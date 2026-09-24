@@ -1,0 +1,448 @@
+.about-page {
+  min-height: 100vh;
+  padding-top: 80px;
+  background: #ffffff;
+}
+
+/* Hero Section */
+.about-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #2563eb;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: 3rem;
+  color: #071A3D;
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 800;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+/* Animated hero button */
+.hero-button {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 2.5rem;
+  background: #071A3D;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 4px 18px rgba(7,26,61,0.3);
+  width: fit-content;
+}
+
+.hero-button::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-20deg);
+}
+
+.hero-button:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37,99,235,0.4);
+}
+
+.hero-button:hover::after {
+  animation: about-shine 0.5s ease;
+}
+
+@keyframes about-shine {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+.image-placeholder {
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  background: linear-gradient(135deg, #071A3D 0%, #0d2d6b 100%);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 40px rgba(7,26,61,0.3);
+}
+
+.image-placeholder.small {
+  height: 200px;
+}
+
+.placeholder-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.image-placeholder.small .placeholder-icon {
+  font-size: 3rem;
+}
+
+.placeholder-text {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.image-placeholder.small .placeholder-text {
+  font-size: 1rem;
+}
+
+/* Har Service Section */
+.har-service-section {
+  background: #f8faff;
+  padding: 4rem 2rem;
+}
+
+.section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #071A3D;
+  margin: 0;
+  font-weight: 800;
+}
+
+.section-description {
+  font-size: 1.1rem;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.stats-card {
+  background: linear-gradient(135deg, #071A3D 0%, #0d2d6b 100%);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 25px rgba(7,26,61,0.3);
+  width: fit-content;
+  transition: transform 0.28s;
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+}
+
+.stats-number {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: #60a5fa;
+}
+
+.stats-label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.image-card {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(7,26,61,0.12);
+}
+
+/* Core Values Section */
+.core-values-section {
+  padding: 5rem 2rem;
+  background: white;
+}
+
+.values-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.values-title {
+  font-size: 2.5rem;
+  color: #071A3D;
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.values-subtitle {
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+.values-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.value-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 18px;
+  border: 2px solid #e0e7ff;
+  box-shadow: 0 4px 16px rgba(7,26,61,0.07);
+  transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  overflow: hidden;
+}
+
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #071A3D, #2563eb);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(37,99,235,0.35);
+  box-shadow: 0 16px 40px rgba(7,26,61,0.14);
+}
+
+.value-card:hover::before {
+  transform: scaleX(1);
+}
+
+.value-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.value-card:hover .value-icon {
+  transform: scale(1.12) rotate(5deg);
+}
+
+.value-title {
+  font-size: 1.4rem;
+  color: #071A3D;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.value-description {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.65;
+}
+
+/* Fair Pricing Section */
+.fair-pricing-section {
+  background: linear-gradient(135deg, #071A3D 0%, #0d2d6b 100%);
+  padding: 5rem 2rem;
+}
+
+.pricing-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.pricing-text {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pricing-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #60a5fa;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.pricing-title {
+  font-size: 2.5rem;
+  margin: 0;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.pricing-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.85);
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pricing-features li {
+  font-size: 1.05rem;
+  margin-bottom: 0.8rem;
+  color: rgba(255,255,255,0.9);
+}
+
+.pricing-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.bid-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.bid-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.bid-avatar {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.bid-info { flex: 1; }
+
+.bid-name {
+  font-size: 1.2rem;
+  color: white;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.bid-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bid-rating .stars { font-size: 1rem; }
+
+.bid-rating .rating-score {
+  color: #60a5fa;
+  font-weight: 700;
+}
+
+.bid-body { margin-bottom: 1.5rem; }
+
+.bid-description {
+  color: rgba(255,255,255,0.8);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.bid-price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #60a5fa;
+}
+
+.bid-button {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  color: #071A3D;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.28s;
+}
+
+.bid-button:hover {
+  background: #e0e7ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,255,255,0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-hero, .section-content, .pricing-content { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-title, .section-title, .values-title, .pricing-title { font-size: 2rem; }
+  .about-hero, .har-service-section, .core-values-section, .fair-pricing-section { padding: 3rem 1rem; }
+  .values-grid { grid-template-columns: 1fr; }
+  .image-placeholder { height: 300px; }
+  .images-grid { grid-template-columns: 1fr; }
+}

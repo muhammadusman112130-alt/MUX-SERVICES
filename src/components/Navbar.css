@@ -1,0 +1,337 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.75rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+}
+
+.logo-link {
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+  transform: scale(1.02);
+}
+
+.logo-image {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.3));
+}
+
+.logo-link:hover .logo-image {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+/* ── ANIMATED SERVICES HUB LOGO TEXT ── */
+.logo-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1;
+}
+
+.logo-text-services {
+  background: linear-gradient(120deg, #071A3D 0%, #1d4ed8 40%, #00ced1 70%, #071A3D 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: logo-text-flow 4s ease infinite alternate;
+}
+
+.logo-text-hub {
+  background: linear-gradient(135deg, #2563eb, #00ced1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.35));
+  animation: hub-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes logo-text-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes hub-pulse {
+  0% {
+    filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.3));
+    transform: scale(1);
+  }
+  100% {
+    filter: drop-shadow(0 0 12px rgba(0, 206, 209, 0.6));
+    transform: scale(1.04);
+  }
+}
+
+/* ── NAVBAR MENU & LIFT-UP ANIMATED BUTTONS ── */
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navbar-menu li button {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 0.96rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 25px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+  z-index: 1;
+}
+
+/* Background animation layer matching the signup button styling (#071A3D -> #2563eb) */
+.navbar-menu li button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #071A3D 0%, #1e40af 50%, #2563eb 100%);
+  background-size: 200% 200%;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: -1;
+  box-shadow: 0 4px 15px rgba(7, 26, 61, 0.3);
+}
+
+/* Shine overlay animation matching signup button */
+.navbar-menu li button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Nav button inner text that lifts upwards */
+.nav-btn-text {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 3;
+}
+
+/* Hover state: text lifts up, background blooms in signup button colors with shine */
+.navbar-menu li button:hover {
+  color: #ffffff !important;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(7, 26, 61, 0.35);
+}
+
+.navbar-menu li button:hover::before {
+  opacity: 1;
+  transform: scale(1);
+  animation: nav-bg-pulse 2.5s ease infinite alternate;
+}
+
+.navbar-menu li button:hover::after {
+  animation: nav-shine 0.6s ease;
+}
+
+.navbar-menu li button:hover .nav-btn-text {
+  transform: translateY(-2px);
+}
+
+@keyframes nav-bg-pulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.navbar-auth {
+  display: flex;
+  gap: 1rem;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-icon {
+  font-size: 1.5rem;
+}
+
+.profile-text {
+  font-weight: 600;
+  color: #333;
+}
+
+.btn-logout {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.1);
+}
+
+.btn-logout:hover {
+  background: rgba(220, 38, 38, 0.2);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-login, .btn-signup {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.btn-login {
+  background: rgba(7,26,61,0.08);
+  color: #071A3D;
+  border: 1.5px solid rgba(7,26,61,0.25);
+  box-shadow: 0 2px 10px rgba(7,26,61,0.08);
+}
+
+.btn-login:hover {
+  background: rgba(7,26,61,0.14);
+  box-shadow: 0 6px 20px rgba(7,26,61,0.18);
+  transform: translateY(-2px);
+}
+
+.btn-signup {
+  position: relative;
+  overflow: hidden;
+  background: #071A3D;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(7,26,61,0.3);
+}
+
+.btn-signup::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  transform: skewX(-20deg);
+}
+
+.btn-signup:hover {
+  background: #2563eb;
+  box-shadow: 0 8px 25px rgba(37,99,235,0.4);
+  transform: translateY(-2px);
+}
+
+.btn-signup:hover::after {
+  animation: nav-shine 0.5s ease;
+}
+
+@keyframes nav-shine {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* ── RESPONSIVE NAVBAR ── */
+@media (max-width: 1024px) {
+  .navbar-container {
+    padding: 0.75rem 1.5rem;
+  }
+  .navbar-menu {
+    gap: 0.75rem;
+  }
+  .navbar-menu li button {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.9rem;
+  }
+  .logo-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0.6rem 1rem;
+    flex-wrap: wrap;
+  }
+  .navbar-menu {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+  }
+  .navbar-menu li button {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+}
