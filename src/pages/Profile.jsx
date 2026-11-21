@@ -1,18 +1,67 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './Profile.css'
+import { authAPI } from '../services/api'
 
-function Profile({ onLogout, setCurrentPage }) {
+function Profile({ onLogout, setCurrentPage, user }) {
   const [selectedMenu, setSelectedMenu] = useState('personal')
   const [isEditMode, setIsEditMode] = useState(false)
   const [profileData, setProfileData] = useState({
-    username: 'User Name',
-    email: 'user@example.com',
-    phone: '',
+    username: user?.fullName || 'User Name',
+    email: user?.email || 'user@example.com',
+    phone: user?.phone || '',
     emergencyNumber: '',
     emergencyRelation: '',
-    primaryArea: '',
+    primaryArea: user?.city || '',
     postalCode: ''
   })
+
+  // User DP photo upload & persistence
+  const userDPInputRef = useRef(null)
+  const [userDP, setUserDP] = useState(() => {
+    try {
+      return localStorage.getItem('servicehub_user_dp') || null
+    } catch {
+      return null
+    }
+  })
+
+  const handleUserDPUpload = (e) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const dataUrl = event.target.result
+        setUserDP(dataUrl)
+        try {
+          localStorage.setItem('servicehub_user_dp', dataUrl)
+        } catch (err) {
+          console.warn('Failed to save user DP to localStorage', err)
+        }
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const handleRemoveDP = () => {
+    setUserDP(null)
+    try {
+      localStorage.removeItem('servicehub_user_dp')
+    } catch (err) {
+      console.warn('Failed to remove user DP from localStorage', err)
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      setProfileData(prev => ({
+        ...prev,
+        username: user.fullName || prev.username,
+        email: user.email || prev.email,
+        phone: user.phone || prev.phone,
+        primaryArea: user.city || prev.primaryArea
+      }))
+    }
+  }, [user])
 
   const handleLogoutClick = () => {
     if (typeof onLogout === 'function') {
@@ -22,10 +71,17 @@ function Profile({ onLogout, setCurrentPage }) {
     }
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setIsEditMode(false)
-    // Save logic here - would typically send to backend
-    console.log('Profile saved:', profileData)
+    try {
+      await authAPI.updateProfile({
+        fullName: profileData.username,
+        phone: profileData.phone,
+        city: profileData.primaryArea
+      })
+    } catch (err) {
+      console.warn('Profile update error:', err.message)
+    }
   }
 
   const handleEdit = () => {
@@ -43,6 +99,29 @@ function Profile({ onLogout, setCurrentPage }) {
     <div className="profile-page">
       <div className="profile-top-section">
         <div className="profile-top-left">
+          <button 
+            type="button" 
+            className="profile-back-header-btn" 
+            onClick={() => setCurrentPage ? setCurrentPage('home') : window.history.back()}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '0.45rem 1.1rem',
+              borderRadius: '25px',
+              border: '1.5px solid #2563eb',
+              background: 'rgba(37, 99, 235, 0.08)',
+              color: '#2563eb',
+              fontWeight: 700,
+              cursor: 'pointer',
+              marginBottom: '1rem',
+              fontSize: '0.92rem',
+              transition: 'all 0.25s ease'
+            }}
+          >
+            <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>←</span>
+            <span>Back</span>
+          </button>
           <h1 className="profile-top-title">Personal Information & Account Profile</h1>
           <p className="profile-top-description">Manage your personal details, verified contact information, national identity, and communication preferences.</p>
         </div>
@@ -96,7 +175,7 @@ function Profile({ onLogout, setCurrentPage }) {
                 <span className="sg-icon">🛡️</span>
                 <h3 className="sg-title">Service Guarantee</h3>
               </div>
-              <p className="sg-text">PKR 100,000 cover against accidental damage & 100% re-work protection when payments stay inside Service HUB.</p>
+              <p className="sg-text">PKR 100,000 cover against accidental damage & 100% re-work protection when payments stay inside MUX SERVICES.</p>
               <div className="sg-footer">
                 <span className="sg-lock">🔒 In-App Escrow</span>
                 <span className="sg-link">Learn more ➔</span>
@@ -193,11 +272,27 @@ function Profile({ onLogout, setCurrentPage }) {
         {selectedMenu === 'personal' && (
           <div className="customer-profile-card">
             <div className="customer-profile-left">
-              <div className="customer-dp-container">
-                <div className="customer-dp">
-                  <span className="dp-initial">U</span>
+              <div 
+                className="customer-dp-container" 
+                onClick={() => userDPInputRef.current?.click()}
+                title="Click to upload / change photo"
+                style={{ cursor: 'pointer', position: 'relative' }}
+              >
+                <div className="customer-dp" style={{ overflow: 'hidden' }}>
+                  {userDP ? (
+                    <img src={userDP} alt="Profile DP" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    <span className="dp-initial">{profileData.username?.charAt(0) || 'U'}</span>
+                  )}
                 </div>
-                <div className="camera-icon">📷</div>
+                <div className="camera-icon" title="Change photo">📷</div>
+                <input 
+                  type="file" 
+                  ref={userDPInputRef} 
+                  style={{ display: 'none' }} 
+                  accept="image/*" 
+                  onChange={handleUserDPUpload} 
+                />
               </div>
               <div className="customer-info">
                 <h3 className="customer-name">
@@ -213,8 +308,8 @@ function Profile({ onLogout, setCurrentPage }) {
               </div>
             </div>
             <div className="customer-profile-right">
-              <button className="change-photo-btn">Change Photo</button>
-              <button className="remove-btn">Remove</button>
+              <button className="change-photo-btn" onClick={() => userDPInputRef.current?.click()}>Change Photo</button>
+              <button className="remove-btn" onClick={handleRemoveDP}>Remove</button>
               <button 
                 className="profile-logout-btn" 
                 onClick={handleLogoutClick}
@@ -660,8 +755,8 @@ function Profile({ onLogout, setCurrentPage }) {
 
                 <div className="ns-safety-box">
                   <h4 className="ns-safety-title">✓ PLATFORM SAFETY & IN-CHAT ESCROW RULE</h4>
-                  <p className="ns-safety-text"><strong>Security Safety Notice:</strong> Always communicate and transact through Service HUB In-chat custom offers. External cash or direct outside payments void platform guarantees, background insurance, and customer dispute assistance.</p>
-                  <p className="ns-safety-text urdu" dir="rtl">حفاظتی نوٹس: ہمیشہ سروس ہب ان چیٹ کسٹم آفرز کے ذریعے بات چیت اور لین دین کریں۔ بیرونی نقد یا براہ راست بیرونی ادائیگیاں پلیٹ فارم کی گارنٹی، پس منظر کی انشورنس، اور کسٹمر تنازعات میں مدد کو باطل کر دیتی ہیں۔</p>
+                  <p className="ns-safety-text"><strong>Security Safety Notice:</strong> Always communicate and transact through MUX SERVICES In-chat custom offers. External cash or direct outside payments void platform guarantees, background insurance, and customer dispute assistance.</p>
+                  <p className="ns-safety-text urdu" dir="rtl">حفاظتی نوٹس: ہمیشہ مکس سروسز ان چیٹ کسٹم آفرز کے ذریعے بات چیت اور لین دین کریں۔ بیرونی نقد یا براہ راست بیرونی ادائیگیاں پلیٹ فارم کی گارنٹی، پس منظر کی انشورنس، اور کسٹمر تنازعات میں مدد کو باطل کر دیتی ہیں۔</p>
                 </div>
               </div>
 
@@ -779,7 +874,7 @@ function Profile({ onLogout, setCurrentPage }) {
                   </div>
                   <h4 className="hs-contact-title">Call Dispatch Desk</h4>
                   <p className="hs-contact-desc">Emergency resolution desk for on-site urgent issues, delay interventions, and SOS.</p>
-                  <button className="hs-btn-dark full-width">📞 Toll-Free Call</button>
+                  <button className="hs-btn-dark full-width">Toll-Free Call</button>
                 </div>
               </div>
 
@@ -791,7 +886,7 @@ function Profile({ onLogout, setCurrentPage }) {
                     <p className="ns-card-subtitle">Tickets are immediately synchronized with field supervisors for swift resolution.</p>
                   </div>
                   <div className="hs-ticket-badge">
-                    <span className="ns-badge light blue-text">⚡ SLA: 15 Minute Response</span>
+                    <span className="ns-badge light blue-text">SLA: 15 Minute Response</span>
                   </div>
                 </div>
 
@@ -823,15 +918,17 @@ function Profile({ onLogout, setCurrentPage }) {
                 <div className="hs-form-group">
                   <label>Attach Photos, Videos, or Receipts <span className="hs-optional">(Optional)</span></label>
                   <div className="hs-drag-drop">
-                    <span className="hs-upload-icon">☁️</span>
+                    <span className="hs-upload-icon" style={{ display: 'flex', justifyContent: 'center' }}>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
+                    </span>
                     <p><strong>Drag & drop inspection photos or <span className="hs-link-color">browse files</span></strong></p>
                     <p className="hs-upload-hint">Supports JPG, PNG, PDF up to 15MB each (helpful for warranty review)</p>
                   </div>
                 </div>
 
                 <div className="hs-form-footer">
-                  <span className="hs-confidential">🔒 Confidential supervisor escalation channel</span>
-                  <button className="hs-btn-primary">📤 Submit Request</button>
+                  <span className="hs-confidential">Confidential supervisor escalation channel</span>
+                  <button className="hs-btn-primary">Submit Request</button>
                 </div>
               </div>
 
@@ -888,7 +985,7 @@ function Profile({ onLogout, setCurrentPage }) {
                 
                 <div className="hs-faq-list">
                   <div className="hs-faq-item">
-                    <span className="hs-faq-q">1. How does Service HUB Guarantee protect my home and appliances?</span>
+                    <span className="hs-faq-q">1. How does MUX SERVICES Guarantee protect my home and appliances?</span>
                     <span className="hs-faq-arrow">▼</span>
                   </div>
                   <div className="hs-faq-item">
@@ -908,10 +1005,12 @@ function Profile({ onLogout, setCurrentPage }) {
 
               <div className="hs-enterprise-banner">
                 <div className="hs-ent-left">
-                  <span className="hs-ent-icon">🏢</span>
+                  <span className="hs-ent-icon" style={{ display: 'flex', alignItems: 'center' }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="22.01"></line><line x1="15" y1="22" x2="15" y2="22.01"></line><line x1="8" y1="6" x2="8.01" y2="6"></line><line x1="16" y1="6" x2="16.01" y2="6"></line><line x1="8" y1="10" x2="8.01" y2="10"></line><line x1="16" y1="10" x2="16.01" y2="10"></line><line x1="8" y1="14" x2="8.01" y2="14"></line><line x1="16" y1="14" x2="16.01" y2="14"></line><line x1="8" y1="18" x2="8.01" y2="18"></line><line x1="16" y1="18" x2="16.01" y2="18"></line></svg>
+                  </span>
                   <div>
                     <h5 className="hs-ent-title">Need specialized enterprise help?</h5>
-                    <p className="hs-ent-desc">Corporate accounts & commercial facility managers can email <strong>enterprise@servicehub.com</strong></p>
+                    <p className="hs-ent-desc">Corporate accounts & commercial facility managers can email <strong>enterprise@muxservices.com</strong></p>
                   </div>
                 </div>
                 <button className="hs-btn-outline bg-white dark-text">Email Commercial Desk</button>
@@ -923,14 +1022,18 @@ function Profile({ onLogout, setCurrentPage }) {
           {selectedMenu === 'payment' && (
             <div className="payment-guarantee-banner">
               <div className="pgb-header">
-                <span className="pgb-shield-icon">🛡️</span>
-                <h3 className="pgb-title">Service HUB Escrow & Payment Guarantee</h3>
-                <span className="pgb-subtitle">سروس ہب کی محفوظ ضمانت</span>
+                <span className="pgb-shield-icon" style={{ display: 'flex', alignItems: 'center' }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </span>
+                <h3 className="pgb-title">MUX SERVICES Escrow & Payment Guarantee</h3>
+                <span className="pgb-subtitle">مکس سروسز کی محفوظ ضمانت</span>
               </div>
               <div className="pgb-features">
                 <div className="pgb-feature">
                   <div className="pgb-feature-icon-container">
-                    <span className="pgb-feature-icon">💸</span>
+                    <span className="pgb-feature-icon" style={{ display: 'flex', alignItems: 'center' }}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                    </span>
                   </div>
                   <div className="pgb-feature-content">
                     <h4>100% Escrow Protection</h4>
@@ -940,7 +1043,9 @@ function Profile({ onLogout, setCurrentPage }) {
                 
                 <div className="pgb-feature">
                   <div className="pgb-feature-icon-container">
-                    <span className="pgb-feature-icon">🕒</span>
+                    <span className="pgb-feature-icon" style={{ display: 'flex', alignItems: 'center' }}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </span>
                   </div>
                   <div className="pgb-feature-content">
                     <h4>Instant Refund Policy</h4>
@@ -950,13 +1055,16 @@ function Profile({ onLogout, setCurrentPage }) {
 
                 <div className="pgb-feature">
                   <div className="pgb-feature-icon-container">
-                    <span className="pgb-feature-icon">📞</span>
+                    <span className="pgb-feature-icon" style={{ display: 'flex', alignItems: 'center' }}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </span>
                   </div>
                   <div className="pgb-feature-content">
                     <h4>24/7 Dispute & Billing Desk</h4>
                     <p>Direct phone support for payment reconciliation and transaction disputes. Call anytime at:</p>
-                    <div className="pgb-phone-badge">
-                      <span className="phone-icon">📞</span> 042 111 HUB PRO (482 776)
+                    <div className="pgb-phone-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                      <span>042 111 HUB PRO (482 776)</span>
                     </div>
                   </div>
                 </div>

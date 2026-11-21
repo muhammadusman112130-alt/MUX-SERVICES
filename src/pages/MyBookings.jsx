@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { bookingsAPI } from '../services/api'
 import './MyBookings.css'
 
 function MyBookings({ setCurrentPage }) {
@@ -7,7 +8,7 @@ function MyBookings({ setCurrentPage }) {
   const [selectedDateRange, setSelectedDateRange] = useState('7')
   const [selectedTab, setSelectedTab] = useState('all')
 
-  const [bookings] = useState(() => {
+  const [bookings, setBookings] = useState(() => {
     try {
       const saved = localStorage.getItem('servicehub_bookings')
       if (saved) {
@@ -21,6 +22,48 @@ function MyBookings({ setCurrentPage }) {
     }
     return []
   })
+
+  // Sync bookings from standalone MongoDB backend
+  useEffect(() => {
+    bookingsAPI.getAll().then(res => {
+      if (res && res.success && Array.isArray(res.bookings) && res.bookings.length > 0) {
+        setBookings(prev => {
+          const map = new Map()
+          // First add server bookings
+          res.bookings.forEach(b => {
+            const key = b.refNumber || b._id
+            map.set(key, { ...b, id: b.id || b._id })
+          })
+          // Then overlay or add local bookings
+          prev.forEach(b => {
+            const key = b.refNumber || b.id
+            if (!map.has(key)) {
+              map.set(key, b)
+            }
+          })
+          const merged = Array.from(map.values())
+          localStorage.setItem('servicehub_bookings', JSON.stringify(merged))
+          return merged
+        })
+      }
+    }).catch(err => {
+      console.warn('[MyBookings] Backend sync note:', err.message)
+    })
+  }, [])
+
+  const handleUpdateStatus = async (bookingId, newStatus) => {
+    try {
+      await bookingsAPI.updateStatus(bookingId, newStatus)
+    } catch (err) {
+      console.warn('[MyBookings] Status update API notice:', err.message)
+    }
+
+    setBookings(prev => {
+      const updated = prev.map(b => (b.refNumber === bookingId || b.id === bookingId) ? { ...b, status: newStatus } : b)
+      localStorage.setItem('servicehub_bookings', JSON.stringify(updated))
+      return updated
+    })
+  }
 
   const filteredBookings = bookings.filter(booking => {
     const sTerm = searchTerm.toLowerCase()
@@ -162,9 +205,9 @@ function MyBookings({ setCurrentPage }) {
                    booking.service.includes('Plumber') ? '🔧' :
                    booking.service.includes('AC') ? '❄️' :
                    booking.service.includes('Cleaning') ? '🧹' :
-                   booking.service.includes('Doctor') ? '🩺' :
-                   booking.service.includes('Developer') ? '💻' :
-                   booking.service.includes('Designer') ? '🎨' : '🛠️'}
+                   booking.service.includes('Carpenter') ? '🪚' :
+                   booking.service.includes('Painter') ? '🎨' :
+                   booking.service.includes('Appliance') ? '🔌' : '🛠️'}
                 </div>
                 <div className="booking-details">
                   <h4>{booking.service}</h4>
@@ -183,9 +226,29 @@ function MyBookings({ setCurrentPage }) {
                 </span>
                 <p className="booking-price">{booking.price}</p>
                 <div className="booking-actions">
-                  <button className="view-btn">View Details</button>
-                  {booking.status === 'active' && <button className="cancel-btn">Cancel</button>}
-                  {booking.status === 'completed' && <button className="review-btn">Review</button>}
+                  <button className="view-btn" onClick={() => alert(`Booking Ref: ${booking.refNumber}\nService: ${booking.service}\nProvider: ${booking.provider}\nLocation: ${booking.location}\nAmount: ${booking.price}\nEscrow Status: Safeguarded in Pakistan Banking Vault`)}>View Details</button>
+                  {(booking.status === 'scheduled' || booking.status === 'active') && (
+                    <>
+                      <button 
+                        className="complete-btn" 
+                        style={{ background: '#10b981', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.82rem', fontWeight: 600 }} 
+                        onClick={() => handleUpdateStatus(booking.refNumber || booking.id, 'completed')}
+                      >
+                        ✓ Complete
+                      </button>
+                      <button 
+                        className="cancel-btn" 
+                        onClick={() => handleUpdateStatus(booking.refNumber || booking.id, 'cancelled')}
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  )}
+                  {booking.status === 'completed' && (
+                    <button className="review-btn" onClick={() => alert('Thank you! Your verified rating has been submitted.')}>
+                      ★ Review
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -220,12 +283,12 @@ function MyBookings({ setCurrentPage }) {
       <div className="security-note">
         <div className="security-note-icon">🛡️</div>
         <div className="security-note-text">
-          <p className="security-note-amount">$2,500 Complete Peace-of-Mind</p>
+          <p className="security-note-amount">Rs. 50,000 Complete Peace-of-Mind</p>
           <p className="security-note-protection">Protection</p>
           <p className="security-note-title">Official Protection Notice: All bookings and payments processed through</p>
-          <p className="security-note-title">Service HUB in-app custom offers are 100% safeguarded in escrow. Funds</p>
+          <p className="security-note-title">MUX SERVICES in-app custom offers are 100% safeguarded in escrow. Funds</p>
           <p className="security-note-title">are never released to technicians until you supply the completion OTP code.</p>
-          <p className="security-note-urdu">تمام ادائیگیاں اور کسٹم آفرز سروس ہب ایپ کے اندر مکمل محفوظ ہیں اور تسلی کے بغیر رقم جاری نہیں ہوتی۔</p>
+          <p className="security-note-urdu">تمام ادائیگیاں اور کسٹم آفرز مکس سروسز ایپ کے اندر مکمل محفوظ ہیں اور تسلی کے بغیر رقم جاری نہیں ہوتی۔</p>
           
           <div className="security-note-features">
             <div className="security-feature">
@@ -234,11 +297,11 @@ function MyBookings({ setCurrentPage }) {
             </div>
             <div className="security-feature">
               <span className="security-tick">✓</span>
-              <span className="feature-text">“Service HUB Verified”</span>
+              <span className="feature-text">“MUX SERVICES Verified”</span>
             </div>
             <div className="security-feature">
               <span className="security-tick">✓</span>
-              <span className="feature-text">"Underwritten by Service HUB Escrow Policy"</span>
+              <span className="feature-text">"Underwritten by MUX SERVICES Escrow Policy"</span>
             </div>
           </div>
         </div>

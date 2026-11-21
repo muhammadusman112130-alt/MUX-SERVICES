@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import CategorySection from './components/CategorySection'
@@ -18,13 +18,46 @@ import Messages from './pages/Messages'
 import ProviderDashboard from './provider/ProviderDashboard'
 import ProviderLogin from './provider/ProviderLogin'
 import ProviderVerification from './provider/ProviderVerification'
+import { authAPI } from './services/api'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
   const [initialSearchQuery, setInitialSearchQuery] = useState('')
   const [authPage, setAuthPage] = useState(null) // 'login' or 'signup' or null
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [currentUser, setCurrentUser] = useState(null)
   const [isProviderLoggedIn, setIsProviderLoggedIn] = useState(false)
+
+  // Verify and sync logged-in user on load
+  useEffect(() => {
+    const initAuth = async () => {
+      if (authAPI.hasToken()) {
+        const stored = authAPI.getStoredUser()
+        if (stored) {
+          setCurrentUser(stored)
+          setIsLoggedIn(true)
+        }
+
+        try {
+          const res = await authAPI.getMe()
+          if (res.success && res.user) {
+            setCurrentUser(res.user)
+            setIsLoggedIn(true)
+          }
+        } catch (err) {
+          console.warn('Session verification failed:', err.message)
+          // Only clear if server says 401 unauthorized
+          if (err.status === 401) {
+            authAPI.logout()
+            setCurrentUser(null)
+            setIsLoggedIn(false)
+          }
+        }
+      }
+    }
+
+    initAuth()
+  }, [])
 
   const handlePageChange = (page, query = '') => {
     setInitialSearchQuery(query || '')
@@ -47,7 +80,8 @@ function App() {
     setCurrentPage('home')
   }
 
-  const handleLogin = () => {
+  const handleLogin = (user) => {
+    setCurrentUser(user || authAPI.getStoredUser())
     setIsLoggedIn(true)
     setIsProviderLoggedIn(false)
     setAuthPage(null)
@@ -62,6 +96,8 @@ function App() {
   }
 
   const handleLogout = () => {
+    authAPI.logout()
+    setCurrentUser(null)
     setIsLoggedIn(false)
     setIsProviderLoggedIn(false)
     setAuthPage(null)
@@ -100,7 +136,7 @@ function App() {
       case 'contact':
         return <Contact />
       case 'profile':
-        return <Profile onLogout={handleLogout} setCurrentPage={handlePageChange} />
+        return <Profile onLogout={handleLogout} setCurrentPage={handlePageChange} user={currentUser} />
       case 'bookings':
       case 'Bookings':
         return <MyBookings setCurrentPage={handlePageChange} />
@@ -136,6 +172,7 @@ function App() {
           onLoginClick={handleLoginClick} 
           onSignupClick={handleSignupClick} 
           isLoggedIn={isLoggedIn} 
+          currentUser={currentUser}
           isProviderLoggedIn={isProviderLoggedIn} 
           onLogout={handleLogout} 
         />

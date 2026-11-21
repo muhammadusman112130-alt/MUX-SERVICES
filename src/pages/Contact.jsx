@@ -1,13 +1,16 @@
 import { useState } from 'react'
+import { contactAPI } from '../services/api'
 import './Contact.css'
 
 function Contact() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
+    phone: '',
     subject: 'general',
     message: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -17,20 +20,30 @@ function Contact() {
     if (errorMessage) setErrorMessage('')
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!formData.fullName.trim() || !formData.email.trim() || !formData.message.trim()) {
       setErrorMessage('Please fill in all required fields.')
       return
     }
-    setErrorMessage('')
-    setIsSubmitted(true)
-    setFormData({
-      fullName: '',
-      email: '',
-      subject: 'general',
-      message: ''
-    })
+
+    try {
+      setIsSubmitting(true)
+      setErrorMessage('')
+      await contactAPI.send(formData)
+      setIsSubmitted(true)
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        subject: 'general',
+        message: ''
+      })
+    } catch (err) {
+      setErrorMessage(err.message || 'Failed to send message. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -41,7 +54,7 @@ function Contact() {
           <h1 className="contact-title">Get in Touch</h1>
           <p className="contact-description">
             We're here to help. Reach out to our support team for any inquiries, 
-            partnership requests, or technical assistance.
+            partnership requests, or technical assistance across Multan and Punjab.
           </p>
         </div>
 
@@ -52,7 +65,7 @@ function Contact() {
             <h2 className="form-title">Send us a message</h2>
             {isSubmitted && (
               <div style={{ padding: '0.85rem 1rem', marginBottom: '1.25rem', background: '#ecfdf5', color: '#065f46', borderRadius: '10px', border: '1px solid #a7f3d0', fontSize: '0.9rem', fontWeight: 600 }}>
-                ✓ Thank you! Your message was validated locally for this demo. No email was sent.
+                ✓ Thank you! Your message has been received. Our Multan support team will contact you shortly.
               </div>
             )}
             {errorMessage && (
@@ -103,7 +116,9 @@ function Contact() {
                   onChange={handleChange}
                 ></textarea>
               </div>
-              <button type="submit" className="submit-button">Send Message</button>
+              <button type="submit" className="submit-button" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending Message...' : 'Send Message'}
+              </button>
             </form>
           </div>
 
@@ -112,18 +127,18 @@ function Contact() {
             <div className="contact-card">
               <div className="card-icon">📧</div>
               <h3 className="card-title">Email Us</h3>
-              <p className="card-description">For general inquiries</p>
-              <a href="mailto:support@servicehub.com" className="card-link">
-                support@servicehub.com
+              <p className="card-description">For general & corporate inquiries</p>
+              <a href="mailto:support@muxservices.pk" className="card-link">
+                support@muxservices.pk
               </a>
             </div>
 
             <div className="contact-card">
               <div className="card-icon">📞</div>
               <h3 className="card-title">Call Us</h3>
-              <p className="card-description">Mon-Fri, 9am-6pm</p>
-              <a href="tel:+1234567890" className="card-link">
-                +1 (234) 567-890
+              <p className="card-description">24/7 Helpline & WhatsApp</p>
+              <a href="tel:+923001234567" className="card-link">
+                042-111-HUB-PRO (+92 61 4587700)
               </a>
             </div>
 

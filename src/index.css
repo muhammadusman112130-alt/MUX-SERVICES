@@ -151,3 +151,400 @@ body {
   width: 100%;
   min-height: 100vh;
 }
+
+
+/* ════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS & ACCESSIBILITY OPTIMIZATIONS
+   (Netlify Mobile Screen Rules & Responsive Layout)
+   ════════════════════════════════════════════════════ */
+
+:root {
+  --minimum-font-size: 0px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --minimum-font-size: 16px;
+  }
+
+  body {
+    font-size: 16px;
+    overflow-x: visible;
+  }
+
+  .app button {
+    font-size: 1rem;
+  }
+
+  .app {
+    overflow-wrap: anywhere;
+  }
+
+  .app :where(div, section, article, main, form, fieldset) {
+    min-width: 0;
+  }
+
+  .app :is(button, a[href], [role="button"], input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]), select, textarea, label[for], label:has(input), .pv-upload-btn) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .app :is(a[href], label[for], label:has(input), .pv-upload-btn) {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .app :is(input, select, textarea) {
+    max-width: 100%;
+    min-width: 0;
+    font-size: 1rem;
+  }
+
+  .app :is(img, video, canvas, iframe, embed, object) {
+    max-width: 100%;
+  }
+
+  .app :is(img, video, canvas) {
+    height: auto;
+  }
+
+  .app iframe {
+    width: 100%;
+  }
+
+  .app :is(.slide img, .auth-left-image, .card-side-img, .avatar-photo-img, .provider-card-photo-box img) {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Hero Section Mobile Adjustments */
+  .hero-section {
+    padding-top: 92px;
+    padding-bottom: 7rem;
+  }
+
+  .hero-slider {
+    top: 68px;
+  }
+
+  .hero-content {
+    width: 100%;
+  }
+
+  .hero-section .hero-stats {
+    gap: 1rem;
+  }
+
+  .slider-dots {
+    width: max-content;
+    max-width: calc(100% - 2rem);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    bottom: 0.5rem;
+  }
+
+  .slider-dots .dot {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    flex-shrink: 0;
+  }
+
+  .slider-dots .dot:before {
+    content: "";
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    bottom: 17px;
+    left: 17px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid white;
+  }
+
+  .slider-dots .dot.active:before {
+    background: #00ced1;
+  }
+
+  .slider-nav-footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .slider-dots-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+
+  .slider-dot-btn {
+    height: 44px;
+    border-block: 17px solid #fff;
+    border-radius: 0;
+  }
+
+  /* Flex wrap & spacing for components */
+  .card-top-row,
+  .card-title-row,
+  .card-stats-info,
+  .professional-rating,
+  .pro-service-box-header,
+  .price-item,
+  .cta-buttons,
+  .cta-stats,
+  .social-links {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .professionals-section,
+  .trust-section,
+  .price-offer-section,
+  .cta-section,
+  .footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .professionals-grid,
+  .trust-grid,
+  .services-page .svc-home-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  }
+
+  .professional-card,
+  .trust-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-contact li {
+    align-items: flex-start;
+  }
+
+  .footer-contact svg {
+    flex-shrink: 0;
+  }
+
+  .footer-bottom-links {
+    gap: 0.5rem;
+  }
+
+  /* Auth Pages Mobile */
+  .auth-page {
+    padding: 1rem;
+  }
+
+  .auth-right-panel {
+    padding: 1.5rem 1rem;
+  }
+
+  .auth-page .input-wrapper .form-input {
+    padding-right: 3.5rem !important;
+  }
+
+  .auth-page .toggle-password {
+    right: 0.25rem;
+  }
+
+  .auth-page .form-options,
+  .auth-page .auth-switch {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .auth-page .social-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-container,
+  .about-hero,
+  .contact-form-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* My Bookings Page Mobile */
+  .my-bookings-page {
+    padding: 6rem 1rem 2rem;
+  }
+
+  .my-bookings-page :is(.top-gradient-section, .bookings-management-card, .booking-card) {
+    padding: 1rem;
+  }
+
+  .my-bookings-page :is(.bookings-header, .booking-card, .card-controls, .security-note) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .my-bookings-page .stats-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .my-bookings-page :is(.booking-actions, .security-note-features, .booking-left) {
+    flex-wrap: wrap;
+  }
+
+  .my-bookings-page :is(.search-bar, .filter-dropdown, .date-filter) {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .my-bookings-page :is(.book-new-services-btn, .tab-btn) {
+    white-space: normal;
+  }
+
+  /* Profile Page Mobile */
+  .profile-top-section {
+    padding: 6rem 1rem 2rem;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .profile-top-right,
+  .profile-completeness-box {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .profile-main-content {
+    padding: 0 1rem;
+  }
+
+  .profile-footer {
+    margin: 0;
+    flex-wrap: wrap;
+  }
+
+  .profile-page :is(.core-details-card, .contact-info-card, .location-info-card, .customer-profile-card, .info-card, .settings-card, .addresses-card, .booking-card) {
+    margin: 0;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .profile-page :is(.customer-profile-card, .customer-profile-left, .customer-profile-right, .customer-details, .card-header, .ns-pref-row, .ns-card-header, .ns-footer-actions) {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .profile-page :is(.form-row, .contact-info-row, .emergency-inputs, .info-row, .hs-cards-grid, .hs-form-row, .ns-pref-row, .pcf-row) {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-page .ns-pref-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profile-page .ns-card-header:has(.ns-pref-headers) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profile-page .ns-pref-left {
+    padding-right: 0;
+  }
+
+  .profile-page :is(.ns-pref-headers, .ns-pref-checks) {
+    grid-template-columns: repeat(4, minmax(44px, 1fr));
+    gap: 0.25rem;
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .profile-page .ns-pref-checks input[type="checkbox"] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .profile-page :is(.hs-table-container, .table-container) {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Messages Page Mobile */
+  .messages-page {
+    padding-top: 68px;
+  }
+
+  .messages-container {
+    height: calc(100dvh - 100px);
+    min-height: 360px;
+  }
+
+  /* Provider Dashboard & Login Mobile */
+  .provider-dashboard,
+  .provider-login,
+  .pv-wrapper {
+    padding-top: 84px;
+  }
+
+  .provider-login .login-header > * {
+    max-width: 100%;
+  }
+
+  .provider-login .network-text {
+    white-space: normal;
+  }
+
+  .provider-dashboard :is(.header-card, .live-mission-card, .incoming-leads-section, .schedule-card, .payout-card) {
+    padding: 1rem;
+  }
+
+  .provider-dashboard :is(.lead-header, .lead-details, .lead-actions, .mission-header-bar, .mission-actions, .status-progress) {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .provider-dashboard .schedule-item {
+    flex-direction: column;
+  }
+
+  .provider-dashboard .schedule-icon {
+    align-items: flex-start;
+  }
+
+  .pv-wrapper .provider-navbar {
+    display: none;
+  }
+
+  .pv-profession-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pv-auto-badge,
+  .pv-hero-badge {
+    white-space: normal;
+  }
+
+  /* Booking View Mobile */
+  .booking-view :is(.booking-header-content, .booking-profile-section, .booking-card-actions) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .booking-view :is(.services-offered-grid, .provider-info-grid) {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-view .booking-content-section {
+    padding: 2rem 1rem;
+  }
+
+  .booking-view .chat-button-section,
+  .booking-view .booking-note {
+    padding: 1rem;
+  }
+
+  .booking-view .start-chat-btn {
+    width: 100%;
+    padding: 1rem;
+  }
+}

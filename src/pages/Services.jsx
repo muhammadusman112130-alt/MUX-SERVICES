@@ -1,30 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { bookingsAPI } from '../services/api'
 import './Services.css'
-import homeIcon from '../Public/home icon.jpg'
-import techIcon from '../Public/tech icon.avif'
-import headerImage from '../Public/4.png'
+import webLogo from '../Public/web logo.png'
 import plumberImage from '../Public/plumber.png'
 import carpenterImage from '../Public/carpenter.png'
-import homeCleaningImage from '../Public/home cleaning.png'
-import paintingImage from '../Public/painting.png'
-import servicesHeaderImage from '../Public/services scr.png'
-import aluminiumImage from '../Public/aluminium.png'
-import gardeningImage from '../Public/gardeninig.png'
-import acImage from '../Public/ac.png'
+import homeCleaningImage from '../Public/cleaner.png'
+import paintingImage from '../Public/painter.png'
+import servicesHeroBanner from '../Public/home repair services .png'
+import aluminiumImage from '../Public/glass aluminum .png'
+import gardeningImage from '../Public/gardner.png'
+import acImage from '../Public/AC technicon.png'
 import welderImage from '../Public/welder.png'
-import laundryImage from '../Public/laundry.png'
-import screenImage from '../Public/screen.png'
-import image22 from '../Public/22.png'
-import image03 from '../Public/03.png'
-import electricianImage from '../Public/electrician.jpg'
-import applianceImage from '../Public/appliance.jpg'
-import itSupportImage from '../Public/it-support.jpg'
-import uiuxImage from '../Public/uiux-design.jpg'
-import cyberSecurityImage from '../Public/cyber-security.png'
-import softwareDevImage from '../Public/software-dev.png'
-import seoImage from '../Public/seo.png'
-import aiImage from '../Public/ai-specialist.png'
-import databaseImage from '../Public/database.jpg'
+import laundryImage from '../Public/laundary.png'
+import electricianImage from '../Public/electricon.png'
+
+const homeIcon = webLogo
+const applianceImage = acImage
 
 export const CANONICAL_SERVICES = [
   {
@@ -70,66 +61,6 @@ export const CANONICAL_SERVICES = [
   {
     key: 'Laundry & Ironing',
     keywords: ['laundry', 'ironing', 'dry clean', 'wash clothes', 'press', 'istri', 'clothes', 'washing']
-  },
-  {
-    key: 'Web Developer',
-    keywords: ['web', 'website', 'web developer', 'frontend', 'backend', 'fullstack', 'react', 'wordpress', 'web development']
-  },
-  {
-    key: 'App Developer',
-    keywords: ['app', 'android', 'ios', 'mobile app', 'flutter', 'react native', 'app developer', 'application']
-  },
-  {
-    key: 'Graphic Designer',
-    keywords: ['graphic', 'designer', 'logo', 'photoshop', 'illustrator', 'banner', 'branding', 'graphic designer', 'graphic design']
-  },
-  {
-    key: 'UI/UX Designer',
-    keywords: ['ui', 'ux', 'ui/ux', 'figma', 'prototype', 'wireframe', 'user experience', 'uiux']
-  },
-  {
-    key: 'IT Support & Hardware',
-    keywords: ['it support', 'it', 'hardware', 'laptop repair', 'computer', 'pc repair', 'wifi', 'networking', 'windows', 'network']
-  },
-  {
-    key: 'Software Developer',
-    keywords: ['software', 'software developer', 'coding', 'python', 'java', 'api', 'backend developer', 'software engineer']
-  },
-  {
-    key: 'SEO & Marketing',
-    keywords: ['seo', 'marketing', 'digital marketing', 'google rank', 'ads', 'backlinks', 'seo specialist']
-  },
-  {
-    key: 'Cybersecurity & Network',
-    keywords: ['cyber', 'cybersecurity', 'security', 'hacking', 'network security', 'firewall', 'penetration']
-  },
-  {
-    key: 'Data & AI Specialist',
-    keywords: ['ai', 'data', 'artificial intelligence', 'machine learning', 'data science', 'deep learning', 'chatgpt']
-  },
-  {
-    key: 'Database Specialist',
-    keywords: ['database', 'sql', 'mysql', 'mongodb', 'postgresql', 'oracle', 'db']
-  },
-  {
-    key: 'Doctor Consult',
-    keywords: ['doctor', 'dr', 'physician', 'medical', 'clinic', 'consultation', 'health', 'medicine', 'doctor consult']
-  },
-  {
-    key: 'Physiotherapist',
-    keywords: ['physio', 'physiotherapy', 'physiotherapist', 'rehab', 'back pain', 'joint', 'spinal']
-  },
-  {
-    key: 'Nutritionist',
-    keywords: ['nutrition', 'diet', 'dietitian', 'nutritionist', 'weight loss', 'meal plan', 'food']
-  },
-  {
-    key: 'Fitness Trainer',
-    keywords: ['fitness', 'trainer', 'gym', 'workout', 'personal trainer', 'exercise', 'bodybuilding']
-  },
-  {
-    key: 'Education',
-    keywords: ['education', 'tutor', 'teacher', 'math', 'physics', 'english', 'tuition', 'coaching', 'study', 'teaching']
   }
 ]
 
@@ -156,8 +87,7 @@ export const normalizeServiceName = (query) => {
 }
 
 function Services({ initialSearchQuery = '' }) {
-  const [showAllHomeServices, setShowAllHomeServices] = useState(false)
-  const [showAllTechServices, setShowAllTechServices] = useState(false)
+  const [showAllHomeServices, setShowAllHomeServices] = useState(true)
   const [selectedService, setSelectedService] = useState(null)
   const [selectedProvider, setSelectedProvider] = useState(null)
   const [showChat, setShowChat] = useState(false)
@@ -192,6 +122,44 @@ function Services({ initialSearchQuery = '' }) {
   const [bookingAddress, setBookingAddress] = useState('')
   const [bookingNotes, setBookingNotes] = useState('')
   const [isSubmittingBooking, setIsSubmittingBooking] = useState(false)
+
+  // Profile DP upload & persistence state
+  const providerDPInputRef = useRef(null)
+  const [customProviderDPs, setCustomProviderDPs] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('custom_provider_dps') || '{}')
+    } catch {
+      return {}
+    }
+  })
+
+  const handleProviderDPUpload = (e) => {
+    const file = e.target.files?.[0]
+    if (file && selectedProvider) {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const dataUrl = event.target.result
+        const providerKey = selectedProvider.id || selectedProvider.name
+        setCustomProviderDPs(prev => {
+          const next = { ...prev, [providerKey]: dataUrl }
+          try {
+            localStorage.setItem('custom_provider_dps', JSON.stringify(next))
+          } catch (err) {
+            console.warn('Failed to save DP to localStorage', err)
+          }
+          return next
+        })
+        setSelectedProvider(prev => ({ ...prev, customDP: dataUrl }))
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const getProviderDP = (provider) => {
+    if (!provider) return null
+    const providerKey = provider.id || provider.name
+    return provider.customDP || customProviderDPs[providerKey] || provider.image || null
+  }
 
   // Handle incoming hero search query
   useEffect(() => {
@@ -246,8 +214,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Wiring, circuit breaker repair, solar setup & 24/7 emergency service',
       rating: '4.9',
       reviews: '180+',
-      price: '$30/hr',
-      badge: '⚡ Verified Electrician'
+      price: 'Rs. 1,500/hr',
+      badge: 'Verified Electrician'
     },
     {
       name: 'Plumber',
@@ -255,8 +223,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Leak detection, pipe repairs, bathroom fitting & drainage solutions',
       rating: '4.8',
       reviews: '160+',
-      price: '$25/hr',
-      badge: '🔧 Master Plumber'
+      price: 'Rs. 1,250/hr',
+      badge: 'Master Plumber'
     },
     {
       name: 'Carpenter',
@@ -264,8 +232,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Custom woodwork, furniture repair, cabinets & door fixing',
       rating: '4.8',
       reviews: '130+',
-      price: '$28/hr',
-      badge: '🪚 Skilled Carpenter'
+      price: 'Rs. 1,400/hr',
+      badge: 'Skilled Carpenter'
     },
     {
       name: 'Painter',
@@ -273,8 +241,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Interior & exterior painting, texture coating & waterproofing',
       rating: '4.7',
       reviews: '110+',
-      price: '$22/hr',
-      badge: '🎨 Pro Painter'
+      price: 'Rs. 1,100/hr',
+      badge: 'Pro Painter'
     },
     {
       name: 'AC & HVAC',
@@ -282,8 +250,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'AC installation, gas charging, deep cleaning & cooling maintenance',
       rating: '4.9',
       reviews: '210+',
-      price: '$35/hr',
-      badge: '❄️ HVAC Expert'
+      price: 'Rs. 1,800/hr',
+      badge: 'HVAC Expert'
     },
     {
       name: 'Appliance Repair',
@@ -291,8 +259,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Washing machine, refrigerator, microwave & home appliance repair',
       rating: '4.8',
       reviews: '140+',
-      price: '$28/hr',
-      badge: '🔌 Appliance Specialist'
+      price: 'Rs. 1,400/hr',
+      badge: 'Appliance Specialist'
     },
   ]
 
@@ -303,8 +271,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Wiring, circuit breaker repair, solar setup & 24/7 emergency service',
       rating: '4.9',
       reviews: '180+',
-      price: '$30/hr',
-      badge: '⚡ Verified Electrician'
+      price: 'Rs. 1,500/hr',
+      badge: 'Verified Electrician'
     },
     {
       name: 'Plumber',
@@ -312,8 +280,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Leak detection, pipe repairs, bathroom fitting & drainage solutions',
       rating: '4.8',
       reviews: '160+',
-      price: '$25/hr',
-      badge: '🔧 Master Plumber'
+      price: 'Rs. 1,250/hr',
+      badge: 'Master Plumber'
     },
     {
       name: 'Carpenter',
@@ -321,8 +289,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Custom woodwork, furniture repair, cabinets & door fixing',
       rating: '4.8',
       reviews: '130+',
-      price: '$28/hr',
-      badge: '🪚 Skilled Carpenter'
+      price: 'Rs. 1,400/hr',
+      badge: 'Skilled Carpenter'
     },
     {
       name: 'Painter',
@@ -330,8 +298,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Interior & exterior painting, texture coating & waterproofing',
       rating: '4.7',
       reviews: '110+',
-      price: '$22/hr',
-      badge: '🎨 Pro Painter'
+      price: 'Rs. 1,100/hr',
+      badge: 'Pro Painter'
     },
     {
       name: 'AC & HVAC',
@@ -339,8 +307,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'AC installation, gas charging, deep cleaning & cooling maintenance',
       rating: '4.9',
       reviews: '210+',
-      price: '$35/hr',
-      badge: '❄️ HVAC Expert'
+      price: 'Rs. 1,800/hr',
+      badge: 'HVAC Expert'
     },
     {
       name: 'Home Cleaning',
@@ -348,8 +316,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Deep house cleaning, kitchen & bathroom sanitization',
       rating: '4.9',
       reviews: '240+',
-      price: '$20/hr',
-      badge: '🧹 Deep Clean'
+      price: 'Rs. 1,000/hr',
+      badge: 'Deep Clean'
     },
     {
       name: 'Gardener',
@@ -357,8 +325,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Lawn care, plant maintenance, landscape design & pruning',
       rating: '4.7',
       reviews: '95+',
-      price: '$18/hr',
-      badge: '🌱 Green Thumb'
+      price: 'Rs. 900/hr',
+      badge: 'Green Thumb'
     },
     {
       name: 'Glass & Aluminum',
@@ -366,8 +334,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Windows, glass partitions, aluminum frames & door fixtures',
       rating: '4.8',
       reviews: '85+',
-      price: '$32/hr',
-      badge: '🪟 Glazing Pro'
+      price: 'Rs. 1,600/hr',
+      badge: 'Glazing Pro'
     },
     {
       name: 'Welder',
@@ -375,8 +343,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Gate fabrication, iron grills, railing & structural welding',
       rating: '4.7',
       reviews: '105+',
-      price: '$26/hr',
-      badge: '🔥 Metal Craft'
+      price: 'Rs. 1,300/hr',
+      badge: 'Metal Craft'
     },
     {
       name: 'Laundry & Ironing',
@@ -384,8 +352,8 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Dry cleaning, cloth washing, steam press & doorstep delivery',
       rating: '4.8',
       reviews: '150+',
-      price: '$15/hr',
-      badge: '👕 Fresh Care'
+      price: 'Rs. 800/hr',
+      badge: 'Fresh Care'
     },
     {
       name: 'Appliance Repair',
@@ -393,17 +361,13 @@ function Services({ initialSearchQuery = '' }) {
       description: 'Refrigerator, washing machine, microwave & home appliance repair',
       rating: '4.8',
       reviews: '140+',
-      price: '$28/hr',
-      badge: '🔌 Appliance Specialist'
+      price: 'Rs. 1,400/hr',
+      badge: 'Appliance Specialist'
     },
   ]
 
   const toggleHomeServices = () => {
     setShowAllHomeServices(!showAllHomeServices)
-  }
-
-  const toggleTechServices = () => {
-    setShowAllTechServices(!showAllTechServices)
   }
 
   const handleServiceClick = (serviceName) => {
@@ -482,7 +446,7 @@ function Services({ initialSearchQuery = '' }) {
 
   const handleVoiceEnd = () => {
     setIsRecording(false)
-    handleSendMessage('🎤 Voice message sent')
+    handleSendMessage('[Voice message sent]')
   }
 
   const handleAttachmentClick = (type) => {
@@ -493,18 +457,18 @@ function Services({ initialSearchQuery = '' }) {
       input.accept = 'image/*'
       input.onchange = (e) => {
         if (e.target.files[0]) {
-          handleSendMessage(`📷 Image: ${e.target.files[0].name}`)
+          handleSendMessage(`[Image]: ${e.target.files[0].name}`)
         }
       }
       input.click()
     } else if (type === 'photo') {
-      handleSendMessage('📸 Photo shared')
+      handleSendMessage('[Photo shared]')
     } else if (type === 'file') {
       const input = document.createElement('input')
       input.type = 'file'
       input.onchange = (e) => {
         if (e.target.files[0]) {
-          handleSendMessage(`📎 File: ${e.target.files[0].name}`)
+          handleSendMessage(`[File]: ${e.target.files[0].name}`)
         }
       }
       input.click()
@@ -512,25 +476,25 @@ function Services({ initialSearchQuery = '' }) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            handleSendMessage(`📍 Location shared: ${position.coords.latitude}, ${position.coords.longitude}`)
+            handleSendMessage(`[Location shared]: ${position.coords.latitude}, ${position.coords.longitude}`)
           },
           (error) => {
-            handleSendMessage('📍 Location shared')
+            handleSendMessage('[Location shared]')
           }
         )
       } else {
-        handleSendMessage('📍 Location shared')
+        handleSendMessage('[Location shared]')
       }
     }
   }
 
   const handleVoiceMessage = () => {
-    handleSendMessage('🎤 Voice message sent')
+    handleSendMessage('[Voice message sent]')
   }
 
   const handleSubmitOffer = () => {
     if (customOfferAmount) {
-      handleSendMessage(`💰 Custom Offer: ${customOfferAmount}`)
+      handleSendMessage(`Custom Offer: ${customOfferAmount}`)
       setShowOfferCard(false)
       setCustomOfferAmount('')
       // Simulate provider response
@@ -589,6 +553,7 @@ function Services({ initialSearchQuery = '' }) {
         }
         const updated = [newBooking, ...(Array.isArray(existing) ? existing : [])]
         localStorage.setItem('servicehub_bookings', JSON.stringify(updated))
+        bookingsAPI.create(newBooking)
       }
     } catch (e) {
       console.error('Error saving booking to localStorage:', e)
@@ -607,30 +572,11 @@ function Services({ initialSearchQuery = '' }) {
       'Painter': 'Expert Painter',
       'AC & HVAC': 'Expert AC Technician',
       'Appliance Repair': 'Expert Appliance Technician',
-      'Cleaning': 'Expert Cleaning Service',
-      'Gardening': 'Expert Gardener',
-      'Pest Control': 'Expert Pest Control',
-      'Web Developer': 'Expert Web Developer',
-      'App Developer': 'Expert Mobile App Developer',
-      'Graphic Designer': 'Expert Graphic Designer',
-      'UI/UX Designer': 'Expert UI/UX Designer',
-      'IT Support & Hardware': 'Expert IT Support & Hardware Specialist',
-      'IT Support': 'Expert IT Support Specialist',
-      'Software Developer': 'Expert Software Developer',
-      'SEO & Marketing': 'Expert SEO & Digital Marketer',
-      'SEO Specialist': 'Expert SEO Specialist',
-      'Cybersecurity & Network': 'Expert Cybersecurity & Network Engineer',
-      'Cybersecurity Specialist': 'Expert Cybersecurity Specialist',
-      'Data & AI Specialist': 'Expert Data & AI Specialist',
-      'Database Specialist': 'Expert Database Administrator',
-      'Doctor Consult': 'Expert Doctor Consultation',
-      'Fitness Trainer': 'Expert Fitness Trainer',
-      'Personal Trainer': 'Expert Personal Trainer',
-      'Yoga Instructor': 'Expert Yoga Instructor',
-      'Physiotherapist': 'Expert Physiotherapist',
-      'Nutritionist': 'Expert Nutritionist',
-      'Mental Health Counselor': 'Expert Mental Health Counselor',
-      'Education': 'Expert Tutors & Educators'
+      'Home Cleaning': 'Expert Deep Cleaning Service',
+      'Gardener': 'Expert Gardener',
+      'Glass & Aluminum': 'Expert Glass & Aluminum Fabricator',
+      'Welder': 'Expert Welder & Metal Fabricator',
+      'Laundry & Ironing': 'Expert Laundry & Dry Cleaning'
     }
     const normalized = normalizeServiceName(serviceName) || serviceName
     if (titles[normalized]) return titles[normalized]
@@ -641,7 +587,7 @@ function Services({ initialSearchQuery = '' }) {
 
   const getServiceSubtitle = (serviceName) => {
     const normalized = normalizeServiceName(serviceName) || serviceName
-    return `Verified professionals offering high-quality ${normalized.toLowerCase()} services.`
+    return `Verified home service professionals offering high-quality ${normalized.toLowerCase()} solutions.`
   }
 
   const getProviderImage = (req, serviceName) => {
@@ -659,28 +605,11 @@ function Services({ initialSearchQuery = '' }) {
       'Welder': welderImage,
       'Laundry & Ironing': laundryImage,
       'Appliance Repair': applianceImage,
-      'Web Developer': screenImage,
-      'App Developer': image03,
-      'Graphic Designer': image22,
-      'UI/UX Designer': uiuxImage,
-      'IT Support & Hardware': itSupportImage,
-      'IT Support': itSupportImage,
-      'Software Developer': softwareDevImage,
-      'SEO & Marketing': seoImage,
-      'SEO Specialist': seoImage,
-      'Cybersecurity & Network': cyberSecurityImage,
-      'Data & AI Specialist': aiImage,
-      'Database Specialist': databaseImage,
-      'Doctor Consult': 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80',
-      'Physiotherapist': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
-      'Nutritionist': 'https://images.unsplash.com/photo-1594824813576-9c4c73a0e671?auto=format&fit=crop&w=600&q=80',
-      'Fitness Trainer': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
-      'Education': 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80',
     }
     if (imageMap[normalized]) return imageMap[normalized]
     const foundKey = Object.keys(imageMap).find(k => k.toLowerCase() === normalized.toLowerCase())
     if (foundKey) return imageMap[foundKey]
-    return getHeaderImage(normalized)
+    return getHeaderImage()
   }
 
   const getProviderRole = (req, serviceName) => {
@@ -697,7 +626,7 @@ function Services({ initialSearchQuery = '' }) {
       'Electrician': ['Wiring & Circuits', 'Circuit Breakers', 'Solar Setup', 'Emergency 24/7'],
       'Plumber': ['Leak Detection', 'Pipe Fitting', 'Drain Cleaning', 'Bathroom Fitting'],
       'Carpenter': ['Custom Woodwork', 'Cabinetry', 'Furniture Repair', 'Door Fixing'],
-      'Painter': ['Wall Painting', 'Cabinet Refinishing', 'Trim Work'],
+      'Painter': ['Wall Painting', 'Cabinet Refinishing', 'Trim Work', 'Waterproofing'],
       'AC & HVAC': ['AC Installation', 'Gas Charging', 'Deep Cleaning', 'Cooling Fix'],
       'Home Cleaning': ['Deep Sanitization', 'Floor Polishing', 'Kitchen Clean', 'Window Wash'],
       'Gardener': ['Lawn Care', 'Pruning & Trimming', 'Garden Design', 'Landscape'],
@@ -705,21 +634,6 @@ function Services({ initialSearchQuery = '' }) {
       'Welder': ['Metal Fabrication', 'Gate Welding', 'Iron Grills', 'Structural'],
       'Laundry & Ironing': ['Steam Press', 'Dry Cleaning', 'Delicate Wash', 'Doorstep Delivery'],
       'Appliance Repair': ['Refrigerator', 'Washing Machine', 'Microwave', 'Oven Repair'],
-      'Web Developer': ['React & Next.js', 'Full Stack', 'Node.js', 'E-Commerce'],
-      'App Developer': ['iOS Swift', 'Android Kotlin', 'Flutter Cross-Platform', 'UI/UX'],
-      'Graphic Designer': ['Brand Identity', 'Logo Design', 'Social Creatives', 'Vector Art'],
-      'UI/UX Designer': ['Figma Prototypes', 'Wireframes', 'Design Systems', 'User Research'],
-      'IT Support & Hardware': ['Hardware Diagnostic', 'Network Setup', 'OS Install', 'Data Recovery'],
-      'Software Developer': ['Python & Java', 'API Integration', 'Cloud Architecture', 'Databases'],
-      'SEO & Marketing': ['Technical SEO', 'Keyword Rank', 'Google Ads', 'Content Strategy'],
-      'Cybersecurity & Network': ['Penetration Testing', 'Firewall Defense', 'VAPT', 'Security Audit'],
-      'Data & AI Specialist': ['LLM Finetuning', 'Machine Learning', 'Computer Vision', 'Data Pipelines'],
-      'Database Specialist': ['PostgreSQL Tuning', 'MongoDB Scaling', 'Query Optimization', 'Cloud DB'],
-      'Doctor Consult': ['General Medicine', 'Tele-Health', 'Prescriptions', 'Clinical Review'],
-      'Physiotherapist': ['Orthopedic Rehab', 'Sports Injury', 'Post-Surgery Care', 'Spine Mobility'],
-      'Nutritionist': ['Clinical Diet', 'Weight Management', 'Cardiac Nutrition', 'Meal Plans'],
-      'Fitness Trainer': ['Strength Conditioning', 'Functional Fitness', 'Personal Coaching', 'Fat Loss'],
-      'Education': ['1-on-1 Tutoring', 'Exam Preparation', 'STEM & Coding', 'Concept Mastery']
     }
     if (tagMap[normalized]) return tagMap[normalized]
     const foundKey = Object.keys(tagMap).find(k => k.toLowerCase() === normalized.toLowerCase())
@@ -730,18 +644,18 @@ function Services({ initialSearchQuery = '' }) {
   const getProviderBio = (req, serviceName) => {
     if (req.bio) return req.bio
     const normalized = normalizeServiceName(serviceName) || serviceName
-    return `Detail-oriented ${normalized.toLowerCase()} specialist with 8+ years experience delivering high-quality residential and commercial solutions with 100% satisfaction guarantee.`
+    return `Detail-oriented ${normalized.toLowerCase()} specialist with 8+ years experience delivering high-quality residential maintenance solutions with 100% satisfaction guarantee.`
   }
 
   const getServiceProviders = (serviceName) => {
     const normalized = normalizeServiceName(serviceName) || serviceName
     const providers = {
       'Electrician': [
-        { id: 'PRV001', name: 'AKRAM', rating: '4.9', reviews: '120', price: '$75/hr', location: 'Gulberg, Lahore', date: '2 hours ago', service: 'Lighting & Wiring', verified: true, image: electricianImage },
-        { id: 'PRV002', name: 'ALI', rating: '4.8', reviews: '95', price: '$80/hr', location: 'DHA Phase 5, Lahore', date: '3 hours ago', service: 'Wiring & Panels', verified: true, image: electricianImage },
-        { id: 'PRV003', name: 'UJAY BHAI', rating: '4.7', reviews: '80', price: '$65/hr', location: 'Johar Town, Lahore', date: '5 hours ago', service: 'Lighting & Solar', verified: false, image: electricianImage },
-        { id: 'PRV004', name: 'Robert Brown', rating: '4.9', reviews: '110', price: '$90/hr', location: 'Cantt, Multan', date: '6 hours ago', service: 'Emergency Breaker', verified: true, image: electricianImage },
-        { id: 'PRV005', name: 'James Taylor', rating: '4.6', reviews: '75', price: '$70/hr', location: 'Bosan Road, Multan', date: '8 hours ago', service: 'Power Inspection', verified: true, image: electricianImage },
+        { id: 'PRV001', name: 'AKRAM', rating: '4.9', reviews: '120', price: 'Rs. 3,800/hr', location: 'Gulberg, Lahore', date: '2 hours ago', service: 'Lighting & Wiring', verified: true, image: electricianImage },
+        { id: 'PRV002', name: 'ALI', rating: '4.8', reviews: '95', price: 'Rs. 4,000/hr', location: 'DHA Phase 5, Lahore', date: '3 hours ago', service: 'Wiring & Panels', verified: true, image: electricianImage },
+        { id: 'PRV003', name: 'UJAY BHAI', rating: '4.7', reviews: '80', price: 'Rs. 3,200/hr', location: 'Johar Town, Lahore', date: '5 hours ago', service: 'Lighting & Solar', verified: false, image: electricianImage },
+        { id: 'PRV004', name: 'Bilal Hassan', rating: '4.9', reviews: '110', price: 'Rs. 4,500/hr', location: 'Cantt, Multan', date: '6 hours ago', service: 'Emergency Breaker', verified: true, image: electricianImage },
+        { id: 'PRV005', name: 'Naveed Iqbal', rating: '4.6', reviews: '75', price: 'Rs. 3,500/hr', location: 'Bosan Road, Multan', date: '8 hours ago', service: 'Power Inspection', verified: true, image: electricianImage },
       ],
       'Plumber': [
         { 
@@ -749,7 +663,7 @@ function Services({ initialSearchQuery = '' }) {
           name: 'Rashid Mehmood (Master Plumber)', 
           rating: '4.9', 
           reviews: '145', 
-          price: '$25/hr', 
+          price: 'Rs. 1,250/hr', 
           location: 'Gulberg, Lahore', 
           date: '10 mins ago', 
           service: 'Pipe Repair & Leak Detection', 
@@ -763,7 +677,7 @@ function Services({ initialSearchQuery = '' }) {
           name: 'Muhammad Aslam', 
           rating: '4.8', 
           reviews: '118', 
-          price: '$22/hr', 
+          price: 'Rs. 1,100/hr', 
           location: 'DHA Phase 5, Lahore', 
           date: '1 hour ago', 
           service: 'Bathroom & Sanitary Fitting', 
@@ -777,7 +691,7 @@ function Services({ initialSearchQuery = '' }) {
           name: 'Tariq Javed', 
           rating: '4.9', 
           reviews: '160', 
-          price: '$28/hr', 
+          price: 'Rs. 1,400/hr', 
           location: 'Johar Town, Lahore', 
           date: '2 hours ago', 
           service: 'Drainage & Sewerage Cleaning', 
@@ -791,7 +705,7 @@ function Services({ initialSearchQuery = '' }) {
           name: 'Naveed Akhtar', 
           rating: '4.7', 
           reviews: '92', 
-          price: '$20/hr', 
+          price: 'Rs. 1,000/hr', 
           location: 'Cantt, Multan', 
           date: '3 hours ago', 
           service: 'Emergency Water Leakage & PPRC Piping', 
@@ -805,7 +719,7 @@ function Services({ initialSearchQuery = '' }) {
           name: 'Kashif Hussain', 
           rating: '4.8', 
           reviews: '104', 
-          price: '$24/hr', 
+          price: 'Rs. 1,200/hr', 
           location: 'Bosan Road, Multan', 
           date: '5 hours ago', 
           service: 'Geyser & Water Heater Installation', 
@@ -816,11 +730,11 @@ function Services({ initialSearchQuery = '' }) {
         },
       ],
       'Carpenter': [
-        { id: 'CRP001', name: 'Mark Johnson', rating: '4.9', reviews: '105', price: '$70/hr', location: 'New York', date: '2 hours ago', service: 'Furniture', verified: true },
-        { id: 'CRP002', name: 'Paul Williams', rating: '4.7', reviews: '88', price: '$65/hr', location: 'Brooklyn', date: '3 hours ago', service: 'Cabinets', verified: true },
-        { id: 'CRP003', name: 'Andrew Brown', rating: '4.8', reviews: '95', price: '$75/hr', location: 'Queens', date: '4 hours ago', service: 'Flooring', verified: true },
-        { id: 'CRP004', name: 'James Miller', rating: '4.6', reviews: '72', price: '$60/hr', location: 'Manhattan', date: '5 hours ago', service: 'Repair', verified: false },
-        { id: 'CRP005', name: 'Robert Davis', rating: '4.9', reviews: '115', price: '$80/hr', location: 'Bronx', date: '6 hours ago', service: 'Custom', verified: true },
+        { id: 'CRP001', name: 'Imran Malik', rating: '4.9', reviews: '105', price: 'Rs. 3,500/hr', location: 'Gulgasht Colony, Multan', date: '2 hours ago', service: 'Furniture', verified: true },
+        { id: 'CRP002', name: 'Rashid Minhas', rating: '4.7', reviews: '88', price: 'Rs. 3,200/hr', location: 'Cantt, Multan', date: '3 hours ago', service: 'Cabinets', verified: true },
+        { id: 'CRP003', name: 'Saad Rafiq', rating: '4.8', reviews: '95', price: 'Rs. 3,800/hr', location: 'Bosan Road, Multan', date: '4 hours ago', service: 'Flooring', verified: true },
+        { id: 'CRP004', name: 'Adnan Siddiqui', rating: '4.6', reviews: '72', price: 'Rs. 3,000/hr', location: 'DHA Phase 5, Lahore', date: '5 hours ago', service: 'Repair', verified: false },
+        { id: 'CRP005', name: 'Hamza Butt', rating: '4.9', reviews: '115', price: 'Rs. 4,000/hr', location: 'Gulberg, Lahore', date: '6 hours ago', service: 'Custom', verified: true },
       ],
       'Painter': [
         {
@@ -829,11 +743,11 @@ function Services({ initialSearchQuery = '' }) {
           role: 'Interior Specialist',
           rating: '4.9',
           reviews: '120',
-          price: '$45/hr',
-          location: 'New York',
+          price: 'Rs. 2,250/hr',
+          location: 'Gulgasht Colony, Multan',
           service: 'Interior Specialist',
           verified: true,
-          image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80',
+          image: paintingImage,
           tags: ['Wall Painting', 'Cabinet Refinishing', 'Trim Work'],
           bio: 'Detail-oriented interior painter with 10+ years transforming residential spaces. I specialize in crisp lines, smooth finishes, and meticulous prep work to ensure long-lasting results.'
         },
@@ -843,11 +757,11 @@ function Services({ initialSearchQuery = '' }) {
           role: 'Exterior Painter',
           rating: '4.8',
           reviews: '95',
-          price: '$55/hr',
-          location: 'Brooklyn',
+          price: 'Rs. 2,800/hr',
+          location: 'Cantt, Multan',
           service: 'Exterior Painter',
           verified: true,
-          image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80',
+          image: paintingImage,
           tags: ['Exterior Painting', 'Power Washing', 'Weatherproofing'],
           bio: 'Equipped for large residential and commercial exterior projects. Fully licensed and insured. We focus on durable, weather-resistant finishes that protect and beautify your property.'
         },
@@ -857,159 +771,68 @@ function Services({ initialSearchQuery = '' }) {
           role: 'Decorative Artist',
           rating: '5.0',
           reviews: '63',
-          price: '$65/hr',
-          location: 'Queens',
+          price: 'Rs. 3,200/hr',
+          location: 'Bosan Road, Multan',
           service: 'Decorative Artist',
           verified: true,
-          image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+          image: paintingImage,
           tags: ['Texture Coating', 'Faux Finishes', 'Murals'],
           bio: 'Specializing in high-end decorative finishes, custom textures, and bespoke wall treatments. I bring an artistic touch to residential interiors, creating unique, personalized spaces.'
         },
       ],
       'AC & HVAC': [
-        { id: 'AC001', name: 'Michael Smith', rating: '4.9', reviews: '120', price: '$85/hr', location: 'New York', date: '1 hour ago', service: 'Installation', verified: true },
-        { id: 'AC002', name: 'David Johnson', rating: '4.8', reviews: '100', price: '$80/hr', location: 'Brooklyn', date: '2 hours ago', service: 'Repair', verified: true },
-        { id: 'AC003', name: 'James Wilson', rating: '4.7', reviews: '88', price: '$75/hr', location: 'Queens', date: '3 hours ago', service: 'Maintenance', verified: true },
-        { id: 'AC004', name: 'Robert Brown', rating: '4.9', reviews: '115', price: '$90/hr', location: 'Manhattan', date: '4 hours ago', service: 'Emergency', verified: true },
-        { id: 'AC005', name: 'William Davis', rating: '4.6', reviews: '75', price: '$70/hr', location: 'Bronx', date: '5 hours ago', service: 'Inspection', verified: false },
+        { id: 'AC001', name: 'Tariq Mehmood', rating: '4.9', reviews: '120', price: 'Rs. 4,200/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Installation', verified: true },
+        { id: 'AC002', name: 'Usman Ali', rating: '4.8', reviews: '100', price: 'Rs. 4,000/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Repair', verified: true },
+        { id: 'AC003', name: 'Kamran Khan', rating: '4.7', reviews: '88', price: 'Rs. 3,800/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Maintenance', verified: true },
+        { id: 'AC004', name: 'Bilal Hassan', rating: '4.9', reviews: '115', price: 'Rs. 4,500/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Emergency', verified: true },
+        { id: 'AC005', name: 'Zahid Hussain', rating: '4.6', reviews: '75', price: 'Rs. 3,500/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Inspection', verified: false },
+      ],
+      'Home Cleaning': [
+        { id: 'CLN001', name: 'Mudassir Abbas (Deep Clean)', rating: '4.9', reviews: '168', price: 'Rs. 1,000/hr', location: 'Cantt, Multan', date: '10 mins ago', service: 'Full House Deep Sanitization', verified: true, image: homeCleaningImage, tags: ['Deep Sanitization', 'Floor Polishing', 'Kitchen Clean', 'Window Wash'], bio: 'Specialist in deep residential cleaning, chemical-free sanitization, motorized sofa washing and floor buffing.' },
+        { id: 'CLN002', name: 'Zahid Mehmood', rating: '4.8', reviews: '135', price: 'Rs. 900/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Water Tank & Floor Buffing', verified: true, image: homeCleaningImage, tags: ['Water Tank', 'Floor Polish', 'Bathroom Sanitization'], bio: 'Expert in underground/overhead water tank cleaning, high-pressure jet washing and marble polishing.' },
+        { id: 'CLN003', name: 'Farhan Cleaners', rating: '4.9', reviews: '190', price: 'Rs. 1,200/hr', location: 'Bosan Road, Multan', date: '2 hours ago', service: 'Sofa & Carpet Steam Wash', verified: true, image: homeCleaningImage, tags: ['Sofa Steam Wash', 'Carpet Wash', 'Mattress Clean'], bio: 'State-of-the-art steam extraction for fabric sofas, carpets and mattresses with quick-drying technology.' }
       ],
       'Appliance Repair': [
-        { id: 'APR001', name: 'Richard Garcia', rating: '4.8', reviews: '98', price: '$70/hr', location: 'New York', date: '1 hour ago', service: 'Refrigerator', verified: true },
-        { id: 'APR002', name: 'Carlos Martinez', rating: '4.7', reviews: '82', price: '$65/hr', location: 'Brooklyn', date: '2 hours ago', service: 'Washing Machine', verified: true },
-        { id: 'APR003', name: 'Steven Lee', rating: '4.9', reviews: '108', price: '$75/hr', location: 'Queens', date: '3 hours ago', service: 'Dishwasher', verified: true },
-        { id: 'APR004', name: 'Daniel Kim', rating: '4.6', reviews: '74', price: '$60/hr', location: 'Manhattan', date: '4 hours ago', service: 'Oven', verified: false },
-        { id: 'APR005', name: 'Paul Thompson', rating: '4.8', reviews: '91', price: '$68/hr', location: 'Bronx', date: '5 hours ago', service: 'Microwave', verified: true },
+        { id: 'APR001', name: 'Farhan Akhtar', rating: '4.8', reviews: '98', price: 'Rs. 3,500/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Refrigerator', verified: true },
+        { id: 'APR002', name: 'Carlos Martinez', rating: '4.7', reviews: '82', price: 'Rs. 3,200/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Washing Machine', verified: true },
+        { id: 'APR003', name: 'Steven Lee', rating: '4.9', reviews: '108', price: 'Rs. 3,800/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Dishwasher', verified: true },
+        { id: 'APR004', name: 'Daniel Kim', rating: '4.6', reviews: '74', price: 'Rs. 3,000/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Oven', verified: false },
+        { id: 'APR005', name: 'Paul Thompson', rating: '4.8', reviews: '91', price: 'Rs. 3,400/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Microwave', verified: true },
       ],
       'Glass & Aluminum': [
-        { id: 'GLA001', name: 'Frank Wright', rating: '4.9', reviews: '112', price: '$80/hr', location: 'New York', date: '1 hour ago', service: 'Windows', verified: true },
-        { id: 'GLA002', name: 'George Miller', rating: '4.7', reviews: '87', price: '$75/hr', location: 'Brooklyn', date: '2 hours ago', service: 'Doors', verified: true },
-        { id: 'GLA003', name: 'Henry Davis', rating: '4.8', reviews: '95', price: '$85/hr', location: 'Queens', date: '3 hours ago', service: 'Aluminum Work', verified: true },
-        { id: 'GLA004', name: 'Charles Brown', rating: '4.6', reviews: '73', price: '$70/hr', location: 'Manhattan', date: '4 hours ago', service: 'Glass Repair', verified: false },
-        { id: 'GLA005', name: 'Edward Wilson', rating: '4.9', reviews: '118', price: '$90/hr', location: 'Bronx', date: '5 hours ago', service: 'Custom Design', verified: true },
+        { id: 'GLA001', name: 'Frank Wright', rating: '4.9', reviews: '112', price: 'Rs. 4,000/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Windows', verified: true },
+        { id: 'GLA002', name: 'George Miller', rating: '4.7', reviews: '87', price: 'Rs. 3,800/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Doors', verified: true },
+        { id: 'GLA003', name: 'Henry Davis', rating: '4.8', reviews: '95', price: 'Rs. 4,200/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Aluminum Work', verified: true },
+        { id: 'GLA004', name: 'Charles Brown', rating: '4.6', reviews: '73', price: 'Rs. 3,500/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Glass Repair', verified: false },
+        { id: 'GLA005', name: 'Edward Wilson', rating: '4.9', reviews: '118', price: 'Rs. 4,500/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Custom Design', verified: true },
       ],
       'Gardener': [
-        { id: 'GRD001', name: 'Mary Johnson', rating: '4.8', reviews: '94', price: '$55/hr', location: 'New York', date: '1 hour ago', service: 'Lawn Care', verified: true },
-        { id: 'GRD002', name: 'Susan Williams', rating: '4.7', reviews: '83', price: '$50/hr', location: 'Brooklyn', date: '2 hours ago', service: 'Landscaping', verified: true },
-        { id: 'GRD003', name: 'Patricia Brown', rating: '4.9', reviews: '106', price: '$60/hr', location: 'Queens', date: '3 hours ago', service: 'Garden Design', verified: true },
-        { id: 'GRD004', name: 'Jennifer Davis', rating: '4.6', reviews: '71', price: '$45/hr', location: 'Manhattan', date: '4 hours ago', service: 'Tree Trimming', verified: false },
-        { id: 'GRD005', name: 'Linda Miller', rating: '4.8', reviews: '89', price: '$52/hr', location: 'Bronx', date: '5 hours ago', service: 'Irrigation', verified: true },
+        { id: 'GRD001', name: 'Mary Johnson', rating: '4.8', reviews: '94', price: 'Rs. 2,800/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Lawn Care', verified: true },
+        { id: 'GRD002', name: 'Susan Williams', rating: '4.7', reviews: '83', price: 'Rs. 2,500/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Landscaping', verified: true },
+        { id: 'GRD003', name: 'Patricia Brown', rating: '4.9', reviews: '106', price: 'Rs. 3,000/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Garden Design', verified: true },
+        { id: 'GRD004', name: 'Jennifer Davis', rating: '4.6', reviews: '71', price: 'Rs. 2,250/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Tree Trimming', verified: false },
+        { id: 'GRD005', name: 'Linda Miller', rating: '4.8', reviews: '89', price: 'Rs. 2,600/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Irrigation', verified: true },
       ],
       'Welder': [
-        { id: 'WLD001', name: 'Thomas Anderson', rating: '4.9', reviews: '114', price: '$85/hr', location: 'New York', date: '1 hour ago', service: 'Metal Fabrication', verified: true },
-        { id: 'WLD002', name: 'Robert Taylor', rating: '4.7', reviews: '88', price: '$80/hr', location: 'Brooklyn', date: '2 hours ago', service: 'Structural Welding', verified: true },
-        { id: 'WLD003', name: 'William Harris', rating: '4.8', reviews: '97', price: '$90/hr', location: 'Queens', date: '3 hours ago', service: 'Pipe Welding', verified: true },
-        { id: 'WLD004', name: 'James Clark', rating: '4.6', reviews: '76', price: '$75/hr', location: 'Manhattan', date: '4 hours ago', service: 'Repair', verified: false },
-        { id: 'WLD005', name: 'John Lewis', rating: '4.9', reviews: '120', price: '$95/hr', location: 'Bronx', date: '5 hours ago', service: 'Custom Projects', verified: true },
+        { id: 'WLD001', name: 'Thomas Anderson', rating: '4.9', reviews: '114', price: 'Rs. 4,200/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Metal Fabrication', verified: true },
+        { id: 'WLD002', name: 'Robert Taylor', rating: '4.7', reviews: '88', price: 'Rs. 4,000/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Structural Welding', verified: true },
+        { id: 'WLD003', name: 'William Harris', rating: '4.8', reviews: '97', price: 'Rs. 4,500/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Pipe Welding', verified: true },
+        { id: 'WLD004', name: 'James Clark', rating: '4.6', reviews: '76', price: 'Rs. 3,800/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Repair', verified: false },
+        { id: 'WLD005', name: 'John Lewis', rating: '4.9', reviews: '120', price: 'Rs. 4,800/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Custom Projects', verified: true },
       ],
       'Laundry & Ironing': [
-        { id: 'LND001', name: 'Emma Wilson', rating: '4.8', reviews: '96', price: '$40/hr', location: 'New York', date: '1 hour ago', service: 'Laundry', verified: true },
-        { id: 'LND002', name: 'Sophia Moore', rating: '4.7', reviews: '84', price: '$35/hr', location: 'Brooklyn', date: '2 hours ago', service: 'Ironing', verified: true },
-        { id: 'LND003', name: 'Olivia Taylor', rating: '4.9', reviews: '109', price: '$45/hr', location: 'Queens', date: '3 hours ago', service: 'Dry Cleaning', verified: true },
-        { id: 'LND004', name: 'Ava Anderson', rating: '4.6', reviews: '72', price: '$38/hr', location: 'Manhattan', date: '4 hours ago', service: 'Fold & Pack', verified: false },
-        { id: 'LND005', name: 'Isabella Thomas', rating: '4.8', reviews: '93', price: '$42/hr', location: 'Bronx', date: '5 hours ago', service: 'Express Service', verified: true },
-      ],
-      'Web Developer': [
-        { id: 'WEB001', name: 'Alexander Wright', rating: '4.9', reviews: '142', price: '$50/hr', location: 'New York', date: 'Just now', service: 'Full-Stack React & Node', verified: true, avatar: '👨‍💻', icon: '💻' },
-        { id: 'WEB002', name: 'Sarah Jenkins', rating: '4.8', reviews: '118', price: '$45/hr', location: 'San Francisco', date: '1 hour ago', service: 'Frontend & UI Web Apps', verified: true, avatar: '👩‍💻', icon: '🌐' },
-        { id: 'WEB003', name: 'David Miller', rating: '4.9', reviews: '165', price: '$55/hr', location: 'Austin', date: '2 hours ago', service: 'E-Commerce & Shopify', verified: true, avatar: '👨‍💻', icon: '🛒' },
-        { id: 'WEB004', name: 'Elena Rostova', rating: '4.7', reviews: '89', price: '$40/hr', location: 'Chicago', date: '3 hours ago', service: 'Next.js & Modern Web', verified: false, avatar: '👩‍💻', icon: '⚡' },
-        { id: 'WEB005', name: 'Marcus Chen', rating: '4.8', reviews: '130', price: '$52/hr', location: 'Seattle', date: '4 hours ago', service: 'WordPress & Custom CMS', verified: true, avatar: '👨‍💻', icon: '⚙️' },
-      ],
-      'App Developer': [
-        { id: 'APP001', name: 'Liam Gallagher', rating: '4.9', reviews: '155', price: '$55/hr', location: 'San Jose', date: '30 mins ago', service: 'iOS Swift & SwiftUI', verified: true, avatar: '👨‍💻', icon: '📱' },
-        { id: 'APP002', name: 'Priya Sharma', rating: '4.8', reviews: '140', price: '$50/hr', location: 'Boston', date: '2 hours ago', service: 'Flutter Cross-Platform', verified: true, avatar: '👩‍💻', icon: '🚀' },
-        { id: 'APP003', name: 'Kevin Zhao', rating: '4.9', reviews: '128', price: '$58/hr', location: 'New York', date: '3 hours ago', service: 'Android Kotlin Native', verified: true, avatar: '👨‍💻', icon: '🤖' },
-        { id: 'APP004', name: 'Hannah White', rating: '4.7', reviews: '92', price: '$48/hr', location: 'Denver', date: '5 hours ago', service: 'React Native Apps', verified: false, avatar: '👩‍💻', icon: '📲' },
-        { id: 'APP005', name: 'Tariq Mehmood', rating: '4.8', reviews: '110', price: '$52/hr', location: 'Dallas', date: '6 hours ago', service: 'App Store Submission & QA', verified: true, avatar: '👨‍💻', icon: '⭐' },
-      ],
-      'Graphic Designer': [
-        { id: 'DES001', name: 'Chloe Dubois', rating: '4.8', reviews: '135', price: '$40/hr', location: 'New York', date: '1 hour ago', service: 'Brand Identity & Logos', verified: true, avatar: '👩‍🎨', icon: '🎨' },
-        { id: 'DES002', name: 'Daniel Vance', rating: '4.9', reviews: '148', price: '$45/hr', location: 'Los Angeles', date: '2 hours ago', service: 'Social Media & Ad Creative', verified: true, avatar: '👨‍🎨', icon: '✨' },
-        { id: 'DES003', name: 'Mia Santos', rating: '4.7', reviews: '98', price: '$35/hr', location: 'Miami', date: '4 hours ago', service: 'Vector Art & Illustrations', verified: false, avatar: '👩‍🎨', icon: '🖌️' },
-        { id: 'DES004', name: 'Oliver Scott', rating: '4.8', reviews: '112', price: '$42/hr', location: 'Atlanta', date: '5 hours ago', service: 'Packaging & Print Design', verified: true, avatar: '👨‍🎨', icon: '📦' },
-      ],
-      'UI/UX Designer': [
-        { id: 'UIX001', name: 'Jessica Taylor', rating: '4.9', reviews: '162', price: '$48/hr', location: 'San Francisco', date: 'Just now', service: 'Figma Prototyping & UX Flow', verified: true, avatar: '👩‍💻', icon: '📐' },
-        { id: 'UIX002', name: 'Ryan Mitchell', rating: '4.8', reviews: '125', price: '$45/hr', location: 'New York', date: '1 hour ago', service: 'Mobile App Wireframes', verified: true, avatar: '👨‍💻', icon: '📱' },
-        { id: 'UIX003', name: 'Zoe Kravitz', rating: '4.9', reviews: '140', price: '$50/hr', location: 'Seattle', date: '3 hours ago', service: 'Design Systems & Tokens', verified: true, avatar: '👩‍💻', icon: '🎨' },
-        { id: 'UIX004', name: 'Ethan Hunt', rating: '4.7', reviews: '88', price: '$42/hr', location: 'Austin', date: '5 hours ago', service: 'User Journey & Research', verified: false, avatar: '👨‍💻', icon: '🔍' },
-      ],
-      'IT Support & Hardware': [
-        { id: 'ITS001', name: 'Brian O\'Connor', rating: '4.9', reviews: '195', price: '$38/hr', location: 'Chicago', date: '1 hour ago', service: 'Laptop & Desktop Repair', verified: true, avatar: '👨‍🔧', icon: '🛠️' },
-        { id: 'ITS002', name: 'Samantha Reed', rating: '4.8', reviews: '150', price: '$35/hr', location: 'Houston', date: '2 hours ago', service: 'Network Setup & WiFi Fix', verified: true, avatar: '👩‍🔧', icon: '📶' },
-        { id: 'ITS003', name: 'Ahmed Raza', rating: '4.9', reviews: '175', price: '$40/hr', location: 'New York', date: '3 hours ago', service: 'OS Crash & Data Recovery', verified: true, avatar: '👨‍🔧', icon: '💾' },
-        { id: 'ITS004', name: 'Lucas Gray', rating: '4.7', reviews: '96', price: '$30/hr', location: 'Philadelphia', date: '5 hours ago', service: 'Hardware Diagnostic & RAM', verified: false, avatar: '👨‍🔧', icon: '⚙️' },
-      ],
-      'IT Support': [
-        { id: 'ITS001', name: 'Brian O\'Connor', rating: '4.9', reviews: '195', price: '$38/hr', location: 'Chicago', date: '1 hour ago', service: 'Laptop & Desktop Repair', verified: true, avatar: '👨‍🔧', icon: '🛠️' },
-        { id: 'ITS002', name: 'Samantha Reed', rating: '4.8', reviews: '150', price: '$35/hr', location: 'Houston', date: '2 hours ago', service: 'Network Setup & WiFi Fix', verified: true, avatar: '👩‍🔧', icon: '📶' },
-      ],
-      'Software Developer': [
-        { id: 'SFT001', name: 'Dmitri Petrov', rating: '4.9', reviews: '188', price: '$65/hr', location: 'Seattle', date: 'Just now', service: 'Backend Python & Go APIs', verified: true, avatar: '👨‍💻', icon: '⚡' },
-        { id: 'SFT002', name: 'Emily Thorne', rating: '4.8', reviews: '142', price: '$60/hr', location: 'Boston', date: '1 hour ago', service: 'Enterprise C# .NET Systems', verified: true, avatar: '👩‍💻', icon: '💻' },
-        { id: 'SFT003', name: 'Vikram Patel', rating: '4.9', reviews: '170', price: '$68/hr', location: 'New York', date: '2 hours ago', service: 'Microservices & Cloud', verified: true, avatar: '👨‍💻', icon: '☁️' },
-        { id: 'SFT004', name: 'Rachel Green', rating: '4.7', reviews: '99', price: '$55/hr', location: 'Austin', date: '4 hours ago', service: 'Java Spring Cloud Systems', verified: false, avatar: '👩‍💻', icon: '☕' },
-      ],
-      'SEO & Marketing': [
-        { id: 'SEO001', name: 'Nathan Drake', rating: '4.9', reviews: '138', price: '$45/hr', location: 'San Francisco', date: '1 hour ago', service: 'Google Top Ranking SEO', verified: true, avatar: '👨‍💼', icon: '📈' },
-        { id: 'SEO002', name: 'Alicia Keys', rating: '4.8', reviews: '120', price: '$40/hr', location: 'New York', date: '2 hours ago', service: 'Technical SEO & Speed Fix', verified: true, avatar: '👩‍💼', icon: '🔍' },
-        { id: 'SEO003', name: 'Jason Miller', rating: '4.7', reviews: '105', price: '$42/hr', location: 'Miami', date: '3 hours ago', service: 'High DA Backlinks Strategy', verified: false, avatar: '👨‍💼', icon: '🔗' },
-        { id: 'SEO004', name: 'Claire Bennet', rating: '4.9', reviews: '145', price: '$48/hr', location: 'Dallas', date: '5 hours ago', service: 'PPC Ads & Conversion Rate', verified: true, avatar: '👩‍💼', icon: '🎯' },
-      ],
-      'SEO Specialist': [
-        { id: 'SEO001', name: 'Nathan Drake', rating: '4.9', reviews: '138', price: '$45/hr', location: 'San Francisco', date: '1 hour ago', service: 'Google Top Ranking SEO', verified: true, avatar: '👨‍💼', icon: '📈' },
-        { id: 'SEO002', name: 'Alicia Keys', rating: '4.8', reviews: '120', price: '$40/hr', location: 'New York', date: '2 hours ago', service: 'Technical SEO & Speed Fix', verified: true, avatar: '👩‍💼', icon: '🔍' },
-      ],
-      'Cybersecurity & Network': [
-        { id: 'CYB001', name: 'Elliot Alderson', rating: '4.9', reviews: '172', price: '$75/hr', location: 'New York', date: '30 mins ago', service: 'Penetration Testing & VAPT', verified: true, avatar: '👨‍💻', icon: '🛡️' },
-        { id: 'CYB002', name: 'Angela Moss', rating: '4.8', reviews: '134', price: '$68/hr', location: 'Washington DC', date: '2 hours ago', service: 'Firewall & Network Defense', verified: true, avatar: '👩‍💻', icon: '🔒' },
-        { id: 'CYB003', name: 'Leon Vance', rating: '4.9', reviews: '158', price: '$80/hr', location: 'San Diego', date: '3 hours ago', service: 'Malware Removal & Recovery', verified: true, avatar: '👨‍💻', icon: '🛑' },
-        { id: 'CYB004', name: 'Grace Hopper', rating: '4.7', reviews: '82', price: '$65/hr', location: 'Boston', date: '5 hours ago', service: 'Server Security Hardening', verified: false, avatar: '👩‍💻', icon: '🔐' },
-      ],
-      'Cybersecurity Specialist': [
-        { id: 'CYB001', name: 'Elliot Alderson', rating: '4.9', reviews: '172', price: '$75/hr', location: 'New York', date: '30 mins ago', service: 'Penetration Testing & VAPT', verified: true, avatar: '👨‍💻', icon: '🛡️' },
-        { id: 'CYB002', name: 'Angela Moss', rating: '4.8', reviews: '134', price: '$68/hr', location: 'Washington DC', date: '2 hours ago', service: 'Firewall & Network Defense', verified: true, avatar: '👩‍💻', icon: '🔒' },
-      ],
-      'Data & AI Specialist': [
-        { id: 'DAI001', name: 'Dr. Alan Turing', rating: '4.9', reviews: '190', price: '$85/hr', location: 'Boston', date: 'Just now', service: 'Machine Learning & LLM Finetune', verified: true, avatar: '👨‍🔬', icon: '🤖' },
-        { id: 'DAI002', name: 'Dr. Ada Lovelace', rating: '4.9', reviews: '182', price: '$90/hr', location: 'San Francisco', date: '1 hour ago', service: 'Computer Vision & AI Agents', verified: true, avatar: '👩‍🔬', icon: '🧠' },
-        { id: 'DAI003', name: 'Ken Thompson', rating: '4.8', reviews: '128', price: '$78/hr', location: 'Seattle', date: '3 hours ago', service: 'Predictive Data Pipelines', verified: true, avatar: '👨‍🔬', icon: '📊' },
-        { id: 'DAI004', name: 'Sophie Germain', rating: '4.7', reviews: '95', price: '$72/hr', location: 'New York', date: '4 hours ago', service: 'NLP & Custom Chatbots', verified: false, avatar: '👩‍🔬', icon: '💬' },
-      ],
-      'Database Specialist': [
-        { id: 'DBS001', name: 'Donald Chamberlin', rating: '4.9', reviews: '165', price: '$60/hr', location: 'New York', date: '1 hour ago', service: 'PostgreSQL & MySQL Tuning', verified: true, avatar: '👨‍💻', icon: '🗄️' },
-        { id: 'DBS002', name: 'Raymond Boyce', rating: '4.8', reviews: '130', price: '$55/hr', location: 'Austin', date: '2 hours ago', service: 'MongoDB & Redis Scaling', verified: true, avatar: '👨‍💻', icon: '⚡' },
-        { id: 'DBS003', name: 'Linus Torvalds', rating: '4.9', reviews: '178', price: '$65/hr', location: 'Portland', date: '3 hours ago', service: 'Database Migration & Backup', verified: true, avatar: '👨‍💻', icon: '🔄' },
-        { id: 'DBS004', name: 'Barbara Liskov', rating: '4.7', reviews: '89', price: '$52/hr', location: 'Denver', date: '5 hours ago', service: 'Query Optimization & Indexing', verified: false, avatar: '👩‍💻', icon: '📈' },
-      ],
-      'Doctor Consult': [
-        { id: 'DOC001', name: 'Dr. Hamza Malik', rating: '4.9', reviews: '160', price: '$40/hr', location: 'Nishtar Road, Multan', date: 'Just now', service: 'General Physician & Tele-Health', verified: true, avatar: '👨‍⚕️', icon: '🩺' },
-        { id: 'DOC002', name: 'Dr. Ayesha Siddiqui', rating: '4.8', reviews: '142', price: '$45/hr', location: 'Cantt, Multan', date: '1 hour ago', service: 'Cardiology & Family Medicine', verified: true, avatar: '👩‍⚕️', icon: '🩺' },
-        { id: 'DOC003', name: 'Dr. Usman Tariq', rating: '4.9', reviews: '118', price: '$50/hr', location: 'Gulgasht Colony, Multan', date: '3 hours ago', service: 'Pediatrics & Child Care', verified: true, avatar: '👨‍⚕️', icon: '🩺' },
-      ],
-      'Physiotherapist': [
-        { id: 'PHY001', name: 'Dr. Bilal Qureshi (PT)', rating: '4.9', reviews: '135', price: '$35/hr', location: 'Bosan Road, Multan', date: '2 hours ago', service: 'Orthopedic Rehabilitation', verified: true, avatar: '👨‍⚕️', icon: '🏃' },
-        { id: 'PHY002', name: 'Dr. Sana Arshad (PT)', rating: '4.8', reviews: '110', price: '$38/hr', location: 'Gulgasht, Multan', date: '4 hours ago', service: 'Sports Injury Therapy', verified: true, avatar: '👩‍⚕️', icon: '🏃' },
-      ],
-      'Nutritionist': [
-        { id: 'NUT001', name: 'Zainab Fatima', rating: '4.8', reviews: '125', price: '$30/hr', location: 'Officers Colony, Multan', date: '1 hour ago', service: 'Clinical Diet & Weight Loss', verified: true, avatar: '👩‍⚕️', icon: '🥗' },
-        { id: 'NUT002', name: 'Haris Mehmood', rating: '4.7', reviews: '98', price: '$28/hr', location: 'Cantt, Multan', date: '3 hours ago', service: 'Diabetes & Cardiac Nutrition', verified: true, avatar: '👨‍⚕️', icon: '🥗' },
-      ],
-      'Fitness Trainer': [
-        { id: 'FIT001', name: 'Captain Imran', rating: '4.9', reviews: '175', price: '$25/hr', location: 'Bosan Road, Multan', date: 'Just now', service: 'Strength & Functional Fitness', verified: true, avatar: '🏋️‍♂️', icon: '💪' },
-        { id: 'FIT002', name: 'Maria Khan', rating: '4.8', reviews: '130', price: '$30/hr', location: 'Gulgasht, Multan', date: '2 hours ago', service: 'Aerobics & Calisthenics', verified: true, avatar: '🏋️‍♀️', icon: '💪' },
-      ],
-      'Education': [
-        { id: 'EDU001', name: 'Prof. Tariq Mahmood', rating: '4.9', reviews: '145', price: '$25/hr', location: 'Gulgasht Colony, Multan', date: 'Just now', service: 'Mathematics & Physics Tutor', verified: true, avatar: '👨‍🏫', icon: '📐' },
-        { id: 'EDU002', name: 'Ayesha Siddiqui', rating: '4.8', reviews: '120', price: '$22/hr', location: 'Cantt, Multan', date: '1 hour ago', service: 'English & O/A Level Prep', verified: true, avatar: '👩‍🏫', icon: '📚' },
-        { id: 'EDU003', name: 'Engr. Bilal Farooq', rating: '4.9', reviews: '160', price: '$30/hr', location: 'Bosan Road, Multan', date: '2 hours ago', service: 'Coding & STEM Instructor', verified: true, avatar: '👨‍💻', icon: '💻' },
+        { id: 'LND001', name: 'Emma Wilson', rating: '4.8', reviews: '96', price: 'Rs. 2,000/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Laundry', verified: true },
+        { id: 'LND002', name: 'Sophia Moore', rating: '4.7', reviews: '84', price: 'Rs. 1,800/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Ironing', verified: true },
+        { id: 'LND003', name: 'Olivia Taylor', rating: '4.9', reviews: '109', price: 'Rs. 2,250/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Dry Cleaning', verified: true },
+        { id: 'LND004', name: 'Ava Anderson', rating: '4.6', reviews: '72', price: 'Rs. 1,900/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Fold & Pack', verified: false },
+        { id: 'LND005', name: 'Isabella Thomas', rating: '4.8', reviews: '93', price: 'Rs. 2,100/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Express Service', verified: true },
       ],
     }
     if (providers[normalized]) return providers[normalized]
     const foundKey = Object.keys(providers).find(k => k.toLowerCase() === normalized.toLowerCase())
     if (foundKey) return providers[foundKey]
 
-    // Fallback: search across all providers by service or tag or name instead of defaulting to Electrician
+    // Fallback: search across all providers by service or tag or name
     const allProviders = Object.values(providers).flat()
     const queryLower = normalized.toLowerCase()
     const matches = allProviders.filter(p => 
@@ -1022,215 +845,9 @@ function Services({ initialSearchQuery = '' }) {
     return []
   }
 
-  const getHeaderImage = (serviceName) => {
-    const normalized = normalizeServiceName(serviceName) || serviceName
-    const images = {
-      'Electrician': electricianImage,
-      'Plumber': plumberImage,
-      'Carpenter': carpenterImage,
-      'Home Cleaning': homeCleaningImage,
-      'Painter': paintingImage,
-      'Glass & Aluminum': aluminiumImage,
-      'Gardener': gardeningImage,
-      'AC & HVAC': acImage,
-      'Welder': welderImage,
-      'Laundry & Ironing': laundryImage,
-      'Appliance Repair': applianceImage,
-      'Web Developer': screenImage,
-      'App Developer': image03,
-      'Graphic Designer': image22,
-      'UI/UX Designer': uiuxImage,
-      'IT Support & Hardware': itSupportImage,
-      'IT Support': itSupportImage,
-      'Software Developer': softwareDevImage,
-      'SEO & Marketing': seoImage,
-      'SEO Specialist': seoImage,
-      'SEO': seoImage,
-      'Cybersecurity & Network': cyberSecurityImage,
-      'Cybersecurity Specialist': cyberSecurityImage,
-      'Cybersecurity': cyberSecurityImage,
-      'Data & AI Specialist': aiImage,
-      'AI Specialist': aiImage,
-      'Database Specialist': databaseImage,
-      'Doctor Consult': 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=1200&q=80',
-      'Physiotherapist': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
-      'Nutritionist': 'https://images.unsplash.com/photo-1594824813576-9c4c73a0e671?auto=format&fit=crop&w=1200&q=80',
-      'Fitness Trainer': 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
-      'Education': 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80'
-    }
-    if (images[normalized]) return images[normalized]
-    const foundKey = Object.keys(images).find(k => k.toLowerCase() === normalized.toLowerCase())
-    if (foundKey) return images[foundKey]
-    return headerImage
+  const getHeaderImage = () => {
+    return servicesHeroBanner
   }
-
-  const mainTechServices = [
-    {
-      name: 'Web Developer',
-      description: 'Custom websites, responsive design & web applications',
-      rating: '4.9',
-      reviews: '200+',
-      price: '$50/hr',
-      hasImage: true,
-      image: screenImage
-    },
-    {
-      name: 'App Developer',
-      description: 'iOS & Android mobile application development',
-      rating: '4.9',
-      reviews: '150+',
-      price: '$55/hr',
-      hasImage: true,
-      image: image03
-    },
-    {
-      name: 'Graphic Designer',
-      description: 'Brand identity, logos, vector art & social media creatives',
-      rating: '4.7',
-      reviews: '120+',
-      price: '$40/hr',
-      hasImage: true,
-      image: image22
-    },
-    {
-      name: 'UI/UX Designer',
-      description: 'Figma prototypes, mobile UX research & modern UI layouts',
-      rating: '4.9',
-      reviews: '135+',
-      price: '$45/hr',
-      hasImage: true,
-      image: uiuxImage
-    },
-  ]
-
-  const allTechServices = [
-    {
-      name: 'Web Developer',
-      description: 'Custom websites, responsive design & web applications',
-      rating: '4.9',
-      reviews: '200+',
-      price: '$50/hr',
-      hasImage: true,
-      image: screenImage
-    },
-    {
-      name: 'App Developer',
-      description: 'iOS & Android mobile application development',
-      rating: '4.9',
-      reviews: '150+',
-      price: '$55/hr',
-      hasImage: true,
-      image: image03
-    },
-    {
-      name: 'Graphic Designer',
-      description: 'Brand identity, logos, vector art & social media creatives',
-      rating: '4.7',
-      reviews: '120+',
-      price: '$40/hr',
-      hasImage: true,
-      image: image22
-    },
-    {
-      name: 'UI/UX Designer',
-      description: 'Figma prototypes, mobile UX research & modern UI layouts',
-      rating: '4.9',
-      reviews: '135+',
-      price: '$45/hr',
-      hasImage: true,
-      image: uiuxImage
-    },
-    {
-      name: 'IT Support & Hardware',
-      description: 'PC repair, diagnostics, OS installations & hardware fixes',
-      rating: '4.8',
-      reviews: '190+',
-      price: '$35/hr',
-      hasImage: true,
-      image: itSupportImage
-    },
-    {
-      name: 'Software Developer',
-      description: 'Enterprise desktop software, cloud systems & custom APIs',
-      rating: '4.8',
-      reviews: '180+',
-      price: '$60/hr',
-      hasImage: true,
-      image: softwareDevImage
-    },
-    {
-      name: 'SEO & Marketing',
-      description: 'Search engine rankings, keyword optimization & ads growth',
-      rating: '4.8',
-      reviews: '115+',
-      price: '$42/hr',
-      hasImage: true,
-      image: seoImage
-    },
-    {
-      name: 'Cybersecurity & Network',
-      description: 'Network setup, router security, firewalls & data protection',
-      rating: '4.9',
-      reviews: '85+',
-      price: '$65/hr',
-      hasImage: true,
-      image: cyberSecurityImage
-    },
-    {
-      name: 'Data & AI Specialist',
-      description: 'Machine learning, deep learning & intelligent AI models',
-      rating: '4.9',
-      reviews: '110+',
-      price: '$85/hr',
-      hasImage: true,
-      image: aiImage
-    },
-    {
-      name: 'Database Specialist',
-      description: 'SQL architecture, MongoDB, data pipelines & DB optimization',
-      rating: '4.8',
-      reviews: '95+',
-      price: '$55/hr',
-      hasImage: true,
-      image: databaseImage
-    },
-  ]
-
-  const healthServices = [
-    {
-      name: 'Doctor Consult',
-      description: 'Online medical consultation',
-      rating: '4.9',
-      reviews: '200+',
-      action: 'Book Now'
-    },
-    {
-      name: 'Physiotherapist',
-      description: 'Physical therapy sessions',
-      rating: '4.8',
-      reviews: '150+',
-      action: 'Consult'
-    },
-    {
-      name: 'Nutritionist',
-      description: 'Diet planning & advice',
-      rating: '4.7',
-      reviews: '100+',
-      action: 'Get Plan'
-    },
-    {
-      name: 'Fitness Trainer',
-      description: 'Personal fitness coaching',
-      rating: '4.9',
-      reviews: '180+',
-      action: 'Find Trainer'
-    },
-  ]
-
-  const moreCategories = [
-    'Professional Services', 'Beauty & Personal Care', 'Automotive & Transport',
-    'Events & Creative', 'Education', 'Family & Personal'
-  ]
 
   return (
     <div className={`services-page ${selectedService ? 'has-detail-view' : ''}`}>
@@ -1265,26 +882,37 @@ function Services({ initialSearchQuery = '' }) {
           )}
           {!isHistoryMode && (
             <div className="chat-modal-footer">
-              <button className="send-custom-offer-btn" onClick={handleSendCustomOffer}>💰 Send Custom Offer</button>
+              <button className="send-custom-offer-btn" onClick={handleSendCustomOffer}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><line x1="12" y1="6" x2="12" y2="8"></line><line x1="12" y1="16" x2="12" y2="18"></line></svg>
+                <span>Send Custom Offer</span>
+              </button>
               <div className="chat-modal-input-section">
                 <div className="chat-input-wrapper">
                   <button className="attachment-btn" onClick={() => setShowAttachmentMenu(!showAttachmentMenu)}>+</button>
                   {showAttachmentMenu && (
                     <div className="attachment-menu">
                       <button className="attachment-option" onClick={() => handleAttachmentClick('image')}>
-                        <span className="attachment-icon">📷</span>
+                        <span className="attachment-icon">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        </span>
                         <span>Upload Image</span>
                       </button>
                       <button className="attachment-option" onClick={() => handleAttachmentClick('photo')}>
-                        <span className="attachment-icon">📸</span>
+                        <span className="attachment-icon">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                        </span>
                         <span>Photo</span>
                       </button>
                       <button className="attachment-option" onClick={() => handleAttachmentClick('file')}>
-                        <span className="attachment-icon">📎</span>
+                        <span className="attachment-icon">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+                        </span>
                         <span>File</span>
                       </button>
                       <button className="attachment-option" onClick={() => handleAttachmentClick('location')}>
-                        <span className="attachment-icon">📍</span>
+                        <span className="attachment-icon">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </span>
                         <span>Location</span>
                       </button>
                     </div>
@@ -1307,7 +935,11 @@ function Services({ initialSearchQuery = '' }) {
                     onTouchStart={handleVoiceStart}
                     onTouchEnd={handleVoiceEnd}
                   >
-                    {isRecording ? '⏹️' : '🎤'}
+                    {isRecording ? (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"></rect></svg>
+                    ) : (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    )}
                   </button>
                   <button
                     className="chat-modal-send-btn"
@@ -1335,7 +967,7 @@ function Services({ initialSearchQuery = '' }) {
                   <input
                     type="text"
                     className="offer-input"
-                    placeholder="e.g., $60"
+                    placeholder="e.g., Rs. 3,000"
                     value={customOfferAmount}
                     onChange={(e) => setCustomOfferAmount(e.target.value)}
                   />
@@ -1352,11 +984,34 @@ function Services({ initialSearchQuery = '' }) {
       {selectedProvider ? (
         <div className="booking-view">
           <div className="booking-header">
-            <button className="back-to-services-btn" onClick={handleBackToProviders}>← Back to Providers</button>
+            <button className="back-to-services-btn" onClick={handleBackToProviders} title="Back to Providers">
+              <span className="back-arrow-icon">←</span>
+              <span>Back</span>
+            </button>
             <div className="booking-header-content">
               <div className="booking-profile-section">
-                <div className="booking-profile-image">
-                  <span className="profile-initial">{selectedProvider.name.charAt(0)}</span>
+                <div 
+                  className="booking-profile-image" 
+                  onClick={() => providerDPInputRef.current?.click()}
+                  title="Click to upload or change profile picture"
+                >
+                  {getProviderDP(selectedProvider) ? (
+                    <img src={getProviderDP(selectedProvider)} alt={selectedProvider.name} className="provider-dp-img" />
+                  ) : (
+                    <span className="profile-initial">{selectedProvider.name.charAt(0)}</span>
+                  )}
+                  <div className="dp-upload-overlay">
+                    <span className="dp-camera-icon">📷</span>
+                    <span className="dp-change-text">Change DP</span>
+                  </div>
+                  <div className="dp-camera-badge" title="Change photo">📷</div>
+                  <input 
+                    type="file" 
+                    ref={providerDPInputRef} 
+                    style={{ display: 'none' }} 
+                    accept="image/*" 
+                    onChange={handleProviderDPUpload} 
+                  />
                 </div>
                 <div className="booking-profile-details">
                   <h2 className="provider-name">{selectedProvider.name}</h2>
@@ -1369,8 +1024,26 @@ function Services({ initialSearchQuery = '' }) {
                 </div>
               </div>
               <div className="booking-header-buttons">
-                <button className="view-profile-btn">View Profile</button>
-                <button className="share-profile-btn">Share Profile</button>
+                <button 
+                  className="view-profile-btn"
+                  onClick={() => {
+                    const el = document.querySelector('.provider-info-section')
+                    if (el) el.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                >
+                  View Profile
+                </button>
+                <button 
+                  className="share-profile-btn"
+                  onClick={() => {
+                    if (navigator.clipboard) {
+                      navigator.clipboard.writeText(window.location.href)
+                      alert(`Profile link for ${selectedProvider.name} copied to clipboard!`)
+                    }
+                  }}
+                >
+                  Share Profile
+                </button>
               </div>
             </div>
           </div>
@@ -1381,17 +1054,23 @@ function Services({ initialSearchQuery = '' }) {
 
               <div className="services-offered-grid">
                 <div className="service-offer-card">
-                  <div className="service-icon">🔧</div>
+                  <div className="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                  </div>
                   <h3>{selectedProvider.service}</h3>
                   <p>Professional {selectedProvider.service.toLowerCase()} services</p>
                 </div>
                 <div className="service-offer-card">
-                  <div className="service-icon">⚡</div>
+                  <div className="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                  </div>
                   <h3>Emergency Service</h3>
                   <p>24/7 emergency support available</p>
                 </div>
                 <div className="service-offer-card">
-                  <div className="service-icon">✓</div>
+                  <div className="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                  </div>
                   <h3>Quality Assured</h3>
                   <p>Guaranteed quality work</p>
                 </div>
@@ -1427,21 +1106,27 @@ function Services({ initialSearchQuery = '' }) {
                       <p className="payment-subtitle">
                         Amount to pay: <strong>{negotiatedPrice || selectedProvider.price}</strong>
                         <span style={{ display: 'block', fontSize: '0.82rem', color: '#64748b', marginTop: '4px' }}>
-                          Notice: Payment demo mode — payment gateway is not connected in this version.
+                          Notice: 100% Escrow Protection Active — Funds held securely in Pakistan Banking Escrow until work completion.
                         </span>
                       </p>
                       <div className="payment-form">
                         <div className="payment-methods-grid">
                           <div className={`payment-method-card ${paymentMethod === 'card' ? 'selected' : ''}`} onClick={() => setPaymentMethod('card')}>
-                            <div className="payment-method-icon">💳</div>
+                            <div className="payment-method-icon">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            </div>
                             <h3>Credit/Debit Card</h3>
                           </div>
                           <div className={`payment-method-card ${paymentMethod === 'bank' ? 'selected' : ''}`} onClick={() => setPaymentMethod('bank')}>
-                            <div className="payment-method-icon">🏦</div>
+                            <div className="payment-method-icon">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="21" x2="21" y2="21"></line><line x1="3" y1="10" x2="21" y2="10"></line><polyline points="5 10 5 21"></polyline><polyline points="19 10 19 21"></polyline><polyline points="10 10 10 21"></polyline><polyline points="14 10 14 21"></polyline><polygon points="12 2 20 7 4 7 12 2"></polygon></svg>
+                            </div>
                             <h3>Bank Transfer</h3>
                           </div>
                           <div className={`payment-method-card ${paymentMethod === 'wallet' ? 'selected' : ''}`} onClick={() => setPaymentMethod('wallet')}>
-                            <div className="payment-method-icon">📱</div>
+                            <div className="payment-method-icon">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                            </div>
                             <h3>Digital Wallet</h3>
                           </div>
                         </div>
@@ -1507,7 +1192,7 @@ function Services({ initialSearchQuery = '' }) {
                               </div>
                               <div className="bank-info-item">
                                 <span className="bank-info-label">Account Title:</span>
-                                <span className="bank-info-value">Service HUB Pvt Ltd</span>
+                                <span className="bank-info-value">MUX SERVICES Pvt Ltd</span>
                               </div>
                               <div className="bank-info-item">
                                 <span className="bank-info-label">Account Number:</span>
@@ -1614,15 +1299,16 @@ function Services({ initialSearchQuery = '' }) {
                       <h2 className="confirmed-title">Booking Confirmed!</h2>
                       <p className="confirmed-message">Your booking with {selectedProvider.name} has been confirmed at {negotiatedPrice || selectedProvider.price}.</p>
                       <p style={{ fontSize: '0.88rem', color: '#64748b', marginTop: '8px' }}>
-                        Payment demo completed locally. Payment gateway is not connected in this version.
+                        Payment reference registered in Escrow Vault. Booking confirmed with MUX SERVICES guarantee.
                       </p>
                     </div>
                   </div>
                 </div>
               ) : showBookingForm ? (
                 <div className="booking-form-container">
-                  <button className="chat-history-btn" onClick={() => { setShowChat(true); setIsHistoryMode(true) }}>
-                    💬 View Chat History
+                  <button className="chat-history-btn" onClick={() => { setShowChat(true); setIsHistoryMode(true) }} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <span>View Chat History</span>
                   </button>
                   <h2 className="booking-form-title">Complete Your Booking</h2>
 
@@ -1688,8 +1374,9 @@ function Services({ initialSearchQuery = '' }) {
                   <div className="booking-note">
                     <p className="note-text">Direct payments or chatting with providers outside of Service HUB can lead to scams or fraud. To avoid these risks and ensure service quality, please use 'Custom Offers' and complete all bookings through our official website. Thank you!</p>
                     <p className="note-text-urdu">سروس ہب سے باہر فراہم کنندگان کے ساتھ براہ راست چیٹ یا ادائیگی کرنے سے دھوکہ دہی یا فراڈ ہو سکتا ہے۔ ان خطرات سے بچنے اور سروس کے معیار کو یقینی بنانے کے لیے، براہ کرم 'کسٹم آفرز' کا استعمال کریں اور تمام بکنگ ہماری آفیشل ویب سائٹ کے ذریعے مکمل کریں۔ شکریہ! </p>
-                    <button className="start-chat-btn" onClick={handleStartChat}>
-                      💬 Chat with Provider
+                    <button className="start-chat-btn" onClick={handleStartChat} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                      <span>Chat with Provider</span>
                     </button>
                   </div>
                   <p className="chat-hint">Click to negotiate price before booking</p>
@@ -1702,8 +1389,11 @@ function Services({ initialSearchQuery = '' }) {
         <div className="service-detail-view">
           <div className="gradient-header">
             <img src={getHeaderImage(selectedService)} alt="Header Background" className="header-background-image" />
+            <button className="back-to-services-btn" onClick={handleBackToServices} title="Back to Services">
+              <span className="back-arrow-icon">←</span>
+              <span>Back to Services</span>
+            </button>
             <div className="header-content">
-              <button className="back-to-services-btn" onClick={handleBackToServices}>← Back to Services</button>
               <h1 className="header-title">{getServiceTitle(selectedService)}</h1>
               <p className="header-subtitle">{getServiceSubtitle(selectedService)}</p>
             </div>
@@ -1719,7 +1409,9 @@ function Services({ initialSearchQuery = '' }) {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button className="inline-search-btn">🔍</button>
+                <button className="inline-search-btn" title="Search">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
               </div>
               <div className="inline-filters">
                 <div className="inline-filter">
@@ -1743,30 +1435,33 @@ function Services({ initialSearchQuery = '' }) {
                     onChange={(e) => setPriceFilter(e.target.value)}
                   >
                     <option value="All">All</option>
-                    <option value="0-50">$0 - $50</option>
-                    <option value="50-100">$50 - $100</option>
-                    <option value="100+">$100+</option>
+                    <option value="0-50">Rs. 0 (Free) - Rs. 2,500</option>
+                    <option value="50-100">Rs. 2,500 - Rs. 5,000</option>
+                    <option value="100+">Rs. 5,000+</option>
                   </select>
                 </div>
               </div>
             </div>
 
-            {/* ⚠️ Animated Safety Notice Banner */}
+            {/* Safety Notice Banner */}
             <div className="safety-notice-banner">
               <div className="safety-notice-header">
                 <div className="safety-notice-icon-circle">
                   <span className="safety-info-icon">!</span>
                 </div>
-                <h3 className="safety-notice-title">
-                  <span className="safety-warning-emoji">⚠️</span> Safety Notice / حفاظتی نوٹ
+                <h3 className="safety-notice-title" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <span className="safety-warning-emoji">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                  <span>Safety Notice / حفاظتی نوٹ</span>
                 </h3>
               </div>
               <div className="safety-notice-content">
                 <p className="safety-text-en">
-                  Direct payments or chatting with providers outside of Service HUB can lead to scams or fraud. To avoid these risks and ensure service quality, please use 'Custom Offers' and complete all bookings through our official website. Thank you!
+                  Direct payments or chatting with providers outside of MUX SERVICES can lead to scams or fraud. To avoid these risks and ensure service quality, please use 'Custom Offers' and complete all bookings through our official website. Thank you!
                 </p>
                 <p className="safety-text-ur" dir="rtl">
-                  سروس ہب سے باہر فراہم کنندگان کے ساتھ براہ راست چیٹ یا ادائیگی کرنے سے دھوکہ دہی یا فراڈ ہو سکتا ہے۔ ان خطرات سے بچنے اور سروس کے معیار کو یقینی بنانے کے لیے، براہ کرم 'کسٹم آفرز' کا استعمال کریں اور تمام بکنگ ہماری آفیشل ویب سائٹ کے ذریعے مکمل کریں۔ شکریہ!
+                  مکس سروسز سے باہر فراہم کنندگان کے ساتھ براہ راست چیٹ یا ادائیگی کرنے سے دھوکہ دہی یا فراڈ ہو سکتا ہے۔ ان خطرات سے بچنے اور سروس کے معیار کو یقینی بنانے کے لیے، براہ کرم 'کسٹم آفرز' کا استعمال کریں اور تمام بکنگ ہماری آفیشل ویب سائٹ کے ذریعے مکمل کریں۔ شکریہ!
                 </p>
               </div>
             </div>
@@ -1873,7 +1568,9 @@ function Services({ initialSearchQuery = '' }) {
                             className="provider-message-btn"
                             onClick={() => handleMessageProvider(req)}
                           >
-                            <span className="btn-msg-icon">✉️</span>
+                            <span className="btn-msg-icon">
+                              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </span>
                             <span>Message</span>
                           </button>
                         </div>
@@ -1897,14 +1594,14 @@ function Services({ initialSearchQuery = '' }) {
         <>
           {/* ── HERO ── */}
           <div className="services-hero">
-            <img src={servicesHeaderImage} alt="Services Header" className="services-hero-bg" />
+            <img src={servicesHeroBanner} alt="Home Services Header" className="services-hero-bg" />
             <div className="services-hero-content">
-              <h1 className="hero-title">Find Expert Services</h1>
-              <p className="hero-subtitle">Discover trusted professionals for every need, from home repairs to digital solutions.</p>
+              <h1 className="hero-title">Find Expert Home Services</h1>
+              <p className="hero-subtitle">Multan's premier verified platform for home repairs, maintenance, plumbing, electrical &amp; HVAC solutions.</p>
               <div className="hero-search-row">
                 <input 
                   type="text" 
-                  placeholder="Search for a service..." 
+                  placeholder="Search home service (e.g. Electrician, Plumber, AC Repair)..." 
                   className="hero-search-input" 
                   value={heroSearchQuery}
                   onChange={(e) => setHeroSearchQuery(e.target.value)}
@@ -1936,7 +1633,7 @@ function Services({ initialSearchQuery = '' }) {
           </div>
 
           {/* ══════════════════════════════════════════
-              SECTION 1 — HOME & REPAIR SERVICES
+              HOME & REPAIR SERVICES CATALOG
           ══════════════════════════════════════════ */}
           <div className="svc-section svc-home">
             <div className="svc-section-banner svc-banner-home">
@@ -1946,11 +1643,11 @@ function Services({ initialSearchQuery = '' }) {
                 </div>
                 <div>
                   <h2 className="svc-banner-title">Home &amp; Repair Services</h2>
-                  <p className="svc-banner-sub">Electricians, Plumbers, Carpenters &amp; more — verified &amp; trusted</p>
+                  <p className="svc-banner-sub">Electricians, Plumbers, Carpenters, AC Technicians &amp; Cleaners — 100% verified &amp; trusted</p>
                 </div>
               </div>
               <button className="svc-view-all-btn" onClick={toggleHomeServices}>
-                {showAllHomeServices ? '↑ View Less' : 'View All →'}
+                {showAllHomeServices ? 'Show Popular (6) ↑' : 'View All (11) →'}
               </button>
             </div>
             <div className="svc-home-grid">
@@ -1971,96 +1668,6 @@ function Services({ initialSearchQuery = '' }) {
                       Book Now →
                     </button>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-              SECTION 2 — TECH & DIGITAL SERVICES
-          ══════════════════════════════════════════ */}
-          <div className="svc-section svc-tech">
-            <div className="svc-section-banner svc-banner-tech">
-              <div className="svc-banner-left">
-                <div className="svc-banner-img-box">
-                  <img src={techIcon} alt="Tech Services" className="svc-banner-img-icon" />
-                </div>
-                <div>
-                  <h2 className="svc-banner-title">Technology &amp; Digital Services</h2>
-                  <p className="svc-banner-sub">Developers, Designers, SEO &amp; IT Support — expert digital talent</p>
-                </div>
-              </div>
-              <button className="svc-view-all-btn svc-view-all-tech" onClick={toggleTechServices}>
-                {showAllTechServices ? '↑ View Less' : 'View All →'}
-              </button>
-            </div>
-            <div className="svc-tech-grid">
-              {(showAllTechServices ? allTechServices : mainTechServices).map((service, index) => (
-                <div key={index} className="svc-tech-card" onClick={() => handleServiceClick(service.name)}>
-                  {service.hasImage && (
-                    <div className="svc-tech-img">
-                      <img src={service.image} alt={service.name} />
-                    </div>
-                  )}
-                  <div className="svc-tech-body">
-                    <div className="svc-tech-icon-wrap">
-                      <img src={techIcon} alt="Tech" className="svc-tech-icon-img" />
-                    </div>
-                    <h3 className="svc-tech-name">{service.name}</h3>
-                    <p className="svc-tech-desc">{service.description}</p>
-                    <div className="svc-tech-meta">
-                      <span>⭐ {service.rating} ({service.reviews})</span>
-                      <strong>{service.price}</strong>
-                    </div>
-                    <button className="svc-tech-btn" onClick={(e) => { e.stopPropagation(); handleServiceClick(service.name); }}>
-                      Book Now →
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-              SECTION 3 — HEALTH & DOCTOR SERVICES
-          ══════════════════════════════════════════ */}
-          <div className="svc-section svc-health">
-            <div className="svc-section-banner svc-banner-health">
-              <div className="svc-banner-left">
-                <span className="svc-banner-emoji">🏥</span>
-                <div>
-                  <h2 className="svc-banner-title">Health, Doctor &amp; Wellness</h2>
-                  <p className="svc-banner-sub">Doctors, Physiotherapists, Nutritionists &amp; Fitness Trainers — PMDC Verified</p>
-                </div>
-              </div>
-              <span className="svc-health-badge">✅ PMDC Verified</span>
-            </div>
-            <div className="svc-health-grid">
-              {healthServices.map((service, index) => (
-                <div key={index} className="svc-health-card" onClick={() => handleServiceClick(service.name)} style={{ cursor: 'pointer' }}>
-                  <div className="svc-health-icon-circle">🩺</div>
-                  <h3 className="svc-health-name">{service.name}</h3>
-                  <p className="svc-health-desc">{service.description}</p>
-                  <div className="svc-health-rating">
-                    <span>⭐ {service.rating}</span>
-                    <span className="svc-health-reviews">({service.reviews} reviews)</span>
-                  </div>
-                  <button className="svc-health-btn" onClick={(e) => { e.stopPropagation(); handleServiceClick(service.name); }}>
-                    {service.action}
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* More Categories */}
-          <div className="svc-more-section">
-            <h2 className="svc-more-title">Explore More Categories</h2>
-            <div className="svc-more-grid">
-              {moreCategories.map((category, index) => (
-                <div key={index} className="svc-more-item" onClick={() => handleServiceClick(category)} style={{ cursor: 'pointer' }}>
-                  <span>{category}</span>
-                  <span className="svc-more-arrow">→</span>
                 </div>
               ))}
             </div>

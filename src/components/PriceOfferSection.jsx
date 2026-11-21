@@ -29,20 +29,20 @@ function PriceOfferSection({ setCurrentPage }) {
             <div className="price-card">
               <div className="price-header">
                 <span className="price-label">Starting from</span>
-                <span className="price-amount">$19</span>
+                <span className="price-amount">Rs. 500</span>
               </div>
               <div className="price-body">
                 <div className="price-item">
                   <span className="item-name">Basic Service</span>
-                  <span className="item-price">$19 - $49</span>
+                  <span className="item-price">Rs. 500 - Rs. 1,500</span>
                 </div>
                 <div className="price-item">
                   <span className="item-name">Standard Service</span>
-                  <span className="item-price">$50 - $99</span>
+                  <span className="item-price">Rs. 1,500 - Rs. 3,500</span>
                 </div>
                 <div className="price-item">
                   <span className="item-name">Premium Service</span>
-                  <span className="item-price">$100+</span>
+                  <span className="item-price">Rs. 5,000+</span>
                 </div>
               </div>
             </div>

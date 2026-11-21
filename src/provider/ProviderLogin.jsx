@@ -1,14 +1,39 @@
 import { useState } from 'react'
+import { providerAPI } from '../services/api'
 import './ProviderLogin.css'
 
 function ProviderLogin({ setCurrentPage, onProviderLogin }) {
   const [loginMethod, setLoginMethod] = useState('mobile')
+  const [mobile, setMobile] = useState('')
+  const [otp, setOtp] = useState('')
+  const [cnic, setCnic] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
-  const handleLogin = () => {
-    if (typeof onProviderLogin === 'function') {
-      onProviderLogin()
-    } else if (typeof setCurrentPage === 'function') {
-      setCurrentPage('home')
+  const handleLogin = async (e) => {
+    if (e && e.preventDefault) e.preventDefault()
+    setErrorMsg('')
+    setLoading(true)
+
+    try {
+      await providerAPI.login({
+        method: loginMethod,
+        mobile,
+        otp,
+        cnic,
+        password
+      })
+
+      if (typeof onProviderLogin === 'function') {
+        onProviderLogin()
+      } else if (typeof setCurrentPage === 'function') {
+        setCurrentPage('provider-dashboard')
+      }
+    } catch (err) {
+      setErrorMsg(err.message || 'Login failed. Please verify your credentials.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -86,6 +111,12 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
             Enter your verified credentials to access incoming jobs, client calls, and wallet transfers.
           </p>
 
+          {errorMsg && (
+            <div style={{ background: '#fee2e2', color: '#991b1b', padding: '10px 14px', borderRadius: '8px', fontSize: '0.85rem', marginBottom: '16px', border: '1px solid #f87171' }}>
+              ⚠️ {errorMsg}
+            </div>
+          )}
+
           <div className="method-selector">
             <div 
               className={`method-option ${loginMethod === 'mobile' ? 'active' : ''}`}
@@ -104,18 +135,36 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
           {loginMethod === 'mobile' && (
             <div className="login-form">
               <p className="form-label">Registered Mobile Number</p>
-              <input type="text" className="form-input" placeholder="Enter mobile number" />
+              <input 
+                type="text" 
+                className="form-input" 
+                placeholder="0300-1234567" 
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+              />
               <p className="form-hint">We will dispatch an SMS authentication passcode to this SIM.</p>
               
               <p className="form-label">6-Digit Verification Code (او ٹی پی)</p>
               <div className="otp-row">
-                <input type="text" className="form-input" placeholder="Enter OTP" />
-                <button className="send-otp-btn">Send OTP via SMS</button>
+                <input 
+                  type="text" 
+                  className="form-input" 
+                  placeholder="Enter 6-digit OTP (e.g. 123456)" 
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+                <button 
+                  type="button"
+                  className="send-otp-btn"
+                  onClick={() => alert('Verification OTP sent to ' + (mobile || 'your mobile number'))}
+                >
+                  Send OTP via SMS
+                </button>
               </div>
-              <button className="changed-sim-btn">Changed mobile SIM</button>
+              <button type="button" className="changed-sim-btn">Changed mobile SIM</button>
               
-              <button className="login-btn" onClick={handleLogin}>
-                Login to Provider Dashboard →
+              <button className="login-btn" onClick={handleLogin} disabled={loading}>
+                {loading ? 'Authenticating...' : 'Login to Provider Dashboard →'}
               </button>
             </div>
           )}
@@ -123,13 +172,25 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
           {loginMethod === 'cnic' && (
             <div className="login-form">
               <p className="form-label">CNIC Number</p>
-              <input type="text" className="form-input" placeholder="Enter CNIC" />
+              <input 
+                type="text" 
+                className="form-input" 
+                placeholder="36302-XXXXXXX-X" 
+                value={cnic}
+                onChange={(e) => setCnic(e.target.value)}
+              />
               
               <p className="form-label">Password</p>
-              <input type="password" className="form-input" placeholder="Enter password" />
+              <input 
+                type="password" 
+                className="form-input" 
+                placeholder="Enter password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
               
-              <button className="login-btn" onClick={handleLogin}>
-                Login to Provider Dashboard →
+              <button className="login-btn" onClick={handleLogin} disabled={loading}>
+                {loading ? 'Authenticating...' : 'Login to Provider Dashboard →'}
               </button>
             </div>
           )}

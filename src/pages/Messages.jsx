@@ -40,16 +40,16 @@ function Messages({ setCurrentPage }) {
     },
     {
       id: 3,
-      name: 'Brian O\'Connor',
-      role: 'IT Support',
-      avatar: '💻',
-      lastMessage: 'Please share your OS version so I can prepare diagnostics.',
+      name: 'Tariq Mehmood',
+      role: 'AC & HVAC Technician',
+      avatar: '❄️',
+      lastMessage: 'The AC gas pressure has been refilled and cooling is optimal.',
       time: '2 days ago',
       unread: 0,
       verified: true,
       messages: [
-        { id: 1, sender: 'user', text: 'Need help recovering data from a secondary SSD.', time: '2 days ago' },
-        { id: 2, sender: 'provider', text: 'Please share your OS version so I can prepare diagnostics.', time: '2 days ago' }
+        { id: 1, sender: 'user', text: 'Hi Tariq, inverter AC is not cooling properly in master bedroom.', time: '2 days ago' },
+        { id: 2, sender: 'provider', text: 'The AC gas pressure has been refilled and cooling is optimal.', time: '2 days ago' }
       ]
     }
   ]
@@ -148,7 +148,7 @@ function Messages({ setCurrentPage }) {
                         <span className="thread-verified-badge">✓ Verified</span>
                       )}
                     </div>
-                    <span className="thread-user-role">{activeConversation.role} • Service HUB Partner</span>
+                    <span className="thread-user-role">{activeConversation.role} • MUX SERVICES Partner</span>
                   </div>
                 </div>
                 {setCurrentPage && (
@@ -164,7 +164,7 @@ function Messages({ setCurrentPage }) {
 
               {/* Safety notice */}
               <div className="thread-safety-banner">
-                <span>🔒 For your protection, always keep communications and payments inside Service HUB.</span>
+                <span>🔒 For your protection, always keep communications and payments inside MUX SERVICES.</span>
               </div>
 
               {/* Messages area */}

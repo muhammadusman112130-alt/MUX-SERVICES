@@ -25,7 +25,7 @@ function About() {
       <section className="about-hero">
         <div className="hero-content">
           <span className="hero-label">OUR STORY</span>
-          <h1 className="hero-title">About Service HUB — Connecting Skills with Needs.</h1>
+          <h1 className="hero-title">About MUX SERVICES — Multan's Premier Home Services Network.</h1>
           <p className="hero-description">
             We're on a mission to empower skilled professionals and simplify life for customers. 
             By creating a trusted service marketplace, we bridge the gap between talent and opportunity, 
@@ -45,11 +45,9 @@ function About() {
       <section className="har-service-section">
         <div className="section-content">
           <div className="text-content">
-            <h2 className="section-title">EVERY SERVICES ONE PLACE</h2>
+            <h2 className="section-title">COMPLETE HOME SERVICES IN ONE PLACE</h2>
             <p className="section-description">
-              From plumbing to consulting, we centralize every service you need in one secure, 
-              comprehensive digital ecosystem. No more juggling multiple apps or unreliable 
-              recommendations — just quality professionals, verified and ready to help.
+              From plumbing and electrical wiring to AC repairs and deep cleaning, we centralize every home maintenance service you need in one secure, trusted platform. No more unreliable recommendations — just quality verified handymen, ready to help.
             </p>
             <div className="stats-card">
               <span className="stats-number">5M+</span>

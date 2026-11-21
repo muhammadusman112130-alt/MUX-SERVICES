@@ -5,80 +5,79 @@ import './ProviderVerification.css'
    DYNAMIC VERIFICATION SECTIONS PER PROFESSION
 ───────────────────────────────────────────── */
 
-function HealthcareVerification() {
+function RiderVerification() {
   return (
     <div className="pv-card">
       <div className="pv-section-header">
         <span className="pv-step-num">3</span>
-        <h2 className="pv-section-title">Professional Industry Verification</h2>
-        <span className="pv-auto-badge">PMDC / PMC Required</span>
+        <h2 className="pv-section-title">Rider &amp; Delivery Verification</h2>
+        <span className="pv-auto-badge">Driving License &amp; Vehicle Reg</span>
       </div>
       <p className="pv-card-subtitle">Category specific compliance framework</p>
 
       <div className="pv-verification-banner">
-        <span className="pv-ver-icon">🏥</span>
+        <span className="pv-ver-icon">🏍️</span>
         <div>
-          <p className="pv-ver-title">Healthcare Verification Protocol (PMDC/PMC)</p>
+          <p className="pv-ver-title">Rider &amp; Courier Verification Protocol</p>
           <p className="pv-ver-desc">
-            Doctors in Pakistan must hold an unexpired registration with PMDC. All submissions are
-            verified against the Pakistan Medical &amp; Dental Registry system. Active prescribers and clinic privileges are verified.
+            All delivery riders must hold a valid Driving License, CNIC, and Vehicle Registration (Book/Smart Card). Safe riding and police verification are confirmed before dispatch access.
           </p>
         </div>
       </div>
 
       <div className="pv-form-row">
         <div className="pv-form-group">
-          <label className="pv-label">PMDC / PMC Registration No. *</label>
-          <input className="pv-input" type="text" placeholder="e.g. PM420-P / 123456" />
+          <label className="pv-label">Driving License Number *</label>
+          <input className="pv-input" type="text" placeholder="e.g. DL-MULT-123456" />
         </div>
         <div className="pv-form-group">
           <label className="pv-label">Live Identity Confirmed</label>
           <input className="pv-input" type="text" placeholder="Auto-confirmed" disabled />
         </div>
         <div className="pv-form-group">
-          <label className="pv-label">Primary Medical Degree *</label>
+          <label className="pv-label">Vehicle Type *</label>
           <select className="pv-input pv-select">
-            <option>MBBS – Bachelor of Medicine &amp; Surgery</option>
-            <option>BDS – Bachelor of Dental Surgery</option>
-            <option>MD – Doctor of Medicine</option>
+            <option>Motorbike (70cc / 100cc / 125cc / 150cc)</option>
+            <option>Cargo Rickshaw / Qingqi</option>
+            <option>Delivery Van / Mini Truck</option>
+            <option>Electric Bike (EV)</option>
           </select>
         </div>
       </div>
 
       <div className="pv-form-row">
         <div className="pv-form-group">
-          <label className="pv-label">Medical College / University *</label>
-          <input className="pv-input" type="text" placeholder="e.g. King Edward Medical Univ, Dow, Aga..." />
+          <label className="pv-label">Vehicle Registration Number *</label>
+          <input className="pv-input" type="text" placeholder="e.g. MN-24-7890" />
         </div>
         <div className="pv-form-group">
-          <label className="pv-label">Year Graduation &amp; Hospital *</label>
-          <input className="pv-input" type="text" placeholder="e.g. Mayo Hospital (2016 – 2019)" />
+          <label className="pv-label">Engine / Chassis Number *</label>
+          <input className="pv-input" type="text" placeholder="e.g. JAP-5678912" />
         </div>
       </div>
 
       <div className="pv-form-row">
         <div className="pv-form-group pv-full-width">
-          <label className="pv-label">Current Hospital Affiliations or Clinic Address *</label>
-          <input className="pv-input" type="text" placeholder="e.g. Shaukat Khanum Memorial / Services Hospital / Private OPD, Jail Road Lahore" />
+          <label className="pv-label">Preferred Operating Zones / City *</label>
+          <input className="pv-input" type="text" placeholder="e.g. Cantt, Bosan Road, Gulgasht, Shah Rukn-e-Alam — Multan" />
         </div>
       </div>
 
       <div className="pv-upload-row">
         <div className="pv-upload-box">
-          <label className="pv-label">PMC Registration Card<br /><span className="pv-upload-sub">Front &amp; Back PDF or JPG (Max 5MB)</span></label>
+          <label className="pv-label">Driving License<br /><span className="pv-upload-sub">Front &amp; Back PDF or JPG (Max 5MB)</span></label>
           <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
         </div>
         <div className="pv-upload-box">
-          <label className="pv-label">Medical Degree / FCPS Transcript<br /><span className="pv-upload-sub">Shown on institutional letterhead</span></label>
+          <label className="pv-label">Vehicle Registration Book / Smart Card<br /><span className="pv-upload-sub">Clear photo of registration documents</span></label>
           <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
         </div>
       </div>
 
       <div className="pv-oath-checkbox">
-        <input type="checkbox" id="pmdc-oath" />
-        <label htmlFor="pmdc-oath">
-          <strong>QuackMedic Legal Declaration:</strong> I hereby solemnly certify that I maintain an active licence in good standing with
-          PMDC with no pending sanctions, malpractice actions or adverse judgements issued to my Credential Panel Gate.
+        <input type="checkbox" id="rider-oath" />
+        <label htmlFor="rider-oath">
+          <strong>Rider Safety &amp; Legal Declaration:</strong> I hereby solemnly certify that my vehicle is in roadworthy condition and I possess a valid driving license with clean traffic and legal record.
         </label>
       </div>
     </div>
@@ -304,33 +303,31 @@ function AutoVerification() {
 ───────────────────────────────────────────── */
 
 function ProviderVerification({ setCurrentPage }) {
-  const [selectedProfession, setSelectedProfession] = useState('healthcare')
+  const [selectedProfession, setSelectedProfession] = useState('electrical')
   const [agreedToOath, setAgreedToOath] = useState(false)
 
   const professions = [
-    { id: 'healthcare', icon: '🏥', title: 'Healthcare & Medical', desc: 'Doctors, Dentists, Therapists / Privates' },
-    { id: 'home', icon: '🏠', title: 'Home Services & Trades', desc: 'Electricians, Plumbers, HVAC, Carpenters' },
-    { id: 'it', icon: '💻', title: 'IT, Digital & Creative', desc: 'Developers, UI/UX, SEO, Multimedia' },
-    { id: 'auto', icon: '🚗', title: 'Auto & Heavy Appliance', desc: 'Auto mechanics, Industrial type' },
+    { id: 'electrical', icon: '⚡', title: 'Electrical & Wiring', desc: 'Electricians, Panels, UPS, Solar Inverters' },
+    { id: 'plumbing', icon: '🔧', title: 'Plumbing & Sanitary', desc: 'Leak Detection, Pipe Fitting, Geyser Fixes' },
+    { id: 'hvac', icon: '❄️', title: 'AC & HVAC Cooling', desc: 'AC Installation, Gas Refill, Jet Servicing' },
+    { id: 'carpentry', icon: '🪚', title: 'Carpentry & Woodwork', desc: 'Wardrobes, Kitchen Cabinets, Door Locks' },
+    { id: 'appliances', icon: '🔌', title: 'Appliance Repair', desc: 'Refrigerators, Washing Machines, Microwaves' },
+    { id: 'cleaning', icon: '🧹', title: 'Deep Home Cleaning', desc: 'House Sanitization, Water Tank, Sofa Wash' },
+    { id: 'painting', icon: '🎨', title: 'Painting & Polishing', desc: 'Interior & Exterior Painting, Waterproofing' },
   ]
 
-  /* Render the correct Step-3 form based on selected profession */
+  /* Render the vocational trade verification */
   const renderProfessionForm = () => {
-    switch (selectedProfession) {
-      case 'healthcare': return <HealthcareVerification />
-      case 'home':       return <HomeServicesVerification />
-      case 'it':         return <ITVerification />
-      case 'auto':       return <AutoVerification />
-      default:           return <HealthcareVerification />
-    }
+    return <HomeServicesVerification />
   }
 
   return (
     <div className="pv-wrapper">
       <nav className="provider-navbar">
         <div className="navbar-container">
-          <div className="navbar-left">
-            <img src="/src/Public/Web-logo.png" alt="Logo" className="navbar-logo" />
+          <div className="navbar-left" onClick={() => setCurrentPage && setCurrentPage('home')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img src="/src/Public/web logo.png" alt="MUX SERVICES" className="navbar-logo" />
+            <span style={{ fontWeight: 900, fontSize: '1.25rem', letterSpacing: '1px', color: '#071A3D' }}>MUX <span style={{ color: '#2563eb' }}>SERVICES</span></span>
           </div>
           <div className="navbar-center">
             <button type="button" onClick={() => setCurrentPage && setCurrentPage('home')} className="nav-link">Home</button>
@@ -354,13 +351,13 @@ function ProviderVerification({ setCurrentPage }) {
       <div className="pv-hero">
         <div className="pv-hero-badge">✅ VERIFIED PRO ONBOARDING GATEWAY</div>
         <h1 className="pv-hero-title">
-          Join Service HUB as an Elite<br />Verified Pro
+          Join MUX SERVICES as an Elite<br />Verified Pro
         </h1>
-        <p className="pv-hero-subtitle">سروس ہب پر مصدق پارٹنر بنیں</p>
+        <p className="pv-hero-subtitle">مکس سروسز پر مصدق پارٹنر بنیں</p>
         <p className="pv-hero-desc">
-          Select your profession below. Our dynamic verification engine automatically
-          adapts credential standards — from PMDC licenses for doctors to
-          TEVTA/Ustad references for skilled trade craftsmen.
+          Select your home service trade below. Our verification engine automatically
+          authenticates credential standards — including TEVTA diplomas, electrical/HVAC licenses,
+          and Master Ustad apprenticeship references.
         </p>
 
         <div className="pv-stats-row">
@@ -570,7 +567,7 @@ function ProviderVerification({ setCurrentPage }) {
 
           <div className="pv-hero-img">
             <div className="pv-img-placeholder">
-              <span>👨‍⚕️</span>
+              <span>⚡</span>
               <p>Verified Pro</p>
             </div>
           </div>
@@ -578,12 +575,11 @@ function ProviderVerification({ setCurrentPage }) {
           <div className="pv-rating-card">
             <div className="pv-stars">⭐⭐⭐⭐⭐</div>
             <p className="pv-rating-val">4.92 / 5.0</p>
-            <p className="pv-rating-count">Join Over 12,000+ Verified Pros</p>
+            <p className="pv-rating-count">Join Over 5,000+ Verified Pros</p>
             <p className="pv-rating-desc">
-              "Service Hub transformed me as an Khidmat Doctor from unverified dispenser. Utilising Verified
-              Pro earning moved our family collectively. I'm strongly on my OWN."
+              "Service Hub transformed my business as a certified electrician. Consistent customer bookings across Multan, upfront PKR payments, and respectful clients made all the difference."
             </p>
-            <p className="pv-reviewer">— Dr. Khalid Mehmood, Consultant Physician</p>
+            <p className="pv-reviewer">— Akram Malik, Master Electrician</p>
           </div>
 
           <div className="pv-why-card">

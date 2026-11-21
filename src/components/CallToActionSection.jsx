@@ -32,7 +32,7 @@ function CallToActionSection({ setCurrentPage }) {
               <span className="stat-label">Active Professionals</span>
             </div>
             <div className="cta-stat">
-              <span className="stat-number">$5M+</span>
+              <span className="stat-number">PKR 50M+</span>
               <span className="stat-label">Earned Monthly</span>
             </div>
             <div className="cta-stat">
