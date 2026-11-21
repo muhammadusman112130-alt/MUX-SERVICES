@@ -170,6 +170,8 @@ function Services({ initialSearchQuery = '' }) {
       } else {
         setHeroSearchQuery(initialSearchQuery.trim())
       }
+    } else if (initialSearchQuery === '') {
+      setSelectedService(null)
     }
   }, [initialSearchQuery])
 
@@ -845,7 +847,39 @@ function Services({ initialSearchQuery = '' }) {
     return []
   }
 
-  const getHeaderImage = () => {
+  const getHeaderImage = (serviceName) => {
+    if (!serviceName) return servicesHeroBanner
+    const normalized = normalizeServiceName(serviceName) || serviceName
+    const imageMap = {
+      'Electrician': electricianImage,
+      'Plumber': plumberImage,
+      'Carpenter': carpenterImage,
+      'Painter': paintingImage,
+      'Home Cleaning': homeCleaningImage,
+      'AC & HVAC': acImage,
+      'Glass & Aluminum': aluminiumImage,
+      'Gardener': gardeningImage,
+      'Welder': welderImage,
+      'Laundry & Ironing': laundryImage,
+      'Appliance Repair': applianceImage,
+    }
+    if (imageMap[normalized]) return imageMap[normalized]
+    const foundKey = Object.keys(imageMap).find(k => k.toLowerCase() === String(normalized).toLowerCase())
+    if (foundKey) return imageMap[foundKey]
+
+    const lower = String(serviceName).toLowerCase()
+    if (lower.includes('electr')) return electricianImage
+    if (lower.includes('plumb') || lower.includes('nal') || lower.includes('pipe')) return plumberImage
+    if (lower.includes('carpent') || lower.includes('wood')) return carpenterImage
+    if (lower.includes('paint') || lower.includes('rang')) return paintingImage
+    if (lower.includes('clean') || lower.includes('safai')) return homeCleaningImage
+    if (lower.includes('ac') || lower.includes('hvac') || lower.includes('cool') || lower.includes('chiller')) return acImage
+    if (lower.includes('glass') || lower.includes('alumin')) return aluminiumImage
+    if (lower.includes('gard') || lower.includes('lawn')) return gardeningImage
+    if (lower.includes('weld') || lower.includes('iron') || lower.includes('metal')) return welderImage
+    if (lower.includes('laund') || lower.includes('wash') || lower.includes('ironing')) return laundryImage
+    if (lower.includes('appliance') || lower.includes('fridge') || lower.includes('oven')) return applianceImage
+
     return servicesHeroBanner
   }
 
@@ -1388,11 +1422,7 @@ function Services({ initialSearchQuery = '' }) {
       ) : selectedService ? (
         <div className="service-detail-view">
           <div className="gradient-header">
-            <img src={getHeaderImage(selectedService)} alt="Header Background" className="header-background-image" />
-            <button className="back-to-services-btn" onClick={handleBackToServices} title="Back to Services">
-              <span className="back-arrow-icon">←</span>
-              <span>Back to Services</span>
-            </button>
+            <img src={getHeaderImage(selectedService)} alt={`${selectedService} Background`} className="header-background-image" />
             <div className="header-content">
               <h1 className="header-title">{getServiceTitle(selectedService)}</h1>
               <p className="header-subtitle">{getServiceSubtitle(selectedService)}</p>
