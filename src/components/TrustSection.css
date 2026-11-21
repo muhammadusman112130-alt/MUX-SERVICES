@@ -35,11 +35,26 @@
   padding: 2.5rem 2rem;
   border-radius: 18px;
   text-align: center;
-  transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 2px 12px rgba(7,26,61,0.07);
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 4px 14px rgba(7,26,61,0.07);
   border: 2px solid #e0e7ff;
   position: relative;
-  overflow: hidden;
+  z-index: 2;
+}
+
+/* Animated glowing backlight behind trust card on hover */
+.trust-card::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 24px;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 206, 209, 0.75) 0%, rgba(37, 99, 235, 0.5) 50%, transparent 75%);
+  filter: blur(22px);
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  transform: translateY(0) scale(0.95);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .trust-card::before {
@@ -51,16 +66,41 @@
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.35s ease;
+  border-radius: 18px 18px 0 0;
 }
 
 .trust-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(7,26,61,0.14);
-  border-color: rgba(37,99,235,0.35);
+  box-shadow: 
+    0 22px 50px rgba(7, 26, 61, 0.16),
+    0 0 35px rgba(0, 206, 209, 0.4),
+    0 0 65px rgba(56, 189, 248, 0.25);
+  border-color: rgba(0, 206, 209, 0.5);
+}
+
+.trust-card:hover::after {
+  opacity: 1;
+  transform: translateY(-4px) scale(1.04);
+  animation: trustBacklightPulse 2.6s ease-in-out infinite alternate;
 }
 
 .trust-card:hover::before {
   transform: scaleX(1);
+}
+
+@keyframes trustBacklightPulse {
+  0% {
+    filter: blur(16px);
+    opacity: 0.75;
+  }
+  50% {
+    filter: blur(28px);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(16px);
+    opacity: 0.75;
+  }
 }
 
 .trust-icon {

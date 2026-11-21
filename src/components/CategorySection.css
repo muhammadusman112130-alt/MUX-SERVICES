@@ -61,8 +61,17 @@
 }
 
 @keyframes pulseDot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.35); opacity: 0.65; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.35);
+    opacity: 0.65;
+  }
 }
 
 .category-section .section-title {
@@ -190,6 +199,67 @@
   flex: 0 0 100%;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  padding: 12px 6px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ANIMATED BACKLIGHT GLOW BEHIND CARD ON HOVER
+══════════════════════════════════════════════════════════════════════════ */
+.card-backlight-glow {
+  position: absolute;
+  inset: 12px 8px;
+  border-radius: 32px;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 206, 209, 0.85) 0%, rgba(56, 189, 248, 0.55) 45%, rgba(37, 99, 235, 0.25) 75%, transparent 100%);
+  filter: blur(28px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transform: translateY(0) scale(0.96);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slider-slide:hover .card-backlight-glow {
+  opacity: 1;
+  transform: translateY(-10px) scale(1.05);
+  animation: cardBacklightPulse 2.8s ease-in-out infinite alternate;
+}
+
+/* Theme-specific backlight glows */
+.slider-slide:hover .card-backlight-glow.glow-theme-home {
+  background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.9) 0%, rgba(56, 189, 248, 0.6) 45%, rgba(2, 132, 199, 0.3) 75%, transparent 100%);
+}
+
+.slider-slide:hover .card-backlight-glow.glow-theme-tech {
+  background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.9) 0%, rgba(99, 102, 241, 0.6) 45%, rgba(30, 64, 175, 0.3) 75%, transparent 100%);
+}
+
+.slider-slide:hover .card-backlight-glow.glow-theme-events {
+  background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.9) 0%, rgba(251, 191, 36, 0.6) 45%, rgba(217, 119, 6, 0.3) 75%, transparent 100%);
+}
+
+.slider-slide:hover .card-backlight-glow.glow-theme-cosmetics {
+  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.9) 0%, rgba(52, 211, 153, 0.6) 45%, rgba(5, 150, 105, 0.3) 75%, transparent 100%);
+}
+
+@keyframes cardBacklightPulse {
+  0% {
+    filter: blur(24px);
+    opacity: 0.75;
+    transform: translateY(-8px) scale(1.03);
+  }
+
+  50% {
+    filter: blur(38px);
+    opacity: 1;
+    transform: translateY(-12px) scale(1.07);
+  }
+
+  100% {
+    filter: blur(24px);
+    opacity: 0.75;
+    transform: translateY(-8px) scale(1.03);
+  }
 }
 
 /* ── Navigation Arrows ── */
@@ -233,18 +303,24 @@
 ══════════════════════════════════════════════════════════════════════════ */
 .top-service-card {
   position: relative;
+  z-index: 2;
   padding: 2.5rem;
   border-radius: 26px;
   background: #ffffff;
   border: 2px solid transparent;
   cursor: pointer;
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, border-color 0.35s ease;
   outline: none;
 }
 
 .top-service-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-9px);
+  border-color: rgba(0, 206, 209, 0.45);
+  box-shadow:
+    0 22px 55px rgba(7, 26, 61, 0.18),
+    0 0 35px rgba(0, 206, 209, 0.35),
+    0 0 70px rgba(56, 189, 248, 0.2);
 }
 
 .card-ambient-glow {
@@ -257,11 +333,12 @@
   pointer-events: none;
   filter: blur(55px);
   opacity: 0.6;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .top-service-card:hover .card-ambient-glow {
-  opacity: 0.85;
+  opacity: 0.95;
+  transform: scale(1.15);
 }
 
 /* ── 4 MATCHING CARD THEMES ── */
@@ -272,33 +349,41 @@
   border-color: rgba(14, 165, 233, 0.32);
   box-shadow: 0 16px 40px rgba(2, 132, 199, 0.1);
 }
+
 .theme-home .card-ambient-glow {
   background: radial-gradient(circle, rgba(14, 165, 233, 0.45) 0%, transparent 70%);
 }
+
 .theme-home .card-badge-tag {
   background: linear-gradient(135deg, #0284c7, #0369a1);
 }
+
 .theme-home .card-service-title {
   color: #0369a1;
 }
+
 .theme-home .card-price-chip {
   background: rgba(14, 165, 233, 0.12);
   color: #0284c7;
   border: 1px solid rgba(14, 165, 233, 0.35);
 }
+
 .theme-home .skill-chip {
   background: rgba(14, 165, 233, 0.08);
   color: #0369a1;
   border: 1px solid rgba(14, 165, 233, 0.22);
 }
+
 .theme-home .skill-chip:hover {
   background: #0284c7;
   color: #ffffff;
 }
+
 .theme-home .card-explore-btn {
   background: linear-gradient(135deg, #0ea5e9, #0284c7);
   box-shadow: 0 6px 18px rgba(2, 132, 199, 0.3);
 }
+
 .theme-home .card-side-img-wrapper {
   border: 2px solid rgba(14, 165, 233, 0.3);
 }
@@ -309,33 +394,41 @@
   border-color: rgba(99, 102, 241, 0.32);
   box-shadow: 0 16px 40px rgba(79, 70, 229, 0.1);
 }
+
 .theme-tech .card-ambient-glow {
   background: radial-gradient(circle, rgba(99, 102, 241, 0.45) 0%, transparent 70%);
 }
+
 .theme-tech .card-badge-tag {
   background: linear-gradient(135deg, #6366f1, #4f46e5);
 }
+
 .theme-tech .card-service-title {
   color: #4f46e5;
 }
+
 .theme-tech .card-price-chip {
   background: rgba(99, 102, 241, 0.12);
   color: #4f46e5;
   border: 1px solid rgba(99, 102, 241, 0.35);
 }
+
 .theme-tech .skill-chip {
   background: rgba(99, 102, 241, 0.08);
   color: #4338ca;
   border: 1px solid rgba(99, 102, 241, 0.22);
 }
+
 .theme-tech .skill-chip:hover {
   background: #4f46e5;
   color: #ffffff;
 }
+
 .theme-tech .card-explore-btn {
   background: linear-gradient(135deg, #6366f1, #4f46e5);
   box-shadow: 0 6px 18px rgba(79, 70, 229, 0.3);
 }
+
 .theme-tech .card-side-img-wrapper {
   border: 2px solid rgba(99, 102, 241, 0.3);
 }
@@ -346,33 +439,41 @@
   border-color: rgba(234, 88, 12, 0.32);
   box-shadow: 0 16px 40px rgba(234, 88, 12, 0.1);
 }
+
 .theme-riders .card-ambient-glow {
   background: radial-gradient(circle, rgba(234, 88, 12, 0.45) 0%, transparent 70%);
 }
+
 .theme-riders .card-badge-tag {
   background: linear-gradient(135deg, #ea580c, #f97316);
 }
+
 .theme-riders .card-service-title {
   color: #c2410c;
 }
+
 .theme-riders .card-price-chip {
   background: rgba(234, 88, 12, 0.12);
   color: #c2410c;
   border: 1px solid rgba(234, 88, 12, 0.35);
 }
+
 .theme-riders .skill-chip {
   background: rgba(234, 88, 12, 0.08);
   color: #c2410c;
   border: 1px solid rgba(234, 88, 12, 0.22);
 }
+
 .theme-riders .skill-chip:hover {
   background: #ea580c;
   color: #ffffff;
 }
+
 .theme-riders .card-explore-btn {
   background: linear-gradient(135deg, #ea580c, #f97316);
   box-shadow: 0 6px 18px rgba(234, 88, 12, 0.3);
 }
+
 .theme-riders .card-side-img-wrapper {
   border: 2px solid rgba(234, 88, 12, 0.3);
 }
@@ -383,33 +484,41 @@
   border-color: rgba(147, 51, 234, 0.32);
   box-shadow: 0 16px 40px rgba(147, 51, 234, 0.1);
 }
+
 .theme-events .card-ambient-glow {
   background: radial-gradient(circle, rgba(147, 51, 234, 0.45) 0%, transparent 70%);
 }
+
 .theme-events .card-badge-tag {
   background: linear-gradient(135deg, #9333ea, #a855f7);
 }
+
 .theme-events .card-service-title {
   color: #7e22ce;
 }
+
 .theme-events .card-price-chip {
   background: rgba(147, 51, 234, 0.12);
   color: #7e22ce;
   border: 1px solid rgba(147, 51, 234, 0.35);
 }
+
 .theme-events .skill-chip {
   background: rgba(147, 51, 234, 0.08);
   color: #7e22ce;
   border: 1px solid rgba(147, 51, 234, 0.22);
 }
+
 .theme-events .skill-chip:hover {
   background: #9333ea;
   color: #ffffff;
 }
+
 .theme-events .card-explore-btn {
   background: linear-gradient(135deg, #9333ea, #a855f7);
   box-shadow: 0 6px 18px rgba(147, 51, 234, 0.3);
 }
+
 .theme-events .card-side-img-wrapper {
   border: 2px solid rgba(147, 51, 234, 0.3);
 }
@@ -420,33 +529,41 @@
   border-color: rgba(219, 39, 119, 0.32);
   box-shadow: 0 16px 40px rgba(219, 39, 119, 0.1);
 }
+
 .theme-cosmetics .card-ambient-glow {
   background: radial-gradient(circle, rgba(219, 39, 119, 0.45) 0%, transparent 70%);
 }
+
 .theme-cosmetics .card-badge-tag {
   background: linear-gradient(135deg, #db2777, #f43f5e);
 }
+
 .theme-cosmetics .card-service-title {
   color: #be185d;
 }
+
 .theme-cosmetics .card-price-chip {
   background: rgba(219, 39, 119, 0.12);
   color: #be185d;
   border: 1px solid rgba(219, 39, 119, 0.35);
 }
+
 .theme-cosmetics .skill-chip {
   background: rgba(219, 39, 119, 0.08);
   color: #be185d;
   border: 1px solid rgba(219, 39, 119, 0.22);
 }
+
 .theme-cosmetics .skill-chip:hover {
   background: #db2777;
   color: #ffffff;
 }
+
 .theme-cosmetics .card-explore-btn {
   background: linear-gradient(135deg, #db2777, #f43f5e);
   box-shadow: 0 6px 18px rgba(219, 39, 119, 0.3);
 }
+
 .theme-cosmetics .card-side-img-wrapper {
   border: 2px solid rgba(219, 39, 119, 0.3);
 }
@@ -457,33 +574,41 @@
   border-color: rgba(217, 119, 6, 0.32);
   box-shadow: 0 16px 40px rgba(217, 119, 6, 0.1);
 }
+
 .theme-education .card-ambient-glow {
   background: radial-gradient(circle, rgba(217, 119, 6, 0.45) 0%, transparent 70%);
 }
+
 .theme-education .card-badge-tag {
   background: linear-gradient(135deg, #d97706, #b45309);
 }
+
 .theme-education .card-service-title {
   color: #b45309;
 }
+
 .theme-education .card-price-chip {
   background: rgba(217, 119, 6, 0.12);
   color: #b45309;
   border: 1px solid rgba(217, 119, 6, 0.35);
 }
+
 .theme-education .skill-chip {
   background: rgba(217, 119, 6, 0.08);
   color: #92400e;
   border: 1px solid rgba(217, 119, 6, 0.22);
 }
+
 .theme-education .skill-chip:hover {
   background: #d97706;
   color: #ffffff;
 }
+
 .theme-education .card-explore-btn {
   background: linear-gradient(135deg, #f59e0b, #d97706);
   box-shadow: 0 6px 18px rgba(217, 119, 6, 0.3);
 }
+
 .theme-education .card-side-img-wrapper {
   border: 2px solid rgba(217, 119, 6, 0.3);
 }
@@ -896,8 +1021,13 @@
 }
 
 @keyframes dotProgress {
-  0% { transform: scaleX(0); }
-  100% { transform: scaleX(1); }
+  0% {
+    transform: scaleX(0);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -907,19 +1037,24 @@
   .category-section {
     padding: 4rem 1rem;
   }
+
   .category-section .section-title {
     font-size: 2.2rem;
   }
+
   .slider-showcase-container {
     padding: 0 2.5rem;
   }
+
   .top-service-card {
     padding: 2rem;
   }
+
   .card-split-layout {
     grid-template-columns: 1fr 280px;
     gap: 1.5rem;
   }
+
   .card-side-visual {
     min-height: 240px;
   }
@@ -930,6 +1065,7 @@
     grid-template-columns: 1fr;
     gap: 1.25rem;
   }
+
   .card-side-visual {
     min-height: 210px;
     max-height: 250px;
@@ -940,54 +1076,70 @@
   .category-section {
     padding: 3rem 0.75rem;
   }
+
   .category-section .section-title {
     font-size: 1.85rem;
   }
+
   .category-section .section-subtitle {
     font-size: 0.98rem;
   }
+
   .slider-showcase-container {
     padding: 0;
   }
+
   .slider-control-btn {
-    display: none; /* Touch swipe & dots active on mobile */
+    display: none;
+    /* Touch swipe & dots active on mobile */
   }
+
   .top-service-card {
     padding: 1.35rem;
     border-radius: 20px;
   }
+
   .card-top-row {
     margin-bottom: 1rem;
   }
+
   .card-main-body {
     flex-direction: column;
     gap: 0.85rem;
   }
+
   .card-icon-wrapper {
     width: 60px;
     height: 60px;
   }
+
   .card-service-title {
     font-size: 1.35rem;
   }
+
   .card-headline {
     font-size: 1rem;
   }
+
   .card-tagline {
     font-size: 0.88rem;
   }
+
   .card-side-visual {
     min-height: 180px;
     max-height: 210px;
   }
+
   .card-bottom-row {
     flex-direction: column;
     align-items: stretch;
     gap: 1rem;
   }
+
   .card-stats-info {
     justify-content: space-between;
   }
+
   .card-explore-btn {
     width: 100%;
     justify-content: center;

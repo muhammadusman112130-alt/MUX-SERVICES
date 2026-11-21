@@ -515,6 +515,9 @@ function CategorySection({ setCurrentPage }) {
                     key={cat.id} 
                     className={`slider-slide ${isActive ? 'slide-active' : ''}`}
                   >
+                    {/* Animated glowing backlight behind card on hover */}
+                    <div className={`card-backlight-glow glow-${cat.themeClass}`} aria-hidden="true"></div>
+
                     <div 
                       className={`top-service-card ${cat.themeClass}`}
                       onClick={() => handleServiceSelect(cat)}

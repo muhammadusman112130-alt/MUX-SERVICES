@@ -113,6 +113,50 @@
   max-width: 400px;
   width: 100%;
   border: 1px solid rgba(255,255,255,0.2);
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease;
+  z-index: 2;
+}
+
+/* Animated glowing backlight behind price card on hover */
+.price-card::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 26px;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 206, 209, 0.75) 0%, rgba(37, 99, 235, 0.5) 50%, transparent 75%);
+  filter: blur(24px);
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  transform: translateY(0) scale(0.95);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.price-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 206, 209, 0.35);
+}
+
+.price-card:hover::before {
+  opacity: 1;
+  transform: translateY(-4px) scale(1.04);
+  animation: priceBacklightPulse 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes priceBacklightPulse {
+  0% {
+    filter: blur(20px);
+    opacity: 0.75;
+  }
+  50% {
+    filter: blur(32px);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(20px);
+    opacity: 0.75;
+  }
 }
 
 .price-header {

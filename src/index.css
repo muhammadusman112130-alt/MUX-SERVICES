@@ -548,3 +548,132 @@ body {
     padding: 1rem;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   UNIVERSAL ANIMATED BACKLIGHT GLOW FOR ALL BUTTONS & CARDS
+   Dynamically matches theme colors across the entire platform
+══════════════════════════════════════════════════════════════ */
+
+/* Universal Button Hover & Backlight Glow */
+button:not(:disabled),
+.btn-primary,
+.card-explore-btn,
+.hire-button,
+.price-button,
+.search-button,
+.cta-button,
+.view-profile-btn,
+.chat-action-btn,
+.pcr-action-btn,
+.book-now-btn,
+.slider-control-btn,
+.review-slider-arrow,
+.quick-nav-btn {
+  transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.28s ease, filter 0.28s ease !important;
+}
+
+button:not(:disabled):hover,
+.btn-primary:hover,
+.card-explore-btn:hover,
+.hire-button:hover,
+.price-button:hover,
+.search-button:hover,
+.cta-button:hover,
+.view-profile-btn:hover,
+.chat-action-btn:hover,
+.pcr-action-btn:hover,
+.book-now-btn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 
+    0 10px 24px rgba(0, 0, 0, 0.22),
+    0 0 20px rgba(0, 206, 209, 0.65),
+    0 0 40px rgba(56, 189, 248, 0.4) !important;
+}
+
+/* Green / Success Action Buttons */
+.btn-success:hover,
+.work-verified-pill:hover,
+.hire-button:hover {
+  box-shadow: 
+    0 10px 24px rgba(16, 185, 129, 0.3),
+    0 0 24px rgba(16, 185, 129, 0.7),
+    0 0 45px rgba(52, 211, 153, 0.45) !important;
+}
+
+/* Cyan / Vibrant Brand Buttons */
+.pcr-action-btn:hover,
+.search-button:hover {
+  box-shadow: 
+    0 10px 24px rgba(0, 206, 209, 0.35),
+    0 0 28px rgba(0, 206, 209, 0.8),
+    0 0 50px rgba(56, 189, 248, 0.5) !important;
+}
+
+/* Blue / Primary Buttons */
+.btn-primary:hover,
+.price-button:hover,
+.card-explore-btn:hover,
+.view-profile-btn:hover,
+.chat-action-btn:hover {
+  box-shadow: 
+    0 10px 24px rgba(37, 99, 235, 0.35),
+    0 0 24px rgba(0, 206, 209, 0.75),
+    0 0 45px rgba(56, 189, 248, 0.45) !important;
+}
+
+/* Universal Card Hover & Animated Backlight Glow */
+.top-service-card,
+.professional-card,
+.price-card,
+.trust-card,
+.completed-work-card,
+.customer-review-card,
+.service-offer-card,
+.service-provider-card,
+.card {
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+}
+
+.top-service-card:hover,
+.professional-card:hover,
+.price-card:hover,
+.trust-card:hover,
+.completed-work-card:hover,
+.customer-review-card:hover,
+.service-offer-card:hover,
+.service-provider-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 
+    0 22px 55px rgba(7, 26, 61, 0.18),
+    0 0 35px rgba(0, 206, 209, 0.45),
+    0 0 70px rgba(56, 189, 248, 0.25) !important;
+}
+
+/* Specific Card Themes & Custom Glow Accents */
+.theme-home:hover {
+  box-shadow: 
+    0 22px 55px rgba(2, 132, 199, 0.25),
+    0 0 35px rgba(14, 165, 233, 0.5),
+    0 0 70px rgba(56, 189, 248, 0.3) !important;
+}
+
+.theme-tech:hover {
+  box-shadow: 
+    0 22px 55px rgba(37, 99, 235, 0.25),
+    0 0 35px rgba(59, 130, 246, 0.5),
+    0 0 70px rgba(99, 102, 241, 0.3) !important;
+}
+
+.theme-events:hover {
+  box-shadow: 
+    0 22px 55px rgba(217, 119, 6, 0.25),
+    0 0 35px rgba(245, 158, 11, 0.5),
+    0 0 70px rgba(251, 191, 36, 0.3) !important;
+}
+
+.theme-cosmetics:hover {
+  box-shadow: 
+    0 22px 55px rgba(5, 150, 105, 0.25),
+    0 0 35px rgba(16, 185, 129, 0.5),
+    0 0 70px rgba(52, 211, 153, 0.3) !important;
+}

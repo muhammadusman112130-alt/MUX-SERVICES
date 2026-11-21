@@ -35,30 +35,59 @@
   border-radius: 18px;
   padding: 2rem;
   text-align: center;
-  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 12px rgba(7, 26, 61, 0.07);
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 4px 18px rgba(7, 26, 61, 0.07);
   border: 2px solid #e0e7ff;
   position: relative;
-  overflow: hidden;
+  z-index: 2;
 }
 
-.professional-card::after {
+/* Animated glowing backlight behind professional card on hover */
+.professional-card::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(7, 26, 61, 0.03), rgba(37, 99, 235, 0.04));
+  inset: -6px;
+  border-radius: 24px;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 206, 209, 0.8) 0%, rgba(56, 189, 248, 0.55) 45%, rgba(37, 99, 235, 0.25) 75%, transparent 100%);
+  filter: blur(22px);
   opacity: 0;
-  transition: opacity 0.3s;
+  z-index: -1;
+  pointer-events: none;
+  transform: translateY(0) scale(0.95);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .professional-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(7, 26, 61, 0.15);
-  border-color: rgba(37, 99, 235, 0.4);
+  box-shadow: 
+    0 24px 50px rgba(7, 26, 61, 0.18),
+    0 0 35px rgba(0, 206, 209, 0.4),
+    0 0 65px rgba(56, 189, 248, 0.25);
+  border-color: rgba(0, 206, 209, 0.5);
 }
 
-.professional-card:hover::after {
+.professional-card:hover::before {
   opacity: 1;
+  transform: translateY(-4px) scale(1.04);
+  animation: proBacklightPulse 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes proBacklightPulse {
+  0% {
+    filter: blur(18px);
+    opacity: 0.75;
+    transform: translateY(-3px) scale(1.02);
+  }
+  50% {
+    filter: blur(28px);
+    opacity: 1;
+    transform: translateY(-6px) scale(1.06);
+  }
+  100% {
+    filter: blur(18px);
+    opacity: 0.75;
+    transform: translateY(-3px) scale(1.02);
+  }
 }
 
 .professional-image {

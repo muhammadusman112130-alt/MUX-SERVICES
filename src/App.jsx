@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import CategorySection from './components/CategorySection'
+import MuxTickerStrips from './components/MuxTickerStrips'
 import PriceOfferSection from './components/PriceOfferSection'
 import ProfessionalsSection from './components/ProfessionalsSection'
 import TrustSection from './components/TrustSection'
@@ -121,6 +122,7 @@ function App() {
           <>
             <HeroSection setCurrentPage={handlePageChange} />
             <CategorySection setCurrentPage={handlePageChange} />
+            <MuxTickerStrips />
             <PriceOfferSection setCurrentPage={handlePageChange} />
             <ProfessionalsSection />
             <TrustSection />
@@ -128,7 +130,7 @@ function App() {
           </>
         )
       case 'services':
-        return <Services initialSearchQuery={initialSearchQuery} />
+        return <Services initialSearchQuery={initialSearchQuery} setCurrentPage={handlePageChange} />
       case 'professionals':
         return <ProfessionalsSection />
       case 'about':
@@ -154,6 +156,7 @@ function App() {
           <>
             <HeroSection setCurrentPage={handlePageChange} />
             <CategorySection setCurrentPage={handlePageChange} />
+            <MuxTickerStrips />
             <PriceOfferSection setCurrentPage={handlePageChange} />
             <ProfessionalsSection />
             <TrustSection />
