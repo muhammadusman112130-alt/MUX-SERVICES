@@ -58,18 +58,26 @@ function HeroSection({ setCurrentPage }) {
   return (
     <section className="hero-section" id="home">
       <style>{`
-        .hero-section .hero-content h1.hero-title,
-        .hero-section .hero-content h1.hero-title span {
-          color: #ffffff !important;
-          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 35px rgba(0, 0, 0, 0.5) !important;
-          -webkit-text-fill-color: #ffffff !important;
-          background: none !important;
-          background-image: none !important;
-          background-clip: unset !important;
-          -webkit-background-clip: unset !important;
-          text-transform: uppercase !important;
+        .hero-section .hero-content h1.hero-title span.hero-title-mint-shine {
+          background: linear-gradient(
+            90deg,
+            #8FD3E8 0%,
+            #17f7f7 25%,
+            #ffffff 50%,
+            #17f7f7 75%,
+            #8FD3E8 100%
+          ) !important;
+          background-size: 200% auto !important;
+          -webkit-background-clip: text !important;
+          background-clip: text !important;
+          -webkit-text-fill-color: transparent !important;
+          color: transparent !important;
+          display: inline-block !important;
           letter-spacing: 2px !important;
           font-weight: 900 !important;
+          text-transform: uppercase !important;
+          animation: mintShineFlow 3.5s linear infinite !important;
+          text-shadow: none !important;
         }
         .hero-section .hero-content p.hero-subtitle,
         .hero-section .hero-content p.hero-subtitle span {
