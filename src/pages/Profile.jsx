@@ -109,9 +109,9 @@ function Profile({ onLogout, setCurrentPage, user }) {
               gap: '8px',
               padding: '0.45rem 1.1rem',
               borderRadius: '25px',
-              border: '1.5px solid #2563eb',
-              background: 'rgba(37, 99, 235, 0.08)',
-              color: '#2563eb',
+              border: '1.5px solid #FF5A4E',
+              background: 'rgba(255, 90, 78, 0.08)',
+              color: '#FF5A4E',
               fontWeight: 700,
               cursor: 'pointer',
               marginBottom: '1rem',
@@ -919,7 +919,7 @@ function Profile({ onLogout, setCurrentPage, user }) {
                   <label>Attach Photos, Videos, or Receipts <span className="hs-optional">(Optional)</span></label>
                   <div className="hs-drag-drop">
                     <span className="hs-upload-icon" style={{ display: 'flex', justifyContent: 'center' }}>
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
                     </span>
                     <p><strong>Drag & drop inspection photos or <span className="hs-link-color">browse files</span></strong></p>
                     <p className="hs-upload-hint">Supports JPG, PNG, PDF up to 15MB each (helpful for warranty review)</p>
@@ -1023,7 +1023,7 @@ function Profile({ onLogout, setCurrentPage, user }) {
             <div className="payment-guarantee-banner">
               <div className="pgb-header">
                 <span className="pgb-shield-icon" style={{ display: 'flex', alignItems: 'center' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                 </span>
                 <h3 className="pgb-title">MUX SERVICES Escrow & Payment Guarantee</h3>
                 <span className="pgb-subtitle">مکس سروسز کی محفوظ ضمانت</span>
@@ -1032,7 +1032,7 @@ function Profile({ onLogout, setCurrentPage, user }) {
                 <div className="pgb-feature">
                   <div className="pgb-feature-icon-container">
                     <span className="pgb-feature-icon" style={{ display: 'flex', alignItems: 'center' }}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
                     </span>
                   </div>
                   <div className="pgb-feature-content">
@@ -1044,7 +1044,7 @@ function Profile({ onLogout, setCurrentPage, user }) {
                 <div className="pgb-feature">
                   <div className="pgb-feature-icon-container">
                     <span className="pgb-feature-icon" style={{ display: 'flex', alignItems: 'center' }}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                     </span>
                   </div>
                   <div className="pgb-feature-content">
@@ -1056,7 +1056,7 @@ function Profile({ onLogout, setCurrentPage, user }) {
                 <div className="pgb-feature">
                   <div className="pgb-feature-icon-container">
                     <span className="pgb-feature-icon" style={{ display: 'flex', alignItems: 'center' }}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                     </span>
                   </div>
                   <div className="pgb-feature-content">

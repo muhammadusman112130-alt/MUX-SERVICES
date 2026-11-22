@@ -4,7 +4,7 @@ function TrustSection() {
   const services = [
     { 
       icon: (
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
           <polyline points="9 12 11 14 15 10"></polyline>
         </svg>
@@ -14,7 +14,7 @@ function TrustSection() {
     },
     { 
       icon: (
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="2" y="4" width="20" height="16" rx="2"></rect>
           <line x1="2" y1="10" x2="22" y2="10"></line>
           <circle cx="12" cy="15" r="2"></circle>
@@ -25,7 +25,7 @@ function TrustSection() {
     },
     { 
       icon: (
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
@@ -35,7 +35,7 @@ function TrustSection() {
     },
     { 
       icon: (
-        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="8" r="7"></circle>
           <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
         </svg>

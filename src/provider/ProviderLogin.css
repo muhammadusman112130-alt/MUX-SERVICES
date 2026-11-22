@@ -515,7 +515,7 @@
 
 .alert-title {
   font-size: clamp(1rem, 1.5vw, 1.2rem);
-  color: #071A3D;
+  color: #141B2D;
   margin: 0;
   font-weight: 700;
   flex: 1;
@@ -561,7 +561,7 @@
 }
 
 .available-tech {
-  color: #071A3D;
+  color: #141B2D;
   font-weight: 700;
   font-size: clamp(0.82rem, 1vw, 0.9rem);
 }

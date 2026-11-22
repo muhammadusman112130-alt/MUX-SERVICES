@@ -93,7 +93,7 @@
 }
 
 .completeness-tick {
-  color: #071A3D;
+  color: #141B2D;
   font-size: 1.2rem;
   font-weight: 700;
 }
@@ -219,7 +219,7 @@
 
 .change-photo-btn {
   padding: 0.5rem 1rem;
-  background: #071A3D;
+  background: #141B2D;
   color: white;
   border: none;
   border-radius: 15px;
@@ -309,8 +309,8 @@
 
 .form-input:focus {
   outline: none;
-  border-color: #071A3D;
-  box-shadow: 0 0 0 3px rgba(7, 26, 61, 0.1);
+  border-color: #141B2D;
+  box-shadow: 0 0 0 3px rgba(20, 27, 45, 0.1);
 }
 
 .contact-info-card {
@@ -437,8 +437,8 @@
 
 .emergency-input:focus {
   outline: none;
-  border-color: #071A3D;
-  box-shadow: 0 0 0 3px rgba(7, 26, 61, 0.1);
+  border-color: #141B2D;
+  box-shadow: 0 0 0 3px rgba(20, 27, 45, 0.1);
 }
 
 .relation-select {
@@ -454,8 +454,8 @@
 
 .relation-select:focus {
   outline: none;
-  border-color: #071A3D;
-  box-shadow: 0 0 0 3px rgba(7, 26, 61, 0.1);
+  border-color: #141B2D;
+  box-shadow: 0 0 0 3px rgba(20, 27, 45, 0.1);
 }
 
 .location-info-card {
@@ -510,8 +510,8 @@
 
 .location-input:focus {
   outline: none;
-  border-color: #071A3D;
-  box-shadow: 0 0 0 3px rgba(7, 26, 61, 0.1);
+  border-color: #141B2D;
+  box-shadow: 0 0 0 3px rgba(20, 27, 45, 0.1);
 }
 
 .location-input:disabled {
@@ -692,8 +692,8 @@
 }
 
 .account-item.active {
-  background: rgba(7, 26, 61, 0.1);
-  color: #071A3D;
+  background: rgba(20, 27, 45, 0.1);
+  color: #141B2D;
   font-weight: 600;
 }
 
@@ -735,7 +735,7 @@
 }
 
 .tab-btn.active {
-  background: linear-gradient(135deg, #071A3D 0%, #8B96AB 100%);
+  background: linear-gradient(135deg, #141B2D 0%, #8B96AB 100%);
   color: white;
 }
 
@@ -811,7 +811,7 @@
 
 .view-btn {
   padding: 0.5rem 1rem;
-  background: #071A3D;
+  background: #141B2D;
   color: white;
   border: none;
   border-radius: 15px;
@@ -834,7 +834,7 @@
 
 .edit-profile-info-btn {
   padding: 0.6rem 1.5rem;
-  background: #071A3D;
+  background: #141B2D;
   color: white;
   border: none;
   border-radius: 20px;
@@ -902,7 +902,7 @@
 
 .setting-item button {
   padding: 0.6rem 1.5rem;
-  background: #071A3D;
+  background: #141B2D;
   color: white;
   border: none;
   border-radius: 20px;
@@ -934,7 +934,7 @@
 
 .add-address-btn {
   padding: 0.6rem 1.5rem;
-  background: #071A3D;
+  background: #141B2D;
   color: white;
   border: none;
   border-radius: 20px;
@@ -995,7 +995,7 @@
 
 .edit-address-btn {
   padding: 0.5rem 1rem;
-  background: #071A3D;
+  background: #141B2D;
   color: white;
   border: none;
   border-radius: 15px;
@@ -1063,8 +1063,8 @@
 .language-tag {
   display: inline-block;
   padding: 0.4rem 1rem;
-  background: rgba(7, 26, 61, 0.1);
-  color: #071A3D;
+  background: rgba(20, 27, 45, 0.1);
+  color: #141B2D;
   border-radius: 15px;
   font-size: 0.9rem;
   font-weight: 500;
@@ -1095,8 +1095,8 @@
 
 .field-input:focus {
   outline: none;
-  border-color: #071A3D;
-  box-shadow: 0 0 0 3px rgba(7, 26, 61, 0.1);
+  border-color: #141B2D;
+  box-shadow: 0 0 0 3px rgba(20, 27, 45, 0.1);
 }
 
 .field-status {
@@ -1121,7 +1121,7 @@
 }
 
 .field-status.add-new {
-  color: #071A3D;
+  color: #141B2D;
 }
 
 .field-status .status-icon {
@@ -1164,7 +1164,7 @@
 .language-option input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  accent-color: #071A3D;
+  accent-color: #141B2D;
   cursor: pointer;
 }
 
@@ -1176,7 +1176,7 @@
 
 .save-changes-btn {
   padding: 0.8rem 2rem;
-  background: linear-gradient(135deg, #071A3D 0%, #8B96AB 100%);
+  background: linear-gradient(135deg, #141B2D 0%, #8B96AB 100%);
   color: white;
   border: none;
   border-radius: 25px;
@@ -1184,12 +1184,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(7, 26, 61, 0.3);
+  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.3);
 }
 
 .save-changes-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(7, 26, 61, 0.4);
+  box-shadow: 0 6px 20px rgba(20, 27, 45, 0.4);
 }
 
 /* =========================================
@@ -1214,7 +1214,7 @@
 .ns-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #071A3D;
+  color: #141B2D;
   margin: 0 0 0.25rem 0;
 }
 
@@ -1363,13 +1363,13 @@
   font-weight: 600;
 }
 
-.ns-badge.blue { background: #eff6ff; color: #2563eb; }
+.ns-badge.blue { background: #eff6ff; color: #FF5A4E; }
 .ns-badge.green { background: #f0fdf4; color: #16a34a; }
 .ns-badge.light { background: #f1f5f9; color: #475569; }
 .ns-badge.dark { background: #1e293b; color: #f8fafc; }
 .ns-badge.outline { border: 1px solid #cbd5e1; color: #475569; }
 .ns-badge.red { background: #fef2f2; color: #dc2626; }
-.ns-badge.blue-text { color: #0284c7; font-weight: 700; background: #e0f2fe; }
+.ns-badge.blue-text { color: #FF5A4E; font-weight: 700; background: #e0f2fe; }
 
 .ns-item-right {
   display: flex;
@@ -1402,7 +1402,7 @@
   transition: .4s;
   border-radius: 50%;
 }
-input:checked + .ns-slider { background-color: #071A3D; }
+input:checked + .ns-slider { background-color: #141B2D; }
 input:checked + .ns-slider:before { transform: translateX(20px); }
 
 .ns-btn-outline {
@@ -1562,7 +1562,7 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
 .ns-pref-checks input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  accent-color: #071A3D;
+  accent-color: #141B2D;
   cursor: pointer;
 }
 .ns-pref-checks-text {
@@ -1594,7 +1594,7 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
 }
 .ns-btn-text:hover { color: #1e293b; }
 .ns-btn-primary {
-  background: #071A3D;
+  background: #141B2D;
   color: white;
   border: none;
   padding: 0.6rem 1.5rem;
@@ -1611,7 +1611,7 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
    ========================================= */
 .hs-header-badge {
   background: #e0f2fe;
-  color: #0284c7;
+  color: #FF5A4E;
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -1674,7 +1674,7 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
   cursor: pointer;
   transition: all 0.2s;
 }
-.hs-btn-primary:hover { background: #2563eb; }
+.hs-btn-primary:hover { background: #FF5A4E; }
 .hs-btn-outline-blue {
   background: white;
   color: #3b82f6;
@@ -2119,7 +2119,7 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
 
 .scc-badge {
   background: #EFF6FF;
-  color: #2563EB;
+  color: #FF5A4E;
   font-size: 0.75rem;
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
@@ -2214,9 +2214,9 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
   font-weight: 600;
 }
 
-.scc-status-badge.blue { background: #EFF6FF; color: #2563EB; }
+.scc-status-badge.blue { background: #EFF6FF; color: #FF5A4E; }
 .scc-status-badge.outline { border: 1px solid #CBD5E1; color: #64748B; }
-.scc-status-badge.solid-blue { background: #2563EB; color: white; }
+.scc-status-badge.solid-blue { background: #FF5A4E; color: white; }
 
 .scc-number {
   font-size: 0.9rem;
@@ -2352,7 +2352,7 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
 .pcf-tab.active {
   background: #EFF6FF;
   border-color: #3B82F6;
-  color: #2563EB;
+  color: #FF5A4E;
 }
 
 .tab-icon {
@@ -2466,7 +2466,7 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
   position: absolute;
   right: 0.5rem;
   background: #EFF6FF;
-  color: #2563EB;
+  color: #FF5A4E;
   border: none;
   padding: 0.5rem 0.8rem;
   border-radius: 6px;
@@ -2537,7 +2537,7 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
 
 .pcf-badge-blue {
   background: #EFF6FF;
-  color: #2563EB;
+  color: #FF5A4E;
   font-size: 0.7rem;
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
@@ -2556,7 +2556,7 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
 }
 
 .pcf-btn-primary {
-  background: #2563EB;
+  background: #FF5A4E;
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -2564,11 +2564,11 @@ input:checked + .ns-slider:before { transform: translateX(20px); }
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 90, 78, 0.3);
   transition: all 0.3s;
 }
 .pcf-btn-primary:hover {
-  background: #1D4ED8;
+  background: #FF5A4E;
 }
 
 .pcf-btn-cancel {

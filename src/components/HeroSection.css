@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #071A3D;
+  background: #141B2D;
   overflow: hidden;
   padding: 2.5rem 1.5rem 3rem;
   color: #ffffff !important;
@@ -31,7 +31,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(7, 26, 61, 0.45) 0%, rgba(0, 0, 0, 0.68) 100%);
+  background: linear-gradient(180deg, rgba(20, 27, 45, 0.45) 0%, rgba(0, 0, 0, 0.68) 100%);
   z-index: 2;
 }
 
@@ -120,10 +120,10 @@
 }
 
 .dot.active {
-  background: #00ced1;
-  border-color: #00ced1;
+  background: #FF5A4E;
+  border-color: #FF5A4E;
   transform: scale(1.25);
-  box-shadow: 0 0 12px rgba(0, 206, 209, 0.7);
+  box-shadow: 0 0 12px rgba(255, 90, 78, 0.7);
 }
 
 .hero-content {
@@ -193,14 +193,14 @@
 
 .search-input:focus {
   outline: none;
-  box-shadow: 0 4px 20px rgba(0, 206, 209, 0.5);
+  box-shadow: 0 4px 20px rgba(255, 90, 78, 0.5);
 }
 
 .search-button {
   position: relative;
   overflow: hidden;
   padding: 0.9rem 2rem;
-  background: linear-gradient(135deg, #00ced1, #2563eb);
+  background: linear-gradient(135deg, #FF5A4E, #e04a3f);
   color: white;
   border: none;
   border-radius: 50px;
@@ -208,7 +208,7 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 18px rgba(0, 206, 209, 0.45);
+  box-shadow: 0 4px 18px rgba(255, 90, 78, 0.45);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -226,8 +226,8 @@
 
 .search-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(0, 206, 209, 0.6);
-  background: linear-gradient(135deg, #00b8ba, #1d4ed8);
+  box-shadow: 0 8px 28px rgba(255, 90, 78, 0.6);
+  background: linear-gradient(135deg, #FF6F64, #FF5A4E);
 }
 
 .search-button:hover::after {

@@ -49,7 +49,7 @@
   object-fit: contain;
   margin-right: -4px;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  filter: drop-shadow(0 2px 10px rgba(37, 99, 235, 0.35));
+  filter: drop-shadow(0 2px 10px rgba(255, 90, 78, 0.35));
 }
 
 .logo-link:hover .logo-image {
@@ -70,20 +70,20 @@
 }
 
 .logo-text-services {
-  background: linear-gradient(120deg, #071A3D 0%, #1d4ed8 40%, #00ced1 70%, #071A3D 100%);
+  background: linear-gradient(120deg, #141B2D 0%, #FF5A4E 50%, #141B2D 100%);
   background-size: 250% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.4px #071A3D;
+  -webkit-text-stroke: 0.4px #141B2D;
   animation: logo-text-flow 4s ease infinite alternate;
 }
 
 .logo-text-hub {
-  background: linear-gradient(135deg, #2563eb, #00ced1);
+  background: linear-gradient(135deg, #FF5A4E, #FF8A80);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.4px #2563eb;
-  filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.35));
+  -webkit-text-stroke: 0.4px #FF5A4E;
+  filter: drop-shadow(0 0 10px rgba(255, 90, 78, 0.45));
   animation: hub-pulse 2s ease-in-out infinite alternate;
 }
 
@@ -98,11 +98,11 @@
 
 @keyframes hub-pulse {
   0% {
-    filter: drop-shadow(0 0 4px rgba(37, 99, 235, 0.3));
+    filter: drop-shadow(0 0 4px rgba(255, 90, 78, 0.3));
     transform: scale(1);
   }
   100% {
-    filter: drop-shadow(0 0 12px rgba(0, 206, 209, 0.6));
+    filter: drop-shadow(0 0 12px rgba(255, 90, 78, 0.6));
     transform: scale(1.04);
   }
 }
@@ -138,20 +138,20 @@
   z-index: 1;
 }
 
-/* Background animation layer matching the signup button styling (#071A3D -> #2563eb) */
+/* Background animation layer matching the theme (#141B2D -> #FF5A4E) */
 .navbar-menu li button::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 25px;
-  background: linear-gradient(135deg, #071A3D 0%, #1e40af 50%, #2563eb 100%);
+  background: linear-gradient(135deg, #141B2D 0%, #1e293b 50%, #FF5A4E 100%);
   background-size: 200% 200%;
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: -1;
-  box-shadow: 0 4px 15px rgba(7, 26, 61, 0.3);
+  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.3);
 }
 
 /* Shine overlay animation matching signup button */
@@ -180,7 +180,7 @@
 .navbar-menu li button:hover {
   color: #ffffff !important;
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(7, 26, 61, 0.35);
+  box-shadow: 0 8px 24px rgba(20, 27, 45, 0.35);
 }
 
 .navbar-menu li button:hover::before {
@@ -257,25 +257,27 @@
 }
 
 .btn-login {
-  background: rgba(7,26,61,0.08);
-  color: #071A3D;
-  border: 1.5px solid rgba(7,26,61,0.25);
-  box-shadow: 0 2px 10px rgba(7,26,61,0.08);
+  background: rgba(20, 27, 45, 0.08);
+  color: #141B2D;
+  border: 1.5px solid rgba(20, 27, 45, 0.25);
+  box-shadow: 0 2px 10px rgba(20, 27, 45, 0.08);
 }
 
 .btn-login:hover {
-  background: rgba(7,26,61,0.14);
-  box-shadow: 0 6px 20px rgba(7,26,61,0.18);
+  background: rgba(255, 90, 78, 0.12);
+  color: #FF5A4E;
+  border-color: #FF5A4E;
+  box-shadow: 0 6px 20px rgba(255, 90, 78, 0.25);
   transform: translateY(-2px);
 }
 
 .btn-signup {
   position: relative;
   overflow: hidden;
-  background: #071A3D;
-  color: white;
+  background: #FF5A4E;
+  color: #F4F1EA;
   border: none;
-  box-shadow: 0 4px 15px rgba(7,26,61,0.3);
+  box-shadow: 0 4px 15px rgba(255, 90, 78, 0.35);
 }
 
 .btn-signup::after {
@@ -283,13 +285,14 @@
   position: absolute;
   top: 0; left: -100%;
   width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
   transform: skewX(-20deg);
 }
 
 .btn-signup:hover {
-  background: #2563eb;
-  box-shadow: 0 8px 25px rgba(37,99,235,0.4);
+  background: #141B2D;
+  color: #F4F1EA;
+  box-shadow: 0 8px 25px rgba(255, 90, 78, 0.55);
   transform: translateY(-2px);
 }
 
@@ -318,13 +321,13 @@
   border: 1px solid #e2e8f0;
   border-radius: 10px;
   background: #f8faff;
-  color: #071a3d;
+  color: #141B2D;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .navbar-menu-toggle:focus-visible {
-  outline: 3px solid #2563eb;
+  outline: 3px solid #FF5A4E;
   outline-offset: 3px;
 }
 
@@ -365,7 +368,7 @@
     flex-wrap: wrap;
   }
   .navbar--account .navbar-profile {
-    color: #071a3d !important;
+    color: #141B2D !important;
     background: #f8faff !important;
     border-color: #e2e8f0 !important;
   }

@@ -256,23 +256,23 @@ function MyBookings({ setCurrentPage }) {
         ) : bookings.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '60px 20px', color: '#666', background: '#fff', borderRadius: '12px', margin: '20px 0', border: '1px solid #e2e8f0' }}>
             <div style={{ fontSize: '3rem', marginBottom: '12px' }}>📋</div>
-            <h3 style={{ fontSize: '1.25rem', color: '#071A3D', marginBottom: '8px' }}>No Bookings Yet</h3>
+            <h3 style={{ fontSize: '1.25rem', color: '#141B2D', marginBottom: '8px' }}>No Bookings Yet</h3>
             <p style={{ fontSize: '0.95rem', color: '#64748b', marginBottom: '20px', maxWidth: '420px', margin: '0 auto 20px' }}>
               You don't have any bookings yet. Find and book verified professionals for home repairs and tech services in Multan, Pakistan.
             </p>
             <button 
               onClick={() => typeof setCurrentPage === 'function' && setCurrentPage('services')}
-              style={{ background: '#071A3D', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.95rem' }}
+              style={{ background: '#141B2D', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.95rem' }}
             >
               Book New Services
             </button>
           </div>
         ) : (
           <div style={{ textAlign: 'center', padding: '40px 20px', color: '#666', background: '#fff', borderRadius: '12px', margin: '20px 0', border: '1px solid #e2e8f0' }}>
-            <p style={{ fontSize: '1.05rem', color: '#071A3D', marginBottom: '12px' }}>No bookings found matching your search or filters.</p>
+            <p style={{ fontSize: '1.05rem', color: '#141B2D', marginBottom: '12px' }}>No bookings found matching your search or filters.</p>
             <button 
               onClick={() => { setSearchTerm(''); setSelectedCategory('all'); setSelectedTab('all'); }}
-              style={{ background: '#071A3D', color: '#fff', border: 'none', padding: '8px 18px', borderRadius: '6px', cursor: 'pointer', fontWeight: 600 }}
+              style={{ background: '#141B2D', color: '#fff', border: 'none', padding: '8px 18px', borderRadius: '6px', cursor: 'pointer', fontWeight: 600 }}
             >
               Clear Filters
             </button>

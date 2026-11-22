@@ -322,13 +322,13 @@ function CategorySection({ setCurrentPage }) {
     switch (type) {
       case 'electric_svg':
         return (
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
           </svg>
         )
       case 'plumber_svg':
         return (
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#0284c7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
           </svg>
         )
@@ -394,7 +394,7 @@ function CategorySection({ setCurrentPage }) {
         )
       default:
         return (
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#FF5A4E" strokeWidth="2">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
           </svg>
         )

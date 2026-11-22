@@ -1,9 +1,9 @@
-/* ── FOOTER — #071A3D Theme ── */
+/* ── FOOTER — #141B2D Theme ── */
 .footer {
-  background: #071A3D;
-  border-top: 4px solid #2563eb;
-  box-shadow: 0 -8px 32px rgba(7,26,61,0.18);
-  color: white;
+  background: #141B2D;
+  border-top: 4px solid #FF5A4E;
+  box-shadow: 0 -8px 32px rgba(20, 27, 45, 0.35);
+  color: #F4F1EA;
   padding: 4rem 2rem 2rem;
   position: relative;
 }
@@ -27,7 +27,7 @@
 
 .footer-logo {
   font-size: 2rem;
-  color: #60a5fa;
+  color: #FF5A4E;
   margin-bottom: 1rem;
 }
 
@@ -59,17 +59,17 @@
 }
 
 .social-link:hover {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: #FF5A4E;
+  border-color: #FF5A4E;
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(37,99,235,0.4);
+  box-shadow: 0 6px 20px rgba(255, 90, 78, 0.45);
 }
 
 .footer-title {
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 1.25rem;
-  color: #60a5fa;
+  color: #FF5A4E;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -85,7 +85,7 @@
 }
 
 .footer-links a {
-  color: rgba(255,255,255,0.65);
+  color: rgba(244, 241, 234, 0.7);
   text-decoration: none;
   font-size: 0.95rem;
   transition: all 0.2s;
@@ -93,7 +93,7 @@
 }
 
 .footer-links a:hover {
-  color: #60a5fa;
+  color: #FF5A4E;
   transform: translateX(4px);
 }
 

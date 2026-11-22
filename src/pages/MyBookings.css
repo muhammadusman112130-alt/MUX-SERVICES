@@ -27,7 +27,7 @@
 
 .bookings-header h1 {
   font-size: 2.5rem;
-  color: #071A3D;
+  color: #141B2D;
   margin-bottom: 1rem;
   font-weight: 700;
 }
@@ -43,7 +43,7 @@
 
 .book-new-services-btn {
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #071A3D 0%, #8B96AB 100%);
+  background: linear-gradient(135deg, #141B2D 0%, #8B96AB 100%);
   color: white;
   border: none;
   border-radius: 25px;
@@ -51,13 +51,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(7, 26, 61, 0.3);
+  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.3);
   white-space: nowrap;
 }
 
 .book-new-services-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(7, 26, 61, 0.4);
+  box-shadow: 0 6px 20px rgba(20, 27, 45, 0.4);
 }
 
 .stats-cards {
@@ -153,14 +153,14 @@
 }
 
 .card-tabs .tab-btn.active {
-  background: linear-gradient(135deg, #071A3D 0%, #8B96AB 100%);
+  background: linear-gradient(135deg, #141B2D 0%, #8B96AB 100%);
   color: white;
-  border-color: #071A3D;
+  border-color: #141B2D;
 }
 
 .card-tabs .tab-btn:hover:not(.active) {
   background: #f8f9fa;
-  border-color: #071A3D;
+  border-color: #141B2D;
 }
 
 .card-controls {
@@ -217,7 +217,7 @@
 
 .filter-select:focus,
 .date-select:focus {
-  border-color: #071A3D;
+  border-color: #141B2D;
 }
 
 .booking-ref-section {
@@ -266,7 +266,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(7, 26, 61, 0.1);
+  background: rgba(20, 27, 45, 0.1);
   border-radius: 12px;
 }
 
@@ -284,7 +284,7 @@
 }
 
 .booking-location {
-  color: #071A3D !important;
+  color: #141B2D !important;
   font-weight: 500;
 }
 
@@ -294,7 +294,7 @@
 }
 
 .booking-ref {
-  color: #071A3D !important;
+  color: #141B2D !important;
   font-weight: 600 !important;
   font-size: 0.9rem !important;
 }
@@ -335,7 +335,7 @@
 
 .booking-price {
   font-size: 1.1rem;
-  color: #071A3D;
+  color: #141B2D;
   font-weight: 600;
   margin: 0;
 }
@@ -347,7 +347,7 @@
 
 .view-btn {
   padding: 0.6rem 1.2rem;
-  background: #071A3D;
+  background: #141B2D;
   color: white;
   border: none;
   border-radius: 20px;
@@ -381,7 +381,7 @@
 
 .review-btn {
   padding: 0.6rem 1.2rem;
-  background: linear-gradient(135deg, #071A3D 0%, #8B96AB 100%);
+  background: linear-gradient(135deg, #141B2D 0%, #8B96AB 100%);
   color: white;
   border: none;
   border-radius: 20px;
@@ -393,18 +393,18 @@
 
 .review-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(7, 26, 61, 0.3);
+  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.3);
 }
 
 .security-note {
-  background: linear-gradient(135deg, #071A3D);
+  background: linear-gradient(135deg, #141B2D);
   border-radius: 15px;
   padding: 1.5rem 2rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-top: 2rem;
-  box-shadow: 0 4px 15px rgba(7, 26, 61, 0.3);
+  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.3);
 }
 
 .security-note-icon {

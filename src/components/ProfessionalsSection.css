@@ -1,7 +1,7 @@
 /* ── PROFESSIONALS SECTION ── */
 .professionals-section {
   padding: 5rem 2rem;
-  background: #f8faff;
+  background: #F4F1EA;
 }
 
 .container {
@@ -11,7 +11,7 @@
 
 .section-title {
   font-size: 2.4rem;
-  color: #071A3D;
+  color: #141B2D;
   text-align: center;
   margin-bottom: 0.5rem;
   font-weight: 800;
@@ -36,7 +36,7 @@
   padding: 2rem;
   text-align: center;
   transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 4px 18px rgba(7, 26, 61, 0.07);
+  box-shadow: 0 4px 18px rgba(20, 27, 45, 0.07);
   border: 2px solid #e0e7ff;
   position: relative;
   z-index: 2;
@@ -48,7 +48,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 24px;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 206, 209, 0.8) 0%, rgba(56, 189, 248, 0.55) 45%, rgba(37, 99, 235, 0.25) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 90, 78, 0.85) 0%, rgba(255, 122, 112, 0.6) 45%, rgba(20, 27, 45, 0.25) 75%, transparent 100%);
   filter: blur(22px);
   opacity: 0;
   z-index: -1;
@@ -60,10 +60,10 @@
 .professional-card:hover {
   transform: translateY(-10px);
   box-shadow: 
-    0 24px 50px rgba(7, 26, 61, 0.18),
-    0 0 35px rgba(0, 206, 209, 0.4),
-    0 0 65px rgba(56, 189, 248, 0.25);
-  border-color: rgba(0, 206, 209, 0.5);
+    0 24px 50px rgba(20, 27, 45, 0.18),
+    0 0 35px rgba(255, 90, 78, 0.45),
+    0 0 65px rgba(255, 122, 112, 0.25);
+  border-color: rgba(255, 90, 78, 0.5);
 }
 
 .professional-card:hover::before {
@@ -105,7 +105,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  box-shadow: 0 6px 18px rgba(7, 26, 61, 0.15);
+  box-shadow: 0 6px 18px rgba(20, 27, 45, 0.15);
   border: 3.5px solid #ffffff;
   background: #f1f5f9;
 }
@@ -129,7 +129,7 @@
   position: absolute;
   bottom: 0;
   right: -10px;
-  background: #071A3D;
+  background: #141B2D;
   color: white;
   width: 30px;
   height: 30px;
@@ -140,13 +140,13 @@
   font-weight: bold;
   font-size: 1rem;
   border: 3px solid white;
-  box-shadow: 0 2px 8px rgba(7, 26, 61, 0.3);
+  box-shadow: 0 2px 8px rgba(20, 27, 45, 0.3);
 }
 
 .professional-name {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #071A3D;
+  color: #141B2D;
   margin-bottom: 0.4rem;
 }
 
@@ -159,7 +159,7 @@
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 3px 12px rgba(37, 99, 235, 0.06);
+  box-shadow: 0 3px 12px rgba(255, 90, 78, 0.06);
 }
 
 .professional-service-box::before {
@@ -169,7 +169,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #2563eb, #60a5fa, #f59e0b, #2563eb);
+  background: linear-gradient(90deg, #FF5A4E, #60a5fa, #f59e0b, #FF5A4E);
   background-size: 200% 100%;
   transform: scaleX(0);
   transform-origin: left;
@@ -179,7 +179,7 @@
 .professional-card:hover .professional-service-box {
   transform: translateY(-4px);
   border-color: #93c5fd;
-  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 10px 28px rgba(255, 90, 78, 0.15);
   background: #ffffff;
 }
 
@@ -205,7 +205,7 @@
   display: inline-block;
   font-size: 0.82rem;
   font-weight: 800;
-  color: #1d4ed8;
+  color: #FF5A4E;
   background: #eff6ff;
   border: 1px solid #bfdbfe;
   padding: 0.25rem 0.75rem;
@@ -214,7 +214,7 @@
 }
 
 .professional-card:hover .pro-service-badge {
-  background: #2563eb;
+  background: #FF5A4E;
   color: white;
   transform: scale(1.04);
 }
@@ -300,7 +300,7 @@
 .pro-stat-chip {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #071A3D;
+  color: #141B2D;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid #e2e8f0;
   padding: 0.2rem 0.55rem;
@@ -311,7 +311,7 @@
 .pro-rate-tag {
   font-size: 0.9rem;
   font-weight: 800;
-  color: #071A3D;
+  color: #141B2D;
   margin-left: 0.35rem;
 }
 
@@ -330,7 +330,7 @@
 
 .rating-number {
   font-weight: 700;
-  color: #071A3D;
+  color: #141B2D;
 }
 
 .reviews {
@@ -347,15 +347,15 @@
   position: relative;
   overflow: hidden;
   padding: 0.75rem 2rem;
-  background: #071A3D;
-  color: white;
+  background: #141B2D;
+  color: #F4F1EA;
   border: none;
   border-radius: 50px;
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(7, 26, 61, 0.25);
+  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.25);
 }
 
 .hire-btn-arrow {
@@ -373,14 +373,15 @@
   left: -100%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
   transform: skewX(-20deg);
 }
 
 .hire-button:hover {
-  background: #2563eb;
+  background: #FF5A4E;
+  color: #F4F1EA;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 90, 78, 0.45);
 }
 
 .hire-button:hover::after {

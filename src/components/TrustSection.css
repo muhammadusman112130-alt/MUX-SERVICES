@@ -1,7 +1,7 @@
 /* ── TRUST SECTION ── */
 .trust-section {
   padding: 5rem 2rem;
-  background: #ffffff;
+  background: #F4F1EA;
 }
 
 .container {
@@ -11,7 +11,7 @@
 
 .section-title {
   font-size: 2.4rem;
-  color: #071A3D;
+  color: #141B2D;
   text-align: center;
   margin-bottom: 0.5rem;
   font-weight: 800;
@@ -36,8 +36,8 @@
   border-radius: 18px;
   text-align: center;
   transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 4px 14px rgba(7,26,61,0.07);
-  border: 2px solid #e0e7ff;
+  box-shadow: 0 4px 14px rgba(20, 27, 45, 0.07);
+  border: 2px solid rgba(20, 27, 45, 0.08);
   position: relative;
   z-index: 2;
 }
@@ -48,7 +48,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 24px;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 206, 209, 0.75) 0%, rgba(37, 99, 235, 0.5) 50%, transparent 75%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 90, 78, 0.75) 0%, rgba(255, 90, 78, 0.5) 50%, transparent 75%);
   filter: blur(22px);
   opacity: 0;
   z-index: -1;
@@ -60,9 +60,11 @@
 .trust-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #071A3D, #2563eb);
+  background: linear-gradient(90deg, #141B2D, #FF5A4E);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.35s ease;
@@ -71,11 +73,11 @@
 
 .trust-card:hover {
   transform: translateY(-8px);
-  box-shadow: 
-    0 22px 50px rgba(7, 26, 61, 0.16),
-    0 0 35px rgba(0, 206, 209, 0.4),
-    0 0 65px rgba(56, 189, 248, 0.25);
-  border-color: rgba(0, 206, 209, 0.5);
+  box-shadow:
+    0 22px 50px rgba(20, 27, 45, 0.16),
+    0 0 35px rgba(255, 90, 78, 0.4),
+    0 0 65px rgba(255, 90, 78, 0.25);
+  border-color: rgba(255, 90, 78, 0.5);
 }
 
 .trust-card:hover::after {
@@ -93,10 +95,12 @@
     filter: blur(16px);
     opacity: 0.75;
   }
+
   50% {
     filter: blur(28px);
     opacity: 1;
   }
+
   100% {
     filter: blur(16px);
     opacity: 0.75;
@@ -117,7 +121,7 @@
 .trust-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #071A3D;
+  color: #141B2D;
   margin-bottom: 0.75rem;
 }
 
@@ -128,6 +132,12 @@
 }
 
 @media (max-width: 768px) {
-  .section-title { font-size: 2rem; }
-  .trust-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .trust-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+  }
 }

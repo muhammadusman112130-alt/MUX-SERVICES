@@ -5,7 +5,7 @@
 .category-section {
   position: relative;
   padding: 5rem 1.5rem;
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
+  background: linear-gradient(180deg, #F4F1EA 0%, #FAF8F5 50%, #F4F1EA 100%);
   overflow: hidden;
 }
 
@@ -17,7 +17,7 @@
   transform: translateX(-50%);
   width: 900px;
   height: 400px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 90, 78, 0.06) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -39,9 +39,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(37, 99, 235, 0.08);
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  color: #1d4ed8;
+  background: rgba(255, 90, 78, 0.08);
+  border: 1px solid rgba(255, 90, 78, 0.2);
+  color: #FF5A4E;
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -55,8 +55,8 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #2563eb;
-  box-shadow: 0 0 10px #2563eb;
+  background: #FF5A4E;
+  box-shadow: 0 0 10px #FF5A4E;
   animation: pulseDot 2s infinite;
 }
 
@@ -77,7 +77,7 @@
 .category-section .section-title {
   font-size: 2.6rem;
   font-weight: 800;
-  color: #071A3D;
+  color: #141B2D;
   margin-bottom: 0.6rem;
   letter-spacing: -0.02em;
 }
@@ -130,10 +130,10 @@
 
 /* Active Nav States with Matching Accent Colors */
 .quick-nav-btn.theme-home.active {
-  background: #0284c7;
+  background: #FF5A4E;
   color: #ffffff;
-  border-color: #0284c7;
-  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+  border-color: #FF5A4E;
+  box-shadow: 0 6px 20px rgba(255, 90, 78, 0.35);
 }
 
 .quick-nav-btn.theme-tech.active {
@@ -184,7 +184,7 @@
 .slider-viewport {
   overflow: hidden;
   border-radius: 26px;
-  box-shadow: 0 20px 48px -12px rgba(7, 26, 61, 0.12);
+  box-shadow: 0 20px 48px -12px rgba(20, 27, 45, 0.12);
 }
 
 /* GPU Accelerated Track for Zero-Lag (transform3d) */
@@ -210,7 +210,7 @@
   position: absolute;
   inset: 12px 8px;
   border-radius: 32px;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 206, 209, 0.85) 0%, rgba(56, 189, 248, 0.55) 45%, rgba(37, 99, 235, 0.25) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 90, 78, 0.85) 0%, rgba(255, 160, 153, 0.55) 45%, rgba(255, 90, 78, 0.25) 75%, transparent 100%);
   filter: blur(28px);
   opacity: 0;
   pointer-events: none;
@@ -227,11 +227,11 @@
 
 /* Theme-specific backlight glows */
 .slider-slide:hover .card-backlight-glow.glow-theme-home {
-  background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.9) 0%, rgba(56, 189, 248, 0.6) 45%, rgba(2, 132, 199, 0.3) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 90, 78, 0.9) 0%, rgba(255, 160, 153, 0.6) 45%, rgba(20, 27, 45, 0.3) 75%, transparent 100%);
 }
 
 .slider-slide:hover .card-backlight-glow.glow-theme-tech {
-  background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.9) 0%, rgba(99, 102, 241, 0.6) 45%, rgba(30, 64, 175, 0.3) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 90, 78, 0.9) 0%, rgba(20, 27, 45, 0.6) 45%, rgba(255, 90, 78, 0.3) 75%, transparent 100%);
 }
 
 .slider-slide:hover .card-backlight-glow.glow-theme-events {
@@ -272,22 +272,22 @@
   border-radius: 50%;
   background: #ffffff;
   border: 1.5px solid rgba(226, 232, 240, 0.9);
-  color: #071A3D;
+  color: #141B2D;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 6px 20px rgba(7, 26, 61, 0.12);
+  box-shadow: 0 6px 20px rgba(20, 27, 45, 0.12);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slider-control-btn:hover {
-  background: #071A3D;
+  background: #141B2D;
   color: #ffffff;
-  border-color: #071A3D;
+  border-color: #141B2D;
   transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 10px 28px rgba(7, 26, 61, 0.25);
+  box-shadow: 0 10px 28px rgba(20, 27, 45, 0.25);
 }
 
 .slider-control-btn.prev-btn {
@@ -316,11 +316,11 @@
 
 .top-service-card:hover {
   transform: translateY(-9px);
-  border-color: rgba(0, 206, 209, 0.45);
+  border-color: rgba(255, 90, 78, 0.45);
   box-shadow:
-    0 22px 55px rgba(7, 26, 61, 0.18),
-    0 0 35px rgba(0, 206, 209, 0.35),
-    0 0 70px rgba(56, 189, 248, 0.2);
+    0 22px 55px rgba(20, 27, 45, 0.18),
+    0 0 35px rgba(255, 90, 78, 0.35),
+    0 0 70px rgba(255, 90, 78, 0.2);
 }
 
 .card-ambient-glow {
@@ -343,49 +343,49 @@
 
 /* ── 4 MATCHING CARD THEMES ── */
 
-/* 1. Home Services Theme (Ocean Sapphire / Deep Blue) */
+/* 1. Home Services Theme (Midnight Slate Navy / Coral Accent) */
 .top-service-card.theme-home {
-  background: linear-gradient(145deg, #ffffff 0%, #f0f9ff 50%, #e0f2fe 100%);
-  border-color: rgba(14, 165, 233, 0.32);
-  box-shadow: 0 16px 40px rgba(2, 132, 199, 0.1);
+  background: linear-gradient(145deg, #ffffff 0%, #FAF8F5 50%, #F4F1EA 100%);
+  border-color: rgba(255, 90, 78, 0.32);
+  box-shadow: 0 16px 40px rgba(255, 90, 78, 0.1);
 }
 
 .theme-home .card-ambient-glow {
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.45) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 90, 78, 0.45) 0%, transparent 70%);
 }
 
 .theme-home .card-badge-tag {
-  background: linear-gradient(135deg, #0284c7, #0369a1);
+  background: linear-gradient(135deg, #FF5A4E, #141B2D);
 }
 
 .theme-home .card-service-title {
-  color: #0369a1;
+  color: #141B2D;
 }
 
 .theme-home .card-price-chip {
-  background: rgba(14, 165, 233, 0.12);
-  color: #0284c7;
-  border: 1px solid rgba(14, 165, 233, 0.35);
+  background: rgba(255, 90, 78, 0.12);
+  color: #FF5A4E;
+  border: 1px solid rgba(255, 90, 78, 0.35);
 }
 
 .theme-home .skill-chip {
-  background: rgba(14, 165, 233, 0.08);
-  color: #0369a1;
-  border: 1px solid rgba(14, 165, 233, 0.22);
+  background: rgba(20, 27, 45, 0.08);
+  color: #141B2D;
+  border: 1px solid rgba(20, 27, 45, 0.22);
 }
 
 .theme-home .skill-chip:hover {
-  background: #0284c7;
+  background: #FF5A4E;
   color: #ffffff;
 }
 
 .theme-home .card-explore-btn {
-  background: linear-gradient(135deg, #0ea5e9, #0284c7);
-  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.3);
+  background: linear-gradient(135deg, #FF5A4E, #141B2D);
+  box-shadow: 0 6px 18px rgba(255, 90, 78, 0.3);
 }
 
 .theme-home .card-side-img-wrapper {
-  border: 2px solid rgba(14, 165, 233, 0.3);
+  border: 2px solid rgba(255, 90, 78, 0.3);
 }
 
 /* 2. Tech Services Theme (Cyber Indigo / Electric Violet) */
@@ -693,7 +693,7 @@
   border-radius: 18px;
   background: #ffffff;
   border: 2px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 20px rgba(7, 26, 61, 0.07);
+  box-shadow: 0 8px 20px rgba(20, 27, 45, 0.07);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -764,7 +764,7 @@
 .card-headline {
   font-size: 1.08rem;
   font-weight: 700;
-  color: #071A3D;
+  color: #141B2D;
   margin-bottom: 0.35rem;
 }
 
@@ -844,7 +844,7 @@
   border-radius: 20px;
   overflow: hidden;
   background: #0f172a;
-  box-shadow: 0 12px 32px rgba(7, 26, 61, 0.14);
+  box-shadow: 0 12px 32px rgba(20, 27, 45, 0.14);
 }
 
 .card-side-img {
@@ -863,7 +863,7 @@
 .card-side-img-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(7, 26, 61, 0.05) 0%, rgba(7, 26, 61, 0.45) 100%);
+  background: linear-gradient(180deg, rgba(20, 27, 45, 0.05) 0%, rgba(20, 27, 45, 0.45) 100%);
   pointer-events: none;
 }
 
@@ -871,7 +871,7 @@
   position: absolute;
   bottom: 14px;
   left: 14px;
-  background: rgba(7, 26, 61, 0.8);
+  background: rgba(20, 27, 45, 0.8);
   backdrop-filter: blur(8px);
   color: #ffffff;
   font-size: 0.82rem;
@@ -905,7 +905,7 @@
   align-items: center;
   gap: 0.35rem;
   font-size: 0.95rem;
-  color: #071A3D;
+  color: #141B2D;
 }
 
 .rating-pill strong {
@@ -923,7 +923,7 @@
 }
 
 .pros-count-text strong {
-  color: #071A3D;
+  color: #141B2D;
   font-weight: 700;
 }
 
@@ -976,7 +976,7 @@
 }
 
 .counter-current {
-  color: #071A3D;
+  color: #141B2D;
   font-size: 1.1rem;
 }
 
@@ -1014,7 +1014,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: #071A3D;
+  background: #141B2D;
   border-radius: 9999px;
   animation: dotProgress linear 1 forwards;
   transform-origin: left;
