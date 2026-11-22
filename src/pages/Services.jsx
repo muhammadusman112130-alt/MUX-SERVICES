@@ -2286,7 +2286,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                 <div className="ldc-heading-block">
                   <div className="ldc-badge-pill">
                     <span className="ldc-pulse-dot"></span>
-                    <span>DISPATCH DESTINATION / سروس لوکیشن</span>
+                    <span>DISPATCH DESTINATION</span>
                   </div>
                   <h3 className="ldc-title">
                     {bookingFor === 'myself' 
@@ -2312,7 +2312,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                       <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <span>For Myself (میرے لیے)</span>
+                    <span>For Myself</span>
                   </button>
 
                   <button 
@@ -2326,7 +2326,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                       <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                       <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
-                    <span>For Someone Else (کسی اور کے لیے)</span>
+                    <span>For Someone Else</span>
                   </button>
                 </div>
               </div>
@@ -2480,15 +2480,12 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   <span className="safety-info-icon">🛡️</span>
                 </div>
                 <h3 className="safety-notice-title">
-                  <span>Official Booking Protection / آفیشل بکنگ اور حفاظتی رہنمائی</span>
+                  <span>Official Booking Protection</span>
                 </h3>
               </div>
               <div className="safety-notice-content">
                 <p className="safety-text-en">
                   Direct off-platform payments or unofficial phone agreements bypass MUX SERVICES quality supervision and dispute resolution. To guarantee certified craftsmanship, standard PKR rate cards, and verified technician accountability across Multan, always book directly through our official platform.
-                </p>
-                <p className="safety-text-ur" dir="rtl">
-                  مکس سروسز پلیٹ فارم سے باہر براہ راست غیر تصدیق شدہ نقد لین دین یا فون پر زبانی ڈیل کرنا سیکیورٹی رسک ہے۔ سروس کے مکمل معیار، شفاف ریٹس اور تصدیق شدہ ٹیکنیشنز کی فوری رسائی کے لیے ہمیشہ آفیشل پورٹل کے ذریعے بکنگ مکمل کریں۔
                 </p>
               </div>
             </div>
