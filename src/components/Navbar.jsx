@@ -170,14 +170,14 @@ function Navbar({
           )}
           {isProviderLoggedIn && (
             <li>
-              <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('Messages'); }}>
+              <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}>
                 <span className="nav-btn-text">Messages</span>
               </a>
             </li>
           )}
           {currentPage === 'provider-verification' && (
             <li className="navbar-mobile-provider-link">
-              <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('Messages'); }}>
+              <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}>
                 <span className="nav-btn-text">Messages</span>
               </a>
             </li>
@@ -200,7 +200,7 @@ function Navbar({
                 </a>
               </li>
               <li>
-                <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('Messages'); }}>
+                <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}>
                   <span className="nav-btn-text">Messages</span>
                 </a>
               </li>

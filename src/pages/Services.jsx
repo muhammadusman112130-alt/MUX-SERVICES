@@ -145,7 +145,50 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
   }
 
   const [showAllHomeServices, setShowAllHomeServices] = useState(true)
-  const [selectedService, setSelectedService] = useState(null)
+  const [selectedService, setSelectedService] = useState(() => {
+    if (initialSearchQuery && typeof initialSearchQuery === 'string' && initialSearchQuery.trim()) {
+      const match = normalizeServiceName(initialSearchQuery.trim())
+      if (match) return match
+    }
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const serviceParam = params.get('service') || params.get('category') || params.get('q')
+      if (serviceParam) {
+        const match = normalizeServiceName(serviceParam)
+        if (match) return match
+      }
+      const saved = sessionStorage.getItem('mux_selected_service')
+      if (saved) {
+        const match = normalizeServiceName(saved)
+        if (match) return match
+      }
+    } catch (e) {
+      console.warn(e)
+    }
+    return null
+  })
+
+  // Synchronize active selected service with sessionStorage and URL
+  useEffect(() => {
+    try {
+      if (selectedService) {
+        sessionStorage.setItem('mux_selected_service', selectedService)
+        const url = new URL(window.location.href)
+        url.pathname = '/services'
+        url.searchParams.set('service', selectedService)
+        window.history.replaceState({ page: 'services', auth: null, query: selectedService }, '', url.pathname + url.search)
+      } else {
+        sessionStorage.removeItem('mux_selected_service')
+        const url = new URL(window.location.href)
+        if (url.searchParams.has('service')) {
+          url.searchParams.delete('service')
+          window.history.replaceState({ page: 'services', auth: null, query: '' }, '', url.pathname + (url.search ? url.search : ''))
+        }
+      }
+    } catch (e) {
+      console.warn(e)
+    }
+  }, [selectedService])
   const [selectedProvider, setSelectedProvider] = useState(null)
   const [isViewingProfile, setIsViewingProfile] = useState(false)
   const [showChat, setShowChat] = useState(false)
@@ -296,8 +339,6 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       } else {
         setHeroSearchQuery(initialSearchQuery.trim())
       }
-    } else if (initialSearchQuery === '') {
-      setSelectedService(null)
     }
   }, [initialSearchQuery, isLoggedIn, onLoginClick, setCurrentPage])
 
@@ -525,6 +566,18 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
     setBookingFor('myself')
     setSelectedLocality(userDefaultLocality)
     setRecipientAddress('')
+    try {
+      sessionStorage.removeItem('mux_selected_service')
+      sessionStorage.removeItem('mux_search_query')
+      const url = new URL(window.location.href)
+      url.pathname = '/services'
+      url.searchParams.delete('service')
+      url.searchParams.delete('category')
+      url.searchParams.delete('q')
+      window.history.replaceState({ page: 'services', auth: null, query: '' }, '', url.pathname)
+    } catch (e) {
+      console.warn(e)
+    }
   }
 
   const handleBookNow = (provider) => {
@@ -2486,6 +2539,9 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
               <div className="safety-notice-content">
                 <p className="safety-text-en">
                   Direct off-platform payments or unofficial phone agreements bypass MUX SERVICES quality supervision and dispute resolution. To guarantee certified craftsmanship, standard PKR rate cards, and verified technician accountability across Multan, always book directly through our official platform.
+                </p>
+                <p className="safety-text-ur" dir="rtl">
+                  مکس سروسز پلیٹ فارم سے باہر براہ راست غیر تصدیق شدہ نقد لین دین یا فون پر زبانی ڈیل کرنا سیکیورٹی رسک ہے۔ سروس کے مکمل معیار، شفاف ریٹس اور تصدیق شدہ ٹیکنیشنز کی فوری رسائی کے لیے ہمیشہ آفیشل پورٹل کے ذریعے بکنگ مکمل کریں۔
                 </p>
               </div>
             </div>

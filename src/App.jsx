@@ -24,13 +24,83 @@ const ProviderDashboard = lazy(() => import('./provider/ProviderDashboard'))
 const ProviderLogin = lazy(() => import('./provider/ProviderLogin'))
 const ProviderVerification = lazy(() => import('./provider/ProviderVerification'))
 
+const VALID_PAGES = [
+  'home',
+  'services',
+  'professionals',
+  'about',
+  'contact',
+  'booked',
+  'bookings',
+  'messages',
+  'profile',
+  'provider-dashboard',
+  'provider-login',
+  'provider-verification'
+]
+
+const getInitialPageState = () => {
+  try {
+    const rawPath = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, '')
+    const params = new URLSearchParams(window.location.search)
+
+    if (rawPath === 'login' || params.get('auth') === 'login') {
+      return { page: 'home', auth: 'login', query: '' }
+    }
+    if (rawPath === 'signup' || params.get('auth') === 'signup') {
+      return { page: 'home', auth: 'signup', query: '' }
+    }
+
+    const query = params.get('service') || params.get('category') || params.get('q') || params.get('query') || ''
+
+    if (rawPath) {
+      if (rawPath === 'bookings') return { page: 'booked', auth: null, query }
+      if (VALID_PAGES.includes(rawPath)) {
+        return { page: rawPath, auth: null, query }
+      }
+    }
+
+    if (window.history.state && window.history.state.page) {
+      const p = window.history.state.page === 'bookings' ? 'booked' : window.history.state.page
+      return {
+        page: p,
+        auth: window.history.state.auth || null,
+        query: window.history.state.query || ''
+      }
+    }
+
+    const saved = sessionStorage.getItem('mux_active_page') || localStorage.getItem('mux_active_page')
+    if (saved && VALID_PAGES.includes(saved.toLowerCase())) {
+      const p = saved.toLowerCase() === 'bookings' ? 'booked' : saved.toLowerCase()
+      const savedQuery = sessionStorage.getItem('mux_search_query') || ''
+      return { page: p, auth: null, query: savedQuery }
+    }
+  } catch (e) {
+    console.warn('Error reading initial page state:', e)
+  }
+
+  return { page: 'home', auth: null, query: '' }
+}
+
+const getUrlForState = (page, auth = null, query = '') => {
+  if (auth === 'login') return '/login'
+  if (auth === 'signup') return '/signup'
+  if (page === 'home') return '/'
+  const base = `/${page.toLowerCase()}`
+  if (query && query.trim()) {
+    return `${base}?service=${encodeURIComponent(query.trim())}`
+  }
+  return base
+}
+
 function App() {
-  const [currentPage, setCurrentPage] = useState('home')
-  const [initialSearchQuery, setInitialSearchQuery] = useState('')
-  const [authPage, setAuthPage] = useState(null) // 'login' or 'signup' or null
+  const initialBoot = getInitialPageState()
+  const [currentPage, setCurrentPage] = useState(initialBoot.page)
+  const [initialSearchQuery, setInitialSearchQuery] = useState(initialBoot.query)
+  const [authPage, setAuthPage] = useState(initialBoot.auth) // 'login' or 'signup' or null
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
-  const [isProviderLoggedIn, setIsProviderLoggedIn] = useState(false)
+  const [isProviderLoggedIn, setIsProviderLoggedIn] = useState(() => initialBoot.page === 'provider-dashboard')
 
   // Verify and sync logged-in user on load & clean legacy MDA storage
   useEffect(() => {
@@ -78,20 +148,28 @@ function App() {
     initAuth()
   }, [])
 
-  // Browser Native Back/Forward Navigation Synchronization
+  // Browser Native Back/Forward Navigation & Refresh State Synchronization
   useEffect(() => {
-    // Initialize base history state
-    window.history.replaceState({ page: 'home', auth: null, query: '' }, '', '')
+    // Keep active URL aligned on mount/refresh
+    const targetUrl = getUrlForState(currentPage, authPage, initialSearchQuery)
+    window.history.replaceState({ page: currentPage, auth: authPage, query: initialSearchQuery }, '', targetUrl)
 
     const handlePopState = (event) => {
-      if (event.state) {
-        setCurrentPage(event.state.page || 'home')
+      if (event.state && event.state.page) {
+        const p = event.state.page === 'bookings' ? 'booked' : event.state.page
+        setCurrentPage(p)
         setAuthPage(event.state.auth || null)
         setInitialSearchQuery(event.state.query || '')
+        try {
+          sessionStorage.setItem('mux_active_page', p)
+        } catch (e) {
+          console.warn(e)
+        }
       } else {
-        setCurrentPage('home')
-        setAuthPage(null)
-        setInitialSearchQuery('')
+        const restored = getInitialPageState()
+        setCurrentPage(restored.page)
+        setAuthPage(restored.auth)
+        setInitialSearchQuery(restored.query)
       }
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
@@ -101,40 +179,60 @@ function App() {
   }, [])
 
   const handlePageChange = (page, query = '', pushToHistory = true) => {
+    const normalized = page === 'bookings' ? 'booked' : (page === 'Booked' ? 'booked' : (page === 'Messages' ? 'messages' : page))
     setInitialSearchQuery(query || '')
-    if (page === 'provider-dashboard') {
+    if (normalized === 'provider-dashboard') {
       setIsProviderLoggedIn(true)
     }
-    setCurrentPage(page)
+    setCurrentPage(normalized)
     setAuthPage(null)
 
+    try {
+      sessionStorage.setItem('mux_active_page', normalized)
+      localStorage.setItem('mux_active_page', normalized)
+      if (query) {
+        sessionStorage.setItem('mux_search_query', query)
+      } else {
+        sessionStorage.removeItem('mux_search_query')
+      }
+    } catch (e) {
+      console.warn(e)
+    }
+
+    const targetUrl = getUrlForState(normalized, null, query)
     if (pushToHistory) {
-      window.history.pushState({ page, auth: null, query }, '', '')
+      window.history.pushState({ page: normalized, auth: null, query }, '', targetUrl)
+    } else {
+      window.history.replaceState({ page: normalized, auth: null, query }, '', targetUrl)
     }
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleLoginClick = (pushToHistory = true) => {
     setAuthPage('login')
+    const targetUrl = getUrlForState(currentPage, 'login')
     if (pushToHistory) {
-      window.history.pushState({ page: currentPage, auth: 'login' }, '', '')
+      window.history.pushState({ page: currentPage, auth: 'login', query: initialSearchQuery }, '', targetUrl)
+    } else {
+      window.history.replaceState({ page: currentPage, auth: 'login', query: initialSearchQuery }, '', targetUrl)
     }
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleSignupClick = (pushToHistory = true) => {
     setAuthPage('signup')
+    const targetUrl = getUrlForState(currentPage, 'signup')
     if (pushToHistory) {
-      window.history.pushState({ page: currentPage, auth: 'signup' }, '', '')
+      window.history.pushState({ page: currentPage, auth: 'signup', query: initialSearchQuery }, '', targetUrl)
+    } else {
+      window.history.replaceState({ page: currentPage, auth: 'signup', query: initialSearchQuery }, '', targetUrl)
     }
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleBackToHome = () => {
     setAuthPage(null)
-    setCurrentPage('home')
-    window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    handlePageChange('home', '', true)
   }
 
   const handleLogin = (user) => {
@@ -157,8 +255,7 @@ function App() {
     if (pendingCategory) {
       handlePageChange('services', pendingCategory)
     } else {
-      setCurrentPage('home')
-      window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
+      handlePageChange('home', '', true)
     }
   }
 
@@ -166,8 +263,7 @@ function App() {
     setIsProviderLoggedIn(true)
     setIsLoggedIn(false)
     setAuthPage(null)
-    setCurrentPage('home')
-    window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
+    handlePageChange('provider-dashboard', '', true)
   }
 
   const handleLogout = () => {
@@ -176,8 +272,7 @@ function App() {
     setIsLoggedIn(false)
     setIsProviderLoggedIn(false)
     setAuthPage(null)
-    setCurrentPage('home')
-    window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
+    handlePageChange('home', '', true)
   }
 
   const shouldShowFooter = !authPage && currentPage !== 'Messages' && currentPage !== 'messages'
