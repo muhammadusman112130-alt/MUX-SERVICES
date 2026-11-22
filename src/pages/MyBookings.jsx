@@ -336,228 +336,394 @@ function MyBookings({ setCurrentPage }) {
         </nav>
 
         {/* ══════════════════════════════════════════════════
-            TAB 1: LIVE TRACKED (ACTIVE SERVICE & MULTAN GPS MAP)
-            (or iss ma sirf wohi service show honi chiay jo liv track ho rahi ha sath maa map bi hona chia)
+            TAB 1: LIVE TRACKED (MODULAR EXECUTIVE DASHBOARD & MULTAN GPS RADAR)
         ══════════════════════════════════════════════════ */}
         {activeTab === 'live' && (
           <div className="booked-live-section">
             {liveBooking ? (
-              <div className="live-tracking-master-card">
+              <div className="live-dashboard-modular-wrap">
                 
-                {/* Status Bar with Live Countdown Timer */}
-                <div className="ltm-top-status-bar">
-                  <div className="ltm-badge-group">
-                    <span className="ltm-live-beacon"></span>
-                    <span className="ltm-live-title">LIVE GPS TRACKING • TECHNICIAN EN ROUTE</span>
-                    <span className="ltm-ref-pill">#{liveBooking.refNumber}</span>
-                  </div>
-
-                  {/* ⏱️ REAL-TIME COUNTDOWN TIMER */}
-                  <div className="ltm-countdown-box">
-                    <span className="cd-label">Estimated Doorstep Arrival</span>
-                    <div className="cd-timer-row">
-                      <span className="cd-icon">⏱️</span>
-                      <strong className="cd-time">{formatTime(countdownSeconds)}</strong>
-                      <span className="cd-mins">Mins Remaining</span>
+                {/* ── CARD 1: LIVE DISPATCH STATUS & DIGITAL COUNTDOWN ── */}
+                <div className="live-mod-card live-status-timer-card">
+                  <div className="lst-left-status">
+                    <div className="lst-radar-beacon">
+                      <span className="lst-beacon-core"></span>
+                      <span className="lst-beacon-wave"></span>
                     </div>
-                  </div>
-                </div>
-
-                {/* ══════════════════════════════════════════════════
-                    INTERACTIVE MULTAN GPS MAP WIDGET
-                ══════════════════════════════════════════════════ */}
-                <div className="multan-gps-map-container">
-                  <svg className="multan-vector-map" viewBox="0 0 800 360" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                      <linearGradient id="mapBg" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#0a1d22" />
-                        <stop offset="100%" stopColor="#08171a" />
-                      </linearGradient>
-                      <linearGradient id="roadGlow" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#10b981" />
-                        <stop offset="100%" stopColor="#17f7f7" />
-                      </linearGradient>
-                      <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="4" result="blur" />
-                        <feMerge>
-                          <feMergeNode in="blur" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-
-                    {/* Dark Canvas */}
-                    <rect width="800" height="360" fill="url(#mapBg)" />
-
-                    {/* Background City Street Grid (Multan Roads Network) */}
-                    <g opacity="0.18" stroke="#8FD3E8" strokeWidth="1.2">
-                      <line x1="0" y1="60" x2="800" y2="60" />
-                      <line x1="0" y1="130" x2="800" y2="130" />
-                      <line x1="0" y1="200" x2="800" y2="200" />
-                      <line x1="0" y1="270" x2="800" y2="270" />
-                      <line x1="0" y1="330" x2="800" y2="330" />
-
-                      <line x1="120" y1="0" x2="120" y2="360" />
-                      <line x1="260" y1="0" x2="260" y2="360" />
-                      <line x1="420" y1="0" x2="420" y2="360" />
-                      <line x1="580" y1="0" x2="580" y2="360" />
-                      <line x1="720" y1="0" x2="720" y2="360" />
-                    </g>
-
-                    {/* Main Multan Arteries (Curved Highways) */}
-                    <path d="M 50 320 Q 240 240 450 210 T 780 120" fill="none" stroke="#13383e" strokeWidth="18" strokeLinecap="round" />
-                    <path d="M 50 320 Q 240 240 450 210 T 780 120" fill="none" stroke="rgba(143, 211, 232, 0.35)" strokeWidth="3" strokeDasharray="6 6" />
-
-                    <path d="M 220 30 Q 320 180 620 320" fill="none" stroke="#13383e" strokeWidth="14" strokeLinecap="round" />
-                    <path d="M 220 30 Q 320 180 620 320" fill="none" stroke="rgba(143, 211, 232, 0.25)" strokeWidth="2" strokeDasharray="5 5" />
-
-                    {/* Multan Locality Sector Labels */}
-                    <g fill="rgba(238, 244, 244, 0.55)" fontSize="11" fontWeight="700" fontFamily="sans-serif">
-                      <text x="70" y="90">GULGASHT COLONY</text>
-                      <text x="280" y="70">MDA CHOWK</text>
-                      <text x="600" y="80">BOSAN ROAD</text>
-                      <text x="140" y="270">KUTCHERY ROAD</text>
-                      <text x="460" y="320">MODEL TOWN</text>
-                      <text x="630" y="290">MULTAN CANTT</text>
-                    </g>
-
-                    {/* LIVE DISPATCH TRAJECTORY PATH (Green to Cyan Glowing Line) */}
-                    <path 
-                      id="dispatchRoute"
-                      d="M 180 160 Q 340 190 480 140 T 640 220" 
-                      fill="none" 
-                      stroke="url(#roadGlow)" 
-                      strokeWidth="5" 
-                      strokeLinecap="round"
-                      filter="url(#neonGlow)"
-                      className="animated-gps-route"
-                    />
-
-                    {/* DESTINATION: Customer Doorstep (Multan Cantt) */}
-                    <g transform="translate(640, 220)">
-                      <circle r="32" fill="none" stroke="#17f7f7" strokeWidth="1.5" className="customer-pulse-ring-1" />
-                      <circle r="20" fill="none" stroke="#17f7f7" strokeWidth="2" className="customer-pulse-ring-2" />
-                      <circle r="10" fill="#17f7f7" filter="url(#neonGlow)" />
-                      <circle r="5" fill="#0E2E33" />
-                      
-                      {/* Destination Label Box */}
-                      <rect x="-85" y="-55" width="170" height="34" rx="8" fill="#0E2E33" stroke="#17f7f7" strokeWidth="1.5" />
-                      <text x="0" y="-38" fill="#17f7f7" fontSize="11" fontWeight="800" textAnchor="middle">📍 YOUR DOORSTEP</text>
-                      <text x="0" y="-25" fill="#EEF4F4" fontSize="9" fontWeight="600" textAnchor="middle">{liveBooking.location || 'Cantt, Multan'}</text>
-                    </g>
-
-                    {/* ORIGIN / TECHNICIAN REAL-TIME POSITION PIN */}
-                    <g transform="translate(240, 172)">
-                      <circle r="22" fill="none" stroke="#10b981" strokeWidth="2" className="tech-pulse-ring" />
-                      <circle r="14" fill="#10b981" filter="url(#neonGlow)" />
-                      <text x="0" y="5" fontSize="12" textAnchor="middle" fill="#ffffff">🛵</text>
-
-                      {/* Specialist Live HUD Pin */}
-                      <rect x="-100" y="-52" width="200" height="32" rx="8" fill="#0E2E33" stroke="#10b981" strokeWidth="1.5" />
-                      <text x="0" y="-36" fill="#10b981" fontSize="10.5" fontWeight="900" textAnchor="middle">
-                        🟢 {liveBooking.provider} (Moving)
-                      </text>
-                      <text x="0" y="-23" fill="#EEF4F4" fontSize="8.5" fontWeight="600" textAnchor="middle">
-                        {liveBooking.speed} • {liveBooking.distance}
-                      </text>
-                    </g>
-                  </svg>
-
-                  {/* Floating Telematics Bar Over Map */}
-                  <div className="map-floating-telemetry">
-                    <div className="mft-col">
-                      <span className="mft-lbl">Current Location</span>
-                      <strong className="mft-val">📍 {liveBooking.currentLocality}</strong>
-                    </div>
-                    <div className="mft-col">
-                      <span className="mft-lbl">GPS Telemetry</span>
-                      <strong className="mft-val highlight">🛵 {liveBooking.speed} • {liveBooking.distance}</strong>
-                    </div>
-                    <div className="mft-col">
-                      <span className="mft-lbl">Delivery Destination</span>
-                      <strong className="mft-val">🏠 {liveBooking.address}</strong>
-                    </div>
-                  </div>
-                </div>
-
-                {/* ══════════════════════════════════════════════════
-                    SPECIALIST PROFILE & LIVE ACTION CONTROLS
-                ══════════════════════════════════════════════════ */}
-                <div className="ltm-specialist-info-bar">
-                  <div className="si-profile">
-                    <div className="si-avatar-ring">
-                      <span className="si-avatar-icon">🛠️</span>
-                      <span className="si-live-dot"></span>
-                    </div>
-                    <div className="si-name-box">
-                      <div className="si-name-row">
-                        <h3>{liveBooking.provider}</h3>
-                        <span className="si-vbadge">✓ Police &amp; CNIC Vetted</span>
+                    <div className="lst-status-text">
+                      <div className="lst-badge-row">
+                        <span className="lst-pill-live">
+                          <span className="lst-live-dot"></span>
+                          LIVE SATELLITE RADAR
+                        </span>
+                        <span className="lst-pill-ref">REF #{liveBooking.refNumber}</span>
+                        <span className="lst-pill-vehicle">🏍️ {liveBooking.bikePlate || 'MN-24-7890 (Honda CD-70)'}</span>
                       </div>
-                      <span className="si-trade">{liveBooking.service}</span>
-                      <span className="si-rate-tag">Agreed Fixed Rate: <strong>{liveBooking.price}</strong></span>
+                      <h2 className="lst-headline">Technician En Route to Your Doorstep</h2>
+                      <p className="lst-subtext">Real-time GPS telematics active across Multan • Direct transit route assigned</p>
                     </div>
                   </div>
 
-                  {/* Actions: Call Specialist, Chat Specialist */}
-                  <div className="si-comms-buttons">
-                    <button 
-                      type="button" 
-                      className="si-call-btn"
-                      onClick={() => setShowCallModal(true)}
-                    >
-                      <span>📞 Call Specialist</span>
-                    </button>
-                    <button 
-                      type="button" 
-                      className="si-chat-btn"
-                      onClick={() => handleChatWithProvider(liveBooking)}
-                    >
-                      <span>💬 Direct Chat</span>
-                    </button>
+                  {/* ⏱️ REAL-TIME COUNTDOWN TIMER (EXPANDED & ILLUMINATED) */}
+                  <div className="lst-right-timer">
+                    <span className="cd-hero-label">Estimated Doorstep Arrival</span>
+                    <div className="cd-hero-timer-display">
+                      <span className="cd-hero-icon">⏱️</span>
+                      <strong className="cd-hero-digits">{formatTime(countdownSeconds)}</strong>
+                      <span className="cd-hero-unit">MINS REMAINING</span>
+                    </div>
+                    <span className="cd-hero-guarantee">⚡ Multan Rapid Doorstep Arrival Protocol</span>
                   </div>
                 </div>
 
-                {/* ══════════════════════════════════════════════════
-                    LIVE CUSTOMER ACTIONS:
-                    1. COMPLETE WORK & REVIEW
-                    2. CANCEL SERVICE (IF TAKING TOO LONG)
-                    3. FILE COMPLAINT
-                ══════════════════════════════════════════════════ */}
-                <div className="ltm-customer-actions-footer">
-                  <div className="caf-left">
-                    <span className="caf-escrow-hint">
-                      🔒 <strong>Escrow Protected:</strong> Funds are safeguarded. Only release payment after inspecting completed work.
-                    </span>
+                {/* ── CARD 2: FULL-WIDTH EDGE-TO-EDGE MULTAN GPS MAP RADAR ── */}
+                <div className="live-mod-card live-multan-map-card">
+                  <div className="lmc-header-bar">
+                    <div className="lmc-left-title">
+                      <span className="lmc-radar-sweep-icon"></span>
+                      <strong>MULTAN VECTOR SATELLITE RADAR — 100% LIVE COVERAGE</strong>
+                    </div>
+                    <div className="lmc-traffic-pill">
+                      <span className="lmc-traffic-dot"></span>
+                      <span>Corridor: Bosan Road → MDA → Cantt (Normal Flow)</span>
+                    </div>
                   </div>
 
-                  <div className="caf-right-buttons">
-                    {/* COMPLETE WORK & GIVE REVIEW */}
+                  <div className="multan-gps-map-container">
+                    {/* Animated Radar Scanning Line */}
+                    <div className="map-radar-sweep-line"></div>
+
+                    <svg className="multan-vector-map" viewBox="0 0 1200 420" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="mapBgFull" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#08181b" />
+                          <stop offset="50%" stopColor="#0a2126" />
+                          <stop offset="100%" stopColor="#061214" />
+                        </linearGradient>
+
+                        <linearGradient id="roadGlowLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#10b981" />
+                          <stop offset="50%" stopColor="#17f7f7" />
+                          <stop offset="100%" stopColor="#8FD3E8" />
+                        </linearGradient>
+
+                        <linearGradient id="riverStream" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="rgba(23, 247, 247, 0.04)" />
+                          <stop offset="100%" stopColor="rgba(143, 211, 232, 0.12)" />
+                        </linearGradient>
+
+                        <filter id="neonPulseGlow" x="-30%" y="-30%" width="160%" height="160%">
+                          <feGaussianBlur stdDeviation="5" result="blur" />
+                          <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                          </feMerge>
+                        </filter>
+                      </defs>
+
+                      {/* Full-width 1200x420 Dark Tech Canvas */}
+                      <rect width="1200" height="420" fill="url(#mapBgFull)" />
+
+                      {/* City Canal / Water Accent */}
+                      <path 
+                        d="M 0 350 C 300 330, 600 390, 1200 340 L 1200 420 L 0 420 Z" 
+                        fill="url(#riverStream)" 
+                      />
+
+                      {/* Background City Street Grid (Multan Coordinate Network spanning 0 to 1200) */}
+                      <g opacity="0.14" stroke="#8FD3E8" strokeWidth="1">
+                        <line x1="0" y1="50" x2="1200" y2="50" />
+                        <line x1="0" y1="110" x2="1200" y2="110" />
+                        <line x1="0" y1="170" x2="1200" y2="170" />
+                        <line x1="0" y1="230" x2="1200" y2="230" />
+                        <line x1="0" y1="290" x2="1200" y2="290" />
+                        <line x1="0" y1="350" x2="1200" y2="350" />
+
+                        <line x1="100" y1="0" x2="100" y2="420" />
+                        <line x1="220" y1="0" x2="220" y2="420" />
+                        <line x1="340" y1="0" x2="340" y2="420" />
+                        <line x1="460" y1="0" x2="460" y2="420" />
+                        <line x1="580" y1="0" x2="580" y2="420" />
+                        <line x1="700" y1="0" x2="700" y2="420" />
+                        <line x1="820" y1="0" x2="820" y2="420" />
+                        <line x1="940" y1="0" x2="940" y2="420" />
+                        <line x1="1060" y1="0" x2="1060" y2="420" />
+                        <line x1="1180" y1="0" x2="1180" y2="420" />
+                      </g>
+
+                      {/* Major Multan Highways & Thoroughfares (Spanning edge to edge) */}
+                      {/* Northern Bypass */}
+                      <path d="M 0 65 Q 400 80, 800 60 T 1200 70" fill="none" stroke="#12353c" strokeWidth="16" strokeLinecap="round" />
+                      <path d="M 0 65 Q 400 80, 800 60 T 1200 70" fill="none" stroke="rgba(143, 211, 232, 0.3)" strokeWidth="2.5" strokeDasharray="8 6" />
+
+                      {/* Bosan Road into City Center */}
+                      <path d="M 180 0 Q 320 180 520 230 T 900 290" fill="none" stroke="#12353c" strokeWidth="18" strokeLinecap="round" />
+                      <path d="M 180 0 Q 320 180 520 230 T 900 290" fill="none" stroke="rgba(143, 211, 232, 0.3)" strokeWidth="3" strokeDasharray="8 6" />
+
+                      {/* Khanewal Road to Cantt Mall Road */}
+                      <path d="M 0 280 Q 350 240 700 200 T 1200 180" fill="none" stroke="#12353c" strokeWidth="16" strokeLinecap="round" />
+                      <path d="M 0 280 Q 350 240 700 200 T 1200 180" fill="none" stroke="rgba(143, 211, 232, 0.25)" strokeWidth="2.5" strokeDasharray="7 5" />
+
+                      {/* Multan City Sector & Landmark Labels */}
+                      <g fill="rgba(238, 244, 244, 0.5)" fontSize="11" fontWeight="800" fontFamily="sans-serif">
+                        <text x="70" y="45">NORTHERN BYPASS</text>
+                        <text x="190" y="100">GULGASHT COLONY</text>
+                        <text x="390" y="85">BOSAN ROAD</text>
+                        <text x="250" y="320">CHOWK KUMHARAN</text>
+                        <text x="490" y="165">MDA CHOWK</text>
+                        <text x="540" y="270">NAWAN SHEHR</text>
+                        <text x="710" y="330">KUTCHERY ROAD</text>
+                        <text x="820" y="130">OFFICERS COLONY</text>
+                        <text x="970" y="315">MULTAN CANTT</text>
+                        <text x="1080" y="160">SHERSHAH ROAD</text>
+                      </g>
+
+                      {/* ═══ REAL-TIME DISPATCH TRAJECTORY PATH (Glowing Neon) ═══ */}
+                      {/* Base Glow Line */}
+                      <path 
+                        d="M 320 215 C 450 230, 580 160, 720 180 S 860 215, 960 205" 
+                        fill="none" 
+                        stroke="rgba(23, 247, 247, 0.25)" 
+                        strokeWidth="10" 
+                        strokeLinecap="round"
+                      />
+                      {/* Active Flowing Neon Dash Line */}
+                      <path 
+                        id="multanDispatchRoute"
+                        d="M 320 215 C 450 230, 580 160, 720 180 S 860 215, 960 205" 
+                        fill="none" 
+                        stroke="url(#roadGlowLine)" 
+                        strokeWidth="5" 
+                        strokeLinecap="round"
+                        filter="url(#neonPulseGlow)"
+                        className="animated-gps-route-flow"
+                      />
+
+                      {/* ═══ DESTINATION: CUSTOMER DOORSTEP PIN (at x=960, y=205) ═══ */}
+                      <g transform="translate(960, 205)">
+                        {/* Radar wave ripples */}
+                        <circle r="40" fill="none" stroke="#17f7f7" strokeWidth="1" className="radar-wave-cust-1" />
+                        <circle r="25" fill="none" stroke="#17f7f7" strokeWidth="1.5" className="radar-wave-cust-2" />
+                        <circle r="12" fill="#17f7f7" filter="url(#neonPulseGlow)" />
+                        <circle r="5" fill="#0E2E33" />
+                        
+                        {/* Destination HUD Marker Box */}
+                        <g className="hud-pin-float">
+                          <rect x="-95" y="-58" width="190" height="38" rx="10" fill="#0E2E33" stroke="#17f7f7" strokeWidth="1.8" filter="url(#neonPulseGlow)" />
+                          <text x="0" y="-39" fill="#17f7f7" fontSize="11" fontWeight="900" textAnchor="middle">📍 YOUR DOORSTEP</text>
+                          <text x="0" y="-24" fill="#EEF4F4" fontSize="9.5" fontWeight="700" textAnchor="middle">{liveBooking.location || 'Cantt, Multan'}</text>
+                        </g>
+                      </g>
+
+                      {/* ═══ ORIGIN: TECHNICIAN REAL-TIME POSITION PIN (at x=320, y=215) ═══ */}
+                      <g transform="translate(320, 215)">
+                        {/* Moving Radar Waves */}
+                        <circle r="30" fill="none" stroke="#10b981" strokeWidth="1.5" className="radar-wave-tech" />
+                        <circle r="16" fill="#10b981" filter="url(#neonPulseGlow)" />
+                        
+                        {/* Floating Motorcycle Icon with vibration */}
+                        <g className="tech-bike-vibration">
+                          <text x="0" y="6" fontSize="14" textAnchor="middle" fill="#ffffff">🛵</text>
+                        </g>
+
+                        {/* Specialist Live HUD Pin */}
+                        <g className="hud-pin-float">
+                          <rect x="-110" y="-58" width="220" height="38" rx="10" fill="#0E2E33" stroke="#10b981" strokeWidth="1.8" filter="url(#neonPulseGlow)" />
+                          <text x="0" y="-39" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
+                            🟢 {liveBooking.provider} (En Route)
+                          </text>
+                          <text x="0" y="-24" fill="#EEF4F4" fontSize="9.5" fontWeight="700" textAnchor="middle">
+                            {liveBooking.speed} • {liveBooking.distance} remaining
+                          </text>
+                        </g>
+                      </g>
+                    </svg>
+
+                    {/* Floating Telematics HUD Glassmorphic Bar */}
+                    <div className="map-floating-telemetry-bar">
+                      <div className="mft-item">
+                        <span className="mft-icon">📍</span>
+                        <div className="mft-text">
+                          <span className="mft-label">Current Technician Locality</span>
+                          <strong className="mft-val">{liveBooking.currentLocality}</strong>
+                        </div>
+                      </div>
+                      <div className="mft-separator"></div>
+                      <div className="mft-item">
+                        <span className="mft-icon">🛵</span>
+                        <div className="mft-text">
+                          <span className="mft-label">Live Telematics Speed</span>
+                          <strong className="mft-val highlight-cyan">{liveBooking.speed} • {liveBooking.distance}</strong>
+                        </div>
+                      </div>
+                      <div className="mft-separator"></div>
+                      <div className="mft-item">
+                        <span className="mft-icon">🏠</span>
+                        <div className="mft-text">
+                          <span className="mft-label">Registered Delivery Address</span>
+                          <strong className="mft-val">{liveBooking.address}</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── CARD 3: 2-COLUMN SPLIT GRID (SPECIALIST PROFILE & DISPATCH STEPPER) ── */}
+                <div className="live-split-grid-row">
+                  {/* Left Column: Assigned Specialist Profile Card */}
+                  <div className="live-mod-card specialist-executive-card">
+                    <div className="sec-header">
+                      <div className="sec-title-tag">
+                        <span>🛠️</span>
+                        <strong>ASSIGNED MULTAN SPECIALIST</strong>
+                      </div>
+                      <span className="sec-vetted-badge">✓ Police &amp; CNIC Vetted</span>
+                    </div>
+
+                    <div className="sec-profile-body">
+                      <div className="sec-avatar-wrapper">
+                        <div className="sec-avatar-circle">
+                          <span>👨‍🔧</span>
+                          <span className="sec-avatar-halo"></span>
+                          <span className="sec-live-pulse-dot"></span>
+                        </div>
+                      </div>
+
+                      <div className="sec-info">
+                        <h3 className="sec-name">{liveBooking.provider}</h3>
+                        <span className="sec-trade">{liveBooking.service}</span>
+                        <div className="sec-price-badge">
+                          <span className="spb-lbl">Agreed Fixed Rate:</span>
+                          <strong className="spb-val">{liveBooking.price}</strong>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Specialist Comms Actions */}
+                    <div className="sec-comms-actions">
+                      <button 
+                        type="button" 
+                        className="sec-btn-call"
+                        onClick={() => setShowCallModal(true)}
+                      >
+                        <span className="btn-icon">📞</span>
+                        <span>Call Specialist ({liveBooking.technicianPhone || '+92 301 7654321'})</span>
+                      </button>
+
+                      <button 
+                        type="button" 
+                        className="sec-btn-chat"
+                        onClick={() => handleChatWithProvider(liveBooking)}
+                      >
+                        <span className="btn-icon">💬</span>
+                        <span>Open Direct Chat</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Dispatch Progress Stepper & Escrow Vault Card */}
+                  <div className="live-mod-card dispatch-stepper-card">
+                    <div className="dsc-header">
+                      <div className="dsc-title-tag">
+                        <span>⚡</span>
+                        <strong>SERVICE PROGRESS STEPPER</strong>
+                      </div>
+                      <span className="dsc-stage-tag">Stage 2 of 4 Active</span>
+                    </div>
+
+                    <div className="dsc-steps-list">
+                      <div className="dsc-step step-done">
+                        <div className="step-marker">✓</div>
+                        <div className="step-details">
+                          <strong>Rate Agreed &amp; Job Scheduled</strong>
+                          <span>Locked price at {liveBooking.price}</span>
+                        </div>
+                      </div>
+
+                      <div className="dsc-step step-active">
+                        <div className="step-marker pulse-active">🛵</div>
+                        <div className="step-details">
+                          <strong>Technician Dispatched &amp; En Route</strong>
+                          <span className="step-highlight">Moving through Multan ({liveBooking.speed})</span>
+                        </div>
+                      </div>
+
+                      <div className="dsc-step step-pending">
+                        <div className="step-marker">📍</div>
+                        <div className="step-details">
+                          <strong>Doorstep Arrival &amp; Diagnostic</strong>
+                          <span>Arrival estimated in approx {formatTime(countdownSeconds)} mins</span>
+                        </div>
+                      </div>
+
+                      <div className="dsc-step step-pending">
+                        <div className="step-marker">⭐</div>
+                        <div className="step-details">
+                          <strong>Work Inspection &amp; Customer Review</strong>
+                          <span>Escrow funds released only upon your approval</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="dsc-escrow-vault">
+                      <span className="dev-icon">🔒</span>
+                      <p>
+                        <strong>100% Escrow Safeguard:</strong> Your PKR funds remain locked in escrow until you personally inspect the completed job.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── CARD 4: DEDICATED CUSTOMER ACTION HUB CARD ── */}
+                <div className="live-mod-card customer-actions-hub-card">
+                  <div className="cah-left-info">
+                    <span className="cah-beacon"></span>
+                    <div>
+                      <h4 className="cah-title">Customer Action Center</h4>
+                      <p className="cah-desc">
+                        Mark job completed to submit your review, or cancel immediately if technician takes too long.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="cah-buttons-row">
+                    {/* COMPLETE WORK & GIVE REVIEW (PRIMARY CTA) */}
                     <button 
                       type="button" 
-                      className="caf-complete-btn"
+                      className="cah-btn-complete"
                       onClick={() => handleOpenReviewModal(liveBooking)}
                     >
-                      <span className="btn-icon">✓</span>
-                      <span>Mark Work Completed &amp; Give Review</span>
+                      <span className="cah-icon">✓</span>
+                      <div className="cah-btn-labels">
+                        <strong className="cah-main-txt">Mark Work Completed</strong>
+                        <small className="cah-sub-txt">&amp; Rate Specialist</small>
+                      </div>
                     </button>
 
-                    {/* CANCEL SERVICE BUTTON (Customer can cancel if delayed) */}
+                    {/* CANCEL SERVICE BUTTON (CUSTOMER CAN CANCEL IF DELAYED) */}
                     <button 
                       type="button" 
-                      className="caf-cancel-btn"
+                      className="cah-btn-cancel"
                       onClick={() => setShowCancelModal(true)}
                     >
-                      <span>✕ Cancel Service</span>
+                      <span className="cah-icon">✕</span>
+                      <div className="cah-btn-labels">
+                        <strong className="cah-main-txt">Cancel Service</strong>
+                        <small className="cah-sub-txt">Instant escrow refund</small>
+                      </div>
                     </button>
 
-                    {/* FILE COMPLAINT */}
+                    {/* LODGE COMPLAINT / REPORT ISSUE */}
                     <button 
                       type="button" 
-                      className="caf-complaint-btn"
+                      className="cah-btn-complaint"
                       onClick={() => setShowComplaintModal(true)}
                     >
-                      <span>⚠️ Report Issue</span>
+                      <span className="cah-icon">⚠️</span>
+                      <div className="cah-btn-labels">
+                        <strong className="cah-main-txt">Report Issue</strong>
+                        <small className="cah-sub-txt">File official dispute</small>
+                      </div>
                     </button>
                   </div>
                 </div>
