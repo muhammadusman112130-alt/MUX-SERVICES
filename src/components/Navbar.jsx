@@ -78,6 +78,9 @@ function Navbar({
               style={{
                 color: '#17f7f7',
                 fontWeight: 900,
+                fontSize: '1.52rem',
+                letterSpacing: '1.2px',
+                textTransform: 'uppercase',
                 textShadow: '0 0 14px rgba(23, 247, 247, 0.9), 0 0 30px rgba(23, 247, 247, 0.6)'
               }}
             >
