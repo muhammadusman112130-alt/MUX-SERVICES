@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import './Navbar.css'
-import webLogo from '../Public/web logo.png'
+import webLogo from '../Public/web logo.png?v=20261122'
 
 function Navbar({ 
   currentPage = 'home',
@@ -74,8 +74,26 @@ function Navbar({
           >
             <img src={webLogo} alt="MUX SERVICES Logo" className="logo-image" />
             <span className="logo-text">
-              <span className="logo-text-mux">MUX</span>
-              <span className="logo-text-services">SERVICES</span>
+              <span 
+                className="logo-text-mux"
+                style={{
+                  color: '#EEF4F4',
+                  fontWeight: 900,
+                  textShadow: '0 0 12px rgba(238, 244, 244, 0.75), 0 0 25px rgba(23, 247, 247, 0.35)'
+                }}
+              >
+                MUX
+              </span>
+              <span 
+                className="logo-text-services"
+                style={{
+                  color: '#17f7f7',
+                  fontWeight: 900,
+                  textShadow: '0 0 14px rgba(23, 247, 247, 0.9), 0 0 30px rgba(23, 247, 247, 0.6)'
+                }}
+              >
+                SERVICES
+              </span>
             </span>
           </button>
         </div>

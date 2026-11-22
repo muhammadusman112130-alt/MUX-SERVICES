@@ -1,4 +1,6 @@
 import './About.css'
+import uiuxDesignImg from '../Public/uiux-design.jpg'
+import softwareDevImg from '../Public/software-dev.png'
 
 function About() {
   const coreValues = [
@@ -31,12 +33,14 @@ function About() {
             By creating a trusted service marketplace, we bridge the gap between talent and opportunity, 
             ensuring every home and business gets the expert care it deserves.
           </p>
-          <button className="hero-button">Join Our Mission</button>
+          <button className="hero-button">Join Our Team</button>
         </div>
         <div className="hero-image">
-          <div className="image-placeholder">
-            <span className="placeholder-icon">👥</span>
-            <p className="placeholder-text">Team Collaboration</p>
+          <div className="about-image-card team-collab-box">
+            <img src={uiuxDesignImg} alt="Team Collaboration" className="about-feature-img" />
+            <div className="about-img-overlay">
+              <span className="about-img-badge">👥 Team Collaboration</span>
+            </div>
           </div>
         </div>
       </section>
@@ -61,10 +65,10 @@ function About() {
                 <p className="placeholder-text">Expert Repairs</p>
               </div>
             </div>
-            <div className="image-card">
-              <div className="image-placeholder small">
-                <span className="placeholder-icon">🤝</span>
-                <p className="placeholder-text">Client Meeting</p>
+            <div className="image-card join-team-box">
+              <img src={softwareDevImg} alt="Join Our Team" className="about-feature-img" />
+              <div className="about-img-overlay">
+                <span className="about-img-badge">💻 Join Our Team</span>
               </div>
             </div>
           </div>

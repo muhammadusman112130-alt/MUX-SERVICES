@@ -34,7 +34,7 @@ function Footer({ setCurrentPage }) {
               </button>
             </div>
           </div>
-          
+
           <div className="footer-section">
             <h4 className="footer-title">Quick Links</h4>
             <ul className="footer-links">
@@ -45,7 +45,7 @@ function Footer({ setCurrentPage }) {
               <li><button type="button" onClick={() => handleNav('contact')} className="footer-nav-btn">Contact</button></li>
             </ul>
           </div>
-          
+
           <div className="footer-section">
             <h4 className="footer-title">Home Services</h4>
             <ul className="footer-links">
@@ -56,7 +56,7 @@ function Footer({ setCurrentPage }) {
               <li><button type="button" onClick={() => handleNav('services')} className="footer-nav-btn">Deep Home Cleaning</button></li>
             </ul>
           </div>
-          
+
           <div className="footer-section">
             <h4 className="footer-title">Contact Us</h4>
             <ul className="footer-contact">
@@ -79,7 +79,7 @@ function Footer({ setCurrentPage }) {
             </ul>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
           <p>&copy; 2024 MUX SERVICES. All rights reserved.</p>
           <div className="footer-bottom-links">

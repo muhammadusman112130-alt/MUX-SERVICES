@@ -14,15 +14,15 @@ import welderImage from '../Public/welder.png'
 import laundryImage from '../Public/laundary.png'
 import electricianImage from '../Public/electricon.png'
 import applianceImage from '../Public/appliance.png'
-import electricianPng from '../Public/electrician.png'
-import electricianJpg from '../Public/electrician.jpg'
-import acPng from '../Public/ac.png'
-import paintingPng from '../Public/painting.png'
-import cleanerPng from '../Public/home cleaning.png'
-import aluminiumPng from '../Public/aluminium.png'
-import gardeningPng from '../Public/gardeninig.png'
-import laundryPng from '../Public/laundry.png'
-import applianceJpg from '../Public/appliance.jpg'
+const electricianPng = electricianImage
+const electricianJpg = electricianImage
+const acPng = acImage
+const paintingPng = paintingImage
+const cleanerPng = homeCleaningImage
+const aluminiumPng = aluminiumImage
+const gardeningPng = gardeningImage
+const laundryPng = laundryImage
+const applianceJpg = applianceImage
 
 const homeIcon = webLogo
 
