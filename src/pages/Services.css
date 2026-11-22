@@ -1340,8 +1340,8 @@
 .gradient-header {
   position: relative;
   width: 100%;
-  min-height: 360px;
-  height: clamp(360px, 38vw, 460px);
+  min-height: 380px;
+  height: clamp(380px, 40vw, 480px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1352,9 +1352,10 @@
   text-align: center;
   color: #EEF4F4;
   box-sizing: border-box;
-  border-bottom: 2px solid rgba(23, 247, 247, 0.25);
+  border-bottom: 2px solid rgba(23, 247, 247, 0.3);
 }
 
+/* Crystal-Clear Category Background Image (Fully Visible & Sharp) */
 .header-background-image {
   position: absolute;
   top: 0;
@@ -1363,22 +1364,22 @@
   height: 100%;
   object-fit: cover;
   object-position: center center !important;
-  opacity: 0.72;
+  opacity: 1 !important;
+  filter: brightness(0.96) contrast(1.08) saturate(1.1) !important;
   z-index: 1;
-  filter: brightness(0.72) contrast(1.15) saturate(1.1);
   transform: scale(1.02);
-  transition: transform 6s ease-out;
 }
 
+/* Soft Balanced Overlay so Image is Clearly Visible */
 .header-overlay-ambient {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(14, 46, 51, 0.52) 0%,
-    rgba(14, 46, 51, 0.32) 40%,
-    rgba(10, 32, 36, 0.92) 100%
-  );
+    rgba(14, 46, 51, 0.32) 0%,
+    rgba(14, 46, 51, 0.12) 45%,
+    rgba(10, 32, 36, 0.58) 100%
+  ) !important;
   z-index: 2;
   pointer-events: none;
 }
@@ -1411,8 +1412,10 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(23, 247, 247, 0.12);
-  border: 1.5px solid rgba(23, 247, 247, 0.55);
+  background: rgba(14, 46, 51, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(23, 247, 247, 0.6);
   color: #17f7f7;
   padding: 0.45rem 1.3rem;
   border-radius: 50px;
@@ -1420,7 +1423,7 @@
   font-weight: 800;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  box-shadow: 0 0 20px rgba(23, 247, 247, 0.25);
+  box-shadow: 0 0 20px rgba(23, 247, 247, 0.3);
 }
 
 .detail-badge-dot {
@@ -1431,36 +1434,44 @@
   box-shadow: 0 0 10px #17f7f7;
 }
 
-/* Glowing Mint Blue Title */
+/* Category Title Matches Main Services Hero Section */
 .gradient-header .header-title {
   font-size: clamp(2.2rem, 3.8vw, 3.2rem);
-  color: #8FD3E8 !important;
   margin: 0;
   font-weight: 900;
   line-height: 1.22;
   letter-spacing: -0.01em;
-  text-shadow: 0 0 24px rgba(143, 211, 232, 0.65), 0 4px 18px rgba(0, 0, 0, 0.95);
 }
 
 .gradient-header .hero-title-mint-shine {
   display: inline-block;
   font-weight: 900;
-  color: #8FD3E8 !important;
-  -webkit-text-fill-color: #8FD3E8 !important;
-  background: none !important;
-  animation: none !important;
-  text-shadow: 0 0 28px rgba(143, 211, 232, 0.75), 0 0 55px rgba(23, 247, 247, 0.45) !important;
+  background: linear-gradient(
+    90deg,
+    #8FD3E8 0%,
+    #17f7f7 25%,
+    #5eead4 50%,
+    #17f7f7 75%,
+    #8FD3E8 100%
+  ) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: mintColorFlow 4s linear infinite !important;
+  filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.85)) !important;
 }
 
 .header-subtitle {
   font-size: clamp(1rem, 1.4vw, 1.2rem);
-  color: #EEF4F4;
+  color: #f1f5f9 !important;
   max-width: 760px;
   margin: 0 auto;
   line-height: 1.6;
   text-align: center;
   opacity: 0.95;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
 }
 
 /* Detail Trust Pills Row */
