@@ -1,10 +1,6 @@
 @import './Login.css';
 
-.signup-black {
-  color: #000000 !important;
-}
-
-.auth-testimonial.signup-black {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Signup specific enhancements if needed */
+.signup-page .auth-glass-card {
+  max-width: 470px;
 }

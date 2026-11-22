@@ -204,56 +204,6 @@
   padding: 12px 6px;
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   ANIMATED UNIFORM ICE BLUE BACKLIGHT GLOW BEHIND CARD (NO INNER LIGHT)
-══════════════════════════════════════════════════════════════════════════ */
-.card-backlight-glow {
-  position: absolute;
-  inset: 12px 8px;
-  border-radius: 32px;
-  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.75) 0%, rgba(143, 211, 232, 0.4) 45%, rgba(14, 46, 51, 0.2) 75%, transparent 100%) !important;
-  filter: blur(28px);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1;
-  transform: translateY(0) scale(0.96);
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.slider-slide:hover .card-backlight-glow {
-  opacity: 1;
-  transform: translateY(-8px) scale(1.04);
-  animation: cardBacklightPulse 2.8s ease-in-out infinite alternate;
-}
-
-/* Strict uniform Ice Blue theme backlight for ALL cards - no other colors */
-.slider-slide:hover .card-backlight-glow.glow-theme-home,
-.slider-slide:hover .card-backlight-glow.glow-theme-tech,
-.slider-slide:hover .card-backlight-glow.glow-theme-events,
-.slider-slide:hover .card-backlight-glow.glow-theme-cosmetics {
-  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.8) 0%, rgba(143, 211, 232, 0.45) 45%, rgba(14, 46, 51, 0.2) 75%, transparent 100%) !important;
-}
-
-@keyframes cardBacklightPulse {
-  0% {
-    filter: blur(24px);
-    opacity: 0.75;
-    transform: translateY(-8px) scale(1.03);
-  }
-
-  50% {
-    filter: blur(38px);
-    opacity: 1;
-    transform: translateY(-12px) scale(1.07);
-  }
-
-  100% {
-    filter: blur(24px);
-    opacity: 0.75;
-    transform: translateY(-8px) scale(1.03);
-  }
-}
-
 /* ── Navigation Arrows ── */
 .slider-control-btn {
   position: absolute;
@@ -290,9 +240,6 @@
   right: 0;
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   TOP SERVICE CARD STYLING & THEMES
-══════════════════════════════════════════════════════════════════════════ */
 .top-service-card {
   position: relative;
   z-index: 2;
@@ -306,16 +253,20 @@
   outline: none;
 }
 
+/* Floor & border clear backlight glow on hover (NO second card behind) */
 .top-service-card:hover {
   transform: translateY(-8px);
   border-color: #8FD3E8 !important;
   box-shadow:
-    0 22px 55px rgba(0, 0, 0, 0.45),
-    0 0 32px rgba(143, 211, 232, 0.35) !important;
+    0 18px 45px rgba(0, 0, 0, 0.55),
+    0 28px 65px rgba(14, 46, 51, 0.5),
+    0 0 25px rgba(143, 211, 232, 0.45),
+    0 0 60px rgba(143, 211, 232, 0.25) !important;
 }
 
 /* Hide internal ambient glow: NO light inside the center of the card */
-.card-ambient-glow {
+.card-ambient-glow,
+.card-backlight-glow {
   display: none !important;
 }
 

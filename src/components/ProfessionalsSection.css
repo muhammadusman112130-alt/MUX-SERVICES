@@ -443,3 +443,11 @@
     --pro-gap: 14px;
   }
 }
+
+
+@media (max-width: 480px) {
+  .professionals-section {
+    --pro-card-w: 260px;
+    --pro-gap: 14px;
+  }
+}
