@@ -165,16 +165,46 @@
 
 .hero-content > h1.hero-title {
   font-size: clamp(2rem, 3.5vw, 2.85rem);
-  color: #ffffff !important;
   margin-bottom: 0.85rem;
   line-height: 1.25;
-  text-shadow: none !important;
-  -webkit-text-fill-color: #ffffff !important;
-  background: none !important;
-  background-image: none !important;
-  background-clip: unset !important;
-  -webkit-background-clip: unset !important;
-  fill: #ffffff !important;
+}
+
+/* ── Mint Blue Continuous Liquid Shimmer Animation ── */
+.hero-title-mint-shine {
+  display: inline-block;
+  letter-spacing: 2px;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(
+    90deg,
+    #8FD3E8 0%,
+    #17f7f7 25%,
+    #ffffff 50%,
+    #17f7f7 75%,
+    #8FD3E8 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: mintShineFlow 3.5s linear infinite;
+  filter: drop-shadow(0 0 14px rgba(23, 247, 247, 0.8)) drop-shadow(0 0 28px rgba(143, 211, 232, 0.5));
+}
+
+@keyframes mintShineFlow {
+  0% {
+    background-position: 0% center;
+    filter: drop-shadow(0 0 12px rgba(143, 211, 232, 0.65)) drop-shadow(0 0 22px rgba(23, 247, 247, 0.45));
+  }
+  50% {
+    background-position: 100% center;
+    filter: drop-shadow(0 0 20px rgba(23, 247, 247, 0.95)) drop-shadow(0 0 38px rgba(143, 211, 232, 0.7));
+  }
+  100% {
+    background-position: 200% center;
+    filter: drop-shadow(0 0 12px rgba(143, 211, 232, 0.65)) drop-shadow(0 0 22px rgba(23, 247, 247, 0.45));
+  }
 }
 
 .hero-content > p.hero-subtitle {

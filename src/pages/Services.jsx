@@ -2255,7 +2255,9 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
           <div className="gradient-header">
             <img src={getHeaderImage(selectedService)} alt={`${selectedService} Background`} className="header-background-image" />
             <div className="header-content">
-              <h1 className="header-title">{getServiceTitle(selectedService)}</h1>
+              <h1 className="header-title">
+                <span className="hero-title-mint-shine">{getServiceTitle(selectedService)}</span>
+              </h1>
               <p className="header-subtitle">{getServiceSubtitle(selectedService)}</p>
             </div>
           </div>
@@ -2458,7 +2460,9 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
           <div className="services-hero">
             <img src={servicesHeroBanner} alt="Home Services Header" className="services-hero-bg" />
             <div className="services-hero-content">
-              <h1 className="hero-title">Find Expert Home Services</h1>
+              <h1 className="hero-title">
+                <span className="hero-title-mint-shine">Find Expert Home Services</span>
+              </h1>
               <p className="hero-subtitle">Multan's premier verified platform for home repairs, maintenance, plumbing, electrical &amp; HVAC solutions.</p>
               <div className="hero-search-row">
                 <input 

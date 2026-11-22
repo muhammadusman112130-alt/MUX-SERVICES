@@ -120,7 +120,7 @@ function HeroSection({ setCurrentPage }) {
       
       <div className="hero-content">
         <h1 className="hero-title">
-          <span style={{ color: '#ffffff', display: 'inline-block', letterSpacing: '2px', fontWeight: 900, textTransform: 'uppercase' }}>
+          <span className="hero-title-mint-shine">
             FIND TRUSTED HOME SERVICES
           </span>
         </h1>
