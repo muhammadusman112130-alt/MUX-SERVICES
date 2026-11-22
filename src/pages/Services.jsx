@@ -152,14 +152,9 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
     }
     try {
       const params = new URLSearchParams(window.location.search)
-      const serviceParam = params.get('service') || params.get('category') || params.get('q')
+      const serviceParam = params.get('service') || params.get('category')
       if (serviceParam) {
         const match = normalizeServiceName(serviceParam)
-        if (match) return match
-      }
-      const saved = sessionStorage.getItem('mux_selected_service')
-      if (saved) {
-        const match = normalizeServiceName(saved)
         if (match) return match
       }
     } catch (e) {
@@ -168,23 +163,18 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
     return null
   })
 
-  // Synchronize active selected service with sessionStorage and URL
+  // Synchronize active selected service with URL
   useEffect(() => {
     try {
+      const url = new URL(window.location.href)
+      url.pathname = '/services'
       if (selectedService) {
-        sessionStorage.setItem('mux_selected_service', selectedService)
-        const url = new URL(window.location.href)
-        url.pathname = '/services'
         url.searchParams.set('service', selectedService)
-        window.history.replaceState({ page: 'services', auth: null, query: selectedService }, '', url.pathname + url.search)
       } else {
-        sessionStorage.removeItem('mux_selected_service')
-        const url = new URL(window.location.href)
-        if (url.searchParams.has('service')) {
-          url.searchParams.delete('service')
-          window.history.replaceState({ page: 'services', auth: null, query: '' }, '', url.pathname + (url.search ? url.search : ''))
-        }
+        url.searchParams.delete('service')
+        url.searchParams.delete('category')
       }
+      window.history.replaceState({ page: 'services', auth: null, query: selectedService || '' }, '', url.pathname + (url.search ? url.search : ''))
     } catch (e) {
       console.warn(e)
     }
@@ -339,6 +329,10 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       } else {
         setHeroSearchQuery(initialSearchQuery.trim())
       }
+    } else if (initialSearchQuery === '') {
+      setSelectedService(null)
+      setSelectedProvider(null)
+      setIsViewingProfile(false)
     }
   }, [initialSearchQuery, isLoggedIn, onLoginClick, setCurrentPage])
 

@@ -180,6 +180,8 @@ function App() {
 
   const handlePageChange = (page, query = '', pushToHistory = true) => {
     const normalized = page === 'bookings' ? 'booked' : (page === 'Booked' ? 'booked' : (page === 'Messages' ? 'messages' : page))
+    const isSamePage = normalized === currentPage && query === initialSearchQuery
+
     setInitialSearchQuery(query || '')
     if (normalized === 'provider-dashboard') {
       setIsProviderLoggedIn(true)
@@ -194,13 +196,14 @@ function App() {
         sessionStorage.setItem('mux_search_query', query)
       } else {
         sessionStorage.removeItem('mux_search_query')
+        sessionStorage.removeItem('mux_selected_service')
       }
     } catch (e) {
       console.warn(e)
     }
 
     const targetUrl = getUrlForState(normalized, null, query)
-    if (pushToHistory) {
+    if (pushToHistory && !isSamePage) {
       window.history.pushState({ page: normalized, auth: null, query }, '', targetUrl)
     } else {
       window.history.replaceState({ page: normalized, auth: null, query }, '', targetUrl)
