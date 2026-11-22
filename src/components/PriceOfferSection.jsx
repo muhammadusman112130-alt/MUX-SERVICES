@@ -1,20 +1,28 @@
 import { useState, useEffect, useRef } from 'react'
 import './PriceOfferSection.css'
-import proBannerImg from '../Public/home repair services .png'
+import joinBannerImg from '../assets/join-pro-banner.jpg'
 
 function PriceOfferSection({ setCurrentPage }) {
   const [isInView, setIsInView] = useState(false)
   const sectionRef = useRef(null)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+    const handleScrollObserver = (entries) => {
+      entries.forEach((entry) => {
+        // Toggle in-view state so whenever user scrolls into it from top OR bottom,
+        // it triggers the smooth opening animation flow every time.
         if (entry.isIntersecting) {
           setIsInView(true)
+        } else {
+          setIsInView(false)
         }
-      },
-      { threshold: 0.12 }
-    )
+      })
+    }
+
+    const observer = new IntersectionObserver(handleScrollObserver, {
+      threshold: 0.15,
+      rootMargin: '-30px 0px -30px 0px'
+    })
 
     const currentElem = sectionRef.current
     if (currentElem) {
@@ -45,42 +53,47 @@ function PriceOfferSection({ setCurrentPage }) {
   return (
     <section 
       ref={sectionRef} 
-      className={`pro-join-section ${isInView ? 'is-in-view' : ''}`} 
+      className={`pro-join-section ${isInView ? 'is-in-view' : 'is-out-view'}`} 
       aria-label="Join as a Service Provider"
     >
-      {/* Background visual image — now crisp & clearly visible */}
+      {/* Laser Light Beams: Expand from center on scroll open */}
+      <div className="pro-laser-beam beam-top" aria-hidden="true"></div>
+      <div className="pro-laser-beam beam-bottom" aria-hidden="true"></div>
+
+      {/* Generated Custom Background Image Layer (Crisp, High-Res, NOT from Public folder) */}
       <div 
         className="pro-join-bg-layer"
-        style={{ backgroundImage: `url("${proBannerImg}")` }}
+        style={{ backgroundImage: `url("${joinBannerImg}")` }}
         aria-hidden="true"
       ></div>
       <div className="pro-join-overlay" aria-hidden="true"></div>
 
-      {/* Ambient background glowing orbs */}
+      {/* Ambient glowing background accent orbs */}
       <div className="pro-join-orb orb-left" aria-hidden="true"></div>
       <div className="pro-join-orb orb-right" aria-hidden="true"></div>
 
       <div className="container">
         <div className="pro-join-content">
-          {/* Left Column: Information & Call to Action (Animated flow) */}
+          {/* Left Column: Unfolds and expands into view */}
           <div className="pro-join-text-col">
-            <div className="pro-pill-badge flow-item flow-delay-1">
+            <div className="pro-pill-badge anim-open anim-delay-1">
               <span className="pro-pill-pulse"></span>
               <span>MULTAN'S PREMIER PROVIDER NETWORK</span>
             </div>
 
-            <h2 className="pro-join-title flow-item flow-delay-2">
+            <h2 className="pro-join-title anim-open anim-delay-2">
               Empower Your Trade — <span className="highlight-cyan">Join as a Verified Service Professional</span>
             </h2>
 
-            <p className="pro-join-description flow-item flow-delay-3">
+            <p className="pro-join-description anim-open anim-delay-3">
               Are you a certified electrician, plumber, carpenter, AC &amp; HVAC specialist, painter, or home repair expert? 
               Partner with Multan's fastest-growing on-demand network. Get direct daily bookings from trusted homeowners, 
               earn upfront with zero hidden cuts, and scale your trade with verified professional credibility.
             </p>
 
+            {/* 4 Benefit Cards: Accordion-style unfold flow */}
             <div className="pro-benefits-grid">
-              <div className="pro-benefit-item flow-item flow-delay-4">
+              <div className="pro-benefit-item anim-card-unfold anim-delay-4">
                 <div className="benefit-icon-box">⚡</div>
                 <div className="benefit-text-wrap">
                   <h4 className="benefit-title">Instant Job Leads</h4>
@@ -88,7 +101,7 @@ function PriceOfferSection({ setCurrentPage }) {
                 </div>
               </div>
 
-              <div className="pro-benefit-item flow-item flow-delay-5">
+              <div className="pro-benefit-item anim-card-unfold anim-delay-5">
                 <div className="benefit-icon-box">💰</div>
                 <div className="benefit-text-wrap">
                   <h4 className="benefit-title">Transparent Earnings</h4>
@@ -96,7 +109,7 @@ function PriceOfferSection({ setCurrentPage }) {
                 </div>
               </div>
 
-              <div className="pro-benefit-item flow-item flow-delay-6">
+              <div className="pro-benefit-item anim-card-unfold anim-delay-6">
                 <div className="benefit-icon-box">🛡️</div>
                 <div className="benefit-text-wrap">
                   <h4 className="benefit-title">Verified Pro Badge</h4>
@@ -104,7 +117,7 @@ function PriceOfferSection({ setCurrentPage }) {
                 </div>
               </div>
 
-              <div className="pro-benefit-item flow-item flow-delay-7">
+              <div className="pro-benefit-item anim-card-unfold anim-delay-7">
                 <div className="benefit-icon-box">📱</div>
                 <div className="benefit-text-wrap">
                   <h4 className="benefit-title">Smart Digital Hub</h4>
@@ -113,7 +126,7 @@ function PriceOfferSection({ setCurrentPage }) {
               </div>
             </div>
 
-            <div className="pro-cta-actions flow-item flow-delay-8">
+            <div className="pro-cta-actions anim-open anim-delay-8">
               <button 
                 type="button" 
                 className="pro-primary-btn"
@@ -133,9 +146,9 @@ function PriceOfferSection({ setCurrentPage }) {
             </div>
           </div>
 
-          {/* Right Column: Animated Stats Showcase Card (Opens with 3D perspective unfold) */}
+          {/* Right Column: 3D Door / Portal Open Animation */}
           <div className="pro-join-visual-col">
-            <div className="pro-stats-card flow-item flow-card">
+            <div className="pro-stats-card anim-3d-door-open">
               <div className="pro-card-header">
                 <span className="badge-tag">Service Provider Portal</span>
                 <div className="live-pulse-chip">

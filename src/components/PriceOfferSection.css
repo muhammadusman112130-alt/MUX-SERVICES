@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════════════
-   JOIN AS PROFESSIONAL SECTION (ANIMATED BANNER WITH CLEAR BACKGROUND IMAGE)
+   JOIN AS PROFESSIONAL SECTION (CUSTOM BANNER IMAGE & 3D OPENING FLOW)
    Theme: #0E2E33 (Deep Teal), #EEF4F4 (Frost White), #17f7f7 / #8FD3E8 (Cyan/Mint)
 ══════════════════════════════════════════════════════════════════════════ */
 
@@ -9,66 +9,65 @@
   background: #0E2E33;
   overflow: hidden;
   color: #EEF4F4;
+  perspective: 1200px;
 }
 
-/* ── Top and Bottom Animated Border Light Beams ── */
-.pro-join-section::before {
-  content: '';
+/* ── Top and Bottom Animated Laser Beams (Draw Open from Center) ── */
+.pro-laser-beam {
   position: absolute;
-  top: 0;
   left: 0;
   right: 0;
   height: 2.5px;
   background: linear-gradient(90deg, transparent, #17f7f7, #8FD3E8, transparent);
-  box-shadow: 0 0 16px rgba(23, 247, 247, 0.85);
+  box-shadow: 0 0 18px rgba(23, 247, 247, 0.9);
   z-index: 4;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.5s ease-out;
 }
 
-.pro-join-section::after {
-  content: '';
-  position: absolute;
+.pro-laser-beam.beam-top {
+  top: 0;
+}
+
+.pro-laser-beam.beam-bottom {
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2.5px;
-  background: linear-gradient(90deg, transparent, #8FD3E8, #17f7f7, transparent);
-  box-shadow: 0 0 16px rgba(23, 247, 247, 0.85);
-  z-index: 4;
 }
 
-/* ── Clear & Crisp Background Image Layer with Subtle Drift ── */
+.pro-join-section.is-in-view .pro-laser-beam {
+  transform: scaleX(1);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Custom Generated Background Image (Crisp, High-Resolution) ── */
 .pro-join-bg-layer {
   position: absolute;
   inset: -15px;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  /* Removed blur & increased brightness so image is crisp & clearly visible */
-  filter: brightness(0.82) contrast(1.12) saturate(1.08);
+  /* Crystal-clear custom image with rich contrast & vibrant details */
+  filter: brightness(0.92) contrast(1.1) saturate(1.12);
   z-index: 1;
-  animation: bgSubtleDrift 22s ease-in-out infinite alternate;
+  transform: scale(1.12);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 
-@keyframes bgSubtleDrift {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.06);
-  }
+.pro-join-section.is-in-view .pro-join-bg-layer {
+  transform: scale(1);
 }
 
-/* ── Balanced Gradient Overlay Layer (Clear View Through Center) ── */
+/* ── Balanced Ambient Overlay: Image is Clearly Visible ── */
 .pro-join-overlay {
   position: absolute;
   inset: 0;
-  /* Semi-transparent tint that lets the background image shine through cleanly */
   background: linear-gradient(
     135deg,
-    rgba(14, 46, 51, 0.78) 0%,
-    rgba(14, 46, 51, 0.52) 45%,
-    rgba(10, 32, 36, 0.76) 100%
+    rgba(14, 46, 51, 0.75) 0%,
+    rgba(14, 46, 51, 0.48) 50%,
+    rgba(10, 32, 36, 0.78) 100%
   );
   z-index: 2;
   backdrop-filter: blur(0.5px);
@@ -79,26 +78,26 @@
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
-  filter: blur(65px);
+  filter: blur(70px);
   z-index: 2;
-  opacity: 0.45;
+  opacity: 0.4;
   animation: orbPulse 8s ease-in-out infinite alternate;
 }
 
 .pro-join-orb.orb-left {
-  width: 450px;
-  height: 450px;
+  width: 480px;
+  height: 480px;
   top: -80px;
-  left: -80px;
-  background: radial-gradient(circle, rgba(23, 247, 247, 0.35) 0%, transparent 70%);
+  left: -90px;
+  background: radial-gradient(circle, rgba(23, 247, 247, 0.38) 0%, transparent 70%);
 }
 
 .pro-join-orb.orb-right {
-  width: 500px;
-  height: 500px;
-  bottom: -100px;
-  right: -80px;
-  background: radial-gradient(circle, rgba(143, 211, 232, 0.28) 0%, transparent 70%);
+  width: 520px;
+  height: 520px;
+  bottom: -110px;
+  right: -90px;
+  background: radial-gradient(circle, rgba(143, 211, 232, 0.32) 0%, transparent 70%);
 }
 
 @keyframes orbPulse {
@@ -108,7 +107,7 @@
   }
   100% {
     transform: scale(1.1) translate(20px, -15px);
-    opacity: 0.6;
+    opacity: 0.58;
   }
 }
 
@@ -128,46 +127,74 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   SCROLL-TRIGGERED ANIMATION FLOW ("Open hota ha flow jasy")
+   FLUID OPENING FLOW ANIMATIONS (Scroll in from top OR bottom)
 ══════════════════════════════════════════════════════════════════════════ */
-.flow-item {
+
+/* Default / Out of view state (smoothly prepared for open animation) */
+.anim-open {
   opacity: 0;
-  transform: translateY(35px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease;
+  transform: translateX(-45px) scale(0.96);
+  filter: blur(4px);
+  transition: opacity 0.4s ease-out,
+              transform 0.4s ease-out,
+              filter 0.4s ease-out;
+  will-change: opacity, transform, filter;
+}
+
+/* Active State: Unfolds / Slides open smoothly into position */
+.pro-join-section.is-in-view .anim-open {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  filter: blur(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.anim-delay-1 { transition-delay: 0.08s !important; }
+.anim-delay-2 { transition-delay: 0.18s !important; }
+.anim-delay-3 { transition-delay: 0.28s !important; }
+.anim-delay-4 { transition-delay: 0.36s !important; }
+.anim-delay-5 { transition-delay: 0.46s !important; }
+.anim-delay-6 { transition-delay: 0.56s !important; }
+.anim-delay-7 { transition-delay: 0.66s !important; }
+.anim-delay-8 { transition-delay: 0.76s !important; }
+
+/* ── 4 Benefit Cards: Accordion-style Unfold Flow ── */
+.anim-card-unfold {
+  opacity: 0;
+  transform: perspective(800px) rotateX(-35deg) translateY(35px) scale(0.9);
+  transform-origin: top center;
+  transition: opacity 0.35s ease-out,
+              transform 0.35s ease-out;
   will-change: opacity, transform;
 }
 
-.flow-delay-1 { transition-delay: 0.05s; }
-.flow-delay-2 { transition-delay: 0.15s; }
-.flow-delay-3 { transition-delay: 0.25s; }
-.flow-delay-4 { transition-delay: 0.35s; }
-.flow-delay-5 { transition-delay: 0.45s; }
-.flow-delay-6 { transition-delay: 0.55s; }
-.flow-delay-7 { transition-delay: 0.65s; }
-.flow-delay-8 { transition-delay: 0.75s; }
+.pro-join-section.is-in-view .anim-card-unfold {
+  opacity: 1;
+  transform: perspective(800px) rotateX(0deg) translateY(0) scale(1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
 
-/* 3D Opening / Unfolding for the Stats Showcase Card */
-.flow-card {
+/* ── Right Column: 3D Door / Portal Open Animation ── */
+.anim-3d-door-open {
   opacity: 0;
-  transform: perspective(1000px) rotateY(-8deg) translateY(45px) scale(0.92);
-  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.3s,
-              transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.3s,
+  transform: perspective(1200px) rotateY(-28deg) translateX(45px) scale(0.86);
+  transform-origin: right center;
+  transition: opacity 0.4s ease-out,
+              transform 0.4s ease-out;
+  will-change: opacity, transform;
+}
+
+.pro-join-section.is-in-view .anim-3d-door-open {
+  opacity: 1;
+  transform: perspective(1200px) rotateY(0deg) translateX(0) scale(1);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.25s,
+              transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.25s,
               box-shadow 0.4s ease;
-  will-change: opacity, transform;
-}
-
-/* Triggered State when Scrolled into View */
-.pro-join-section.is-in-view .flow-item {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.pro-join-section.is-in-view .flow-card {
-  opacity: 1;
-  transform: perspective(1000px) rotateY(0deg) translateY(0) scale(1);
 }
 
 /* ── Left Column: Typography & Content ── */
@@ -175,7 +202,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  background: rgba(14, 46, 51, 0.75);
+  background: rgba(14, 46, 51, 0.82);
   border: 1.5px solid rgba(23, 247, 247, 0.5);
   color: #17f7f7;
   font-size: 0.82rem;
@@ -185,7 +212,7 @@
   padding: 0.45rem 1.15rem;
   border-radius: 9999px;
   margin-bottom: 1.25rem;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 15px rgba(23, 247, 247, 0.2);
 }
 
@@ -215,21 +242,21 @@
   line-height: 1.22;
   color: #EEF4F4;
   margin-bottom: 1.25rem;
-  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.7);
 }
 
 .highlight-cyan {
   color: #17f7f7;
-  text-shadow: 0 0 18px rgba(23, 247, 247, 0.75);
+  text-shadow: 0 0 18px rgba(23, 247, 247, 0.8);
 }
 
 .pro-join-description {
   font-size: 1.08rem;
   line-height: 1.7;
-  color: rgba(238, 244, 244, 0.92);
+  color: rgba(238, 244, 244, 0.95);
   margin-bottom: 2.2rem;
   max-width: 620px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 /* ── Benefits 2x2 Grid ── */
@@ -244,20 +271,20 @@
   display: flex;
   align-items: flex-start;
   gap: 0.9rem;
-  padding: 1.15rem;
-  background: rgba(14, 46, 51, 0.72);
-  border: 1px solid rgba(143, 211, 232, 0.25);
+  padding: 1.2rem;
+  background: rgba(14, 46, 51, 0.78);
+  border: 1px solid rgba(143, 211, 232, 0.28);
   border-radius: 14px;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   transition: all 0.3s ease;
 }
 
 .pro-benefit-item:hover {
   border-color: #17f7f7;
-  background: rgba(14, 46, 51, 0.88);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(23, 247, 247, 0.2);
+  background: rgba(14, 46, 51, 0.92);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(23, 247, 247, 0.25);
 }
 
 .benefit-icon-box {
@@ -284,7 +311,7 @@
 .benefit-desc {
   font-size: 0.84rem;
   line-height: 1.5;
-  color: rgba(238, 244, 244, 0.8);
+  color: rgba(238, 244, 244, 0.85);
   margin: 0;
 }
 
@@ -353,14 +380,14 @@
 
 .pro-secondary-btn {
   padding: 0.95rem 2rem;
-  background: rgba(14, 46, 51, 0.6);
+  background: rgba(14, 46, 51, 0.65);
   border: 1.5px solid rgba(143, 211, 232, 0.5);
   color: #EEF4F4;
   font-weight: 700;
   font-size: 1.05rem;
   border-radius: 50px;
   cursor: pointer;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   transition: all 0.3s ease;
 }
 
@@ -373,12 +400,12 @@
 
 /* ── Right Column: Stats Showcase Card ── */
 .pro-stats-card {
-  background: rgba(14, 46, 51, 0.78);
-  border: 1.5px solid rgba(23, 247, 247, 0.35);
+  background: rgba(14, 46, 51, 0.82);
+  border: 1.5px solid rgba(23, 247, 247, 0.4);
   border-radius: 24px;
   padding: 2.2rem;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(23, 247, 247, 0.15);
-  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 35px rgba(23, 247, 247, 0.2);
+  backdrop-filter: blur(18px);
   position: relative;
   overflow: hidden;
 }
@@ -441,7 +468,7 @@
 
 .metric-box {
   padding: 1.1rem 1.35rem;
-  background: rgba(10, 32, 36, 0.65);
+  background: rgba(10, 32, 36, 0.7);
   border: 1px solid rgba(143, 211, 232, 0.2);
   border-radius: 14px;
   display: flex;
@@ -453,12 +480,12 @@
 .metric-box:hover {
   border-color: #17f7f7;
   transform: translateX(4px);
-  background: rgba(10, 32, 36, 0.85);
+  background: rgba(10, 32, 36, 0.9);
 }
 
 .metric-box.highlight {
   border-color: rgba(23, 247, 247, 0.5);
-  background: linear-gradient(135deg, rgba(23, 247, 247, 0.12), rgba(10, 32, 36, 0.7));
+  background: linear-gradient(135deg, rgba(23, 247, 247, 0.15), rgba(10, 32, 36, 0.75));
 }
 
 .metric-num {
@@ -471,7 +498,7 @@
 
 .metric-label {
   font-size: 0.85rem;
-  color: rgba(238, 244, 244, 0.8);
+  color: rgba(238, 244, 244, 0.85);
   font-weight: 500;
 }
 
@@ -484,7 +511,7 @@
   font-style: italic;
   font-size: 0.92rem;
   line-height: 1.6;
-  color: rgba(238, 244, 244, 0.88);
+  color: rgba(238, 244, 244, 0.9);
   margin-bottom: 1rem;
 }
 
