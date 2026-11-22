@@ -21,9 +21,9 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
 
   // Customer Profile State
   const [profileData, setProfileData] = useState({
-    fullName: user?.fullName || 'Muhammad Ali',
-    email: user?.email || 'ali.multan@gmail.com',
-    phone: user?.phone || '+92 300 8765432',
+    fullName: user?.fullName || 'ali',
+    email: user?.email || 'ali@gmail.com',
+    phone: user?.phone || '0300-1234567',
     whatsapp: user?.whatsapp || '+92 300 8765432',
     cnic: user?.cnic || '36302-9847123-1',
     city: 'Multan',
@@ -129,7 +129,6 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
     setIsSaving(true)
 
     try {
-      // Persist via authAPI and update localStorage
       const updatedUser = {
         fullName: profileData.fullName,
         email: profileData.email,
@@ -146,7 +145,6 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
 
       await authAPI.updateProfile(updatedUser)
       
-      // Update parent state so Navbar reflects new name immediately
       if (typeof onUserUpdate === 'function') {
         onUserUpdate(updatedUser)
       }
@@ -163,7 +161,6 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
     }
   }
 
-  // Multan Neighborhoods options
   const multanAreas = [
     'Multan Cantt',
     'Gulgasht Colony',
@@ -181,7 +178,6 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
     'Nawan Shehr'
   ]
 
-  // Avatar Initials
   const userInitials = profileData.fullName
     ? profileData.fullName.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()
     : 'ALI'
@@ -198,27 +194,10 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
 
       <div className="cp-container">
         
-        {/* ── TOP NAV BAR & BREADCRUMB ── */}
-        <div className="cp-header-actions">
-          <button 
-            type="button" 
-            className="cp-back-btn"
-            onClick={() => setCurrentPage ? setCurrentPage('home') : window.history.back()}
-          >
-            <span className="cbb-arrow">←</span>
-            <span>Back to Home</span>
-          </button>
-
-          <div className="cp-header-status-pill">
-            <span className="chsp-dot"></span>
-            <span>Customer Account Active • Multan Verified</span>
-          </div>
-        </div>
-
         {/* ══════════════════════════════════════════════════
             HERO PROFILE CARD (ANIMATED EXECUTIVE BANNER)
         ══════════════════════════════════════════════════ */}
-        <div className="cp-hero-card">
+        <div className="cp-hero-card animated-shadow-aura">
           <div className="cp-hero-bg-glow"></div>
           
           <div className="cp-hero-content">
@@ -244,7 +223,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
                   onClick={() => fileInputRef.current?.click()}
                   title="Upload / Change Profile Picture"
                 >
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                     <circle cx="12" cy="13" r="4"></circle>
                   </svg>
@@ -269,9 +248,8 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
             {/* User Primary Identity */}
             <div className="cp-identity-column">
               <div className="cp-identity-badges">
-                <span className="cpi-verified-badge">✓ CNIC Vetted</span>
-                <span className="cpi-area-badge">📍 {profileData.area}</span>
-                <span className="cpi-escrow-badge">🛡️ Escrow Guarded</span>
+                <span className="cpi-verified-badge">CNIC Vetted</span>
+                <span className="cpi-area-badge">{profileData.area}</span>
               </div>
 
               <h1 className="cp-user-fullname">{profileData.fullName}</h1>
@@ -283,11 +261,11 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
 
               <div className="cp-identity-meta-row">
                 <span className="cp-member-tag">Registered Customer • Multan Corridor</span>
-                <span className="cp-trust-pill">★ 5.0 Star Profile</span>
+                <span className="cp-trust-pill">5.0 Star Profile</span>
               </div>
             </div>
 
-            {/* Edit Profile Action Buttons */}
+            {/* Edit Profile Action Buttons (Compact size, no logout button) */}
             <div className="cp-hero-actions-column">
               {!isEditMode ? (
                 <button 
@@ -295,7 +273,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
                   className="cp-btn-edit-mode"
                   onClick={handleStartEdit}
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                   </svg>
@@ -309,60 +287,59 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
                     onClick={handleSave}
                     disabled={isSaving}
                   >
-                    <span>{isSaving ? 'Saving...' : '✓ Save Changes'}</span>
+                    <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
                   </button>
                   <button 
                     type="button" 
                     className="cp-btn-cancel"
                     onClick={handleCancelEdit}
                   >
-                    <span>✕ Cancel</span>
+                    <span>Cancel</span>
                   </button>
                 </div>
               )}
-
-              <button 
-                type="button" 
-                className="cp-btn-logout-alt"
-                onClick={onLogout}
-              >
-                <span>Logout</span>
-              </button>
             </div>
 
           </div>
         </div>
 
         {/* ══════════════════════════════════════════════════
-            ANIMATED STATS TILES (4 EXECUTIVE PODS)
+            ANIMATED STATS TILES (CLEAN SVG OUTLINES, NO EMOJIS, NO ESCROW)
         ══════════════════════════════════════════════════ */}
         <div className="cp-stats-grid">
-          <div className="cp-stat-card">
-            <span className="cpsc-icon">🛵</span>
+          <div className="cp-stat-card animated-shadow-aura">
+            <div className="cpsc-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
             <div className="cpsc-body">
               <strong className="cpsc-value">14</strong>
               <span className="cpsc-label">Doorstep Services Completed</span>
             </div>
           </div>
 
-          <div className="cp-stat-card">
-            <span className="cpsc-icon">🔒</span>
-            <div className="cpsc-body">
-              <strong className="cpsc-value">100%</strong>
-              <span className="cpsc-label">Escrow Protected Payments</span>
+          <div className="cp-stat-card animated-shadow-aura">
+            <div className="cpsc-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
             </div>
-          </div>
-
-          <div className="cp-stat-card">
-            <span className="cpsc-icon">⏱️</span>
             <div className="cpsc-body">
               <strong className="cpsc-value">&lt; 30 Mins</strong>
               <span className="cpsc-label">Guaranteed Multan Arrival</span>
             </div>
           </div>
 
-          <div className="cp-stat-card">
-            <span className="cpsc-icon">🏠</span>
+          <div className="cp-stat-card animated-shadow-aura">
+            <div className="cpsc-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
             <div className="cpsc-body">
               <strong className="cpsc-value">2</strong>
               <span className="cpsc-label">Saved Delivery Addresses</span>
@@ -371,36 +348,29 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
         </div>
 
         {/* ══════════════════════════════════════════════════
-            TABBED NAVIGATION SECTION (MODULAR & CLEAN)
+            TABBED NAVIGATION SECTION (CLEAN TEXT, NO EMOJIS, NO ESCROW)
         ══════════════════════════════════════════════════ */}
-        <div className="cp-nav-tabs">
+        <div className="cp-nav-tabs animated-shadow-aura">
           <button 
             type="button" 
             className={`cp-tab-btn ${activeTab === 'personal' ? 'active' : ''}`}
             onClick={() => setActiveTab('personal')}
           >
-            <span>👤 Personal Details</span>
+            <span>Personal Details</span>
           </button>
           <button 
             type="button" 
             className={`cp-tab-btn ${activeTab === 'address' ? 'active' : ''}`}
             onClick={() => setActiveTab('address')}
           >
-            <span>📍 Multan Addresses</span>
-          </button>
-          <button 
-            type="button" 
-            className={`cp-tab-btn ${activeTab === 'payment' ? 'active' : ''}`}
-            onClick={() => setActiveTab('payment')}
-          >
-            <span>💳 Escrow &amp; Payments</span>
+            <span>Multan Addresses</span>
           </button>
           <button 
             type="button" 
             className={`cp-tab-btn ${activeTab === 'security' ? 'active' : ''}`}
             onClick={() => setActiveTab('security')}
           >
-            <span>🛡️ Security &amp; Alerts</span>
+            <span>Security &amp; Alerts</span>
           </button>
         </div>
 
@@ -408,7 +378,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
             TAB 1: PERSONAL DETAILS & CONTACT (EDITABLE)
         ══════════════════════════════════════════════════ */}
         {activeTab === 'personal' && (
-          <div className="cp-tab-card anim-slide-up">
+          <div className="cp-tab-card animated-shadow-aura anim-slide-up">
             <div className="cptc-header">
               <div>
                 <h3 className="cptc-title">Personal Information</h3>
@@ -416,7 +386,11 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
               </div>
               {!isEditMode ? (
                 <button type="button" className="cp-mini-edit-btn" onClick={handleStartEdit}>
-                  ✏️ Edit Details
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                  </svg>
+                  <span>Edit Details</span>
                 </button>
               ) : (
                 <span className="cptc-editing-badge">Editing Mode Active</span>
@@ -469,7 +443,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
                     value={profileData.phone}
                     onChange={(e) => handleFieldChange('phone', e.target.value)}
                     required
-                    placeholder="+92 300 1234567"
+                    placeholder="0300-1234567"
                   />
                 ) : (
                   <div className="cp-field-display">{profileData.phone}</div>
@@ -506,7 +480,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
                 ) : (
                   <div className="cp-field-display">
                     <span>{profileData.cnic}</span>
-                    <span className="cp-inline-vtag">✓ Verified</span>
+                    <span className="cp-inline-vtag">Verified</span>
                   </div>
                 )}
               </div>
@@ -577,7 +551,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
             TAB 2: MULTAN SAVED ADDRESSES (EDITABLE)
         ══════════════════════════════════════════════════ */}
         {activeTab === 'address' && (
-          <div className="cp-tab-card anim-slide-up">
+          <div className="cp-tab-card animated-shadow-aura anim-slide-up">
             <div className="cptc-header">
               <div>
                 <h3 className="cptc-title">Saved Multan Doorstep Addresses</h3>
@@ -585,7 +559,11 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
               </div>
               {!isEditMode && (
                 <button type="button" className="cp-mini-edit-btn" onClick={handleStartEdit}>
-                  ✏️ Edit Addresses
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                  </svg>
+                  <span>Edit Addresses</span>
                 </button>
               )}
             </div>
@@ -593,7 +571,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
             <div className="cp-address-list">
               
               {/* PRIMARY ADDRESS CARD */}
-              <div className="cp-address-item primary">
+              <div className="cp-address-item primary animated-shadow-aura">
                 <div className="cpai-top">
                   <div className="cpai-tag-group">
                     <span className="cpai-tag primary">Primary Delivery Address</span>
@@ -643,13 +621,13 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
                   <div className="cpai-view-fields">
                     <h4 className="cpai-address-title">{profileData.address}</h4>
                     <p className="cpai-meta"><strong>Area:</strong> {profileData.area}, Multan</p>
-                    <p className="cpai-landmark">📍 <strong>Landmark:</strong> {profileData.landmark}</p>
+                    <p className="cpai-landmark"><strong>Landmark:</strong> {profileData.landmark}</p>
                   </div>
                 )}
               </div>
 
               {/* SECONDARY ADDRESS CARD */}
-              <div className="cp-address-item secondary">
+              <div className="cp-address-item secondary animated-shadow-aura">
                 <div className="cpai-top">
                   <div className="cpai-tag-group">
                     <span className="cpai-tag">Secondary Address (Office / Site)</span>
@@ -694,80 +672,10 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
         )}
 
         {/* ══════════════════════════════════════════════════
-            TAB 3: ESCROW VAULT & PAYMENT METHODS
-        ══════════════════════════════════════════════════ */}
-        {activeTab === 'payment' && (
-          <div className="cp-tab-card anim-slide-up">
-            <div className="cptc-header">
-              <div>
-                <h3 className="cptc-title">MUX Escrow Vault &amp; Payment Channels</h3>
-                <p className="cptc-sub">Your payment security guarantee. Funds are safeguarded in escrow until work is inspected.</p>
-              </div>
-            </div>
-
-            {/* Escrow Guarantee Highlight Box */}
-            <div className="cp-escrow-feature-card">
-              <div className="cpe-icon-ring">🔒</div>
-              <div className="cpe-info">
-                <h4>100% Doorstep Escrow Protection</h4>
-                <p>
-                  When you agree on a rate in chat, your payment is secured in the MUX Escrow Vault. 
-                  Technicians are only paid after you tap <strong>&quot;Mark Work Completed&quot;</strong> and inspect the job.
-                </p>
-                <div className="cpe-pills-row">
-                  <span className="cpe-pill">Instant Dispute Refund</span>
-                  <span className="cpe-pill">Zero Upfront Cash Risk</span>
-                  <span className="cpe-pill">Direct SBP-Compliant Escrow</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Payment Channels Grid */}
-            <div className="cp-payment-channels-grid">
-              <div className="cp-pc-card active">
-                <div className="cppc-header">
-                  <span className="cppc-logo-badge cod">💵</span>
-                  <span className="cppc-status">Active</span>
-                </div>
-                <h4>Cash on Doorstep Inspection</h4>
-                <p>Hand over exact agreed cash to technician only after inspecting the repair.</p>
-              </div>
-
-              <div className="cp-pc-card">
-                <div className="cppc-header">
-                  <span className="cppc-logo-badge jazzcash">JC</span>
-                  <span className="cppc-status">Supported</span>
-                </div>
-                <h4>JazzCash Direct Transfer</h4>
-                <p>Pay instantly from your JazzCash wallet with zero surcharge fees.</p>
-              </div>
-
-              <div className="cp-pc-card">
-                <div className="cppc-header">
-                  <span className="cppc-logo-badge easypaisa">EP</span>
-                  <span className="cppc-status">Supported</span>
-                </div>
-                <h4>EasyPaisa Digital QR</h4>
-                <p>Scan technician&apos;s verified MUX QR code upon doorstep arrival.</p>
-              </div>
-
-              <div className="cp-pc-card">
-                <div className="cppc-header">
-                  <span className="cppc-logo-badge bank">🏛️</span>
-                  <span className="cppc-status">Supported</span>
-                </div>
-                <h4>Online Bank / Raast Instant</h4>
-                <p>Direct Raast ID transfer to verified MUX Services Escrow Account.</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ══════════════════════════════════════════════════
-            TAB 4: SECURITY & ALERT PREFERENCES
+            TAB 3: SECURITY & ALERT PREFERENCES
         ══════════════════════════════════════════════════ */}
         {activeTab === 'security' && (
-          <div className="cp-tab-card anim-slide-up">
+          <div className="cp-tab-card animated-shadow-aura anim-slide-up">
             <div className="cptc-header">
               <div>
                 <h3 className="cptc-title">Account Security &amp; Notifications</h3>
@@ -778,7 +686,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
             <div className="cp-security-options-list">
               
               {/* WhatsApp Live Tracking Toggle */}
-              <div className="cp-toggle-item">
+              <div className="cp-toggle-item animated-shadow-aura">
                 <div className="cpti-text">
                   <h4>WhatsApp Live Technician Tracking</h4>
                   <p>Receive live GPS location links and arrival ETA alerts on {profileData.whatsapp}.</p>
@@ -793,9 +701,9 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
               </div>
 
               {/* SMS Doorstep Alerts Toggle */}
-              <div className="cp-toggle-item">
+              <div className="cp-toggle-item animated-shadow-aura">
                 <div className="cpti-text">
-                  <h4>SMS Booking &amp; Escrow Receipts</h4>
+                  <h4>SMS Booking Confirmation</h4>
                   <p>Instant SMS confirmation whenever a rate is agreed or booking is dispatched.</p>
                 </div>
                 <button 
@@ -808,7 +716,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
               </div>
 
               {/* Promotional Rate Cards Toggle */}
-              <div className="cp-toggle-item">
+              <div className="cp-toggle-item animated-shadow-aura">
                 <div className="cpti-text">
                   <h4>Seasonal Multan Rate Discounts</h4>
                   <p>Get notified of summer AC servicing and winter plumbing discounted rates.</p>
@@ -823,8 +731,12 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
               </div>
 
               {/* Security Shield Card */}
-              <div className="cp-security-shield-card">
-                <div className="cssc-icon">🛡️</div>
+              <div className="cp-security-shield-card animated-shadow-aura">
+                <div className="cssc-icon-wrap">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                </div>
                 <div className="cssc-text">
                   <h4>Two-Factor Phone Authentication Active</h4>
                   <p>Your account is protected by encrypted OTP verification for bookings across Multan.</p>
