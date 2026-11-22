@@ -202,7 +202,7 @@ function App() {
       case 'professionals':
         return <Professionals setCurrentPage={handlePageChange} />
       case 'about':
-        return <About />
+        return <About setCurrentPage={handlePageChange} />
       case 'contact':
         return <Contact />
       case 'profile':
