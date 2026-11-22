@@ -1,10 +1,10 @@
 /* ── CALL TO ACTION SECTION ── */
 .cta-section {
   padding: 5rem 2rem;
-  background: #141B2D;
+  background: #0E2E33;
   position: relative;
   overflow: hidden;
-  border-top: 5px solid #FF5A4E;
+  border-top: 5px solid #8FD3E8;
   box-shadow: inset 0 6px 20px rgba(0,0,0,0.15);
 }
 
@@ -14,7 +14,7 @@
   bottom: -30%; left: -10%;
   width: 500px; height: 500px;
   border-radius: 50%;
-  background: rgba(255,90,78,0.12);
+  background: rgba(143, 211, 232,0.12);
   pointer-events: none;
 }
 
@@ -24,7 +24,7 @@
   top: -20%; right: -5%;
   width: 350px; height: 350px;
   border-radius: 50%;
-  background: rgba(16,185,129,0.08);
+  background: rgba(143, 211, 232, 0.08);
   pointer-events: none;
 }
 
@@ -71,15 +71,15 @@
   position: relative;
   overflow: hidden;
   padding: 1rem 2.5rem;
-  background: #FF5A4E;
-  color: #F4F1EA;
+  background: #8FD3E8;
+  color: #0E2E33;
   border: none;
   border-radius: 50px;
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 6px 25px rgba(255, 90, 78, 0.4);
+  box-shadow: 0 6px 25px rgba(143, 211, 232, 0.4);
 }
 
 .cta-primary::after {
@@ -87,15 +87,15 @@
   position: absolute;
   top: 0; left: -100%;
   width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  background: linear-gradient(90deg, transparent, rgba(238, 244, 244, 0.35), transparent);
   transform: skewX(-20deg);
 }
 
 .cta-primary:hover {
-  background: #F4F1EA;
-  color: #141B2D;
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(255, 90, 78, 0.55);
+  background: #a8e0f0;
+  color: #0E2E33;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(143, 211, 232, 0.55);
 }
 
 .cta-primary:hover::after {
@@ -108,8 +108,8 @@
   overflow: hidden;
   padding: 1rem 2.5rem;
   background: transparent;
-  color: white;
-  border: 2px solid rgba(255,255,255,0.5);
+  color: #EEF4F4;
+  border: 2px solid #8FD3E8;
   border-radius: 50px;
   font-size: 1.1rem;
   font-weight: 700;
@@ -118,10 +118,11 @@
 }
 
 .cta-secondary:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255,255,255,0.15);
+  background: rgba(143, 211, 232, 0.15);
+  border-color: #8FD3E8;
+  color: #EEF4F4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(143, 211, 232, 0.3);
 }
 
 @keyframes cta-shine {

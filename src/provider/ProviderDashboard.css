@@ -12,7 +12,7 @@
 }
 
 .header-card {
-  background: linear-gradient(to right, #141B2D, #667eea);
+  background: linear-gradient(to right, #0E2E33, #667eea);
   border-radius: 15px;
   padding: 2rem;
   display: flex;
@@ -133,7 +133,7 @@
   width: 24px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background: #0E2E33 ;
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -160,7 +160,7 @@
 }
 
 .stat-card {
-  background: white;
+  background: #13383e ;
   border-radius: 15px;
   padding: 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -175,7 +175,7 @@
 .stat-value {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0;
 }
 
@@ -203,7 +203,7 @@
 
 .leads-title {
   font-size: 1.3rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0 0 1rem 0;
   font-weight: 700;
 }
@@ -296,7 +296,7 @@
 
 .lead-service {
   font-size: 1.1rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0 0 0.5rem 0;
   font-weight: 700;
 }
@@ -346,7 +346,7 @@
 }
 
 .send-offer-btn {
-  background: #141B2D;
+  background: #0E2E33;
   color: white;
   border: none;
   padding: 0.6rem 1rem;
@@ -378,7 +378,7 @@
 }
 
 .schedule-card {
-  background: white;
+  background: #13383e ;
   border-radius: 15px;
   padding: 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -395,7 +395,7 @@
 
 .schedule-title {
   font-size: 1.1rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0;
   font-weight: 700;
 }
@@ -454,7 +454,7 @@
 
 .schedule-service {
   font-size: 0.95rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0 0 0.3rem 0;
   font-weight: 600;
 }
@@ -472,14 +472,14 @@
 }
 
 .live-mission-card {
-  background: white;
+  background: #13383e ;
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .mission-header-bar {
-  background: linear-gradient(to right, #141B2D, #667eea);
+  background: linear-gradient(to right, #0E2E33, #667eea);
   color: white;
   padding: 1rem;
   border-radius: 10px;
@@ -523,7 +523,7 @@
 
 .mission-title-text {
   font-size: 1.5rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0 0 0.5rem 0;
   font-weight: 700;
 }
@@ -608,7 +608,7 @@
 }
 
 .otp-button {
-  background: #141B2D;
+  background: #0E2E33;
   color: white;
   border: none;
   padding: 1rem 1.5rem;
@@ -624,7 +624,7 @@
 }
 
 .payout-card {
-  background: white;
+  background: #13383e ;
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -643,7 +643,7 @@
 
 .payout-title {
   font-size: 1.1rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0;
   font-weight: 600;
 }
@@ -688,14 +688,14 @@
 .payout-amount {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0;
 }
 
 .escrow-amount {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0;
 }
 
@@ -711,7 +711,7 @@
 }
 
 .transfer-button {
-  background: #141B2D;
+  background: #0E2E33;
   color: white;
   border: none;
   padding: 0.8rem 1rem;
@@ -814,7 +814,7 @@
 
 .clearance-amount {
   font-weight: 700;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin-bottom: 0.2rem;
 }
 

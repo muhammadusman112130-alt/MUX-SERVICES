@@ -8,8 +8,8 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  background: #141B2D;
-  box-shadow: 0 14px 45px rgba(20, 27, 45, 0.45);
+  background: #0E2E33;
+  box-shadow: 0 14px 45px rgba(14, 46, 51, 0.45);
   padding: 1.5rem 0;
   margin: 4.2rem 0; /* Clear, spacious gap from section above and section below */
   display: flex;
@@ -31,16 +31,16 @@
   height: 2.5px;
   background: linear-gradient(90deg, 
     transparent 0%, 
-    rgba(255, 90, 78, 0.25) 15%, 
-    #FF5A4E 35%, 
-    #FFA099 50%, 
-    #FF5A4E 65%, 
-    rgba(255, 90, 78, 0.25) 85%, 
+    rgba(143, 211, 232, 0.25) 15%, 
+    #8FD3E8 35%, 
+    #bdecf9 50%, 
+    #8FD3E8 65%, 
+    rgba(143, 211, 232, 0.25) 85%, 
     transparent 100%
   );
   background-size: 200% 100%;
   animation: tickerBorderFlowTop 3.5s linear infinite;
-  box-shadow: 0 0 14px #FF5A4E, 0 0 28px rgba(255, 90, 78, 0.65);
+  box-shadow: 0 0 14px #8FD3E8, 0 0 28px rgba(143, 211, 232, 0.65);
   z-index: 6;
 }
 
@@ -54,16 +54,16 @@
   height: 2.5px;
   background: linear-gradient(90deg, 
     transparent 0%, 
-    rgba(244, 241, 234, 0.25) 15%, 
-    #F4F1EA 35%, 
-    #FF5A4E 50%, 
-    #F4F1EA 65%, 
-    rgba(244, 241, 234, 0.25) 85%, 
+    rgba(238, 244, 244, 0.25) 15%, 
+    #EEF4F4 35%, 
+    #8FD3E8 50%, 
+    #EEF4F4 65%, 
+    rgba(238, 244, 244, 0.25) 85%, 
     transparent 100%
   );
   background-size: 200% 100%;
   animation: tickerBorderFlowBottom 3.5s linear infinite;
-  box-shadow: 0 0 14px #FF5A4E, 0 0 28px rgba(244, 241, 234, 0.65);
+  box-shadow: 0 0 14px #8FD3E8, 0 0 28px rgba(238, 244, 244, 0.65);
   z-index: 6;
 }
 
@@ -152,52 +152,52 @@
 }
 
 .mux-ticker-item:hover {
-  background: rgba(255, 90, 78, 0.12);
-  border-color: #FF5A4E;
+  background: rgba(143, 211, 232, 0.12);
+  border-color: #8FD3E8;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 90, 78, 0.25);
+  box-shadow: 0 4px 15px rgba(143, 211, 232, 0.25);
 }
 
-/* Strip 1 Styling (Sunset Coral Theme) */
+/* Strip 1 Styling (Ice Blue Theme) */
 .strip-1-theme .mux-ticker-item {
-  background: linear-gradient(135deg, rgba(20, 27, 45, 0.85) 0%, rgba(30, 41, 59, 0.75) 100%);
-  border-color: rgba(255, 90, 78, 0.4);
+  background: linear-gradient(135deg, rgba(14, 46, 51, 0.85) 0%, rgba(19, 56, 62, 0.75) 100%);
+  border-color: rgba(143, 211, 232, 0.4);
 }
 
 .strip-1-theme .ticker-badge-icon {
-  background: rgba(255, 90, 78, 0.2);
-  color: #FF5A4E;
-  border: 1px solid rgba(255, 90, 78, 0.45);
+  background: rgba(143, 211, 232, 0.2);
+  color: #8FD3E8;
+  border: 1px solid rgba(143, 211, 232, 0.45);
 }
 
 .strip-1-theme .ticker-title {
-  color: #F4F1EA;
+  color: #EEF4F4;
   font-weight: 800;
 }
 
 .strip-1-theme .ticker-desc {
-  color: #fce7e7;
+  color: rgba(238, 244, 244, 0.85);
 }
 
-/* Strip 2 Styling (Pearl White Theme) */
+/* Strip 2 Styling (Frost White Theme) */
 .strip-2-theme .mux-ticker-item {
-  background: linear-gradient(135deg, rgba(20, 27, 45, 0.9) 0%, rgba(15, 20, 34, 0.8) 100%);
-  border-color: rgba(244, 241, 234, 0.25);
+  background: linear-gradient(135deg, rgba(14, 46, 51, 0.9) 0%, rgba(19, 56, 62, 0.8) 100%);
+  border-color: rgba(238, 244, 244, 0.25);
 }
 
 .strip-2-theme .ticker-badge-icon {
-  background: rgba(244, 241, 234, 0.15);
-  color: #F4F1EA;
-  border: 1px solid rgba(244, 241, 234, 0.35);
+  background: rgba(238, 244, 244, 0.15);
+  color: #EEF4F4;
+  border: 1px solid rgba(238, 244, 244, 0.35);
 }
 
 .strip-2-theme .ticker-title {
-  color: #F4F1EA;
+  color: #EEF4F4;
   font-weight: 800;
 }
 
 .strip-2-theme .ticker-desc {
-  color: #d1d5db;
+  color: rgba(143, 211, 232, 0.85);
 }
 
 /* Common Item Elements */
@@ -224,7 +224,7 @@
 }
 
 .ticker-dot-sep {
-  color: #FF5A4E;
+  color: #8FD3E8;
   font-weight: 900;
   opacity: 0.7;
 }

@@ -1,7 +1,7 @@
 /* ── PROFESSIONALS SECTION ── */
 .professionals-section {
   padding: 5rem 2rem;
-  background: #F4F1EA;
+  background: #0E2E33;
 }
 
 .container {
@@ -11,7 +11,7 @@
 
 .section-title {
   font-size: 2.4rem;
-  color: #141B2D;
+  color: #EEF4F4;
   text-align: center;
   margin-bottom: 0.5rem;
   font-weight: 800;
@@ -19,7 +19,7 @@
 
 .section-subtitle {
   font-size: 1.1rem;
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.75);
   text-align: center;
   margin-bottom: 3rem;
 }
@@ -31,13 +31,13 @@
 }
 
 .professional-card {
-  background: white;
+  background: #13383e;
   border-radius: 18px;
   padding: 2rem;
   text-align: center;
   transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 4px 18px rgba(20, 27, 45, 0.07);
-  border: 2px solid #e0e7ff;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+  border: 1.5px solid rgba(143, 211, 232, 0.2);
   position: relative;
   z-index: 2;
 }
@@ -48,7 +48,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 24px;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 90, 78, 0.85) 0%, rgba(255, 122, 112, 0.6) 45%, rgba(20, 27, 45, 0.25) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.85) 0%, rgba(189, 236, 249, 0.6) 45%, rgba(14, 46, 51, 0.25) 75%, transparent 100%);
   filter: blur(22px);
   opacity: 0;
   z-index: -1;
@@ -60,10 +60,10 @@
 .professional-card:hover {
   transform: translateY(-10px);
   box-shadow: 
-    0 24px 50px rgba(20, 27, 45, 0.18),
-    0 0 35px rgba(255, 90, 78, 0.45),
-    0 0 65px rgba(255, 122, 112, 0.25);
-  border-color: rgba(255, 90, 78, 0.5);
+    0 24px 50px rgba(14, 46, 51, 0.18),
+    0 0 35px rgba(143, 211, 232, 0.45),
+    0 0 65px rgba(189, 236, 249, 0.25);
+  border-color: rgba(143, 211, 232, 0.5);
 }
 
 .professional-card:hover::before {
@@ -105,7 +105,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  box-shadow: 0 6px 18px rgba(20, 27, 45, 0.15);
+  box-shadow: 0 6px 18px rgba(14, 46, 51, 0.15);
   border: 3.5px solid #ffffff;
   background: #f1f5f9;
 }
@@ -129,7 +129,7 @@
   position: absolute;
   bottom: 0;
   right: -10px;
-  background: #141B2D;
+  background: #0E2E33;
   color: white;
   width: 30px;
   height: 30px;
@@ -140,26 +140,26 @@
   font-weight: bold;
   font-size: 1rem;
   border: 3px solid white;
-  box-shadow: 0 2px 8px rgba(20, 27, 45, 0.3);
+  box-shadow: 0 2px 8px rgba(14, 46, 51, 0.3);
 }
 
 .professional-name {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #141B2D;
+  color: #EEF4F4;
   margin-bottom: 0.4rem;
 }
 
 .professional-service-box {
-  background: linear-gradient(135deg, #f8faff 0%, #edf2fe 100%);
-  border: 1.5px solid #dbeafe;
+  background: rgba(14, 46, 51, 0.6);
+  border: 1.5px solid rgba(143, 211, 232, 0.25);
   border-radius: 16px;
   padding: 1.1rem 0.95rem;
   margin: 0.8rem 0 1.2rem;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 3px 12px rgba(255, 90, 78, 0.06);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
 }
 
 .professional-service-box::before {
@@ -169,7 +169,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #FF5A4E, #60a5fa, #f59e0b, #FF5A4E);
+  background: linear-gradient(90deg, #8FD3E8, #EEF4F4, #8FD3E8);
   background-size: 200% 100%;
   transform: scaleX(0);
   transform-origin: left;
@@ -177,10 +177,10 @@
 }
 
 .professional-card:hover .professional-service-box {
-  transform: translateY(-4px);
-  border-color: #93c5fd;
-  box-shadow: 0 10px 28px rgba(255, 90, 78, 0.15);
-  background: #ffffff;
+  transform: translateY(-2px);
+  border-color: rgba(143, 211, 232, 0.5);
+  box-shadow: 0 8px 24px rgba(143, 211, 232, 0.15);
+  background: rgba(14, 46, 51, 0.85);
 }
 
 .professional-card:hover .professional-service-box::before {
@@ -205,18 +205,18 @@
   display: inline-block;
   font-size: 0.82rem;
   font-weight: 800;
-  color: #FF5A4E;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  color: #0E2E33;
+  background: #8FD3E8;
+  border: none;
   padding: 0.25rem 0.75rem;
   border-radius: 50px;
   transition: all 0.25s ease;
 }
 
 .professional-card:hover .pro-service-badge {
-  background: #FF5A4E;
-  color: white;
-  transform: scale(1.04);
+  background: #a8e0f0;
+  color: #0E2E33;
+  transform: scale(1.02);
 }
 
 .pro-live-status {
@@ -225,9 +225,9 @@
   gap: 0.35rem;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #059669;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #8FD3E8;
+  background: rgba(143, 211, 232, 0.12);
+  border: 1px solid rgba(143, 211, 232, 0.3);
   padding: 0.18rem 0.55rem;
   border-radius: 50px;
 }
@@ -236,8 +236,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  background: #8FD3E8;
+  box-shadow: 0 0 8px rgba(143, 211, 232, 0.7);
   animation: pro-pulse 1.8s infinite;
 }
 
@@ -275,18 +275,18 @@
 .pro-skill-tag {
   font-size: 0.72rem;
   font-weight: 600;
-  color: #1e3a8a;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  color: #EEF4F4;
+  background: rgba(238, 244, 244, 0.08);
+  border: 1px solid rgba(143, 211, 232, 0.2);
   padding: 0.18rem 0.5rem;
   border-radius: 50px;
   transition: all 0.25s ease;
 }
 
 .professional-card:hover .pro-skill-tag {
-  background: #dbeafe;
-  color: #1e40af;
-  border-color: #93c5fd;
+  background: rgba(143, 211, 232, 0.18);
+  color: #8FD3E8;
+  border-color: rgba(143, 211, 232, 0.4);
   transform: translateY(-2px);
 }
 
@@ -300,18 +300,18 @@
 .pro-stat-chip {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #141B2D;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid #e2e8f0;
+  color: #EEF4F4;
+  background: rgba(14, 46, 51, 0.7);
+  border: 1px solid rgba(143, 211, 232, 0.2);
   padding: 0.2rem 0.55rem;
   border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 .pro-rate-tag {
   font-size: 0.9rem;
   font-weight: 800;
-  color: #141B2D;
+  color: #8FD3E8;
   margin-left: 0.35rem;
 }
 
@@ -330,11 +330,11 @@
 
 .rating-number {
   font-weight: 700;
-  color: #141B2D;
+  color: #EEF4F4;
 }
 
 .reviews {
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.75);
   font-size: 0.9rem;
 }
 
@@ -347,15 +347,15 @@
   position: relative;
   overflow: hidden;
   padding: 0.75rem 2rem;
-  background: #141B2D;
-  color: #F4F1EA;
+  background: #8FD3E8;
+  color: #0E2E33;
   border: none;
   border-radius: 50px;
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.25);
+  box-shadow: 0 4px 15px rgba(143, 211, 232, 0.35);
 }
 
 .hire-btn-arrow {
@@ -378,10 +378,10 @@
 }
 
 .hire-button:hover {
-  background: #FF5A4E;
-  color: #F4F1EA;
+  background: #8FD3E8;
+  color: #EEF4F4;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 90, 78, 0.45);
+  box-shadow: 0 8px 25px rgba(143, 211, 232, 0.45);
 }
 
 .hire-button:hover::after {

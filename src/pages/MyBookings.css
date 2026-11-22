@@ -1,11 +1,12 @@
 .my-bookings-page {
   min-height: 100vh;
-  background: white;
+  background: #0E2E33 ;
   padding: 9rem 8rem 3rem 8rem;
 }
 
 .top-gradient-section {
-  background: linear-gradient(to bottom, #CFDEFF, #DBE6FF);
+  background: #13383e;
+  border: 1.5px solid rgba(143, 211, 232, 0.2);
   padding: 2rem;
   border-radius: 15px;
   margin-bottom: 2rem;
@@ -27,7 +28,7 @@
 
 .bookings-header h1 {
   font-size: 2.5rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin-bottom: 1rem;
   font-weight: 700;
 }
@@ -43,7 +44,7 @@
 
 .book-new-services-btn {
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #141B2D 0%, #8B96AB 100%);
+  background: linear-gradient(135deg, #0E2E33 0%, #8B96AB 100%);
   color: white;
   border: none;
   border-radius: 25px;
@@ -51,13 +52,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.3);
+  box-shadow: 0 4px 15px rgba(14, 46, 51, 0.3);
   white-space: nowrap;
 }
 
 .book-new-services-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(20, 27, 45, 0.4);
+  box-shadow: 0 6px 20px rgba(14, 46, 51, 0.4);
 }
 
 .stats-cards {
@@ -68,7 +69,7 @@
 }
 
 .stat-card {
-  background: white;
+  background: #13383e ;
   border-radius: 15px;
   padding: 1.5rem;
   display: flex;
@@ -125,7 +126,7 @@
 }
 
 .bookings-management-card {
-  background: white;
+  background: #13383e ;
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -141,7 +142,7 @@
 
 .card-tabs .tab-btn {
   padding: 0.8rem 1.5rem;
-  background: white;
+  background: #0E2E33 ;
   border: 1px solid #e0e0e0;
   border-radius: 25px;
   font-size: 0.9rem;
@@ -153,14 +154,14 @@
 }
 
 .card-tabs .tab-btn.active {
-  background: linear-gradient(135deg, #141B2D 0%, #8B96AB 100%);
+  background: linear-gradient(135deg, #0E2E33 0%, #8B96AB 100%);
   color: white;
-  border-color: #141B2D;
+  border-color: #EEF4F4 ;
 }
 
 .card-tabs .tab-btn:hover:not(.active) {
   background: #f8f9fa;
-  border-color: #141B2D;
+  border-color: #EEF4F4 ;
 }
 
 .card-controls {
@@ -210,14 +211,14 @@
   border: 1px solid #e0e0e0;
   border-radius: 25px;
   font-size: 0.95rem;
-  background: white;
+  background: #0E2E33 ;
   cursor: pointer;
   outline: none;
 }
 
 .filter-select:focus,
 .date-select:focus {
-  border-color: #141B2D;
+  border-color: #EEF4F4 ;
 }
 
 .booking-ref-section {
@@ -238,7 +239,7 @@
 }
 
 .booking-card {
-  background: white;
+  background: #13383e ;
   border-radius: 15px;
   padding: 1.5rem;
   display: flex;
@@ -266,7 +267,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(20, 27, 45, 0.1);
+  background: rgba(14, 46, 51, 0.1);
   border-radius: 12px;
 }
 
@@ -284,7 +285,7 @@
 }
 
 .booking-location {
-  color: #141B2D !important;
+  color: #EEF4F4 !important;
   font-weight: 500;
 }
 
@@ -294,7 +295,7 @@
 }
 
 .booking-ref {
-  color: #141B2D !important;
+  color: #EEF4F4 !important;
   font-weight: 600 !important;
   font-size: 0.9rem !important;
 }
@@ -335,7 +336,7 @@
 
 .booking-price {
   font-size: 1.1rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   font-weight: 600;
   margin: 0;
 }
@@ -347,7 +348,7 @@
 
 .view-btn {
   padding: 0.6rem 1.2rem;
-  background: #141B2D;
+  background: #0E2E33;
   color: white;
   border: none;
   border-radius: 20px;
@@ -381,7 +382,7 @@
 
 .review-btn {
   padding: 0.6rem 1.2rem;
-  background: linear-gradient(135deg, #141B2D 0%, #8B96AB 100%);
+  background: linear-gradient(135deg, #0E2E33 0%, #8B96AB 100%);
   color: white;
   border: none;
   border-radius: 20px;
@@ -393,18 +394,18 @@
 
 .review-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.3);
+  box-shadow: 0 4px 15px rgba(14, 46, 51, 0.3);
 }
 
 .security-note {
-  background: linear-gradient(135deg, #141B2D);
+  background: linear-gradient(135deg, #0E2E33);
   border-radius: 15px;
   padding: 1.5rem 2rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-top: 2rem;
-  box-shadow: 0 4px 15px rgba(20, 27, 45, 0.3);
+  box-shadow: 0 4px 15px rgba(14, 46, 51, 0.3);
 }
 
 .security-note-icon {

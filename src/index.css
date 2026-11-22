@@ -1,27 +1,26 @@
 /* ════════════════════════════════════════════════════
    GLOBAL DESIGN SYSTEM — Service HUB
-   Primary:  #141B2D  (Navy)
-   Accent:   #FF5A4E  (Blue)
+   Primary:  #0E2E33  (Navy)
+   Accent:   #8FD3E8  (Blue)
    Highlight:#10b981  (Green)
    Body:     #ffffff  (White)
    Surface:  #f8faff  (Light blue-white)
 ════════════════════════════════════════════════════ */
 
 :root {
-  --primary:      #141B2D;
-  --primary-light:#1e293b;
-  --accent:       #FF5A4E;
-  --accent-glow:  rgba(255, 90, 78, 0.35);
-  --pearl-white:  #F4F1EA;
-  --green:        #10b981;
-  --white:        #ffffff;
-  --surface:      #F4F1EA;
-  --border:       rgba(20, 27, 45, 0.12);
-  --text:         #141B2D;
-  --muted:        #64748b;
-  --shadow-sm:    0 2px 8px rgba(20, 27, 45,0.08);
-  --shadow-md:    0 6px 24px rgba(20, 27, 45,0.12);
-  --shadow-lg:    0 16px 48px rgba(20, 27, 45,0.18);
+  --primary:      #0E2E33;
+  --primary-light:#13383e;
+  --accent:       #8FD3E8;
+  --accent-glow:  rgba(143, 211, 232, 0.45);
+  --frost-white:  #EEF4F4;
+  --white:        #EEF4F4;
+  --surface:      #13383e;
+  --border:       rgba(143, 211, 232, 0.2);
+  --text:         #EEF4F4;
+  --muted:        rgba(238, 244, 244, 0.72);
+  --shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md:    0 6px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg:    0 16px 48px rgba(0, 0, 0, 0.5);
   --radius:       14px;
   --transition:   all 0.28s cubic-bezier(0.4,0,0.2,1);
 }
@@ -34,16 +33,36 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--pearl-white);
-  color: var(--text);
+  background: #0E2E33;
+  color: #EEF4F4;
   overflow-x: hidden;
 }
 
-/* ── GLOBAL BUTTON ANIMATION KEYFRAMES ── */
-@keyframes btn-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(20, 27, 45,0.4); }
-  70%  { box-shadow: 0 0 0 10px rgba(20, 27, 45,0); }
-  100% { box-shadow: 0 0 0 0 rgba(20, 27, 45,0); }
+/* ── GLOBAL ANIMATIONS ── */
+@keyframes webSectionFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes iceFloatGlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes icePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(143, 211, 232, 0.45); }
+  70%  { box-shadow: 0 0 0 12px rgba(143, 211, 232, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(143, 211, 232, 0); }
 }
 
 @keyframes btn-shine {
@@ -51,17 +70,12 @@ body {
   100% { left: 200%; }
 }
 
-@keyframes float-up {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
-}
-
 /* ── GLOBAL PRIMARY BUTTON ── */
 .btn-primary {
   position: relative;
   overflow: hidden;
-  background: var(--primary);
-  color: var(--white);
+  background: #8FD3E8;
+  color: #0E2E33;
   border: none;
   border-radius: 50px;
   padding: 0.8rem 2rem;
@@ -69,7 +83,7 @@ body {
   font-size: 1rem;
   cursor: pointer;
   transition: var(--transition);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 15px rgba(143, 211, 232, 0.35);
 }
 
 .btn-primary::after {
@@ -77,16 +91,16 @@ body {
   position: absolute;
   top: 0; left: -100%;
   width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  background: linear-gradient(90deg, transparent, rgba(238, 244, 244, 0.3), transparent);
   transform: skewX(-20deg);
   transition: none;
 }
 
 .btn-primary:hover {
-  background: var(--accent);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 90, 78,0.4);
-  animation: btn-pulse 0.6s ease;
+  background: #a8e0f0;
+  color: #0E2E33;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(143, 211, 232, 0.55);
 }
 
 .btn-primary:hover::after {
@@ -95,17 +109,18 @@ body {
 
 /* ── GLOBAL CARD ── */
 .card {
-  background: var(--white);
+  background: #13383e;
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border);
+  color: #EEF4F4;
   transition: var(--transition);
 }
 
 .card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-6px);
-  border-color: rgba(255, 90, 78,0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(143, 211, 232, 0.25);
+  transform: translateY(-3px);
+  border-color: rgba(143, 211, 232, 0.45);
 }
 
 /* ── FORCE WHITE TEXT IN HERO ── */
@@ -269,7 +284,7 @@ body {
   }
 
   .slider-dots .dot.active:before {
-    background: #FF5A4E;
+    background: #8FD3E8;
   }
 
   .slider-nav-footer {
@@ -570,53 +585,71 @@ button:not(:disabled),
 .slider-control-btn,
 .review-slider-arrow,
 .quick-nav-btn {
-  transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.28s ease, filter 0.28s ease !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
 }
 
-button:not(:disabled):hover,
+/* ── ACTION BUTTONS: ICE BLUE #8FD3E8 INSIDE, DEEP TEAL #0E2E33 TEXT ── */
+.btn-primary,
+.card-explore-btn,
+.hire-button,
+.price-button,
+.search-button,
+.cta-button,
+.cta-primary,
+.view-profile-btn,
+.chat-action-btn,
+.pcr-action-btn,
+.book-now-btn,
+.btn-signup {
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
+  font-weight: 700 !important;
+  border: none !important;
+  border-radius: 50px !important;
+  box-shadow: 0 4px 14px rgba(143, 211, 232, 0.35) !important;
+  transition: all 0.25s ease !important;
+}
+
+/* Button Hover: gentle lift, NO turning blue, soft glowing sheen */
 .btn-primary:hover,
 .card-explore-btn:hover,
 .hire-button:hover,
 .price-button:hover,
 .search-button:hover,
 .cta-button:hover,
+.cta-primary:hover,
 .view-profile-btn:hover,
 .chat-action-btn:hover,
 .pcr-action-btn:hover,
-.book-now-btn:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 
-    0 10px 24px rgba(20, 27, 45, 0.22),
-    0 0 20px rgba(255, 90, 78, 0.65),
-    0 0 40px rgba(255, 122, 112, 0.4) !important;
+.book-now-btn:hover,
+.btn-signup:hover {
+  background: #a8e0f0 !important;
+  color: #0E2E33 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(143, 211, 232, 0.55) !important;
 }
 
-/* Coral / Primary Action Buttons */
-.btn-primary:hover,
-.price-button:hover,
-.card-explore-btn:hover,
-.view-profile-btn:hover,
-.chat-action-btn:hover,
-.pcr-action-btn:hover,
-.search-button:hover,
-.cta-button:hover,
-.hire-button:hover {
-  box-shadow: 
-    0 10px 24px rgba(255, 90, 78, 0.35),
-    0 0 26px rgba(255, 90, 78, 0.8),
-    0 0 48px rgba(255, 122, 112, 0.45) !important;
+/* Secondary / Outline Buttons */
+.cta-secondary,
+.btn-login {
+  background: rgba(143, 211, 232, 0.1) !important;
+  color: #EEF4F4 !important;
+  border: 1.5px solid #8FD3E8 !important;
+  border-radius: 50px !important;
+  font-weight: 700 !important;
+  transition: all 0.25s ease !important;
 }
 
-/* Green / Success Action Buttons */
-.btn-success:hover,
-.work-verified-pill:hover {
-  box-shadow: 
-    0 10px 24px rgba(16, 185, 129, 0.3),
-    0 0 24px rgba(16, 185, 129, 0.7),
-    0 0 45px rgba(52, 211, 153, 0.45) !important;
+.cta-secondary:hover,
+.btn-login:hover {
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
+  border-color: #8FD3E8 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(143, 211, 232, 0.4) !important;
 }
 
-/* Universal Card Hover & Animated Backlight Glow */
+/* ── UNIVERSAL CARDS: DEEP PINE TEAL #13383e WITH FROST WHITE #EEF4F4 TEXT ── */
 .top-service-card,
 .professional-card,
 .price-card,
@@ -626,9 +659,14 @@ button:not(:disabled):hover,
 .service-offer-card,
 .service-provider-card,
 .card {
-  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+  background: #13383e !important;
+  color: #EEF4F4 !important;
+  border: 1.5px solid rgba(143, 211, 232, 0.2) !important;
+  border-radius: 18px !important;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease !important;
 }
 
+/* Card Hover: Gentle lift, NO turning blue, elegant Ice Blue subtle glow */
 .top-service-card:hover,
 .professional-card:hover,
 .price-card:hover,
@@ -636,39 +674,22 @@ button:not(:disabled):hover,
 .completed-work-card:hover,
 .customer-review-card:hover,
 .service-offer-card:hover,
-.service-provider-card:hover {
-  transform: translateY(-8px) !important;
+.service-provider-card:hover,
+.card:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(143, 211, 232, 0.5) !important;
   box-shadow: 
-    0 22px 55px rgba(20, 27, 45, 0.22),
-    0 0 35px rgba(255, 90, 78, 0.45),
-    0 0 70px rgba(255, 122, 112, 0.3) !important;
+    0 14px 35px rgba(0, 0, 0, 0.4),
+    0 0 22px rgba(143, 211, 232, 0.25) !important;
 }
 
-/* Specific Card Themes & Custom Glow Accents */
-.theme-home:hover {
-  box-shadow: 
-    0 22px 55px rgba(255, 90, 78, 0.25),
-    0 0 35px rgba(255, 90, 78, 0.5),
-    0 0 70px rgba(255, 160, 153, 0.3) !important;
-}
-
-.theme-tech:hover {
-  box-shadow: 
-    0 22px 55px rgba(20, 27, 45, 0.3),
-    0 0 35px rgba(255, 90, 78, 0.5),
-    0 0 70px rgba(255, 90, 78, 0.35) !important;
-}
-
-.theme-events:hover {
-  box-shadow: 
-    0 22px 55px rgba(217, 119, 6, 0.25),
-    0 0 35px rgba(245, 158, 11, 0.5),
-    0 0 70px rgba(251, 191, 36, 0.3) !important;
-}
-
-.theme-cosmetics:hover {
-  box-shadow: 
-    0 22px 55px rgba(5, 150, 105, 0.25),
-    0 0 35px rgba(16, 185, 129, 0.5),
-    0 0 70px rgba(52, 211, 153, 0.3) !important;
+/* Universal Page Animations */
+.hero-section,
+.category-section,
+.mux-dual-ticker-section,
+.professionals-section,
+.price-offer-section,
+.trust-section,
+.cta-section {
+  animation: webSectionFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

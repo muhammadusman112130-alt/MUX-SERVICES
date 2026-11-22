@@ -1348,7 +1348,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
         id: 'rev1',
         author: 'Muhammad Tariq',
         location: 'Gulgasht Colony, Multan',
-        avatarColor: '#FF5A4E',
+        avatarColor: '#8FD3E8',
         rating: 5,
         date: '2 days ago',
         serviceDone: `${sName} Work`,
@@ -1806,7 +1806,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                 </button>
                 <h2 className="booking-form-title">Complete Your Booking</h2>
                 <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '1.2rem' }}>
-                  Booking with <strong>{selectedProvider.name}</strong> • Agreed Price: <strong style={{ color: '#FF5A4E' }}>{negotiatedPrice || selectedProvider.price}</strong>
+                  Booking with <strong>{selectedProvider.name}</strong> • Agreed Price: <strong style={{ color: '#8FD3E8' }}>{negotiatedPrice || selectedProvider.price}</strong>
                 </p>
 
                 <div className="booking-form">
@@ -1892,12 +1892,12 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                   <svg className="dp-orbit-svg" viewBox="0 0 220 220" aria-hidden="true">
                     <defs>
                       <linearGradient id="dpOrbitCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#FF5A4E" />
-                        <stop offset="100%" stopColor="#FFA099" />
+                        <stop offset="0%" stopColor="#8FD3E8" />
+                        <stop offset="100%" stopColor="#bdecf9" />
                       </linearGradient>
                       <linearGradient id="dpOrbitBlueGrad" x1="100%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" stopColor="#F4F1EA" />
-                        <stop offset="100%" stopColor="#FF5A4E" />
+                        <stop offset="0%" stopColor="#EEF4F4" />
+                        <stop offset="100%" stopColor="#8FD3E8" />
                       </linearGradient>
                     </defs>
                     {/* Outer Ring: dual rotating detached arcs (one top, one bottom, not connected) */}
@@ -2059,7 +2059,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                   </div>
                   <div className="info-item">
                     <span className="info-label">Identity Verified:</span>
-                    <span className="info-value" style={{ color: '#16a34a', fontWeight: 700 }}>✓ Verified NADRA CNIC</span>
+                    <span className="info-value" style={{ color: '#8FD3E8', fontWeight: 700 }}>✓ Verified NADRA CNIC</span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">Jobs Completed:</span>
@@ -2067,7 +2067,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                   </div>
                   <div className="info-item">
                     <span className="info-label">Escrow Protected:</span>
-                    <span className="info-value" style={{ color: '#FF5A4E', fontWeight: 700 }}>✓ 100% Secure</span>
+                    <span className="info-value" style={{ color: '#8FD3E8', fontWeight: 700 }}>✓ 100% Secure</span>
                   </div>
                 </div>
               </div>
@@ -2133,7 +2133,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                     <div>
                       <div className="summary-stars-row">
                         {[...Array(5)].map((_, i) => (
-                          <span key={i} style={{ color: '#f59e0b' }}>★</span>
+                          <span key={i} style={{ color: '#8FD3E8' }}>★</span>
                         ))}
                       </div>
                       <p className="summary-total-text">Based on {selectedProvider.reviews} verified client reviews</p>
@@ -2358,7 +2358,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                       <p style={{ fontSize: '1.1rem', marginBottom: '14px', fontWeight: 500 }}>No providers found matching your filters.</p>
                       <button 
                         onClick={() => { setSearchQuery(''); setRatingFilter('All'); setPriceFilter('All'); }}
-                        style={{ background: '#141B2D', color: '#fff', border: 'none', padding: '10px 22px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}
+                        style={{ background: '#8FD3E8', color: '#0E2E33', border: 'none', padding: '10px 22px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold' }}
                       >
                         Clear Filters
                       </button>

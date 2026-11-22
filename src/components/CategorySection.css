@@ -5,7 +5,7 @@
 .category-section {
   position: relative;
   padding: 5rem 1.5rem;
-  background: linear-gradient(180deg, #F4F1EA 0%, #FAF8F5 50%, #F4F1EA 100%);
+  background: #0E2E33;
   overflow: hidden;
 }
 
@@ -17,7 +17,7 @@
   transform: translateX(-50%);
   width: 900px;
   height: 400px;
-  background: radial-gradient(circle, rgba(255, 90, 78, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(143, 211, 232, 0.06) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -39,9 +39,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 90, 78, 0.08);
-  border: 1px solid rgba(255, 90, 78, 0.2);
-  color: #FF5A4E;
+  background: rgba(143, 211, 232, 0.08);
+  border: 1px solid rgba(143, 211, 232, 0.2);
+  color: #8FD3E8;
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -55,8 +55,8 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #FF5A4E;
-  box-shadow: 0 0 10px #FF5A4E;
+  background: #8FD3E8;
+  box-shadow: 0 0 10px #8FD3E8;
   animation: pulseDot 2s infinite;
 }
 
@@ -77,14 +77,14 @@
 .category-section .section-title {
   font-size: 2.6rem;
   font-weight: 800;
-  color: #141B2D;
+  color: #EEF4F4;
   margin-bottom: 0.6rem;
   letter-spacing: -0.02em;
 }
 
 .category-section .section-subtitle {
   font-size: 1.12rem;
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.75);
   max-width: 640px;
   margin: 0 auto 1.75rem auto;
   line-height: 1.6;
@@ -108,9 +108,9 @@
   gap: 0.5rem;
   padding: 0.6rem 1.15rem;
   border-radius: 9999px;
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
-  color: #334155;
+  background: rgba(238, 244, 244, 0.06);
+  border: 1.5px solid rgba(143, 211, 232, 0.25);
+  color: #EEF4F4;
   font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
@@ -120,8 +120,9 @@
 
 .quick-nav-btn:hover {
   transform: translateY(-2px);
-  border-color: #cbd5e1;
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+  border-color: #8FD3E8;
+  color: #8FD3E8;
+  box-shadow: 0 6px 16px rgba(143, 211, 232, 0.25);
 }
 
 .quick-nav-icon {
@@ -129,46 +130,46 @@
 }
 
 /* Active Nav States with Matching Accent Colors */
-.quick-nav-btn.theme-home.active {
-  background: #FF5A4E;
-  color: #ffffff;
-  border-color: #FF5A4E;
-  box-shadow: 0 6px 20px rgba(255, 90, 78, 0.35);
+.quick-nav-btn.active {
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
+  border-color: #8FD3E8 !important;
+  box-shadow: 0 6px 20px rgba(143, 211, 232, 0.45) !important;
 }
 
-.quick-nav-btn.theme-tech.active {
-  background: #4f46e5;
-  color: #ffffff;
-  border-color: #4f46e5;
-  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35);
+.quick-nav-btn.active {
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
+  border-color: #8FD3E8 !important;
+  box-shadow: 0 6px 20px rgba(143, 211, 232, 0.45) !important;
 }
 
-.quick-nav-btn.theme-riders.active {
-  background: #ea580c;
-  color: #ffffff;
-  border-color: #ea580c;
-  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35);
+.quick-nav-btn.active {
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
+  border-color: #8FD3E8 !important;
+  box-shadow: 0 6px 20px rgba(143, 211, 232, 0.45) !important;
 }
 
-.quick-nav-btn.theme-events.active {
-  background: #9333ea;
-  color: #ffffff;
-  border-color: #9333ea;
-  box-shadow: 0 6px 20px rgba(147, 51, 234, 0.35);
+.quick-nav-btn.active {
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
+  border-color: #8FD3E8 !important;
+  box-shadow: 0 6px 20px rgba(143, 211, 232, 0.45) !important;
 }
 
-.quick-nav-btn.theme-cosmetics.active {
-  background: #db2777;
-  color: #ffffff;
-  border-color: #db2777;
-  box-shadow: 0 6px 20px rgba(219, 39, 119, 0.35);
+.quick-nav-btn.active {
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
+  border-color: #8FD3E8 !important;
+  box-shadow: 0 6px 20px rgba(143, 211, 232, 0.45) !important;
 }
 
-.quick-nav-btn.theme-education.active {
-  background: #d97706;
-  color: #ffffff;
-  border-color: #d97706;
-  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.35);
+.quick-nav-btn.active {
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
+  border-color: #8FD3E8 !important;
+  box-shadow: 0 6px 20px rgba(143, 211, 232, 0.45) !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -184,7 +185,7 @@
 .slider-viewport {
   overflow: hidden;
   border-radius: 26px;
-  box-shadow: 0 20px 48px -12px rgba(20, 27, 45, 0.12);
+  box-shadow: 0 20px 48px -12px rgba(14, 46, 51, 0.12);
 }
 
 /* GPU Accelerated Track for Zero-Lag (transform3d) */
@@ -210,7 +211,7 @@
   position: absolute;
   inset: 12px 8px;
   border-radius: 32px;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 90, 78, 0.85) 0%, rgba(255, 160, 153, 0.55) 45%, rgba(255, 90, 78, 0.25) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.85) 0%, rgba(189, 236, 249, 0.55) 45%, rgba(143, 211, 232, 0.25) 75%, transparent 100%);
   filter: blur(28px);
   opacity: 0;
   pointer-events: none;
@@ -227,11 +228,11 @@
 
 /* Theme-specific backlight glows */
 .slider-slide:hover .card-backlight-glow.glow-theme-home {
-  background: radial-gradient(circle at 50% 50%, rgba(255, 90, 78, 0.9) 0%, rgba(255, 160, 153, 0.6) 45%, rgba(20, 27, 45, 0.3) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.9) 0%, rgba(189, 236, 249, 0.6) 45%, rgba(14, 46, 51, 0.3) 75%, transparent 100%);
 }
 
 .slider-slide:hover .card-backlight-glow.glow-theme-tech {
-  background: radial-gradient(circle at 50% 50%, rgba(255, 90, 78, 0.9) 0%, rgba(20, 27, 45, 0.6) 45%, rgba(255, 90, 78, 0.3) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.9) 0%, rgba(14, 46, 51, 0.6) 45%, rgba(143, 211, 232, 0.3) 75%, transparent 100%);
 }
 
 .slider-slide:hover .card-backlight-glow.glow-theme-events {
@@ -270,24 +271,24 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 1.5px solid rgba(226, 232, 240, 0.9);
-  color: #141B2D;
+  background: #13383e;
+  border: 1.5px solid rgba(143, 211, 232, 0.25);
+  color: #EEF4F4;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 6px 20px rgba(20, 27, 45, 0.12);
+  box-shadow: 0 6px 20px rgba(14, 46, 51, 0.12);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slider-control-btn:hover {
-  background: #141B2D;
-  color: #ffffff;
-  border-color: #141B2D;
+  background: #8FD3E8;
+  color: #0E2E33;
+  border-color: #8FD3E8;
   transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 10px 28px rgba(20, 27, 45, 0.25);
+  box-shadow: 0 10px 28px rgba(14, 46, 51, 0.25);
 }
 
 .slider-control-btn.prev-btn {
@@ -306,8 +307,8 @@
   z-index: 2;
   padding: 2.5rem;
   border-radius: 26px;
-  background: #ffffff;
-  border: 2px solid transparent;
+  background: #13383e;
+  border: 1.5px solid rgba(143, 211, 232, 0.2);
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, border-color 0.35s ease;
@@ -316,11 +317,11 @@
 
 .top-service-card:hover {
   transform: translateY(-9px);
-  border-color: rgba(255, 90, 78, 0.45);
+  border-color: rgba(143, 211, 232, 0.45);
   box-shadow:
-    0 22px 55px rgba(20, 27, 45, 0.18),
-    0 0 35px rgba(255, 90, 78, 0.35),
-    0 0 70px rgba(255, 90, 78, 0.2);
+    0 22px 55px rgba(14, 46, 51, 0.18),
+    0 0 35px rgba(143, 211, 232, 0.35),
+    0 0 70px rgba(143, 211, 232, 0.2);
 }
 
 .card-ambient-glow {
@@ -341,276 +342,52 @@
   transform: scale(1.15);
 }
 
-/* ── 4 MATCHING CARD THEMES ── */
-
-/* 1. Home Services Theme (Midnight Slate Navy / Coral Accent) */
-.top-service-card.theme-home {
-  background: linear-gradient(145deg, #ffffff 0%, #FAF8F5 50%, #F4F1EA 100%);
-  border-color: rgba(255, 90, 78, 0.32);
-  box-shadow: 0 16px 40px rgba(255, 90, 78, 0.1);
+/* ── UNIFIED PALETTE CARD THEMES (#0E2E33, #EEF4F4, #8FD3E8) ── */
+.top-service-card {
+  background: #13383e !important;
+  border: 1.5px solid rgba(143, 211, 232, 0.2) !important;
 }
 
-.theme-home .card-ambient-glow {
-  background: radial-gradient(circle, rgba(255, 90, 78, 0.45) 0%, transparent 70%);
+.top-service-card .card-ambient-glow {
+  background: radial-gradient(circle, rgba(143, 211, 232, 0.25) 0%, transparent 70%);
 }
 
-.theme-home .card-badge-tag {
-  background: linear-gradient(135deg, #FF5A4E, #141B2D);
+.top-service-card .card-badge-tag {
+  background: #8FD3E8;
+  color: #0E2E33;
+  font-weight: 700;
 }
 
-.theme-home .card-service-title {
-  color: #141B2D;
+.top-service-card .card-service-title {
+  color: #EEF4F4 !important;
 }
 
-.theme-home .card-price-chip {
-  background: rgba(255, 90, 78, 0.12);
-  color: #FF5A4E;
-  border: 1px solid rgba(255, 90, 78, 0.35);
+.top-service-card .card-price-chip {
+  background: rgba(143, 211, 232, 0.15);
+  color: #8FD3E8;
+  border: 1px solid rgba(143, 211, 232, 0.35);
 }
 
-.theme-home .skill-chip {
-  background: rgba(20, 27, 45, 0.08);
-  color: #141B2D;
-  border: 1px solid rgba(20, 27, 45, 0.22);
+.top-service-card .skill-chip {
+  background: rgba(238, 244, 244, 0.06);
+  color: #EEF4F4;
+  border: 1px solid rgba(143, 211, 232, 0.2);
 }
 
-.theme-home .skill-chip:hover {
-  background: #FF5A4E;
-  color: #ffffff;
+.top-service-card .skill-chip:hover {
+  background: #8FD3E8;
+  color: #0E2E33;
 }
 
-.theme-home .card-explore-btn {
-  background: linear-gradient(135deg, #FF5A4E, #141B2D);
-  box-shadow: 0 6px 18px rgba(255, 90, 78, 0.3);
+.top-service-card .card-explore-btn {
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(143, 211, 232, 0.3);
 }
 
-.theme-home .card-side-img-wrapper {
-  border: 2px solid rgba(255, 90, 78, 0.3);
-}
-
-/* 2. Tech Services Theme (Cyber Indigo / Electric Violet) */
-.top-service-card.theme-tech {
-  background: linear-gradient(145deg, #ffffff 0%, #f5f3ff 50%, #ede9fe 100%);
-  border-color: rgba(99, 102, 241, 0.32);
-  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.1);
-}
-
-.theme-tech .card-ambient-glow {
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.45) 0%, transparent 70%);
-}
-
-.theme-tech .card-badge-tag {
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-}
-
-.theme-tech .card-service-title {
-  color: #4f46e5;
-}
-
-.theme-tech .card-price-chip {
-  background: rgba(99, 102, 241, 0.12);
-  color: #4f46e5;
-  border: 1px solid rgba(99, 102, 241, 0.35);
-}
-
-.theme-tech .skill-chip {
-  background: rgba(99, 102, 241, 0.08);
-  color: #4338ca;
-  border: 1px solid rgba(99, 102, 241, 0.22);
-}
-
-.theme-tech .skill-chip:hover {
-  background: #4f46e5;
-  color: #ffffff;
-}
-
-.theme-tech .card-explore-btn {
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.3);
-}
-
-.theme-tech .card-side-img-wrapper {
-  border: 2px solid rgba(99, 102, 241, 0.3);
-}
-
-/* 3. Riders & Delivery Theme (Energetic Orange / Amber Flame) */
-.top-service-card.theme-riders {
-  background: linear-gradient(145deg, #ffffff 0%, #fff7ed 50%, #ffedd5 100%);
-  border-color: rgba(234, 88, 12, 0.32);
-  box-shadow: 0 16px 40px rgba(234, 88, 12, 0.1);
-}
-
-.theme-riders .card-ambient-glow {
-  background: radial-gradient(circle, rgba(234, 88, 12, 0.45) 0%, transparent 70%);
-}
-
-.theme-riders .card-badge-tag {
-  background: linear-gradient(135deg, #ea580c, #f97316);
-}
-
-.theme-riders .card-service-title {
-  color: #c2410c;
-}
-
-.theme-riders .card-price-chip {
-  background: rgba(234, 88, 12, 0.12);
-  color: #c2410c;
-  border: 1px solid rgba(234, 88, 12, 0.35);
-}
-
-.theme-riders .skill-chip {
-  background: rgba(234, 88, 12, 0.08);
-  color: #c2410c;
-  border: 1px solid rgba(234, 88, 12, 0.22);
-}
-
-.theme-riders .skill-chip:hover {
-  background: #ea580c;
-  color: #ffffff;
-}
-
-.theme-riders .card-explore-btn {
-  background: linear-gradient(135deg, #ea580c, #f97316);
-  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.3);
-}
-
-.theme-riders .card-side-img-wrapper {
-  border: 2px solid rgba(234, 88, 12, 0.3);
-}
-
-/* 4. Event Management Theme (Royal Purple / Celebration Violet) */
-.top-service-card.theme-events {
-  background: linear-gradient(145deg, #ffffff 0%, #faf5ff 50%, #f3e8ff 100%);
-  border-color: rgba(147, 51, 234, 0.32);
-  box-shadow: 0 16px 40px rgba(147, 51, 234, 0.1);
-}
-
-.theme-events .card-ambient-glow {
-  background: radial-gradient(circle, rgba(147, 51, 234, 0.45) 0%, transparent 70%);
-}
-
-.theme-events .card-badge-tag {
-  background: linear-gradient(135deg, #9333ea, #a855f7);
-}
-
-.theme-events .card-service-title {
-  color: #7e22ce;
-}
-
-.theme-events .card-price-chip {
-  background: rgba(147, 51, 234, 0.12);
-  color: #7e22ce;
-  border: 1px solid rgba(147, 51, 234, 0.35);
-}
-
-.theme-events .skill-chip {
-  background: rgba(147, 51, 234, 0.08);
-  color: #7e22ce;
-  border: 1px solid rgba(147, 51, 234, 0.22);
-}
-
-.theme-events .skill-chip:hover {
-  background: #9333ea;
-  color: #ffffff;
-}
-
-.theme-events .card-explore-btn {
-  background: linear-gradient(135deg, #9333ea, #a855f7);
-  box-shadow: 0 6px 18px rgba(147, 51, 234, 0.3);
-}
-
-.theme-events .card-side-img-wrapper {
-  border: 2px solid rgba(147, 51, 234, 0.3);
-}
-
-/* 5. Salon & Cosmetics Theme (Rose Pink / Luxury Fuchsia) */
-.top-service-card.theme-cosmetics {
-  background: linear-gradient(145deg, #ffffff 0%, #fdf2f8 50%, #fce7f3 100%);
-  border-color: rgba(219, 39, 119, 0.32);
-  box-shadow: 0 16px 40px rgba(219, 39, 119, 0.1);
-}
-
-.theme-cosmetics .card-ambient-glow {
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.45) 0%, transparent 70%);
-}
-
-.theme-cosmetics .card-badge-tag {
-  background: linear-gradient(135deg, #db2777, #f43f5e);
-}
-
-.theme-cosmetics .card-service-title {
-  color: #be185d;
-}
-
-.theme-cosmetics .card-price-chip {
-  background: rgba(219, 39, 119, 0.12);
-  color: #be185d;
-  border: 1px solid rgba(219, 39, 119, 0.35);
-}
-
-.theme-cosmetics .skill-chip {
-  background: rgba(219, 39, 119, 0.08);
-  color: #be185d;
-  border: 1px solid rgba(219, 39, 119, 0.22);
-}
-
-.theme-cosmetics .skill-chip:hover {
-  background: #db2777;
-  color: #ffffff;
-}
-
-.theme-cosmetics .card-explore-btn {
-  background: linear-gradient(135deg, #db2777, #f43f5e);
-  box-shadow: 0 6px 18px rgba(219, 39, 119, 0.3);
-}
-
-.theme-cosmetics .card-side-img-wrapper {
-  border: 2px solid rgba(219, 39, 119, 0.3);
-}
-
-/* 6. Education Theme (Warm Sunset Amber / Royal Gold) */
-.top-service-card.theme-education {
-  background: linear-gradient(145deg, #ffffff 0%, #fffbeb 50%, #fef3c7 100%);
-  border-color: rgba(217, 119, 6, 0.32);
-  box-shadow: 0 16px 40px rgba(217, 119, 6, 0.1);
-}
-
-.theme-education .card-ambient-glow {
-  background: radial-gradient(circle, rgba(217, 119, 6, 0.45) 0%, transparent 70%);
-}
-
-.theme-education .card-badge-tag {
-  background: linear-gradient(135deg, #d97706, #b45309);
-}
-
-.theme-education .card-service-title {
-  color: #b45309;
-}
-
-.theme-education .card-price-chip {
-  background: rgba(217, 119, 6, 0.12);
-  color: #b45309;
-  border: 1px solid rgba(217, 119, 6, 0.35);
-}
-
-.theme-education .skill-chip {
-  background: rgba(217, 119, 6, 0.08);
-  color: #92400e;
-  border: 1px solid rgba(217, 119, 6, 0.22);
-}
-
-.theme-education .skill-chip:hover {
-  background: #d97706;
-  color: #ffffff;
-}
-
-.theme-education .card-explore-btn {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.3);
-}
-
-.theme-education .card-side-img-wrapper {
-  border: 2px solid rgba(217, 119, 6, 0.3);
+.top-service-card .card-side-img-wrapper {
+  border: 2px solid rgba(143, 211, 232, 0.3);
 }
 
 /* ── Top Row of Card (Badges) ── */
@@ -658,8 +435,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 6px #10b981;
+  background: #8FD3E8;
+  box-shadow: 0 0 6px #8FD3E8;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -691,9 +468,9 @@
   width: 72px;
   height: 72px;
   border-radius: 18px;
-  background: #ffffff;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 20px rgba(20, 27, 45, 0.07);
+  background: rgba(14, 46, 51, 0.7);
+  border: 1.5px solid rgba(143, 211, 232, 0.3);
+  box-shadow: 0 8px 20px rgba(14, 46, 51, 0.07);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -720,19 +497,19 @@
 }
 
 .card-svg-icon.rider-icon {
-  color: #ea580c;
+  color: #8FD3E8;
 }
 
 .card-svg-icon.event-icon {
-  color: #9333ea;
+  color: #8FD3E8;
 }
 
 .card-svg-icon.cosmetic-icon {
-  color: #db2777;
+  color: #8FD3E8;
 }
 
 .card-svg-icon.edu-icon {
-  color: #d97706;
+  color: #8FD3E8;
 }
 
 .card-text-block {
@@ -764,7 +541,7 @@
 .card-headline {
   font-size: 1.08rem;
   font-weight: 700;
-  color: #141B2D;
+  color: #0E2E33;
   margin-bottom: 0.35rem;
 }
 
@@ -844,7 +621,7 @@
   border-radius: 20px;
   overflow: hidden;
   background: #0f172a;
-  box-shadow: 0 12px 32px rgba(20, 27, 45, 0.14);
+  box-shadow: 0 12px 32px rgba(14, 46, 51, 0.14);
 }
 
 .card-side-img {
@@ -863,7 +640,7 @@
 .card-side-img-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(20, 27, 45, 0.05) 0%, rgba(20, 27, 45, 0.45) 100%);
+  background: linear-gradient(180deg, rgba(14, 46, 51, 0.05) 0%, rgba(14, 46, 51, 0.45) 100%);
   pointer-events: none;
 }
 
@@ -871,7 +648,7 @@
   position: absolute;
   bottom: 14px;
   left: 14px;
-  background: rgba(20, 27, 45, 0.8);
+  background: rgba(14, 46, 51, 0.8);
   backdrop-filter: blur(8px);
   color: #ffffff;
   font-size: 0.82rem;
@@ -905,7 +682,7 @@
   align-items: center;
   gap: 0.35rem;
   font-size: 0.95rem;
-  color: #141B2D;
+  color: #0E2E33;
 }
 
 .rating-pill strong {
@@ -923,7 +700,7 @@
 }
 
 .pros-count-text strong {
-  color: #141B2D;
+  color: #0E2E33;
   font-weight: 700;
 }
 
@@ -976,7 +753,7 @@
 }
 
 .counter-current {
-  color: #141B2D;
+  color: #0E2E33;
   font-size: 1.1rem;
 }
 
@@ -1014,7 +791,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: #141B2D;
+  background: #0E2E33;
   border-radius: 9999px;
   animation: dotProgress linear 1 forwards;
   transform-origin: left;

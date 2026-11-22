@@ -1,7 +1,7 @@
 .about-page {
   min-height: 100vh;
   padding-top: 80px;
-  background: #ffffff;
+  background: #0E2E33 ;
 }
 
 /* Hero Section */
@@ -24,14 +24,14 @@
 .hero-label {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #FF5A4E;
+  color: #8FD3E8;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 .hero-title {
   font-size: 3rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   line-height: 1.2;
   margin: 0;
   font-weight: 800;
@@ -39,7 +39,7 @@
 
 .hero-description {
   font-size: 1.1rem;
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.72) ;
   line-height: 1.7;
 }
 
@@ -48,7 +48,7 @@
   position: relative;
   overflow: hidden;
   padding: 1rem 2.5rem;
-  background: #141B2D;
+  background: #0E2E33;
   color: white;
   border: none;
   border-radius: 50px;
@@ -56,7 +56,7 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 4px 18px rgba(20, 27, 45,0.3);
+  box-shadow: 0 4px 18px rgba(14, 46, 51,0.3);
   width: fit-content;
 }
 
@@ -70,9 +70,9 @@
 }
 
 .hero-button:hover {
-  background: #FF5A4E;
+  background: #8FD3E8;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 90, 78,0.4);
+  box-shadow: 0 8px 25px rgba(143, 211, 232,0.4);
 }
 
 .hero-button:hover::after {
@@ -93,13 +93,13 @@
   width: 100%;
   max-width: 500px;
   height: 400px;
-  background: linear-gradient(135deg, #141B2D 0%, #0d2d6b 100%);
+  background: linear-gradient(135deg, #0E2E33 0%, #0d2d6b 100%);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 40px rgba(20, 27, 45,0.3);
+  box-shadow: 0 10px 40px rgba(14, 46, 51,0.3);
 }
 
 .image-placeholder.small {
@@ -127,7 +127,7 @@
 
 /* Har Service Section */
 .har-service-section {
-  background: #f8faff;
+  background: #0E2E33 ;
   padding: 4rem 2rem;
 }
 
@@ -148,24 +148,24 @@
 
 .section-title {
   font-size: 2.5rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin: 0;
   font-weight: 800;
 }
 
 .section-description {
   font-size: 1.1rem;
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.72) ;
   line-height: 1.7;
 }
 
 .stats-card {
-  background: linear-gradient(135deg, #141B2D 0%, #0d2d6b 100%);
+  background: linear-gradient(135deg, #0E2E33 0%, #0d2d6b 100%);
   padding: 2rem;
   border-radius: 15px;
   text-align: center;
   color: white;
-  box-shadow: 0 8px 25px rgba(20, 27, 45,0.3);
+  box-shadow: 0 8px 25px rgba(14, 46, 51,0.3);
   width: fit-content;
   transition: transform 0.28s;
 }
@@ -197,13 +197,13 @@
 .image-card {
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(20, 27, 45,0.12);
+  box-shadow: 0 4px 15px rgba(14, 46, 51,0.12);
 }
 
 /* Core Values Section */
 .core-values-section {
   padding: 5rem 2rem;
-  background: white;
+  background: #0E2E33 ;
 }
 
 .values-header {
@@ -213,14 +213,14 @@
 
 .values-title {
   font-size: 2.5rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin-bottom: 0.5rem;
   font-weight: 800;
 }
 
 .values-subtitle {
   font-size: 1.2rem;
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.72) ;
 }
 
 .values-grid {
@@ -232,11 +232,11 @@
 }
 
 .value-card {
-  background: white;
+  background: #13383e ;
   padding: 2.5rem;
   border-radius: 18px;
-  border: 2px solid #e0e7ff;
-  box-shadow: 0 4px 16px rgba(20, 27, 45,0.07);
+  border: 1.5px solid rgba(143, 211, 232, 0.2);
+  box-shadow: 0 4px 16px rgba(14, 46, 51,0.07);
   transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
   position: relative;
   overflow: hidden;
@@ -247,7 +247,7 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #141B2D, #FF5A4E);
+  background: linear-gradient(90deg, #0E2E33, #8FD3E8);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -255,8 +255,8 @@
 
 .value-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(255, 90, 78,0.35);
-  box-shadow: 0 16px 40px rgba(20, 27, 45,0.14);
+  border-color: rgba(143, 211, 232,0.35);
+  box-shadow: 0 16px 40px rgba(14, 46, 51,0.14);
 }
 
 .value-card:hover::before {
@@ -276,20 +276,20 @@
 
 .value-title {
   font-size: 1.4rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin-bottom: 1rem;
   font-weight: 700;
 }
 
 .value-description {
   font-size: 1rem;
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.72) ;
   line-height: 1.65;
 }
 
 /* Fair Pricing Section */
 .fair-pricing-section {
-  background: linear-gradient(135deg, #141B2D 0%, #0d2d6b 100%);
+  background: linear-gradient(135deg, #0E2E33 0%, #0d2d6b 100%);
   padding: 5rem 2rem;
 }
 
@@ -351,7 +351,7 @@
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(143, 211, 232, 0.2);
   border-radius: 20px;
   padding: 2rem;
   max-width: 400px;
@@ -371,7 +371,7 @@
 .bid-avatar {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #FF5A4E, #60a5fa);
+  background: linear-gradient(135deg, #8FD3E8, #60a5fa);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -421,8 +421,8 @@
   overflow: hidden;
   width: 100%;
   padding: 1rem;
-  background: white;
-  color: #141B2D;
+  background: #0E2E33 ;
+  color: #EEF4F4 ;
   border: none;
   border-radius: 10px;
   font-size: 1rem;

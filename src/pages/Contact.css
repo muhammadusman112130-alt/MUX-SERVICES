@@ -1,7 +1,7 @@
 .contact-page {
   min-height: 100vh;
   padding-top: 80px;
-  background: #f8faff;
+  background: #0E2E33 ;
 }
 
 .contact-container {
@@ -18,14 +18,14 @@
 
 .contact-title {
   font-size: 3rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin-bottom: 1rem;
   font-weight: 800;
 }
 
 .contact-description {
   font-size: 1.15rem;
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.72) ;
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
@@ -41,16 +41,16 @@
 
 /* Form Section */
 .contact-form-section {
-  background: white;
+  background: #0E2E33 ;
   padding: 2.5rem;
   border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(20, 27, 45,0.08);
-  border: 2px solid #e0e7ff;
+  box-shadow: 0 4px 20px rgba(14, 46, 51,0.08);
+  border: 1.5px solid rgba(143, 211, 232, 0.2);
 }
 
 .form-title {
   font-size: 1.8rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin-bottom: 2rem;
   font-weight: 700;
 }
@@ -70,29 +70,29 @@
 .form-group label {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #141B2D;
+  color: #EEF4F4 ;
 }
 
 .form-input,
 .form-select,
 .form-textarea {
   padding: 0.9rem 1rem;
-  border: 2px solid #e0e7ff;
+  border: 1.5px solid rgba(143, 211, 232, 0.2);
   border-radius: 10px;
   font-size: 1rem;
   font-family: inherit;
   transition: all 0.25s;
   background: #fafbff;
-  color: #1e293b;
+  color: #EEF4F4 ;
 }
 
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: #141B2D;
-  box-shadow: 0 0 0 3px rgba(20, 27, 45,0.1);
-  background: white;
+  border-color: #EEF4F4 ;
+  box-shadow: 0 0 0 3px rgba(14, 46, 51,0.1);
+  background: #0E2E33 ;
 }
 
 .form-textarea {
@@ -105,7 +105,7 @@
   position: relative;
   overflow: hidden;
   padding: 1rem 2.5rem;
-  background: #141B2D;
+  background: #0E2E33;
   color: white;
   border: none;
   border-radius: 50px;
@@ -113,7 +113,7 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 4px 18px rgba(20, 27, 45,0.3);
+  box-shadow: 0 4px 18px rgba(14, 46, 51,0.3);
 }
 
 .submit-button::after {
@@ -126,9 +126,9 @@
 }
 
 .submit-button:hover {
-  background: #FF5A4E;
+  background: #8FD3E8;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 90, 78,0.4);
+  box-shadow: 0 8px 25px rgba(143, 211, 232,0.4);
 }
 
 .submit-button:hover::after {
@@ -148,11 +148,11 @@
 }
 
 .contact-card {
-  background: white;
+  background: #13383e ;
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(20, 27, 45,0.07);
-  border: 2px solid #e0e7ff;
+  box-shadow: 0 2px 12px rgba(14, 46, 51,0.07);
+  border: 1.5px solid rgba(143, 211, 232, 0.2);
   transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
   position: relative;
   overflow: hidden;
@@ -163,7 +163,7 @@
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 4px;
-  background: linear-gradient(180deg, #141B2D, #FF5A4E);
+  background: linear-gradient(180deg, #0E2E33, #8FD3E8);
   transform: scaleY(0);
   transition: transform 0.3s ease;
   transform-origin: top;
@@ -171,8 +171,8 @@
 
 .contact-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(20, 27, 45,0.14);
-  border-color: rgba(255, 90, 78,0.3);
+  box-shadow: 0 12px 35px rgba(14, 46, 51,0.14);
+  border-color: rgba(143, 211, 232,0.3);
 }
 
 .contact-card:hover::before {
@@ -192,19 +192,19 @@
 
 .card-title {
   font-size: 1.25rem;
-  color: #141B2D;
+  color: #EEF4F4 ;
   margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
 .card-description {
   font-size: 0.95rem;
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.72) ;
   margin-bottom: 0.5rem;
 }
 
 .card-link {
-  color: #FF5A4E;
+  color: #8FD3E8;
   text-decoration: none;
   font-weight: 700;
   font-size: 1rem;
@@ -212,14 +212,14 @@
 }
 
 .card-link:hover {
-  color: #141B2D;
+  color: #EEF4F4 ;
   text-decoration: underline;
 }
 
 .map-placeholder {
   margin-top: 1rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #141B2D 0%, #0d2d6b 100%);
+  background: linear-gradient(135deg, #0E2E33 0%, #0d2d6b 100%);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -238,12 +238,12 @@
 
 /* FAQ Section */
 .faq-section {
-  background: linear-gradient(135deg, #141B2D 0%, #0d2d6b 100%);
+  background: linear-gradient(135deg, #0E2E33 0%, #0d2d6b 100%);
   padding: 3rem;
   border-radius: 20px;
   text-align: center;
   color: white;
-  box-shadow: 0 8px 30px rgba(20, 27, 45,0.25);
+  box-shadow: 0 8px 30px rgba(14, 46, 51,0.25);
 }
 
 .faq-content {
@@ -270,8 +270,8 @@
   position: relative;
   overflow: hidden;
   padding: 1rem 2.5rem;
-  background: white;
-  color: #141B2D;
+  background: #0E2E33 ;
+  color: #EEF4F4 ;
   border: none;
   border-radius: 50px;
   font-size: 1rem;
