@@ -87,19 +87,38 @@ function Navbar({
               }}
             />
             <span
-              className="brand-logo-text-cyan"
+              className="brand-logo-text-wrap"
               style={{
-                color: '#17f7f7',
-                WebkitTextFillColor: '#17f7f7',
                 background: 'none',
                 fontWeight: 900,
                 fontSize: '1.52rem',
                 letterSpacing: '1.2px',
                 textTransform: 'uppercase',
-                textShadow: '0 0 14px rgba(23, 247, 247, 0.9), 0 0 30px rgba(23, 247, 247, 0.6)'
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
               }}
             >
-              MUX SERVICES
+              <span
+                className="brand-logo-mux"
+                style={{
+                  color: '#ffffff',
+                  WebkitTextFillColor: '#ffffff',
+                  textShadow: '0 0 14px rgba(255, 255, 255, 0.8), 0 0 28px rgba(238, 244, 244, 0.5)'
+                }}
+              >
+                MUX
+              </span>
+              <span
+                className="brand-logo-services"
+                style={{
+                  color: '#17f7f7',
+                  WebkitTextFillColor: '#17f7f7',
+                  textShadow: '0 0 14px rgba(23, 247, 247, 0.9), 0 0 30px rgba(23, 247, 247, 0.6)'
+                }}
+              >
+                SERVICES
+              </span>
             </span>
           </a>
         </div>
