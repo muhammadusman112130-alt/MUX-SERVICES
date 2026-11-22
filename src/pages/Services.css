@@ -56,63 +56,32 @@
   z-index: 10;
 }
 
-/* Background "MUX SERVICES" Brand Watermark & Ambient Lights */
-.booking-header-brand-bg {
+/* Background Cinematic Profile Banner (Sharp, Crystal Clear & Modern) */
+.booking-header-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: brightness(0.92) contrast(1.1) saturate(1.12);
+  opacity: 1;
+  z-index: 1;
+  transform: scale(1.02);
+}
+
+.booking-header-ambient-overlay {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 46, 51, 0.45) 0%,
+    rgba(14, 46, 51, 0.25) 45%,
+    rgba(10, 32, 36, 0.65) 100%
+  );
+  z-index: 2;
   pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.brand-bg-watermark {
-  font-size: clamp(3.8rem, 9.5vw, 8.5rem);
-  font-weight: 900;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.055);
-  white-space: nowrap;
-  user-select: none;
-  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-  text-shadow: 0 0 45px rgba(143, 211, 232, 0.15);
-  transform: rotate(-2deg);
-}
-
-.booking-header-brand-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(143, 211, 232, 0.2);
-  padding: 0.4rem 1rem;
-  border-radius: 30px;
-  margin-bottom: 0.6rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  width: fit-content;
-}
-
-.brand-header-logo {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-}
-
-.brand-corp-name {
-  font-weight: 800;
-  font-size: 0.92rem;
-  letter-spacing: 0.8px;
-  color: #8FD3E8;
-}
-
-.brand-corp-tagline {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 600;
 }
 
 .back-to-services-btn {
@@ -332,7 +301,7 @@
   align-items: center;
   justify-content: center;
   border: 4px solid #ffffff;
-  cursor: pointer;
+  cursor: default;
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
@@ -351,62 +320,6 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-}
-
-.dp-upload-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(14, 46, 51, 0.8);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  color: #ffffff;
-  z-index: 2;
-}
-
-.booking-profile-image:hover .dp-upload-overlay {
-  opacity: 1;
-}
-
-.dp-camera-icon {
-  font-size: 1.6rem;
-}
-
-.dp-change-text {
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.dp-camera-badge {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #8FD3E8;
-  border: 2.5px solid #ffffff;
-  color: #0E2E33;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.05rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-  z-index: 3;
-  transition: transform 0.25s ease, background 0.25s ease;
-  pointer-events: none;
-}
-
-.booking-profile-image:hover .dp-camera-badge {
-  transform: scale(1.15);
-  background: #8FD3E8;
 }
 
 .profile-initial {
@@ -4379,87 +4292,7 @@
   background: rgba(143, 211, 232, 0.6);
 }
 
-/* Bottom Chat Redirect Box in Profile View */
-.profile-chat-redirect-box {
-  margin-top: 3.5rem;
-  background: #13383e;
-  border-radius: 20px;
-  padding: 2.4rem 2.8rem;
-  color: #EEF4F4;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4), 0 0 25px rgba(143, 211, 232, 0.15);
-  border: 1.5px solid #8FD3E8;
-}
 
-.pcr-text-group h4 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.45rem;
-  font-weight: 900;
-  color: #ffffff;
-}
-
-.pcr-text-group p {
-  margin: 0;
-  font-size: 0.98rem;
-  color: rgba(238, 244, 244, 0.85);
-  max-width: 650px;
-  line-height: 1.6;
-}
-
-.pcr-actions-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.pcr-action-btn.primary {
-  background: #8FD3E8;
-  color: #0E2E33;
-  border: none;
-  padding: 0.95rem 2.2rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.28s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 18px rgba(143, 211, 232, 0.45);
-  white-space: nowrap;
-}
-
-.pcr-action-btn.primary:hover {
-  background: #ffffff;
-  color: #0E2E33;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.5);
-}
-
-.pcr-action-btn.secondary {
-  background: rgba(23, 247, 247, 0.1);
-  color: #8FD3E8;
-  border: 1.5px solid rgba(143, 211, 232, 0.35);
-  padding: 0.95rem 1.8rem;
-  border-radius: 50px;
-  font-size: 0.98rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.28s ease;
-  white-space: nowrap;
-}
-
-.pcr-action-btn.secondary:hover {
-  background: rgba(143, 211, 232, 0.2);
-  border-color: #8FD3E8;
-  color: #EEF4F4;
-  transform: translateY(-2px);
-}
 
 /* ══════════════════════════════════════════════════════════════
    BOOKING & PAYMENT MODAL OVERLAY (Triggered from Chat)
@@ -4637,13 +4470,5 @@
   .customer-reviews-grid {
     grid-template-columns: 1fr;
   }
-  .profile-chat-redirect-box {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.8rem;
-  }
-  .pcr-action-btn {
-    width: 100%;
-    justify-content: center;
-  }
+
 }

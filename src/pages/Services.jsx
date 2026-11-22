@@ -21,6 +21,7 @@ import categoryCarpenterBanner from '../assets/category-carpenter-banner.webp'
 import categoryCleaningBanner from '../assets/category-cleaning-banner.webp'
 import categoryPainterBanner from '../assets/category-painter-banner.webp'
 import categoryApplianceBanner from '../assets/category-appliance-banner.webp'
+import providerProfileBanner from '../assets/provider-profile-banner.webp'
 const electricianPng = electricianImage
 const electricianJpg = electricianImage
 const acPng = acImage
@@ -1930,10 +1931,13 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
       {isViewingProfile && selectedProvider ? (
         <div className="booking-view provider-profile-view">
           <div className="booking-header">
-            {/* Background Brand Watermark */}
-            <div className="booking-header-brand-bg">
-              <span className="brand-bg-watermark">MUX SERVICES</span>
-            </div>
+            {/* Background Cinematic Profile Banner */}
+            <img 
+              src={providerProfileBanner} 
+              alt="Specialist Profile Background" 
+              className="booking-header-bg-img" 
+            />
+            <div className="booking-header-ambient-overlay" aria-hidden="true"></div>
 
             <button className="back-to-services-btn" onClick={handleBackToProviders} title="Back to Providers">
               <span className="back-arrow-icon">←</span>
@@ -2009,37 +2013,16 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                     </g>
                   </svg>
 
-                  <div 
-                    className="booking-profile-image" 
-                    onClick={() => providerDPInputRef.current?.click()}
-                    title="Click to upload or change profile picture"
-                  >
+                  <div className="booking-profile-image">
                     {getProviderDP(selectedProvider) ? (
                       <img src={getProviderDP(selectedProvider)} alt={selectedProvider.name} className="provider-dp-img" />
                     ) : (
                       <span className="profile-initial">{selectedProvider.name.charAt(0)}</span>
                     )}
-                    <div className="dp-upload-overlay">
-                      <span className="dp-camera-icon">📷</span>
-                      <span className="dp-change-text">Change DP</span>
-                    </div>
-                    <div className="dp-camera-badge" title="Change photo">📷</div>
-                    <input 
-                      type="file" 
-                      ref={providerDPInputRef} 
-                      style={{ display: 'none' }} 
-                      accept="image/*" 
-                      onChange={handleProviderDPUpload} 
-                    />
                   </div>
                 </div>
 
                 <div className="booking-profile-details">
-                  <div className="booking-header-brand-badge">
-                    <img src={webLogo} alt="MUX SERVICES" className="brand-header-logo" />
-                    <span className="brand-corp-name">MUX SERVICES</span>
-                    <span className="brand-corp-tagline">• Verified Partner Network</span>
-                  </div>
                   <h2 className="provider-name">{selectedProvider.name}</h2>
                   <div className="provider-rating">
                     <span className="star">⭐</span>
@@ -2298,21 +2281,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                 </div>
               </div>
 
-              {/* Bottom Notice for Chat */}
-              <div className="profile-chat-redirect-box">
-                <div className="pcr-text-group">
-                  <h4>Ready to discuss or hire {selectedProvider.name}?</h4>
-                  <p>Message directly to discuss your project requirements, verify upfront PKR estimates, and schedule fast doorstep arrival across Multan.</p>
-                </div>
-                <div className="pcr-actions-row">
-                  <button className="pcr-action-btn primary" onClick={handleStartChat}>
-                    <span>💬 Direct Chat &amp; Book</span>
-                  </button>
-                  <button className="pcr-action-btn secondary" onClick={handleBackToProviders}>
-                    <span>← Back to Services</span>
-                  </button>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
