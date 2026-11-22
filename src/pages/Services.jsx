@@ -138,27 +138,44 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   // Arrival open animation for home catalog cards (from 4th card / row 2 onwards)
   const [cardsOpen, setCardsOpen] = useState(false)
   const homeGridRef = useRef(null)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY || window.pageYOffset || 0
       const windowHeight = window.innerHeight || 800
+      const isScrollingUp = scrollY < lastScrollY.current
+      lastScrollY.current = scrollY
 
       if (homeGridRef.current) {
         const rect = homeGridRef.current.getBoundingClientRect()
-        // When grid enters view or user has scrolled down past hero banner:
-        // Open cards 4+ and keep them open throughout browsing (never disappear in mid)
-        if (rect.top <= windowHeight * 0.88 || scrollY > 120) {
+
+        // When scrolling down and grid enters viewport: OPEN cards 4+
+        if (rect.top <= windowHeight * 0.72) {
+          // When user scrolls back UP towards top/hero: CLOSE cards 4+
+          if (isScrollingUp && rect.top > windowHeight * 0.38) {
+            setCardsOpen(false)
+            return
+          }
           setCardsOpen(true)
           return
         }
-      } else if (scrollY > 120) {
-        setCardsOpen(true)
-        return
+
+        // When grid is below trigger zone (user is up at the hero banner)
+        if (rect.top > windowHeight * 0.72) {
+          setCardsOpen(false)
+          return
+        }
       }
 
-      // ONLY reset when the user scrolls all the way back up to the top of the page (Hero section)
-      if (scrollY < 40) {
+      // ScrollY fallback
+      if (scrollY > 220) {
+        if (isScrollingUp && scrollY < 320) {
+          setCardsOpen(false)
+        } else {
+          setCardsOpen(true)
+        }
+      } else {
         setCardsOpen(false)
       }
     }
