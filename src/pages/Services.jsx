@@ -2325,12 +2325,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
               </h1>
               <p className="header-subtitle">{getServiceSubtitle(selectedService)}</p>
 
-              {/* Quick Trust Highlights */}
-              <div className="detail-trust-pills-row">
-                <span className="detail-trust-pill">🛡️ Police &amp; CNIC Vetted</span>
-                <span className="detail-trust-pill">⚡ Upfront PKR Rate Card</span>
-                <span className="detail-trust-pill">⏱️ &lt; 30 Mins Doorstep Arrival</span>
-              </div>
+
             </div>
           </div>
 
