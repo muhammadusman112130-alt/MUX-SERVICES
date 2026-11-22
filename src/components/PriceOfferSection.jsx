@@ -1,7 +1,33 @@
+import { useState, useEffect, useRef } from 'react'
 import './PriceOfferSection.css'
 import proBannerImg from '../Public/home repair services .png'
 
 function PriceOfferSection({ setCurrentPage }) {
+  const [isInView, setIsInView] = useState(false)
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true)
+        }
+      },
+      { threshold: 0.12 }
+    )
+
+    const currentElem = sectionRef.current
+    if (currentElem) {
+      observer.observe(currentElem)
+    }
+
+    return () => {
+      if (currentElem) {
+        observer.unobserve(currentElem)
+      }
+    }
+  }, [])
+
   const handleJoinClick = () => {
     if (typeof setCurrentPage === 'function') {
       setCurrentPage('provider-login')
@@ -17,8 +43,12 @@ function PriceOfferSection({ setCurrentPage }) {
   }
 
   return (
-    <section className="pro-join-section" aria-label="Join as a Service Provider">
-      {/* Background visual image with dark overlay */}
+    <section 
+      ref={sectionRef} 
+      className={`pro-join-section ${isInView ? 'is-in-view' : ''}`} 
+      aria-label="Join as a Service Provider"
+    >
+      {/* Background visual image — now crisp & clearly visible */}
       <div 
         className="pro-join-bg-layer"
         style={{ backgroundImage: `url("${proBannerImg}")` }}
@@ -32,25 +62,25 @@ function PriceOfferSection({ setCurrentPage }) {
 
       <div className="container">
         <div className="pro-join-content">
-          {/* Left Column: Information & Call to Action */}
+          {/* Left Column: Information & Call to Action (Animated flow) */}
           <div className="pro-join-text-col">
-            <div className="pro-pill-badge">
+            <div className="pro-pill-badge flow-item flow-delay-1">
               <span className="pro-pill-pulse"></span>
               <span>MULTAN'S PREMIER PROVIDER NETWORK</span>
             </div>
 
-            <h2 className="pro-join-title">
+            <h2 className="pro-join-title flow-item flow-delay-2">
               Empower Your Trade — <span className="highlight-cyan">Join as a Verified Service Professional</span>
             </h2>
 
-            <p className="pro-join-description">
+            <p className="pro-join-description flow-item flow-delay-3">
               Are you a certified electrician, plumber, carpenter, AC &amp; HVAC specialist, painter, or home repair expert? 
               Partner with Multan's fastest-growing on-demand network. Get direct daily bookings from trusted homeowners, 
               earn upfront with zero hidden cuts, and scale your trade with verified professional credibility.
             </p>
 
             <div className="pro-benefits-grid">
-              <div className="pro-benefit-item">
+              <div className="pro-benefit-item flow-item flow-delay-4">
                 <div className="benefit-icon-box">⚡</div>
                 <div className="benefit-text-wrap">
                   <h4 className="benefit-title">Instant Job Leads</h4>
@@ -58,7 +88,7 @@ function PriceOfferSection({ setCurrentPage }) {
                 </div>
               </div>
 
-              <div className="pro-benefit-item">
+              <div className="pro-benefit-item flow-item flow-delay-5">
                 <div className="benefit-icon-box">💰</div>
                 <div className="benefit-text-wrap">
                   <h4 className="benefit-title">Transparent Earnings</h4>
@@ -66,7 +96,7 @@ function PriceOfferSection({ setCurrentPage }) {
                 </div>
               </div>
 
-              <div className="pro-benefit-item">
+              <div className="pro-benefit-item flow-item flow-delay-6">
                 <div className="benefit-icon-box">🛡️</div>
                 <div className="benefit-text-wrap">
                   <h4 className="benefit-title">Verified Pro Badge</h4>
@@ -74,7 +104,7 @@ function PriceOfferSection({ setCurrentPage }) {
                 </div>
               </div>
 
-              <div className="pro-benefit-item">
+              <div className="pro-benefit-item flow-item flow-delay-7">
                 <div className="benefit-icon-box">📱</div>
                 <div className="benefit-text-wrap">
                   <h4 className="benefit-title">Smart Digital Hub</h4>
@@ -83,7 +113,7 @@ function PriceOfferSection({ setCurrentPage }) {
               </div>
             </div>
 
-            <div className="pro-cta-actions">
+            <div className="pro-cta-actions flow-item flow-delay-8">
               <button 
                 type="button" 
                 className="pro-primary-btn"
@@ -103,9 +133,9 @@ function PriceOfferSection({ setCurrentPage }) {
             </div>
           </div>
 
-          {/* Right Column: Animated Stats Showcase Card */}
+          {/* Right Column: Animated Stats Showcase Card (Opens with 3D perspective unfold) */}
           <div className="pro-join-visual-col">
-            <div className="pro-stats-card">
+            <div className="pro-stats-card flow-item flow-card">
               <div className="pro-card-header">
                 <span className="badge-tag">Service Provider Portal</span>
                 <div className="live-pulse-chip">
