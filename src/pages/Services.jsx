@@ -2306,11 +2306,39 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
         <div className="service-detail-view">
           <div className="gradient-header">
             <img src={getHeaderImage(selectedService)} alt={`${selectedService} Background`} className="header-background-image" />
+            <div className="header-overlay-ambient" aria-hidden="true"></div>
+
             <div className="header-content">
+              {/* Top Navigation Row: Back Button & Badge */}
+              <div className="detail-top-nav-row">
+                <button 
+                  type="button" 
+                  className="detail-back-btn"
+                  onClick={() => {
+                    setSelectedService(null)
+                    window.scrollTo({ top: 350, behavior: 'smooth' })
+                  }}
+                >
+                  ← Back to All Services
+                </button>
+
+                <div className="detail-badge">
+                  <span className="detail-badge-dot"></span>
+                  <span>MULTAN VERIFIED SPECIALISTS</span>
+                </div>
+              </div>
+
               <h1 className="header-title">
                 <span className="hero-title-mint-shine">{getServiceTitle(selectedService)}</span>
               </h1>
               <p className="header-subtitle">{getServiceSubtitle(selectedService)}</p>
+
+              {/* Quick Trust Highlights */}
+              <div className="detail-trust-pills-row">
+                <span className="detail-trust-pill">🛡️ Police &amp; CNIC Vetted</span>
+                <span className="detail-trust-pill">⚡ Upfront PKR Rate Card</span>
+                <span className="detail-trust-pill">⏱️ &lt; 30 Mins Doorstep Arrival</span>
+              </div>
             </div>
           </div>
 
@@ -2319,13 +2347,13 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
               <div className="search-bar-inline">
                 <input 
                   type="text" 
-                  placeholder="Search requests..." 
+                  placeholder="Search specialists, locations, skills..." 
                   className="inline-search-input" 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button className="inline-search-btn" title="Search">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
               </div>
               <div className="inline-filters">
@@ -2336,47 +2364,44 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                     value={ratingFilter}
                     onChange={(e) => setRatingFilter(e.target.value)}
                   >
-                    <option value="All">All</option>
-                    <option value="4.5">4.5+</option>
-                    <option value="4.0">4.0+</option>
-                    <option value="3.5">3.5+</option>
+                    <option value="All">All Ratings</option>
+                    <option value="4.5">4.5+ ⭐</option>
+                    <option value="4.0">4.0+ ⭐</option>
+                    <option value="3.5">3.5+ ⭐</option>
                   </select>
                 </div>
                 <div className="inline-filter">
-                  <label>Price:</label>
+                  <label>Price Range:</label>
                   <select 
                     className="inline-select"
                     value={priceFilter}
                     onChange={(e) => setPriceFilter(e.target.value)}
                   >
-                    <option value="All">All</option>
-                    <option value="0-50">Rs. 0 (Free) - Rs. 2,500</option>
-                    <option value="50-100">Rs. 2,500 - Rs. 5,000</option>
-                    <option value="100+">Rs. 5,000+</option>
+                    <option value="All">All Prices</option>
+                    <option value="0-50">PKR 0 - PKR 2,500</option>
+                    <option value="50-100">PKR 2,500 - PKR 5,000</option>
+                    <option value="100+">PKR 5,000+</option>
                   </select>
                 </div>
               </div>
             </div>
 
-            {/* Safety Notice Banner */}
+            {/* Official Booking Protection Banner (100% Unified Brand Theme) */}
             <div className="safety-notice-banner">
               <div className="safety-notice-header">
                 <div className="safety-notice-icon-circle">
-                  <span className="safety-info-icon">!</span>
+                  <span className="safety-info-icon">🛡️</span>
                 </div>
-                <h3 className="safety-notice-title" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  <span className="safety-warning-emoji">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                  </span>
-                  <span>Safety Notice / حفاظتی نوٹ</span>
+                <h3 className="safety-notice-title">
+                  <span>Official Booking Protection / آفیشل بکنگ اور حفاظتی رہنمائی</span>
                 </h3>
               </div>
               <div className="safety-notice-content">
                 <p className="safety-text-en">
-                  Direct payments or chatting with providers outside of MUX SERVICES can lead to scams or fraud. To avoid these risks and ensure service quality, please use 'Custom Offers' and complete all bookings through our official website. Thank you!
+                  Direct off-platform payments or unofficial phone agreements bypass MUX SERVICES quality supervision and dispute resolution. To guarantee certified craftsmanship, standard PKR rate cards, and verified technician accountability across Multan, always book directly through our official platform.
                 </p>
                 <p className="safety-text-ur" dir="rtl">
-                  مکس سروسز سے باہر فراہم کنندگان کے ساتھ براہ راست چیٹ یا ادائیگی کرنے سے دھوکہ دہی یا فراڈ ہو سکتا ہے۔ ان خطرات سے بچنے اور سروس کے معیار کو یقینی بنانے کے لیے، براہ کرم 'کسٹم آفرز' کا استعمال کریں اور تمام بکنگ ہماری آفیشل ویب سائٹ کے ذریعے مکمل کریں۔ شکریہ!
+                  مکس سروسز پلیٹ فارم سے باہر براہ راست غیر تصدیق شدہ نقد لین دین یا فون پر زبانی ڈیل کرنا سیکیورٹی رسک ہے۔ سروس کے مکمل معیار، شفاف ریٹس اور تصدیق شدہ ٹیکنیشنز کی فوری رسائی کے لیے ہمیشہ آفیشل پورٹل کے ذریعے بکنگ مکمل کریں۔
                 </p>
               </div>
             </div>
@@ -2408,13 +2433,13 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
 
                 if (filtered.length === 0) {
                   return (
-                    <div style={{ textAlign: 'center', padding: '50px 20px', color: '#64748b' }}>
-                      <p style={{ fontSize: '1.1rem', marginBottom: '14px', fontWeight: 500 }}>No providers found matching your filters.</p>
+                    <div className="no-providers-box">
+                      <p className="no-providers-text">No verified specialists found matching your search filters.</p>
                       <button 
                         onClick={() => { setSearchQuery(''); setRatingFilter('All'); setPriceFilter('All'); }}
-                        style={{ background: '#8FD3E8', color: '#0E2E33', border: 'none', padding: '10px 22px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold' }}
+                        className="clear-filters-btn"
                       >
-                        Clear Filters
+                        Reset All Filters
                       </button>
                     </div>
                   )
@@ -2427,7 +2452,11 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                   const bio = getProviderBio(req, selectedService)
 
                   return (
-                    <div key={req.id || index} className="provider-request-card">
+                    <div 
+                      key={req.id || index} 
+                      className="provider-request-card"
+                      style={{ animationDelay: `${index * 0.08}s` }}
+                    >
                       {/* Left: Provider Photo with Floating Rating */}
                       <div className="provider-card-photo-box">
                         <img 
@@ -2450,7 +2479,10 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                       <div className="provider-card-details">
                         <div className="provider-card-top-row">
                           <div className="provider-name-block">
-                            <h3 className="provider-card-name">{req.name}</h3>
+                            <div className="provider-name-verified-line">
+                              <h3 className="provider-card-name">{req.name}</h3>
+                              <span className="provider-verified-badge">✓ Verified</span>
+                            </div>
                             <span className="provider-card-role">{roleTitle}</span>
                           </div>
                           <div className="provider-price-block">
@@ -2476,7 +2508,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                             className="provider-view-profile-btn"
                             onClick={() => handleViewProviderProfile(req)}
                           >
-                            View Profile
+                            View Full Profile
                           </button>
                           <button 
                             type="button" 
@@ -2487,7 +2519,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                             <span className="btn-chat-icon">
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                             </span>
-                            <span>Chat</span>
+                            <span>Direct Chat</span>
                           </button>
                         </div>
                       </div>
@@ -2497,12 +2529,26 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
               })()}
             </div>
 
-            {/* Pagination Dots (Matching screenshot) */}
+            {/* Pagination Dots */}
             <div className="requests-pagination-dots">
               <span className="page-dot active"></span>
               <span className="page-dot"></span>
               <span className="page-dot"></span>
               <span className="page-dot"></span>
+            </div>
+
+            {/* Bottom Back Button */}
+            <div className="detail-bottom-nav">
+              <button 
+                type="button" 
+                className="detail-back-btn bottom-btn"
+                onClick={() => {
+                  setSelectedService(null)
+                  window.scrollTo({ top: 350, behavior: 'smooth' })
+                }}
+              >
+                ← Back to All Home Services
+              </button>
             </div>
           </div>
         </div>
