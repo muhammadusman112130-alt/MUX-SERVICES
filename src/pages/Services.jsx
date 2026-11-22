@@ -167,18 +167,57 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
   useEffect(() => {
     try {
       const url = new URL(window.location.href)
-      url.pathname = '/services'
+      const currentServiceParam = url.searchParams.get('service') || url.searchParams.get('category')
       if (selectedService) {
-        url.searchParams.set('service', selectedService)
+        if (currentServiceParam !== selectedService) {
+          url.pathname = '/services'
+          url.searchParams.set('service', selectedService)
+          url.searchParams.delete('category')
+          window.history.replaceState({ page: 'services', auth: null, query: selectedService, service: selectedService }, '', url.pathname + url.search)
+        }
       } else {
-        url.searchParams.delete('service')
-        url.searchParams.delete('category')
+        if (currentServiceParam) {
+          url.pathname = '/services'
+          url.searchParams.delete('service')
+          url.searchParams.delete('category')
+          window.history.replaceState({ page: 'services', auth: null, query: '', service: null }, '', url.pathname)
+        }
       }
-      window.history.replaceState({ page: 'services', auth: null, query: selectedService || '' }, '', url.pathname + (url.search ? url.search : ''))
     } catch (e) {
       console.warn(e)
     }
   }, [selectedService])
+
+  // Automatically scroll to the top hero section whenever a service category is selected
+  useEffect(() => {
+    if (selectedService) {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
+  }, [selectedService])
+
+  // Native Browser History Synchronization (Back/Forward Arrow) within Services
+  useEffect(() => {
+    const handlePopState = (e) => {
+      if (window.location.pathname === '/services') {
+        const params = new URLSearchParams(window.location.search)
+        const serviceParam = e.state?.service ?? e.state?.query ?? params.get('service') ?? params.get('category')
+        if (serviceParam && typeof serviceParam === 'string' && serviceParam.trim()) {
+          const resolved = normalizeServiceName(serviceParam.trim()) || serviceParam.trim()
+          setSelectedService(resolved)
+        } else {
+          setSelectedService(null)
+        }
+        setSelectedProvider(null)
+        setIsViewingProfile(false)
+        setShowChat(false)
+        setShowBookingForm(false)
+        window.scrollTo({ top: 0, behavior: 'instant' })
+      }
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
   const [selectedProvider, setSelectedProvider] = useState(null)
   const [isViewingProfile, setIsViewingProfile] = useState(false)
   const [showChat, setShowChat] = useState(false)
@@ -550,10 +589,36 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
 
     const canonical = normalizeServiceName(serviceName) || serviceName
     setSelectedService(canonical)
+    setSelectedProvider(null)
+    setIsViewingProfile(false)
+    setShowChat(false)
+    setShowBookingForm(false)
+
+    // Scroll directly to the top hero section so start of screen is in view
+    window.scrollTo({ top: 0, behavior: 'instant' })
+
+    // Push entry to browser history so browser Back returns to /services catalog
+    try {
+      const url = new URL(window.location.href)
+      url.pathname = '/services'
+      url.searchParams.set('service', canonical)
+      url.searchParams.delete('category')
+      window.history.pushState(
+        { page: 'services', auth: null, query: canonical, service: canonical },
+        '',
+        url.pathname + url.search
+      )
+    } catch (e) {
+      console.warn(e)
+    }
   }
 
   const handleBackToServices = () => {
     setSelectedService(null)
+    setSelectedProvider(null)
+    setIsViewingProfile(false)
+    setShowChat(false)
+    setShowBookingForm(false)
     setSearchQuery('')
     setRatingFilter('All')
     setPriceFilter('All')
@@ -568,10 +633,11 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       url.searchParams.delete('service')
       url.searchParams.delete('category')
       url.searchParams.delete('q')
-      window.history.replaceState({ page: 'services', auth: null, query: '' }, '', url.pathname)
+      window.history.pushState({ page: 'services', auth: null, query: '', service: null }, '', url.pathname)
     } catch (e) {
       console.warn(e)
     }
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
   const handleBookNow = (provider) => {

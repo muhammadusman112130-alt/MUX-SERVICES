@@ -153,7 +153,7 @@ function App() {
   useEffect(() => {
     // Keep active URL aligned on mount/refresh
     const targetUrl = getUrlForState(currentPage, authPage, initialSearchQuery)
-    window.history.replaceState({ page: currentPage, auth: authPage, query: initialSearchQuery }, '', targetUrl)
+    window.history.replaceState({ page: currentPage, auth: authPage, query: initialSearchQuery, service: initialSearchQuery || null }, '', targetUrl)
 
     const handlePopState = (event) => {
       // Direct 1-to-1 page navigation from browser history
@@ -164,7 +164,7 @@ function App() {
       setCurrentPage(poppedPage)
       setAuthPage(poppedAuth)
       setInitialSearchQuery(poppedQuery)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      window.scrollTo({ top: 0, behavior: 'instant' })
     }
 
     window.addEventListener('popstate', handlePopState)
@@ -183,14 +183,19 @@ function App() {
     setAuthPage(null)
 
     const targetUrl = getUrlForState(normalized, null, query)
-    const stateObj = { page: normalized, auth: null, query: query || '' }
+    const stateObj = { page: normalized, auth: null, query: query || '', service: query || null }
 
     if (pushToHistory && !isSamePage) {
+      // If user navigates from home directly into a specific service category, insert /services into history
+      // so browser Back always takes the user to the /services catalog first
+      if (currentPage === 'home' && normalized === 'services' && query && query.trim()) {
+        window.history.pushState({ page: 'services', auth: null, query: '', service: null }, '', '/services')
+      }
       window.history.pushState(stateObj, '', targetUrl)
     } else {
       window.history.replaceState(stateObj, '', targetUrl)
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
   const handleLoginClick = (pushToHistory = true) => {
@@ -201,7 +206,7 @@ function App() {
     } else {
       window.history.replaceState({ page: currentPage, auth: 'login', query: initialSearchQuery }, '', targetUrl)
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
   const handleSignupClick = (pushToHistory = true) => {
@@ -212,7 +217,7 @@ function App() {
     } else {
       window.history.replaceState({ page: currentPage, auth: 'signup', query: initialSearchQuery }, '', targetUrl)
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
   const handleBackToHome = () => {
