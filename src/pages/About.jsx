@@ -1,6 +1,6 @@
 import './About.css'
-import aboutTeamImg from '../assets/about-team-mission.jpg'
-import aboutCraftImg from '../assets/about-service-craft.jpg'
+import aboutTeamImg from '../assets/about-team-mission.webp'
+import aboutCraftImg from '../assets/about-service-craft.webp'
 
 function About({ setCurrentPage }) {
   const coreValues = [

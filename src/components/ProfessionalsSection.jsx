@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import './ProfessionalsSection.css'
-import electricianImg from '../Public/electricon.png'
-import plumberImg from '../Public/plumber.png'
-import carpenterImg from '../Public/carpenter.png'
-import cleanerImg from '../Public/cleaner.png'
+import electricianImg from '../Public/electricon.webp'
+import plumberImg from '../Public/plumber.webp'
+import carpenterImg from '../Public/carpenter.webp'
+import cleanerImg from '../Public/cleaner.webp'
 
 function ProfessionalsSection({ setCurrentPage }) {
   const [activeIndex, setActiveIndex] = useState(0)

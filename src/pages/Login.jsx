@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './Login.css'
-import loginScr from '../Public/login scr.png'
+import loginScr from '../Public/login scr.webp'
 import { authAPI } from '../services/api'
 
 function Login({ onSignupClick, onLogin }) {

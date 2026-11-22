@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './PriceOfferSection.css'
-import joinBannerImg from '../assets/join-pro-banner.jpg'
+import joinBannerImg from '../assets/join-pro-banner.webp'
 
 function PriceOfferSection({ setCurrentPage }) {
   const [isInView, setIsInView] = useState(false)
