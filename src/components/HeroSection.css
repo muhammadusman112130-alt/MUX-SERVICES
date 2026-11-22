@@ -15,36 +15,30 @@
   box-sizing: border-box;
 }
 
-/* ── ANIMATED FLOWING ICE BLUE BORDER LIGHT BEAM ── */
+/* ── TOP ICE BLUE BORDER LINE (WHERE HERO TOUCHES NAVBAR) ── */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: #8FD3E8;
+  box-shadow: 0 0 14px rgba(143, 211, 232, 0.9), 0 0 28px rgba(143, 211, 232, 0.5);
+  z-index: 10;
+}
+
+/* ── BOTTOM ICE BLUE BORDER LINE (CLEAN & STATIONARY AS REQUESTED) ── */
 .hero-section::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(143, 211, 232, 0.25) 15%, 
-    #8FD3E8 35%, 
-    #cbf2fd 50%, 
-    #8FD3E8 65%, 
-    rgba(143, 211, 232, 0.25) 85%, 
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: heroBorderFlow 3.5s linear infinite;
-  box-shadow: 0 0 16px #8FD3E8, 0 0 32px rgba(143, 211, 232, 0.75);
+  height: 2.5px;
+  background: #8FD3E8;
+  box-shadow: 0 0 16px rgba(143, 211, 232, 0.95), 0 0 32px rgba(143, 211, 232, 0.6);
   z-index: 10;
-}
-
-@keyframes heroBorderFlow {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
 }
 
 .hero-slider {

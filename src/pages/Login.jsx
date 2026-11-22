@@ -51,8 +51,8 @@ function Login({ onSignupClick, onBackClick, onLogin }) {
       <img src={loginScr} alt="Login Background" className="auth-fullscreen-bg" />
       <div className="auth-bg-overlay" aria-hidden="true"></div>
 
-      {/* Centered Glass Form Overlay */}
-      <div className="auth-glass-card">
+      {/* Centered Direct Form on Clear Background Image (NO CARDS) */}
+      <div className="auth-direct-form">
         <button className="back-button" onClick={onBackClick} type="button">← Back to Home</button>
         
         <div className="auth-header-brand">
