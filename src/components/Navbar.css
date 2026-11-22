@@ -125,7 +125,8 @@
   padding: 0;
 }
 
-.navbar-menu li button {
+.navbar-menu li button,
+.navbar-menu li a {
   position: relative;
   overflow: visible;
   background: transparent;
@@ -150,7 +151,8 @@
 }
 
 /* Background animation layer with Ice Blue glow */
-.navbar-menu li button::before {
+.navbar-menu li button::before,
+.navbar-menu li a::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -171,7 +173,8 @@
 }
 
 /* Hover state: button lifts up, animated Ice Blue shadow shines behind */
-.navbar-menu li button:hover {
+.navbar-menu li button:hover,
+.navbar-menu li a:hover {
   color: #ffffff !important;
   transform: translateY(-4px);
   background: rgba(143, 211, 232, 0.12);
@@ -180,14 +183,16 @@
     0 0 20px rgba(143, 211, 232, 0.35);
 }
 
-.navbar-menu li button:hover::before {
+.navbar-menu li button:hover::before,
+.navbar-menu li a:hover::before {
   opacity: 1;
   transform: scale(1.02);
   box-shadow: 0 0 24px rgba(143, 211, 232, 0.55);
   animation: nav-ice-pulse 2s ease infinite alternate;
 }
 
-.navbar-menu li button:hover .nav-btn-text {
+.navbar-menu li button:hover .nav-btn-text,
+.navbar-menu li a:hover .nav-btn-text {
   transform: translateY(-2px);
   text-shadow: 0 0 12px rgba(143, 211, 232, 0.65);
 }
@@ -365,7 +370,8 @@
     padding-top: 0.75rem;
   }
 
-  .navbar--account .navbar-menu button {
+  .navbar--account .navbar-menu button,
+  .navbar--account .navbar-menu a {
     width: 100%;
     text-align: left;
     justify-content: flex-start;
@@ -425,7 +431,8 @@
     padding-top: 0.75rem;
   }
 
-  .navbar .navbar-menu button {
+  .navbar .navbar-menu button,
+  .navbar .navbar-menu a {
     width: 100%;
     min-height: 44px;
     text-align: left;

@@ -20,40 +20,40 @@ function Footer({ setCurrentPage }) {
               Multan's premier verified home services platform. Professional electricians, plumbers, gardeners, and carpenters on demand.
             </p>
             <div className="social-links">
-              <button type="button" onClick={(e) => e.preventDefault()} className="social-link" title="Facebook">
+              <a href="https://facebook.com/muxservices" target="_blank" rel="noopener noreferrer" className="social-link" title="Facebook">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-              </button>
-              <button type="button" onClick={(e) => e.preventDefault()} className="social-link" title="Twitter">
+              </a>
+              <a href="https://twitter.com/muxservices" target="_blank" rel="noopener noreferrer" className="social-link" title="Twitter">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
-              </button>
-              <button type="button" onClick={(e) => e.preventDefault()} className="social-link" title="Instagram">
+              </a>
+              <a href="https://instagram.com/muxservices" target="_blank" rel="noopener noreferrer" className="social-link" title="Instagram">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              </button>
-              <button type="button" onClick={(e) => e.preventDefault()} className="social-link" title="LinkedIn">
+              </a>
+              <a href="https://linkedin.com/company/muxservices" target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-              </button>
+              </a>
             </div>
           </div>
 
           <div className="footer-section">
             <h4 className="footer-title">Quick Links</h4>
             <ul className="footer-links">
-              <li><button type="button" onClick={() => handleNav('home')} className="footer-nav-btn">Home</button></li>
-              <li><button type="button" onClick={() => handleNav('services')} className="footer-nav-btn">Services</button></li>
-              <li><button type="button" onClick={() => handleNav('professionals')} className="footer-nav-btn">Professionals</button></li>
-              <li><button type="button" onClick={() => handleNav('about')} className="footer-nav-btn">About Us</button></li>
-              <li><button type="button" onClick={() => handleNav('contact')} className="footer-nav-btn">Contact</button></li>
+              <li><a href="/" onClick={(e) => { e.preventDefault(); handleNav('home'); }} className="footer-nav-btn">Home</a></li>
+              <li><a href="/services" onClick={(e) => { e.preventDefault(); handleNav('services'); }} className="footer-nav-btn">Services</a></li>
+              <li><a href="/professionals" onClick={(e) => { e.preventDefault(); handleNav('professionals'); }} className="footer-nav-btn">Professionals</a></li>
+              <li><a href="/about" onClick={(e) => { e.preventDefault(); handleNav('about'); }} className="footer-nav-btn">About Us</a></li>
+              <li><a href="/contact" onClick={(e) => { e.preventDefault(); handleNav('contact'); }} className="footer-nav-btn">Contact</a></li>
             </ul>
           </div>
 
           <div className="footer-section">
             <h4 className="footer-title">Home Services</h4>
             <ul className="footer-links">
-              <li><button type="button" onClick={() => handleNav('services')} className="footer-nav-btn">Electrician &amp; Wiring</button></li>
-              <li><button type="button" onClick={() => handleNav('services')} className="footer-nav-btn">Plumbing &amp; Sanitary</button></li>
-              <li><button type="button" onClick={() => handleNav('services')} className="footer-nav-btn">AC &amp; HVAC Solutions</button></li>
-              <li><button type="button" onClick={() => handleNav('services')} className="footer-nav-btn">Carpentry &amp; Woodwork</button></li>
-              <li><button type="button" onClick={() => handleNav('services')} className="footer-nav-btn">Deep Home Cleaning</button></li>
+              <li><a href="/services#electrician" onClick={(e) => { e.preventDefault(); handleNav('services'); }} className="footer-nav-btn">Electrician &amp; Wiring</a></li>
+              <li><a href="/services#plumbing" onClick={(e) => { e.preventDefault(); handleNav('services'); }} className="footer-nav-btn">Plumbing &amp; Sanitary</a></li>
+              <li><a href="/services#ac" onClick={(e) => { e.preventDefault(); handleNav('services'); }} className="footer-nav-btn">AC &amp; HVAC Solutions</a></li>
+              <li><a href="/services#carpentry" onClick={(e) => { e.preventDefault(); handleNav('services'); }} className="footer-nav-btn">Carpentry &amp; Woodwork</a></li>
+              <li><a href="/services#cleaning" onClick={(e) => { e.preventDefault(); handleNav('services'); }} className="footer-nav-btn">Deep Home Cleaning</a></li>
             </ul>
           </div>
 
@@ -66,11 +66,11 @@ function Footer({ setCurrentPage }) {
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <span>+92 300 1234567</span>
+                <a href="tel:+923001234567" style={{ color: 'inherit', textDecoration: 'none' }}>+92 300 1234567</a>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <span>info@muxservices.com</span>
+                <a href="mailto:info@muxservices.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@muxservices.com</a>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
@@ -83,9 +83,9 @@ function Footer({ setCurrentPage }) {
         <div className="footer-bottom">
           <p>&copy; 2024 MUX SERVICES. All rights reserved.</p>
           <div className="footer-bottom-links">
-            <button type="button" onClick={(e) => e.preventDefault()} className="footer-policy-btn">Privacy Policy</button>
-            <button type="button" onClick={(e) => e.preventDefault()} className="footer-policy-btn">Terms of Service</button>
-            <button type="button" onClick={(e) => e.preventDefault()} className="footer-policy-btn">Cookie Policy</button>
+            <a href="/privacy" onClick={(e) => e.preventDefault()} className="footer-policy-btn">Privacy Policy</a>
+            <a href="/terms" onClick={(e) => e.preventDefault()} className="footer-policy-btn">Terms of Service</a>
+            <a href="/cookies" onClick={(e) => e.preventDefault()} className="footer-policy-btn">Cookie Policy</a>
           </div>
         </div>
       </div>

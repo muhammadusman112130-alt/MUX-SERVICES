@@ -52,7 +52,7 @@ function Navbar({
   }, [isMenuOpen, isLoggedIn])
 
   const handleNavClick = (e) => {
-    if (e.target.closest('button') && !e.target.closest('.navbar-menu-toggle')) {
+    if ((e.target.closest('button') || e.target.closest('a')) && !e.target.closest('.navbar-menu-toggle')) {
       setIsMenuOpen(false)
     }
   }
@@ -66,10 +66,13 @@ function Navbar({
     >
       <div className={`navbar-container${isMenuOpen ? ' is-menu-open' : ''}`}>
         <div className="navbar-logo">
-          <button
-            type="button"
+          <a
+            href="/"
             className="logo-link"
-            onClick={() => setCurrentPage('home')}
+            onClick={(e) => {
+              e.preventDefault()
+              setCurrentPage('home')
+            }}
             aria-label="MUX SERVICES Home"
           >
             <img 
@@ -98,7 +101,7 @@ function Navbar({
             >
               MUX SERVICES
             </span>
-          </button>
+          </a>
         </div>
 
         <button
@@ -120,33 +123,73 @@ function Navbar({
         </button>
 
         <ul className="navbar-menu" id="main-navigation">
-          <li><button onClick={() => setCurrentPage('home')}><span className="nav-btn-text">Home</span></button></li>
+          <li>
+            <a href="/" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>
+              <span className="nav-btn-text">Home</span>
+            </a>
+          </li>
           {!isProviderLoggedIn && !isProviderAuthPage && (
-            <li><button onClick={() => setCurrentPage('services')}><span className="nav-btn-text">Services</span></button></li>
+            <li>
+              <a href="/services" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }}>
+                <span className="nav-btn-text">Services</span>
+              </a>
+            </li>
           )}
           {!isProviderLoggedIn && !isProviderAuthPage && (
-            <li><button onClick={() => setCurrentPage('professionals')}><span className="nav-btn-text">Professionals</span></button></li>
+            <li>
+              <a href="/professionals" onClick={(e) => { e.preventDefault(); setCurrentPage('professionals'); }}>
+                <span className="nav-btn-text">Professionals</span>
+              </a>
+            </li>
           )}
           {isProviderLoggedIn && (
-            <li><button onClick={() => setCurrentPage('provider-dashboard')}><span className="nav-btn-text">Dashboard</span></button></li>
+            <li>
+              <a href="/provider-dashboard" onClick={(e) => { e.preventDefault(); setCurrentPage('provider-dashboard'); }}>
+                <span className="nav-btn-text">Dashboard</span>
+              </a>
+            </li>
           )}
           {isProviderLoggedIn && (
-            <li><button onClick={() => setCurrentPage('Messages')}><span className="nav-btn-text">Messages</span></button></li>
+            <li>
+              <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('Messages'); }}>
+                <span className="nav-btn-text">Messages</span>
+              </a>
+            </li>
           )}
           {currentPage === 'provider-verification' && (
             <li className="navbar-mobile-provider-link">
-              <button onClick={() => setCurrentPage('Messages')}>
+              <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('Messages'); }}>
                 <span className="nav-btn-text">Messages</span>
-              </button>
+              </a>
             </li>
           )}
-          <li><button onClick={() => setCurrentPage('about')}><span className="nav-btn-text">About</span></button></li>
-          <li><button onClick={() => setCurrentPage('contact')}><span className="nav-btn-text">Contact</span></button></li>
+          <li>
+            <a href="/about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }}>
+              <span className="nav-btn-text">About</span>
+            </a>
+          </li>
+          <li>
+            <a href="/contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}>
+              <span className="nav-btn-text">Contact</span>
+            </a>
+          </li>
           {!isProviderLoggedIn && !isProviderAuthPage && isLoggedIn && (
             <>
-              <li><button onClick={() => setCurrentPage('Bookings')}><span className="nav-btn-text">Bookings</span></button></li>
-              <li><button onClick={() => setCurrentPage('Messages')}><span className="nav-btn-text">Messages</span></button></li>
-              <li><button onClick={() => setCurrentPage('profile')}><span className="nav-btn-text">Profile</span></button></li>
+              <li>
+                <a href="/bookings" onClick={(e) => { e.preventDefault(); setCurrentPage('Bookings'); }}>
+                  <span className="nav-btn-text">Bookings</span>
+                </a>
+              </li>
+              <li>
+                <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('Messages'); }}>
+                  <span className="nav-btn-text">Messages</span>
+                </a>
+              </li>
+              <li>
+                <a href="/profile" onClick={(e) => { e.preventDefault(); setCurrentPage('profile'); }}>
+                  <span className="nav-btn-text">Profile</span>
+                </a>
+              </li>
             </>
           )}
         </ul>

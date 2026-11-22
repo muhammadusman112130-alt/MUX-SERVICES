@@ -1,0 +1,6 @@
+# robots.txt for MUX SERVICES
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://muxservices.com/sitemap.xml
