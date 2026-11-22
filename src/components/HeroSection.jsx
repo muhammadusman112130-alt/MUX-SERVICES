@@ -104,7 +104,15 @@ function HeroSection({ setCurrentPage }) {
             key={index} 
             className={`slide ${index === currentSlide ? 'active' : ''}`}
           >
-            <img src={slide.src} alt={slide.alt} />
+            <img 
+              src={slide.src} 
+              alt={slide.alt} 
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchPriority={index === 0 ? 'high' : 'low'}
+              decoding="async"
+              width="1200"
+              height="670"
+            />
           </div>
         ))}
         

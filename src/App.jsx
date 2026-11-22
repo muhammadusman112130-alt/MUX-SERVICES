@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import CategorySection from './components/CategorySection'
@@ -8,19 +8,21 @@ import ProfessionalsSection from './components/ProfessionalsSection'
 import TrustSection from './components/TrustSection'
 import CallToActionSection from './components/CallToActionSection'
 import Footer from './components/Footer'
-import Services from './pages/Services'
-import Professionals from './pages/Professionals'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import Profile from './pages/Profile'
-import MyBookings from './pages/MyBookings'
-import Messages from './pages/Messages'
-import ProviderDashboard from './provider/ProviderDashboard'
-import ProviderLogin from './provider/ProviderLogin'
-import ProviderVerification from './provider/ProviderVerification'
 import { authAPI } from './services/api'
+
+// Route-based Code Splitting: Lazy load non-home pages so initial Home payload is minimal
+const Services = lazy(() => import('./pages/Services'))
+const Professionals = lazy(() => import('./pages/Professionals'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Login = lazy(() => import('./pages/Login'))
+const Signup = lazy(() => import('./pages/Signup'))
+const Profile = lazy(() => import('./pages/Profile'))
+const MyBookings = lazy(() => import('./pages/MyBookings'))
+const Messages = lazy(() => import('./pages/Messages'))
+const ProviderDashboard = lazy(() => import('./provider/ProviderDashboard'))
+const ProviderLogin = lazy(() => import('./provider/ProviderLogin'))
+const ProviderVerification = lazy(() => import('./provider/ProviderVerification'))
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -248,7 +250,14 @@ function App() {
           onLogout={handleLogout} 
         />
       )}
-      {renderPage()}
+      {/* Lazy-loaded Route Suspense Boundary with zero layout shift */}
+      <Suspense fallback={
+        <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '40px', height: '40px', border: '3px solid rgba(143, 211, 232, 0.2)', borderTopColor: '#8FD3E8', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }}></div>
+        </div>
+      }>
+        {renderPage()}
+      </Suspense>
       {shouldShowFooter && <Footer setCurrentPage={handlePageChange} />}
     </div>
   )

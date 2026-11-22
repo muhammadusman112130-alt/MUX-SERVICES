@@ -157,7 +157,15 @@ function ProfessionalsSection({ setCurrentPage }) {
                 >
                   <div className="professional-image">
                     <div className="avatar">
-                      <img src={pro.image} alt={pro.name} className="avatar-photo-img" />
+                      <img 
+                        src={pro.image} 
+                        alt={pro.name} 
+                        className="avatar-photo-img" 
+                        loading="lazy"
+                        decoding="async"
+                        width="160"
+                        height="160"
+                      />
                     </div>
                     {pro.verified && (
                       <span className="verified-badge" title="Verified Expert">✓</span>

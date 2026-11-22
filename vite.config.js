@@ -2,11 +2,15 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import fs from 'node:fs'
 import path from 'node:path'
+import compression from 'compression'
 
 function seoHeadersPlugin() {
   return {
     name: 'seo-headers-plugin',
     configureServer(server) {
+      // Enable live on-the-fly GZIP/Brotli compression for all text/html/js/css responses
+      server.middlewares.use(compression())
+
       server.middlewares.use((req, res, next) => {
         // Universal CORS and Private Network Access for Chrome Extensions (SEOquake/SEMrush)
         res.setHeader('Access-Control-Allow-Origin', '*')
@@ -60,6 +64,18 @@ function seoHeadersPlugin() {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), seoHeadersPlugin()],
+  build: {
+    chunkSizeWarningLimit: 600,
+    cssCodeSplit: true,
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom']
+        }
+      }
+    }
+  },
   server: {
     host: '0.0.0.0',
     port: 5174,
