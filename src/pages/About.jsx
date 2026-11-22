@@ -154,7 +154,7 @@ function About({ setCurrentPage }) {
                 </span>
               </div>
               <div className="floating-trust-pill pill-bottom-left">
-                <span>✓ 7-Day Satisfaction Warranty</span>
+                <span>✓ 100% Satisfaction Guarantee</span>
               </div>
             </div>
           </div>
@@ -228,7 +228,7 @@ function About({ setCurrentPage }) {
               Say goodbye to unexpected add-ons, erratic door-to-door overcharging, and arbitrary street contractor bargaining. MUX SERVICES was established to bring radical pricing transparency to Multan’s home maintenance sector. Traditional unverified labor in our city frequently relies on subjective verbal estimates that escalate once work begins, leaving homeowners unprotected and financially stressed. We replace this broken dynamic with an institutional pricing model where every repair requirement receives a clearly defined scope, upfront labor standards, and itemized component breakdowns before a single tool is lifted.
             </p>
             <p className="pricing-description justified-narrative">
-              Through our transparent rate architecture, homeowners across Cantt, Bosan Road, Gulgasht, Shah Rukn-e-Alam, Model Town, and all surrounding Multan localities can book certified electricians, plumbers, AC engineers, and home specialists with absolute financial certainty. Every quote provided is an agreed estimate based on standardized diagnostic benchmarks rather than guesswork. Technicians carry verified digital rate cards, provide genuine vendor receipts for all replacement parts, and ensure that every service is backed by our 7-day peace of mind warranty with zero hidden doorstep surcharges.
+              Through our transparent rate architecture, homeowners across Cantt, Bosan Road, Gulgasht, Shah Rukn-e-Alam, Model Town, and all surrounding Multan localities can book certified electricians, plumbers, AC engineers, and home specialists with absolute financial certainty. Every quote provided is an agreed estimate based on standardized diagnostic benchmarks rather than guesswork. Technicians carry verified digital rate cards, provide genuine vendor receipts for all replacement parts, and ensure that every service is backed by our certified workmanship guarantee with zero hidden doorstep surcharges.
             </p>
           </div>
 
@@ -252,8 +252,8 @@ function About({ setCurrentPage }) {
             <div className="pricing-guarantee-card">
               <span className="feat-check">✓</span>
               <div className="guarantee-text">
-                <h4 className="guarantee-title">7-Day Free Warranty</h4>
-                <p className="guarantee-desc">Full re-inspection and resolution coverage if any related issue arises within seven days.</p>
+                <h4 className="guarantee-title">Workmanship Guarantee</h4>
+                <p className="guarantee-desc">Free re-inspection and complete resolution coverage on every verified doorstep service.</p>
               </div>
             </div>
 
