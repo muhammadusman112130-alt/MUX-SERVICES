@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import './Navbar.css'
+import webLogo from '../Public/weblogo.png'
 
 function Navbar({ 
   currentPage = 'home',
@@ -64,7 +65,26 @@ function Navbar({
       onClick={handleNavClick}
     >
       <div className={`navbar-container${isMenuOpen ? ' is-menu-open' : ''}`}>
-        <div className="navbar-logo"></div>
+        <div className="navbar-logo">
+          <button 
+            type="button" 
+            className="logo-link" 
+            onClick={() => setCurrentPage('home')}
+            aria-label="MUX SERVICES Home"
+          >
+            <img src={webLogo} alt="MUX SERVICES Logo" className="logo-image" />
+            <span 
+              className="logo-text-services"
+              style={{
+                color: '#17f7f7',
+                fontWeight: 900,
+                textShadow: '0 0 14px rgba(23, 247, 247, 0.9), 0 0 30px rgba(23, 247, 247, 0.6)'
+              }}
+            >
+              MUX SERVICES
+            </span>
+          </button>
+        </div>
 
         <button
           type="button"
