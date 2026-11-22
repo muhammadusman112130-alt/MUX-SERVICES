@@ -1,8 +1,36 @@
+import { useState, useEffect, useRef } from 'react'
 import './About.css'
 import aboutTeamImg from '../assets/about-team-mission.webp'
 import aboutCraftImg from '../assets/about-service-craft.webp'
 
 function About({ setCurrentPage }) {
+  const [valuesInView, setValuesInView] = useState(false)
+  const valuesSectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setValuesInView(true)
+        }
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      }
+    )
+
+    if (valuesSectionRef.current) {
+      observer.observe(valuesSectionRef.current)
+    }
+
+    return () => {
+      if (valuesSectionRef.current) {
+        observer.unobserve(valuesSectionRef.current)
+      }
+    }
+  }, [])
+
   const coreValues = [
     {
       icon: '🛡️',
@@ -53,8 +81,8 @@ function About({ setCurrentPage }) {
           </div>
 
           <h1 className="hero-title">
-            Empowering Multan Homes With{' '}
-            <span className="about-title-mint-shine">Certified Technical Craftsmanship.</span>
+            Multan’s Premier Network For{' '}
+            <span className="about-title-mint-shine">Certified Home &amp; Technical Craftsmanship.</span>
           </h1>
 
           <p className="hero-description">
@@ -109,11 +137,34 @@ function About({ setCurrentPage }) {
         </div>
       </section>
 
-      {/* ── COMPLETE SERVICE ECOSYSTEM SECTION ── */}
+      {/* ── COMPLETE SERVICE ECOSYSTEM SECTION (Image on Left, Text & Stats on Right) ── */}
       <section className="har-service-section">
         <div className="section-content">
+          {/* Craft Image on Left */}
+          <div className="images-grid">
+            <div className="about-image-card craft-card">
+              <img
+                src={aboutCraftImg}
+                alt="Doorstep Technical Craftsmanship and Diagnostic Tools"
+                className="about-feature-img"
+              />
+              <div className="about-img-overlay">
+                <span className="about-img-badge">
+                  🔧 Precision Digital Diagnostic Equipment &amp; Genuine Spares
+                </span>
+              </div>
+              <div className="floating-trust-pill pill-bottom-left">
+                <span>✓ 7-Day Satisfaction Warranty</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Text & Stats on Right */}
           <div className="text-content">
-            <span className="section-eyebrow">WHY MUX SERVICES</span>
+            <div className="why-choose-badge">
+              <span className="why-choose-dot"></span>
+              <span>WHY CHOOSE MUX SERVICES</span>
+            </div>
             <h2 className="section-title">Complete Home &amp; Technical Solutions In One Trusted Hub</h2>
             <p className="section-description">
               From emergency midnight electrical short-circuits and complex inverter PCB troubleshooting to concealed plumbing leak detection, carpentry fittings, and sanitizing deep cleans — MUX SERVICES centralizes every residential and commercial maintenance solution into a single, unified digital experience. We remove the uncertainty of unverified street contractors and deliver factory-grade doorstep craftsmanship with standard safety protocols across all Multan localities.
@@ -134,31 +185,19 @@ function About({ setCurrentPage }) {
               </div>
             </div>
           </div>
-
-          <div className="images-grid">
-            <div className="about-image-card craft-card">
-              <img
-                src={aboutCraftImg}
-                alt="Doorstep Technical Craftsmanship and Diagnostic Tools"
-                className="about-feature-img"
-              />
-              <div className="about-img-overlay">
-                <span className="about-img-badge">
-                  🔧 Precision Digital Diagnostic Equipment &amp; Genuine Spares
-                </span>
-              </div>
-              <div className="floating-trust-pill pill-bottom-left">
-                <span>✓ 7-Day Satisfaction Warranty</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* ── CORE VALUES SECTION ── */}
-      <section className="core-values-section">
+      {/* ── CORE VALUES SECTION (Scroll-Triggered Animated Reveal) ── */}
+      <section
+        ref={valuesSectionRef}
+        className={`core-values-section ${valuesInView ? 'values-in-view' : 'values-out-view'}`}
+      >
         <div className="values-header">
-          <span className="section-eyebrow">OUR FOUNDATION</span>
+          <div className="foundation-badge">
+            <span className="foundation-dot"></span>
+            <span>OUR FOUNDATION</span>
+          </div>
           <h2 className="values-title">Core Values That Guide Every Doorstep Visit</h2>
           <p className="values-subtitle">
             The principles upholding customer peace of mind and technician dignity across Multan.
@@ -167,7 +206,7 @@ function About({ setCurrentPage }) {
 
         <div className="values-grid">
           {coreValues.map((value, index) => (
-            <div key={index} className="value-card">
+            <div key={index} className={`value-card anim-card-${index + 1}`}>
               <div className="value-icon-box">{value.icon}</div>
               <h3 className="value-title">{value.title}</h3>
               <p className="value-description">{value.description}</p>
@@ -176,73 +215,65 @@ function About({ setCurrentPage }) {
         </div>
       </section>
 
-      {/* ── FAIR PRICING & BIDDING INNOVATION SECTION ── */}
+      {/* ── FAIR PRICING & TRANSPARENCY SECTION (Full-Width Justified Narrative) ── */}
       <section className="fair-pricing-section">
-        <div className="pricing-content">
-          <div className="pricing-text">
+        <div className="pricing-content full-narrative">
+          <div className="pricing-header-center">
             <span className="pricing-label">TRANSPARENCY GUARANTEED</span>
-            <h2 className="pricing-title">Fair Pricing Through Smart Bidding &amp; Agreed Estimates</h2>
-            <p className="pricing-description">
-              Say goodbye to unexpected add-ons and unreasonable street contractor bargaining. MUX SERVICES empowers you to post your exact repair requirement, receive transparent competitive quotes from certified technicians, compare verified ratings and verified credentials, and hire with total financial confidence.
-            </p>
-            <ul className="pricing-features">
-              <li>
-                <span className="feat-check">✓</span>
-                <span>Direct upfront pricing with zero hidden doorstep surcharges</span>
-              </li>
-              <li>
-                <span className="feat-check">✓</span>
-                <span>Genuine spare parts backed by verified vendor receipts</span>
-              </li>
-              <li>
-                <span className="feat-check">✓</span>
-                <span>Free inspection warranty if any issue occurs within 7 days</span>
-              </li>
-            </ul>
+            <h2 className="pricing-title">Fair Pricing Through Upfront Rates &amp; Agreed Estimates</h2>
           </div>
 
-          <div className="pricing-visual">
-            <div className="bid-card">
-              <div className="bid-badge-row">
-                <span className="bid-live-pill">
-                  <span className="live-pulse-dot"></span> Live Verified Quote
-                </span>
-                <span className="bid-area-tag">📍 Bosan Road, Multan</span>
-              </div>
+          <div className="pricing-narrative-block">
+            <p className="pricing-description justified-narrative">
+              Say goodbye to unexpected add-ons, erratic door-to-door overcharging, and arbitrary street contractor bargaining. MUX SERVICES was established to bring radical pricing transparency to Multan’s home maintenance sector. Traditional unverified labor in our city frequently relies on subjective verbal estimates that escalate once work begins, leaving homeowners unprotected and financially stressed. We replace this broken dynamic with an institutional pricing model where every repair requirement receives a clearly defined scope, upfront labor standards, and itemized component breakdowns before a single tool is lifted.
+            </p>
+            <p className="pricing-description justified-narrative">
+              Through our transparent rate architecture, homeowners across Cantt, Bosan Road, Gulgasht, Shah Rukn-e-Alam, Model Town, and all surrounding Multan localities can book certified electricians, plumbers, AC engineers, and home specialists with absolute financial certainty. Every quote provided is an agreed estimate based on standardized diagnostic benchmarks rather than guesswork. Technicians carry verified digital rate cards, provide genuine vendor receipts for all replacement parts, and ensure that every service is backed by our 7-day peace of mind warranty with zero hidden doorstep surcharges.
+            </p>
+          </div>
 
-              <div className="bid-header">
-                <div className="bid-avatar">⚡</div>
-                <div className="bid-info">
-                  <div className="bid-name-row">
-                    <h4 className="bid-name">Muhammad Akram</h4>
-                    <span className="bid-verified-mark">✓ Vetted</span>
-                  </div>
-                  <div className="bid-rating">
-                    <span className="stars">⭐ 4.95</span>
-                    <span className="rating-score">(340 authentic reviews)</span>
-                  </div>
-                </div>
+          <div className="pricing-guarantees-grid">
+            <div className="pricing-guarantee-card">
+              <span className="feat-check">✓</span>
+              <div className="guarantee-text">
+                <h4 className="guarantee-title">Direct Upfront Rates</h4>
+                <p className="guarantee-desc">Standardized labor and diagnostic pricing with zero unexpected doorstep surcharges.</p>
               </div>
-
-              <div className="bid-body">
-                <div className="bid-job-tag">Electrician &amp; Inverter Lead</div>
-                <p className="bid-description">
-                  Short-circuit diagnosis, DB board circuit breaker replacement &amp; UPS inverter wiring overhaul with digital load testing.
-                </p>
-                <div className="bid-price-box">
-                  <span className="bid-price-lbl">Agreed Estimate:</span>
-                  <span className="bid-price">PKR 1,500</span>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                className="bid-button"
-                onClick={handleServicesClick}
-              >
-                Hire Verified Professional →
-              </button>
             </div>
+
+            <div className="pricing-guarantee-card">
+              <span className="feat-check">✓</span>
+              <div className="guarantee-text">
+                <h4 className="guarantee-title">Genuine Spare Parts</h4>
+                <p className="guarantee-desc">Direct manufacturer-approved parts backed by transparent, verified vendor receipts.</p>
+              </div>
+            </div>
+
+            <div className="pricing-guarantee-card">
+              <span className="feat-check">✓</span>
+              <div className="guarantee-text">
+                <h4 className="guarantee-title">7-Day Free Warranty</h4>
+                <p className="guarantee-desc">Full re-inspection and resolution coverage if any related issue arises within seven days.</p>
+              </div>
+            </div>
+
+            <div className="pricing-guarantee-card">
+              <span className="feat-check">✓</span>
+              <div className="guarantee-text">
+                <h4 className="guarantee-title">Digital Proof &amp; Invoices</h4>
+                <p className="guarantee-desc">Itemized digital invoices delivered directly to your device upon job sign-off.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="pricing-action-wrap">
+            <button
+              type="button"
+              className="pricing-cta-btn"
+              onClick={handleServicesClick}
+            >
+              Explore Verified Services &amp; Upfront Rates →
+            </button>
           </div>
         </div>
       </section>
