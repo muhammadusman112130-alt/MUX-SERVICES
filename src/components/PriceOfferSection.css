@@ -1,224 +1,511 @@
-/* ── PRICE OFFER SECTION ── */
-.price-offer-section {
-  padding: 5rem 2rem;
-  background: #0E2E33;
+/* ══════════════════════════════════════════════════════════════════════════
+   JOIN AS PROFESSIONAL SECTION (ANIMATED BANNER WITH BACKGROUND IMAGE)
+   Theme: #0E2E33 (Deep Teal), #EEF4F4 (Frost White), #17f7f7 / #8FD3E8 (Cyan/Mint)
+══════════════════════════════════════════════════════════════════════════ */
+
+.pro-join-section {
   position: relative;
+  padding: 6rem 2rem;
+  background: #0E2E33;
   overflow: hidden;
+  color: #EEF4F4;
 }
 
-.price-offer-section::before {
+/* ── Top and Bottom Animated Border Light Beams ── */
+.pro-join-section::before {
   content: '';
   position: absolute;
-  top: -50%; right: -20%;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: rgba(143, 211, 232,0.12);
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, transparent, #17f7f7, #8FD3E8, transparent);
+  box-shadow: 0 0 16px rgba(23, 247, 247, 0.85);
+  z-index: 4;
 }
 
-.container {
-  max-width: 1200px;
+.pro-join-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, transparent, #8FD3E8, #17f7f7, transparent);
+  box-shadow: 0 0 16px rgba(23, 247, 247, 0.85);
+  z-index: 4;
+}
+
+/* ── Background Image Layer with Subtle Zoom Animation ── */
+.pro-join-bg-layer {
+  position: absolute;
+  inset: -20px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(1.5px) brightness(0.42);
+  z-index: 1;
+  animation: bgSubtleDrift 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes bgSubtleDrift {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+/* ── Deep Gradient Overlay Layer ── */
+.pro-join-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(14, 46, 51, 0.95) 0%,
+    rgba(14, 46, 51, 0.88) 50%,
+    rgba(10, 32, 36, 0.96) 100%
+  );
+  z-index: 2;
+}
+
+/* ── Ambient Glowing Background Orbs ── */
+.pro-join-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 2;
+  opacity: 0.45;
+  animation: orbPulse 8s ease-in-out infinite alternate;
+}
+
+.pro-join-orb.orb-left {
+  width: 450px;
+  height: 450px;
+  top: -100px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(23, 247, 247, 0.35) 0%, transparent 70%);
+}
+
+.pro-join-orb.orb-right {
+  width: 500px;
+  height: 500px;
+  bottom: -120px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(143, 211, 232, 0.25) 0%, transparent 70%);
+}
+
+@keyframes orbPulse {
+  0% {
+    transform: scale(0.92) translate(0, 0);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.1) translate(20px, -15px);
+    opacity: 0.6;
+  }
+}
+
+/* ── Container Layout ── */
+.pro-join-section .container {
+  max-width: 1240px;
   margin: 0 auto;
   position: relative;
+  z-index: 3;
 }
 
-.price-content {
+.pro-join-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
   align-items: center;
 }
 
-.price-text { color: white; }
-
-.price-title {
-  font-size: 2.5rem;
+/* ── Left Column: Typography & Content ── */
+.pro-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(23, 247, 247, 0.12);
+  border: 1.5px solid rgba(23, 247, 247, 0.35);
+  color: #17f7f7;
+  font-size: 0.82rem;
   font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
   margin-bottom: 1.25rem;
+  backdrop-filter: blur(10px);
+}
+
+.pro-pill-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #17f7f7;
+  box-shadow: 0 0 10px #17f7f7;
+  animation: pillPulseDot 2s infinite;
+}
+
+@keyframes pillPulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
+}
+
+.pro-join-title {
+  font-size: 2.75rem;
+  font-weight: 900;
   line-height: 1.2;
-  color: white;
+  color: #EEF4F4;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
 }
 
-.price-description {
-  font-size: 1.05rem;
+.highlight-cyan {
+  color: #17f7f7;
+  text-shadow: 0 0 20px rgba(23, 247, 247, 0.55);
+}
+
+.pro-join-description {
+  font-size: 1.08rem;
   line-height: 1.7;
+  color: rgba(238, 244, 244, 0.82);
   margin-bottom: 2rem;
-  color: rgba(255,255,255,0.85);
+  max-width: 600px;
 }
 
-.price-features {
-  list-style: none;
+/* ── Benefits 2x2 Grid ── */
+.pro-benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
   margin-bottom: 2.5rem;
 }
 
-.price-features li {
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-  color: rgba(255,255,255,0.9);
+.pro-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background: rgba(14, 46, 51, 0.5);
+  border: 1px solid rgba(143, 211, 232, 0.2);
+  backdrop-filter: blur(8px);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.pro-benefit-item:hover {
+  transform: translateY(-3px);
+  border-color: #17f7f7;
+  background: rgba(19, 56, 62, 0.7);
+}
+
+.benefit-icon-box {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.benefit-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.benefit-title {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #EEF4F4;
+  margin: 0;
+}
+
+.benefit-desc {
+  font-size: 0.85rem;
+  color: rgba(238, 244, 244, 0.7);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ── Call to Action Buttons ── */
+.pro-cta-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.25rem;
+  flex-wrap: wrap;
 }
 
-/* Animated price button */
-.price-button {
+.pro-primary-btn {
   position: relative;
   overflow: hidden;
-  padding: 1rem 2.5rem;
-  background: #8FD3E8;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1.05rem 2.5rem;
+  background: #17f7f7;
   color: #0E2E33;
   border: none;
-  border-radius: 50px;
+  border-radius: 9999px;
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 6px 25px rgba(143, 211, 232, 0.4);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, background 0.28s ease;
+  box-shadow: 0 8px 30px rgba(23, 247, 247, 0.45);
 }
 
-.price-button::after {
+.pro-primary-btn::after {
   content: '';
   position: absolute;
-  top: 0; left: -100%;
-  width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(238, 244, 244, 0.3), transparent);
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
   transform: skewX(-20deg);
 }
 
-.price-button:hover {
-  background: #a8e0f0;
-  color: #0E2E33;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 35px rgba(143, 211, 232, 0.5);
+.pro-primary-btn:hover {
+  background: #55ffff;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(23, 247, 247, 0.65);
 }
 
-.price-button:hover::after {
-  animation: price-shine 0.6s ease;
+.pro-primary-btn:hover::after {
+  animation: proBtnShine 0.6s ease;
 }
 
-@keyframes price-shine {
-  0%   { left: -100%; }
+@keyframes proBtnShine {
+  0% { left: -100%; }
   100% { left: 200%; }
 }
 
-.price-visual {
+.btn-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.25s ease;
+}
+
+.pro-primary-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.pro-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 1.05rem 2.25rem;
+  background: rgba(238, 244, 244, 0.08);
+  border: 1.5px solid rgba(143, 211, 232, 0.35);
+  color: #EEF4F4;
+  border-radius: 9999px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(10px);
+}
+
+.pro-secondary-btn:hover {
+  background: rgba(23, 247, 247, 0.15);
+  border-color: #17f7f7;
+  color: #17f7f7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(23, 247, 247, 0.25);
+}
+
+/* ── Right Column: Stats Showcase Card ── */
+.pro-join-visual-col {
   display: flex;
   justify-content: center;
 }
 
-.price-card {
-  background: #13383e;
-  border-radius: 20px;
-  padding: 2.5rem;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.3);
-  max-width: 400px;
-  width: 100%;
-  border: 1.5px solid rgba(143, 211, 232, 0.2);
+.pro-stats-card {
   position: relative;
-  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease;
-  z-index: 2;
-}
-
-/* Animated glowing backlight behind price card on hover */
-.price-card::before {
-  content: '';
-  position: absolute;
-  inset: -8px;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(19, 56, 62, 0.75);
+  border: 1.5px solid rgba(23, 247, 247, 0.35);
   border-radius: 26px;
-  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.75) 0%, rgba(143, 211, 232, 0.5) 50%, transparent 75%);
-  filter: blur(24px);
-  opacity: 0;
-  z-index: -1;
-  pointer-events: none;
-  transform: translateY(0) scale(0.95);
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  padding: 2.25rem;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    0 0 35px rgba(23, 247, 247, 0.25);
+  backdrop-filter: blur(16px);
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease;
 }
 
-.price-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.4), 0 0 30px rgba(143, 211, 232, 0.35);
+.pro-stats-card:hover {
+  transform: translateY(-6px);
+  border-color: #17f7f7;
+  box-shadow:
+    0 32px 75px rgba(0, 0, 0, 0.6),
+    0 0 50px rgba(23, 247, 247, 0.4);
 }
 
-.price-card:hover::before {
-  opacity: 1;
-  transform: translateY(-4px) scale(1.04);
-  animation: priceBacklightPulse 2.6s ease-in-out infinite alternate;
+.pro-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(143, 211, 232, 0.2);
 }
 
-@keyframes priceBacklightPulse {
-  0% {
-    filter: blur(20px);
-    opacity: 0.75;
-  }
-  50% {
-    filter: blur(32px);
-    opacity: 1;
-  }
-  100% {
-    filter: blur(20px);
-    opacity: 0.75;
-  }
-}
-
-.price-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid rgba(143, 211, 232, 0.2);
-}
-
-.price-label {
-  display: block;
-  font-size: 0.9rem;
-  color: rgba(238, 244, 244, 0.7);
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+.badge-tag {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #EEF4F4;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.price-amount {
-  display: block;
-  font-size: 3rem;
-  font-weight: 800;
-  color: #8FD3E8;
+.live-pulse-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(23, 247, 247, 0.12);
+  border: 1px solid rgba(23, 247, 247, 0.4);
+  color: #17f7f7;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.28rem 0.75rem;
+  border-radius: 9999px;
 }
 
-.price-body {
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #17f7f7;
+  box-shadow: 0 0 8px #17f7f7;
+  animation: pillPulseDot 2s infinite;
+}
+
+/* ── Stat Metrics ── */
+.pro-stat-metrics {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
 }
 
-.price-item {
+.metric-box {
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  background: rgba(14, 46, 51, 0.7);
+  border: 1px solid rgba(143, 211, 232, 0.22);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.9rem 1rem;
-  background: rgba(14, 46, 51, 0.6);
-  border-radius: 10px;
-  border: 1px solid rgba(143, 211, 232, 0.2);
-  transition: all 0.2s;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.price-item:hover {
-  background: rgba(14, 46, 51, 0.9);
-  border-color: rgba(143, 211, 232, 0.45);
+.metric-box:hover {
+  transform: translateX(4px);
+  border-color: #17f7f7;
 }
 
-.item-name {
+.metric-box.highlight {
+  background: linear-gradient(135deg, rgba(23, 247, 247, 0.15) 0%, rgba(14, 46, 51, 0.7) 100%);
+  border-color: rgba(23, 247, 247, 0.45);
+}
+
+.metric-num {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #17f7f7;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: rgba(238, 244, 244, 0.75);
   font-weight: 600;
-  color: #EEF4F4;
-  font-size: 0.95rem;
 }
 
-.item-price {
-  font-weight: 700;
+/* ── Quote Block ── */
+.pro-card-quote {
+  padding: 1.2rem;
+  border-radius: 14px;
+  background: rgba(14, 46, 51, 0.5);
+  border: 1px dashed rgba(143, 211, 232, 0.25);
+}
+
+.pro-card-quote p {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: rgba(238, 244, 244, 0.85);
+  line-height: 1.5;
+  margin: 0 0 0.85rem 0;
+}
+
+.quote-author {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.author-avatar {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.author-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.author-details strong {
+  font-size: 0.88rem;
+  color: #EEF4F4;
+}
+
+.author-details span {
+  font-size: 0.78rem;
   color: #8FD3E8;
+}
+
+/* ── Responsive Rules ── */
+@media (max-width: 1024px) {
+  .pro-join-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .pro-join-visual-col {
+    justify-content: flex-start;
+  }
+  .pro-stats-card {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
-  .price-content { grid-template-columns: 1fr; gap: 2rem; }
-  .price-title { font-size: 2rem; }
-  .price-card { max-width: 100%; }
+  .pro-join-section {
+    padding: 4rem 1.25rem;
+  }
+  .pro-join-title {
+    font-size: 2.1rem;
+  }
+  .pro-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .pro-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pro-primary-btn,
+  .pro-secondary-btn {
+    justify-content: center;
+    width: 100%;
+  }
 }
