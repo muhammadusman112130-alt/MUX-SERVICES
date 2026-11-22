@@ -2482,6 +2482,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
           {/* ── HERO ── */}
           <div className="services-hero">
             <img src={servicesHeroBanner} alt="Home Services Header" className="services-hero-bg" />
+            <div className="services-hero-overlay" aria-hidden="true"></div>
             <div className="services-hero-content">
               <h1 className="hero-title">
                 <span className="hero-title-mint-shine">Find Expert Home Services</span>
