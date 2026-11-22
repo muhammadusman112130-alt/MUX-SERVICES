@@ -66,9 +66,9 @@ function Navbar({
     >
       <div className={`navbar-container${isMenuOpen ? ' is-menu-open' : ''}`}>
         <div className="navbar-logo">
-          <button 
-            type="button" 
-            className="logo-link" 
+          <button
+            type="button"
+            className="logo-link"
             onClick={() => setCurrentPage('home')}
             aria-label="MUX SERVICES Home"
           >
@@ -83,7 +83,7 @@ function Navbar({
                 filter: 'drop-shadow(0 0 12px rgba(23, 247, 247, 0.9)) drop-shadow(0 0 24px rgba(23, 247, 247, 0.5))'
               }}
             />
-            <span 
+            <span
               className="brand-logo-text-cyan"
               style={{
                 color: '#17f7f7',
