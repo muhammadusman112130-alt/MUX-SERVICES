@@ -2053,6 +2053,12 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
               </div>
 
               <div className="booking-header-buttons">
+                <button
+                  className="profile-direct-chat-btn"
+                  onClick={handleStartChat}
+                >
+                  💬 Direct Chat &amp; Hire
+                </button>
                 <button 
                   className="share-profile-btn"
                   onClick={() => {
@@ -2161,7 +2167,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                         </div>
                         <div className="work-card-footer">
                           <span className="work-location">📍 {work.location}</span>
-                          <span className="work-guarantee">🛡️ Warranty Covered</span>
+                          <span className="work-guarantee">🛡️ Verified Craftsmanship</span>
                         </div>
                       </div>
                     </div>
@@ -2296,11 +2302,16 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
               <div className="profile-chat-redirect-box">
                 <div className="pcr-text-group">
                   <h4>Ready to discuss or hire {selectedProvider.name}?</h4>
-                  <p>Please return to the Services list and click the "Chat" button next to this provider to message, negotiate price, and complete booking.</p>
+                  <p>Message directly to discuss your project requirements, verify upfront PKR estimates, and schedule fast doorstep arrival across Multan.</p>
                 </div>
-                <button className="pcr-action-btn" onClick={handleBackToProviders}>
-                  <span>← Back to Services to Chat</span>
-                </button>
+                <div className="pcr-actions-row">
+                  <button className="pcr-action-btn primary" onClick={handleStartChat}>
+                    <span>💬 Direct Chat &amp; Book</span>
+                  </button>
+                  <button className="pcr-action-btn secondary" onClick={handleBackToProviders}>
+                    <span>← Back to Services</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
