@@ -14,8 +14,6 @@ import welderImg from '../Public/welder.png'
 
 function Professionals({ setCurrentPage }) {
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [searchInputText, setSearchInputText] = useState('')
-  const [searchQuery, setSearchQuery] = useState('')
   const [verifiedOnly, setVerifiedOnly] = useState(true)
   const [selectedProModal, setSelectedProModal] = useState(null)
 
@@ -311,22 +309,10 @@ function Professionals({ setCurrentPage }) {
         if (verifiedOnly && !pro.verified) {
           return false
         }
-        // Search query
-        if (searchQuery.trim()) {
-          const q = searchQuery.toLowerCase()
-          const matchName = pro.name.toLowerCase().includes(q)
-          const matchTitle = pro.title.toLowerCase().includes(q)
-          const matchService = pro.service.toLowerCase().includes(q)
-          const matchLocation = pro.location.toLowerCase().includes(q)
-          const matchSkills = pro.skills.some((s) => s.toLowerCase().includes(q))
-          if (!matchName && !matchTitle && !matchService && !matchLocation && !matchSkills) {
-            return false
-          }
-        }
         return true
       })
       .sort((a, b) => b.rating - a.rating)
-  }, [professionalsList, selectedCategory, searchQuery, verifiedOnly])
+  }, [professionalsList, selectedCategory, verifiedOnly])
 
   const handleBook = (pro) => {
     if (typeof setCurrentPage === 'function') {
@@ -357,15 +343,15 @@ function Professionals({ setCurrentPage }) {
             Directly connect with certified technicians who maintain highest ratings, quickest response rates, and transparent PKR pricing in Multan.
           </p>
 
-          {/* Quick Metrics Bar (Clean bare stats without card background) */}
+          {/* Quick Metrics Bar (Clean bare stats without card background or star/lightning icons) */}
           <div className="pro-hero-metrics">
             <div className="pro-metric-item">
-              <span className="pro-metric-num">⭐ 4.93</span>
+              <span className="pro-metric-num">4.93</span>
               <span className="pro-metric-lbl">Avg. Customer Rating</span>
             </div>
             <div className="pro-metric-div"></div>
             <div className="pro-metric-item">
-              <span className="pro-metric-num">⚡ &lt; 10 Mins</span>
+              <span className="pro-metric-num">&lt; 10 Mins</span>
               <span className="pro-metric-lbl">Fastest Response</span>
             </div>
             <div className="pro-metric-div"></div>
@@ -385,46 +371,7 @@ function Professionals({ setCurrentPage }) {
       {/* ── DIRECTORY CONTROLS SECTION ── */}
       <section className="pro-controls-section">
         <div className="pro-controls-wrapper">
-          {/* Integrated Search Bar with Click Button */}
-          <div className="pro-search-row">
-            <div className="pro-search-bar-inline">
-              <span className="pro-search-icon">🔍</span>
-              <input
-                type="text"
-                placeholder="Search technician by name, specialty, or area (e.g. Akram, Inverter, Bosan Road)..."
-                value={searchInputText}
-                onChange={(e) => setSearchInputText(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setSearchQuery(searchInputText.trim())
-                  }
-                }}
-                className="pro-search-input"
-              />
-              {searchInputText && (
-                <button
-                  type="button"
-                  className="pro-search-clear"
-                  onClick={() => {
-                    setSearchInputText('')
-                    setSearchQuery('')
-                  }}
-                  title="Clear"
-                >
-                  ✕
-                </button>
-              )}
-              <button
-                type="button"
-                className="pro-search-submit-btn"
-                onClick={() => setSearchQuery(searchInputText.trim())}
-              >
-                Search
-              </button>
-            </div>
-          </div>
-
-          {/* Category Filter Pills */}
+          {/* Category Filter Navigation (Bare text tabs, shifted up in place of search bar) */}
           <div className="pro-category-pills">
             {categories.map((cat) => (
               <button
@@ -463,12 +410,10 @@ function Professionals({ setCurrentPage }) {
             <div className="pro-empty-state">
               <span className="pro-empty-icon">🔍</span>
               <h3>No matching professionals found</h3>
-              <p>Try clearing your search query or choosing another service category.</p>
+              <p>Try choosing another service category.</p>
               <button
                 className="pro-reset-btn"
                 onClick={() => {
-                  setSearchInputText('')
-                  setSearchQuery('')
                   setSelectedCategory('All')
                   setVerifiedOnly(false)
                 }}
