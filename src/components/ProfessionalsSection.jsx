@@ -20,7 +20,7 @@ function ProfessionalsSection({ setCurrentPage }) {
       image: electricianImg,
       verified: true,
       badge: 'Master Electrician',
-      detail: 'Wiring, Circuit Breakers, Solar Setup & 24/7 Emergency Repairs',
+      detail: 'Wiring, Circuit Breakers, Solar Setup & 24/7 Emergency Repairs in Multan.',
       skills: ['Wiring & Circuits', 'Solar Setup', 'Emergency 24/7'],
       experience: '8+ Years Exp',
       completedJobs: '450+ Jobs',
@@ -35,7 +35,7 @@ function ProfessionalsSection({ setCurrentPage }) {
       image: plumberImg,
       verified: true,
       badge: 'Master Plumber',
-      detail: 'Pipe Repairs, Leak Detection, Bathroom Fitting & Drainage Fixes',
+      detail: 'Pipe Repairs, Leak Detection, Bathroom Fitting & Drainage Fixes in Multan.',
       skills: ['Leak Detection', 'Pipe Fitting', 'Drain Cleaning'],
       experience: '6+ Years Exp',
       completedJobs: '320+ Jobs',
@@ -50,7 +50,7 @@ function ProfessionalsSection({ setCurrentPage }) {
       image: carpenterImg,
       verified: true,
       badge: 'Artisan Carpenter',
-      detail: 'Custom Wood Furniture, Door Lock Fitting & Wooden Restorations',
+      detail: 'Custom Wood Furniture, Door Lock Fitting & Wooden Restorations in Multan.',
       skills: ['Custom Woodwork', 'Cabinetry', 'Furniture Repair'],
       experience: '7+ Years Exp',
       completedJobs: '280+ Jobs',
@@ -65,7 +65,7 @@ function ProfessionalsSection({ setCurrentPage }) {
       image: cleanerImg,
       verified: true,
       badge: 'Deep Clean Pro',
-      detail: 'Full House Sanitization, Floor Polishing & Kitchen Deep Cleaning',
+      detail: 'Full House Sanitization, Floor Polishing & Kitchen Deep Cleaning in Multan.',
       skills: ['Full Sanitization', 'Floor Polish', 'Deep Kitchen Clean'],
       experience: '5+ Years Exp',
       completedJobs: '510+ Jobs',
@@ -120,9 +120,9 @@ function ProfessionalsSection({ setCurrentPage }) {
       id="professionals"
     >
       <div className="container">
-        <h2 className="section-title">Top Professional Services</h2>
+        <h2 className="section-title">Top-Rated Multan Home Service Professionals</h2>
         <p className="section-subtitle">
-          Highly rated verified experts delivering top-tier services with guaranteed quality
+          Certified technicians delivering reliable electrical, plumbing, carpentry &amp; cleaning services across Multan
         </p>
 
         {/* ── HORIZONTAL CAROUSEL VIEWPORT (Center Focused, Sides Blurred, NO Side Arrows) ── */}
@@ -180,7 +180,10 @@ function ProfessionalsSection({ setCurrentPage }) {
                       {/* Skills tags */}
                       <div className="pro-service-tags">
                         {pro.skills.map((skill, idx) => (
-                          <span key={idx} className="pro-skill-tag">✓ {skill}</span>
+                          <span key={idx} className="pro-skill-tag">
+                            <span aria-hidden="true" style={{ marginRight: '3px' }}>✓</span>
+                            {skill.endsWith('.') ? skill : `${skill}.`}
+                          </span>
                         ))}
                       </div>
 
@@ -202,7 +205,7 @@ function ProfessionalsSection({ setCurrentPage }) {
                     </div>
 
                     <div className="professional-rating">
-                      <span className="stars-svg">
+                      <span className="stars-svg" aria-hidden="true">
                         {[...Array(5)].map((_, i) => (
                           <svg key={i} width="15" height="15" viewBox="0 0 24 24" fill="#8FD3E8" stroke="#8FD3E8">
                             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -210,17 +213,18 @@ function ProfessionalsSection({ setCurrentPage }) {
                         ))}
                       </span>
                       <span className="rating-number">{pro.rating}</span>
-                      <span className="reviews">({pro.reviews} reviews)</span>
-                      <strong className="pro-rate-tag">{pro.rate}</strong>
+                      <span className="reviews">({pro.reviews} verified reviews).</span>
+                      <strong className="pro-rate-tag">Rate: {pro.rate}.</strong>
                     </div>
 
                     <button 
                       className="hire-button" 
                       type="button"
+                      aria-label={`Book verified professional ${pro.name} - ${pro.service} in Multan`}
                       onClick={(e) => handleHireClick(e, pro)}
                     >
-                      <span>Hire Now</span>
-                      <span className="hire-btn-arrow">→</span>
+                      <span>Book Professional</span>
+                      <span className="hire-btn-arrow" aria-hidden="true">→</span>
                     </button>
                   </div>
                 </div>

@@ -411,7 +411,7 @@ function CategorySection({ setCurrentPage }) {
             <span className="pill-dot"></span>
             <span>100% Verified Home Services</span>
           </div>
-          <h2 className="section-title">Home Services &amp; Repairs</h2>
+          <h2 className="section-title">Home Services &amp; Repairs in Multan</h2>
           <p className="section-subtitle">
             Multan's leading certified home service divisions with transparent pricing, instant booking &amp; skilled technicians
           </p>
@@ -555,13 +555,13 @@ function CategorySection({ setCurrentPage }) {
                           <div className="card-features-list">
                             {cat.features.map((feat, fIdx) => (
                               <div key={fIdx} className="feature-item">
-                                <span>{feat}</span>
+                                <span>{feat.endsWith('.') ? feat : `${feat}.`}</span>
                               </div>
                             ))}
                           </div>
 
                           <div className="card-skills-wrap">
-                            <span className="skills-heading">Popular Tasks:</span>
+                            <span className="skills-heading">{cat.name.split(' ')[0]} Tasks:</span>
                             <div className="skills-tags-row">
                               {cat.skills.map((skill, sIdx) => (
                                 <span key={sIdx} className="skill-chip">
@@ -598,20 +598,21 @@ function CategorySection({ setCurrentPage }) {
                             <span className="review-count">({cat.reviews})</span>
                           </div>
                           <div className="pros-count-text">
-                            <strong>{cat.count}</strong> Experts Available
+                            <strong>{cat.count}</strong> Verified Pros in Multan.
                           </div>
                         </div>
 
                         <button 
                           type="button" 
                           className="card-explore-btn"
+                          aria-label={`Book verified ${cat.name} in Multan`}
                           onClick={(e) => {
                             e.stopPropagation()
                             handleServiceSelect(cat)
                           }}
                         >
-                          <span>Book {cat.name.split(' ')[0]}</span>
-                          <span className="btn-arrow">→</span>
+                          <span>Explore {cat.name.split(' ')[0]}</span>
+                          <span className="btn-arrow" aria-hidden="true">→</span>
                         </button>
                       </div>
                     </div>

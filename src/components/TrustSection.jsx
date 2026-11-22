@@ -10,7 +10,7 @@ function TrustSection() {
         </svg>
       ),
       title: 'Verified Professionals', 
-      description: 'All professionals are background checked and verified' 
+      description: 'All Multan technicians are police background checked and CNIC verified.' 
     },
     { 
       icon: (
@@ -21,7 +21,7 @@ function TrustSection() {
         </svg>
       ),
       title: 'Fair Pricing', 
-      description: 'Transparent pricing in PKR with no hidden charges' 
+      description: 'Transparent pricing in PKR with zero hidden surprise charges.' 
     },
     { 
       icon: (
@@ -31,7 +31,7 @@ function TrustSection() {
         </svg>
       ),
       title: '24/7 Support', 
-      description: 'Round the clock customer support for all your needs' 
+      description: 'Round the clock dedicated customer support for all household needs.' 
     },
     { 
       icon: (
@@ -41,15 +41,15 @@ function TrustSection() {
         </svg>
       ),
       title: 'Satisfaction Guaranteed', 
-      description: '100% satisfaction guarantee or your money back' 
+      description: '100% service satisfaction guarantee or free inspection resolution.' 
     },
   ]
 
   return (
     <section className="trust-section">
       <div className="container">
-        <h2 className="section-title">Services You Can Trust</h2>
-        <p className="section-subtitle">Why choose us for your service needs</p>
+        <h2 className="section-title">Multan Home Services You Can Trust</h2>
+        <p className="section-subtitle">Why Multan homeowners choose MUX Services for home repairs &amp; maintenance</p>
         <div className="trust-grid">
           {services.map((service, index) => (
             <div key={index} className="trust-card">

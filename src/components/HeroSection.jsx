@@ -130,12 +130,12 @@ function HeroSection({ setCurrentPage }) {
       <div className="hero-content">
         <h1 className="hero-title">
           <span className="hero-title-mint-shine">
-            FIND TRUSTED HOME SERVICES
+            FIND TRUSTED HOME SERVICES IN MULTAN
           </span>
         </h1>
         <p className="hero-subtitle">
           <span style={{ color: '#ffffff', display: 'inline-block' }}>
-            Connect with certified electricians, plumbers, gardeners, carpenters &amp; home technicians in Multan
+            Book certified electricians, plumbers, carpenters, AC technicians &amp; deep cleaning pros across Multan
           </span>
         </p>
         <div className="search-container">
