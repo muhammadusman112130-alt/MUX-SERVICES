@@ -63,7 +63,7 @@ function HeroSection({ setCurrentPage }) {
             90deg,
             #8FD3E8 0%,
             #17f7f7 25%,
-            #ffffff 50%,
+            #5eead4 50%,
             #17f7f7 75%,
             #8FD3E8 100%
           ) !important;
@@ -76,8 +76,9 @@ function HeroSection({ setCurrentPage }) {
           letter-spacing: 2px !important;
           font-weight: 900 !important;
           text-transform: uppercase !important;
-          animation: mintShineFlow 3.5s linear infinite !important;
+          animation: mintColorFlow 4s linear infinite !important;
           text-shadow: none !important;
+          filter: none !important;
         }
         .hero-section .hero-content p.hero-subtitle,
         .hero-section .hero-content p.hero-subtitle span {
