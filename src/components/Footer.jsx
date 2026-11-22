@@ -13,9 +13,9 @@ function Footer({ setCurrentPage }) {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3 className="footer-logo">
+            <div className="footer-logo">
               <span className="footer-logo-mux">MUX</span> <span className="footer-logo-services">SERVICES</span>
-            </h3>
+            </div>
             <p className="footer-description">
               Multan's premier verified home services platform. Professional electricians, plumbers, gardeners, and carpenters on demand.
             </p>
@@ -36,7 +36,7 @@ function Footer({ setCurrentPage }) {
           </div>
 
           <div className="footer-section">
-            <h4 className="footer-title">Quick Links</h4>
+            <h3 className="footer-title">Quick Links</h3>
             <ul className="footer-links">
               <li><a href="/" onClick={(e) => { e.preventDefault(); handleNav('home'); }} className="footer-nav-btn">Home</a></li>
               <li><a href="/services" onClick={(e) => { e.preventDefault(); handleNav('services'); }} className="footer-nav-btn">Services</a></li>
@@ -47,7 +47,7 @@ function Footer({ setCurrentPage }) {
           </div>
 
           <div className="footer-section">
-            <h4 className="footer-title">Home Services</h4>
+            <h3 className="footer-title">Home Services</h3>
             <ul className="footer-links">
               <li><a href="/services#electrician" onClick={(e) => { e.preventDefault(); handleNav('services'); }} className="footer-nav-btn">Electrician &amp; Wiring</a></li>
               <li><a href="/services#plumbing" onClick={(e) => { e.preventDefault(); handleNav('services'); }} className="footer-nav-btn">Plumbing &amp; Sanitary</a></li>
@@ -58,7 +58,7 @@ function Footer({ setCurrentPage }) {
           </div>
 
           <div className="footer-section">
-            <h4 className="footer-title">Contact Us</h4>
+            <h3 className="footer-title">Contact Us</h3>
             <ul className="footer-contact">
               <li style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>

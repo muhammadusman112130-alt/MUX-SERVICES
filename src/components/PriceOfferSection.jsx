@@ -96,7 +96,7 @@ function PriceOfferSection({ setCurrentPage }) {
               <div className="pro-benefit-item anim-card-unfold anim-delay-4">
                 <div className="benefit-icon-box">⚡</div>
                 <div className="benefit-text-wrap">
-                  <h4 className="benefit-title">Instant Job Leads</h4>
+                  <h3 className="benefit-title">Instant Job Leads</h3>
                   <p className="benefit-desc">Receive real-time customer requests across Multan straight to your device.</p>
                 </div>
               </div>
@@ -104,7 +104,7 @@ function PriceOfferSection({ setCurrentPage }) {
               <div className="pro-benefit-item anim-card-unfold anim-delay-5">
                 <div className="benefit-icon-box">💰</div>
                 <div className="benefit-text-wrap">
-                  <h4 className="benefit-title">Transparent Earnings</h4>
+                  <h3 className="benefit-title">Transparent Earnings</h3>
                   <p className="benefit-desc">Set competitive rates, bid fairly, and retain 100% of your agreed price.</p>
                 </div>
               </div>
@@ -112,7 +112,7 @@ function PriceOfferSection({ setCurrentPage }) {
               <div className="pro-benefit-item anim-card-unfold anim-delay-6">
                 <div className="benefit-icon-box">🛡️</div>
                 <div className="benefit-text-wrap">
-                  <h4 className="benefit-title">Verified Pro Badge</h4>
+                  <h3 className="benefit-title">Verified Pro Badge</h3>
                   <p className="benefit-desc">Build trust with police-verified badges and authenticated customer reviews.</p>
                 </div>
               </div>
@@ -120,7 +120,7 @@ function PriceOfferSection({ setCurrentPage }) {
               <div className="pro-benefit-item anim-card-unfold anim-delay-7">
                 <div className="benefit-icon-box">📱</div>
                 <div className="benefit-text-wrap">
-                  <h4 className="benefit-title">Smart Digital Hub</h4>
+                  <h3 className="benefit-title">Smart Digital Hub</h3>
                   <p className="benefit-desc">Manage schedules, active bookings, and customer chats all in one portal.</p>
                 </div>
               </div>

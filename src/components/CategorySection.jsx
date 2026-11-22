@@ -547,7 +547,7 @@ function CategorySection({ setCurrentPage }) {
                                 <h3 className="card-service-title">{cat.name}</h3>
                                 <span className="card-price-chip">{cat.priceRange}</span>
                               </div>
-                              <h4 className="card-headline">{cat.headline}</h4>
+                              <p className="card-headline">{cat.headline}</p>
                               <p className="card-tagline">{cat.tagline}</p>
                             </div>
                           </div>
