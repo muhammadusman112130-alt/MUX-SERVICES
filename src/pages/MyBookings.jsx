@@ -538,33 +538,6 @@ function MyBookings({ setCurrentPage }) {
                         </g>
                       </g>
                     </svg>
-
-                    {/* Floating Telematics HUD Glassmorphic Bar */}
-                    <div className="map-floating-telemetry-bar">
-                      <div className="mft-item">
-                        <span className="mft-icon">📍</span>
-                        <div className="mft-text">
-                          <span className="mft-label">Current Technician Locality</span>
-                          <strong className="mft-val">{liveBooking.currentLocality}</strong>
-                        </div>
-                      </div>
-                      <div className="mft-separator"></div>
-                      <div className="mft-item">
-                        <span className="mft-icon">🛵</span>
-                        <div className="mft-text">
-                          <span className="mft-label">Live Telematics Speed</span>
-                          <strong className="mft-val highlight-cyan">{liveBooking.speed} • {liveBooking.distance}</strong>
-                        </div>
-                      </div>
-                      <div className="mft-separator"></div>
-                      <div className="mft-item">
-                        <span className="mft-icon">🏠</span>
-                        <div className="mft-text">
-                          <span className="mft-label">Registered Delivery Address</span>
-                          <strong className="mft-val">{liveBooking.address}</strong>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
