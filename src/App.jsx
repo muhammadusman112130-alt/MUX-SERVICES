@@ -232,6 +232,8 @@ function App() {
         return <Contact setCurrentPage={handlePageChange} />
       case 'profile':
         return <Profile onLogout={handleLogout} setCurrentPage={handlePageChange} user={currentUser} />
+      case 'booked':
+      case 'Booked':
       case 'bookings':
       case 'Bookings':
         return <MyBookings setCurrentPage={handlePageChange} />

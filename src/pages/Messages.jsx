@@ -284,7 +284,7 @@ function Messages({ setCurrentPage }) {
           ...conv,
           offer: updatedOffer,
           isServiceActive: true,
-          lastMessage: `Offer Accepted (${agreedPrice}) • View in Bookings`,
+          lastMessage: `Offer Accepted (${agreedPrice}) • View in Booked`,
           time: 'Just now',
           messages: [...conv.messages, confirmationMsg]
         }
@@ -295,10 +295,10 @@ function Messages({ setCurrentPage }) {
     // Save to official My Bookings
     saveBookingToLocalStorage(activeConversation, agreedPrice)
 
-    // Automatically navigate to Bookings screen after 1 second so user sees live tracking!
+    // Automatically navigate to Booked screen after 1 second so user sees live tracking!
     if (typeof setCurrentPage === 'function') {
       setTimeout(() => {
-        setCurrentPage('bookings')
+        setCurrentPage('booked')
       }, 1000)
     }
   }
@@ -753,9 +753,9 @@ function Messages({ setCurrentPage }) {
                           <button
                             type="button"
                             className="ic-view-booking-btn"
-                            onClick={() => setCurrentPage('bookings')}
+                            onClick={() => setCurrentPage('booked')}
                           >
-                            🚀 View Live Doorstep Tracking in Bookings →
+                            🚀 View Live Doorstep Tracking in Booked →
                           </button>
                         )}
                       </div>

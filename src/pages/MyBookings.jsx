@@ -2,23 +2,26 @@ import { useState, useEffect } from 'react'
 import { bookingsAPI } from '../services/api'
 import './MyBookings.css'
 
-// Default verified Multan bookings for initial experience
-const DEFAULT_INITIAL_BOOKINGS = [
+// Initial mock data if storage is clean
+const INITIAL_BOOKINGS = [
   {
     id: 'MUX-849201',
     refNumber: 'MUX-849201',
     service: 'AC Diagnostic & Cooling Overhaul',
     provider: 'Mary Johnson',
     price: 'Rs. 2,500',
-    status: 'active',
+    status: 'active', // 'active' | 'completed' | 'cancelled'
     date: 'Today',
     time: '10:30 AM',
     location: 'Cantt & Bosan Road, Multan',
     address: 'House 14, Sector B, Cantt, Multan',
     warranty: '14-Day Free Workmanship Guarantee',
     phone: '+92 300 1234567',
-    technicianETA: '< 25 Mins Doorstep Arrival',
-    step: 2, // 1: Agreed, 2: Dispatched, 3: At Doorstep, 4: Completed
+    technicianETA: '< 20 Mins',
+    initialSeconds: 1125, // ~18 mins 45 secs countdown
+    currentLocality: 'Crossing Bosan Road toward Cantt',
+    speed: '34 km/h',
+    distance: '2.1 km remaining',
     createdAt: new Date().toISOString()
   },
   {
@@ -34,21 +37,32 @@ const DEFAULT_INITIAL_BOOKINGS = [
     address: 'Street 3, Block C, Gulgasht, Multan',
     warranty: '14-Day Free Workmanship Guarantee',
     phone: '+92 300 7654321',
-    step: 4,
+    rating: 5,
+    reviewText: 'Akram arrived right on time, replaced the main breaker swiftly, and tested all circuits. Very polite and professional!',
+    reviewTags: ['Punctual Arrival', 'Expert Diagnostic', 'Cleaned Work Area'],
     createdAt: new Date(Date.now() - 86400000).toISOString()
   }
 ]
 
-function MyBookings({ setCurrentPage }) {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('all')
-  const [selectedTab, setSelectedTab] = useState('all') // 'all' | 'active' | 'completed' | 'cancelled'
-  const [activeTrackingStep, setActiveTrackingStep] = useState(2)
-  const [showCallModal, setShowCallModal] = useState(false)
-  const [callModalData, setCallModalData] = useState(null)
-  const [showReceiptModal, setShowReceiptModal] = useState(false)
-  const [selectedReceiptBooking, setSelectedReceiptBooking] = useState(null)
+const INITIAL_COMPLAINTS = [
+  {
+    id: 'CMP-7482',
+    bookingRef: 'MUX-739104',
+    provider: 'Muhammad Akram',
+    service: 'Main Circuit Breaker & Load Balancing',
+    category: 'Technician Delay in Arrival',
+    details: 'Technician reached 20 minutes later than promised due to Bosan Road traffic congestion.',
+    status: 'Resolved by Multan Support',
+    resolutionNote: 'Rs. 300 courtesy credit added to customer account. Specialist notified for punctual compliance.',
+    date: 'Yesterday at 05:30 PM'
+  }
+]
 
+function MyBookings({ setCurrentPage }) {
+  // Tabs: 'live' (default active tracked), 'completed', 'complaints'
+  const [activeTab, setActiveTab] = useState('live')
+
+  // Bookings list state
   const [bookings, setBookings] = useState(() => {
     try {
       const saved = localStorage.getItem('servicehub_bookings')
@@ -59,28 +73,52 @@ function MyBookings({ setCurrentPage }) {
         }
       }
     } catch (e) {
-      console.error('Error reading bookings from localStorage:', e)
+      console.error('Error reading bookings:', e)
     }
-    return DEFAULT_INITIAL_BOOKINGS
+    return INITIAL_BOOKINGS
   })
 
-  // Sync bookings from standalone MongoDB backend
+  // Complaints list state
+  const [complaints, setComplaints] = useState(() => {
+    try {
+      const saved = localStorage.getItem('servicehub_complaints')
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed
+        }
+      }
+    } catch (e) {}
+    return INITIAL_COMPLAINTS
+  })
+
+  // Live active booking
+  const liveBooking = bookings.find(b => b.status === 'active') || null
+
+  // Active countdown timer (counts down seconds continuously)
+  const [countdownSeconds, setCountdownSeconds] = useState(liveBooking?.initialSeconds || 1125)
+
+  useEffect(() => {
+    if (!liveBooking) return
+    const timer = setInterval(() => {
+      setCountdownSeconds(prev => (prev > 0 ? prev - 1 : 0))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [liveBooking])
+
+  // Sync with MongoDB backend
   useEffect(() => {
     bookingsAPI.getAll().then(res => {
       if (res && res.success && Array.isArray(res.bookings) && res.bookings.length > 0) {
         setBookings(prev => {
           const map = new Map()
-          // First add server bookings
           res.bookings.forEach(b => {
             const key = b.refNumber || b._id
             map.set(key, { ...b, id: b.id || b._id })
           })
-          // Then overlay or add local bookings
           prev.forEach(b => {
             const key = b.refNumber || b.id
-            if (!map.has(key)) {
-              map.set(key, b)
-            }
+            if (!map.has(key)) map.set(key, b)
           })
           const merged = Array.from(map.values())
           try {
@@ -90,34 +128,132 @@ function MyBookings({ setCurrentPage }) {
         })
       }
     }).catch(err => {
-      console.warn('[MyBookings] Backend sync note:', err.message)
+      console.warn('[Booked] Backend sync notice:', err.message)
     })
   }, [])
 
-  // Update status (e.g. mark completed or cancelled)
-  const handleUpdateStatus = async (bookingId, newStatus) => {
-    try {
-      await bookingsAPI.updateStatus(bookingId, newStatus)
-    } catch (err) {
-      console.warn('[MyBookings] Status update API notice:', err.message)
-    }
+  // Modals state
+  const [showCancelModal, setShowCancelModal] = useState(false)
+  const [cancelReason, setCancelReason] = useState('Technician is taking too long to arrive')
+  const [cancelNotes, setCancelNotes] = useState('')
 
-    setBookings(prev => {
-      const updated = prev.map(b => (b.refNumber === bookingId || b.id === bookingId) ? { ...b, status: newStatus } : b)
-      try {
-        localStorage.setItem('servicehub_bookings', JSON.stringify(updated))
-      } catch (e) {}
-      return updated
-    })
+  const [showReviewModal, setShowReviewModal] = useState(false)
+  const [reviewBooking, setReviewBooking] = useState(null)
+  const [selectedStars, setSelectedStars] = useState(5)
+  const [reviewComment, setReviewComment] = useState('')
+  const [selectedTags, setSelectedTags] = useState(['Punctual Arrival', 'Polite & Clean'])
+
+  const [showComplaintModal, setShowComplaintModal] = useState(false)
+  const [complaintCategory, setComplaintCategory] = useState('Overcharging / Rate Dispute')
+  const [complaintDetails, setComplaintDetails] = useState('')
+
+  const [showCallModal, setShowCallModal] = useState(false)
+
+  // Format countdown mm:ss
+  const formatTime = (secs) => {
+    const m = Math.floor(secs / 60)
+    const s = secs % 60
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
   }
 
-  // Open Direct Chat with provider from booking
-  const handleChatWithProvider = (booking) => {
+  // 1. CANCEL SERVICE (Customer cancels if taking too long)
+  const handleConfirmCancelService = () => {
+    if (!liveBooking) return
+    const updated = bookings.map(b => b.id === liveBooking.id || b.refNumber === liveBooking.refNumber ? {
+      ...b,
+      status: 'cancelled',
+      cancelReason,
+      cancelledAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    } : b)
+
+    setBookings(updated)
+    try {
+      localStorage.setItem('servicehub_bookings', JSON.stringify(updated))
+    } catch (e) {}
+
+    setShowCancelModal(false)
+    alert(`Service #${liveBooking.refNumber} has been successfully cancelled. Your 100% Escrow deposit has been refunded.`)
+  }
+
+  // 2. COMPLETE WORK & REVIEW SERVICE
+  const handleOpenReviewModal = (booking) => {
+    setReviewBooking(booking || liveBooking)
+    setSelectedStars(5)
+    setReviewComment('')
+    setShowReviewModal(true)
+  }
+
+  const handleSubmitReviewAndComplete = (e) => {
+    e.preventDefault()
+    const target = reviewBooking || liveBooking
+    if (!target) return
+
+    const updated = bookings.map(b => b.id === target.id || b.refNumber === target.refNumber ? {
+      ...b,
+      status: 'completed',
+      rating: selectedStars,
+      reviewText: reviewComment.trim() || 'Work completed satisfactorily with verified craftsmanship.',
+      reviewTags: selectedTags,
+      completedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    } : b)
+
+    setBookings(updated)
+    try {
+      localStorage.setItem('servicehub_bookings', JSON.stringify(updated))
+    } catch (e) {}
+
+    setShowReviewModal(false)
+    // Switch to completed tab so user immediately sees their completed service
+    setActiveTab('completed')
+    alert(`Thank you! Work marked as completed. Your verified review for ${target.provider} has been published.`)
+  }
+
+  const toggleTag = (tag) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter(t => t !== tag))
+    } else {
+      setSelectedTags([...selectedTags, tag])
+    }
+  }
+
+  // 3. FILE COMPLAINT
+  const handleSubmitComplaint = (e) => {
+    e.preventDefault()
+    const target = liveBooking || bookings[0]
+    if (!target) return
+
+    const newComplaint = {
+      id: `CMP-${Date.now().toString().slice(-4)}`,
+      bookingRef: target.refNumber,
+      provider: target.provider,
+      service: target.service,
+      category: complaintCategory,
+      details: complaintDetails.trim() || 'Customer reported an issue regarding doorstep service.',
+      status: 'Under Investigation • Multan Support Dispatched',
+      resolutionNote: 'MUX SERVICES Customer Ombudsman is actively reviewing technician telematics.',
+      date: 'Just now'
+    }
+
+    const updatedComplaints = [newComplaint, ...complaints]
+    setComplaints(updatedComplaints)
+    try {
+      localStorage.setItem('servicehub_complaints', JSON.stringify(updatedComplaints))
+    } catch (e) {}
+
+    setShowComplaintModal(false)
+    setComplaintDetails('')
+    // Switch to complaints tab so user sees their registered complaint
+    setActiveTab('complaints')
+    alert(`Complaint #${newComplaint.id} registered! Our Multan Resolution Officer is investigating. Escalation hotline: +92 300 1234567.`)
+  }
+
+  // Open Direct Chat
+  const handleChatWithProvider = (b) => {
     const chatPayload = {
-      id: booking.provider.toLowerCase().replace(/\s+/g, '-'),
-      name: booking.provider,
-      service: booking.service,
-      price: booking.price,
+      id: b.provider.toLowerCase().replace(/\s+/g, '-'),
+      name: b.provider,
+      service: b.service,
+      price: b.price,
       verified: true
     }
     try {
@@ -128,471 +264,735 @@ function MyBookings({ setCurrentPage }) {
     }
   }
 
-  // Find the most relevant active/live booking for top tracking banner
-  const liveActiveBooking = bookings.find(b => b.status === 'active' || b.status === 'scheduled')
-
-  // Filter bookings list
-  const filteredBookings = bookings.filter(booking => {
-    const sTerm = searchTerm.toLowerCase()
-    const matchesSearch = (booking.service || '').toLowerCase().includes(sTerm) ||
-                          (booking.provider || '').toLowerCase().includes(sTerm) ||
-                          (booking.refNumber || '').toLowerCase().includes(sTerm) ||
-                          (booking.location || '').toLowerCase().includes(sTerm)
-
-    const matchesCategory = selectedCategory === 'all' || 
-                            (booking.service || '').toLowerCase().includes(selectedCategory.toLowerCase())
-
-    const matchesTab = selectedTab === 'all' || 
-                      (selectedTab === 'active' && (booking.status === 'active' || booking.status === 'scheduled')) ||
-                      (selectedTab === 'completed' && booking.status === 'completed') ||
-                      (selectedTab === 'cancelled' && booking.status === 'cancelled')
-
-    return matchesSearch && matchesCategory && matchesTab
-  })
-
-  const activeCount = bookings.filter(b => b.status === 'active' || b.status === 'scheduled').length
-  const completedCount = bookings.filter(b => b.status === 'completed').length
-
-  const getServiceIcon = (service = '') => {
-    const s = service.toLowerCase()
-    if (s.includes('electric') || s.includes('wiring') || s.includes('breaker')) return '⚡'
-    if (s.includes('plumb') || s.includes('pipe') || s.includes('leak')) return '🔧'
-    if (s.includes('ac') || s.includes('hvac') || s.includes('cooling')) return '❄️'
-    if (s.includes('clean')) return '🧹'
-    if (s.includes('carpent') || s.includes('wood') || s.includes('furniture')) return '🪚'
-    if (s.includes('paint')) return '🎨'
-    if (s.includes('appliance') || s.includes('fridge') || s.includes('washing')) return '🔌'
-    return '🛠️'
-  }
+  const completedBookings = bookings.filter(b => b.status === 'completed')
 
   return (
-    <div className="my-bookings-page">
-      <div className="bookings-page-container">
+    <div className="booked-page">
+      <div className="booked-container">
 
         {/* ══════════════════════════════════════════════════
-            TOP HEADER & STATS BAR
+            HEADER & TOP NAVIGATION TABS (BOOKED)
         ══════════════════════════════════════════════════ */}
-        <header className="bookings-hero-header">
-          <div className="bhh-left">
-            <span className="bhh-badge">✦ OFFICIAL CLIENT DASHBOARD</span>
-            <h1 className="bhh-title">My Doorstep Bookings &amp; Orders</h1>
-            <p className="bhh-subtitle">
-              Live GPS technician coordinates, upfront PKR rate cards, and verified workmanship guarantees across Multan localities.
+        <header className="booked-header">
+          <div className="bh-left">
+            <span className="bh-badge">✦ MUX SERVICES CLIENT PORTAL</span>
+            <h1 className="bh-title">Booked Services</h1>
+            <p className="bh-subtitle">
+              Live doorstep technician GPS tracking, arrival countdown, and verified job completion across Multan.
             </p>
           </div>
-          <div className="bhh-right">
+
+          <div className="bh-right">
+            {liveBooking && (
+              <button 
+                type="button" 
+                className="bh-complaint-quick-btn"
+                onClick={() => setShowComplaintModal(true)}
+              >
+                <span>⚠️ Lodge Complaint</span>
+              </button>
+            )}
             {setCurrentPage && (
               <button 
                 type="button" 
-                className="bhh-book-btn"
+                className="bh-new-book-btn"
                 onClick={() => setCurrentPage('services')}
               >
-                <span>+ Book New Service</span>
+                <span>+ Hire New Specialist</span>
               </button>
             )}
           </div>
         </header>
 
-        {/* Quick Stats Grid */}
-        <div className="bookings-stats-strip">
-          <div className={`bss-card ${activeCount > 0 ? 'highlight-active' : ''}`}>
-            <div className="bss-icon live-pulse">⚡</div>
-            <div className="bss-text">
-              <span className="bss-label">Active &amp; Live</span>
-              <strong className="bss-val">{activeCount} Jobs In Progress</strong>
-            </div>
-          </div>
+        {/* 3 Main View Tabs */}
+        <nav className="booked-tabs-bar" aria-label="Booked Navigation">
+          <button 
+            type="button" 
+            className={`bt-tab-btn ${activeTab === 'live' ? 'active' : ''}`}
+            onClick={() => setActiveTab('live')}
+          >
+            <span className="tab-icon">⚡</span>
+            <span>Live Tracked (Active)</span>
+            {liveBooking && <span className="tab-live-dot"></span>}
+          </button>
 
-          <div className="bss-card">
-            <div className="bss-icon completed">✓</div>
-            <div className="bss-text">
-              <span className="bss-label">Completed Jobs</span>
-              <strong className="bss-val">{completedCount} Verified Closed</strong>
-            </div>
-          </div>
+          <button 
+            type="button" 
+            className={`bt-tab-btn ${activeTab === 'completed' ? 'active' : ''}`}
+            onClick={() => setActiveTab('completed')}
+          >
+            <span className="tab-icon">✓</span>
+            <span>Completed Services ({completedBookings.length})</span>
+          </button>
 
-          <div className="bss-card">
-            <div className="bss-icon escrow">🔒</div>
-            <div className="bss-text">
-              <span className="bss-label">Escrow Safeguard</span>
-              <strong className="bss-val">100% Protected Funds</strong>
-            </div>
-          </div>
-
-          <div className="bss-card">
-            <div className="bss-icon warranty">🛡️</div>
-            <div className="bss-text">
-              <span className="bss-label">Certified Warranty</span>
-              <strong className="bss-val">14-Day Free Coverage</strong>
-            </div>
-          </div>
-        </div>
+          <button 
+            type="button" 
+            className={`bt-tab-btn ${activeTab === 'complaints' ? 'active' : ''}`}
+            onClick={() => setActiveTab('complaints')}
+          >
+            <span className="tab-icon">⚠️</span>
+            <span>Complaints &amp; Disputes ({complaints.length})</span>
+          </button>
+        </nav>
 
         {/* ══════════════════════════════════════════════════
-            FEATURED: LIVE ACTIVE SERVICE & DOORSTEP TRACKER
-            (jab ma accept kro tu service start liv jo ha wo honi chiay haa booking screen ma)
+            TAB 1: LIVE TRACKED (ACTIVE SERVICE & MULTAN GPS MAP)
+            (or iss ma sirf wohi service show honi chiay jo liv track ho rahi ha sath maa map bi hona chia)
         ══════════════════════════════════════════════════ */}
-        {liveActiveBooking && (
-          <section className="live-service-tracker-panel" aria-label="Live Active Service Dispatch Tracker">
-            <div className="lst-header">
-              <div className="lst-header-badge-row">
-                <div className="lst-live-pill">
-                  <span className="live-emerald-pulse"></span>
-                  <span>SERVICE IN PROGRESS • TECHNICIAN DISPATCHED</span>
-                </div>
-                <span className="lst-ref-pill">Ref: {liveActiveBooking.refNumber}</span>
-              </div>
-              <div className="lst-eta-box">
-                <span className="lst-eta-label">Guaranteed Arrival</span>
-                <strong className="lst-eta-time">{liveActiveBooking.technicianETA || '< 25 Mins Doorstep'}</strong>
-              </div>
-            </div>
-
-            {/* Specialist Profile Details Inside Live Tracker */}
-            <div className="lst-specialist-row">
-              <div className="lst-spec-info">
-                <div className="lst-spec-avatar">
-                  <span className="lst-spec-icon">{getServiceIcon(liveActiveBooking.service)}</span>
-                  <span className="lst-spec-status-dot"></span>
-                </div>
-                <div className="lst-spec-text">
-                  <div className="lst-spec-name-line">
-                    <h3 className="lst-spec-name">{liveActiveBooking.provider}</h3>
-                    <span className="lst-spec-vtag">✓ CNIC &amp; Police Vetted</span>
+        {activeTab === 'live' && (
+          <div className="booked-live-section">
+            {liveBooking ? (
+              <div className="live-tracking-master-card">
+                
+                {/* Status Bar with Live Countdown Timer */}
+                <div className="ltm-top-status-bar">
+                  <div className="ltm-badge-group">
+                    <span className="ltm-live-beacon"></span>
+                    <span className="ltm-live-title">LIVE GPS TRACKING • TECHNICIAN EN ROUTE</span>
+                    <span className="ltm-ref-pill">#{liveBooking.refNumber}</span>
                   </div>
-                  <span className="lst-spec-trade">{liveActiveBooking.service}</span>
-                  <span className="lst-spec-loc">📍 {liveActiveBooking.location || 'Multan Delivery Zone'}</span>
-                </div>
-              </div>
 
-              <div className="lst-rate-and-actions">
-                <div className="lst-price-tag">
-                  <span className="lst-pt-label">Agreed Upfront PKR</span>
-                  <strong className="lst-pt-val">{liveActiveBooking.price}</strong>
-                </div>
-
-                <div className="lst-action-buttons">
-                  <button 
-                    type="button" 
-                    className="lst-call-btn"
-                    onClick={() => {
-                      setCallModalData(liveActiveBooking)
-                      setShowCallModal(true)
-                    }}
-                  >
-                    <span>📞 Call Specialist</span>
-                  </button>
-                  <button 
-                    type="button" 
-                    className="lst-chat-btn"
-                    onClick={() => handleChatWithProvider(liveActiveBooking)}
-                  >
-                    <span>💬 Direct Chat</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* 4-Step Visual Doorstep Tracker */}
-            <div className="lst-stepper-wrap">
-              <div className="lst-stepper-title-row">
-                <span className="lst-st-heading">Live Doorstep Dispatch Progress Across Multan</span>
-                <span className="lst-st-live-hint">Auto-synced with specialist mobile app</span>
-              </div>
-
-              <div className="lst-stepper">
-                <div className="lst-step completed">
-                  <div className="lst-step-circle">✓</div>
-                  <span className="lst-step-title">Rate Agreed</span>
-                  <span className="lst-step-sub">{liveActiveBooking.price} Fixed</span>
-                </div>
-
-                <div className="lst-step-line completed"></div>
-
-                <div className={`lst-step ${activeTrackingStep >= 2 ? 'active' : ''}`}>
-                  <div className="lst-step-circle">2</div>
-                  <span className="lst-step-title">Dispatched</span>
-                  <span className="lst-step-sub">En Route Multan</span>
-                </div>
-
-                <div className={`lst-step-line ${activeTrackingStep >= 3 ? 'completed' : ''}`}></div>
-
-                <div className={`lst-step ${activeTrackingStep >= 3 ? 'active' : ''}`}>
-                  <div className="lst-step-circle">3</div>
-                  <span className="lst-step-title">At Doorstep</span>
-                  <span className="lst-step-sub">Tools &amp; Inspection</span>
-                </div>
-
-                <div className={`lst-step-line ${activeTrackingStep >= 4 ? 'completed' : ''}`}></div>
-
-                <div className={`lst-step ${activeTrackingStep >= 4 ? 'completed' : ''}`}>
-                  <div className="lst-step-circle">4</div>
-                  <span className="lst-step-title">Job Done</span>
-                  <span className="lst-step-sub">Warranty Issued</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Actions for Live Tracker */}
-            <div className="lst-bottom-bar">
-              <span className="lst-safeguard-text">
-                🔒 Escrow Protected: Payment is held safe until you inspect the work and confirm satisfaction.
-              </span>
-              <div className="lst-bb-actions">
-                <button 
-                  type="button"
-                  className="lst-complete-job-btn"
-                  onClick={() => handleUpdateStatus(liveActiveBooking.refNumber, 'completed')}
-                >
-                  ✓ Complete Job &amp; Release
-                </button>
-                <button 
-                  type="button"
-                  className="lst-dispute-btn"
-                  onClick={() => alert(`Dispute Support for #${liveActiveBooking.refNumber}: Our 24/7 Multan hotline (+92 300 1234567) is notified.`)}
-                >
-                  Dispute Support
-                </button>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* ══════════════════════════════════════════════════
-            BOOKINGS MANAGEMENT SECTION (Filter & Search)
-        ══════════════════════════════════════════════════ */}
-        <section className="bookings-management-section">
-          {/* Controls Bar */}
-          <div className="bmc-controls-bar">
-            {/* Tabs */}
-            <div className="bmc-tabs">
-              <button 
-                type="button" 
-                className={`bmc-tab-btn ${selectedTab === 'all' ? 'active' : ''}`}
-                onClick={() => setSelectedTab('all')}
-              >
-                All Bookings ({bookings.length})
-              </button>
-              <button 
-                type="button" 
-                className={`bmc-tab-btn ${selectedTab === 'active' ? 'active' : ''}`}
-                onClick={() => setSelectedTab('active')}
-              >
-                Active &amp; Live ({activeCount})
-              </button>
-              <button 
-                type="button" 
-                className={`bmc-tab-btn ${selectedTab === 'completed' ? 'active' : ''}`}
-                onClick={() => setSelectedTab('completed')}
-              >
-                Completed ({completedCount})
-              </button>
-              <button 
-                type="button" 
-                className={`bmc-tab-btn ${selectedTab === 'cancelled' ? 'active' : ''}`}
-                onClick={() => setSelectedTab('cancelled')}
-              >
-                Cancelled
-              </button>
-            </div>
-
-            {/* Search and Category Filter */}
-            <div className="bmc-search-filter-row">
-              <div className="bmc-search-wrap">
-                <svg className="bmc-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <input 
-                  type="text" 
-                  className="bmc-search-input"
-                  placeholder="Search by ref, technician or service..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-
-              <select 
-                className="bmc-category-select"
-                value={selectedCategory} 
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
-                <option value="all">All Service Categories</option>
-                <option value="ac">AC &amp; HVAC Technicians</option>
-                <option value="electrician">Electricians</option>
-                <option value="plumb">Plumbers</option>
-                <option value="carpent">Carpenters</option>
-                <option value="clean">Deep Cleaning</option>
-                <option value="paint">Painters</option>
-                <option value="appliance">Appliance Repair</option>
-              </select>
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════════════
-              BOOKINGS CARDS GRID
-          ══════════════════════════════════════════════════ */}
-          <div className="bookings-grid">
-            {filteredBookings.length > 0 ? (
-              filteredBookings.map((b) => {
-                const isActive = b.status === 'active' || b.status === 'scheduled'
-                const isCompleted = b.status === 'completed'
-
-                return (
-                  <div key={b.id || b.refNumber} className={`booking-luxury-card ${isActive ? 'is-active-card' : ''}`}>
-                    {/* Top Row: Service Icon, Title, Status */}
-                    <div className="blc-top-row">
-                      <div className="blc-service-badge-wrap">
-                        <span className="blc-svc-icon">{getServiceIcon(b.service)}</span>
-                        <div>
-                          <h4 className="blc-svc-title">{b.service}</h4>
-                          <span className="blc-ref-id">Ref: #{b.refNumber}</span>
-                        </div>
-                      </div>
-
-                      <span className={`blc-status-pill ${b.status}`}>
-                        {isActive && '⚡ In Progress'}
-                        {isCompleted && '✓ Completed'}
-                        {b.status === 'cancelled' && '✕ Cancelled'}
-                      </span>
-                    </div>
-
-                    {/* Middle Details */}
-                    <div className="blc-details-grid">
-                      <div className="blc-detail-item">
-                        <span className="bdi-label">Specialist</span>
-                        <strong className="bdi-val">{b.provider} <span className="bdi-tick">✓</span></strong>
-                      </div>
-                      <div className="blc-detail-item">
-                        <span className="bdi-label">Agreed Rate</span>
-                        <strong className="bdi-val price-highlight">{b.price}</strong>
-                      </div>
-                      <div className="blc-detail-item">
-                        <span className="bdi-label">Date &amp; Arrival</span>
-                        <strong className="bdi-val">{b.date} • {b.time}</strong>
-                      </div>
-                      <div className="blc-detail-item">
-                        <span className="bdi-label">Location</span>
-                        <strong className="bdi-val">{b.location || 'Multan, Pakistan'}</strong>
-                      </div>
-                    </div>
-
-                    {/* Guarantee Tag */}
-                    <div className="blc-guarantee-strip">
-                      <span>🛡️ {b.warranty || '14-Day Free Workmanship Guarantee'}</span>
-                    </div>
-
-                    {/* Action Buttons Row */}
-                    <div className="blc-actions-row">
-                      <button 
-                        type="button" 
-                        className="blc-chat-btn"
-                        onClick={() => handleChatWithProvider(b)}
-                        title="Open chat with specialist"
-                      >
-                        <span>💬 Chat</span>
-                      </button>
-
-                      <button 
-                        type="button" 
-                        className="blc-receipt-btn"
-                        onClick={() => {
-                          setSelectedReceiptBooking(b)
-                          setShowReceiptModal(true)
-                        }}
-                      >
-                        <span>📄 Receipt</span>
-                      </button>
-
-                      {isActive && (
-                        <button 
-                          type="button" 
-                          className="blc-complete-btn"
-                          onClick={() => handleUpdateStatus(b.refNumber, 'completed')}
-                        >
-                          <span>✓ Complete</span>
-                        </button>
-                      )}
-
-                      {isActive && (
-                        <button 
-                          type="button" 
-                          className="blc-cancel-btn"
-                          onClick={() => handleUpdateStatus(b.refNumber, 'cancelled')}
-                        >
-                          <span>Cancel</span>
-                        </button>
-                      )}
+                  {/* ⏱️ REAL-TIME COUNTDOWN TIMER */}
+                  <div className="ltm-countdown-box">
+                    <span className="cd-label">Estimated Doorstep Arrival</span>
+                    <div className="cd-timer-row">
+                      <span className="cd-icon">⏱️</span>
+                      <strong className="cd-time">{formatTime(countdownSeconds)}</strong>
+                      <span className="cd-mins">Mins Remaining</span>
                     </div>
                   </div>
-                )
-              })
+                </div>
+
+                {/* ══════════════════════════════════════════════════
+                    INTERACTIVE MULTAN GPS MAP WIDGET
+                ══════════════════════════════════════════════════ */}
+                <div className="multan-gps-map-container">
+                  <svg className="multan-vector-map" viewBox="0 0 800 360" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                      <linearGradient id="mapBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#0a1d22" />
+                        <stop offset="100%" stopColor="#08171a" />
+                      </linearGradient>
+                      <linearGradient id="roadGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#10b981" />
+                        <stop offset="100%" stopColor="#17f7f7" />
+                      </linearGradient>
+                      <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="4" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                    </defs>
+
+                    {/* Dark Canvas */}
+                    <rect width="800" height="360" fill="url(#mapBg)" />
+
+                    {/* Background City Street Grid (Multan Roads Network) */}
+                    <g opacity="0.18" stroke="#8FD3E8" strokeWidth="1.2">
+                      <line x1="0" y1="60" x2="800" y2="60" />
+                      <line x1="0" y1="130" x2="800" y2="130" />
+                      <line x1="0" y1="200" x2="800" y2="200" />
+                      <line x1="0" y1="270" x2="800" y2="270" />
+                      <line x1="0" y1="330" x2="800" y2="330" />
+
+                      <line x1="120" y1="0" x2="120" y2="360" />
+                      <line x1="260" y1="0" x2="260" y2="360" />
+                      <line x1="420" y1="0" x2="420" y2="360" />
+                      <line x1="580" y1="0" x2="580" y2="360" />
+                      <line x1="720" y1="0" x2="720" y2="360" />
+                    </g>
+
+                    {/* Main Multan Arteries (Curved Highways) */}
+                    <path d="M 50 320 Q 240 240 450 210 T 780 120" fill="none" stroke="#13383e" strokeWidth="18" strokeLinecap="round" />
+                    <path d="M 50 320 Q 240 240 450 210 T 780 120" fill="none" stroke="rgba(143, 211, 232, 0.35)" strokeWidth="3" strokeDasharray="6 6" />
+
+                    <path d="M 220 30 Q 320 180 620 320" fill="none" stroke="#13383e" strokeWidth="14" strokeLinecap="round" />
+                    <path d="M 220 30 Q 320 180 620 320" fill="none" stroke="rgba(143, 211, 232, 0.25)" strokeWidth="2" strokeDasharray="5 5" />
+
+                    {/* Multan Locality Sector Labels */}
+                    <g fill="rgba(238, 244, 244, 0.55)" fontSize="11" fontWeight="700" fontFamily="sans-serif">
+                      <text x="70" y="90">GULGASHT COLONY</text>
+                      <text x="280" y="70">MDA CHOWK</text>
+                      <text x="600" y="80">BOSAN ROAD</text>
+                      <text x="140" y="270">KUTCHERY ROAD</text>
+                      <text x="460" y="320">MODEL TOWN</text>
+                      <text x="630" y="290">MULTAN CANTT</text>
+                    </g>
+
+                    {/* LIVE DISPATCH TRAJECTORY PATH (Green to Cyan Glowing Line) */}
+                    <path 
+                      id="dispatchRoute"
+                      d="M 180 160 Q 340 190 480 140 T 640 220" 
+                      fill="none" 
+                      stroke="url(#roadGlow)" 
+                      strokeWidth="5" 
+                      strokeLinecap="round"
+                      filter="url(#neonGlow)"
+                      className="animated-gps-route"
+                    />
+
+                    {/* DESTINATION: Customer Doorstep (Multan Cantt) */}
+                    <g transform="translate(640, 220)">
+                      <circle r="32" fill="none" stroke="#17f7f7" strokeWidth="1.5" className="customer-pulse-ring-1" />
+                      <circle r="20" fill="none" stroke="#17f7f7" strokeWidth="2" className="customer-pulse-ring-2" />
+                      <circle r="10" fill="#17f7f7" filter="url(#neonGlow)" />
+                      <circle r="5" fill="#0E2E33" />
+                      
+                      {/* Destination Label Box */}
+                      <rect x="-85" y="-55" width="170" height="34" rx="8" fill="#0E2E33" stroke="#17f7f7" strokeWidth="1.5" />
+                      <text x="0" y="-38" fill="#17f7f7" fontSize="11" fontWeight="800" textAnchor="middle">📍 YOUR DOORSTEP</text>
+                      <text x="0" y="-25" fill="#EEF4F4" fontSize="9" fontWeight="600" textAnchor="middle">{liveBooking.location || 'Cantt, Multan'}</text>
+                    </g>
+
+                    {/* ORIGIN / TECHNICIAN REAL-TIME POSITION PIN */}
+                    <g transform="translate(240, 172)">
+                      <circle r="22" fill="none" stroke="#10b981" strokeWidth="2" className="tech-pulse-ring" />
+                      <circle r="14" fill="#10b981" filter="url(#neonGlow)" />
+                      <text x="0" y="5" fontSize="12" textAnchor="middle" fill="#ffffff">🛵</text>
+
+                      {/* Specialist Live HUD Pin */}
+                      <rect x="-100" y="-52" width="200" height="32" rx="8" fill="#0E2E33" stroke="#10b981" strokeWidth="1.5" />
+                      <text x="0" y="-36" fill="#10b981" fontSize="10.5" fontWeight="900" textAnchor="middle">
+                        🟢 {liveBooking.provider} (Moving)
+                      </text>
+                      <text x="0" y="-23" fill="#EEF4F4" fontSize="8.5" fontWeight="600" textAnchor="middle">
+                        {liveBooking.speed} • {liveBooking.distance}
+                      </text>
+                    </g>
+                  </svg>
+
+                  {/* Floating Telematics Bar Over Map */}
+                  <div className="map-floating-telemetry">
+                    <div className="mft-col">
+                      <span className="mft-lbl">Current Location</span>
+                      <strong className="mft-val">📍 {liveBooking.currentLocality}</strong>
+                    </div>
+                    <div className="mft-col">
+                      <span className="mft-lbl">GPS Telemetry</span>
+                      <strong className="mft-val highlight">🛵 {liveBooking.speed} • {liveBooking.distance}</strong>
+                    </div>
+                    <div className="mft-col">
+                      <span className="mft-lbl">Delivery Destination</span>
+                      <strong className="mft-val">🏠 {liveBooking.address}</strong>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ══════════════════════════════════════════════════
+                    SPECIALIST PROFILE & LIVE ACTION CONTROLS
+                ══════════════════════════════════════════════════ */}
+                <div className="ltm-specialist-info-bar">
+                  <div className="si-profile">
+                    <div className="si-avatar-ring">
+                      <span className="si-avatar-icon">🛠️</span>
+                      <span className="si-live-dot"></span>
+                    </div>
+                    <div className="si-name-box">
+                      <div className="si-name-row">
+                        <h3>{liveBooking.provider}</h3>
+                        <span className="si-vbadge">✓ Police &amp; CNIC Vetted</span>
+                      </div>
+                      <span className="si-trade">{liveBooking.service}</span>
+                      <span className="si-rate-tag">Agreed Fixed Rate: <strong>{liveBooking.price}</strong></span>
+                    </div>
+                  </div>
+
+                  {/* Actions: Call Specialist, Chat Specialist */}
+                  <div className="si-comms-buttons">
+                    <button 
+                      type="button" 
+                      className="si-call-btn"
+                      onClick={() => setShowCallModal(true)}
+                    >
+                      <span>📞 Call Specialist</span>
+                    </button>
+                    <button 
+                      type="button" 
+                      className="si-chat-btn"
+                      onClick={() => handleChatWithProvider(liveBooking)}
+                    >
+                      <span>💬 Direct Chat</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* ══════════════════════════════════════════════════
+                    LIVE CUSTOMER ACTIONS:
+                    1. COMPLETE WORK & REVIEW
+                    2. CANCEL SERVICE (IF TAKING TOO LONG)
+                    3. FILE COMPLAINT
+                ══════════════════════════════════════════════════ */}
+                <div className="ltm-customer-actions-footer">
+                  <div className="caf-left">
+                    <span className="caf-escrow-hint">
+                      🔒 <strong>Escrow Protected:</strong> Funds are safeguarded. Only release payment after inspecting completed work.
+                    </span>
+                  </div>
+
+                  <div className="caf-right-buttons">
+                    {/* COMPLETE WORK & GIVE REVIEW */}
+                    <button 
+                      type="button" 
+                      className="caf-complete-btn"
+                      onClick={() => handleOpenReviewModal(liveBooking)}
+                    >
+                      <span className="btn-icon">✓</span>
+                      <span>Mark Work Completed &amp; Give Review</span>
+                    </button>
+
+                    {/* CANCEL SERVICE BUTTON (Customer can cancel if delayed) */}
+                    <button 
+                      type="button" 
+                      className="caf-cancel-btn"
+                      onClick={() => setShowCancelModal(true)}
+                    >
+                      <span>✕ Cancel Service</span>
+                    </button>
+
+                    {/* FILE COMPLAINT */}
+                    <button 
+                      type="button" 
+                      className="caf-complaint-btn"
+                      onClick={() => setShowComplaintModal(true)}
+                    >
+                      <span>⚠️ Report Issue</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
             ) : (
-              <div className="bookings-empty-card">
-                <div className="bec-icon">📋</div>
-                <h3 className="bec-title">No Bookings Found</h3>
-                <p className="bec-desc">
-                  No service bookings match your current search or tab filters. Book verified technicians across Multan with guaranteed upfront rates.
+              <div className="no-live-service-card">
+                <div className="nlsc-icon">🛵</div>
+                <h3>No Live Service Being Tracked Right Now</h3>
+                <p>
+                  You do not have any active doorstep service in transit. Book verified electricians, plumbers, carpenters or AC engineers across Multan with guaranteed arrival.
                 </p>
-                {setCurrentPage && (
-                  <button 
-                    type="button" 
-                    className="bec-cta-btn"
-                    onClick={() => setCurrentPage('services')}
-                  >
-                    Browse Verified Multan Services →
+                <div className="nlsc-buttons">
+                  {setCurrentPage && (
+                    <button type="button" className="nlsc-hire-btn" onClick={() => setCurrentPage('services')}>
+                      Browse Multan Services →
+                    </button>
+                  )}
+                  <button type="button" className="nlsc-view-past-btn" onClick={() => setActiveTab('completed')}>
+                    View Completed Services ({completedBookings.length})
                   </button>
-                )}
+                </div>
               </div>
             )}
           </div>
-        </section>
+        )}
 
         {/* ══════════════════════════════════════════════════
-            SECURITY & ESCROW NOTICE FOOTER
+            TAB 2: COMPLETED SERVICES
+            (or jab ya complete work ho ja tu yaa providr ak tab maa jaha completed kam krway hoy bandy show hon gyn)
         ══════════════════════════════════════════════════ */}
-        <footer className="bookings-escrow-security-banner">
-          <div className="besb-icon">🛡️</div>
-          <div className="besb-content">
-            <h4 className="besb-title">Official MUX Escrow Guarantee &amp; Customer Safety</h4>
-            <p className="besb-text">
-              Every booking processed through MUX SERVICES is protected under digital escrow. Upfront PKR rate cards are standardized across Cantt, Bosan Road, Gulgasht, Model Town, and all Multan localities. Technicians carry verified CNIC badges and genuine vendor purchase receipts.
-            </p>
-            <div className="besb-points">
-              <span>✓ 100% Escrow Vault Security</span>
-              <span>✓ CNIC &amp; Police Verified Independent Pros</span>
-              <span>✓ 14-Day Free Rework Workmanship Guarantee</span>
+        {activeTab === 'completed' && (
+          <div className="booked-completed-section">
+            <div className="section-title-strip">
+              <div>
+                <h2>Completed Doorstep Jobs</h2>
+                <p>History of completed jobs with customer verified ratings, reviews, and warranty certificates.</p>
+              </div>
+              <span className="completed-counter-badge">{completedBookings.length} Verified Jobs</span>
+            </div>
+
+            {completedBookings.length > 0 ? (
+              <div className="completed-cards-grid">
+                {completedBookings.map((b) => (
+                  <div key={b.id || b.refNumber} className="completed-job-card">
+                    <div className="cjc-header">
+                      <div className="cjc-svc-info">
+                        <span className="cjc-icon">🛠️</span>
+                        <div>
+                          <h4 className="cjc-title">{b.service}</h4>
+                          <span className="cjc-ref">Ref: #{b.refNumber}</span>
+                        </div>
+                      </div>
+                      <span className="cjc-status-pill">✓ Work Completed</span>
+                    </div>
+
+                    <div className="cjc-body-details">
+                      <div className="cbd-row">
+                        <span>Technician:</span>
+                        <strong>{b.provider} <span style={{ color: '#10b981' }}>✓</span></strong>
+                      </div>
+                      <div className="cbd-row">
+                        <span>Paid Amount:</span>
+                        <strong className="cjc-price">{b.price}</strong>
+                      </div>
+                      <div className="cbd-row">
+                        <span>Date &amp; Time:</span>
+                        <strong>{b.date} • {b.time}</strong>
+                      </div>
+                      <div className="cbd-row">
+                        <span>Location:</span>
+                        <strong>{b.location}</strong>
+                      </div>
+                    </div>
+
+                    {/* Customer Review Display */}
+                    <div className="cjc-review-box">
+                      <div className="crb-top">
+                        <span className="crb-stars">{'★'.repeat(b.rating || 5)}{'☆'.repeat(5 - (b.rating || 5))}</span>
+                        <span className="crb-label">Verified Customer Review</span>
+                      </div>
+                      <p className="crb-comment">&ldquo;{b.reviewText || 'Excellent doorstep service and high-quality craftsmanship.'}&rdquo;</p>
+                      {b.reviewTags && b.reviewTags.length > 0 && (
+                        <div className="crb-tags">
+                          {b.reviewTags.map((tag, i) => (
+                            <span key={i} className="crb-tag-pill">✓ {tag}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Card Actions */}
+                    <div className="cjc-actions">
+                      <button 
+                        type="button" 
+                        className="cjc-chat-again-btn"
+                        onClick={() => handleChatWithProvider(b)}
+                      >
+                        <span>💬 Message Specialist</span>
+                      </button>
+                      <button 
+                        type="button" 
+                        className="cjc-book-again-btn"
+                        onClick={() => setCurrentPage && setCurrentPage('services')}
+                      >
+                        <span>Re-book Service</span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="empty-subtab-card">
+                <span className="esc-icon">✓</span>
+                <h3>No Completed Jobs Yet</h3>
+                <p>When an active doorstep technician finishes your work, you can rate and complete the service here.</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════════
+            TAB 3: COMPLAINTS & DISPUTES
+            (and issi screen ma complaint ka bi option rakho... jinki complaints ki ho hon gi wo bi show hon)
+        ══════════════════════════════════════════════════ */}
+        {activeTab === 'complaints' && (
+          <div className="booked-complaints-section">
+            <div className="section-title-strip">
+              <div>
+                <h2>Customer Complaints &amp; Disputes Hub</h2>
+                <p>Official records of reported issues under active investigation by MUX SERVICES Multan Ombudsman.</p>
+              </div>
+              <button 
+                type="button" 
+                className="lodge-new-complaint-btn"
+                onClick={() => setShowComplaintModal(true)}
+              >
+                <span>+ Lodge New Complaint</span>
+              </button>
+            </div>
+
+            <div className="complaints-cards-list">
+              {complaints.length > 0 ? (
+                complaints.map((c) => (
+                  <div key={c.id} className="complaint-card">
+                    <div className="cmp-header">
+                      <div className="cmp-header-left">
+                        <span className="cmp-ticket-badge">Ticket #{c.id}</span>
+                        <h4 className="cmp-category-title">{c.category}</h4>
+                      </div>
+                      <span className="cmp-status-badge">{c.status}</span>
+                    </div>
+
+                    <div className="cmp-meta-grid">
+                      <div>
+                        <span className="cmp-meta-label">Accused Specialist</span>
+                        <strong className="cmp-meta-val">{c.provider} ({c.service})</strong>
+                      </div>
+                      <div>
+                        <span className="cmp-meta-label">Booking Reference</span>
+                        <strong className="cmp-meta-val">#{c.bookingRef}</strong>
+                      </div>
+                      <div>
+                        <span className="cmp-meta-label">Filed On</span>
+                        <strong className="cmp-meta-val">{c.date}</strong>
+                      </div>
+                    </div>
+
+                    <div className="cmp-details-quote">
+                      <span className="cdq-title">Customer Complaint Description:</span>
+                      <p>&ldquo;{c.details}&rdquo;</p>
+                    </div>
+
+                    <div className="cmp-support-resolution-box">
+                      <span className="srb-title">🛡️ MUX SERVICES Multan Ombudsman Action:</span>
+                      <p>{c.resolutionNote}</p>
+                      <span className="srb-hotline">24/7 Priority Resolution Desk: +92 300 1234567</span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="empty-subtab-card">
+                  <span className="esc-icon">🛡️</span>
+                  <h3>No Complaints on Record</h3>
+                  <p>All your service bookings have operated smoothly with zero disputes.</p>
+                </div>
+              )}
             </div>
           </div>
-        </footer>
+        )}
 
       </div>
 
       {/* ══════════════════════════════════════════════════
-          CALL SPECIALIST POPUP MODAL
+          MODAL 1: CANCEL SERVICE CONFIRMATION
+          (agr ziada time laga raha tu service customer khud cancel kr saky)
       ══════════════════════════════════════════════════ */}
-      {showCallModal && callModalData && (
-        <div className="booking-modal-backdrop" onClick={() => setShowCallModal(false)}>
-          <div className="booking-modal-box" onClick={(e) => e.stopPropagation()}>
-            <div className="bmb-header">
-              <h3>Direct Specialist Contact</h3>
-              <button type="button" className="bmb-close" onClick={() => setShowCallModal(false)}>✕</button>
+      {showCancelModal && liveBooking && (
+        <div className="booked-modal-backdrop" onClick={() => setShowCancelModal(false)}>
+          <div className="booked-modal-box cancel-box" onClick={(e) => e.stopPropagation()}>
+            <div className="bmb-top">
+              <h3>Cancel Live Doorstep Service</h3>
+              <button type="button" className="bmb-x-btn" onClick={() => setShowCancelModal(false)}>✕</button>
             </div>
-            <div className="bmb-body">
-              <div className="bmb-avatar-ring">
-                <span>{getServiceIcon(callModalData.service)}</span>
+
+            <div className="bmb-content">
+              <div className="cancel-warning-banner">
+                <span className="cwb-icon">⏱️</span>
+                <div>
+                  <strong>Taking too long? You have full right to cancel.</strong>
+                  <p>Your 100% Escrow deposit of {liveBooking.price} will be refunded with zero deduction.</p>
+                </div>
               </div>
-              <h4>{callModalData.provider}</h4>
-              <p className="bmb-sub">{callModalData.service}</p>
-              <div className="bmb-phone-card">
-                <span className="bmb-phone-label">Verified Contact Number</span>
-                <strong className="bmb-phone-number">{callModalData.phone || '+92 300 1234567'}</strong>
+
+              <div className="cancel-form-group">
+                <label className="cfg-label">Select Reason for Cancellation:</label>
+                <select 
+                  className="cfg-select"
+                  value={cancelReason}
+                  onChange={(e) => setCancelReason(e.target.value)}
+                >
+                  <option value="Technician is taking too long to arrive">Technician is taking too long to arrive</option>
+                  <option value="Specialist is unresponsive on call">Specialist is unresponsive on call / chat</option>
+                  <option value="Emergency reschedule needed">Personal emergency / need to reschedule</option>
+                  <option value="Booked wrong category by mistake">Booked wrong category by mistake</option>
+                  <option value="Other reason">Other reason</option>
+                </select>
               </div>
-              <p className="bmb-hint">Doorstep arrival window: {callModalData.technicianETA || '< 25 mins across Multan'}.</p>
-              <div className="bmb-actions">
-                <a href={`tel:${callModalData.phone || '+923001234567'}`} className="bmb-call-now-btn">
-                  📞 Call Now
+
+              <div className="cancel-form-group">
+                <label className="cfg-label">Additional Feedback (Optional):</label>
+                <textarea 
+                  className="cfg-textarea"
+                  placeholder="Tell us what went wrong so we improve Multan technician punctuality..."
+                  rows="2"
+                  value={cancelNotes}
+                  onChange={(e) => setCancelNotes(e.target.value)}
+                />
+              </div>
+
+              <div className="bmb-actions-row">
+                <button 
+                  type="button" 
+                  className="bmb-cancel-action-btn"
+                  onClick={handleConfirmCancelService}
+                >
+                  Confirm Instant Cancellation &amp; Refund
+                </button>
+                <button 
+                  type="button" 
+                  className="bmb-keep-btn"
+                  onClick={() => setShowCancelModal(false)}
+                >
+                  Keep Service Active
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════
+          MODAL 2: COMPLETE WORK & SUBMIT REVIEW
+          (jab kam kr ly banda tu yaa customer apna review dy service provider ko or complete work kr dy)
+      ══════════════════════════════════════════════════ */}
+      {showReviewModal && reviewBooking && (
+        <div className="booked-modal-backdrop" onClick={() => setShowReviewModal(false)}>
+          <div className="booked-modal-box review-box" onClick={(e) => e.stopPropagation()}>
+            <div className="bmb-top">
+              <h3>Complete Work &amp; Rate Specialist</h3>
+              <button type="button" className="bmb-x-btn" onClick={() => setShowReviewModal(false)}>✕</button>
+            </div>
+
+            <form className="bmb-content" onSubmit={handleSubmitReviewAndComplete}>
+              <div className="review-spec-card">
+                <div className="rsc-avatar">🛠️</div>
+                <div>
+                  <h4 className="rsc-name">{reviewBooking.provider}</h4>
+                  <span className="rsc-service">{reviewBooking.service} • {reviewBooking.price}</span>
+                </div>
+              </div>
+
+              {/* Star Rating Selector */}
+              <div className="review-rating-selector">
+                <span className="rrs-label">Select Your Rating:</span>
+                <div className="rrs-stars">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      className={`star-select-btn ${star <= selectedStars ? 'selected' : ''}`}
+                      onClick={() => setSelectedStars(star)}
+                    >
+                      ★
+                    </button>
+                  ))}
+                </div>
+                <span className="rrs-score-text">
+                  {selectedStars === 5 && '5.0 Stars - Exceptional Craftsmanship!'}
+                  {selectedStars === 4 && '4.0 Stars - Great Work & Professional'}
+                  {selectedStars === 3 && '3.0 Stars - Satisfactory'}
+                  {selectedStars === 2 && '2.0 Stars - Below Expectations'}
+                  {selectedStars === 1 && '1.0 Star - Very Poor'}
+                </span>
+              </div>
+
+              {/* Quick Feedback Tags */}
+              <div className="review-tags-picker">
+                <span className="rtp-label">Quick Highlights:</span>
+                <div className="rtp-tags-row">
+                  {['Punctual Arrival', 'Polite & Clean', 'Expert Diagnostic', 'Genuine Parts', 'Zero Mess'].map((tag) => (
+                    <button
+                      key={tag}
+                      type="button"
+                      className={`rtp-tag-pill ${selectedTags.includes(tag) ? 'active' : ''}`}
+                      onClick={() => toggleTag(tag)}
+                    >
+                      {selectedTags.includes(tag) ? '✓ ' : '+ '}{tag}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Review Comment Textarea */}
+              <div className="review-comment-group">
+                <label className="rcg-label">Write Your Review:</label>
+                <textarea 
+                  className="rcg-textarea"
+                  placeholder={`Write your experience with ${reviewBooking.provider} in Multan...`}
+                  rows="3"
+                  value={reviewComment}
+                  onChange={(e) => setReviewComment(e.target.value)}
+                />
+              </div>
+
+              <div className="bmb-actions-row">
+                <button type="submit" className="bmb-submit-review-btn">
+                  ✓ Submit Review &amp; Release Payment
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════
+          MODAL 3: FILE COMPLAINT / REPORT ISSUE
+          (issi screen ma complaint ka bi option rakho customer provider ki complaint bi kr saky)
+      ══════════════════════════════════════════════════ */}
+      {showComplaintModal && (
+        <div className="booked-modal-backdrop" onClick={() => setShowComplaintModal(false)}>
+          <div className="booked-modal-box complaint-box" onClick={(e) => e.stopPropagation()}>
+            <div className="bmb-top">
+              <h3>File Official Specialist Complaint</h3>
+              <button type="button" className="bmb-x-btn" onClick={() => setShowComplaintModal(false)}>✕</button>
+            </div>
+
+            <form className="bmb-content" onSubmit={handleSubmitComplaint}>
+              <div className="complaint-warning-banner">
+                <span className="cwb-icon">🛡️</span>
+                <div>
+                  <strong>MUX SERVICES Customer Ombudsman</strong>
+                  <p>All complaints are investigated within 30 minutes by our dedicated Multan field officer.</p>
+                </div>
+              </div>
+
+              <div className="cancel-form-group">
+                <label className="cfg-label">Complaint Nature:</label>
+                <select 
+                  className="cfg-select"
+                  value={complaintCategory}
+                  onChange={(e) => setComplaintCategory(e.target.value)}
+                >
+                  <option value="Overcharging / Rate Dispute">Demanding Extra Charges Beyond Agreed PKR Rate</option>
+                  <option value="Unprofessional / Rude Behavior">Unprofessional, Late, or Rude Behavior</option>
+                  <option value="Poor Workmanship / Incomplete Job">Poor Workmanship / Incomplete Work</option>
+                  <option value="Property Damage / Misuse">Damage to Property or Home Appliances</option>
+                  <option value="Technician No Show">Technician Marked Arrived Without Coming</option>
+                </select>
+              </div>
+
+              <div className="cancel-form-group">
+                <label className="cfg-label">Describe the Issue in Detail:</label>
+                <textarea 
+                  className="cfg-textarea"
+                  placeholder="Provide details about what happened..."
+                  rows="3"
+                  required
+                  value={complaintDetails}
+                  onChange={(e) => setComplaintDetails(e.target.value)}
+                />
+              </div>
+
+              <div className="complaint-hotline-strip">
+                <span>Immediate Multan Escalation Hotline: <strong>+92 300 1234567</strong></span>
+              </div>
+
+              <div className="bmb-actions-row">
+                <button type="submit" className="bmb-submit-complaint-btn">
+                  Submit Complaint Ticket
+                </button>
+                <button type="button" className="bmb-keep-btn" onClick={() => setShowComplaintModal(false)}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════
+          MODAL 4: CALL SPECIALIST PHONE MODAL
+      ══════════════════════════════════════════════════ */}
+      {showCallModal && liveBooking && (
+        <div className="booked-modal-backdrop" onClick={() => setShowCallModal(false)}>
+          <div className="booked-modal-box call-box" onClick={(e) => e.stopPropagation()}>
+            <div className="bmb-top">
+              <h3>Call Assigned Specialist</h3>
+              <button type="button" className="bmb-x-btn" onClick={() => setShowCallModal(false)}>✕</button>
+            </div>
+            <div className="bmb-content text-center">
+              <div className="call-avatar">🛵</div>
+              <h4>{liveBooking.provider}</h4>
+              <p className="call-sub">{liveBooking.service}</p>
+              
+              <div className="call-number-box">
+                <span className="cnb-label">Verified Contact Phone</span>
+                <strong className="cnb-val">{liveBooking.phone || '+92 300 1234567'}</strong>
+              </div>
+
+              <div className="bmb-actions-row">
+                <a href={`tel:${liveBooking.phone || '+923001234567'}`} className="call-now-btn">
+                  📞 Call Specialist Now
                 </a>
-                <button type="button" className="bmb-cancel-btn" onClick={() => setShowCallModal(false)}>
+                <button type="button" className="bmb-keep-btn" onClick={() => setShowCallModal(false)}>
                   Close
                 </button>
               </div>
@@ -601,57 +1001,6 @@ function MyBookings({ setCurrentPage }) {
         </div>
       )}
 
-      {/* ══════════════════════════════════════════════════
-          RECEIPT / INVOICE MODAL
-      ══════════════════════════════════════════════════ */}
-      {showReceiptModal && selectedReceiptBooking && (
-        <div className="booking-modal-backdrop" onClick={() => setShowReceiptModal(false)}>
-          <div className="booking-modal-box receipt-box" onClick={(e) => e.stopPropagation()}>
-            <div className="bmb-header">
-              <h3>Official MUX Booking Invoice</h3>
-              <button type="button" className="bmb-close" onClick={() => setShowReceiptModal(false)}>✕</button>
-            </div>
-            <div className="receipt-content">
-              <div className="receipt-brand-row">
-                <strong>MUX SERVICES MULTAN</strong>
-                <span className="receipt-status-tag">{selectedReceiptBooking.status.toUpperCase()}</span>
-              </div>
-              <div className="receipt-details-list">
-                <div className="rd-row">
-                  <span>Booking Reference:</span>
-                  <strong>#{selectedReceiptBooking.refNumber}</strong>
-                </div>
-                <div className="rd-row">
-                  <span>Specialist Name:</span>
-                  <strong>{selectedReceiptBooking.provider}</strong>
-                </div>
-                <div className="rd-row">
-                  <span>Service Title:</span>
-                  <strong>{selectedReceiptBooking.service}</strong>
-                </div>
-                <div className="rd-row">
-                  <span>Date &amp; Time:</span>
-                  <strong>{selectedReceiptBooking.date} at {selectedReceiptBooking.time}</strong>
-                </div>
-                <div className="rd-row">
-                  <span>Delivery Location:</span>
-                  <strong>{selectedReceiptBooking.location}</strong>
-                </div>
-                <div className="rd-row highlight-pkr">
-                  <span>Total Amount Paid (PKR):</span>
-                  <strong>{selectedReceiptBooking.price}</strong>
-                </div>
-              </div>
-              <div className="receipt-guarantee-note">
-                <span>🛡️ Covered by 14-Day Free Workmanship Guarantee. Zero Doorstep Surcharges.</span>
-              </div>
-              <button type="button" className="receipt-print-btn" onClick={() => window.print()}>
-                🖨️ Print / Save PDF
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

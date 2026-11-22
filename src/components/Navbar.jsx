@@ -195,8 +195,8 @@ function Navbar({
           {!isProviderLoggedIn && !isProviderAuthPage && isLoggedIn && (
             <>
               <li>
-                <a href="/bookings" onClick={(e) => { e.preventDefault(); setCurrentPage('Bookings'); }}>
-                  <span className="nav-btn-text">Bookings</span>
+                <a href="/booked" onClick={(e) => { e.preventDefault(); setCurrentPage('booked'); }}>
+                  <span className="nav-btn-text">Booked</span>
                 </a>
               </li>
               <li>
