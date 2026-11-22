@@ -95,8 +95,9 @@
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
 }
 
+/* Non-stop continuous scroll: ticker does NOT pause on cursor hover */
 .mux-ticker-track-wrapper:hover .mux-ticker-inner {
-  animation-play-state: paused;
+  animation-play-state: running !important;
 }
 
 /* Base Ticker Flex Inner */

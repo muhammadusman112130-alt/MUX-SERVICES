@@ -205,13 +205,13 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   ANIMATED BACKLIGHT GLOW BEHIND CARD ON HOVER
+   ANIMATED UNIFORM ICE BLUE BACKLIGHT GLOW BEHIND CARD (NO INNER LIGHT)
 ══════════════════════════════════════════════════════════════════════════ */
 .card-backlight-glow {
   position: absolute;
   inset: 12px 8px;
   border-radius: 32px;
-  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.85) 0%, rgba(189, 236, 249, 0.55) 45%, rgba(143, 211, 232, 0.25) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.75) 0%, rgba(143, 211, 232, 0.4) 45%, rgba(14, 46, 51, 0.2) 75%, transparent 100%) !important;
   filter: blur(28px);
   opacity: 0;
   pointer-events: none;
@@ -222,25 +222,16 @@
 
 .slider-slide:hover .card-backlight-glow {
   opacity: 1;
-  transform: translateY(-10px) scale(1.05);
+  transform: translateY(-8px) scale(1.04);
   animation: cardBacklightPulse 2.8s ease-in-out infinite alternate;
 }
 
-/* Theme-specific backlight glows */
-.slider-slide:hover .card-backlight-glow.glow-theme-home {
-  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.9) 0%, rgba(189, 236, 249, 0.6) 45%, rgba(14, 46, 51, 0.3) 75%, transparent 100%);
-}
-
-.slider-slide:hover .card-backlight-glow.glow-theme-tech {
-  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.9) 0%, rgba(14, 46, 51, 0.6) 45%, rgba(143, 211, 232, 0.3) 75%, transparent 100%);
-}
-
-.slider-slide:hover .card-backlight-glow.glow-theme-events {
-  background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.9) 0%, rgba(251, 191, 36, 0.6) 45%, rgba(217, 119, 6, 0.3) 75%, transparent 100%);
-}
-
+/* Strict uniform Ice Blue theme backlight for ALL cards - no other colors */
+.slider-slide:hover .card-backlight-glow.glow-theme-home,
+.slider-slide:hover .card-backlight-glow.glow-theme-tech,
+.slider-slide:hover .card-backlight-glow.glow-theme-events,
 .slider-slide:hover .card-backlight-glow.glow-theme-cosmetics {
-  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.9) 0%, rgba(52, 211, 153, 0.6) 45%, rgba(5, 150, 105, 0.3) 75%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(143, 211, 232, 0.8) 0%, rgba(143, 211, 232, 0.45) 45%, rgba(14, 46, 51, 0.2) 75%, transparent 100%) !important;
 }
 
 @keyframes cardBacklightPulse {
@@ -316,30 +307,16 @@
 }
 
 .top-service-card:hover {
-  transform: translateY(-9px);
-  border-color: rgba(143, 211, 232, 0.45);
+  transform: translateY(-8px);
+  border-color: #8FD3E8 !important;
   box-shadow:
-    0 22px 55px rgba(14, 46, 51, 0.18),
-    0 0 35px rgba(143, 211, 232, 0.35),
-    0 0 70px rgba(143, 211, 232, 0.2);
+    0 22px 55px rgba(0, 0, 0, 0.45),
+    0 0 32px rgba(143, 211, 232, 0.35) !important;
 }
 
+/* Hide internal ambient glow: NO light inside the center of the card */
 .card-ambient-glow {
-  position: absolute;
-  top: -80px;
-  right: -80px;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(55px);
-  opacity: 0.6;
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-
-.top-service-card:hover .card-ambient-glow {
-  opacity: 0.95;
-  transform: scale(1.15);
+  display: none !important;
 }
 
 /* ── UNIFIED PALETTE CARD THEMES (#0E2E33, #EEF4F4, #8FD3E8) ── */
@@ -541,36 +518,44 @@
 .card-headline {
   font-size: 1.08rem;
   font-weight: 700;
-  color: #0E2E33;
+  color: #EEF4F4 !important;
   margin-bottom: 0.35rem;
 }
 
 .card-tagline {
   font-size: 0.92rem;
-  color: #475569;
+  color: rgba(238, 244, 244, 0.88) !important;
   line-height: 1.5;
   margin-bottom: 0;
 }
 
-/* ── Features List ── */
+/* ── Features List (No white box, matching theme) ── */
 .card-features-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.7);
+  gap: 0.55rem;
+  background: rgba(14, 46, 51, 0.7);
   backdrop-filter: blur(8px);
   border-radius: 14px;
-  padding: 0.85rem 1.1rem;
+  padding: 0.85rem 1.15rem;
   margin-bottom: 1.15rem;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(143, 211, 232, 0.22);
 }
 
 .feature-item {
   font-size: 0.88rem;
-  font-weight: 600;
-  color: #1e293b;
+  font-weight: 500;
+  color: #EEF4F4;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+}
+
+.feature-item::before {
+  content: '✓';
+  color: #8FD3E8;
+  font-weight: 800;
+  font-size: 0.95rem;
 }
 
 /* ── Skills Chips Row ── */
@@ -585,7 +570,7 @@
 .skills-heading {
   font-size: 0.82rem;
   font-weight: 700;
-  color: #64748b;
+  color: #8FD3E8;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -682,25 +667,26 @@
   align-items: center;
   gap: 0.35rem;
   font-size: 0.95rem;
-  color: #0E2E33;
+  color: #EEF4F4;
 }
 
 .rating-pill strong {
   font-weight: 800;
+  color: #EEF4F4;
 }
 
 .review-count {
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.7);
   font-size: 0.85rem;
 }
 
 .pros-count-text {
   font-size: 0.88rem;
-  color: #475569;
+  color: rgba(238, 244, 244, 0.85);
 }
 
 .pros-count-text strong {
-  color: #0E2E33;
+  color: #8FD3E8;
   font-weight: 700;
 }
 
@@ -710,16 +696,19 @@
   gap: 0.55rem;
   padding: 0.75rem 1.6rem;
   border-radius: 9999px;
-  color: #ffffff;
+  background: #8FD3E8 !important;
+  color: #0E2E33 !important;
   font-size: 0.95rem;
   font-weight: 700;
   border: none;
   cursor: pointer;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+  box-shadow: 0 4px 15px rgba(143, 211, 232, 0.35);
 }
 
 .card-explore-btn:hover {
   transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(143, 211, 232, 0.55);
 }
 
 .btn-arrow {
@@ -746,19 +735,24 @@
   font-family: monospace;
   font-size: 0.92rem;
   font-weight: 700;
-  color: #64748b;
+  color: rgba(238, 244, 244, 0.7);
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
 .counter-current {
-  color: #0E2E33;
+  color: #8FD3E8;
   font-size: 1.1rem;
+  font-weight: 800;
 }
 
 .counter-divider {
-  color: #cbd5e1;
+  color: rgba(143, 211, 232, 0.5);
+}
+
+.counter-total {
+  color: rgba(238, 244, 244, 0.7);
 }
 
 .slider-dots-track {
@@ -772,8 +766,8 @@
   width: 32px;
   height: 10px;
   border-radius: 9999px;
-  background: #e2e8f0;
-  border: none;
+  background: rgba(143, 211, 232, 0.2);
+  border: 1px solid rgba(143, 211, 232, 0.25);
   cursor: pointer;
   padding: 0;
   overflow: hidden;
@@ -782,7 +776,8 @@
 
 .slider-dot-btn.active {
   width: 52px;
-  background: #cbd5e1;
+  background: rgba(143, 211, 232, 0.35);
+  border-color: #8FD3E8;
 }
 
 .dot-progress-bar {
@@ -791,7 +786,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: #0E2E33;
+  background: #8FD3E8;
   border-radius: 9999px;
   animation: dotProgress linear 1 forwards;
   transform-origin: left;

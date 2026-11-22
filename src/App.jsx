@@ -124,7 +124,7 @@ function App() {
             <CategorySection setCurrentPage={handlePageChange} />
             <MuxTickerStrips />
             <PriceOfferSection setCurrentPage={handlePageChange} />
-            <ProfessionalsSection />
+            <ProfessionalsSection setCurrentPage={handlePageChange} />
             <TrustSection />
             {!isProviderLoggedIn && <CallToActionSection setCurrentPage={handlePageChange} />}
           </>
@@ -132,7 +132,7 @@ function App() {
       case 'services':
         return <Services initialSearchQuery={initialSearchQuery} setCurrentPage={handlePageChange} />
       case 'professionals':
-        return <ProfessionalsSection />
+        return <ProfessionalsSection setCurrentPage={handlePageChange} />
       case 'about':
         return <About />
       case 'contact':
