@@ -276,7 +276,7 @@ function Messages({ setCurrentPage }) {
         const confirmationMsg = {
           id: Date.now(),
           sender: 'provider',
-          text: `🎉 Congratulations! Upfront offer of ${agreedPrice} has been ACCEPTED. Your service has OFFICIALLY STARTED! I am dispatched and en route to your doorstep across Multan. Estimated arrival: < 25 mins.`,
+          text: `🎉 Upfront offer of ${agreedPrice} has been ACCEPTED! Your booking is confirmed and live tracking is now active in your Bookings screen. I am dispatched to your doorstep across Multan.`,
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           isStatusAnnouncement: true
         }
@@ -284,7 +284,7 @@ function Messages({ setCurrentPage }) {
           ...conv,
           offer: updatedOffer,
           isServiceActive: true,
-          lastMessage: `Service Started (${agreedPrice}) • Technician Dispatched`,
+          lastMessage: `Offer Accepted (${agreedPrice}) • View in Bookings`,
           time: 'Just now',
           messages: [...conv.messages, confirmationMsg]
         }
@@ -294,6 +294,13 @@ function Messages({ setCurrentPage }) {
 
     // Save to official My Bookings
     saveBookingToLocalStorage(activeConversation, agreedPrice)
+
+    // Automatically navigate to Bookings screen after 1 second so user sees live tracking!
+    if (typeof setCurrentPage === 'function') {
+      setTimeout(() => {
+        setCurrentPage('bookings')
+      }, 1000)
+    }
   }
 
   // 2. REJECT OFFER: Price declined, can negotiate or send counter-offer
@@ -672,62 +679,8 @@ function Messages({ setCurrentPage }) {
 
               {/* Official Protection Notice */}
               <div className="thread-safety-banner">
-                <span>🛡️ <strong>Official MUX Protection:</strong> Upfront PKR pricing with zero hidden doorstep surcharges across Cantt, Bosan Road, Gulgasht & all Multan.</span>
+                <span>🛡️ <strong>Official MUX Protection:</strong> Upfront PKR pricing with zero hidden doorstep surcharges across Cantt, Bosan Road, Gulgasht &amp; all Multan.</span>
               </div>
-
-              {/* ══════════════════════════════════════════════════
-                  ACTIVE SERVICE BANNER: Appears when offer accepted!
-                  (means accept ho jay tu iski service start ho jay)
-              ══════════════════════════════════════════════════ */}
-              {(activeConversation.offer?.status === 'accepted' || activeConversation.isServiceActive) && (
-                <div className="active-service-status-card">
-                  <div className="assc-top-row">
-                    <div className="assc-live-badge">
-                      <span className="live-pulse-dot"></span>
-                      <span>SERVICE IN PROGRESS • TECHNICIAN DISPATCHED</span>
-                    </div>
-                    <span className="assc-price-tag">{activeConversation.offer?.amount}</span>
-                  </div>
-
-                  <div className="assc-info-grid">
-                    <div className="assc-info-item">
-                      <span className="assc-label">Specialist</span>
-                      <strong className="assc-val">{activeConversation.name}</strong>
-                    </div>
-                    <div className="assc-info-item">
-                      <span className="assc-label">Arrival Window</span>
-                      <strong className="assc-val highlight">&lt; 25 Mins Doorstep ETA</strong>
-                    </div>
-                    <div className="assc-info-item">
-                      <span className="assc-label">Coverage</span>
-                      <strong className="assc-val">Multan Certified Care</strong>
-                    </div>
-                  </div>
-
-                  {/* 4-Step Live Progress Tracker */}
-                  <div className="service-tracker-steps">
-                    <div className="tracker-step completed">
-                      <span className="st-num">✓</span>
-                      <span className="st-label">Rate Agreed</span>
-                    </div>
-                    <div className="tracker-line completed"></div>
-                    <div className="tracker-step active">
-                      <span className="st-num">2</span>
-                      <span className="st-label">Dispatched</span>
-                    </div>
-                    <div className="tracker-line"></div>
-                    <div className="tracker-step">
-                      <span className="st-num">3</span>
-                      <span className="st-label">At Doorstep</span>
-                    </div>
-                    <div className="tracker-line"></div>
-                    <div className="tracker-step">
-                      <span className="st-num">4</span>
-                      <span className="st-label">Completed</span>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {/* ══════════════════════════════════════════════════
                   MESSAGES SCROLLABLE THREAD
@@ -795,7 +748,16 @@ function Messages({ setCurrentPage }) {
 
                     {activeConversation.offer.status === 'accepted' && (
                       <div className="ic-offer-status-ribbon accepted">
-                        <span>✓ Offer Accepted • Service Officially Started &amp; Technician Dispatched</span>
+                        <span>✓ Offer Accepted ({activeConversation.offer.amount}) • Live Service Started!</span>
+                        {setCurrentPage && (
+                          <button
+                            type="button"
+                            className="ic-view-booking-btn"
+                            onClick={() => setCurrentPage('bookings')}
+                          >
+                            🚀 View Live Doorstep Tracking in Bookings →
+                          </button>
+                        )}
                       </div>
                     )}
 

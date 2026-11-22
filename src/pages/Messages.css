@@ -5,7 +5,8 @@
 
 .messages-page {
   background: #0E2E33;
-  min-height: calc(100vh - 75px);
+  min-height: 100vh;
+  padding-top: 90px;
   display: flex;
   flex-direction: column;
   color: #EEF4F4;
@@ -17,10 +18,10 @@
   display: flex;
   max-width: 1380px;
   width: 100%;
-  margin: 1.25rem auto;
+  margin: 0.25rem auto 1.5rem;
   padding: 0 1.25rem;
-  height: calc(100vh - 110px);
-  min-height: 600px;
+  height: calc(100vh - 115px);
+  min-height: 580px;
   gap: 1.25rem;
   box-sizing: border-box;
 }
@@ -959,9 +960,9 @@
 }
 
 .ic-offer-status-ribbon {
-  padding: 0.65rem 1rem;
-  border-radius: 10px;
-  font-size: 0.85rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 14px;
+  font-size: 0.88rem;
   font-weight: 800;
   text-align: center;
 }
@@ -970,6 +971,30 @@
   background: rgba(16, 185, 129, 0.15);
   border: 1.5px solid #10b981;
   color: #10b981;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.ic-view-booking-btn {
+  padding: 0.6rem 1.25rem;
+  background: #10b981;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.ic-view-booking-btn:hover {
+  background: #ffffff;
+  color: #0E2E33;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5);
 }
 
 .ic-offer-status-ribbon.rejected {
