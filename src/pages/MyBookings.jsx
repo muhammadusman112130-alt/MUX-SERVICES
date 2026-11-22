@@ -568,164 +568,190 @@ function MyBookings({ setCurrentPage }) {
                   </div>
                 </div>
 
-                {/* ── CARD 3: 2-COLUMN SPLIT GRID (SPECIALIST PROFILE & DISPATCH STEPPER) ── */}
-                <div className="live-split-grid-row">
-                  {/* Left Column: Assigned Specialist Profile Card */}
-                  <div className="live-mod-card specialist-executive-card">
-                    <div className="sec-header">
-                      <div className="sec-title-tag">
-                        <span>🛠️</span>
-                        <strong>ASSIGNED MULTAN SPECIALIST</strong>
+                {/* ── CARD 3: UNIFIED SPECIALIST, CONNECTED STEPPER & ACTIONS CARD ── */}
+                <div className="live-mod-card live-unified-ops-card">
+                  
+                  {/* TOP TIER: ASSIGNED SPECIALIST PROFILE & COMMS */}
+                  <div className="uoc-specialist-row">
+                    <div className="uoc-specialist-left">
+                      <div className="uoc-avatar">
+                        <span className="uoc-avatar-text">
+                          {liveBooking.provider ? liveBooking.provider.split(' ').map(n => n[0]).slice(0, 2).join('') : 'PRO'}
+                        </span>
+                        <span className="uoc-live-dot"></span>
                       </div>
-                      <span className="sec-vetted-badge">✓ Police &amp; CNIC Vetted</span>
-                    </div>
 
-                    <div className="sec-profile-body">
-                      <div className="sec-avatar-wrapper">
-                        <div className="sec-avatar-circle">
-                          <span>👨‍🔧</span>
-                          <span className="sec-avatar-halo"></span>
-                          <span className="sec-live-pulse-dot"></span>
+                      <div className="uoc-info">
+                        <div className="uoc-tag-row">
+                          <span className="uoc-section-tag">ASSIGNED MULTAN SPECIALIST</span>
+                          <span className="uoc-vetted-pill">Police &amp; CNIC Vetted</span>
                         </div>
-                      </div>
-
-                      <div className="sec-info">
-                        <h3 className="sec-name">{liveBooking.provider}</h3>
-                        <span className="sec-trade">{liveBooking.service}</span>
-                        <div className="sec-price-badge">
-                          <span className="spb-lbl">Agreed Fixed Rate:</span>
-                          <strong className="spb-val">{liveBooking.price}</strong>
+                        <h3 className="uoc-name">{liveBooking.provider}</h3>
+                        <p className="uoc-service">{liveBooking.service}</p>
+                        <div className="uoc-rate-line">
+                          <span>Agreed Fixed Rate:</span>
+                          <strong>{liveBooking.price}</strong>
                         </div>
                       </div>
                     </div>
 
-                    {/* Specialist Comms Actions */}
-                    <div className="sec-comms-actions">
+                    {/* Compact Comms Buttons (Sleek, small, clean SVG) */}
+                    <div className="uoc-comms-group">
                       <button 
                         type="button" 
-                        className="sec-btn-call"
+                        className="uoc-btn-call"
                         onClick={() => setShowCallModal(true)}
                       >
-                        <span className="btn-icon">📞</span>
-                        <span>Call Specialist ({liveBooking.technicianPhone || '+92 301 7654321'})</span>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>Call Specialist</span>
                       </button>
 
                       <button 
                         type="button" 
-                        className="sec-btn-chat"
+                        className="uoc-btn-chat"
                         onClick={() => handleChatWithProvider(liveBooking)}
                       >
-                        <span className="btn-icon">💬</span>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
                         <span>Open Direct Chat</span>
                       </button>
                     </div>
                   </div>
 
-                  {/* Right Column: Dispatch Progress Stepper & Escrow Vault Card */}
-                  <div className="live-mod-card dispatch-stepper-card">
-                    <div className="dsc-header">
-                      <div className="dsc-title-tag">
-                        <span>⚡</span>
-                        <strong>SERVICE PROGRESS STEPPER</strong>
-                      </div>
-                      <span className="dsc-stage-tag">Stage 2 of 4 Active</span>
+                  <div className="uoc-divider"></div>
+
+                  {/* MIDDLE TIER: 4-STEP CONNECTED SERVICE TRACKER */}
+                  <div className="uoc-stepper-wrap">
+                    <div className="uoc-stepper-header">
+                      <span className="uoc-stepper-title">SERVICE PROGRESS STEPPER</span>
+                      <span className="uoc-stage-indicator">Stage 2 of 4 Active</span>
                     </div>
 
-                    <div className="dsc-steps-list">
-                      <div className="dsc-step step-done">
-                        <div className="step-marker">✓</div>
-                        <div className="step-details">
-                          <strong>Rate Agreed &amp; Job Scheduled</strong>
-                          <span>Locked price at {liveBooking.price}</span>
+                    {/* Continuous Connected Stepper Track */}
+                    <div className="connected-stepper-track">
+                      {/* Connecting Line between steps */}
+                      <div className="stepper-track-line">
+                        <div className="stepper-track-fill" style={{ width: '38%' }}></div>
+                      </div>
+
+                      {/* STEP 1: Completed */}
+                      <div className="cs-node completed">
+                        <div className="cs-marker">
+                          <span className="cs-marker-inner">✓</span>
+                        </div>
+                        <div className="cs-text">
+                          <strong className="cs-title">Rate Agreed &amp; Scheduled</strong>
+                          <span className="cs-sub">Locked price at {liveBooking.price}</span>
                         </div>
                       </div>
 
-                      <div className="dsc-step step-active">
-                        <div className="step-marker pulse-active">🛵</div>
-                        <div className="step-details">
-                          <strong>Technician Dispatched &amp; En Route</strong>
-                          <span className="step-highlight">Moving through Multan ({liveBooking.speed})</span>
+                      {/* STEP 2: Active */}
+                      <div className="cs-node active">
+                        <div className="cs-marker">
+                          <span className="cs-marker-inner">2</span>
+                          <span className="cs-active-halo"></span>
+                        </div>
+                        <div className="cs-text">
+                          <strong className="cs-title">Technician Dispatched &amp; En Route</strong>
+                          <span className="cs-sub highlight">Moving through Multan ({liveBooking.speed})</span>
                         </div>
                       </div>
 
-                      <div className="dsc-step step-pending">
-                        <div className="step-marker">📍</div>
-                        <div className="step-details">
-                          <strong>Doorstep Arrival &amp; Diagnostic</strong>
-                          <span>Arrival estimated in approx {formatTime(countdownSeconds)} mins</span>
+                      {/* STEP 3: Pending */}
+                      <div className="cs-node pending">
+                        <div className="cs-marker">
+                          <span className="cs-marker-inner">3</span>
+                        </div>
+                        <div className="cs-text">
+                          <strong className="cs-title">Doorstep Arrival &amp; Diagnostic</strong>
+                          <span className="cs-sub">Estimated in approx {formatTime(countdownSeconds)} mins</span>
                         </div>
                       </div>
 
-                      <div className="dsc-step step-pending">
-                        <div className="step-marker">⭐</div>
-                        <div className="step-details">
-                          <strong>Work Inspection &amp; Customer Review</strong>
-                          <span>Escrow funds released only upon your approval</span>
+                      {/* STEP 4: Pending */}
+                      <div className="cs-node pending">
+                        <div className="cs-marker">
+                          <span className="cs-marker-inner">4</span>
+                        </div>
+                        <div className="cs-text">
+                          <strong className="cs-title">Work Inspection &amp; Review</strong>
+                          <span className="cs-sub">Escrow funds released upon approval</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="dsc-escrow-vault">
-                      <span className="dev-icon">🔒</span>
-                      <p>
-                        <strong>100% Escrow Safeguard:</strong> Your PKR funds remain locked in escrow until you personally inspect the completed job.
-                      </p>
+                    {/* Escrow Safeguard strip (clean, professional) */}
+                    <div className="uoc-escrow-strip">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                      </svg>
+                      <span>
+                        <strong>100% Escrow Safeguard:</strong> Your PKR funds remain locked in escrow until you personally inspect and approve the completed job.
+                      </span>
                     </div>
                   </div>
-                </div>
 
-                {/* ── CARD 4: DEDICATED CUSTOMER ACTION HUB CARD ── */}
-                <div className="live-mod-card customer-actions-hub-card">
-                  <div className="cah-left-info">
-                    <span className="cah-beacon"></span>
-                    <div>
-                      <h4 className="cah-title">Customer Action Center</h4>
-                      <p className="cah-desc">
-                        Mark job completed to submit your review, or cancel immediately if technician takes too long.
-                      </p>
+                  <div className="uoc-divider"></div>
+
+                  {/* BOTTOM TIER: COMPACT CUSTOMER ACTION CENTER */}
+                  <div className="uoc-actions-row">
+                    <div className="uoc-actions-desc">
+                      <span className="uoc-actions-lamp"></span>
+                      <div>
+                        <h4 className="uoc-actions-heading">Customer Action Center</h4>
+                        <p className="uoc-actions-caption">
+                          Mark job completed to submit your review, or cancel immediately if technician takes too long.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Compact, sleek, proportional buttons */}
+                    <div className="uoc-compact-buttons">
+                      {/* 1. Mark Work Completed */}
+                      <button 
+                        type="button" 
+                        className="uoc-btn-complete"
+                        onClick={() => handleOpenReviewModal(liveBooking)}
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Mark Work Completed &amp; Rate</span>
+                      </button>
+
+                      {/* 2. Cancel Service */}
+                      <button 
+                        type="button" 
+                        className="uoc-btn-cancel"
+                        onClick={() => setShowCancelModal(true)}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        <span>Cancel Service</span>
+                      </button>
+
+                      {/* 3. Report Issue */}
+                      <button 
+                        type="button" 
+                        className="uoc-btn-complaint"
+                        onClick={() => setShowComplaintModal(true)}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="12" y1="8" x2="12" y2="12"></line>
+                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <span>Report Issue</span>
+                      </button>
                     </div>
                   </div>
 
-                  <div className="cah-buttons-row">
-                    {/* COMPLETE WORK & GIVE REVIEW (PRIMARY CTA) */}
-                    <button 
-                      type="button" 
-                      className="cah-btn-complete"
-                      onClick={() => handleOpenReviewModal(liveBooking)}
-                    >
-                      <span className="cah-icon">✓</span>
-                      <div className="cah-btn-labels">
-                        <strong className="cah-main-txt">Mark Work Completed</strong>
-                        <small className="cah-sub-txt">&amp; Rate Specialist</small>
-                      </div>
-                    </button>
-
-                    {/* CANCEL SERVICE BUTTON (CUSTOMER CAN CANCEL IF DELAYED) */}
-                    <button 
-                      type="button" 
-                      className="cah-btn-cancel"
-                      onClick={() => setShowCancelModal(true)}
-                    >
-                      <span className="cah-icon">✕</span>
-                      <div className="cah-btn-labels">
-                        <strong className="cah-main-txt">Cancel Service</strong>
-                        <small className="cah-sub-txt">Instant escrow refund</small>
-                      </div>
-                    </button>
-
-                    {/* LODGE COMPLAINT / REPORT ISSUE */}
-                    <button 
-                      type="button" 
-                      className="cah-btn-complaint"
-                      onClick={() => setShowComplaintModal(true)}
-                    >
-                      <span className="cah-icon">⚠️</span>
-                      <div className="cah-btn-labels">
-                        <strong className="cah-main-txt">Report Issue</strong>
-                        <small className="cah-sub-txt">File official dispute</small>
-                      </div>
-                    </button>
-                  </div>
                 </div>
 
               </div>

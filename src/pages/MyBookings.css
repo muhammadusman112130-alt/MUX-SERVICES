@@ -205,12 +205,8 @@
   animation: cardSlideFadeIn 0.5s ease-out forwards;
 }
 
-.live-split-grid-row {
+.live-unified-ops-card {
   animation: cardSlideFadeIn 0.6s ease-out forwards;
-}
-
-.customer-actions-hub-card {
-  animation: cardSlideFadeIn 0.7s ease-out forwards;
 }
 
 /* ── CARD 1: LIVE DISPATCH STATUS & DIGITAL COUNTDOWN ── */
@@ -635,476 +631,511 @@
   background: rgba(143, 211, 232, 0.25);
 }
 
-/* ── CARD 3: 2-COLUMN SPLIT GRID (SPECIALIST PROFILE & DISPATCH STEPPER) ── */
-.live-split-grid-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.75rem;
-}
-
-@media (max-width: 960px) {
-  .live-split-grid-row {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Left: Specialist Profile Card */
-.specialist-executive-card {
-  padding: 1.8rem 2rem;
+/* ══════════════════════════════════════════════════
+   CARD 3: UNIFIED SPECIALIST, CONNECTED STEPPER & ACTIONS CARD
+   (All in ONE card with animated background shadow aura)
+══════════════════════════════════════════════════ */
+.live-unified-ops-card {
+  position: relative;
+  background: #13383e;
+  border: 1.5px solid rgba(23, 247, 247, 0.4);
+  border-radius: 22px;
+  padding: 1.75rem 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 1.4rem;
+  animation: cardSlideFadeIn 0.6s ease-out forwards, auraShadowPulse 3.5s infinite ease-in-out;
 }
 
-.sec-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.sec-title-tag {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #8FD3E8;
-  font-size: 0.82rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-}
-
-.sec-vetted-badge {
-  background: #8FD3E8;
-  color: #0E2E33;
-  font-size: 0.74rem;
-  font-weight: 800;
-  padding: 0.25rem 0.75rem;
-  border-radius: 50px;
-}
-
-.sec-profile-body {
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-}
-
-.sec-avatar-wrapper {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.sec-avatar-circle {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: #0E2E33;
-  border: 2.5px solid #8FD3E8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
-  position: relative;
-  box-shadow: 0 0 20px rgba(143, 211, 232, 0.35);
-}
-
-.sec-avatar-halo {
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(23, 247, 247, 0.5);
-  animation: haloSpin 12s linear infinite;
-}
-
-@keyframes haloSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.sec-live-pulse-dot {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #10b981;
-  border: 2.5px solid #13383e;
-  box-shadow: 0 0 8px #10b981;
-}
-
-.sec-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.sec-name {
-  font-size: 1.4rem;
-  font-weight: 900;
-  color: #EEF4F4;
-  margin: 0;
-}
-
-.sec-trade {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #8FD3E8;
-}
-
-.sec-price-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-top: 0.35rem;
-}
-
-.spb-lbl {
-  font-size: 0.85rem;
-  color: rgba(238, 244, 244, 0.75);
-}
-
-.spb-val {
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: #17f7f7;
-}
-
-.sec-comms-actions {
-  display: flex;
-  gap: 0.85rem;
-  flex-wrap: wrap;
-  margin-top: 0.25rem;
-}
-
-.sec-btn-call {
-  flex: 1;
-  min-width: 170px;
-  padding: 0.85rem 1.25rem;
-  background: rgba(16, 185, 129, 0.16);
-  color: #10b981;
-  border: 1.8px solid #10b981;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 800;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.25s ease;
-}
-
-.sec-btn-call:hover {
-  background: #10b981;
-  color: #ffffff;
-  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.5);
-  transform: translateY(-2px);
-}
-
-.sec-btn-chat {
-  flex: 1;
-  min-width: 150px;
-  padding: 0.85rem 1.25rem;
-  background: #8FD3E8;
-  color: #0E2E33;
-  border: none;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 900;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 15px rgba(143, 211, 232, 0.4);
-}
-
-.sec-btn-chat:hover {
-  background: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(255, 255, 255, 0.5);
-}
-
-/* Right: Progress Stepper Card */
-.dispatch-stepper-card {
-  padding: 1.8rem 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.25rem;
-}
-
-.dsc-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.dsc-title-tag {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #8FD3E8;
-  font-size: 0.82rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-}
-
-.dsc-stage-tag {
-  background: rgba(23, 247, 247, 0.18);
-  color: #17f7f7;
-  font-size: 0.74rem;
-  font-weight: 800;
-  padding: 0.25rem 0.75rem;
-  border-radius: 50px;
-  border: 1px solid rgba(23, 247, 247, 0.35);
-}
-
-.dsc-steps-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-.dsc-step {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  position: relative;
-}
-
-.step-marker {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-  font-weight: 900;
-  flex-shrink: 0;
-}
-
-.step-done .step-marker {
-  background: #10b981;
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.45);
-}
-
-.step-active .step-marker {
-  background: #0E2E33;
-  border: 2.2px solid #17f7f7;
-  color: #17f7f7;
-  font-size: 1.15rem;
-  box-shadow: 0 0 16px rgba(23, 247, 247, 0.65);
-  animation: stepPulseGlow 1.4s infinite;
-}
-
-@keyframes stepPulseGlow {
+/* Pulsing background shadow aura */
+@keyframes auraShadowPulse {
   0%, 100% {
-    box-shadow: 0 0 10px rgba(23, 247, 247, 0.4);
-    transform: scale(1);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6),
+                0 0 25px rgba(23, 247, 247, 0.18),
+                0 0 50px rgba(16, 185, 129, 0.1);
+    border-color: rgba(143, 211, 232, 0.35);
   }
   50% {
-    box-shadow: 0 0 20px rgba(23, 247, 247, 0.8);
-    transform: scale(1.06);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7),
+                0 0 45px rgba(23, 247, 247, 0.42),
+                0 0 85px rgba(23, 247, 247, 0.22),
+                0 0 35px rgba(16, 185, 129, 0.3);
+    border-color: rgba(23, 247, 247, 0.7);
   }
 }
 
-.step-pending .step-marker {
-  background: rgba(238, 244, 244, 0.08);
-  color: rgba(238, 244, 244, 0.35);
+.uoc-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(143, 211, 232, 0.18);
 }
 
-.step-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.12rem;
-}
-
-.step-details strong {
-  font-size: 0.92rem;
-  color: #EEF4F4;
-  font-weight: 800;
-}
-
-.step-details span {
-  font-size: 0.78rem;
-  color: rgba(238, 244, 244, 0.65);
-}
-
-.step-highlight {
-  color: #17f7f7 !important;
-  font-weight: 700;
-}
-
-.dsc-escrow-vault {
-  background: rgba(14, 46, 51, 0.75);
-  border: 1.5px solid rgba(143, 211, 232, 0.3);
-  border-radius: 12px;
-  padding: 0.8rem 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-}
-
-.dev-icon {
-  font-size: 1.4rem;
-}
-
-.dsc-escrow-vault p {
-  font-size: 0.8rem;
-  color: rgba(238, 244, 244, 0.85);
-  margin: 0;
-  line-height: 1.4;
-}
-
-.dsc-escrow-vault strong {
-  color: #8FD3E8;
-}
-
-/* ── CARD 4: DEDICATED CUSTOMER ACTION HUB CARD ── */
-.customer-actions-hub-card {
-  padding: 1.6rem 2rem;
+/* ── TIER 1: ASSIGNED SPECIALIST PROFILE & COMMS ── */
+.uoc-specialist-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
   flex-wrap: wrap;
-  background: #0E2E33;
-  border: 2px solid rgba(143, 211, 232, 0.35);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 
-.cah-left-info {
+.uoc-specialist-left {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   flex: 1;
   min-width: 280px;
 }
 
-.cah-beacon {
-  width: 14px;
-  height: 14px;
+.uoc-avatar {
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 14px #10b981;
-  animation: pulseBeacon 1.2s infinite;
-}
-
-.cah-title {
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: #EEF4F4;
-  margin: 0 0 0.2rem 0;
-}
-
-.cah-desc {
-  font-size: 0.82rem;
-  color: rgba(238, 244, 244, 0.7);
-  margin: 0;
-  line-height: 1.4;
-}
-
-.cah-buttons-row {
+  background: #0E2E33;
+  border: 2px solid #8FD3E8;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 0 16px rgba(143, 211, 232, 0.35);
+  flex-shrink: 0;
+}
+
+.uoc-avatar-text {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #17f7f7;
+  letter-spacing: 0.05em;
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+}
+
+.uoc-live-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2px solid #13383e;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.uoc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.uoc-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
   flex-wrap: wrap;
 }
 
-/* Complete Work CTA (Primary Emerald Green) */
-.cah-btn-complete {
-  padding: 0.85rem 1.7rem;
+.uoc-section-tag {
+  font-size: 0.74rem;
+  font-weight: 900;
+  color: #8FD3E8;
+  letter-spacing: 0.04em;
+}
+
+.uoc-vetted-pill {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #0E2E33;
+  background: #8FD3E8;
+  padding: 0.15rem 0.6rem;
+  border-radius: 50px;
+}
+
+.uoc-name {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #EEF4F4;
+  margin: 0;
+}
+
+.uoc-service {
+  font-size: 0.88rem;
+  color: #8FD3E8;
+  font-weight: 700;
+  margin: 0;
+}
+
+.uoc-rate-line {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: rgba(238, 244, 244, 0.75);
+  margin-top: 0.15rem;
+}
+
+.uoc-rate-line strong {
+  color: #17f7f7;
+  font-weight: 900;
+  font-size: 0.95rem;
+}
+
+/* Compact Comms Buttons (Sleek, small, clean) */
+.uoc-comms-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.uoc-btn-call {
+  padding: 0.52rem 1.05rem;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1.5px solid #10b981;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.22s ease;
+}
+
+.uoc-btn-call:hover {
+  background: #10b981;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.uoc-btn-chat {
+  padding: 0.52rem 1.15rem;
+  background: #8FD3E8;
+  color: #0E2E33;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 14px rgba(143, 211, 232, 0.35);
+}
+
+.uoc-btn-chat:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ── TIER 2: 4-STEP CONNECTED SERVICE TRACKER ── */
+.uoc-stepper-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.uoc-stepper-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.uoc-stepper-title {
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: #8FD3E8;
+  letter-spacing: 0.05em;
+}
+
+.uoc-stage-indicator {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #17f7f7;
+  background: rgba(237, 247, 247, 0.12);
+  border: 1px solid rgba(23, 247, 247, 0.35);
+  padding: 0.2rem 0.65rem;
+  border-radius: 50px;
+}
+
+/* Connected Stepper Horizontal Track */
+.connected-stepper-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.6rem 0.5rem 0.35rem;
+}
+
+/* Continuous connecting background line */
+.stepper-track-line {
+  position: absolute;
+  top: 22px;
+  left: 36px;
+  right: 36px;
+  height: 3px;
+  background: rgba(143, 211, 232, 0.2);
+  z-index: 1;
+}
+
+.stepper-track-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #17f7f7 100%);
+  border-radius: 3px;
+  box-shadow: 0 0 10px #17f7f7;
+  transition: width 0.4s ease;
+}
+
+.cs-node {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  gap: 0.55rem;
+}
+
+.cs-marker {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+/* Completed Step */
+.cs-node.completed .cs-marker {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+}
+
+/* Active Step */
+.cs-node.active .cs-marker {
+  background: #0E2E33;
+  border: 2px solid #17f7f7;
+  color: #17f7f7;
+  font-size: 0.85rem;
+  box-shadow: 0 0 14px rgba(23, 247, 247, 0.7);
+}
+
+.cs-active-halo {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1.5px solid #17f7f7;
+  animation: csHaloPulse 1.6s infinite ease-out;
+}
+
+@keyframes csHaloPulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Pending Step */
+.cs-node.pending .cs-marker {
+  background: #0d262b;
+  border: 1.5px solid rgba(143, 211, 232, 0.25);
+  color: rgba(238, 244, 244, 0.45);
+}
+
+.cs-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.cs-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #EEF4F4;
+}
+
+.cs-sub {
+  font-size: 0.7rem;
+  color: rgba(238, 244, 244, 0.6);
+}
+
+.cs-sub.highlight {
+  color: #17f7f7;
+  font-weight: 700;
+}
+
+/* Clean Escrow Strip */
+.uoc-escrow-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(14, 46, 51, 0.75);
+  border: 1px solid rgba(143, 211, 232, 0.25);
+  border-radius: 10px;
+  padding: 0.55rem 0.95rem;
+  font-size: 0.75rem;
+  color: rgba(238, 244, 244, 0.8);
+  margin-top: 0.25rem;
+}
+
+.uoc-escrow-strip strong {
+  color: #8FD3E8;
+}
+
+/* ── TIER 3: COMPACT CUSTOMER ACTION CENTER ── */
+.uoc-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.uoc-actions-desc {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 260px;
+}
+
+.uoc-actions-lamp {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulseBeacon 1.2s infinite;
+  flex-shrink: 0;
+}
+
+.uoc-actions-heading {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: #EEF4F4;
+  margin: 0 0 0.1rem 0;
+}
+
+.uoc-actions-caption {
+  font-size: 0.75rem;
+  color: rgba(238, 244, 244, 0.65);
+  margin: 0;
+}
+
+/* Compact Buttons Row (Small, sleek, well-proportioned) */
+.uoc-compact-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.uoc-btn-complete {
+  padding: 0.55rem 1.15rem;
   background: #10b981;
   color: #ffffff;
   border: none;
   border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 900;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.5);
+  gap: 6px;
+  transition: all 0.22s ease;
+  box-shadow: 0 3px 12px rgba(16, 185, 129, 0.45);
 }
 
-.cah-btn-complete:hover {
+.uoc-btn-complete:hover {
   background: #059669;
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.7);
+  box-shadow: 0 5px 16px rgba(16, 185, 129, 0.6);
 }
 
-/* Cancel Service CTA (Secondary Red Outline) */
-.cah-btn-cancel {
-  padding: 0.85rem 1.45rem;
-  background: rgba(239, 68, 68, 0.14);
+.uoc-btn-cancel {
+  padding: 0.55rem 1.05rem;
+  background: rgba(239, 68, 68, 0.12);
   color: #f87171;
-  border: 1.8px solid rgba(239, 68, 68, 0.5);
+  border: 1.5px solid rgba(239, 68, 68, 0.45);
   border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 800;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.25s ease;
+  gap: 6px;
+  transition: all 0.22s ease;
 }
 
-.cah-btn-cancel:hover {
+.uoc-btn-cancel:hover {
   background: #ef4444;
   color: #ffffff;
   border-color: #ef4444;
   transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
 }
 
-/* File Dispute CTA (Amber Warning Outline) */
-.cah-btn-complaint {
-  padding: 0.85rem 1.35rem;
-  background: rgba(245, 158, 11, 0.14);
+.uoc-btn-complaint {
+  padding: 0.55rem 1rem;
+  background: rgba(245, 158, 11, 0.12);
   color: #fbbf24;
-  border: 1.8px solid rgba(245, 158, 11, 0.5);
+  border: 1.5px solid rgba(245, 158, 11, 0.45);
   border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 800;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.25s ease;
+  gap: 6px;
+  transition: all 0.22s ease;
 }
 
-.cah-btn-complaint:hover {
+.uoc-btn-complaint:hover {
   background: #f59e0b;
   color: #0E2E33;
   border-color: #f59e0b;
   transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
 }
 
-.cah-icon {
-  font-size: 1.25rem;
-  font-weight: 900;
-}
-
-.cah-btn-labels {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  line-height: 1.2;
-}
-
-.cah-main-txt {
-  font-size: 0.92rem;
-  font-weight: 900;
-}
-
-.cah-sub-txt {
-  font-size: 0.72rem;
-  opacity: 0.85;
-  font-weight: 600;
+@media (max-width: 768px) {
+  .connected-stepper-track {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding-left: 1rem;
+  }
+  .stepper-track-line {
+    top: 15px;
+    bottom: 15px;
+    left: 26px;
+    right: auto;
+    width: 3px;
+    height: auto;
+  }
+  .stepper-track-fill {
+    width: 3px !important;
+    height: 38%;
+  }
+  .cs-node {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 1rem;
+  }
+  .cs-text {
+    align-items: flex-start;
+  }
 }
 
 /* No Live Service Card */
