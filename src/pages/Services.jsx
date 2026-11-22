@@ -1485,25 +1485,25 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   return (
     <div className={`services-page ${selectedService ? 'has-detail-view' : ''}`}>
       {showChat && (
-        <div className="chat-modal">
-          <div className="chat-modal-header">
-            <button className="close-chat-btn" onClick={handleCloseChat}>✕</button>
-            <h2 className="chat-modal-title">{isHistoryMode ? 'Chat History' : `Chat with ${selectedProvider.name}`}</h2>
-            <div className="chat-modal-provider-info">
-              <div className="chat-provider-avatar">
-                {getProviderDP(selectedProvider) ? (
-                  <img src={getProviderDP(selectedProvider)} alt={selectedProvider.name} className="chat-avatar-img" />
-                ) : (
-                  <span className="profile-initial-small">{selectedProvider.name.charAt(0)}</span>
-                )}
+        <div className="chat-modal-backdrop" onClick={handleCloseChat}>
+          <div className="chat-modal-window" onClick={(e) => e.stopPropagation()}>
+            <div className="chat-modal-header">
+              <div className="chat-modal-provider-info">
+                <div className="chat-provider-avatar">
+                  {getProviderDP(selectedProvider) ? (
+                    <img src={getProviderDP(selectedProvider)} alt={selectedProvider.name} className="chat-avatar-img" />
+                  ) : (
+                    <span className="profile-initial-small">{selectedProvider.name.charAt(0)}</span>
+                  )}
+                </div>
+                <div className="chat-provider-details">
+                  <span className="chat-provider-name">{selectedProvider.name}</span>
+                  <span className="chat-provider-service">{selectedProvider.service}</span>
+                </div>
               </div>
-              <div className="chat-provider-details">
-                <span className="chat-provider-name">{selectedProvider.name}</span>
-                <span className="chat-provider-service">{selectedProvider.service}</span>
-              </div>
+              <button className="close-chat-btn" onClick={handleCloseChat} title="Close Chat">✕</button>
             </div>
-          </div>
-          <div className="chat-modal-messages">
+            <div className="chat-modal-messages">
             {chatMessages.map((msg, index) => (
               <div key={index} className={`chat-modal-message ${msg.sender}`}>
                 <span className="modal-message-sender">{msg.sender === 'provider' ? selectedProvider.name : 'You'}</span>
@@ -1616,6 +1616,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
               </div>
             </div>
           )}
+          </div>
         </div>
       )}
       {/* Booking & Checkout Flow (Triggered from Chat) */}
