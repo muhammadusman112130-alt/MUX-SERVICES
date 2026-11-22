@@ -103,7 +103,7 @@ export const normalizeServiceName = (query) => {
   return null
 }
 
-function Services({ initialSearchQuery = '', setCurrentPage }) {
+function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false, onLoginClick }) {
   const [showAllHomeServices, setShowAllHomeServices] = useState(true)
   const [selectedService, setSelectedService] = useState(null)
   const [selectedProvider, setSelectedProvider] = useState(null)
@@ -236,6 +236,20 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   // Handle incoming hero search query
   useEffect(() => {
     if (initialSearchQuery && typeof initialSearchQuery === 'string' && initialSearchQuery.trim()) {
+      if (!isLoggedIn) {
+        try {
+          localStorage.setItem('pending_service_category', initialSearchQuery.trim())
+        } catch (e) {
+          console.warn(e)
+        }
+        if (typeof onLoginClick === 'function') {
+          onLoginClick()
+        } else if (typeof setCurrentPage === 'function') {
+          setCurrentPage('login')
+        }
+        return
+      }
+
       const resolved = normalizeServiceName(initialSearchQuery)
       if (resolved) {
         setSelectedService(resolved)
@@ -245,7 +259,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
     } else if (initialSearchQuery === '') {
       setSelectedService(null)
     }
-  }, [initialSearchQuery])
+  }, [initialSearchQuery, isLoggedIn, onLoginClick, setCurrentPage])
 
   const banks = [
     'Allied Bank (ABL)',
@@ -445,6 +459,20 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   }
 
   const handleServiceClick = (serviceName) => {
+    if (!isLoggedIn) {
+      try {
+        localStorage.setItem('pending_service_category', serviceName)
+      } catch (e) {
+        console.warn(e)
+      }
+      if (typeof onLoginClick === 'function') {
+        onLoginClick()
+      } else if (typeof setCurrentPage === 'function') {
+        setCurrentPage('login')
+      }
+      return
+    }
+
     const canonical = normalizeServiceName(serviceName) || serviceName
     setSelectedService(canonical)
   }
@@ -471,13 +499,33 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   }
 
   const handleMessageProvider = (provider) => {
+    if (!provider) return
     setSelectedProvider(provider)
     setIsViewingProfile(false)
-    setShowChat(true)
-    setIsHistoryMode(false)
-    setChatMessages([
-      { sender: 'provider', text: `Hello! I'm ${provider.name} (${provider.service || 'Service Specialist'}). How can I help you today? Feel free to ask any question or send a custom offer.` }
-    ])
+    setShowChat(false)
+
+    // Save selected provider details to localStorage for the Messages screen
+    const chatPayload = {
+      id: provider.id || provider.name,
+      name: provider.name,
+      service: provider.service || selectedService || 'Home Specialist',
+      price: provider.price || 'Rs. 2,500',
+      rating: provider.rating || 4.9,
+      reviews: provider.reviews || 28,
+      image: getProviderDP(provider),
+      badge: provider.badge || 'Verified Pro',
+      experience: provider.experience || '8+ Years',
+      verified: true
+    }
+    try {
+      localStorage.setItem('active_chat_provider', JSON.stringify(chatPayload))
+    } catch (e) {
+      console.warn('Failed to save active chat provider', e)
+    }
+
+    if (typeof setCurrentPage === 'function') {
+      setCurrentPage('messages')
+    }
   }
 
   const handleBackToProviders = () => {
@@ -501,11 +549,9 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   }
 
   const handleStartChat = () => {
-    setShowChat(true)
-    setIsHistoryMode(false)
-    setChatMessages([
-      { sender: 'provider', text: `Hello! I'm ${selectedProvider.name}. How can I help you today?` }
-    ])
+    if (selectedProvider) {
+      handleMessageProvider(selectedProvider)
+    }
   }
 
   const handleSendMessage = (message) => {
@@ -1484,141 +1530,6 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
 
   return (
     <div className={`services-page ${selectedService ? 'has-detail-view' : ''}`}>
-      {showChat && (
-        <div className="chat-modal-backdrop" onClick={handleCloseChat}>
-          <div className="chat-modal-window" onClick={(e) => e.stopPropagation()}>
-            <div className="chat-modal-header">
-              <div className="chat-modal-provider-info">
-                <div className="chat-provider-avatar">
-                  {getProviderDP(selectedProvider) ? (
-                    <img src={getProviderDP(selectedProvider)} alt={selectedProvider.name} className="chat-avatar-img" />
-                  ) : (
-                    <span className="profile-initial-small">{selectedProvider.name.charAt(0)}</span>
-                  )}
-                </div>
-                <div className="chat-provider-details">
-                  <span className="chat-provider-name">{selectedProvider.name}</span>
-                  <span className="chat-provider-service">{selectedProvider.service}</span>
-                </div>
-              </div>
-              <button className="close-chat-btn" onClick={handleCloseChat} title="Close Chat">✕</button>
-            </div>
-            <div className="chat-modal-messages">
-            {chatMessages.map((msg, index) => (
-              <div key={index} className={`chat-modal-message ${msg.sender}`}>
-                <span className="modal-message-sender">{msg.sender === 'provider' ? selectedProvider.name : 'You'}</span>
-                <p className="modal-message-text">{msg.text}</p>
-              </div>
-            ))}
-          </div>
-          {negotiatedPrice && (
-            <div className={`modal-price-confirmation ${isHistoryMode ? 'history-mode' : ''}`}>
-              <p>Provider has agreed to: <strong>{negotiatedPrice}</strong></p>
-              {!isHistoryMode && <button className="modal-accept-btn" onClick={handleAcceptAndBook}>Accept & Complete Booking</button>}
-            </div>
-          )}
-          {!isHistoryMode && (
-            <div className="chat-modal-footer">
-              <button className="send-custom-offer-btn" onClick={handleSendCustomOffer}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><line x1="12" y1="6" x2="12" y2="8"></line><line x1="12" y1="16" x2="12" y2="18"></line></svg>
-                <span>Send Custom Offer</span>
-              </button>
-              <div className="chat-modal-input-section">
-                <div className="chat-input-wrapper">
-                  <button className="attachment-btn" onClick={() => setShowAttachmentMenu(!showAttachmentMenu)}>+</button>
-                  {showAttachmentMenu && (
-                    <div className="attachment-menu">
-                      <button className="attachment-option" onClick={() => handleAttachmentClick('image')}>
-                        <span className="attachment-icon">
-                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                        </span>
-                        <span>Upload Image</span>
-                      </button>
-                      <button className="attachment-option" onClick={() => handleAttachmentClick('photo')}>
-                        <span className="attachment-icon">
-                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                        </span>
-                        <span>Photo</span>
-                      </button>
-                      <button className="attachment-option" onClick={() => handleAttachmentClick('file')}>
-                        <span className="attachment-icon">
-                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
-                        </span>
-                        <span>File</span>
-                      </button>
-                      <button className="attachment-option" onClick={() => handleAttachmentClick('location')}>
-                        <span className="attachment-icon">
-                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        </span>
-                        <span>Location</span>
-                      </button>
-                    </div>
-                  )}
-                  <input
-                    type="text"
-                    className="chat-modal-input"
-                    placeholder="Type your message..."
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter' && e.target.value.trim()) {
-                        handleSendMessage(e.target.value)
-                        e.target.value = ''
-                      }
-                    }}
-                  />
-                  <button
-                    className={`voice-btn ${isRecording ? 'recording' : ''}`}
-                    onMouseDown={handleVoiceStart}
-                    onMouseUp={handleVoiceEnd}
-                    onTouchStart={handleVoiceStart}
-                    onTouchEnd={handleVoiceEnd}
-                  >
-                    {isRecording ? (
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"></rect></svg>
-                    ) : (
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                    )}
-                  </button>
-                  <button
-                    className="chat-modal-send-btn"
-                    onClick={(e) => {
-                      const input = e.target.parentElement.querySelector('.chat-modal-input')
-                      if (input.value.trim()) {
-                        handleSendMessage(input.value)
-                        input.value = ''
-                      }
-                    }}
-                  >
-                    Send
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-          {showOfferCard && (
-            <div className="offer-card-modal">
-              <div className="offer-card">
-                <h3 className="offer-card-title">Make a Custom Offer</h3>
-                <p className="offer-card-subtitle">Current price: {selectedProvider.price}</p>
-                <div className="offer-input-group">
-                  <label>Your Offer:</label>
-                  <input
-                    type="text"
-                    className="offer-input"
-                    placeholder="e.g., Rs. 3,000"
-                    value={customOfferAmount}
-                    onChange={(e) => setCustomOfferAmount(e.target.value)}
-                  />
-                </div>
-                <div className="offer-card-actions">
-                  <button className="offer-decline-btn" onClick={handleDeclineOffer}>Decline</button>
-                  <button className="offer-accept-btn" onClick={handleSubmitOffer}>Send Offer</button>
-                </div>
-              </div>
-            </div>
-          )}
-          </div>
-        </div>
-      )}
       {/* Booking & Checkout Flow (Triggered from Chat) */}
       {(showBookingForm || bookingStatus === 'confirmed' || bookingStatus === 'paid') && selectedProvider && !isViewingProfile && (
         <div className="booking-modal-overlay">

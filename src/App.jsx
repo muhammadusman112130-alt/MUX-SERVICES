@@ -142,8 +142,24 @@ function App() {
     setIsLoggedIn(true)
     setIsProviderLoggedIn(false)
     setAuthPage(null)
-    setCurrentPage('home')
-    window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
+
+    // Check if there was a pending service category chosen before login
+    let pendingCategory = null
+    try {
+      pendingCategory = localStorage.getItem('pending_service_category')
+      if (pendingCategory) {
+        localStorage.removeItem('pending_service_category')
+      }
+    } catch (e) {
+      console.warn('Storage read notice:', e)
+    }
+
+    if (pendingCategory) {
+      handlePageChange('services', pendingCategory)
+    } else {
+      setCurrentPage('home')
+      window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
+    }
   }
 
   const handleProviderLogin = () => {
@@ -200,7 +216,14 @@ function App() {
           </>
         )
       case 'services':
-        return <Services initialSearchQuery={initialSearchQuery} setCurrentPage={handlePageChange} />
+        return (
+          <Services 
+            initialSearchQuery={initialSearchQuery} 
+            setCurrentPage={handlePageChange} 
+            isLoggedIn={isLoggedIn}
+            onLoginClick={() => handleLoginClick(true)}
+          />
+        )
       case 'professionals':
         return <Professionals setCurrentPage={handlePageChange} />
       case 'about':
@@ -214,7 +237,13 @@ function App() {
         return <MyBookings setCurrentPage={handlePageChange} />
       case 'messages':
       case 'Messages':
-        return <Messages setCurrentPage={handlePageChange} />
+        return (
+          <Messages 
+            setCurrentPage={handlePageChange} 
+            isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
+          />
+        )
       case 'provider-dashboard':
         return <ProviderDashboard setCurrentPage={handlePageChange} onLogout={handleLogout} />
       case 'provider-login':
