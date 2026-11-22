@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import './Professionals.css'
-import heroBanner from '../assets/services-hero-banner.jpg'
+import heroBanner from '../assets/professionals-hero-banner.jpg'
 import electricianImg from '../Public/electricon.png'
 import plumberImg from '../Public/plumber.png'
 import acImg from '../Public/AC technicon.png'
@@ -14,10 +14,34 @@ import welderImg from '../Public/welder.png'
 
 function Professionals({ setCurrentPage }) {
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [searchInputText, setSearchInputText] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
-  const [sortBy, setSortBy] = useState('rating')
   const [verifiedOnly, setVerifiedOnly] = useState(true)
   const [selectedProModal, setSelectedProModal] = useState(null)
+
+  // Scroll open & close animation for Guarantee Section cards
+  const [trustCardsOpen, setTrustCardsOpen] = useState(false)
+  const trustGridRef = useRef(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!trustGridRef.current) return
+      const rect = trustGridRef.current.getBoundingClientRect()
+      const windowHeight = window.innerHeight || 800
+
+      // When guarantee section enters viewport: open cards
+      // When scrolled away (up or down): close cards
+      if (rect.top <= windowHeight * 0.82 && rect.bottom >= 40) {
+        setTrustCardsOpen(true)
+      } else {
+        setTrustCardsOpen(false)
+      }
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const categories = [
     'All',
@@ -275,7 +299,7 @@ function Professionals({ setCurrentPage }) {
     }
   ]
 
-  // Filter & Sort Pipeline
+  // Filter Pipeline (Highest rated first by default)
   const filteredProfessionals = useMemo(() => {
     return professionalsList
       .filter((pro) => {
@@ -301,14 +325,8 @@ function Professionals({ setCurrentPage }) {
         }
         return true
       })
-      .sort((a, b) => {
-        if (sortBy === 'rating') return b.rating - a.rating
-        if (sortBy === 'reviews') return b.reviews - a.reviews
-        if (sortBy === 'response') return parseInt(a.responseTime) - parseInt(b.responseTime)
-        if (sortBy === 'price') return parseInt(a.hourlyRate.replace(/\D/g, '')) - parseInt(b.hourlyRate.replace(/\D/g, ''))
-        return 0
-      })
-  }, [professionalsList, selectedCategory, searchQuery, sortBy, verifiedOnly])
+      .sort((a, b) => b.rating - a.rating)
+  }, [professionalsList, selectedCategory, searchQuery, verifiedOnly])
 
   const handleBook = (pro) => {
     if (typeof setCurrentPage === 'function') {
@@ -339,7 +357,7 @@ function Professionals({ setCurrentPage }) {
             Directly connect with certified technicians who maintain highest ratings, quickest response rates, and transparent PKR pricing in Multan.
           </p>
 
-          {/* Quick Metrics Bar */}
+          {/* Quick Metrics Bar (Clean bare stats without card background) */}
           <div className="pro-hero-metrics">
             <div className="pro-metric-item">
               <span className="pro-metric-num">⭐ 4.93</span>
@@ -367,37 +385,42 @@ function Professionals({ setCurrentPage }) {
       {/* ── DIRECTORY CONTROLS SECTION ── */}
       <section className="pro-controls-section">
         <div className="pro-controls-wrapper">
-          {/* Search Row */}
+          {/* Integrated Search Bar with Click Button */}
           <div className="pro-search-row">
-            <div className="pro-search-input-box">
+            <div className="pro-search-bar-inline">
               <span className="pro-search-icon">🔍</span>
               <input
                 type="text"
                 placeholder="Search technician by name, specialty, or area (e.g. Akram, Inverter, Bosan Road)..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchInputText}
+                onChange={(e) => setSearchInputText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setSearchQuery(searchInputText.trim())
+                  }
+                }}
                 className="pro-search-input"
               />
-              {searchQuery && (
-                <button className="pro-search-clear" onClick={() => setSearchQuery('')} title="Clear">
+              {searchInputText && (
+                <button
+                  type="button"
+                  className="pro-search-clear"
+                  onClick={() => {
+                    setSearchInputText('')
+                    setSearchQuery('')
+                  }}
+                  title="Clear"
+                >
                   ✕
                 </button>
               )}
-            </div>
-
-            <div className="pro-sort-box">
-              <label htmlFor="pro-sort-select">Sort By:</label>
-              <select
-                id="pro-sort-select"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="pro-select"
+              <button
+                type="button"
+                className="pro-search-submit-btn"
+                onClick={() => setSearchQuery(searchInputText.trim())}
               >
-                <option value="rating">Highest Rating (⭐ 5.0 - 4.8)</option>
-                <option value="reviews">Most Customer Reviews</option>
-                <option value="response">Fastest Response Time</option>
-                <option value="price">Price (Low to High)</option>
-              </select>
+                Search
+              </button>
             </div>
           </div>
 
@@ -444,6 +467,7 @@ function Professionals({ setCurrentPage }) {
               <button
                 className="pro-reset-btn"
                 onClick={() => {
+                  setSearchInputText('')
                   setSearchQuery('')
                   setSelectedCategory('All')
                   setVerifiedOnly(false)
@@ -552,7 +576,7 @@ function Professionals({ setCurrentPage }) {
         </div>
       </section>
 
-      {/* ── WHY CHOOSE MUX VERIFIED PROFESSIONALS ── */}
+      {/* ── WHY CHOOSE MUX VERIFIED PROFESSIONALS (3 Cards with 3D Scroll Flow) ── */}
       <section className="pro-trust-banner">
         <div className="pro-trust-wrapper">
           <div className="pro-trust-header">
@@ -561,7 +585,10 @@ function Professionals({ setCurrentPage }) {
             <p>Every technician is strictly screened for technical expertise, background record, and customer respect.</p>
           </div>
 
-          <div className="pro-trust-grid">
+          <div 
+            ref={trustGridRef} 
+            className={`pro-trust-grid ${trustCardsOpen ? 'trust-cards-open' : ''}`}
+          >
             <div className="pro-trust-card">
               <span className="pro-trust-icon">🛡️</span>
               <h4>CNIC &amp; Police Background Checked</h4>
@@ -576,11 +603,6 @@ function Professionals({ setCurrentPage }) {
               <span className="pro-trust-icon">💵</span>
               <h4>Transparent PKR Pricing</h4>
               <p>Agreed pricing upfront before work starts. Zero surprise add-ons or hidden charges guaranteed.</p>
-            </div>
-            <div className="pro-trust-card">
-              <span className="pro-trust-icon">🤝</span>
-              <h4>Satisfaction Warranty</h4>
-              <p>If any service issue occurs within 7 days, our verified technicians inspect and resolve it free.</p>
             </div>
           </div>
         </div>
