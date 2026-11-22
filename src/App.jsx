@@ -29,8 +29,24 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [isProviderLoggedIn, setIsProviderLoggedIn] = useState(false)
 
-  // Verify and sync logged-in user on load
+  // Verify and sync logged-in user on load & clean legacy MDA storage
   useEffect(() => {
+    // Clean up any stale MDA keys stored from port 5173
+    try {
+      Object.keys(localStorage).forEach((key) => {
+        if (key.toLowerCase().includes('mda')) {
+          localStorage.removeItem(key)
+        }
+      })
+      Object.keys(sessionStorage).forEach((key) => {
+        if (key.toLowerCase().includes('mda')) {
+          sessionStorage.removeItem(key)
+        }
+      })
+    } catch (e) {
+      console.warn('Storage cleanup notice:', e)
+    }
+
     const initAuth = async () => {
       if (authAPI.hasToken()) {
         const stored = authAPI.getStoredUser()
@@ -47,7 +63,6 @@ function App() {
           }
         } catch (err) {
           console.warn('Session verification failed:', err.message)
-          // Only clear if server says 401 unauthorized
           if (err.status === 401) {
             authAPI.logout()
             setCurrentUser(null)
@@ -60,25 +75,63 @@ function App() {
     initAuth()
   }, [])
 
-  const handlePageChange = (page, query = '') => {
+  // Browser Native Back/Forward Navigation Synchronization
+  useEffect(() => {
+    // Initialize base history state
+    window.history.replaceState({ page: 'home', auth: null, query: '' }, '', '')
+
+    const handlePopState = (event) => {
+      if (event.state) {
+        setCurrentPage(event.state.page || 'home')
+        setAuthPage(event.state.auth || null)
+        setInitialSearchQuery(event.state.query || '')
+      } else {
+        setCurrentPage('home')
+        setAuthPage(null)
+        setInitialSearchQuery('')
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
+
+  const handlePageChange = (page, query = '', pushToHistory = true) => {
     setInitialSearchQuery(query || '')
     if (page === 'provider-dashboard') {
       setIsProviderLoggedIn(true)
     }
     setCurrentPage(page)
+    setAuthPage(null)
+
+    if (pushToHistory) {
+      window.history.pushState({ page, auth: null, query }, '', '')
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const handleLoginClick = () => {
+  const handleLoginClick = (pushToHistory = true) => {
     setAuthPage('login')
+    if (pushToHistory) {
+      window.history.pushState({ page: currentPage, auth: 'login' }, '', '')
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const handleSignupClick = () => {
+  const handleSignupClick = (pushToHistory = true) => {
     setAuthPage('signup')
+    if (pushToHistory) {
+      window.history.pushState({ page: currentPage, auth: 'signup' }, '', '')
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleBackToHome = () => {
     setAuthPage(null)
     setCurrentPage('home')
+    window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleLogin = (user) => {
@@ -87,6 +140,7 @@ function App() {
     setIsProviderLoggedIn(false)
     setAuthPage(null)
     setCurrentPage('home')
+    window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
   }
 
   const handleProviderLogin = () => {
@@ -94,6 +148,7 @@ function App() {
     setIsLoggedIn(false)
     setAuthPage(null)
     setCurrentPage('home')
+    window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
   }
 
   const handleLogout = () => {
@@ -103,17 +158,29 @@ function App() {
     setIsProviderLoggedIn(false)
     setAuthPage(null)
     setCurrentPage('home')
+    window.history.pushState({ page: 'home', auth: null, query: '' }, '', '')
   }
 
   const shouldShowFooter = !authPage && currentPage !== 'Messages' && currentPage !== 'messages'
 
   const renderPage = () => {
     if (authPage === 'login') {
-      return <Login onSignupClick={() => setAuthPage('signup')} onBackClick={handleBackToHome} onLogin={handleLogin} />
+      return (
+        <Login 
+          onSignupClick={() => handleSignupClick(true)} 
+          onBackClick={handleBackToHome} 
+          onLogin={handleLogin} 
+        />
+      )
     }
 
     if (authPage === 'signup') {
-      return <Signup onLoginClick={() => setAuthPage('login')} onBackClick={handleBackToHome} />
+      return (
+        <Signup 
+          onLoginClick={() => handleLoginClick(true)} 
+          onBackClick={handleBackToHome} 
+        />
+      )
     }
 
     switch(currentPage) {
@@ -158,7 +225,7 @@ function App() {
             <CategorySection setCurrentPage={handlePageChange} />
             <MuxTickerStrips />
             <PriceOfferSection setCurrentPage={handlePageChange} />
-            <ProfessionalsSection />
+            <ProfessionalsSection setCurrentPage={handlePageChange} />
             <TrustSection />
             {!isProviderLoggedIn && <CallToActionSection setCurrentPage={handlePageChange} />}
           </>
@@ -172,8 +239,8 @@ function App() {
         <Navbar 
           currentPage={currentPage}
           setCurrentPage={handlePageChange} 
-          onLoginClick={handleLoginClick} 
-          onSignupClick={handleSignupClick} 
+          onLoginClick={() => handleLoginClick(true)} 
+          onSignupClick={() => handleSignupClick(true)} 
           isLoggedIn={isLoggedIn} 
           currentUser={currentUser}
           isProviderLoggedIn={isProviderLoggedIn} 

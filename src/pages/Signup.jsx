@@ -3,7 +3,7 @@ import './Signup.css'
 import loginScr from '../Public/login scr.png'
 import { authAPI } from '../services/api'
 
-function Signup({ onLoginClick, onBackClick }) {
+function Signup({ onLoginClick }) {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -71,10 +71,8 @@ function Signup({ onLoginClick, onBackClick }) {
       <img src={loginScr} alt="Signup Background" className="auth-fullscreen-bg" />
       <div className="auth-bg-overlay" aria-hidden="true"></div>
 
-      {/* Centered Direct Form on Clear Background Image (NO CARDS & NO SCROLL) */}
+      {/* Centered Direct Form on Clear Background Image (NO CARDS & BROWSER-BACK READY) */}
       <div className="auth-direct-form signup-direct-form">
-        <button className="back-button" onClick={onBackClick} type="button">← Back to Home</button>
-        
         <div className="auth-header-brand">
           <h1 className="auth-brand-title">MUX SERVICES</h1>
           <p className="auth-brand-tagline">Join Multan's #1 Certified Service Network</p>
@@ -97,7 +95,23 @@ function Signup({ onLoginClick, onBackClick }) {
           </div>
         )}
 
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form className="auth-form" onSubmit={handleSubmit} autoComplete="off">
+          {/* Chrome autofill isolation trap: prevents browser from autofilling saved MDA credentials */}
+          <input 
+            type="text" 
+            name="fake_autofill_signup_trap" 
+            style={{ position: 'absolute', opacity: 0, height: 0, width: 0, pointerEvents: 'none' }} 
+            tabIndex="-1" 
+            autoComplete="off" 
+          />
+          <input 
+            type="password" 
+            name="fake_autofill_signuppwd_trap" 
+            style={{ position: 'absolute', opacity: 0, height: 0, width: 0, pointerEvents: 'none' }} 
+            tabIndex="-1" 
+            autoComplete="new-password" 
+          />
+
           <div className="form-group">
             <label htmlFor="fullName">Full Name</label>
             <div className="input-wrapper">
@@ -110,10 +124,12 @@ function Signup({ onLoginClick, onBackClick }) {
               <input
                 type="text"
                 id="fullName"
+                name="mux_signup_fullname"
                 placeholder="Enter your full name"
                 className="form-input"
                 value={formData.fullName}
                 onChange={handleChange}
+                autoComplete="off"
                 required
               />
             </div>
@@ -131,10 +147,12 @@ function Signup({ onLoginClick, onBackClick }) {
               <input
                 type="email"
                 id="email"
+                name="mux_signup_email"
                 placeholder="Enter your email"
                 className="form-input"
                 value={formData.email}
                 onChange={handleChange}
+                autoComplete="off"
                 required
               />
             </div>
@@ -152,10 +170,12 @@ function Signup({ onLoginClick, onBackClick }) {
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
+                name="mux_signup_key"
                 placeholder="Create password"
                 className="form-input"
                 value={formData.password}
                 onChange={handleChange}
+                autoComplete="new-password"
                 required
               />
               <button 
@@ -193,10 +213,12 @@ function Signup({ onLoginClick, onBackClick }) {
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 id="confirmPassword"
+                name="mux_signup_confirm_key"
                 placeholder="Confirm password"
                 className="form-input"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                autoComplete="new-password"
                 required
               />
               <button 
