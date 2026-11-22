@@ -39,47 +39,35 @@ const VALID_PAGES = [
   'provider-verification'
 ]
 
-const getInitialPageState = () => {
+const getPageFromPathname = (pathname = window.location.pathname) => {
   try {
-    const rawPath = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, '')
-    const params = new URLSearchParams(window.location.search)
-
-    if (rawPath === 'login' || params.get('auth') === 'login') {
-      return { page: 'home', auth: 'login', query: '' }
-    }
-    if (rawPath === 'signup' || params.get('auth') === 'signup') {
-      return { page: 'home', auth: 'signup', query: '' }
-    }
-
-    const query = params.get('service') || params.get('category') || params.get('q') || params.get('query') || ''
-
-    if (rawPath) {
-      if (rawPath === 'bookings') return { page: 'booked', auth: null, query }
-      if (VALID_PAGES.includes(rawPath)) {
-        return { page: rawPath, auth: null, query }
-      }
-    }
-
-    if (window.history.state && window.history.state.page) {
-      const p = window.history.state.page === 'bookings' ? 'booked' : window.history.state.page
-      return {
-        page: p,
-        auth: window.history.state.auth || null,
-        query: window.history.state.query || ''
-      }
-    }
-
-    const saved = sessionStorage.getItem('mux_active_page') || localStorage.getItem('mux_active_page')
-    if (saved && VALID_PAGES.includes(saved.toLowerCase())) {
-      const p = saved.toLowerCase() === 'bookings' ? 'booked' : saved.toLowerCase()
-      const savedQuery = sessionStorage.getItem('mux_search_query') || ''
-      return { page: p, auth: null, query: savedQuery }
-    }
+    const clean = pathname.toLowerCase().replace(/^\/+|\/+$/g, '')
+    if (!clean) return 'home'
+    if (clean === 'bookings') return 'booked'
+    if (clean === 'login' || clean === 'signup') return 'home'
+    if (VALID_PAGES.includes(clean)) return clean
   } catch (e) {
-    console.warn('Error reading initial page state:', e)
+    console.warn(e)
   }
+  return 'home'
+}
 
-  return { page: 'home', auth: null, query: '' }
+const getAuthFromPathname = (pathname = window.location.pathname) => {
+  try {
+    const clean = pathname.toLowerCase().replace(/^\/+|\/+$/g, '')
+    if (clean === 'login') return 'login'
+    if (clean === 'signup') return 'signup'
+  } catch {}
+  return null
+}
+
+const getQueryFromSearch = (search = window.location.search) => {
+  try {
+    const params = new URLSearchParams(search)
+    return params.get('service') || params.get('category') || params.get('q') || ''
+  } catch {
+    return ''
+  }
 }
 
 const getUrlForState = (page, auth = null, query = '') => {
@@ -94,13 +82,26 @@ const getUrlForState = (page, auth = null, query = '') => {
 }
 
 function App() {
-  const initialBoot = getInitialPageState()
-  const [currentPage, setCurrentPage] = useState(initialBoot.page)
-  const [initialSearchQuery, setInitialSearchQuery] = useState(initialBoot.query)
-  const [authPage, setAuthPage] = useState(initialBoot.auth) // 'login' or 'signup' or null
+  const initialPage = getPageFromPathname()
+  const initialAuth = getAuthFromPathname()
+  const initialQuery = getQueryFromSearch()
+
+  const [currentPage, setCurrentPage] = useState(initialPage)
+  const [initialSearchQuery, setInitialSearchQuery] = useState(initialQuery)
+  const [authPage, setAuthPage] = useState(initialAuth) // 'login' or 'signup' or null
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
-  const [isProviderLoggedIn, setIsProviderLoggedIn] = useState(() => initialBoot.page === 'provider-dashboard')
+  const [isProviderLoggedIn, setIsProviderLoggedIn] = useState(() => initialPage === 'provider-dashboard')
+
+  // Clean stale legacy storage on startup
+  useEffect(() => {
+    try {
+      localStorage.removeItem('mux_active_page')
+      localStorage.removeItem('mux_current_page')
+      sessionStorage.removeItem('mux_active_page')
+      sessionStorage.removeItem('mux_current_page')
+    } catch {}
+  }, [])
 
   // Verify and sync logged-in user on load & clean legacy MDA storage
   useEffect(() => {
@@ -148,29 +149,21 @@ function App() {
     initAuth()
   }, [])
 
-  // Browser Native Back/Forward Navigation & Refresh State Synchronization
+  // Native Browser History Synchronization (Back/Forward Arrow)
   useEffect(() => {
     // Keep active URL aligned on mount/refresh
     const targetUrl = getUrlForState(currentPage, authPage, initialSearchQuery)
     window.history.replaceState({ page: currentPage, auth: authPage, query: initialSearchQuery }, '', targetUrl)
 
     const handlePopState = (event) => {
-      if (event.state && event.state.page) {
-        const p = event.state.page === 'bookings' ? 'booked' : event.state.page
-        setCurrentPage(p)
-        setAuthPage(event.state.auth || null)
-        setInitialSearchQuery(event.state.query || '')
-        try {
-          sessionStorage.setItem('mux_active_page', p)
-        } catch (e) {
-          console.warn(e)
-        }
-      } else {
-        const restored = getInitialPageState()
-        setCurrentPage(restored.page)
-        setAuthPage(restored.auth)
-        setInitialSearchQuery(restored.query)
-      }
+      // Direct 1-to-1 page navigation from browser history
+      const poppedPage = event.state?.page || getPageFromPathname(window.location.pathname)
+      const poppedAuth = event.state?.auth || getAuthFromPathname(window.location.pathname)
+      const poppedQuery = event.state?.query || getQueryFromSearch(window.location.search)
+
+      setCurrentPage(poppedPage)
+      setAuthPage(poppedAuth)
+      setInitialSearchQuery(poppedQuery)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
@@ -180,7 +173,7 @@ function App() {
 
   const handlePageChange = (page, query = '', pushToHistory = true) => {
     const normalized = page === 'bookings' ? 'booked' : (page === 'Booked' ? 'booked' : (page === 'Messages' ? 'messages' : page))
-    const isSamePage = normalized === currentPage && query === initialSearchQuery
+    const isSamePage = normalized === currentPage && query === initialSearchQuery && authPage === null
 
     setInitialSearchQuery(query || '')
     if (normalized === 'provider-dashboard') {
@@ -189,24 +182,13 @@ function App() {
     setCurrentPage(normalized)
     setAuthPage(null)
 
-    try {
-      sessionStorage.setItem('mux_active_page', normalized)
-      localStorage.setItem('mux_active_page', normalized)
-      if (query) {
-        sessionStorage.setItem('mux_search_query', query)
-      } else {
-        sessionStorage.removeItem('mux_search_query')
-        sessionStorage.removeItem('mux_selected_service')
-      }
-    } catch (e) {
-      console.warn(e)
-    }
-
     const targetUrl = getUrlForState(normalized, null, query)
+    const stateObj = { page: normalized, auth: null, query: query || '' }
+
     if (pushToHistory && !isSamePage) {
-      window.history.pushState({ page: normalized, auth: null, query }, '', targetUrl)
+      window.history.pushState(stateObj, '', targetUrl)
     } else {
-      window.history.replaceState({ page: normalized, auth: null, query }, '', targetUrl)
+      window.history.replaceState(stateObj, '', targetUrl)
     }
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
