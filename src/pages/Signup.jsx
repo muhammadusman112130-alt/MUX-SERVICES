@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './Signup.css'
-import signupImage from '../Public/signup.png'
+import loginScr from '../Public/login scr.png'
 import { authAPI } from '../services/api'
 
 function Signup({ onLoginClick, onBackClick }) {
@@ -67,12 +67,12 @@ function Signup({ onLoginClick, onBackClick }) {
 
   return (
     <div className="auth-page signup-page">
-      {/* Full-screen background image */}
-      <img src={signupImage} alt="Signup Background" className="auth-fullscreen-bg" />
+      {/* Full-screen background image — exactly same as Login screen */}
+      <img src={loginScr} alt="Signup Background" className="auth-fullscreen-bg" />
       <div className="auth-bg-overlay" aria-hidden="true"></div>
 
-      {/* Centered Direct Form on Clear Background Image (NO CARDS) */}
-      <div className="auth-direct-form">
+      {/* Centered Direct Form on Clear Background Image (NO CARDS & NO SCROLL) */}
+      <div className="auth-direct-form signup-direct-form">
         <button className="back-button" onClick={onBackClick} type="button">← Back to Home</button>
         
         <div className="auth-header-brand">
@@ -152,7 +152,7 @@ function Signup({ onLoginClick, onBackClick }) {
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
-                placeholder="Create a password"
+                placeholder="Create password"
                 className="form-input"
                 value={formData.password}
                 onChange={handleChange}
@@ -193,7 +193,7 @@ function Signup({ onLoginClick, onBackClick }) {
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 id="confirmPassword"
-                placeholder="Confirm your password"
+                placeholder="Confirm password"
                 className="form-input"
                 value={formData.confirmPassword}
                 onChange={handleChange}
@@ -225,21 +225,6 @@ function Signup({ onLoginClick, onBackClick }) {
           <button type="submit" className="auth-button" disabled={loading} style={{ opacity: loading ? 0.7 : 1 }}>
             {loading ? 'Creating Account...' : 'Sign Up'}
           </button>
-
-          <div className="auth-divider">
-            <span>OR SIGN UP WITH</span>
-          </div>
-
-          <div className="social-buttons">
-            <button type="button" className="social-button google" onClick={() => alert('Google authentication service ready.')}>
-              <span className="social-icon">G</span>
-              <span>Google</span>
-            </button>
-            <button type="button" className="social-button facebook" onClick={() => alert('Mobile OTP verification available.')}>
-              <span className="social-icon">f</span>
-              <span>Facebook</span>
-            </button>
-          </div>
 
           <div className="auth-switch">
             <span>Already have an account?</span>

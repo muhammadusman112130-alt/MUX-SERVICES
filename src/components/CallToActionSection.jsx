@@ -6,14 +6,22 @@ function CallToActionSection({ setCurrentPage }) {
   const sectionRef = useRef(null)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+    const handleObserver = (entries) => {
+      entries.forEach((entry) => {
+        // Only trigger when user actually arrives at this section in the viewport.
+        // Resets when scrolling away so it plays freshly every time they scroll into it.
         if (entry.isIntersecting) {
           setIsInView(true)
+        } else {
+          setIsInView(false)
         }
-      },
-      { threshold: 0.12 }
-    )
+      })
+    }
+
+    const observer = new IntersectionObserver(handleObserver, {
+      threshold: 0.28, // 28% of section must be visible inside viewport
+      rootMargin: '-80px 0px -80px 0px' // Prevents premature triggering while still on sections above
+    })
 
     const currentElem = sectionRef.current
     if (currentElem) {
@@ -96,7 +104,7 @@ function CallToActionSection({ setCurrentPage }) {
   return (
     <section 
       ref={sectionRef} 
-      className={`workflow-section ${isInView ? 'is-in-view' : ''}`}
+      className={`workflow-section ${isInView ? 'is-in-view' : 'is-out-view'}`}
       aria-label="How MUX SERVICES Works - Booking Workflow"
     >
       {/* Ambient background glowing elements */}
