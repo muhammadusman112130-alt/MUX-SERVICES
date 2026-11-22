@@ -29,9 +29,17 @@
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 1.5px;
-  color: #EEF4F4;
-  text-shadow: 0 0 16px rgba(143, 211, 232, 0.6);
   margin-bottom: 1rem;
+}
+
+.footer-logo-mux {
+  color: #EEF4F4;
+  text-shadow: 0 0 14px rgba(238, 244, 244, 0.6);
+}
+
+.footer-logo-services {
+  color: #17f7f7;
+  text-shadow: 0 0 16px rgba(23, 247, 247, 0.75);
 }
 
 .footer-description {

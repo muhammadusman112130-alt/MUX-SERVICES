@@ -13,7 +13,9 @@ function Footer({ setCurrentPage }) {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3 className="footer-logo">MUX SERVICES</h3>
+            <h3 className="footer-logo">
+              <span className="footer-logo-mux">MUX</span> <span className="footer-logo-services">SERVICES</span>
+            </h3>
             <p className="footer-description">
               Multan's premier verified home services platform. Professional electricians, plumbers, gardeners, and carpenters on demand.
             </p>

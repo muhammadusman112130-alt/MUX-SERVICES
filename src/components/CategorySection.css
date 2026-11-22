@@ -184,8 +184,9 @@
 
 .slider-viewport {
   overflow: hidden;
-  border-radius: 26px;
-  box-shadow: 0 20px 48px -12px rgba(14, 46, 51, 0.12);
+  border-radius: 30px;
+  padding: 12px 8px 45px 8px;
+  margin: -12px -8px -45px -8px;
 }
 
 /* GPU Accelerated Track for Zero-Lag (transform3d) */
@@ -201,7 +202,88 @@
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  padding: 12px 6px;
+  padding: 16px 10px 30px 10px;
+}
+
+/* ── DEDICATED ANIMATED LIGHT & FLOOR BEAM BEHIND SERVICE CARDS ── */
+.card-backlight-aura {
+  position: absolute;
+  inset: 12px 18px 25px 18px;
+  border-radius: 32px;
+  background: radial-gradient(ellipse at 50% 60%, rgba(23, 247, 247, 0.28) 0%, rgba(143, 211, 232, 0.14) 45%, transparent 72%);
+  filter: blur(22px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+  animation: cardAuraPulse 3s ease-in-out infinite alternate;
+  transform: scale(0.98);
+}
+
+.card-floor-light-animation {
+  position: absolute;
+  bottom: 8px;
+  left: 6%;
+  right: 6%;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(23, 247, 247, 0.7) 0%, rgba(238, 244, 244, 0.55) 35%, rgba(143, 211, 232, 0.3) 65%, transparent 82%);
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+  animation: cardFloorBeam 2.6s ease-in-out infinite alternate;
+  transform: scaleY(0.7);
+}
+
+@keyframes cardAuraPulse {
+  0% {
+    opacity: 0.65;
+    transform: scale(0.97);
+    filter: blur(18px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+    filter: blur(26px);
+  }
+  100% {
+    opacity: 0.65;
+    transform: scale(0.97);
+    filter: blur(18px);
+  }
+}
+
+@keyframes cardFloorBeam {
+  0% {
+    opacity: 0.6;
+    transform: scaleX(0.85) scaleY(0.65);
+    filter: blur(18px);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.08) scaleY(0.9);
+    filter: blur(26px);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scaleX(0.85) scaleY(0.65);
+    filter: blur(18px);
+  }
+}
+
+.slider-slide:hover .card-backlight-aura {
+  opacity: 1;
+  filter: blur(30px);
+  background: radial-gradient(ellipse at 50% 60%, rgba(23, 247, 247, 0.5) 0%, rgba(238, 244, 244, 0.4) 45%, transparent 75%);
+  transform: scale(1.05);
+}
+
+.slider-slide:hover .card-floor-light-animation {
+  opacity: 1;
+  height: 65px;
+  filter: blur(28px);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(23, 247, 247, 0.85) 35%, rgba(143, 211, 232, 0.45) 65%, transparent 85%);
+  transform: scaleX(1.18) scaleY(1);
 }
 
 /* ── Navigation Arrows ── */
@@ -246,41 +328,49 @@
   padding: 2.5rem;
   border-radius: 26px;
   background: #13383e;
-  border: 1.5px solid rgba(143, 211, 232, 0.2);
+  border: 1.5px solid rgba(23, 247, 247, 0.3);
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, border-color 0.35s ease;
   outline: none;
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(23, 247, 247, 0.15);
 }
 
 /* Animated white glow & floor shadow behind card on hover (as requested) */
 .top-service-card:hover {
   transform: translateY(-8px);
-  border-color: #8FD3E8 !important;
+  border-color: #17f7f7 !important;
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.6),
+    0 30px 80px rgba(255, 255, 255, 0.45),
+    0 0 35px rgba(23, 247, 247, 0.8),
+    0 0 70px rgba(23, 247, 247, 0.5) !important;
   animation: cardShadowPulse 2.2s ease-in-out infinite alternate !important;
 }
 
 @keyframes cardShadowPulse {
   0% {
     box-shadow:
-      0 16px 45px rgba(0, 0, 0, 0.5),
-      0 20px 50px rgba(255, 255, 255, 0.28),
-      0 0 25px rgba(255, 255, 255, 0.45),
-      0 0 50px rgba(143, 211, 232, 0.4);
+      0 18px 48px rgba(0, 0, 0, 0.55),
+      0 24px 60px rgba(255, 255, 255, 0.35),
+      0 0 28px rgba(23, 247, 247, 0.65),
+      0 0 55px rgba(23, 247, 247, 0.4);
   }
   50% {
     box-shadow:
-      0 22px 60px rgba(0, 0, 0, 0.6),
-      0 28px 75px rgba(255, 255, 255, 0.45),
-      0 0 40px rgba(255, 255, 255, 0.75),
-      0 0 85px rgba(143, 211, 232, 0.6);
+      0 26px 70px rgba(0, 0, 0, 0.65),
+      0 32px 85px rgba(255, 255, 255, 0.55),
+      0 0 45px rgba(23, 247, 247, 0.95),
+      0 0 90px rgba(23, 247, 247, 0.7);
   }
   100% {
     box-shadow:
-      0 16px 45px rgba(0, 0, 0, 0.5),
-      0 20px 50px rgba(255, 255, 255, 0.28),
-      0 0 25px rgba(255, 255, 255, 0.45),
-      0 0 50px rgba(143, 211, 232, 0.4);
+      0 18px 48px rgba(0, 0, 0, 0.55),
+      0 24px 60px rgba(255, 255, 255, 0.35),
+      0 0 28px rgba(23, 247, 247, 0.65),
+      0 0 55px rgba(23, 247, 247, 0.4);
   }
 }
 

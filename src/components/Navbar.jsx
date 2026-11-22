@@ -74,8 +74,8 @@ function Navbar({
           >
             <img src={webLogo} alt="MUX SERVICES Logo" className="logo-image" />
             <span className="logo-text">
-              <span className="logo-text-services">MUX</span>
-              <span className="logo-text-hub">SERVICES</span>
+              <span className="logo-text-mux">MUX</span>
+              <span className="logo-text-services">SERVICES</span>
             </span>
           </button>
         </div>

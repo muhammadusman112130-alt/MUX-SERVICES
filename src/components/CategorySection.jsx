@@ -13,7 +13,6 @@ import laundryImg from '../Public/laundary.png'
 
 function CategorySection({ setCurrentPage }) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
   const [touchStart, setTouchStart] = useState(null)
   const [touchEnd, setTouchEnd] = useState(null)
   const sliderRef = useRef(null)
@@ -264,16 +263,14 @@ function CategorySection({ setCurrentPage }) {
 
   const totalSlides = categories.length
 
-  // Ultra-smooth auto-slide
+  // Ultra-smooth continuous auto-slide
   useEffect(() => {
-    if (isPaused) return
-
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % totalSlides)
-    }, 4500)
+    }, 3500)
 
     return () => clearInterval(interval)
-  }, [isPaused, totalSlides])
+  }, [totalSlides])
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % totalSlides)
@@ -406,8 +403,6 @@ function CategorySection({ setCurrentPage }) {
       className="category-section" 
       id="services"
       aria-label="Home Services"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     >
       <div className="container">
         {/* Section Header */}
@@ -429,6 +424,7 @@ function CategorySection({ setCurrentPage }) {
                 type="button"
                 className={`quick-nav-btn ${cat.themeClass} ${idx === currentIndex ? 'active' : ''}`}
                 onClick={() => goToSlide(idx)}
+                onMouseEnter={() => goToSlide(idx)}
               >
                 <span className="quick-nav-icon">
                   {cat.id === 'electrician' && (
@@ -514,7 +510,12 @@ function CategorySection({ setCurrentPage }) {
                   <div 
                     key={cat.id} 
                     className={`slider-slide ${isActive ? 'slide-active' : ''}`}
+                    onMouseEnter={() => setCurrentIndex(index)}
                   >
+                    {/* Dedicated Animated Background Aura & Floor Lighting behind Service Card */}
+                    <div className="card-backlight-aura" aria-hidden="true"></div>
+                    <div className="card-floor-light-animation" aria-hidden="true"></div>
+
                     <div 
                       className={`top-service-card ${cat.themeClass}`}
                       onClick={() => handleServiceSelect(cat)}
@@ -641,7 +642,7 @@ function CategorySection({ setCurrentPage }) {
                   {idx === currentIndex && (
                     <span 
                       className="dot-progress-bar" 
-                      style={{ animationDuration: isPaused ? '0s' : '4.5s' }}
+                      style={{ animationDuration: '3.5s' }}
                     ></span>
                   )}
                 </button>
