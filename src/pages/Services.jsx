@@ -14,6 +14,13 @@ import welderImage from '../Public/welder.webp'
 import laundryImage from '../Public/laundary.webp'
 import electricianImage from '../Public/electricon.webp'
 import applianceImage from '../Public/appliance.webp'
+import categoryAcBanner from '../assets/category-ac-banner.webp'
+import categoryElectricianBanner from '../assets/category-electrician-banner.webp'
+import categoryPlumberBanner from '../assets/category-plumber-banner.webp'
+import categoryCarpenterBanner from '../assets/category-carpenter-banner.webp'
+import categoryCleaningBanner from '../assets/category-cleaning-banner.webp'
+import categoryPainterBanner from '../assets/category-painter-banner.webp'
+import categoryApplianceBanner from '../assets/category-appliance-banner.webp'
 const electricianPng = electricianImage
 const electricianJpg = electricianImage
 const acPng = acImage
@@ -927,39 +934,35 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   }
 
   const getHeaderImage = (serviceName) => {
-    if (!serviceName) return servicesHeroBanner
+    if (!serviceName) return categoryAcBanner
     const normalized = normalizeServiceName(serviceName) || serviceName
     const imageMap = {
-      'Electrician': electricianImage,
-      'Plumber': plumberImage,
-      'Carpenter': carpenterImage,
-      'Painter': paintingImage,
-      'Home Cleaning': homeCleaningImage,
-      'AC & HVAC': acImage,
-      'Glass & Aluminum': aluminiumImage,
-      'Gardener': gardeningImage,
-      'Welder': welderImage,
-      'Laundry & Ironing': laundryImage,
-      'Appliance Repair': applianceImage,
+      'AC & HVAC': categoryAcBanner,
+      'Electrician': categoryElectricianBanner,
+      'Plumber': categoryPlumberBanner,
+      'Carpenter': categoryCarpenterBanner,
+      'Painter': categoryPainterBanner,
+      'Home Cleaning': categoryCleaningBanner,
+      'Appliance Repair': categoryApplianceBanner,
+      'Glass & Aluminum': categoryCarpenterBanner,
+      'Gardener': categoryCleaningBanner,
+      'Welder': categoryElectricianBanner,
+      'Laundry & Ironing': categoryCleaningBanner,
     }
     if (imageMap[normalized]) return imageMap[normalized]
     const foundKey = Object.keys(imageMap).find(k => k.toLowerCase() === String(normalized).toLowerCase())
     if (foundKey) return imageMap[foundKey]
 
     const lower = String(serviceName).toLowerCase()
-    if (lower.includes('electr')) return electricianImage
-    if (lower.includes('plumb') || lower.includes('nal') || lower.includes('pipe')) return plumberImage
-    if (lower.includes('carpent') || lower.includes('wood')) return carpenterImage
-    if (lower.includes('paint') || lower.includes('rang')) return paintingImage
-    if (lower.includes('clean') || lower.includes('safai')) return homeCleaningImage
-    if (lower.includes('ac') || lower.includes('hvac') || lower.includes('cool') || lower.includes('chiller')) return acImage
-    if (lower.includes('glass') || lower.includes('alumin')) return aluminiumImage
-    if (lower.includes('gard') || lower.includes('lawn')) return gardeningImage
-    if (lower.includes('weld') || lower.includes('iron') || lower.includes('metal')) return welderImage
-    if (lower.includes('laund') || lower.includes('wash') || lower.includes('ironing')) return laundryImage
-    if (lower.includes('appliance') || lower.includes('fridge') || lower.includes('oven')) return applianceImage
+    if (lower.includes('ac') || lower.includes('hvac') || lower.includes('cool') || lower.includes('chiller')) return categoryAcBanner
+    if (lower.includes('electr')) return categoryElectricianBanner
+    if (lower.includes('plumb') || lower.includes('nal') || lower.includes('pipe')) return categoryPlumberBanner
+    if (lower.includes('carpent') || lower.includes('wood')) return categoryCarpenterBanner
+    if (lower.includes('paint') || lower.includes('rang')) return categoryPainterBanner
+    if (lower.includes('clean') || lower.includes('safai')) return categoryCleaningBanner
+    if (lower.includes('appliance') || lower.includes('fridge') || lower.includes('oven')) return categoryApplianceBanner
 
-    return servicesHeroBanner
+    return categoryAcBanner
   }
 
   const getProviderCompletedWorks = (provider) => {
@@ -2309,19 +2312,8 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
             <div className="header-overlay-ambient" aria-hidden="true"></div>
 
             <div className="header-content">
-              {/* Top Navigation Row: Back Button & Badge */}
+              {/* Centered Category Badge */}
               <div className="detail-top-nav-row">
-                <button 
-                  type="button" 
-                  className="detail-back-btn"
-                  onClick={() => {
-                    setSelectedService(null)
-                    window.scrollTo({ top: 350, behavior: 'smooth' })
-                  }}
-                >
-                  ← Back to All Services
-                </button>
-
                 <div className="detail-badge">
                   <span className="detail-badge-dot"></span>
                   <span>MULTAN VERIFIED SPECIALISTS</span>
@@ -2535,20 +2527,6 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
               <span className="page-dot"></span>
               <span className="page-dot"></span>
               <span className="page-dot"></span>
-            </div>
-
-            {/* Bottom Back Button */}
-            <div className="detail-bottom-nav">
-              <button 
-                type="button" 
-                className="detail-back-btn bottom-btn"
-                onClick={() => {
-                  setSelectedService(null)
-                  window.scrollTo({ top: 350, behavior: 'smooth' })
-                }}
-              >
-                ← Back to All Home Services
-              </button>
             </div>
           </div>
         </div>

@@ -1340,19 +1340,19 @@
 .gradient-header {
   position: relative;
   width: 100%;
-  min-height: 340px;
-  height: clamp(340px, 36vw, 440px);
+  min-height: 360px;
+  height: clamp(360px, 38vw, 460px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background: #0E2E33;
-  padding: 2rem 1.5rem 3rem 1.5rem;
+  padding: 2.5rem 1.5rem 3.5rem 1.5rem;
   text-align: center;
   color: #EEF4F4;
   box-sizing: border-box;
-  border-bottom: 1.5px solid rgba(143, 211, 232, 0.2);
+  border-bottom: 2px solid rgba(23, 247, 247, 0.25);
 }
 
 .header-background-image {
@@ -1362,10 +1362,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top !important;
-  opacity: 0.65;
+  object-position: center center !important;
+  opacity: 0.72;
   z-index: 1;
-  filter: brightness(0.65) contrast(1.1);
+  filter: brightness(0.72) contrast(1.15) saturate(1.1);
   transform: scale(1.02);
   transition: transform 6s ease-out;
 }
@@ -1375,9 +1375,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(14, 46, 51, 0.72) 0%,
-    rgba(14, 46, 51, 0.45) 45%,
-    rgba(10, 32, 36, 0.95) 100%
+    rgba(14, 46, 51, 0.52) 0%,
+    rgba(14, 46, 51, 0.32) 40%,
+    rgba(10, 32, 36, 0.92) 100%
   );
   z-index: 2;
   pointer-events: none;
@@ -1395,81 +1395,65 @@
   max-width: 960px;
   margin: 0 auto;
   text-align: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
-/* Detail Top Nav Row: Back button & Verified Badge */
+/* Detail Top Nav Row: Centered Verified Badge (Back button removed) */
 .detail-top-nav-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  margin-bottom: 0.8rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.detail-back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(14, 46, 51, 0.85);
-  border: 1.5px solid rgba(23, 247, 247, 0.5);
-  color: #17f7f7;
-  padding: 0.5rem 1.35rem;
-  border-radius: 50px;
-  font-size: 0.88rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-.detail-back-btn:hover {
-  background: #17f7f7;
-  color: #0E2E33;
-  transform: translateX(-3px);
-  box-shadow: 0 0 20px rgba(23, 247, 247, 0.5);
+  margin-bottom: 0.6rem;
 }
 
 .detail-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.6rem;
   background: rgba(23, 247, 247, 0.12);
-  border: 1.5px solid rgba(23, 247, 247, 0.5);
+  border: 1.5px solid rgba(23, 247, 247, 0.55);
   color: #17f7f7;
-  padding: 0.42rem 1.15rem;
+  padding: 0.45rem 1.3rem;
   border-radius: 50px;
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   font-weight: 800;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
-  box-shadow: 0 0 16px rgba(23, 247, 247, 0.2);
+  box-shadow: 0 0 20px rgba(23, 247, 247, 0.25);
 }
 
 .detail-badge-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #17f7f7;
-  box-shadow: 0 0 8px #17f7f7;
+  box-shadow: 0 0 10px #17f7f7;
 }
 
-.header-title {
-  font-size: clamp(2.1rem, 3.6vw, 3rem);
-  color: #EEF4F4;
+/* Glowing Mint Blue Title */
+.gradient-header .header-title {
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  color: #8FD3E8 !important;
   margin: 0;
   font-weight: 900;
-  line-height: 1.25;
+  line-height: 1.22;
   letter-spacing: -0.01em;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 0 24px rgba(143, 211, 232, 0.65), 0 4px 18px rgba(0, 0, 0, 0.95);
+}
+
+.gradient-header .hero-title-mint-shine {
+  display: inline-block;
+  font-weight: 900;
+  color: #8FD3E8 !important;
+  -webkit-text-fill-color: #8FD3E8 !important;
+  background: none !important;
+  animation: none !important;
+  text-shadow: 0 0 28px rgba(143, 211, 232, 0.75), 0 0 55px rgba(23, 247, 247, 0.45) !important;
 }
 
 .header-subtitle {
-  font-size: clamp(0.98rem, 1.4vw, 1.18rem);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
   color: #EEF4F4;
   max-width: 760px;
   margin: 0 auto;
@@ -1853,8 +1837,7 @@
 }
 
 /* ── Services Hero Mint Blue Continuous Flowing Color Animation (No Flashing Shine) ── */
-.services-hero .hero-title-mint-shine,
-.gradient-header .hero-title-mint-shine {
+.services-hero .hero-title-mint-shine {
   display: inline-block;
   font-weight: 900;
   background: linear-gradient(
