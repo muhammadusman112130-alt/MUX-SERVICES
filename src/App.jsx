@@ -9,6 +9,7 @@ import TrustSection from './components/TrustSection'
 import CallToActionSection from './components/CallToActionSection'
 import Footer from './components/Footer'
 import Services from './pages/Services'
+import Professionals from './pages/Professionals'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
@@ -199,7 +200,7 @@ function App() {
       case 'services':
         return <Services initialSearchQuery={initialSearchQuery} setCurrentPage={handlePageChange} />
       case 'professionals':
-        return <ProfessionalsSection setCurrentPage={handlePageChange} />
+        return <Professionals setCurrentPage={handlePageChange} />
       case 'about':
         return <About />
       case 'contact':
