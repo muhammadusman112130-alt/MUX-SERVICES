@@ -6,7 +6,7 @@ import plumberImage from '../Public/plumber.png'
 import carpenterImage from '../Public/carpenter.png'
 import homeCleaningImage from '../Public/cleaner.png'
 import paintingImage from '../Public/painter.png'
-import servicesHeroBanner from '../Public/home repair services .png'
+import servicesHeroBanner from '../assets/services-hero-banner.jpg'
 import aluminiumImage from '../Public/glass aluminum .png'
 import gardeningImage from '../Public/gardner.png'
 import acImage from '../Public/AC technicon.png'
@@ -134,6 +134,29 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   const [bookingAddress, setBookingAddress] = useState('')
   const [bookingNotes, setBookingNotes] = useState('')
   const [isSubmittingBooking, setIsSubmittingBooking] = useState(false)
+
+  // Arrival open animation for home catalog cards
+  const [cardsOpen, setCardsOpen] = useState(false)
+  const homeGridRef = useRef(null)
+
+  useEffect(() => {
+    setCardsOpen(false)
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCardsOpen(true)
+        }
+      },
+      { threshold: 0.1, rootMargin: '-20px 0px -20px 0px' }
+    )
+
+    const el = homeGridRef.current
+    if (el) observer.observe(el)
+
+    return () => {
+      if (el) observer.unobserve(el)
+    }
+  }, [selectedService])
 
   // Profile DP upload & persistence state
   const providerDPInputRef = useRef(null)
@@ -2516,7 +2539,7 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                 {showAllHomeServices ? 'Show Popular (6) ↑' : 'View All (11) →'}
               </button>
             </div>
-            <div className="svc-home-grid">
+            <div ref={homeGridRef} className={`svc-home-grid ${cardsOpen ? 'cards-open' : ''}`}>
               {(showAllHomeServices ? allHomeServices : homeRepairServices).map((service, index) => (
                 <div key={index} className="svc-home-card" onClick={() => handleServiceClick(service.name)}>
                   <div className="svc-home-img">
