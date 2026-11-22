@@ -135,28 +135,35 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   const [bookingNotes, setBookingNotes] = useState('')
   const [isSubmittingBooking, setIsSubmittingBooking] = useState(false)
 
-  // Arrival open animation for home catalog cards
+  // Arrival open animation for home catalog cards (from 4th card / row 2 onwards)
   const [cardsOpen, setCardsOpen] = useState(false)
   const homeGridRef = useRef(null)
+  const row2Ref = useRef(null)
 
   useEffect(() => {
-    setCardsOpen(false)
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+    const handleObserver = (entries) => {
+      entries.forEach((entry) => {
+        // Two-way scroll trigger: open when scrolled into view, close when scrolled away
         if (entry.isIntersecting) {
           setCardsOpen(true)
+        } else {
+          setCardsOpen(false)
         }
-      },
-      { threshold: 0.1, rootMargin: '-20px 0px -20px 0px' }
-    )
+      })
+    }
 
-    const el = homeGridRef.current
-    if (el) observer.observe(el)
+    const observer = new IntersectionObserver(handleObserver, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -30px 0px'
+    })
+
+    const targetEl = row2Ref.current || homeGridRef.current
+    if (targetEl) observer.observe(targetEl)
 
     return () => {
-      if (el) observer.unobserve(el)
+      if (targetEl) observer.unobserve(targetEl)
     }
-  }, [selectedService])
+  }, [selectedService, showAllHomeServices])
 
   // Profile DP upload & persistence state
   const providerDPInputRef = useRef(null)
@@ -2523,26 +2530,26 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
           </div>
 
           {/* ══════════════════════════════════════════
-              HOME & REPAIR SERVICES CATALOG
+              HOME & REPAIR SERVICES CATALOG (CLEAN LEFT HEADER & 3 CARDS ROW)
           ══════════════════════════════════════════ */}
           <div className="svc-section svc-home">
-            <div className="svc-section-banner svc-banner-home">
-              <div className="svc-banner-left">
-                <div className="svc-banner-img-box">
-                  <img src={homeIcon} alt="Home Services" className="svc-banner-img-icon" />
-                </div>
-                <div>
-                  <h2 className="svc-banner-title">Home &amp; Repair Services</h2>
-                  <p className="svc-banner-sub">Electricians, Plumbers, Carpenters, AC Technicians &amp; Cleaners — 100% verified &amp; trusted</p>
-                </div>
+            <div className="svc-home-header-row">
+              <div className="svc-home-header-left">
+                <h2 className="svc-home-clean-title">Home &amp; Repair Services</h2>
+                <p className="svc-home-clean-sub">Electricians, Plumbers, Carpenters, AC Technicians &amp; Cleaners — 100% verified &amp; trusted</p>
               </div>
-              <button className="svc-view-all-btn" onClick={toggleHomeServices}>
+              <button className="svc-view-all-clean-btn" onClick={toggleHomeServices}>
                 {showAllHomeServices ? 'Show Popular (6) ↑' : 'View All (11) →'}
               </button>
             </div>
             <div ref={homeGridRef} className={`svc-home-grid ${cardsOpen ? 'cards-open' : ''}`}>
               {(showAllHomeServices ? allHomeServices : homeRepairServices).map((service, index) => (
-                <div key={index} className="svc-home-card" onClick={() => handleServiceClick(service.name)}>
+                <div 
+                  key={index} 
+                  ref={index === 3 ? row2Ref : null}
+                  className="svc-home-card" 
+                  onClick={() => handleServiceClick(service.name)}
+                >
                   <div className="svc-home-img">
                     <img src={service.image} alt={service.name} />
                   </div>

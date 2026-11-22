@@ -1634,7 +1634,7 @@
 .services-hero {
   position: relative;
   width: 100%;
-  margin-top: 80px;
+  margin-top: 0 !important;
   min-height: 580px;
   height: clamp(580px, 76vh, 720px);
   max-height: 720px;
@@ -1713,8 +1713,9 @@
 
 .hero-title {
   font-size: 3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.85rem !important;
   font-weight: 800;
+  line-height: 1.25;
 }
 
 /* ── Services Hero Mint Blue Continuous Flowing Color Animation (No Flashing Shine) ── */
@@ -1751,10 +1752,11 @@
 .hero-subtitle {
   font-size: 1.15rem;
   color: #f1f5f9 !important;
-  margin-bottom: 2rem;
-  max-width: 700px;
+  margin-bottom: 2.75rem !important;
+  max-width: 720px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.6;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
@@ -2320,9 +2322,67 @@
   white-space: nowrap;
 }
 
+/* ══ CLEAN LEFT-ALIGNED HOME & REPAIR HEADER ══ */
+.svc-home-header-row {
+  max-width: 1280px;
+  margin: 0 auto 2.2rem auto;
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.svc-home-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.svc-home-clean-title {
+  font-size: 2.35rem;
+  font-weight: 900;
+  color: #EEF4F4;
+  margin: 0;
+  letter-spacing: -0.02em;
+  font-family: inherit;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.svc-home-clean-sub {
+  font-size: 1.02rem;
+  color: #8FD3E8;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.svc-view-all-clean-btn {
+  padding: 0.65rem 1.6rem;
+  background: rgba(23, 247, 247, 0.12);
+  color: #17f7f7;
+  border: 1.5px solid rgba(23, 247, 247, 0.5);
+  border-radius: 50px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.28s ease;
+  white-space: nowrap;
+}
+
+.svc-view-all-clean-btn:hover {
+  background: #17f7f7;
+  color: #0E2E33;
+  box-shadow: 0 0 22px rgba(23, 247, 247, 0.65);
+  transform: translateY(-2px);
+}
+
 /* ══ HOME GRID (Strictly 3 Cards Per Row on Desktop) ══ */
 .svc-home {
   background: #0E2E33;
+  padding-top: 3.5rem !important;
+  padding-bottom: 3.5rem !important;
 }
 
 .svc-home-grid {
@@ -2335,7 +2395,10 @@
   perspective: 1200px;
 }
 
-/* Category Card with 3D Scroll-Open Flow */
+/* Category Card with Two-Way 3D Scroll Flow:
+   - First 3 cards (:nth-child(-n+3)): ALWAYS VISIBLE and in place
+   - Cards from 4th onwards (:nth-child(n+4)): 3D scroll-open flow (staggered open when scrolling down, smooth close when scrolling back up)
+*/
 .svc-home-card {
   background: rgba(19, 56, 62, 0.9) !important;
   border-radius: 18px;
@@ -2346,36 +2409,50 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+}
 
-  /* Initial state: closed until user scrolls to it */
+/* First 3 cards: Always clearly visible, natural layout */
+.svc-home-card:nth-child(-n+3) {
+  opacity: 1 !important;
+  transform: perspective(1000px) rotateY(0deg) translateY(0) scale(1) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Cards from 4th onwards (Row 2+): Closed / folded state until scrolled to */
+.svc-home-card:nth-child(n+4) {
   opacity: 0;
   transform: perspective(1000px) rotateY(-18deg) translateY(45px) scale(0.92);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: opacity 0.4s ease-out,
+              transform 0.4s ease-out,
               box-shadow 0.3s ease,
               border-color 0.3s ease;
   will-change: opacity, transform;
 }
 
-/* Once opened, they stay open in place */
-.svc-home-grid.cards-open .svc-home-card {
+/* In-View Open State: Cards from 4th onwards open with staggered 3D spring flow */
+.svc-home-grid.cards-open .svc-home-card:nth-child(n+4) {
   opacity: 1 !important;
   transform: perspective(1000px) rotateY(0deg) translateY(0) scale(1) !important;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease !important;
 }
 
-.svc-home-grid.cards-open .svc-home-card:nth-child(1) { transition-delay: 0.08s; }
-.svc-home-grid.cards-open .svc-home-card:nth-child(2) { transition-delay: 0.18s; }
-.svc-home-grid.cards-open .svc-home-card:nth-child(3) { transition-delay: 0.28s; }
-.svc-home-grid.cards-open .svc-home-card:nth-child(4) { transition-delay: 0.38s; }
-.svc-home-grid.cards-open .svc-home-card:nth-child(5) { transition-delay: 0.48s; }
-.svc-home-grid.cards-open .svc-home-card:nth-child(6) { transition-delay: 0.58s; }
-.svc-home-grid.cards-open .svc-home-card:nth-child(n+7) { transition-delay: 0.68s; }
+.svc-home-grid.cards-open .svc-home-card:nth-child(4) { transition-delay: 0.08s !important; }
+.svc-home-grid.cards-open .svc-home-card:nth-child(5) { transition-delay: 0.18s !important; }
+.svc-home-grid.cards-open .svc-home-card:nth-child(6) { transition-delay: 0.28s !important; }
+.svc-home-grid.cards-open .svc-home-card:nth-child(7) { transition-delay: 0.38s !important; }
+.svc-home-grid.cards-open .svc-home-card:nth-child(8) { transition-delay: 0.48s !important; }
+.svc-home-grid.cards-open .svc-home-card:nth-child(9) { transition-delay: 0.58s !important; }
+.svc-home-grid.cards-open .svc-home-card:nth-child(n+10) { transition-delay: 0.68s !important; }
 
 .svc-home-card:hover {
   transform: translateY(-8px) scale(1.02) !important;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 25px rgba(23, 247, 247, 0.3) !important;
   border-color: #17f7f7 !important;
   background: rgba(19, 56, 62, 0.98) !important;
+  transition-delay: 0s !important;
 }
 
 .svc-home-img {
@@ -2761,11 +2838,23 @@
 /* ══ RESPONSIVE ══ */
 @media (max-width: 768px) {
   .services-hero {
-    margin-top: 75px;
+    margin-top: 0 !important;
     min-height: 520px;
     height: auto;
     max-height: none;
     padding: 2rem 1rem 2.5rem;
+  }
+
+  .svc-home-header-row {
+    padding: 0 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .svc-home-clean-title {
+    font-size: 1.85rem;
   }
 
   .svc-section-banner {
