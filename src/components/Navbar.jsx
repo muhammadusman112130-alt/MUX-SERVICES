@@ -1,16 +1,16 @@
 import { useState, useRef, useEffect } from 'react'
 import './Navbar.css'
-import webLogo from '../Public/weblogo.png'
+import brandLogo from '../Public/brand-logo-cyan-v3.png'
 
-function Navbar({ 
+function Navbar({
   currentPage = 'home',
-  setCurrentPage, 
-  onLoginClick, 
-  onSignupClick, 
-  isLoggedIn, 
+  setCurrentPage,
+  onLoginClick,
+  onSignupClick,
+  isLoggedIn,
   currentUser,
-  isProviderLoggedIn, 
-  onLogout 
+  isProviderLoggedIn,
+  onLogout
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navRef = useRef(null)
@@ -58,10 +58,10 @@ function Navbar({
   }
 
   return (
-    <nav 
-      className={`navbar${isLoggedIn ? ' navbar--account' : ''}`} 
-      ref={navRef} 
-      aria-label="Main navigation" 
+    <nav
+      className={`navbar${isLoggedIn ? ' navbar--account' : ''}`}
+      ref={navRef}
+      aria-label="Main navigation"
       onClick={handleNavClick}
     >
       <div className={`navbar-container${isMenuOpen ? ' is-menu-open' : ''}`}>
@@ -72,11 +72,23 @@ function Navbar({
             onClick={() => setCurrentPage('home')}
             aria-label="MUX SERVICES Home"
           >
-            <img src={webLogo} alt="MUX SERVICES Logo" className="logo-image" />
+            <img 
+              src={brandLogo} 
+              alt="MUX SERVICES Logo" 
+              className="navbar-brand-icon"
+              style={{
+                height: '56px',
+                width: 'auto',
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 0 12px rgba(23, 247, 247, 0.9)) drop-shadow(0 0 24px rgba(23, 247, 247, 0.5))'
+              }}
+            />
             <span 
-              className="logo-text-services"
+              className="brand-logo-text-cyan"
               style={{
                 color: '#17f7f7',
+                WebkitTextFillColor: '#17f7f7',
+                background: 'none',
                 fontWeight: 900,
                 fontSize: '1.52rem',
                 letterSpacing: '1.2px',
@@ -143,7 +155,7 @@ function Navbar({
           {isProviderLoggedIn || isLoggedIn ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               {currentUser && (
-                <button 
+                <button
                   className="navbar-profile"
                   onClick={() => setCurrentPage('profile')}
                   style={{

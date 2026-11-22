@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { bookingsAPI } from '../services/api'
 import './Services.css'
-import webLogo from '../Public/web logo.png'
+import webLogo from '../Public/brand-logo-cyan-v3.png'
 import plumberImage from '../Public/plumber.png'
 import carpenterImage from '../Public/carpenter.png'
 import homeCleaningImage from '../Public/cleaner.png'

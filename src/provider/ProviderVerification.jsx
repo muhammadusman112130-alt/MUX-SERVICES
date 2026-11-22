@@ -326,8 +326,8 @@ function ProviderVerification({ setCurrentPage }) {
       <nav className="provider-navbar">
         <div className="navbar-container">
           <div className="navbar-left" onClick={() => setCurrentPage && setCurrentPage('home')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <img src="/src/Public/web logo.png" alt="MUX SERVICES" className="navbar-logo" />
-            <span style={{ fontWeight: 900, fontSize: '1.25rem', letterSpacing: '1px', color: '#EEF4F4' }}>MUX <span style={{ color: '#8FD3E8' }}>SERVICES</span></span>
+            <img src="/brand-logo-cyan-v3.png" alt="MUX SERVICES" className="navbar-logo" style={{ height: '42px', width: 'auto', objectFit: 'contain' }} />
+            <span style={{ fontWeight: 900, fontSize: '1.25rem', letterSpacing: '1px', color: '#17f7f7' }}>MUX SERVICES</span>
           </div>
           <div className="navbar-center">
             <button type="button" onClick={() => setCurrentPage && setCurrentPage('home')} className="nav-link">Home</button>
