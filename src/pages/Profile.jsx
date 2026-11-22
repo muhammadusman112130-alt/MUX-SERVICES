@@ -2,21 +2,15 @@ import { useState, useEffect, useRef } from 'react'
 import './Profile.css'
 import { authAPI } from '../services/api'
 
-function Profile({ onLogout, setCurrentPage, user }) {
-  const [selectedMenu, setSelectedMenu] = useState('personal')
+function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
+  const [activeTab, setActiveTab] = useState('personal')
   const [isEditMode, setIsEditMode] = useState(false)
-  const [profileData, setProfileData] = useState({
-    username: user?.fullName || 'User Name',
-    email: user?.email || 'user@example.com',
-    phone: user?.phone || '',
-    emergencyNumber: '',
-    emergencyRelation: '',
-    primaryArea: user?.city || '',
-    postalCode: ''
-  })
+  const [isSaving, setIsSaving] = useState(false)
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const fileInputRef = useRef(null)
 
-  // User DP photo upload & persistence
-  const userDPInputRef = useRef(null)
+  // Initial user avatar / DP from local storage
   const [userDP, setUserDP] = useState(() => {
     try {
       return localStorage.getItem('servicehub_user_dp') || null
@@ -25,7 +19,51 @@ function Profile({ onLogout, setCurrentPage, user }) {
     }
   })
 
-  const handleUserDPUpload = (e) => {
+  // Customer Profile State
+  const [profileData, setProfileData] = useState({
+    fullName: user?.fullName || 'Muhammad Ali',
+    email: user?.email || 'ali.multan@gmail.com',
+    phone: user?.phone || '+92 300 8765432',
+    whatsapp: user?.whatsapp || '+92 300 8765432',
+    cnic: user?.cnic || '36302-9847123-1',
+    city: 'Multan',
+    area: user?.city || user?.area || 'Multan Cantt',
+    address: user?.address || 'House #42, Street 8, Officers Colony, Multan Cantt',
+    landmark: user?.landmark || 'Near Nishtar Road & Commercial Market',
+    emergencyContact: user?.emergencyContact || '+92 301 7654321',
+    emergencyRelation: user?.emergencyRelation || 'Brother (Ahmed)',
+    preferredTime: user?.preferredTime || 'Afternoon (12:00 PM - 04:00 PM)',
+    secondaryAddress: 'Plot 18-B, Commercial Plaza, Bosan Road, Multan',
+    smsAlerts: true,
+    whatsappAlerts: true,
+    promotions: false
+  })
+
+  // Backup state for Cancel operation
+  const [originalData, setOriginalData] = useState({ ...profileData })
+
+  // Keep state synced with incoming user prop
+  useEffect(() => {
+    if (user) {
+      setProfileData(prev => ({
+        ...prev,
+        fullName: user.fullName || prev.fullName,
+        email: user.email || prev.email,
+        phone: user.phone || prev.phone,
+        area: user.city || prev.area
+      }))
+      setOriginalData(prev => ({
+        ...prev,
+        fullName: user.fullName || prev.fullName,
+        email: user.email || prev.email,
+        phone: user.phone || prev.phone,
+        area: user.city || prev.area
+      }))
+    }
+  }, [user])
+
+  // DP upload handler
+  const handleDPUpload = (e) => {
     const file = e.target.files?.[0]
     if (file) {
       const reader = new FileReader()
@@ -34,8 +72,9 @@ function Profile({ onLogout, setCurrentPage, user }) {
         setUserDP(dataUrl)
         try {
           localStorage.setItem('servicehub_user_dp', dataUrl)
+          triggerToast('Profile photo updated successfully!')
         } catch (err) {
-          console.warn('Failed to save user DP to localStorage', err)
+          console.warn('Storage error for DP:', err)
         }
       }
       reader.readAsDataURL(file)
@@ -46,1036 +85,760 @@ function Profile({ onLogout, setCurrentPage, user }) {
     setUserDP(null)
     try {
       localStorage.removeItem('servicehub_user_dp')
+      triggerToast('Profile photo removed.')
     } catch (err) {
-      console.warn('Failed to remove user DP from localStorage', err)
+      console.warn('Storage error for DP:', err)
     }
   }
 
-  useEffect(() => {
-    if (user) {
-      setProfileData(prev => ({
-        ...prev,
-        username: user.fullName || prev.username,
-        email: user.email || prev.email,
-        phone: user.phone || prev.phone,
-        primaryArea: user.city || prev.primaryArea
-      }))
-    }
-  }, [user])
-
-  const handleLogoutClick = () => {
-    if (typeof onLogout === 'function') {
-      onLogout()
-    } else if (typeof setCurrentPage === 'function') {
-      setCurrentPage('home')
-    }
+  // Toast Helper
+  const triggerToast = (msg) => {
+    setToastMessage(msg)
+    setShowToast(true)
+    setTimeout(() => {
+      setShowToast(false)
+    }, 3500)
   }
 
-  const handleSave = async () => {
-    setIsEditMode(false)
-    try {
-      await authAPI.updateProfile({
-        fullName: profileData.username,
-        phone: profileData.phone,
-        city: profileData.primaryArea
-      })
-    } catch (err) {
-      console.warn('Profile update error:', err.message)
-    }
-  }
-
-  const handleEdit = () => {
-    setIsEditMode(true)
-  }
-
-  const handleChange = (field, value) => {
+  const handleFieldChange = (field, value) => {
     setProfileData(prev => ({
       ...prev,
       [field]: value
     }))
   }
 
+  const handleToggle = (field) => {
+    setProfileData(prev => ({
+      ...prev,
+      [field]: !prev[field]
+    }))
+  }
+
+  const handleStartEdit = () => {
+    setOriginalData({ ...profileData })
+    setIsEditMode(true)
+  }
+
+  const handleCancelEdit = () => {
+    setProfileData({ ...originalData })
+    setIsEditMode(false)
+  }
+
+  const handleSave = async (e) => {
+    if (e) e.preventDefault()
+    setIsSaving(true)
+
+    try {
+      // Persist via authAPI and update localStorage
+      const updatedUser = {
+        fullName: profileData.fullName,
+        email: profileData.email,
+        phone: profileData.phone,
+        city: profileData.area,
+        address: profileData.address,
+        whatsapp: profileData.whatsapp,
+        cnic: profileData.cnic,
+        emergencyContact: profileData.emergencyContact,
+        emergencyRelation: profileData.emergencyRelation,
+        landmark: profileData.landmark,
+        preferredTime: profileData.preferredTime
+      }
+
+      await authAPI.updateProfile(updatedUser)
+      
+      // Update parent state so Navbar reflects new name immediately
+      if (typeof onUserUpdate === 'function') {
+        onUserUpdate(updatedUser)
+      }
+
+      setOriginalData({ ...profileData })
+      setIsEditMode(false)
+      triggerToast('Profile changes saved successfully!')
+    } catch (err) {
+      console.warn('Profile save warning:', err)
+      triggerToast('Changes saved locally.')
+      setIsEditMode(false)
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  // Multan Neighborhoods options
+  const multanAreas = [
+    'Multan Cantt',
+    'Gulgasht Colony',
+    'Bosan Road',
+    'Officers Colony',
+    'MDA Chowk',
+    'Model Town',
+    'New Multan',
+    'Shah Rukn-e-Alam Colony',
+    'Mumtazabad',
+    'Wapda Town Multan',
+    'Northern Bypass',
+    'Kutchery Road',
+    'Chowk Kumharanwala',
+    'Nawan Shehr'
+  ]
+
+  // Avatar Initials
+  const userInitials = profileData.fullName
+    ? profileData.fullName.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()
+    : 'ALI'
+
   return (
-    <div className="profile-page">
-      <div className="profile-top-section">
-        <div className="profile-top-left">
+    <div className="customer-profile-page">
+      {/* ── TOAST NOTIFICATION ── */}
+      {showToast && (
+        <div className="cp-toast-notification">
+          <span className="cpt-icon">✓</span>
+          <span className="cpt-msg">{toastMessage}</span>
+        </div>
+      )}
+
+      <div className="cp-container">
+        
+        {/* ── TOP NAV BAR & BREADCRUMB ── */}
+        <div className="cp-header-actions">
           <button 
             type="button" 
-            className="profile-back-header-btn" 
+            className="cp-back-btn"
             onClick={() => setCurrentPage ? setCurrentPage('home') : window.history.back()}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '0.45rem 1.1rem',
-              borderRadius: '25px',
-              border: '1.5px solid #8FD3E8',
-              background: 'rgba(143, 211, 232, 0.08)',
-              color: '#8FD3E8',
-              fontWeight: 700,
-              cursor: 'pointer',
-              marginBottom: '1rem',
-              fontSize: '0.92rem',
-              transition: 'all 0.25s ease'
-            }}
           >
-            <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>←</span>
-            <span>Back</span>
+            <span className="cbb-arrow">←</span>
+            <span>Back to Home</span>
           </button>
-          <h1 className="profile-top-title">Personal Information & Account Profile</h1>
-          <p className="profile-top-description">Manage your personal details, verified contact information, national identity, and communication preferences.</p>
-        </div>
-        <div className="profile-top-right">
-          <div className="profile-completeness-box">
-            <div className="completeness-header">
-              <div className="completeness-circle">
-                <span>80%</span>
-              </div>
-              <div className="completeness-text-group">
-                <span className="completeness-title">Profile Completeness</span>
-                <span className="completeness-tick">✓</span>
-                <p className="completeness-tier">Tier 2 Verified Account</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="profile-main-content">
-        <div className="profile-sidebar">
-          <div className="account-card new-sidebar-style">
-            <h2 className="card-title sidebar-title">ACCOUNT CENTRAL</h2>
-            <div className="account-menu">
-              <div className={`account-item ${selectedMenu === 'personal' ? 'active' : ''}`} onClick={() => setSelectedMenu('personal')}>
-                <div className="ai-left"><span className="ai-icon">👤</span> <span>Personal Information</span></div>
-                <span className="ai-arrow">›</span>
-              </div>
-              <div className={`account-item ${selectedMenu === 'payment' ? 'active' : ''}`} onClick={() => setSelectedMenu('payment')}>
-                <div className="ai-left"><span className="ai-icon">💳</span> <span>Payment Methods & Vault</span></div>
-                <span className="ai-arrow">›</span>
-              </div>
-              <div className={`account-item ${selectedMenu === 'notifications' ? 'active' : ''}`} onClick={() => setSelectedMenu('notifications')}>
-                <div className="ai-left"><span className="ai-icon">🛡️</span> <span>Notifications & Security</span></div>
-                <span className="ai-arrow">›</span>
-              </div>
-              <div className={`account-item ${selectedMenu === 'help' ? 'active' : ''}`} onClick={() => setSelectedMenu('help')}>
-                <div className="ai-left"><span className="ai-icon">📄</span> <span>Help & Support</span></div>
-                <span className="ai-arrow">›</span>
-              </div>
-              <div className="account-item logout-item" onClick={handleLogoutClick} style={{ cursor: 'pointer', marginTop: '0.6rem', borderTop: '1px solid #fee2e2' }}>
-                <div className="ai-left"><span className="ai-icon">🚪</span> <span style={{ color: '#dc2626', fontWeight: 600 }}>Logout</span></div>
-                <span className="ai-arrow" style={{ color: '#dc2626' }}>➔</span>
-              </div>
-            </div>
+          <div className="cp-header-status-pill">
+            <span className="chsp-dot"></span>
+            <span>Customer Account Active • Multan Verified</span>
           </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════════
+            HERO PROFILE CARD (ANIMATED EXECUTIVE BANNER)
+        ══════════════════════════════════════════════════ */}
+        <div className="cp-hero-card">
+          <div className="cp-hero-bg-glow"></div>
           
-          {selectedMenu !== 'payment' && (
-            <div className="service-guarantee-card">
-              <div className="sg-header">
-                <span className="sg-icon">🛡️</span>
-                <h3 className="sg-title">Service Guarantee</h3>
-              </div>
-              <p className="sg-text">PKR 100,000 cover against accidental damage & 100% re-work protection when payments stay inside MUX SERVICES.</p>
-              <div className="sg-footer">
-                <span className="sg-lock">🔒 In-App Escrow</span>
-                <span className="sg-link">Learn more ➔</span>
-              </div>
-            </div>
-          )}
+          <div className="cp-hero-content">
+            
+            {/* Avatar & Photo Upload */}
+            <div className="cp-avatar-column">
+              <div className="cp-avatar-frame">
+                {userDP ? (
+                  <img src={userDP} alt={profileData.fullName} className="cp-avatar-image" />
+                ) : (
+                  <div className="cp-avatar-initials">
+                    <span>{userInitials}</span>
+                  </div>
+                )}
+                
+                {/* Live Online Badge */}
+                <span className="cp-avatar-live-indicator" title="Active Account"></span>
 
-          {selectedMenu === 'payment' && (
-            <div className="saved-channels-card">
-              <div className="scc-header">
-                <h3 className="scc-title">Saved Channels <span className="scc-badge">4</span></h3>
-                <span className="scc-subtitle">ڈجیٹل اپنے محفوظ طریقے</span>
-              </div>
+                {/* Upload Button Overlay */}
+                <button 
+                  type="button" 
+                  className="cp-avatar-upload-trigger"
+                  onClick={() => fileInputRef.current?.click()}
+                  title="Upload / Change Profile Picture"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                  </svg>
+                </button>
 
-              <div className="scc-list">
-                <div className="scc-item active">
-                  <div className="scc-item-left">
-                    <div className="scc-icon visa">
-                      <span>💳</span>
-                    </div>
-                    <div className="scc-details">
-                      <h4 className="scc-name">Visa Platinum <span className="scc-status-badge blue">🛡️ Default / ڈیفالٹ</span></h4>
-                      <p className="scc-number">**** 4921</p>
-                      <p className="scc-meta">Alex Rivera • Exp: 08/28 • Meezan Bank</p>
-                    </div>
-                  </div>
-                  <div className="scc-actions">
-                    <button className="scc-btn outline">Edit</button>
-                    <button className="scc-btn icon">🗑️</button>
-                  </div>
-                  <div className="scc-footer-note">
-                    <span className="scc-note-left">⚡ 1-Click Instant / SBP 3D-Secure Enabled</span>
-                    <span className="scc-note-right">Auto-renew active</span>
-                  </div>
-                </div>
-
-                <div className="scc-item">
-                  <div className="scc-item-left">
-                    <div className="scc-icon jazzcash">
-                      <span className="text-icon">JC</span>
-                    </div>
-                    <div className="scc-details">
-                      <h4 className="scc-name">JazzCash Wallet <span className="scc-status-badge outline">Verified</span></h4>
-                      <p className="scc-number">+92 300 ••••67</p>
-                      <p className="scc-meta">Linked & Auto-debit ready</p>
-                    </div>
-                  </div>
-                  <div className="scc-actions">
-                    <button className="scc-btn text">Make Default</button>
-                    <button className="scc-btn text">Unlink</button>
-                  </div>
-                </div>
-
-                <div className="scc-item">
-                  <div className="scc-item-left">
-                    <div className="scc-icon easypaisa">
-                      <span className="text-icon">EP</span>
-                    </div>
-                    <div className="scc-details">
-                      <h4 className="scc-name">EasyPaisa Mobile Account</h4>
-                      <p className="scc-number">+92 333 ••••52</p>
-                      <p className="scc-meta">Direct wallet deduction</p>
-                    </div>
-                  </div>
-                  <div className="scc-actions">
-                    <span className="scc-status-badge solid-blue">Active</span>
-                    <button className="scc-btn text">Make Default</button>
-                    <button className="scc-btn text">Unlink</button>
-                  </div>
-                </div>
-
-                <div className="scc-item">
-                  <div className="scc-item-left">
-                    <div className="scc-icon raast">
-                      <span className="text-icon">R</span>
-                    </div>
-                    <div className="scc-details">
-                      <h4 className="scc-name">Raast Instant P2M <span className="scc-status-badge blue">0% Fees</span></h4>
-                      <p className="scc-meta strong">alexrivera@raast</p>
-                      <p className="scc-meta tiny">IBAN: PK89MEZN000000000000000</p>
-                      <p className="scc-meta">Direct instant refunds & vendor payouts</p>
-                    </div>
-                  </div>
-                  <div className="scc-actions">
-                    <button className="scc-btn text">Make Default</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="profile-content-area" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', minWidth: 0 }}>
-        {selectedMenu === 'personal' && (
-          <div className="customer-profile-card">
-            <div className="customer-profile-left">
-              <div 
-                className="customer-dp-container" 
-                onClick={() => userDPInputRef.current?.click()}
-                title="Click to upload / change photo"
-                style={{ cursor: 'pointer', position: 'relative' }}
-              >
-                <div className="customer-dp" style={{ overflow: 'hidden' }}>
-                  {userDP ? (
-                    <img src={userDP} alt="Profile DP" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  ) : (
-                    <span className="dp-initial">{profileData.username?.charAt(0) || 'U'}</span>
-                  )}
-                </div>
-                <div className="camera-icon" title="Change photo">📷</div>
                 <input 
                   type="file" 
-                  ref={userDPInputRef} 
-                  style={{ display: 'none' }} 
+                  ref={fileInputRef} 
                   accept="image/*" 
-                  onChange={handleUserDPUpload} 
+                  style={{ display: 'none' }} 
+                  onChange={handleDPUpload} 
                 />
               </div>
-              <div className="customer-info">
-                <h3 className="customer-name">
-                  {profileData.username}
-                </h3>
-                <div className="customer-details">
-                  <span className="calendar-icon">📅</span>
-                  <span className="black-tick">✓</span>
-                  <span className="member-since">Active Member Since 24.</span>
-                  <span className="dot">•</span>
-                  <span className="client-ref">Client Ref: #2356</span>
-                </div>
+
+              {userDP && (
+                <button type="button" className="cp-remove-photo-link" onClick={handleRemoveDP}>
+                  Remove photo
+                </button>
+              )}
+            </div>
+
+            {/* User Primary Identity */}
+            <div className="cp-identity-column">
+              <div className="cp-identity-badges">
+                <span className="cpi-verified-badge">✓ CNIC Vetted</span>
+                <span className="cpi-area-badge">📍 {profileData.area}</span>
+                <span className="cpi-escrow-badge">🛡️ Escrow Guarded</span>
+              </div>
+
+              <h1 className="cp-user-fullname">{profileData.fullName}</h1>
+              <p className="cp-user-subline">
+                <span>{profileData.email}</span>
+                <span className="cp-sep">•</span>
+                <span>{profileData.phone}</span>
+              </p>
+
+              <div className="cp-identity-meta-row">
+                <span className="cp-member-tag">Registered Customer • Multan Corridor</span>
+                <span className="cp-trust-pill">★ 5.0 Star Profile</span>
               </div>
             </div>
-            <div className="customer-profile-right">
-              <button className="change-photo-btn" onClick={() => userDPInputRef.current?.click()}>Change Photo</button>
-              <button className="remove-btn" onClick={handleRemoveDP}>Remove</button>
+
+            {/* Edit Profile Action Buttons */}
+            <div className="cp-hero-actions-column">
+              {!isEditMode ? (
+                <button 
+                  type="button" 
+                  className="cp-btn-edit-mode"
+                  onClick={handleStartEdit}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                  </svg>
+                  <span>Edit Profile</span>
+                </button>
+              ) : (
+                <div className="cp-edit-actions-pair">
+                  <button 
+                    type="button" 
+                    className="cp-btn-save"
+                    onClick={handleSave}
+                    disabled={isSaving}
+                  >
+                    <span>{isSaving ? 'Saving...' : '✓ Save Changes'}</span>
+                  </button>
+                  <button 
+                    type="button" 
+                    className="cp-btn-cancel"
+                    onClick={handleCancelEdit}
+                  >
+                    <span>✕ Cancel</span>
+                  </button>
+                </div>
+              )}
+
               <button 
-                className="profile-logout-btn" 
-                onClick={handleLogoutClick}
-                style={{
-                  background: 'rgba(220, 38, 38, 0.1)',
-                  color: '#dc2626',
-                  border: '1.5px solid rgba(220, 38, 38, 0.35)',
-                  padding: '0.55rem 1.25rem',
-                  borderRadius: '20px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.25s ease'
-                }}
+                type="button" 
+                className="cp-btn-logout-alt"
+                onClick={onLogout}
               >
-                🚪 Logout
+                <span>Logout</span>
               </button>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════════
+            ANIMATED STATS TILES (4 EXECUTIVE PODS)
+        ══════════════════════════════════════════════════ */}
+        <div className="cp-stats-grid">
+          <div className="cp-stat-card">
+            <span className="cpsc-icon">🛵</span>
+            <div className="cpsc-body">
+              <strong className="cpsc-value">14</strong>
+              <span className="cpsc-label">Doorstep Services Completed</span>
+            </div>
+          </div>
+
+          <div className="cp-stat-card">
+            <span className="cpsc-icon">🔒</span>
+            <div className="cpsc-body">
+              <strong className="cpsc-value">100%</strong>
+              <span className="cpsc-label">Escrow Protected Payments</span>
+            </div>
+          </div>
+
+          <div className="cp-stat-card">
+            <span className="cpsc-icon">⏱️</span>
+            <div className="cpsc-body">
+              <strong className="cpsc-value">&lt; 30 Mins</strong>
+              <span className="cpsc-label">Guaranteed Multan Arrival</span>
+            </div>
+          </div>
+
+          <div className="cp-stat-card">
+            <span className="cpsc-icon">🏠</span>
+            <div className="cpsc-body">
+              <strong className="cpsc-value">2</strong>
+              <span className="cpsc-label">Saved Delivery Addresses</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════════
+            TABBED NAVIGATION SECTION (MODULAR & CLEAN)
+        ══════════════════════════════════════════════════ */}
+        <div className="cp-nav-tabs">
+          <button 
+            type="button" 
+            className={`cp-tab-btn ${activeTab === 'personal' ? 'active' : ''}`}
+            onClick={() => setActiveTab('personal')}
+          >
+            <span>👤 Personal Details</span>
+          </button>
+          <button 
+            type="button" 
+            className={`cp-tab-btn ${activeTab === 'address' ? 'active' : ''}`}
+            onClick={() => setActiveTab('address')}
+          >
+            <span>📍 Multan Addresses</span>
+          </button>
+          <button 
+            type="button" 
+            className={`cp-tab-btn ${activeTab === 'payment' ? 'active' : ''}`}
+            onClick={() => setActiveTab('payment')}
+          >
+            <span>💳 Escrow &amp; Payments</span>
+          </button>
+          <button 
+            type="button" 
+            className={`cp-tab-btn ${activeTab === 'security' ? 'active' : ''}`}
+            onClick={() => setActiveTab('security')}
+          >
+            <span>🛡️ Security &amp; Alerts</span>
+          </button>
+        </div>
+
+        {/* ══════════════════════════════════════════════════
+            TAB 1: PERSONAL DETAILS & CONTACT (EDITABLE)
+        ══════════════════════════════════════════════════ */}
+        {activeTab === 'personal' && (
+          <div className="cp-tab-card anim-slide-up">
+            <div className="cptc-header">
+              <div>
+                <h3 className="cptc-title">Personal Information</h3>
+                <p className="cptc-sub">Your verified customer identity details used for bookings across Multan.</p>
+              </div>
+              {!isEditMode ? (
+                <button type="button" className="cp-mini-edit-btn" onClick={handleStartEdit}>
+                  ✏️ Edit Details
+                </button>
+              ) : (
+                <span className="cptc-editing-badge">Editing Mode Active</span>
+              )}
+            </div>
+
+            <form onSubmit={handleSave} className="cp-form-grid">
+              
+              {/* Full Name */}
+              <div className="cp-form-group">
+                <label className="cp-form-label">Full Name</label>
+                {isEditMode ? (
+                  <input 
+                    type="text" 
+                    className="cp-form-input" 
+                    value={profileData.fullName}
+                    onChange={(e) => handleFieldChange('fullName', e.target.value)}
+                    required
+                    placeholder="Enter your full name"
+                  />
+                ) : (
+                  <div className="cp-field-display">{profileData.fullName}</div>
+                )}
+              </div>
+
+              {/* Email Address */}
+              <div className="cp-form-group">
+                <label className="cp-form-label">Email Address</label>
+                {isEditMode ? (
+                  <input 
+                    type="email" 
+                    className="cp-form-input" 
+                    value={profileData.email}
+                    onChange={(e) => handleFieldChange('email', e.target.value)}
+                    required
+                    placeholder="name@example.com"
+                  />
+                ) : (
+                  <div className="cp-field-display">{profileData.email}</div>
+                )}
+              </div>
+
+              {/* Phone Number */}
+              <div className="cp-form-group">
+                <label className="cp-form-label">Mobile Phone Number</label>
+                {isEditMode ? (
+                  <input 
+                    type="tel" 
+                    className="cp-form-input" 
+                    value={profileData.phone}
+                    onChange={(e) => handleFieldChange('phone', e.target.value)}
+                    required
+                    placeholder="+92 300 1234567"
+                  />
+                ) : (
+                  <div className="cp-field-display">{profileData.phone}</div>
+                )}
+              </div>
+
+              {/* WhatsApp Number */}
+              <div className="cp-form-group">
+                <label className="cp-form-label">WhatsApp Number (For Live Technician Updates)</label>
+                {isEditMode ? (
+                  <input 
+                    type="tel" 
+                    className="cp-form-input" 
+                    value={profileData.whatsapp}
+                    onChange={(e) => handleFieldChange('whatsapp', e.target.value)}
+                    placeholder="+92 300 1234567"
+                  />
+                ) : (
+                  <div className="cp-field-display">{profileData.whatsapp}</div>
+                )}
+              </div>
+
+              {/* CNIC Number */}
+              <div className="cp-form-group">
+                <label className="cp-form-label">CNIC Number (National ID)</label>
+                {isEditMode ? (
+                  <input 
+                    type="text" 
+                    className="cp-form-input" 
+                    value={profileData.cnic}
+                    onChange={(e) => handleFieldChange('cnic', e.target.value)}
+                    placeholder="36302-XXXXXXX-X"
+                  />
+                ) : (
+                  <div className="cp-field-display">
+                    <span>{profileData.cnic}</span>
+                    <span className="cp-inline-vtag">✓ Verified</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Emergency Contact */}
+              <div className="cp-form-group">
+                <label className="cp-form-label">Emergency Contact &amp; Relation</label>
+                {isEditMode ? (
+                  <div className="cp-input-dual-row">
+                    <input 
+                      type="text" 
+                      className="cp-form-input" 
+                      value={profileData.emergencyContact}
+                      onChange={(e) => handleFieldChange('emergencyContact', e.target.value)}
+                      placeholder="Phone / Name"
+                    />
+                    <input 
+                      type="text" 
+                      className="cp-form-input" 
+                      value={profileData.emergencyRelation}
+                      onChange={(e) => handleFieldChange('emergencyRelation', e.target.value)}
+                      placeholder="Relation (e.g. Brother)"
+                    />
+                  </div>
+                ) : (
+                  <div className="cp-field-display">
+                    {profileData.emergencyContact} ({profileData.emergencyRelation})
+                  </div>
+                )}
+              </div>
+
+              {/* Preferred Time Window */}
+              <div className="cp-form-group full-width">
+                <label className="cp-form-label">Preferred Doorstep Service Window</label>
+                {isEditMode ? (
+                  <select 
+                    className="cp-form-select"
+                    value={profileData.preferredTime}
+                    onChange={(e) => handleFieldChange('preferredTime', e.target.value)}
+                  >
+                    <option value="Morning (09:00 AM - 12:00 PM)">Morning (09:00 AM - 12:00 PM)</option>
+                    <option value="Afternoon (12:00 PM - 04:00 PM)">Afternoon (12:00 PM - 04:00 PM)</option>
+                    <option value="Evening (04:00 PM - 08:00 PM)">Evening (04:00 PM - 08:00 PM)</option>
+                    <option value="Emergency Any Time (< 30 Mins)">Emergency Any Time (&lt; 30 Mins)</option>
+                  </select>
+                ) : (
+                  <div className="cp-field-display">{profileData.preferredTime}</div>
+                )}
+              </div>
+
+              {/* Bottom Save Bar when in Edit Mode */}
+              {isEditMode && (
+                <div className="cp-form-bottom-bar full-width">
+                  <button type="submit" className="cp-submit-btn" disabled={isSaving}>
+                    <span>{isSaving ? 'Updating...' : 'Save Profile Changes'}</span>
+                  </button>
+                  <button type="button" className="cp-cancel-btn" onClick={handleCancelEdit}>
+                    <span>Cancel</span>
+                  </button>
+                </div>
+              )}
+
+            </form>
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════════
+            TAB 2: MULTAN SAVED ADDRESSES (EDITABLE)
+        ══════════════════════════════════════════════════ */}
+        {activeTab === 'address' && (
+          <div className="cp-tab-card anim-slide-up">
+            <div className="cptc-header">
+              <div>
+                <h3 className="cptc-title">Saved Multan Doorstep Addresses</h3>
+                <p className="cptc-sub">Locations where technicians are dispatched for plumbing, AC, electrician or carpenter jobs.</p>
+              </div>
+              {!isEditMode && (
+                <button type="button" className="cp-mini-edit-btn" onClick={handleStartEdit}>
+                  ✏️ Edit Addresses
+                </button>
+              )}
+            </div>
+
+            <div className="cp-address-list">
+              
+              {/* PRIMARY ADDRESS CARD */}
+              <div className="cp-address-item primary">
+                <div className="cpai-top">
+                  <div className="cpai-tag-group">
+                    <span className="cpai-tag primary">Primary Delivery Address</span>
+                    <span className="cpai-city-tag">Multan Urban</span>
+                  </div>
+                  <span className="cpai-badge-default">Default</span>
+                </div>
+
+                {isEditMode ? (
+                  <div className="cpai-edit-fields">
+                    <div className="cp-form-group">
+                      <label className="cp-form-label">Multan Sector / Locality</label>
+                      <select 
+                        className="cp-form-select"
+                        value={profileData.area}
+                        onChange={(e) => handleFieldChange('area', e.target.value)}
+                      >
+                        {multanAreas.map(a => (
+                          <option key={a} value={a}>{a}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="cp-form-group">
+                      <label className="cp-form-label">Street Address &amp; House Number</label>
+                      <textarea 
+                        className="cp-form-textarea"
+                        rows="2"
+                        value={profileData.address}
+                        onChange={(e) => handleFieldChange('address', e.target.value)}
+                        placeholder="House #, Street #, Sector..."
+                      />
+                    </div>
+
+                    <div className="cp-form-group">
+                      <label className="cp-form-label">Nearby Famous Landmark (For Rapid Technician Navigation)</label>
+                      <input 
+                        type="text" 
+                        className="cp-form-input"
+                        value={profileData.landmark}
+                        onChange={(e) => handleFieldChange('landmark', e.target.value)}
+                        placeholder="Near Mosque / School / Hospital..."
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="cpai-view-fields">
+                    <h4 className="cpai-address-title">{profileData.address}</h4>
+                    <p className="cpai-meta"><strong>Area:</strong> {profileData.area}, Multan</p>
+                    <p className="cpai-landmark">📍 <strong>Landmark:</strong> {profileData.landmark}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* SECONDARY ADDRESS CARD */}
+              <div className="cp-address-item secondary">
+                <div className="cpai-top">
+                  <div className="cpai-tag-group">
+                    <span className="cpai-tag">Secondary Address (Office / Site)</span>
+                    <span className="cpai-city-tag">Bosan Road Corridor</span>
+                  </div>
+                </div>
+
+                {isEditMode ? (
+                  <div className="cpai-edit-fields">
+                    <div className="cp-form-group">
+                      <label className="cp-form-label">Secondary Street Address</label>
+                      <input 
+                        type="text" 
+                        className="cp-form-input"
+                        value={profileData.secondaryAddress}
+                        onChange={(e) => handleFieldChange('secondaryAddress', e.target.value)}
+                        placeholder="Office or alternate site address"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="cpai-view-fields">
+                    <h4 className="cpai-address-title">{profileData.secondaryAddress}</h4>
+                    <p className="cpai-meta">Bosan Road, Multan</p>
+                  </div>
+                )}
+              </div>
+
+              {isEditMode && (
+                <div className="cp-address-save-bar">
+                  <button type="button" className="cp-submit-btn" onClick={handleSave} disabled={isSaving}>
+                    <span>{isSaving ? 'Saving...' : 'Save Updated Addresses'}</span>
+                  </button>
+                  <button type="button" className="cp-cancel-btn" onClick={handleCancelEdit}>
+                    <span>Cancel</span>
+                  </button>
+                </div>
+              )}
+
             </div>
           </div>
         )}
 
-      {selectedMenu === 'personal' && (
-        <div className="core-details-card">
-          <div className="card-header">
-            <h3 className="core-details-title">Core Personal Details</h3>
-            <button className="edit-card-btn" onClick={handleEdit}>✏️ Edit</button>
-          </div>
-          <div className="core-details-form">
-            <div className="form-row">
-              <div className="form-field">
-                <label>Name <span className="required">*</span></label>
-                <input type="text" className="form-input" placeholder="ENTER YOUR FIRST NAME " />
-              </div>
-              <div className="form-field">
-                <label>Last Name <span className="required">*</span></label>
-                <input type="text" className="form-input" placeholder="ENTER YOUR LAST NAME " />
+        {/* ══════════════════════════════════════════════════
+            TAB 3: ESCROW VAULT & PAYMENT METHODS
+        ══════════════════════════════════════════════════ */}
+        {activeTab === 'payment' && (
+          <div className="cp-tab-card anim-slide-up">
+            <div className="cptc-header">
+              <div>
+                <h3 className="cptc-title">MUX Escrow Vault &amp; Payment Channels</h3>
+                <p className="cptc-sub">Your payment security guarantee. Funds are safeguarded in escrow until work is inspected.</p>
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-field">
-                <label>Nickname</label>
-                <input type="text" className="form-input" placeholder="ENTER NICK NAME" />
-              </div>
-              <div className="form-field">
-                <label>CNIC <span className="required">*</span></label>
-                <input type="text" className="form-input" placeholder="ENTER YOUR CNIC NUMBER" />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-field">
-                <label>Gender <span className="required">*</span></label>
-                <select className="form-input">
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div className="form-field">
-                <label>Date of Birth <span className="required">*</span></label>
-                <input type="text" className="form-input" placeholder="ENTER YOUR DATE OF BIRTH" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
-      {selectedMenu === 'personal' && (
-        <div className="contact-info-card">
-          <h3 className="contact-info-title">Contact and Information</h3>
-          <div className="contact-info-row">
-            <div className="email-box">
-              <p className="email-label">Primary Email</p>
-              <p className="email-address">{profileData.email}</p>
-              <p className="email-description">Used for dispatch confirmations, invoices, and guarantee certificates.</p>
-              <div className="change-email-link">
-                <span className="change-email-text">Change Email Address</span>
-                <span className="change-email-arrow">→</span>
+            {/* Escrow Guarantee Highlight Box */}
+            <div className="cp-escrow-feature-card">
+              <div className="cpe-icon-ring">🔒</div>
+              <div className="cpe-info">
+                <h4>100% Doorstep Escrow Protection</h4>
+                <p>
+                  When you agree on a rate in chat, your payment is secured in the MUX Escrow Vault. 
+                  Technicians are only paid after you tap <strong>&quot;Mark Work Completed&quot;</strong> and inspect the job.
+                </p>
+                <div className="cpe-pills-row">
+                  <span className="cpe-pill">Instant Dispute Refund</span>
+                  <span className="cpe-pill">Zero Upfront Cash Risk</span>
+                  <span className="cpe-pill">Direct SBP-Compliant Escrow</span>
+                </div>
               </div>
             </div>
-            <div className="mobile-box">
-              <p className="mobile-label">Mobile Number</p>
-              <p className="mobile-number">{profileData.phone || '+92 300 1234567'}</p>
-              <p className="mobile-description">Direct channel for arrival alerts and doorstep security PIN.</p>
-              <div className="update-number-link">
-                <span className="update-number-text">Update Number via OTP</span>
-                <span className="update-number-arrow">→</span>
+
+            {/* Payment Channels Grid */}
+            <div className="cp-payment-channels-grid">
+              <div className="cp-pc-card active">
+                <div className="cppc-header">
+                  <span className="cppc-logo-badge cod">💵</span>
+                  <span className="cppc-status">Active</span>
+                </div>
+                <h4>Cash on Doorstep Inspection</h4>
+                <p>Hand over exact agreed cash to technician only after inspecting the repair.</p>
               </div>
-            </div>
-          </div>
-          <div className="emergency-contact-row">
-            <div className="emergency-contact-box">
-              <p className="emergency-label">Secondary / Emergency Contact</p>
-              <p className="emergency-description">In case you are unreachable during service delivery.</p>
-              <div className="emergency-inputs">
-                <input type="text" className="emergency-input" placeholder="Enter Number" />
-                <select className="relation-select">
-                  <option value="">Select Relation</option>
-                  <option value="mother">Mother</option>
-                  <option value="father">Father</option>
-                  <option value="brother">Brother</option>
-                  <option value="sister">Sister</option>
-                  <option value="cousin">Cousin</option>
-                  <option value="spouse">Spouse</option>
-                </select>
+
+              <div className="cp-pc-card">
+                <div className="cppc-header">
+                  <span className="cppc-logo-badge jazzcash">JC</span>
+                  <span className="cppc-status">Supported</span>
+                </div>
+                <h4>JazzCash Direct Transfer</h4>
+                <p>Pay instantly from your JazzCash wallet with zero surcharge fees.</p>
+              </div>
+
+              <div className="cp-pc-card">
+                <div className="cppc-header">
+                  <span className="cppc-logo-badge easypaisa">EP</span>
+                  <span className="cppc-status">Supported</span>
+                </div>
+                <h4>EasyPaisa Digital QR</h4>
+                <p>Scan technician&apos;s verified MUX QR code upon doorstep arrival.</p>
+              </div>
+
+              <div className="cp-pc-card">
+                <div className="cppc-header">
+                  <span className="cppc-logo-badge bank">🏛️</span>
+                  <span className="cppc-status">Supported</span>
+                </div>
+                <h4>Online Bank / Raast Instant</h4>
+                <p>Direct Raast ID transfer to verified MUX Services Escrow Account.</p>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {selectedMenu === 'personal' && (
-        <div className="location-info-card">
-          <div className="location-header">
-            <span className="location-icon">📍</span>
-            <h3 className="location-title">In case you are unreachable during service delivery.</h3>
+        {/* ══════════════════════════════════════════════════
+            TAB 4: SECURITY & ALERT PREFERENCES
+        ══════════════════════════════════════════════════ */}
+        {activeTab === 'security' && (
+          <div className="cp-tab-card anim-slide-up">
+            <div className="cptc-header">
+              <div>
+                <h3 className="cptc-title">Account Security &amp; Notifications</h3>
+                <p className="cptc-sub">Manage your security credentials and live technician tracking updates.</p>
+              </div>
+            </div>
+
+            <div className="cp-security-options-list">
+              
+              {/* WhatsApp Live Tracking Toggle */}
+              <div className="cp-toggle-item">
+                <div className="cpti-text">
+                  <h4>WhatsApp Live Technician Tracking</h4>
+                  <p>Receive live GPS location links and arrival ETA alerts on {profileData.whatsapp}.</p>
+                </div>
+                <button 
+                  type="button" 
+                  className={`cp-toggle-switch ${profileData.whatsappAlerts ? 'on' : 'off'}`}
+                  onClick={() => handleToggle('whatsappAlerts')}
+                >
+                  <span className="switch-slider"></span>
+                </button>
+              </div>
+
+              {/* SMS Doorstep Alerts Toggle */}
+              <div className="cp-toggle-item">
+                <div className="cpti-text">
+                  <h4>SMS Booking &amp; Escrow Receipts</h4>
+                  <p>Instant SMS confirmation whenever a rate is agreed or booking is dispatched.</p>
+                </div>
+                <button 
+                  type="button" 
+                  className={`cp-toggle-switch ${profileData.smsAlerts ? 'on' : 'off'}`}
+                  onClick={() => handleToggle('smsAlerts')}
+                >
+                  <span className="switch-slider"></span>
+                </button>
+              </div>
+
+              {/* Promotional Rate Cards Toggle */}
+              <div className="cp-toggle-item">
+                <div className="cpti-text">
+                  <h4>Seasonal Multan Rate Discounts</h4>
+                  <p>Get notified of summer AC servicing and winter plumbing discounted rates.</p>
+                </div>
+                <button 
+                  type="button" 
+                  className={`cp-toggle-switch ${profileData.promotions ? 'on' : 'off'}`}
+                  onClick={() => handleToggle('promotions')}
+                >
+                  <span className="switch-slider"></span>
+                </button>
+              </div>
+
+              {/* Security Shield Card */}
+              <div className="cp-security-shield-card">
+                <div className="cssc-icon">🛡️</div>
+                <div className="cssc-text">
+                  <h4>Two-Factor Phone Authentication Active</h4>
+                  <p>Your account is protected by encrypted OTP verification for bookings across Multan.</p>
+                </div>
+                <span className="cssc-tag">Encrypted</span>
+              </div>
+
+            </div>
           </div>
-          <label>primary Area <span className="required">*</span></label>
-          <input
-            type="text"
-            placeholder="Enter Area / Sector"
-            className="location-input"
-            value={profileData.primaryArea}
-            onChange={(e) => handleChange('primaryArea', e.target.value)}
-            disabled={!isEditMode}
-          />
-          <label>postal/zip code <span className="required">*</span></label>
-          <input
-            type="text"
-            placeholder="Postal / Zip Code"
-            className="location-input"
-            value={profileData.postalCode}
-            onChange={(e) => handleChange('postalCode', e.target.value)}
-            disabled={!isEditMode}
-          />
-        </div>
-      )}
+        )}
 
-      {selectedMenu === 'personal' && isEditMode && (
-        <div className="profile-footer">
-          <button className="save-location-btn" onClick={handleSave}>Save</button>
-        </div>
-      )}
-
-      <div className="selected-menu-section">
-        <div className="selected-menu-card">
-          {selectedMenu === 'settings' && (
-            <div className="settings-card">
-              <h2 className="card-title">Account Settings</h2>
-              <div className="settings-list">
-                <div className="setting-item">
-                  <span>Change Password</span>
-                  <button>Change</button>
-                </div>
-                <div className="setting-item">
-                  <span>Two-Factor Authentication</span>
-                  <button>Enable</button>
-                </div>
-                <div className="setting-item">
-                  <span>Email Verification</span>
-                  <button>Verify</button>
-                </div>
-                <div className="setting-item">
-                  <span>Account Deletion</span>
-                  <button className="danger">Delete</button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {selectedMenu === 'addresses' && (
-            <div className="addresses-card">
-              <div className="addresses-header">
-                <h2 className="card-title">Saved Addresses</h2>
-                <button className="add-address-btn">+ Add New Address</button>
-              </div>
-              <div className="addresses-list">
-                <div className="address-card">
-                  <div className="address-icon">🏠</div>
-                  <div className="address-info">
-                    <h4>Home</h4>
-                    <p>123 Main Street, Lahore, Pakistan</p>
-                    <p>+92 300 1234567</p>
-                  </div>
-                  <button className="edit-address-btn">Edit</button>
-                </div>
-                <div className="address-card">
-                  <div className="address-icon">🏢</div>
-                  <div className="address-info">
-                    <h4>Office</h4>
-                    <p>456 Business Avenue, Lahore, Pakistan</p>
-                    <p>+92 300 1234567</p>
-                  </div>
-                  <button className="edit-address-btn">Edit</button>
-                </div>
-                <div className="address-card">
-                  <div className="address-icon">📍</div>
-                  <div className="address-info">
-                    <h4>Other</h4>
-                    <p>789 Other Road, Lahore, Pakistan</p>
-                    <p>+92 300 1234567</p>
-                  </div>
-                  <button className="edit-address-btn">Edit</button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {selectedMenu === 'privacy' && (
-            <div className="settings-card">
-              <h2 className="card-title">Settings</h2>
-              <div className="settings-list">
-                <div className="setting-item">
-                  <span>Privacy Settings</span>
-                  <button>Manage</button>
-                </div>
-                <div className="setting-item">
-                  <span>Security Settings</span>
-                  <button>Manage</button>
-                </div>
-                <div className="setting-item">
-                  <span>Data Sharing</span>
-                  <button>Manage</button>
-                </div>
-                <div className="setting-item">
-                  <span>Blocked Users</span>
-                  <button>View</button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {selectedMenu === 'payment' && (
-            <div className="payment-channel-form">
-              <div className="pcf-header">
-                <div>
-                  <h2 className="pcf-title">Add New Payment Channel</h2>
-                  <p className="pcf-subtitle">Select your preferred transaction mechanism to authorize seamless checkout.</p>
-                </div>
-                <div className="pci-vault-badge">
-                  <span className="pci-icon">🛡️</span> PCI-DSS Level 1 Vault
-                </div>
-              </div>
-
-              <div className="pcf-tabs">
-                <div className="pcf-tab active">
-                  <span className="tab-icon">💳</span>
-                  Card (Visa/MC)
-                </div>
-                <div className="pcf-tab">
-                  <span className="tab-icon text-icon">JC</span>
-                  JazzCash
-                </div>
-                <div className="pcf-tab">
-                  <span className="tab-icon text-icon">EP</span>
-                  EasyPaisa
-                </div>
-                <div className="pcf-tab">
-                  <span className="tab-icon text-icon">R</span>
-                  Raast Direct
-                </div>
-              </div>
-
-              <div className="pcf-supported-brands">
-                <span className="pcf-support-text">🛡️ Supported in Pakistan & International</span>
-                <div className="pcf-brands">
-                  <span className="brand-badge">VISA</span>
-                  <span className="brand-badge">mastercard</span>
-                  <span className="brand-badge">PayPal</span>
-                  <span className="brand-badge">UnionPay</span>
-                </div>
-              </div>
-
-              <div className="pcf-form-fields">
-                <div className="pcf-field">
-                  <div className="pcf-label-row">
-                    <label>Cardholder Full Name</label>
-                    <span className="pcf-hint">As printed on front</span>
-                  </div>
-                  <div className="pcf-input-wrapper">
-                    <span className="pcf-input-icon">👤</span>
-                    <input type="text" placeholder="Alex Rivera" defaultValue="Alex Rivera" className="pcf-input" />
-                  </div>
-                </div>
-
-                <div className="pcf-field">
-                  <div className="pcf-label-row">
-                    <label>16-Digit Card Number</label>
-                    <span className="pcf-hint">3D-Secure 2.0 Ready</span>
-                  </div>
-                  <div className="pcf-input-wrapper with-button">
-                    <span className="pcf-input-icon">💳</span>
-                    <input type="text" placeholder="4242 **** **** 4242" className="pcf-input" />
-                    <button className="pcf-auto-detect-btn">Auto Detect</button>
-                  </div>
-                </div>
-
-                <div className="pcf-row">
-                  <div className="pcf-field half">
-                    <label>Expiry Date</label>
-                    <div className="pcf-input-wrapper">
-                      <span className="pcf-input-icon">📅</span>
-                      <input type="text" placeholder="MM / YY" className="pcf-input" />
-                    </div>
-                  </div>
-                  <div className="pcf-field half">
-                    <div className="pcf-label-row">
-                      <label>CVV / CVC</label>
-                      <span className="pcf-hint">3 digits on back</span>
-                    </div>
-                    <div className="pcf-input-wrapper">
-                      <span className="pcf-input-icon">🔒</span>
-                      <input type="password" placeholder="•••" className="pcf-input" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pcf-field">
-                  <div className="pcf-label-row">
-                    <label>Billing Address & Postal Code</label>
-                    <span className="pcf-hint">Profile synced</span>
-                  </div>
-                  <div className="pcf-input-wrapper">
-                    <span className="pcf-input-icon">📍</span>
-                    <input type="text" defaultValue="House 42-B, Gulberg III, Lahore, 54000, Punjab, PK" className="pcf-input" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="pcf-checkboxes">
-                <label className="pcf-checkbox-label">
-                  <input type="checkbox" defaultChecked />
-                  <span className="custom-checkbox"></span>
-                  <div className="cb-text-group">
-                    <span className="cb-title">Set as default payment method</span>
-                    <span className="cb-desc">Direct all future instant bookings, renewals, and on-demand maintenance to this card.</span>
-                  </div>
-                </label>
-
-                <label className="pcf-checkbox-label">
-                  <input type="checkbox" defaultChecked />
-                  <span className="custom-checkbox"></span>
-                  <div className="cb-text-group">
-                    <span className="cb-title">Enable 1-Click Fast Checkout <span className="pcf-badge-blue">SBP-3DS</span></span>
-                    <span className="cb-desc">Tokenized via State Bank of Pakistan compliant micro-deposit / biometric authorization without storing raw card credentials.</span>
-                  </div>
-                </label>
-              </div>
-
-              <div className="pcf-actions">
-                <button className="pcf-btn-primary">🔒 Save & Authorize Payment Method</button>
-                <button className="pcf-btn-cancel">Cancel</button>
-              </div>
-            </div>
-          )}
-
-          {selectedMenu === 'notifications' && (
-            <div className="notifications-security-view">
-              <div className="ns-header">
-                <div>
-                  <h2 className="ns-title">Notifications & Security</h2>
-                  <p className="ns-subtitle">Control how you receive system alerts, booking updates, and protect your account.</p>
-                </div>
-                <div className="ns-score-badge">
-                  <span className="ns-shield-icon">🛡️</span> Security Score: 98% (Optimal)
-                </div>
-              </div>
-
-              <div className="ns-card">
-                <div className="ns-card-header">
-                  <div className="ns-card-title-group">
-                    <span className="ns-icon">🛡️</span>
-                    <div>
-                      <h3 className="ns-card-title">Account Security & Access</h3>
-                      <p className="ns-card-subtitle">Manage authentication credentials, verified devices, and safety protocols</p>
-                    </div>
-                  </div>
-                  <div className="ns-active-shield">
-                    <span className="ns-dot"></span> 2FA Shield Active
-                  </div>
-                </div>
-
-                <div className="ns-item-box">
-                  <div className="ns-item-left">
-                    <span className="ns-item-icon">📱</span>
-                    <div>
-                      <h4 className="ns-item-title">Two-Factor Authentication (2FA) <span className="ns-badge blue">Enabled</span></h4>
-                      <p className="ns-item-desc">Protected via SMS to +92 300 1234567 for all login & wallet transactions.</p>
-                    </div>
-                  </div>
-                  <div className="ns-item-right">
-                    <label className="ns-toggle">
-                      <input type="checkbox" defaultChecked />
-                      <span className="ns-slider"></span>
-                    </label>
-                    <button className="ns-btn-outline">✏️ Change Phone</button>
-                  </div>
-                </div>
-
-                <div className="ns-item-box">
-                  <div className="ns-item-left">
-                    <span className="ns-item-icon">🔑</span>
-                    <div>
-                      <h4 className="ns-item-title">Master Password</h4>
-                      <p className="ns-item-desc">Last changed <strong>45 days ago</strong> - Strong rating (14 characters with special symbols)</p>
-                    </div>
-                  </div>
-                  <div className="ns-item-right">
-                    <button className="ns-btn-outline">🔑 Update Password</button>
-                  </div>
-                </div>
-
-                <div className="ns-login-activity">
-                  <div className="ns-la-header">
-                    <h4 className="ns-la-title">LOGIN ACTIVITY & ACTIVE SESSIONS</h4>
-                    <span className="ns-la-count">2 recognized devices</span>
-                  </div>
-                  
-                  <div className="ns-device-item">
-                    <div className="ns-device-left">
-                      <span className="ns-device-icon">💻</span>
-                      <div>
-                        <h5 className="ns-device-name">Chrome on Windows 11 <span className="ns-badge green">Active now</span></h5>
-                        <p className="ns-device-detail">Lahore, PK - IP: 110.39.241.xx (Current Session)</p>
-                      </div>
-                    </div>
-                    <div className="ns-device-right">
-                      <span className="ns-trusted">✓ Trusted Station</span>
-                    </div>
-                  </div>
-
-                  <div className="ns-device-item">
-                    <div className="ns-device-left">
-                      <span className="ns-device-icon">📱</span>
-                      <div>
-                        <h5 className="ns-device-name">Mobile App - Apple iPhone 14</h5>
-                        <p className="ns-device-detail">Lahore, PK - Logged in 2 hrs ago (Build v4.8.2)</p>
-                      </div>
-                    </div>
-                    <div className="ns-device-right">
-                      <button className="ns-btn-text-danger">[- Revoke]</button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="ns-safety-box">
-                  <h4 className="ns-safety-title">✓ PLATFORM SAFETY & IN-CHAT ESCROW RULE</h4>
-                  <p className="ns-safety-text"><strong>Security Safety Notice:</strong> Always communicate and transact through MUX SERVICES In-chat custom offers. External cash or direct outside payments void platform guarantees, background insurance, and customer dispute assistance.</p>
-                  <p className="ns-safety-text urdu" dir="rtl">حفاظتی نوٹس: ہمیشہ مکس سروسز ان چیٹ کسٹم آفرز کے ذریعے بات چیت اور لین دین کریں۔ بیرونی نقد یا براہ راست بیرونی ادائیگیاں پلیٹ فارم کی گارنٹی، پس منظر کی انشورنس، اور کسٹمر تنازعات میں مدد کو باطل کر دیتی ہیں۔</p>
-                </div>
-              </div>
-
-              <div className="ns-card">
-                <div className="ns-card-header no-border">
-                  <div className="ns-card-title-group">
-                    <span className="ns-icon">🔔</span>
-                    <div>
-                      <h3 className="ns-card-title">Notification Preferences</h3>
-                      <p className="ns-card-subtitle">Select customized channels for delivery, messaging, and promotional alerts</p>
-                    </div>
-                  </div>
-                  <div className="ns-pref-headers">
-                    <span>Email</span>
-                    <span>SMS</span>
-                    <span>WhatsApp</span>
-                    <span>Push</span>
-                  </div>
-                </div>
-
-                <div className="ns-pref-row">
-                  <div className="ns-pref-left">
-                    <h5 className="ns-pref-title">📍 Booking Status & Live Tracking</h5>
-                    <p className="ns-pref-desc">Real-time technician en-route dispatch, arrival milestones, and job sign-off OTP confirmations.</p>
-                  </div>
-                  <div className="ns-pref-checks">
-                    <input type="checkbox" defaultChecked />
-                    <input type="checkbox" defaultChecked />
-                    <input type="checkbox" defaultChecked />
-                    <input type="checkbox" defaultChecked />
-                  </div>
-                </div>
-
-                <div className="ns-pref-row">
-                  <div className="ns-pref-left">
-                    <h5 className="ns-pref-title">💬 Provider Direct In-Chat Messages</h5>
-                    <p className="ns-pref-desc">Direct communication with verified service pros regarding scope clarifications and custom quotes.</p>
-                  </div>
-                  <div className="ns-pref-checks">
-                    <input type="checkbox" />
-                    <input type="checkbox" />
-                    <input type="checkbox" defaultChecked />
-                    <input type="checkbox" defaultChecked />
-                  </div>
-                </div>
-
-                <div className="ns-pref-row">
-                  <div className="ns-pref-left">
-                    <h5 className="ns-pref-title">🏷️ Seasonal Promos & Discount Offers <span className="ns-badge light">15% Off AC Maintenance</span></h5>
-                    <p className="ns-pref-desc">Exclusive seasonal vouchers, weekend deep clean specials, and appliance tune-up flash credits.</p>
-                  </div>
-                  <div className="ns-pref-checks">
-                    <input type="checkbox" defaultChecked />
-                    <input type="checkbox" />
-                    <input type="checkbox" />
-                    <input type="checkbox" />
-                  </div>
-                </div>
-
-                <div className="ns-pref-row highlight-blue">
-                  <div className="ns-pref-left">
-                    <h5 className="ns-pref-title">⚠️ Urgent Service Safety & Technician Arrival Alerts <span className="ns-badge dark">Critical/Mandatory</span></h5>
-                    <p className="ns-pref-desc">Safety PIN verification codes, doorstep identity validation, and critical dispatch emergency alerts.</p>
-                  </div>
-                  <div className="ns-pref-checks-text">
-                    <span className="ns-always-on">⚡ Always On (Instant SMS & Auto-Call)</span>
-                  </div>
-                </div>
-
-                <div className="ns-footer-actions">
-                  <button className="ns-btn-text">Reset to Defaults</button>
-                  <button className="ns-btn-primary">✓ Save Preferences</button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {selectedMenu === 'help' && (
-            <div className="help-support-view">
-              <div className="hs-header">
-                <div>
-                  <h2 className="ns-title">Help & Customer Support</h2>
-                  <p className="ns-subtitle">Get instant 24/7 assistance for your bookings, technician queries, and warranty claims.</p>
-                </div>
-                <div className="hs-header-badge">
-                  <span className="ns-badge light blue-text">FAQ & TICKETS</span>
-                </div>
-              </div>
-
-              <div className="hs-cards-grid">
-                <div className="hs-contact-card">
-                  <div className="hs-card-icon-header">
-                    <span className="hs-contact-icon">💬</span>
-                    <span className="ns-badge green">Online</span>
-                  </div>
-                  <h4 className="hs-contact-title">Live Chat Support</h4>
-                  <p className="hs-contact-desc">Average response is &lt; 2 mins. Instant routing to non-robot dispatchers.</p>
-                  <button className="hs-btn-primary full-width">💬 Start Live Chat</button>
-                </div>
-
-                <div className="hs-contact-card">
-                  <div className="hs-card-icon-header">
-                    <span className="hs-contact-icon green-icon">📱</span>
-                    <span className="ns-badge outline">Verified Channel</span>
-                  </div>
-                  <h4 className="hs-contact-title">WhatsApp Helpline</h4>
-                  <p className="hs-contact-desc">Direct official helpline for multimedia sharing: <br/><strong>+92 300-SERVICE (7378423)</strong></p>
-                  <button className="hs-btn-outline-blue full-width">📱 Message on WhatsApp</button>
-                </div>
-
-                <div className="hs-contact-card">
-                  <div className="hs-card-icon-header">
-                    <span className="hs-contact-icon red-icon">📞</span>
-                    <span className="ns-badge red">Emergency</span>
-                  </div>
-                  <h4 className="hs-contact-title">Call Dispatch Desk</h4>
-                  <p className="hs-contact-desc">Emergency resolution desk for on-site urgent issues, delay interventions, and SOS.</p>
-                  <button className="hs-btn-dark full-width">Toll-Free Call</button>
-                </div>
-              </div>
-
-              <div className="ns-card hs-ticket-form">
-                <div className="hs-ticket-header">
-                  <div>
-                    <span className="hs-small-label">EASY ESCALATION PROTOCOL</span>
-                    <h3 className="ns-card-title">Open a Support Ticket / Report an Issue</h3>
-                    <p className="ns-card-subtitle">Tickets are immediately synchronized with field supervisors for swift resolution.</p>
-                  </div>
-                  <div className="hs-ticket-badge">
-                    <span className="ns-badge light blue-text">SLA: 15 Minute Response</span>
-                  </div>
-                </div>
-
-                <div className="hs-form-row">
-                  <div className="hs-form-group">
-                    <label>Select Related Booking <span className="req">*</span> <span className="hs-hint">Recent 30 Days</span></label>
-                    <select className="hs-select">
-                      <option>Choose a booking record...</option>
-                      <option>BK-1088 (Jan AC)</option>
-                      <option>BK-1014 (Electrician)</option>
-                    </select>
-                  </div>
-                  <div className="hs-form-group">
-                    <label>Issue Category <span className="req">*</span></label>
-                    <select className="hs-select">
-                      <option>Select issue severity or type...</option>
-                      <option>Service Quality</option>
-                      <option>Payment Dispute</option>
-                      <option>Delay/No-Show</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="hs-form-group">
-                  <label>Detailed Description <span className="req">*</span> <span className="hs-hint-right">0 / 500 chars</span></label>
-                  <textarea className="hs-textarea" placeholder="Describe your concern in detail. Our safety supervisor will review immediately..."></textarea>
-                </div>
-
-                <div className="hs-form-group">
-                  <label>Attach Photos, Videos, or Receipts <span className="hs-optional">(Optional)</span></label>
-                  <div className="hs-drag-drop">
-                    <span className="hs-upload-icon" style={{ display: 'flex', justifyContent: 'center' }}>
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8FD3E8" strokeWidth="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
-                    </span>
-                    <p><strong>Drag & drop inspection photos or <span className="hs-link-color">browse files</span></strong></p>
-                    <p className="hs-upload-hint">Supports JPG, PNG, PDF up to 15MB each (helpful for warranty review)</p>
-                  </div>
-                </div>
-
-                <div className="hs-form-footer">
-                  <span className="hs-confidential">Confidential supervisor escalation channel</span>
-                  <button className="hs-btn-primary">Submit Request</button>
-                </div>
-              </div>
-
-              <div className="ns-card hs-recent-tickets">
-                <div className="hs-table-header">
-                  <div>
-                    <h3 className="ns-card-title">Recent Support Requests & Dispute History</h3>
-                    <p className="ns-card-subtitle">Track ongoing tickets, previous claims, and resolution transcripts.</p>
-                  </div>
-                  <div className="hs-table-count">Showing 2 records</div>
-                </div>
-
-                <div className="hs-table-container">
-                  <table className="hs-table">
-                    <thead>
-                      <tr>
-                        <th>TICKET NO & TITLE</th>
-                        <th>BOOKING REFERENCE</th>
-                        <th>DATE RAISED</th>
-                        <th>STATUS</th>
-                        <th>ACTION</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <strong>#TKT-44521</strong><br/>
-                          <span className="hs-ticket-desc">AC Cooling Check post-serv...</span>
-                        </td>
-                        <td>📄 BK-1088 (Jan AC)</td>
-                        <td>Aug 12, 2024</td>
-                        <td><span className="ns-badge green">✓ Resolved</span></td>
-                        <td><button className="hs-btn-text">View Details</button></td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <strong>#TKT-3909</strong><br/>
-                          <span className="hs-ticket-desc">Invoice clarification for DB...</span>
-                        </td>
-                        <td>📄 BK-1014 (Electrician)</td>
-                        <td>Jun 28, 2024</td>
-                        <td><span className="ns-badge green">✓ Resolved</span></td>
-                        <td><button className="hs-btn-text">View Details</button></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <div className="ns-card hs-faq-section">
-                <span className="hs-small-label">YOUR SERVICE KNOWLEDGEBASE</span>
-                <h3 className="ns-card-title">Frequently Asked Questions (FAQs)</h3>
-                <p className="ns-card-subtitle">Find answers regarding buyer guarantee, technician compliance, and warranty processes.</p>
-                
-                <div className="hs-faq-list">
-                  <div className="hs-faq-item">
-                    <span className="hs-faq-q">1. How does MUX SERVICES Guarantee protect my home and appliances?</span>
-                    <span className="hs-faq-arrow">▼</span>
-                  </div>
-                  <div className="hs-faq-item">
-                    <span className="hs-faq-q">2. What happens if a technician damages parts or arrives late?</span>
-                    <span className="hs-faq-arrow">▼</span>
-                  </div>
-                  <div className="hs-faq-item">
-                    <span className="hs-faq-q">3. Can I pay the technician in cash outside the app?</span>
-                    <span className="hs-faq-arrow">▼</span>
-                  </div>
-                  <div className="hs-faq-item">
-                    <span className="hs-faq-q">4. How do I claim warranty on completed jobs?</span>
-                    <span className="hs-faq-arrow">▼</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="hs-enterprise-banner">
-                <div className="hs-ent-left">
-                  <span className="hs-ent-icon" style={{ display: 'flex', alignItems: 'center' }}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="22.01"></line><line x1="15" y1="22" x2="15" y2="22.01"></line><line x1="8" y1="6" x2="8.01" y2="6"></line><line x1="16" y1="6" x2="16.01" y2="6"></line><line x1="8" y1="10" x2="8.01" y2="10"></line><line x1="16" y1="10" x2="16.01" y2="10"></line><line x1="8" y1="14" x2="8.01" y2="14"></line><line x1="16" y1="14" x2="16.01" y2="14"></line><line x1="8" y1="18" x2="8.01" y2="18"></line><line x1="16" y1="18" x2="16.01" y2="18"></line></svg>
-                  </span>
-                  <div>
-                    <h5 className="hs-ent-title">Need specialized enterprise help?</h5>
-                    <p className="hs-ent-desc">Corporate accounts & commercial facility managers can email <strong>enterprise@muxservices.com</strong></p>
-                  </div>
-                </div>
-                <button className="hs-btn-outline bg-white dark-text">Email Commercial Desk</button>
-              </div>
-
-            </div>
-          )}
-
-          {selectedMenu === 'payment' && (
-            <div className="payment-guarantee-banner">
-              <div className="pgb-header">
-                <span className="pgb-shield-icon" style={{ display: 'flex', alignItems: 'center' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8FD3E8" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                </span>
-                <h3 className="pgb-title">MUX SERVICES Escrow & Payment Guarantee</h3>
-                <span className="pgb-subtitle">مکس سروسز کی محفوظ ضمانت</span>
-              </div>
-              <div className="pgb-features">
-                <div className="pgb-feature">
-                  <div className="pgb-feature-icon-container">
-                    <span className="pgb-feature-icon" style={{ display: 'flex', alignItems: 'center' }}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8FD3E8" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
-                    </span>
-                  </div>
-                  <div className="pgb-feature-content">
-                    <h4>100% Escrow Protection</h4>
-                    <p>Payments are securely held and only released to verified technicians after you inspect and confirm satisfactory completion of the job.</p>
-                  </div>
-                </div>
-                
-                <div className="pgb-feature">
-                  <div className="pgb-feature-icon-container">
-                    <span className="pgb-feature-icon" style={{ display: 'flex', alignItems: 'center' }}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8FD3E8" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    </span>
-                  </div>
-                  <div className="pgb-feature-content">
-                    <h4>Instant Refund Policy</h4>
-                    <p>Any canceled, unfulfilled, or disputed order is refunded back to your original source account, card, or wallet in under 24 hours.</p>
-                  </div>
-                </div>
-
-                <div className="pgb-feature">
-                  <div className="pgb-feature-icon-container">
-                    <span className="pgb-feature-icon" style={{ display: 'flex', alignItems: 'center' }}>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8FD3E8" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    </span>
-                  </div>
-                  <div className="pgb-feature-content">
-                    <h4>24/7 Dispute & Billing Desk</h4>
-                    <p>Direct phone support for payment reconciliation and transaction disputes. Call anytime at:</p>
-                    <div className="pgb-phone-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                      <span>042 111 HUB PRO (482 776)</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
       </div>
-    </div>
-    </div>
     </div>
   )
 }
+
 export default Profile

@@ -204,45 +204,33 @@ function Navbar({
                   <span className="nav-btn-text">Messages</span>
                 </a>
               </li>
-              <li>
-                <a href="/profile" onClick={(e) => { e.preventDefault(); setCurrentPage('profile'); }}>
-                  <span className="nav-btn-text">Profile</span>
-                </a>
-              </li>
             </>
           )}
         </ul>
 
         <div className="navbar-auth" id="account-navigation">
           {isProviderLoggedIn || isLoggedIn ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              {currentUser && (
-                <button
-                  className="navbar-profile"
-                  onClick={() => setCurrentPage('profile')}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    background: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.25)',
-                    borderRadius: '20px',
-                    padding: '0.35rem 0.85rem',
-                    color: '#ffffff',
-                    fontSize: 'max(var(--minimum-font-size, 0px), 0.85rem)',
-                    cursor: 'pointer'
-                  }}
-                  title="View Profile"
-                >
-                  <span style={{ display: 'flex', alignItems: 'center' }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <div className="navbar-account-actions">
+              <button
+                type="button"
+                className={`navbar-user-pill ${currentPage === 'profile' ? 'active' : ''}`}
+                onClick={() => setCurrentPage('profile')}
+                title="View &amp; Edit Profile"
+              >
+                <span className="nup-avatar-circle">
+                  <span className="nup-avatar-text">
+                    {currentUser?.fullName
+                      ? currentUser.fullName.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()
+                      : 'ALI'}
                   </span>
-                  <span style={{ fontWeight: 600, maxWidth: '120px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {currentUser.fullName || currentUser.email}
-                  </span>
-                </button>
-              )}
-              <button className="btn-logout" onClick={onLogout}>
+                  <span className="nup-live-dot"></span>
+                </span>
+                <span className="nup-user-name">
+                  {currentUser?.fullName || 'Ali'}
+                </span>
+              </button>
+
+              <button type="button" className="btn-logout" onClick={onLogout}>
                 Logout
               </button>
             </div>
