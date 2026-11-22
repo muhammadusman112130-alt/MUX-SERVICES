@@ -1471,16 +1471,16 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   }
 
   useEffect(() => {
-    if (!isViewingProfile || isReviewSliderPaused || !selectedProvider) return
+    if (!isViewingProfile || !selectedProvider) return
     const count = getProviderCustomerReviews(selectedProvider).length
     if (count <= 1) return
 
     const timer = setInterval(() => {
       setReviewSlideIndex((prev) => (prev + 1) % count)
-    }, 4500)
+    }, 3200)
 
     return () => clearInterval(timer)
-  }, [isViewingProfile, isReviewSliderPaused, selectedProvider])
+  }, [isViewingProfile, selectedProvider])
 
   return (
     <div className={`services-page ${selectedService ? 'has-detail-view' : ''}`}>
@@ -1491,7 +1491,11 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
             <h2 className="chat-modal-title">{isHistoryMode ? 'Chat History' : `Chat with ${selectedProvider.name}`}</h2>
             <div className="chat-modal-provider-info">
               <div className="chat-provider-avatar">
-                <span className="profile-initial">{selectedProvider.name.charAt(0)}</span>
+                {getProviderDP(selectedProvider) ? (
+                  <img src={getProviderDP(selectedProvider)} alt={selectedProvider.name} className="chat-avatar-img" />
+                ) : (
+                  <span className="profile-initial-small">{selectedProvider.name.charAt(0)}</span>
+                )}
               </div>
               <div className="chat-provider-details">
                 <span className="chat-provider-name">{selectedProvider.name}</span>
@@ -1939,11 +1943,6 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
             />
             <div className="booking-header-ambient-overlay" aria-hidden="true"></div>
 
-            <button className="back-to-services-btn" onClick={handleBackToProviders} title="Back to Providers">
-              <span className="back-arrow-icon">←</span>
-              <span>Back to Services</span>
-            </button>
-
             <div className="booking-header-content">
               <div className="booking-profile-section">
                 <div className="booking-dp-orbit-container">
@@ -2199,17 +2198,12 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
                   </div>
                 </div>
 
-                {/* Auto-Rotating Reviews Slider */}
-                <div 
-                  className="reviews-slider-container"
-                  onMouseEnter={() => setIsReviewSliderPaused(true)}
-                  onMouseLeave={() => setIsReviewSliderPaused(false)}
-                >
+                {/* Continuous Auto-Rotating Reviews Slider */}
+                <div className="reviews-slider-container">
                   <div className="reviews-slider-top-bar">
                     <div className="slider-indicator-text">
                       <span className="live-dot-pulse"></span>
                       <span>Verified Testimonials • Slide {reviewSlideIndex + 1} of {getProviderCustomerReviews(selectedProvider).length}</span>
-                      {isReviewSliderPaused && <span className="paused-badge">(Hovered - Paused)</span>}
                     </div>
                     <div className="slider-nav-arrows">
                       <button 
