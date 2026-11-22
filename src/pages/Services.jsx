@@ -138,30 +138,35 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
   // Arrival open animation for home catalog cards (from 4th card / row 2 onwards)
   const [cardsOpen, setCardsOpen] = useState(false)
   const homeGridRef = useRef(null)
-  const row2Ref = useRef(null)
 
   useEffect(() => {
-    const handleObserver = (entries) => {
-      entries.forEach((entry) => {
-        // Two-way scroll trigger: open when scrolled into view, close when scrolled away
-        if (entry.isIntersecting) {
+    const handleScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset || 0
+      const windowHeight = window.innerHeight || 800
+
+      if (homeGridRef.current) {
+        const rect = homeGridRef.current.getBoundingClientRect()
+        // When grid enters view or user has scrolled down past hero banner:
+        // Open cards 4+ and keep them open throughout browsing (never disappear in mid)
+        if (rect.top <= windowHeight * 0.88 || scrollY > 120) {
           setCardsOpen(true)
-        } else {
-          setCardsOpen(false)
+          return
         }
-      })
+      } else if (scrollY > 120) {
+        setCardsOpen(true)
+        return
+      }
+
+      // ONLY reset when the user scrolls all the way back up to the top of the page (Hero section)
+      if (scrollY < 40) {
+        setCardsOpen(false)
+      }
     }
 
-    const observer = new IntersectionObserver(handleObserver, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -30px 0px'
-    })
-
-    const targetEl = row2Ref.current || homeGridRef.current
-    if (targetEl) observer.observe(targetEl)
-
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
-      if (targetEl) observer.unobserve(targetEl)
+      window.removeEventListener('scroll', handleScroll)
     }
   }, [selectedService, showAllHomeServices])
 
@@ -2546,7 +2551,6 @@ function Services({ initialSearchQuery = '', setCurrentPage }) {
               {(showAllHomeServices ? allHomeServices : homeRepairServices).map((service, index) => (
                 <div 
                   key={index} 
-                  ref={index === 3 ? row2Ref : null}
                   className="svc-home-card" 
                   onClick={() => handleServiceClick(service.name)}
                 >
