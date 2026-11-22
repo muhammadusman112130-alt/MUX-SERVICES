@@ -7,7 +7,6 @@ import cleanerImg from '../Public/cleaner.png'
 
 function ProfessionalsSection({ setCurrentPage }) {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef(null)
   const touchEndX = useRef(null)
 
@@ -76,16 +75,14 @@ function ProfessionalsSection({ setCurrentPage }) {
 
   const totalCards = professionals.length
 
-  // Smooth continuous auto-progression every 3.6s (pauses on hover)
+  // Continuous non-stop auto-progression every 3.5s
   useEffect(() => {
-    if (isPaused) return
-
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % totalCards)
-    }, 3600)
+    }, 3500)
 
     return () => clearInterval(interval)
-  }, [isPaused, totalCards])
+  }, [totalCards])
 
   // Touch swipe support for mobile
   const handleTouchStart = (e) => {
@@ -121,8 +118,6 @@ function ProfessionalsSection({ setCurrentPage }) {
     <section 
       className="professionals-section" 
       id="professionals"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     >
       <div className="container">
         <h2 className="section-title">Top Professional Services</h2>
@@ -149,10 +144,11 @@ function ProfessionalsSection({ setCurrentPage }) {
                 <div 
                   key={pro.id} 
                   className={`professional-card ${isActive ? 'card-active' : 'card-inactive'}`}
+                  onMouseEnter={() => setActiveIndex(index)}
                   onClick={() => setActiveIndex(index)}
                   role="button"
                   tabIndex={0}
-                  aria-label={`${pro.name} - ${pro.service} (${isActive ? 'active' : 'click to focus'})`}
+                  aria-label={`${pro.name} - ${pro.service} (${isActive ? 'active' : 'click or hover to focus'})`}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       setActiveIndex(index)
