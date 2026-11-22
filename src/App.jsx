@@ -222,6 +222,7 @@ function App() {
             setCurrentPage={handlePageChange} 
             isLoggedIn={isLoggedIn}
             onLoginClick={() => handleLoginClick(true)}
+            currentUser={currentUser}
           />
         )
       case 'professionals':

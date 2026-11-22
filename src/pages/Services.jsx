@@ -103,7 +103,47 @@ export const normalizeServiceName = (query) => {
   return null
 }
 
-function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false, onLoginClick }) {
+const MULTAN_LOCALITIES = [
+  { id: 'all', name: 'All Multan Areas', tag: 'Citywide' },
+  { id: 'cantt', name: 'Multan Cantt', tag: 'Central' },
+  { id: 'gulgasht', name: 'Gulgasht Colony', tag: 'Popular' },
+  { id: 'bosan', name: 'Bosan Road', tag: 'Fast Dispatch' },
+  { id: 'officers', name: 'Officers Colony', tag: 'Prime' },
+  { id: 'modeltown', name: 'Model Town', tag: 'Prime' },
+  { id: 'mda', name: 'MDA Chowk & Shah Rukn-e-Alam', tag: 'Central' },
+  { id: 'newmultan', name: 'New Multan', tag: 'Commercial' },
+  { id: 'mumtazabad', name: 'Mumtazabad', tag: 'South' },
+  { id: 'wapdatown', name: 'Wapda Town', tag: 'Suburban' }
+]
+
+function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false, onLoginClick, currentUser = null }) {
+  const userDefaultLocality = currentUser?.area || currentUser?.city || 'Multan Cantt'
+  const [bookingFor, setBookingFor] = useState('myself') // 'myself' | 'someone_else'
+  const [selectedLocality, setSelectedLocality] = useState(userDefaultLocality)
+  const [recipientAddress, setRecipientAddress] = useState('')
+
+  useEffect(() => {
+    if (currentUser?.area || currentUser?.city) {
+      const loc = currentUser.area || currentUser.city
+      if (bookingFor === 'myself') {
+        setSelectedLocality(loc)
+      }
+    }
+  }, [currentUser, bookingFor])
+
+  const getProviderETA = (providerLocation, targetLocality) => {
+    if (!targetLocality || targetLocality === 'All Multan Areas') return '15 - 20 Mins'
+    const pLoc = (providerLocation || '').toLowerCase()
+    const tLoc = targetLocality.toLowerCase()
+    const pArea = pLoc.split(',')[0].trim().toLowerCase()
+    const tArea = tLoc.split(',')[0].trim().toLowerCase()
+    
+    if (pArea.includes(tArea) || tArea.includes(pArea)) {
+      return '10 - 15 Mins (Direct Local)'
+    }
+    return '20 - 25 Mins (Rapid Dispatch)'
+  }
+
   const [showAllHomeServices, setShowAllHomeServices] = useState(true)
   const [selectedService, setSelectedService] = useState(null)
   const [selectedProvider, setSelectedProvider] = useState(null)
@@ -482,6 +522,9 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
     setSearchQuery('')
     setRatingFilter('All')
     setPriceFilter('All')
+    setBookingFor('myself')
+    setSelectedLocality(userDefaultLocality)
+    setRecipientAddress('')
   }
 
   const handleBookNow = (provider) => {
@@ -515,7 +558,10 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       image: getProviderDP(provider),
       badge: provider.badge || 'Verified Pro',
       experience: provider.experience || '8+ Years',
-      verified: true
+      verified: true,
+      locality: selectedLocality,
+      bookingFor: bookingFor,
+      recipientAddress: recipientAddress
     }
     try {
       localStorage.setItem('active_chat_provider', JSON.stringify(chatPayload))
@@ -786,9 +832,9 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
     const normalized = normalizeServiceName(serviceName) || serviceName
     const providers = {
       'Electrician': [
-        { id: 'PRV001', name: 'AKRAM', rating: '4.9', reviews: '120', price: 'Rs. 3,800/hr', location: 'Gulberg, Lahore', date: '2 hours ago', service: 'Lighting & Wiring', verified: true, image: electricianImage },
-        { id: 'PRV002', name: 'ALI', rating: '4.8', reviews: '95', price: 'Rs. 4,000/hr', location: 'DHA Phase 5, Lahore', date: '3 hours ago', service: 'Wiring & Panels', verified: true, image: electricianImage },
-        { id: 'PRV003', name: 'UJAY BHAI', rating: '4.7', reviews: '80', price: 'Rs. 3,200/hr', location: 'Johar Town, Lahore', date: '5 hours ago', service: 'Lighting & Solar', verified: false, image: electricianImage },
+        { id: 'PRV001', name: 'AKRAM', rating: '4.9', reviews: '120', price: 'Rs. 3,800/hr', location: 'Gulgasht Colony, Multan', date: '2 hours ago', service: 'Lighting & Wiring', verified: true, image: electricianImage },
+        { id: 'PRV002', name: 'ALI', rating: '4.8', reviews: '95', price: 'Rs. 4,000/hr', location: 'Officers Colony, Multan', date: '3 hours ago', service: 'Wiring & Panels', verified: true, image: electricianImage },
+        { id: 'PRV003', name: 'UJAY BHAI', rating: '4.7', reviews: '80', price: 'Rs. 3,200/hr', location: 'Model Town, Multan', date: '5 hours ago', service: 'Lighting & Solar', verified: false, image: electricianImage },
         { id: 'PRV004', name: 'Bilal Hassan', rating: '4.9', reviews: '110', price: 'Rs. 4,500/hr', location: 'Cantt, Multan', date: '6 hours ago', service: 'Emergency Breaker', verified: true, image: electricianImage },
         { id: 'PRV005', name: 'Naveed Iqbal', rating: '4.6', reviews: '75', price: 'Rs. 3,500/hr', location: 'Bosan Road, Multan', date: '8 hours ago', service: 'Power Inspection', verified: true, image: electricianImage },
       ],
@@ -799,7 +845,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
           rating: '4.9', 
           reviews: '145', 
           price: 'Rs. 1,250/hr', 
-          location: 'Gulberg, Lahore', 
+          location: 'Gulgasht Colony, Multan', 
           date: '10 mins ago', 
           service: 'Pipe Repair & Leak Detection', 
           verified: true, 
@@ -813,7 +859,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
           rating: '4.8', 
           reviews: '118', 
           price: 'Rs. 1,100/hr', 
-          location: 'DHA Phase 5, Lahore', 
+          location: 'Officers Colony, Multan', 
           date: '1 hour ago', 
           service: 'Bathroom & Sanitary Fitting', 
           verified: true, 
@@ -827,7 +873,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
           rating: '4.9', 
           reviews: '160', 
           price: 'Rs. 1,400/hr', 
-          location: 'Johar Town, Lahore', 
+          location: 'Model Town, Multan', 
           date: '2 hours ago', 
           service: 'Drainage & Sewerage Cleaning', 
           verified: true, 
@@ -868,8 +914,8 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
         { id: 'CRP001', name: 'Imran Malik', rating: '4.9', reviews: '105', price: 'Rs. 3,500/hr', location: 'Gulgasht Colony, Multan', date: '2 hours ago', service: 'Furniture', verified: true },
         { id: 'CRP002', name: 'Rashid Minhas', rating: '4.7', reviews: '88', price: 'Rs. 3,200/hr', location: 'Cantt, Multan', date: '3 hours ago', service: 'Cabinets', verified: true },
         { id: 'CRP003', name: 'Saad Rafiq', rating: '4.8', reviews: '95', price: 'Rs. 3,800/hr', location: 'Bosan Road, Multan', date: '4 hours ago', service: 'Flooring', verified: true },
-        { id: 'CRP004', name: 'Adnan Siddiqui', rating: '4.6', reviews: '72', price: 'Rs. 3,000/hr', location: 'DHA Phase 5, Lahore', date: '5 hours ago', service: 'Repair', verified: false },
-        { id: 'CRP005', name: 'Hamza Butt', rating: '4.9', reviews: '115', price: 'Rs. 4,000/hr', location: 'Gulberg, Lahore', date: '6 hours ago', service: 'Custom', verified: true },
+        { id: 'CRP004', name: 'Adnan Siddiqui', rating: '4.6', reviews: '72', price: 'Rs. 3,000/hr', location: 'Model Town, Multan', date: '5 hours ago', service: 'Repair', verified: false },
+        { id: 'CRP005', name: 'Hamza Butt', rating: '4.9', reviews: '115', price: 'Rs. 4,000/hr', location: 'Officers Colony, Multan', date: '6 hours ago', service: 'Custom', verified: true },
       ],
       'Painter': [
         {
@@ -914,13 +960,27 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
           tags: ['Texture Coating', 'Faux Finishes', 'Murals'],
           bio: 'Specializing in high-end decorative finishes, custom textures, and bespoke wall treatments. I bring an artistic touch to residential interiors, creating unique, personalized spaces.'
         },
+        {
+          id: 'PNT004',
+          name: 'Tariq Mehmood',
+          role: 'Wall Primer & Texture',
+          rating: '4.8',
+          reviews: '84',
+          price: 'Rs. 2,500/hr',
+          location: 'Officers Colony, Multan',
+          service: 'Wall Primer & Texture',
+          verified: true,
+          image: paintingImage,
+          tags: ['Weather Sheet', 'Distemper', 'Enamel'],
+          bio: 'Multan residential and commercial interior painter with 8+ years expertise in waterproof coatings.'
+        }
       ],
       'AC & HVAC': [
         { id: 'AC001', name: 'Tariq Mehmood', rating: '4.9', reviews: '120', price: 'Rs. 4,200/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Installation', verified: true },
         { id: 'AC002', name: 'Usman Ali', rating: '4.8', reviews: '100', price: 'Rs. 4,000/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Repair', verified: true },
         { id: 'AC003', name: 'Kamran Khan', rating: '4.7', reviews: '88', price: 'Rs. 3,800/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Maintenance', verified: true },
-        { id: 'AC004', name: 'Bilal Hassan', rating: '4.9', reviews: '115', price: 'Rs. 4,500/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Emergency', verified: true },
-        { id: 'AC005', name: 'Zahid Hussain', rating: '4.6', reviews: '75', price: 'Rs. 3,500/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Inspection', verified: false },
+        { id: 'AC004', name: 'Bilal Hassan', rating: '4.9', reviews: '115', price: 'Rs. 4,500/hr', location: 'Officers Colony, Multan', date: '4 hours ago', service: 'Emergency', verified: true },
+        { id: 'AC005', name: 'Zahid Hussain', rating: '4.6', reviews: '75', price: 'Rs. 3,500/hr', location: 'Model Town, Multan', date: '5 hours ago', service: 'Inspection', verified: false },
       ],
       'Home Cleaning': [
         { id: 'CLN001', name: 'Mudassir Abbas (Deep Clean)', rating: '4.9', reviews: '168', price: 'Rs. 1,000/hr', location: 'Cantt, Multan', date: '10 mins ago', service: 'Full House Deep Sanitization', verified: true, image: homeCleaningImage, tags: ['Deep Sanitization', 'Floor Polishing', 'Kitchen Clean', 'Window Wash'], bio: 'Specialist in deep residential cleaning, chemical-free sanitization, motorized sofa washing and floor buffing.' },
@@ -931,36 +991,36 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
         { id: 'APR001', name: 'Farhan Akhtar', rating: '4.8', reviews: '98', price: 'Rs. 3,500/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Refrigerator', verified: true },
         { id: 'APR002', name: 'Carlos Martinez', rating: '4.7', reviews: '82', price: 'Rs. 3,200/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Washing Machine', verified: true },
         { id: 'APR003', name: 'Steven Lee', rating: '4.9', reviews: '108', price: 'Rs. 3,800/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Dishwasher', verified: true },
-        { id: 'APR004', name: 'Daniel Kim', rating: '4.6', reviews: '74', price: 'Rs. 3,000/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Oven', verified: false },
-        { id: 'APR005', name: 'Paul Thompson', rating: '4.8', reviews: '91', price: 'Rs. 3,400/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Microwave', verified: true },
+        { id: 'APR004', name: 'Daniel Kim', rating: '4.6', reviews: '74', price: 'Rs. 3,000/hr', location: 'Officers Colony, Multan', date: '4 hours ago', service: 'Oven', verified: false },
+        { id: 'APR005', name: 'Paul Thompson', rating: '4.8', reviews: '91', price: 'Rs. 3,400/hr', location: 'Model Town, Multan', date: '5 hours ago', service: 'Microwave', verified: true },
       ],
       'Glass & Aluminum': [
         { id: 'GLA001', name: 'Frank Wright', rating: '4.9', reviews: '112', price: 'Rs. 4,000/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Windows', verified: true },
         { id: 'GLA002', name: 'George Miller', rating: '4.7', reviews: '87', price: 'Rs. 3,800/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Doors', verified: true },
         { id: 'GLA003', name: 'Henry Davis', rating: '4.8', reviews: '95', price: 'Rs. 4,200/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Aluminum Work', verified: true },
-        { id: 'GLA004', name: 'Charles Brown', rating: '4.6', reviews: '73', price: 'Rs. 3,500/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Glass Repair', verified: false },
-        { id: 'GLA005', name: 'Edward Wilson', rating: '4.9', reviews: '118', price: 'Rs. 4,500/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Custom Design', verified: true },
+        { id: 'GLA004', name: 'Charles Brown', rating: '4.6', reviews: '73', price: 'Rs. 3,500/hr', location: 'Officers Colony, Multan', date: '4 hours ago', service: 'Glass Repair', verified: false },
+        { id: 'GLA005', name: 'Edward Wilson', rating: '4.9', reviews: '118', price: 'Rs. 4,500/hr', location: 'Model Town, Multan', date: '5 hours ago', service: 'Custom Design', verified: true },
       ],
       'Gardener': [
         { id: 'GRD001', name: 'Mary Johnson', rating: '4.8', reviews: '94', price: 'Rs. 2,800/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Lawn Care', verified: true },
         { id: 'GRD002', name: 'Susan Williams', rating: '4.7', reviews: '83', price: 'Rs. 2,500/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Landscaping', verified: true },
         { id: 'GRD003', name: 'Patricia Brown', rating: '4.9', reviews: '106', price: 'Rs. 3,000/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Garden Design', verified: true },
-        { id: 'GRD004', name: 'Jennifer Davis', rating: '4.6', reviews: '71', price: 'Rs. 2,250/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Tree Trimming', verified: false },
-        { id: 'GRD005', name: 'Linda Miller', rating: '4.8', reviews: '89', price: 'Rs. 2,600/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Irrigation', verified: true },
+        { id: 'GRD004', name: 'Jennifer Davis', rating: '4.6', reviews: '71', price: 'Rs. 2,250/hr', location: 'Officers Colony, Multan', date: '4 hours ago', service: 'Tree Trimming', verified: false },
+        { id: 'GRD005', name: 'Linda Miller', rating: '4.8', reviews: '89', price: 'Rs. 2,600/hr', location: 'Model Town, Multan', date: '5 hours ago', service: 'Irrigation', verified: true },
       ],
       'Welder': [
         { id: 'WLD001', name: 'Thomas Anderson', rating: '4.9', reviews: '114', price: 'Rs. 4,200/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Metal Fabrication', verified: true },
         { id: 'WLD002', name: 'Robert Taylor', rating: '4.7', reviews: '88', price: 'Rs. 4,000/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Structural Welding', verified: true },
         { id: 'WLD003', name: 'William Harris', rating: '4.8', reviews: '97', price: 'Rs. 4,500/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Pipe Welding', verified: true },
-        { id: 'WLD004', name: 'James Clark', rating: '4.6', reviews: '76', price: 'Rs. 3,800/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Repair', verified: false },
-        { id: 'WLD005', name: 'John Lewis', rating: '4.9', reviews: '120', price: 'Rs. 4,800/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Custom Projects', verified: true },
+        { id: 'WLD004', name: 'James Clark', rating: '4.6', reviews: '76', price: 'Rs. 3,800/hr', location: 'Officers Colony, Multan', date: '4 hours ago', service: 'Repair', verified: false },
+        { id: 'WLD005', name: 'John Lewis', rating: '4.9', reviews: '120', price: 'Rs. 4,800/hr', location: 'Model Town, Multan', date: '5 hours ago', service: 'Custom Projects', verified: true },
       ],
       'Laundry & Ironing': [
         { id: 'LND001', name: 'Emma Wilson', rating: '4.8', reviews: '96', price: 'Rs. 2,000/hr', location: 'Gulgasht Colony, Multan', date: '1 hour ago', service: 'Laundry', verified: true },
         { id: 'LND002', name: 'Sophia Moore', rating: '4.7', reviews: '84', price: 'Rs. 1,800/hr', location: 'Cantt, Multan', date: '2 hours ago', service: 'Ironing', verified: true },
         { id: 'LND003', name: 'Olivia Taylor', rating: '4.9', reviews: '109', price: 'Rs. 2,250/hr', location: 'Bosan Road, Multan', date: '3 hours ago', service: 'Dry Cleaning', verified: true },
-        { id: 'LND004', name: 'Ava Anderson', rating: '4.6', reviews: '72', price: 'Rs. 1,900/hr', location: 'DHA Phase 5, Lahore', date: '4 hours ago', service: 'Fold & Pack', verified: false },
-        { id: 'LND005', name: 'Isabella Thomas', rating: '4.8', reviews: '93', price: 'Rs. 2,100/hr', location: 'Gulberg, Lahore', date: '5 hours ago', service: 'Express Service', verified: true },
+        { id: 'LND004', name: 'Ava Anderson', rating: '4.6', reviews: '72', price: 'Rs. 1,900/hr', location: 'Officers Colony, Multan', date: '4 hours ago', service: 'Fold & Pack', verified: false },
+        { id: 'LND005', name: 'Isabella Thomas', rating: '4.8', reviews: '93', price: 'Rs. 2,100/hr', location: 'Model Town, Multan', date: '5 hours ago', service: 'Express Service', verified: true },
       ],
     }
     if (providers[normalized]) return providers[normalized]
@@ -2216,6 +2276,160 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
           </div>
 
           <div className="white-content-section">
+
+            {/* ══════════════════════════════════════════════════════════════
+                CHOOSE LOCATION & SERVICE RECIPIENT DISPATCH BAR
+                Allows booking for Myself (My Location) or Someone Else (Choose Locality)
+            ══════════════════════════════════════════════════════════════ */}
+            <div className="location-dispatcher-card animated-shadow-aura">
+              <div className="ldc-header-row">
+                <div className="ldc-heading-block">
+                  <div className="ldc-badge-pill">
+                    <span className="ldc-pulse-dot"></span>
+                    <span>DISPATCH DESTINATION / سروس لوکیشن</span>
+                  </div>
+                  <h3 className="ldc-title">
+                    {bookingFor === 'myself' 
+                      ? 'Technicians Stationed Near Your Location' 
+                      : `Technicians Stationed Near ${selectedLocality}`}
+                  </h3>
+                  <p className="ldc-subtitle">
+                    Select whether this service is for yourself or someone else to view specialists stationed closest to the target doorstep.
+                  </p>
+                </div>
+
+                {/* Recipient Toggle: For Myself vs For Someone Else */}
+                <div className="ldc-toggle-group">
+                  <button 
+                    type="button" 
+                    className={`ldc-toggle-btn ${bookingFor === 'myself' ? 'active' : ''}`}
+                    onClick={() => {
+                      setBookingFor('myself')
+                      setSelectedLocality(userDefaultLocality)
+                    }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>For Myself (میرے لیے)</span>
+                  </button>
+
+                  <button 
+                    type="button" 
+                    className={`ldc-toggle-btn ${bookingFor === 'someone_else' ? 'active' : ''}`}
+                    onClick={() => setBookingFor('someone_else')}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span>For Someone Else (کسی اور کے لیے)</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Status Banner */}
+              {bookingFor === 'myself' ? (
+                <div className="ldc-myself-banner">
+                  <div className="ldc-myself-left">
+                    <div className="ldc-icon-circle">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="ldc-location-title-row">
+                        <span className="ldc-loc-label">Active Delivery Location:</span>
+                        <strong className="ldc-loc-value">{userDefaultLocality}</strong>
+                        <span className="ldc-status-chip">Registered Home</span>
+                      </div>
+                      <p className="ldc-loc-subtext">
+                        Showing all certified specialists stationed nearby {userDefaultLocality} with rapid doorstep arrival (approx 10-20 mins).
+                      </p>
+                    </div>
+                  </div>
+                  <button 
+                    type="button" 
+                    className="ldc-switch-area-btn"
+                    onClick={() => setBookingFor('someone_else')}
+                  >
+                    <span>Choose Other Multan Area →</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="ldc-other-picker-box">
+                  <div className="ldc-picker-headline">
+                    <div className="ldc-pin-pulse">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                      </svg>
+                    </div>
+                    <div>
+                      <strong>Select Multan Delivery Locality For Recipient:</strong>
+                      <span className="ldc-subtle-hint">Choose neighborhood to see nearest stationed specialists</span>
+                    </div>
+                  </div>
+
+                  {/* Multan Area Quick Select Pills */}
+                  <div className="ldc-area-pills-wrap">
+                    {MULTAN_LOCALITIES.map(loc => (
+                      <button
+                        key={loc.id}
+                        type="button"
+                        className={`ldc-area-pill ${selectedLocality === loc.name ? 'selected' : ''}`}
+                        onClick={() => setSelectedLocality(loc.name)}
+                      >
+                        <span className="ldc-pill-marker"></span>
+                        <span className="ldc-pill-text">{loc.name}</span>
+                        <span className="ldc-pill-subtag">{loc.tag}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Recipient Detailed Address / Area Dropdown Row */}
+                  <div className="ldc-address-fields-grid">
+                    <div className="ldc-field-group">
+                      <label className="ldc-field-label">Selected Multan Locality</label>
+                      <select 
+                        className="ldc-field-select"
+                        value={selectedLocality}
+                        onChange={(e) => setSelectedLocality(e.target.value)}
+                      >
+                        {MULTAN_LOCALITIES.map(loc => (
+                          <option key={loc.id} value={loc.name}>{loc.name} ({loc.tag})</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="ldc-field-group flex-2">
+                      <label className="ldc-field-label">Recipient Exact Address / Landmark (Optional)</label>
+                      <input 
+                        type="text" 
+                        className="ldc-field-input" 
+                        placeholder="e.g. House #14, Street 5, Near Gol Bagh / Commercial Market..."
+                        value={recipientAddress}
+                        onChange={(e) => setRecipientAddress(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Active Filtering Feedback */}
+                  <div className="ldc-feedback-strip">
+                    <span className="ldc-dot-emerald"></span>
+                    <span>
+                      {selectedLocality === 'All Multan Areas' 
+                        ? 'Displaying all certified specialists across Multan with citywide rapid response.' 
+                        : `Displaying specialists located in or providing rapid dispatch to: ${selectedLocality}`}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="search-filters-row">
               <div className="search-bar-inline">
                 <input 
@@ -2282,7 +2496,30 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
             {/* Provider Requests List */}
             <div className="provider-requests-container">
               {(() => {
-                const filtered = getServiceProviders(selectedService).filter((req) => {
+                const isAllAreas = !selectedLocality || selectedLocality === 'All Multan Areas'
+                const localityTerm = isAllAreas ? '' : selectedLocality.toLowerCase().replace(', multan', '').replace('multan', '').trim()
+
+                const checkLocMatch = (locStr) => {
+                  if (isAllAreas) return true
+                  if (!locStr) return false
+                  const l = locStr.toLowerCase()
+                  if (localityTerm.includes('cantt') && l.includes('cantt')) return true
+                  if (localityTerm.includes('gulgasht') && l.includes('gulgasht')) return true
+                  if (localityTerm.includes('bosan') && l.includes('bosan')) return true
+                  if (localityTerm.includes('officers') && l.includes('officers')) return true
+                  if (localityTerm.includes('model town') && l.includes('model town')) return true
+                  if (localityTerm.includes('mda') && (l.includes('mda') || l.includes('rukn'))) return true
+                  if (localityTerm.includes('new multan') && l.includes('new multan')) return true
+                  if (localityTerm.includes('mumtazabad') && l.includes('mumtazabad')) return true
+                  if (localityTerm.includes('wapda') && l.includes('wapda')) return true
+                  return l.includes(localityTerm) || localityTerm.includes(l.split(',')[0].trim().toLowerCase())
+                }
+
+                // All providers for this service
+                const allProviders = getServiceProviders(selectedService)
+
+                // Filter by search, rating, price
+                const filteredBySearchAndRate = allProviders.filter((req) => {
                   if (searchQuery.trim()) {
                     const q = searchQuery.toLowerCase()
                     const matchName = req.name?.toLowerCase().includes(q)
@@ -2304,12 +2541,17 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   return true
                 })
 
-                if (filtered.length === 0) {
+                // Split into exact local matches vs nearby rapid dispatch
+                const exactMatches = filteredBySearchAndRate.filter(req => checkLocMatch(req.location))
+                const hasExact = exactMatches.length > 0
+                const displayList = hasExact ? exactMatches : filteredBySearchAndRate
+
+                if (displayList.length === 0) {
                   return (
                     <div className="no-providers-box">
                       <p className="no-providers-text">No verified specialists found matching your search filters.</p>
                       <button 
-                        onClick={() => { setSearchQuery(''); setRatingFilter('All'); setPriceFilter('All'); }}
+                        onClick={() => { setSearchQuery(''); setRatingFilter('All'); setPriceFilter('All'); setSelectedLocality('All Multan Areas'); }}
                         className="clear-filters-btn"
                       >
                         Reset All Filters
@@ -2318,87 +2560,124 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   )
                 }
 
-                return filtered.map((req, index) => {
-                  const photo = getProviderImage(req, selectedService)
-                  const roleTitle = getProviderRole(req, selectedService)
-                  const tags = getProviderTags(req, selectedService)
-                  const bio = getProviderBio(req, selectedService)
-
-                  return (
-                    <div 
-                      key={req.id || index} 
-                      className="provider-request-card"
-                      style={{ animationDelay: `${index * 0.08}s` }}
-                    >
-                      {/* Left: Provider Photo with Floating Rating */}
-                      <div className="provider-card-photo-box">
-                        <img 
-                          src={photo} 
-                          alt={req.name} 
-                          className="provider-card-photo"
-                          onError={(e) => {
-                            e.target.onerror = null
-                            e.target.src = getHeaderImage(selectedService)
-                          }}
-                        />
-                        <div className="provider-card-rating-badge">
-                          <span className="star-icon">⭐</span>
-                          <span className="rating-val">{req.rating}</span>
-                          <span className="reviews-val">({req.reviews})</span>
-                        </div>
+                return (
+                  <>
+                    {!isAllAreas && !hasExact && (
+                      <div className="location-fallback-notice animated-shadow-aura">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="12" y1="8" x2="12" y2="12"></line>
+                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <span>
+                          No specialists directly headquartered inside <strong>{selectedLocality}</strong>, but these top-rated Multan specialists are equipped with rapid transport and guarantee arrival in <strong>20-25 mins</strong>:
+                        </span>
                       </div>
+                    )}
 
-                      {/* Right: Info, Tags, Bio, Actions */}
-                      <div className="provider-card-details">
-                        <div className="provider-card-top-row">
-                          <div className="provider-name-block">
-                            <div className="provider-name-verified-line">
-                              <h3 className="provider-card-name">{req.name}</h3>
-                              <span className="provider-verified-badge">✓ Verified</span>
+                    {displayList.map((req, index) => {
+                      const photo = getProviderImage(req, selectedService)
+                      const roleTitle = getProviderRole(req, selectedService)
+                      const tags = getProviderTags(req, selectedService)
+                      const bio = getProviderBio(req, selectedService)
+                      const isLocalStationed = checkLocMatch(req.location)
+
+                      return (
+                        <div 
+                          key={req.id || index} 
+                          className="provider-request-card"
+                          style={{ animationDelay: `${index * 0.08}s` }}
+                        >
+                          {/* Left: Provider Photo with Floating Rating */}
+                          <div className="provider-card-photo-box">
+                            <img 
+                              src={photo} 
+                              alt={req.name} 
+                              className="provider-card-photo"
+                              onError={(e) => {
+                                e.target.onerror = null
+                                e.target.src = getHeaderImage(selectedService)
+                              }}
+                            />
+                            <div className="provider-card-rating-badge">
+                              <span className="star-icon">⭐</span>
+                              <span className="rating-val">{req.rating}</span>
+                              <span className="reviews-val">({req.reviews})</span>
                             </div>
-                            <span className="provider-card-role">{roleTitle}</span>
                           </div>
-                          <div className="provider-price-block">
-                            <span className="price-label">STARTING AT</span>
-                            <span className="price-amount">{req.price}</span>
+
+                          {/* Right: Info, Tags, Bio, Actions */}
+                          <div className="provider-card-details">
+                            <div className="provider-card-top-row">
+                              <div className="provider-name-block">
+                                <div className="provider-name-verified-line">
+                                  <h3 className="provider-card-name">{req.name}</h3>
+                                  <span className="provider-verified-badge">✓ Verified</span>
+                                </div>
+                                <span className="provider-card-role">{roleTitle}</span>
+
+                                {/* Multan Locality & Arrival ETA Tags */}
+                                <div className="provider-locality-dispatch-row">
+                                  <span className="pldr-location-badge">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                      <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>{req.location}</span>
+                                  </span>
+                                  <span className={`pldr-eta-chip ${isLocalStationed ? 'local-speed' : 'citywide-speed'}`}>
+                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                      <circle cx="12" cy="12" r="10"></circle>
+                                      <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    <span>{getProviderETA(req.location, selectedLocality)}</span>
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="provider-price-block">
+                                <span className="price-label">STARTING AT</span>
+                                <span className="price-amount">{req.price}</span>
+                              </div>
+                            </div>
+
+                            {/* Skill Tags */}
+                            <div className="provider-tags-row">
+                              {tags.map((tag, tIdx) => (
+                                <span key={tIdx} className="provider-tag-chip">{tag}</span>
+                              ))}
+                            </div>
+
+                            {/* Bio / Description */}
+                            <p className="provider-bio-text">{bio}</p>
+
+                            {/* Action Buttons */}
+                            <div className="provider-actions-row">
+                              <button 
+                                type="button" 
+                                className="provider-view-profile-btn"
+                                onClick={() => handleViewProviderProfile(req)}
+                              >
+                                View Full Profile
+                              </button>
+                              <button 
+                                type="button" 
+                                className="provider-chat-btn"
+                                onClick={() => handleMessageProvider(req)}
+                                title={`Chat with ${req.name}`}
+                              >
+                                <span className="btn-chat-icon">
+                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                </span>
+                                <span>Direct Chat</span>
+                              </button>
+                            </div>
                           </div>
                         </div>
-
-                        {/* Skill Tags */}
-                        <div className="provider-tags-row">
-                          {tags.map((tag, tIdx) => (
-                            <span key={tIdx} className="provider-tag-chip">{tag}</span>
-                          ))}
-                        </div>
-
-                        {/* Bio / Description */}
-                        <p className="provider-bio-text">{bio}</p>
-
-                        {/* Action Buttons */}
-                        <div className="provider-actions-row">
-                          <button 
-                            type="button" 
-                            className="provider-view-profile-btn"
-                            onClick={() => handleViewProviderProfile(req)}
-                          >
-                            View Full Profile
-                          </button>
-                          <button 
-                            type="button" 
-                            className="provider-chat-btn"
-                            onClick={() => handleMessageProvider(req)}
-                            title={`Chat with ${req.name}`}
-                          >
-                            <span className="btn-chat-icon">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                            </span>
-                            <span>Direct Chat</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })
+                      )
+                    })}
+                  </>
+                )
               })()}
             </div>
 

@@ -35,8 +35,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
     preferredTime: user?.preferredTime || 'Afternoon (12:00 PM - 04:00 PM)',
     secondaryAddress: 'Plot 18-B, Commercial Plaza, Bosan Road, Multan',
     smsAlerts: true,
-    whatsappAlerts: true,
-    promotions: false
+    whatsappAlerts: true
   })
 
   // Backup state for Cancel operation
@@ -710,21 +709,6 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
                   type="button" 
                   className={`cp-toggle-switch ${profileData.smsAlerts ? 'on' : 'off'}`}
                   onClick={() => handleToggle('smsAlerts')}
-                >
-                  <span className="switch-slider"></span>
-                </button>
-              </div>
-
-              {/* Promotional Rate Cards Toggle */}
-              <div className="cp-toggle-item animated-shadow-aura">
-                <div className="cpti-text">
-                  <h4>Seasonal Multan Rate Discounts</h4>
-                  <p>Get notified of summer AC servicing and winter plumbing discounted rates.</p>
-                </div>
-                <button 
-                  type="button" 
-                  className={`cp-toggle-switch ${profileData.promotions ? 'on' : 'off'}`}
-                  onClick={() => handleToggle('promotions')}
                 >
                   <span className="switch-slider"></span>
                 </button>
