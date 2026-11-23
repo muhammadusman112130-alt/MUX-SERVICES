@@ -2348,3 +2348,80 @@ body.theme-warm-stone,
   border-color: #0A0A0A !important;
   box-shadow: 0 2px 8px rgba(10, 10, 10, 0.3) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   GLOBAL PROVIDER PROFILE VIEW LIGHT MODE REINFORCEMENTS
+══════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .provider-profile-view,
+.theme-warm-stone .provider-profile-view,
+[data-theme="warm-stone"] .provider-profile-view .booking-header,
+.theme-warm-stone .provider-profile-view .booking-header,
+[data-theme="warm-stone"] .provider-profile-view .booking-content-section,
+.theme-warm-stone .provider-profile-view .booking-content-section,
+[data-theme="warm-stone"] .provider-profile-view .booking-content-container,
+.theme-warm-stone .provider-profile-view .booking-content-container {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+}
+
+/* DP Orbit SVG Circles in Light Mode (Pure Jet Black) */
+[data-theme="warm-stone"] .dp-orbit-svg circle,
+.theme-warm-stone .dp-orbit-svg circle,
+[data-theme="warm-stone"] .booking-dp-orbit-container circle,
+.theme-warm-stone .booking-dp-orbit-container circle {
+  stroke: #0A0A0A !important;
+}
+
+/* Provider Name: No box behind it */
+[data-theme="warm-stone"] .booking-profile-details,
+.theme-warm-stone .booking-profile-details,
+[data-theme="warm-stone"] .provider-name,
+.theme-warm-stone .provider-name,
+[data-theme="warm-stone"] .provider-name-block,
+.theme-warm-stone .provider-name-block,
+[data-theme="warm-stone"] .provider-name-verified-line,
+.theme-warm-stone .provider-name-verified-line {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .provider-verified-badge,
+.theme-warm-stone .provider-verified-badge {
+  background: transparent !important;
+  border: none !important;
+  color: #0A0A0A !important;
+  padding: 0 !important;
+}
+
+/* Provider Profile Cards, Icons & Summaries */
+[data-theme="warm-stone"] .service-offer-card,
+.theme-warm-stone .service-offer-card,
+[data-theme="warm-stone"] .provider-info-section,
+.theme-warm-stone .provider-info-section,
+[data-theme="warm-stone"] .completed-work-card,
+.theme-warm-stone .completed-work-card,
+[data-theme="warm-stone"] .reviews-summary-card,
+.theme-warm-stone .reviews-summary-card,
+[data-theme="warm-stone"] .customer-review-card,
+.theme-warm-stone .customer-review-card {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .profile-back-btn,
+.theme-warm-stone .profile-back-btn,
+[data-theme="warm-stone"] .share-profile-btn,
+.theme-warm-stone .share-profile-btn {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+  border: 1.5px solid #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .profile-direct-chat-btn,
+.theme-warm-stone .profile-direct-chat-btn {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+}

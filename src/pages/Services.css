@@ -88,15 +88,50 @@
 
 .booking-header-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2.5rem;
-  margin-top: 1.5rem;
+  flex-direction: column;
+  gap: 1.2rem;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  width: 100%;
+}
+
+.profile-header-top-bar {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.profile-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.55rem 1.4rem;
+  background: rgba(14, 46, 51, 0.75);
+  color: #8FD3E8;
+  border: 1.5px solid rgba(143, 211, 232, 0.35);
+  border-radius: 50px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.profile-back-btn:hover {
+  background: #8FD3E8;
+  color: #0E2E33;
+  transform: translateY(-2px);
+}
+
+.booking-header-main-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2.5rem;
+  width: 100%;
 }
 
 .booking-profile-section {
@@ -4088,8 +4123,19 @@
   font-size: 1.4rem;
 }
 
-.summary-stars-row span {
+.summary-stars-row span,
+.summary-star-icon {
   color: #8FD3E8 !important;
+}
+
+.escrow-secure-pill {
+  color: #8FD3E8;
+  font-weight: 700;
+}
+
+.review-gold-stars {
+  color: #f59e0b;
+  font-size: 1.1rem;
 }
 
 .summary-total-text {
@@ -6452,4 +6498,481 @@
 [data-theme="warm-stone"] .review-slider-dot:hover:not(.active),
 .theme-warm-stone .review-slider-dot:hover:not(.active) {
   background: rgba(10, 10, 10, 0.5) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROVIDER PROFILE VIEW IN LIGHT MODE (STRICT PURE IVORY #FFFFF0 & JET BLACK #0A0A0A)
+══════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .provider-profile-view,
+.theme-warm-stone .provider-profile-view,
+[data-theme="warm-stone"] .provider-profile-view .booking-header,
+.theme-warm-stone .provider-profile-view .booking-header {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+  border-bottom: 2px solid #0A0A0A !important;
+  position: relative !important;
+}
+
+[data-theme="warm-stone"] .provider-profile-view .booking-header::after,
+.theme-warm-stone .provider-profile-view .booking-header::after {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 2px !important;
+  background: #0A0A0A !important;
+  box-shadow: 0 0 10px rgba(10, 10, 10, 0.35) !important;
+  z-index: 5 !important;
+}
+
+[data-theme="warm-stone"] .provider-profile-view .booking-header-ambient-overlay,
+.theme-warm-stone .provider-profile-view .booking-header-ambient-overlay {
+  display: block !important;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.05) 0%, rgba(10, 10, 10, 0.22) 100%) !important;
+  pointer-events: none !important;
+}
+
+/* DP Orbital Circles in Light Mode (Pure Jet Black, No Cyan / Blue) */
+[data-theme="warm-stone"] .dp-orbit-svg,
+.theme-warm-stone .dp-orbit-svg {
+  filter: none !important;
+}
+
+[data-theme="warm-stone"] .dp-orbit-svg circle,
+.theme-warm-stone .dp-orbit-svg circle,
+[data-theme="warm-stone"] .dp-orbit-spin-clockwise circle,
+.theme-warm-stone .dp-orbit-spin-clockwise circle,
+[data-theme="warm-stone"] .dp-orbit-spin-counter circle,
+.theme-warm-stone .dp-orbit-spin-counter circle,
+[data-theme="warm-stone"] .booking-dp-orbit-container circle,
+.theme-warm-stone .booking-dp-orbit-container circle {
+  stroke: #0A0A0A !important;
+}
+
+/* Provider DP Image & Initial */
+[data-theme="warm-stone"] .booking-profile-image,
+.theme-warm-stone .booking-profile-image {
+  background: #FFFFF0 !important;
+  border: 3.5px solid #0A0A0A !important;
+  box-shadow: 0 10px 30px rgba(10, 10, 10, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .booking-profile-image:hover,
+.theme-warm-stone .booking-profile-image:hover {
+  border-color: #0A0A0A !important;
+  box-shadow: 0 14px 38px rgba(10, 10, 10, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .profile-initial,
+.theme-warm-stone .profile-initial {
+  color: #0A0A0A !important;
+  text-shadow: none !important;
+}
+
+/* Provider Profile Header Info (No Box Behind Name) */
+[data-theme="warm-stone"] .booking-profile-details,
+.theme-warm-stone .booking-profile-details {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .provider-profile-view .provider-name,
+.theme-warm-stone .provider-profile-view .provider-name,
+[data-theme="warm-stone"] .booking-profile-details .provider-name,
+.theme-warm-stone .booking-profile-details .provider-name {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 18px rgba(255, 255, 240, 0.98), 0 0 36px rgba(255, 255, 240, 0.95), 0 0 55px rgba(255, 255, 240, 0.9) !important;
+  animation: whiteHaloPulse 3s ease-in-out infinite alternate !important;
+}
+
+[data-theme="warm-stone"] .provider-profile-view .provider-rating,
+.theme-warm-stone .provider-profile-view .provider-rating,
+[data-theme="warm-stone"] .provider-profile-view .provider-rating .reviews,
+.theme-warm-stone .provider-profile-view .provider-rating .reviews {
+  color: #0A0A0A !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 12px rgba(255, 255, 240, 0.95) !important;
+}
+
+[data-theme="warm-stone"] .provider-profile-view .provider-about,
+.theme-warm-stone .provider-profile-view .provider-about {
+  color: #0A0A0A !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 10px rgba(255, 255, 240, 0.95) !important;
+}
+
+/* Provider Profile Header Action Buttons */
+[data-theme="warm-stone"] .profile-back-btn,
+.theme-warm-stone .profile-back-btn {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 4px 14px rgba(10, 10, 10, 0.1) !important;
+}
+
+[data-theme="warm-stone"] .profile-back-btn:hover,
+.theme-warm-stone .profile-back-btn:hover {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .profile-direct-chat-btn,
+.theme-warm-stone .profile-direct-chat-btn {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 4px 15px rgba(10, 10, 10, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .profile-direct-chat-btn:hover,
+.theme-warm-stone .profile-direct-chat-btn:hover {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+  border-color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .share-profile-btn,
+.theme-warm-stone .share-profile-btn {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+  border: 1.5px solid #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .share-profile-btn:hover,
+.theme-warm-stone .share-profile-btn:hover {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+}
+
+/* Booking Content Area & Titles */
+[data-theme="warm-stone"] .booking-content-section,
+.theme-warm-stone .booking-content-section,
+[data-theme="warm-stone"] .booking-content-container,
+.theme-warm-stone .booking-content-container {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .services-offered-title,
+.theme-warm-stone .services-offered-title,
+[data-theme="warm-stone"] .provider-info-title,
+.theme-warm-stone .provider-info-title,
+[data-theme="warm-stone"] .section-main-title,
+.theme-warm-stone .section-main-title,
+[data-theme="warm-stone"] .section-main-title span,
+.theme-warm-stone .section-main-title span {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .section-main-subtitle,
+.theme-warm-stone .section-main-subtitle {
+  color: rgba(10, 10, 10, 0.75) !important;
+}
+
+/* Services Offered Cards */
+[data-theme="warm-stone"] .service-offer-card,
+.theme-warm-stone .service-offer-card {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 4px 15px rgba(10, 10, 10, 0.08) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .service-offer-card:hover,
+.theme-warm-stone .service-offer-card:hover {
+  border-color: #0A0A0A !important;
+  box-shadow: 0 10px 25px rgba(10, 10, 10, 0.16) !important;
+}
+
+[data-theme="warm-stone"] .service-icon,
+.theme-warm-stone .service-icon {
+  background: rgba(10, 10, 10, 0.06) !important;
+  border: 1.5px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .service-icon svg,
+.theme-warm-stone .service-icon svg {
+  stroke: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .service-offer-card h3,
+.theme-warm-stone .service-offer-card h3,
+[data-theme="warm-stone"] .service-offer-card p,
+.theme-warm-stone .service-offer-card p {
+  color: #0A0A0A !important;
+}
+
+/* Provider Info & Credentials Grid */
+[data-theme="warm-stone"] .provider-info-section,
+.theme-warm-stone .provider-info-section {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 4px 18px rgba(10, 10, 10, 0.08) !important;
+  border-radius: 20px !important;
+  padding: 2.2rem !important;
+}
+
+[data-theme="warm-stone"] .info-item,
+.theme-warm-stone .info-item {
+  background: rgba(10, 10, 10, 0.04) !important;
+  border: 1px solid rgba(10, 10, 10, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .info-label,
+.theme-warm-stone .info-label {
+  color: rgba(10, 10, 10, 0.7) !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="warm-stone"] .info-value,
+.theme-warm-stone .info-value {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .verified-nadra-text,
+.theme-warm-stone .verified-nadra-text,
+[data-theme="warm-stone"] .escrow-secure-pill,
+.theme-warm-stone .escrow-secure-pill {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+/* Completed Works & Portfolio Section */
+[data-theme="warm-stone"] .completed-works-section,
+.theme-warm-stone .completed-works-section {
+  border-top: 1.5px solid #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .section-header-badge,
+.theme-warm-stone .section-header-badge {
+  background: rgba(10, 10, 10, 0.08) !important;
+  border: 1.5px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .completed-work-card,
+.theme-warm-stone .completed-work-card {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 6px 20px rgba(10, 10, 10, 0.08) !important;
+}
+
+[data-theme="warm-stone"] .completed-work-card:hover,
+.theme-warm-stone .completed-work-card:hover {
+  border-color: #0A0A0A !important;
+  box-shadow: 0 12px 30px rgba(10, 10, 10, 0.16) !important;
+}
+
+[data-theme="warm-stone"] .work-card-media,
+.theme-warm-stone .work-card-media {
+  background: #FFFFF0 !important;
+  border-bottom: 1.5px solid #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .work-verified-pill,
+.theme-warm-stone .work-verified-pill {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: 1px solid #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .work-rating-pill,
+.theme-warm-stone .work-rating-pill {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: 1px solid #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .work-category-tag,
+.theme-warm-stone .work-category-tag {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .work-completed-date,
+.theme-warm-stone .work-completed-date {
+  color: rgba(10, 10, 10, 0.65) !important;
+}
+
+[data-theme="warm-stone"] .work-card-title,
+.theme-warm-stone .work-card-title {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .work-card-desc,
+.theme-warm-stone .work-card-desc {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+[data-theme="warm-stone"] .work-tag-chip,
+.theme-warm-stone .work-tag-chip {
+  background: rgba(10, 10, 10, 0.06) !important;
+  border: 1px solid rgba(10, 10, 10, 0.25) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .work-card-footer,
+.theme-warm-stone .work-card-footer {
+  border-top: 1px solid rgba(10, 10, 10, 0.15) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .work-location,
+.theme-warm-stone .work-location,
+[data-theme="warm-stone"] .work-guarantee,
+.theme-warm-stone .work-guarantee {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+/* Customer Reviews & Feedback Section */
+[data-theme="warm-stone"] .customer-reviews-section,
+.theme-warm-stone .customer-reviews-section {
+  border-top: 1.5px solid #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .reviews-summary-card,
+.theme-warm-stone .reviews-summary-card {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 6px 20px rgba(10, 10, 10, 0.08) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .summary-big-rating,
+.theme-warm-stone .summary-big-rating {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .summary-stars-row span,
+.theme-warm-stone .summary-stars-row span,
+[data-theme="warm-stone"] .summary-star-icon,
+.theme-warm-stone .summary-star-icon {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .summary-total-text,
+.theme-warm-stone .summary-total-text {
+  color: rgba(10, 10, 10, 0.7) !important;
+}
+
+[data-theme="warm-stone"] .stat-pill,
+.theme-warm-stone .stat-pill {
+  background: rgba(10, 10, 10, 0.05) !important;
+  border: 1px solid rgba(10, 10, 10, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .stat-pill-val,
+.theme-warm-stone .stat-pill-val {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .stat-pill-lbl,
+.theme-warm-stone .stat-pill-lbl {
+  color: rgba(10, 10, 10, 0.7) !important;
+  font-weight: 600 !important;
+}
+
+/* Customer Review Cards */
+[data-theme="warm-stone"] .customer-review-card,
+.theme-warm-stone .customer-review-card {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 4px 15px rgba(10, 10, 10, 0.06) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .customer-review-card:hover,
+.theme-warm-stone .customer-review-card:hover {
+  border-color: #0A0A0A !important;
+  box-shadow: 0 10px 25px rgba(10, 10, 10, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .reviewer-avatar-circle,
+.theme-warm-stone .reviewer-avatar-circle {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .reviewer-name,
+.theme-warm-stone .reviewer-name {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .reviewer-location,
+.theme-warm-stone .reviewer-location {
+  color: rgba(10, 10, 10, 0.65) !important;
+}
+
+[data-theme="warm-stone"] .review-verified-tag,
+.theme-warm-stone .review-verified-tag {
+  background: rgba(10, 10, 10, 0.08) !important;
+  border: 1px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .review-stars-amber,
+.theme-warm-stone .review-stars-amber {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .review-date,
+.theme-warm-stone .review-date {
+  color: rgba(10, 10, 10, 0.6) !important;
+}
+
+[data-theme="warm-stone"] .review-service-pill,
+.theme-warm-stone .review-service-pill {
+  background: rgba(10, 10, 10, 0.08) !important;
+  border: 1px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .customer-review-card .review-comment-text,
+.theme-warm-stone .customer-review-card .review-comment-text {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .review-footer,
+.theme-warm-stone .review-footer {
+  border-top: 1px solid rgba(10, 10, 10, 0.15) !important;
+  color: rgba(10, 10, 10, 0.7) !important;
+}
+
+[data-theme="warm-stone"] .helpful-btn,
+.theme-warm-stone .helpful-btn {
+  background: rgba(10, 10, 10, 0.08) !important;
+  border: 1px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .helpful-btn:hover,
+.theme-warm-stone .helpful-btn:hover {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+}
+
+/* Also: Provider verified badge on category list (No box behind name) */
+[data-theme="warm-stone"] .provider-verified-badge,
+.theme-warm-stone .provider-verified-badge {
+  background: transparent !important;
+  border: none !important;
+  color: #0A0A0A !important;
+  padding: 0 !important;
+  font-weight: 800 !important;
 }

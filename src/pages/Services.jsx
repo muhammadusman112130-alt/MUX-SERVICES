@@ -2037,114 +2037,126 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
             <div className="booking-header-ambient-overlay" aria-hidden="true"></div>
 
             <div className="booking-header-content">
-              <div className="booking-profile-section">
-                <div className="booking-dp-orbit-container">
-                  {/* Animated rotating non-attached circular lines (arcs) around DP */}
-                  <svg className="dp-orbit-svg" viewBox="0 0 220 220" aria-hidden="true">
-                    <defs>
-                      <linearGradient id="dpOrbitCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#8FD3E8" />
-                        <stop offset="100%" stopColor="#bdecf9" />
-                      </linearGradient>
-                      <linearGradient id="dpOrbitBlueGrad" x1="100%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" stopColor="#EEF4F4" />
-                        <stop offset="100%" stopColor="#8FD3E8" />
-                      </linearGradient>
-                    </defs>
-                    {/* Outer Ring: dual rotating detached arcs (one top, one bottom, not connected) */}
-                    <g className="dp-orbit-spin-clockwise">
-                      {/* Top Arc (from top down) */}
-                      <circle
-                        cx="110"
-                        cy="110"
-                        r="101"
-                        fill="none"
-                        stroke="url(#dpOrbitCyanGrad)"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                        strokeDasharray="180 137"
-                        strokeDashoffset="0"
-                      />
-                      {/* Bottom Arc (from bottom up, separated by gap, not connected) */}
-                      <circle
-                        cx="110"
-                        cy="110"
-                        r="101"
-                        fill="none"
-                        stroke="url(#dpOrbitCyanGrad)"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                        strokeDasharray="180 137"
-                        strokeDashoffset="317"
-                      />
-                    </g>
-                    {/* Inner Ring: secondary counter-rotating detached arcs */}
-                    <g className="dp-orbit-spin-counter">
-                      <circle
-                        cx="110"
-                        cy="110"
-                        r="94"
-                        fill="none"
-                        stroke="url(#dpOrbitBlueGrad)"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeDasharray="115 180"
-                        strokeDashoffset="60"
-                      />
-                      <circle
-                        cx="110"
-                        cy="110"
-                        r="94"
-                        fill="none"
-                        stroke="url(#dpOrbitBlueGrad)"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeDasharray="115 180"
-                        strokeDashoffset="210"
-                      />
-                    </g>
-                  </svg>
-
-                  <div className="booking-profile-image">
-                    {getProviderDP(selectedProvider) ? (
-                      <img src={getProviderDP(selectedProvider)} alt={selectedProvider.name} className="provider-dp-img" />
-                    ) : (
-                      <span className="profile-initial">{selectedProvider.name.charAt(0)}</span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="booking-profile-details">
-                  <h2 className="provider-name">{selectedProvider.name}</h2>
-                  <div className="provider-rating">
-                    <span className="star">⭐</span>
-                    <span>{selectedProvider.rating}</span>
-                    <span className="reviews">({selectedProvider.reviews} verified reviews)</span>
-                  </div>
-                  <p className="provider-about">
-                    {selectedProvider.bio || `Certified ${selectedProvider.service} specialist with years of proven residential and commercial experience in ${selectedProvider.location}. Fully vetted with guaranteed satisfaction on MUX SERVICES.`}
-                  </p>
-                </div>
+              <div className="profile-header-top-bar">
+                <button 
+                  type="button"
+                  className="profile-back-btn" 
+                  onClick={handleBackToProviders}
+                >
+                  ← Back to {selectedService ? `${selectedService} Specialists` : 'Services'}
+                </button>
               </div>
 
-              <div className="booking-header-buttons">
-                <button
-                  className="profile-direct-chat-btn"
-                  onClick={handleStartChat}
-                >
-                  💬 Direct Chat &amp; Hire
-                </button>
-                <button 
-                  className="share-profile-btn"
-                  onClick={() => {
-                    if (navigator.clipboard) {
-                      navigator.clipboard.writeText(window.location.href)
-                      alert(`Profile link for ${selectedProvider.name} copied to clipboard!`)
-                    }
-                  }}
-                >
-                  🔗 Share Profile
-                </button>
+              <div className="booking-header-main-row">
+                <div className="booking-profile-section">
+                  <div className="booking-dp-orbit-container">
+                    {/* Animated rotating non-attached circular lines (arcs) around DP */}
+                    <svg className="dp-orbit-svg" viewBox="0 0 220 220" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="dpOrbitCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#8FD3E8" />
+                          <stop offset="100%" stopColor="#bdecf9" />
+                        </linearGradient>
+                        <linearGradient id="dpOrbitBlueGrad" x1="100%" y1="100%" x2="0%" y2="0%">
+                          <stop offset="0%" stopColor="#EEF4F4" />
+                          <stop offset="100%" stopColor="#8FD3E8" />
+                        </linearGradient>
+                      </defs>
+                      {/* Outer Ring: dual rotating detached arcs (one top, one bottom, not connected) */}
+                      <g className="dp-orbit-spin-clockwise">
+                        {/* Top Arc (from top down) */}
+                        <circle
+                          cx="110"
+                          cy="110"
+                          r="101"
+                          fill="none"
+                          stroke="url(#dpOrbitCyanGrad)"
+                          strokeWidth="3.5"
+                          strokeLinecap="round"
+                          strokeDasharray="180 137"
+                          strokeDashoffset="0"
+                        />
+                        {/* Bottom Arc (from bottom up, separated by gap, not connected) */}
+                        <circle
+                          cx="110"
+                          cy="110"
+                          r="101"
+                          fill="none"
+                          stroke="url(#dpOrbitCyanGrad)"
+                          strokeWidth="3.5"
+                          strokeLinecap="round"
+                          strokeDasharray="180 137"
+                          strokeDashoffset="317"
+                        />
+                      </g>
+                      {/* Inner Ring: secondary counter-rotating detached arcs */}
+                      <g className="dp-orbit-spin-counter">
+                        <circle
+                          cx="110"
+                          cy="110"
+                          r="94"
+                          fill="none"
+                          stroke="url(#dpOrbitBlueGrad)"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeDasharray="115 180"
+                          strokeDashoffset="60"
+                        />
+                        <circle
+                          cx="110"
+                          cy="110"
+                          r="94"
+                          fill="none"
+                          stroke="url(#dpOrbitBlueGrad)"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeDasharray="115 180"
+                          strokeDashoffset="210"
+                        />
+                      </g>
+                    </svg>
+
+                    <div className="booking-profile-image">
+                      {getProviderDP(selectedProvider) ? (
+                        <img src={getProviderDP(selectedProvider)} alt={selectedProvider.name} className="provider-dp-img" />
+                      ) : (
+                        <span className="profile-initial">{selectedProvider.name.charAt(0)}</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="booking-profile-details">
+                    <h2 className="provider-name">{selectedProvider.name}</h2>
+                    <div className="provider-rating">
+                      <span className="star">⭐</span>
+                      <span>{selectedProvider.rating}</span>
+                      <span className="reviews">({selectedProvider.reviews} verified reviews)</span>
+                    </div>
+                    <p className="provider-about">
+                      {selectedProvider.bio || `Certified ${selectedProvider.service} specialist with years of proven residential and commercial experience in ${selectedProvider.location}. Fully vetted with guaranteed satisfaction on MUX SERVICES.`}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="booking-header-buttons">
+                  <button
+                    className="profile-direct-chat-btn"
+                    onClick={handleStartChat}
+                  >
+                    💬 Direct Chat &amp; Hire
+                  </button>
+                  <button 
+                    className="share-profile-btn"
+                    onClick={() => {
+                      if (navigator.clipboard) {
+                        navigator.clipboard.writeText(window.location.href)
+                        alert(`Profile link for ${selectedProvider.name} copied to clipboard!`)
+                      }
+                    }}
+                  >
+                    🔗 Share Profile
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -2203,7 +2215,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   </div>
                   <div className="info-item">
                     <span className="info-label">Escrow Protected:</span>
-                    <span className="info-value" style={{ color: '#8FD3E8', fontWeight: 700 }}>✓ 100% Secure</span>
+                    <span className="info-value escrow-secure-pill">✓ 100% Secure</span>
                   </div>
                 </div>
               </div>
@@ -2269,7 +2281,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                     <div>
                       <div className="summary-stars-row">
                         {[...Array(5)].map((_, i) => (
-                          <span key={i} style={{ color: '#8FD3E8' }}>★</span>
+                          <span key={i} className="summary-star-icon">★</span>
                         ))}
                       </div>
                       <p className="summary-total-text">Based on {selectedProvider.reviews} verified client reviews</p>
@@ -2339,7 +2351,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                               <span className="review-verified-tag">✓ Verified Hire</span>
                             </div>
                             <div className="review-stars-row">
-                              <span style={{ color: '#f59e0b', fontSize: '1.1rem' }}>★★★★★</span>
+                              <span className="review-gold-stars">★★★★★</span>
                               <span className="review-date">{rev.date}</span>
                             </div>
                             <span className="review-service-pill">🛠️ {rev.serviceDone}</span>
