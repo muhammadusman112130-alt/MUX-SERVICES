@@ -20,6 +20,19 @@
     <link rel="canonical" id="canonical-url" href="https://muxservices.com/" />
     <link rel="robots" href="/robots.txt" />
     
+    <!-- Instant Theme Initializer: Zero flicker on reload -->
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('mux_theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', t);
+          if (t === 'warm-stone') {
+            document.documentElement.classList.add('theme-warm-stone');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    
     <!-- Multi-Language & Regional Targeting (Hreflang) -->
     <link rel="alternate" hreflang="en-PK" href="https://muxservices.com/" />
     <link rel="alternate" hreflang="ur-PK" href="https://muxservices.com/" />

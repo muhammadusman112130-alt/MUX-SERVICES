@@ -1391,3 +1391,148 @@
 [data-theme="warm-stone"] .cssc-text p {
   color: rgba(53, 79, 82, 0.8) !important;
 }
+
+/* DP Box & Avatar Column in Light Mode */
+[data-theme="warm-stone"] .cp-avatar-frame,
+.theme-warm-stone .cp-avatar-frame {
+  background: #ECEAE2 !important;
+  border: 2.5px solid #354F52 !important;
+  box-shadow: 0 8px 24px rgba(53, 79, 82, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .cp-avatar-initials,
+.theme-warm-stone .cp-avatar-initials {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+}
+
+[data-theme="warm-stone"] .cp-avatar-initials span,
+.theme-warm-stone .cp-avatar-initials span {
+  color: #DAD7CD !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .cp-avatar-upload-trigger,
+.theme-warm-stone .cp-avatar-upload-trigger {
+  background: #354F52 !important;
+  border: 1.5px solid #DAD7CD !important;
+  color: #DAD7CD !important;
+  box-shadow: 0 2px 8px rgba(53, 79, 82, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .cp-avatar-live-indicator,
+.theme-warm-stone .cp-avatar-live-indicator {
+  background: #52796F !important;
+  border: 2.5px solid #ECEAE2 !important;
+}
+
+/* Badges & Identity Tags in Profile */
+[data-theme="warm-stone"] .cpi-verified-badge,
+.theme-warm-stone .cpi-verified-badge {
+  background: rgba(53, 79, 82, 0.12) !important;
+  color: #354F52 !important;
+  border: 1px solid rgba(53, 79, 82, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .cpi-area-badge,
+.theme-warm-stone .cpi-area-badge {
+  background: rgba(53, 79, 82, 0.08) !important;
+  color: #52796F !important;
+  border: 1px solid rgba(53, 79, 82, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .cp-member-tag,
+.theme-warm-stone .cp-member-tag,
+[data-theme="warm-stone"] .cp-trust-pill,
+.theme-warm-stone .cp-trust-pill {
+  background: rgba(53, 79, 82, 0.08) !important;
+  color: #354F52 !important;
+  border: 1px solid rgba(53, 79, 82, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .cpai-tag,
+.theme-warm-stone .cpai-tag,
+[data-theme="warm-stone"] .cpai-city-tag,
+.theme-warm-stone .cpai-city-tag {
+  background: rgba(53, 79, 82, 0.1) !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .cpai-tag.primary,
+.theme-warm-stone .cpai-tag.primary {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+}
+
+[data-theme="warm-stone"] .cpai-badge-default,
+.theme-warm-stone .cpai-badge-default {
+  background: rgba(53, 79, 82, 0.12) !important;
+  color: #354F52 !important;
+  border: 1px solid rgba(53, 79, 82, 0.3) !important;
+}
+
+/* Profile Action Buttons */
+[data-theme="warm-stone"] .cp-btn-edit-mode,
+.theme-warm-stone .cp-btn-edit-mode,
+[data-theme="warm-stone"] .cp-mini-edit-btn,
+.theme-warm-stone .cp-mini-edit-btn,
+[data-theme="warm-stone"] .cp-submit-btn,
+.theme-warm-stone .cp-submit-btn,
+[data-theme="warm-stone"] .cp-btn-save,
+.theme-warm-stone .cp-btn-save {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .cp-btn-edit-mode:hover,
+.theme-warm-stone .cp-btn-edit-mode:hover,
+[data-theme="warm-stone"] .cp-mini-edit-btn:hover,
+.theme-warm-stone .cp-mini-edit-btn:hover,
+[data-theme="warm-stone"] .cp-submit-btn:hover,
+.theme-warm-stone .cp-submit-btn:hover,
+[data-theme="warm-stone"] .cp-btn-save:hover,
+.theme-warm-stone .cp-btn-save:hover {
+  background: #283C3E !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .cp-btn-cancel,
+.theme-warm-stone .cp-btn-cancel,
+[data-theme="warm-stone"] .cp-cancel-btn,
+.theme-warm-stone .cp-cancel-btn {
+  background: rgba(53, 79, 82, 0.1) !important;
+  color: #354F52 !important;
+  border: 1.5px solid #354F52 !important;
+}
+
+/* Toggle Switches */
+[data-theme="warm-stone"] .cp-toggle-switch.on,
+.theme-warm-stone .cp-toggle-switch.on {
+  background: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .cp-toggle-switch.off,
+.theme-warm-stone .cp-toggle-switch.off {
+  background: rgba(53, 79, 82, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .cp-toggle-switch .switch-slider,
+.theme-warm-stone .cp-toggle-switch .switch-slider {
+  background: #DAD7CD !important;
+}
+
+[data-theme="warm-stone"] .cp-inline-vtag,
+.theme-warm-stone .cp-inline-vtag {
+  background: rgba(53, 79, 82, 0.12) !important;
+  color: #354F52 !important;
+}
+
+/* Toast Alert in Light Mode */
+[data-theme="warm-stone"] .cp-toast-notification,
+.theme-warm-stone .cp-toast-notification {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  box-shadow: 0 10px 30px rgba(53, 79, 82, 0.35) !important;
+}

@@ -565,3 +565,206 @@
     flex-wrap: wrap;
   }
 }
+
+/* ══════════════════════════════════════════════════
+   NAVBAR WARM STONE LIGHT MODE (#DAD7CD & #354F52)
+   100% Theme Isolation: Zero Cyan / Zero Mint in Light Mode
+══════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .navbar,
+.theme-warm-stone .navbar {
+  background: #DAD7CD !important;
+  border-bottom: 1.5px solid rgba(53, 79, 82, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(53, 79, 82, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .navbar-brand-icon,
+.theme-warm-stone .navbar-brand-icon,
+[data-theme="warm-stone"] .logo-image,
+.theme-warm-stone .logo-image {
+  filter: brightness(0.28) sepia(1) hue-rotate(135deg) saturate(1.8) drop-shadow(0 2px 6px rgba(53, 79, 82, 0.35)) !important;
+}
+
+[data-theme="warm-stone"] .logo-link:hover .navbar-brand-icon,
+.theme-warm-stone .logo-link:hover .navbar-brand-icon,
+[data-theme="warm-stone"] .logo-link:hover .logo-image,
+.theme-warm-stone .logo-link:hover .logo-image {
+  filter: brightness(0.22) sepia(1) hue-rotate(135deg) saturate(2) drop-shadow(0 4px 10px rgba(53, 79, 82, 0.45)) !important;
+}
+
+[data-theme="warm-stone"] .brand-logo-mux,
+.theme-warm-stone .brand-logo-mux {
+  color: #354F52 !important;
+  -webkit-text-fill-color: #354F52 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .brand-logo-services,
+.theme-warm-stone .brand-logo-services,
+[data-theme="warm-stone"] .brand-logo-text-cyan,
+.theme-warm-stone .brand-logo-text-cyan,
+[data-theme="warm-stone"] .logo-text-services,
+.theme-warm-stone .logo-text-services {
+  color: #52796F !important;
+  -webkit-text-fill-color: #52796F !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .logo-link:hover .brand-logo-mux,
+.theme-warm-stone .logo-link:hover .brand-logo-mux {
+  color: #283C3E !important;
+  -webkit-text-fill-color: #283C3E !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .logo-link:hover .brand-logo-services,
+.theme-warm-stone .logo-link:hover .brand-logo-services {
+  color: #354F52 !important;
+  -webkit-text-fill-color: #354F52 !important;
+  text-shadow: none !important;
+}
+
+/* Nav Menu Links */
+[data-theme="warm-stone"] .navbar-menu li button,
+.theme-warm-stone .navbar-menu li button,
+[data-theme="warm-stone"] .navbar-menu li a,
+.theme-warm-stone .navbar-menu li a {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .nav-btn-text,
+.theme-warm-stone .nav-btn-text {
+  color: #354F52 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .navbar-menu li button::before,
+.theme-warm-stone .navbar-menu li button::before,
+[data-theme="warm-stone"] .navbar-menu li a::before,
+.theme-warm-stone .navbar-menu li a::before {
+  background: rgba(53, 79, 82, 0.12) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .navbar-menu li button:hover,
+.theme-warm-stone .navbar-menu li button:hover,
+[data-theme="warm-stone"] .navbar-menu li a:hover,
+.theme-warm-stone .navbar-menu li a:hover {
+  color: #283C3E !important;
+  background: rgba(53, 79, 82, 0.12) !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.18) !important;
+}
+
+[data-theme="warm-stone"] .navbar-menu li button:hover .nav-btn-text,
+.theme-warm-stone .navbar-menu li button:hover .nav-btn-text,
+[data-theme="warm-stone"] .navbar-menu li a:hover .nav-btn-text,
+.theme-warm-stone .navbar-menu li a:hover .nav-btn-text {
+  color: #283C3E !important;
+  text-shadow: none !important;
+}
+
+/* DP Box / User Profile Pill */
+[data-theme="warm-stone"] .navbar-user-pill,
+.theme-warm-stone .navbar-user-pill {
+  background: #ECEAE2 !important;
+  border: 1.5px solid rgba(53, 79, 82, 0.35) !important;
+  color: #354F52 !important;
+  box-shadow: 0 3px 12px rgba(53, 79, 82, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .navbar-user-pill:hover,
+.theme-warm-stone .navbar-user-pill:hover,
+[data-theme="warm-stone"] .navbar-user-pill.active,
+.theme-warm-stone .navbar-user-pill.active {
+  background: #DAD7CD !important;
+  border-color: #354F52 !important;
+  box-shadow: 0 4px 18px rgba(53, 79, 82, 0.28) !important;
+}
+
+[data-theme="warm-stone"] .nup-avatar-circle,
+.theme-warm-stone .nup-avatar-circle {
+  background: #354F52 !important;
+  border: 1.5px solid #354F52 !important;
+  box-shadow: 0 2px 8px rgba(53, 79, 82, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .nup-avatar-text,
+.theme-warm-stone .nup-avatar-text {
+  color: #DAD7CD !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .nup-live-dot,
+.theme-warm-stone .nup-live-dot {
+  background: #52796F !important;
+  border: 1.5px solid #DAD7CD !important;
+  box-shadow: 0 0 6px rgba(82, 121, 111, 0.5) !important;
+}
+
+[data-theme="warm-stone"] .nup-user-name,
+.theme-warm-stone .nup-user-name {
+  color: #354F52 !important;
+  font-weight: 800 !important;
+}
+
+/* Buttons in Navbar */
+[data-theme="warm-stone"] .btn-login,
+.theme-warm-stone .btn-login {
+  background: rgba(53, 79, 82, 0.08) !important;
+  color: #354F52 !important;
+  border: 1.5px solid #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .btn-login:hover,
+.theme-warm-stone .btn-login:hover {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .btn-signup,
+.theme-warm-stone .btn-signup {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .btn-signup:hover,
+.theme-warm-stone .btn-signup:hover {
+  background: #283C3E !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 22px rgba(53, 79, 82, 0.5) !important;
+}
+
+[data-theme="warm-stone"] .btn-signup::after,
+.theme-warm-stone .btn-signup::after {
+  background: linear-gradient(90deg, transparent, rgba(218, 215, 205, 0.45), transparent) !important;
+}
+
+[data-theme="warm-stone"] .btn-logout,
+.theme-warm-stone .btn-logout {
+  background: rgba(53, 79, 82, 0.1) !important;
+  color: #354F52 !important;
+  border: 1px solid rgba(53, 79, 82, 0.35) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .btn-logout:hover,
+.theme-warm-stone .btn-logout:hover {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+}
+
+[data-theme="warm-stone"] .navbar-menu-toggle,
+.theme-warm-stone .navbar-menu-toggle {
+  background: #ECEAE2 !important;
+  border-color: rgba(53, 79, 82, 0.3) !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .navbar--account .navbar-profile,
+.theme-warm-stone .navbar--account .navbar-profile {
+  color: #354F52 !important;
+  background: #ECEAE2 !important;
+  border-color: rgba(53, 79, 82, 0.25) !important;
+}
