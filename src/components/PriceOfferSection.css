@@ -586,6 +586,16 @@
     width: 100%;
     justify-content: center;
   }
+
+  .anim-card-unfold,
+  .anim-3d-door-open {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .pro-join-orb {
+    display: none !important;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════

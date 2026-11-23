@@ -819,7 +819,41 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
               {/* Theme Selection Grid Cards */}
               <div className="cp-theme-cards-grid">
                 
-                {/* 1. Default Dark MUX Theme */}
+                {/* 1. Light Mode (Pure White #FFFFF0 & Dark Slate Gray #0A0A0A) */}
+                <div 
+                  className={`cp-theme-selection-card animated-shadow-aura ${currentTheme === 'warm-stone' ? 'selected' : ''}`}
+                  onClick={() => {
+                    if (currentTheme !== 'warm-stone' && typeof onThemeChange === 'function') {
+                      onThemeChange('warm-stone')
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <div className="cp-tsc-preview warm-stone-preview">
+                    <div className="cp-tsc-sample-header"></div>
+                    <div className="cp-tsc-sample-body">
+                      <div className="cp-tsc-sample-card">
+                        <div className="cp-tsc-sample-line accent"></div>
+                        <div className="cp-tsc-sample-line"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="cp-tsc-details">
+                    <div className="cp-tsc-title-row">
+                      <h4>Light Mode</h4>
+                      {currentTheme === 'warm-stone' && <span className="cp-tsc-active-pill">Active</span>}
+                    </div>
+                    <p>Pure White (#FFFFF0) and Dark Slate Gray (#0A0A0A) minimalist two-color palette.</p>
+                    <div className="cp-tsc-swatches">
+                      <span className="cp-swatch" style={{ background: '#FFFFF0', border: '1.5px solid #0A0A0A' }} title="Ivory #FFFFF0"></span>
+                      <span className="cp-swatch" style={{ background: '#0A0A0A' }} title="Dark Slate Gray #0A0A0A"></span>
+                      <span className="cp-swatch" style={{ background: '#222222' }} title="Deep Slate #222222"></span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Default Dark MUX Theme */}
                 <div 
                   className={`cp-theme-selection-card animated-shadow-aura ${currentTheme === 'dark' ? 'selected' : ''}`}
                   onClick={() => {
@@ -850,40 +884,6 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
                       <span className="cp-swatch" style={{ background: '#13383e' }} title="Surface #13383e"></span>
                       <span className="cp-swatch" style={{ background: '#8FD3E8' }} title="Mint Ice #8FD3E8"></span>
                       <span className="cp-swatch" style={{ background: '#EEF4F4' }} title="Frost White #EEF4F4"></span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 2. Light Mode (Pure White #FFFFF0 & Dark Slate Gray #0A0A0A) */}
-                <div 
-                  className={`cp-theme-selection-card animated-shadow-aura ${currentTheme === 'warm-stone' ? 'selected' : ''}`}
-                  onClick={() => {
-                    if (currentTheme !== 'warm-stone' && typeof onThemeChange === 'function') {
-                      onThemeChange('warm-stone')
-                    }
-                  }}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <div className="cp-tsc-preview warm-stone-preview">
-                    <div className="cp-tsc-sample-header"></div>
-                    <div className="cp-tsc-sample-body">
-                      <div className="cp-tsc-sample-card">
-                        <div className="cp-tsc-sample-line accent"></div>
-                        <div className="cp-tsc-sample-line"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="cp-tsc-details">
-                    <div className="cp-tsc-title-row">
-                      <h4>Light Mode</h4>
-                      {currentTheme === 'warm-stone' && <span className="cp-tsc-active-pill">Active</span>}
-                    </div>
-                    <p>Pure White (#FFFFF0) and Dark Slate Gray (#0A0A0A) minimalist two-color palette.</p>
-                    <div className="cp-tsc-swatches">
-                      <span className="cp-swatch" style={{ background: '#FFFFF0', border: '1.5px solid #0A0A0A' }} title="Ivory #FFFFF0"></span>
-                      <span className="cp-swatch" style={{ background: '#0A0A0A' }} title="Dark Slate Gray #0A0A0A"></span>
-                      <span className="cp-swatch" style={{ background: '#222222' }} title="Deep Slate #222222"></span>
                     </div>
                   </div>
                 </div>

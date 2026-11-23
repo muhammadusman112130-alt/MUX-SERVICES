@@ -3193,6 +3193,12 @@
   .svc-home-grid {
     padding: 0 1.25rem;
     grid-template-columns: repeat(2, 1fr) !important;
+    perspective: none !important;
+  }
+
+  .svc-home-card:nth-child(n+4) {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .svc-tech-grid {
@@ -4624,14 +4630,33 @@
     align-items: center;
     text-align: center;
   }
+  .booking-header-main-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+  }
   .booking-profile-section {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 100% !important;
   }
   .booking-profile-details {
     align-items: center;
     text-align: center;
+    width: 100% !important;
+  }
+  .booking-header-buttons {
+    width: 100% !important;
+    align-items: stretch !important;
+  }
+  .profile-direct-chat-btn,
+  .view-profile-btn,
+  .share-profile-btn {
+    width: 100% !important;
+    justify-content: center !important;
   }
   .booking-dp-orbit-container {
     width: 185px;
@@ -4648,7 +4673,6 @@
   .customer-reviews-grid {
     grid-template-columns: 1fr;
   }
-
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -6532,23 +6556,6 @@
   display: block !important;
   background: linear-gradient(180deg, rgba(10, 10, 10, 0.05) 0%, rgba(10, 10, 10, 0.22) 100%) !important;
   pointer-events: none !important;
-}
-
-/* DP Orbital Circles in Light Mode (Pure Jet Black, No Cyan / Blue) */
-[data-theme="warm-stone"] .dp-orbit-svg,
-.theme-warm-stone .dp-orbit-svg {
-  filter: none !important;
-}
-
-[data-theme="warm-stone"] .dp-orbit-svg circle,
-.theme-warm-stone .dp-orbit-svg circle,
-[data-theme="warm-stone"] .dp-orbit-spin-clockwise circle,
-.theme-warm-stone .dp-orbit-spin-clockwise circle,
-[data-theme="warm-stone"] .dp-orbit-spin-counter circle,
-.theme-warm-stone .dp-orbit-spin-counter circle,
-[data-theme="warm-stone"] .booking-dp-orbit-container circle,
-.theme-warm-stone .booking-dp-orbit-container circle {
-  stroke: #0A0A0A !important;
 }
 
 /* Provider DP Image & Initial */

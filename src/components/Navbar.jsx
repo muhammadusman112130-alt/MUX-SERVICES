@@ -107,69 +107,68 @@ function Navbar({
 
         <ul className="navbar-menu" id="main-navigation">
           <li>
-            <a href="/" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>
+            <a 
+              href="/" 
+              className={currentPage === 'home' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}
+            >
               <span className="nav-btn-text">Home</span>
             </a>
           </li>
-          {!isProviderLoggedIn && !isProviderAuthPage && (
-            <li>
-              <a href="/services" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }}>
-                <span className="nav-btn-text">Services</span>
-              </a>
-            </li>
-          )}
-          {!isProviderLoggedIn && !isProviderAuthPage && (
-            <li>
-              <a href="/professionals" onClick={(e) => { e.preventDefault(); setCurrentPage('professionals'); }}>
-                <span className="nav-btn-text">Professionals</span>
-              </a>
-            </li>
-          )}
-          {isProviderLoggedIn && (
-            <li>
-              <a href="/provider-dashboard" onClick={(e) => { e.preventDefault(); setCurrentPage('provider-dashboard'); }}>
-                <span className="nav-btn-text">Dashboard</span>
-              </a>
-            </li>
-          )}
-          {isProviderLoggedIn && (
-            <li>
-              <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}>
-                <span className="nav-btn-text">Messages</span>
-              </a>
-            </li>
-          )}
-          {currentPage === 'provider-verification' && (
-            <li className="navbar-mobile-provider-link">
-              <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}>
-                <span className="nav-btn-text">Messages</span>
-              </a>
-            </li>
-          )}
           <li>
-            <a href="/about" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }}>
+            <a 
+              href="/services" 
+              className={currentPage === 'services' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }}
+            >
+              <span className="nav-btn-text">Services</span>
+            </a>
+          </li>
+          <li>
+            <a 
+              href="/professionals" 
+              className={currentPage === 'professionals' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); setCurrentPage('professionals'); }}
+            >
+              <span className="nav-btn-text">Professionals</span>
+            </a>
+          </li>
+          <li>
+            <a 
+              href="/messages" 
+              className={currentPage === 'messages' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}
+            >
+              <span className="nav-btn-text">Messages</span>
+            </a>
+          </li>
+          <li>
+            <a 
+              href="/booked" 
+              className={(currentPage === 'booked' || currentPage === 'bookings') ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); setCurrentPage('booked'); }}
+            >
+              <span className="nav-btn-text">Booked</span>
+            </a>
+          </li>
+          <li>
+            <a 
+              href="/about" 
+              className={currentPage === 'about' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }}
+            >
               <span className="nav-btn-text">About</span>
             </a>
           </li>
           <li>
-            <a href="/contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}>
+            <a 
+              href="/contact" 
+              className={currentPage === 'contact' ? 'active' : ''}
+              onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}
+            >
               <span className="nav-btn-text">Contact</span>
             </a>
           </li>
-          {!isProviderLoggedIn && !isProviderAuthPage && isLoggedIn && (
-            <>
-              <li>
-                <a href="/booked" onClick={(e) => { e.preventDefault(); setCurrentPage('booked'); }}>
-                  <span className="nav-btn-text">Booked</span>
-                </a>
-              </li>
-              <li>
-                <a href="/messages" onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}>
-                  <span className="nav-btn-text">Messages</span>
-                </a>
-              </li>
-            </>
-          )}
         </ul>
 
         <div className="navbar-auth" id="account-navigation">

@@ -2037,16 +2037,6 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
             <div className="booking-header-ambient-overlay" aria-hidden="true"></div>
 
             <div className="booking-header-content">
-              <div className="profile-header-top-bar">
-                <button 
-                  type="button"
-                  className="profile-back-btn" 
-                  onClick={handleBackToProviders}
-                >
-                  ← Back to {selectedService ? `${selectedService} Specialists` : 'Services'}
-                </button>
-              </div>
-
               <div className="booking-header-main-row">
                 <div className="booking-profile-section">
                   <div className="booking-dp-orbit-container">

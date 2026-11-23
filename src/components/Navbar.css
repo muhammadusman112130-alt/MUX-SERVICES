@@ -550,10 +550,11 @@
     display: list-item;
   }
 
-  .navbar .logo-text {
-    font-size: 1rem;
+  .navbar .logo-text,
+  .brand-logo-text-wrap {
+    font-size: 1.12rem !important;
     gap: 0.25rem;
-    letter-spacing: 0;
+    letter-spacing: 0.5px !important;
   }
 
   .navbar .logo-link {

@@ -492,6 +492,15 @@
     gap: 0.75rem;
     align-items: flex-start;
   }
+
+  .wf-step-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .wf-orb {
+    display: none !important;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════

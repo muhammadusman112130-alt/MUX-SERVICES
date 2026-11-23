@@ -94,9 +94,9 @@ function App() {
   const [isProviderLoggedIn, setIsProviderLoggedIn] = useState(() => initialPage === 'provider-dashboard')
   const [theme, setTheme] = useState(() => {
     try {
-      return localStorage.getItem('mux_theme') || 'dark'
+      return localStorage.getItem('mux_theme') || 'warm-stone'
     } catch {
-      return 'dark'
+      return 'warm-stone'
     }
   })
 

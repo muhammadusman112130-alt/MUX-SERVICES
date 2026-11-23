@@ -1973,6 +1973,10 @@
   .bt-tab-btn {
     width: 100%;
   }
+  .lst-left-status {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
   .ltm-top-status-bar {
     flex-direction: column;
     align-items: flex-start;

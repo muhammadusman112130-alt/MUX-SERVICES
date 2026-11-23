@@ -183,9 +183,84 @@ body {
     --minimum-font-size: 16px;
   }
 
+  html,
   body {
     font-size: 16px;
-    overflow-x: visible;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative !important;
+  }
+
+  #root,
+  .app {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* ── Universal Mobile UI Resilience: Guaranteed Visibility & No Side Gaps ── */
+  /* Prevent any element or card from remaining invisible due to scroll observer delays or failures */
+  .svc-home-card,
+  .svc-home-card:nth-child(n+4),
+  .pro-card,
+  .pro-card:nth-child(n+7),
+  .wf-step-card,
+  .anim-card-unfold,
+  .anim-3d-door-open,
+  .price-offer-box,
+  .pro-trust-card,
+  .value-card,
+  .core-values-section.values-out-view .value-card,
+  .core-values-section.values-out-view .values-header,
+  .values-header,
+  .pro-trust-grid::before {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    visibility: visible !important;
+  }
+
+  /* Disable 3D perspectives that poke beyond mobile device borders */
+  .workflow-section,
+  .pro-join-section,
+  .svc-home-grid,
+  .pro-trust-grid {
+    perspective: none !important;
+  }
+
+  /* Hide background bleed orbs and horizontal connectors that cause mobile margin gaps */
+  .wf-orb,
+  .wf-orb-left,
+  .wf-orb-right,
+  .pro-join-orb,
+  .pro-join-orb.orb-left,
+  .pro-join-orb.orb-right,
+  .pro-trust-card:not(:last-child)::after,
+  .pro-trust-card:not(:last-child)::before {
+    display: none !important;
+  }
+
+  /* Mobile container width and margin resets */
+  .container,
+  .workflow-section .container,
+  .pro-join-section .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Eliminate min-width overflows on mobile screens */
+  .lst-left-status {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .cp-identity-column {
+    min-width: 0 !important;
+    width: 100% !important;
   }
 
   .app button {
@@ -2362,14 +2437,6 @@ body.theme-warm-stone,
 .theme-warm-stone .provider-profile-view .booking-content-container {
   background: #FFFFF0 !important;
   color: #0A0A0A !important;
-}
-
-/* DP Orbit SVG Circles in Light Mode (Pure Jet Black) */
-[data-theme="warm-stone"] .dp-orbit-svg circle,
-.theme-warm-stone .dp-orbit-svg circle,
-[data-theme="warm-stone"] .booking-dp-orbit-container circle,
-.theme-warm-stone .booking-dp-orbit-container circle {
-  stroke: #0A0A0A !important;
 }
 
 /* Provider Name: No box behind it */

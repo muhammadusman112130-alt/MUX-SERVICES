@@ -1145,6 +1145,16 @@
   .pro-modal-actions {
     flex-direction: column;
   }
+
+  .pro-trust-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .pro-trust-card:not(:last-child)::after,
+  .pro-trust-card:not(:last-child)::before {
+    display: none !important;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     
     <!-- SEO Primary Meta Tags -->
     <title>MUX SERVICES - Multan's Premier Verified Home Services</title>
@@ -24,10 +24,12 @@
     <script>
       (function() {
         try {
-          var t = localStorage.getItem('mux_theme') || 'dark';
+          var t = localStorage.getItem('mux_theme') || 'warm-stone';
           document.documentElement.setAttribute('data-theme', t);
           if (t === 'warm-stone') {
             document.documentElement.classList.add('theme-warm-stone');
+          } else {
+            document.documentElement.classList.remove('theme-warm-stone');
           }
         } catch(e) {}
       })();

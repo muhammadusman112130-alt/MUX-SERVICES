@@ -863,6 +863,15 @@
   .craft-card {
     height: 300px;
   }
+
+  .core-values-section.values-out-view .values-header,
+  .core-values-section.values-out-view .value-card,
+  .values-header,
+  .value-card {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

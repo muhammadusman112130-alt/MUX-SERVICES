@@ -1243,6 +1243,10 @@
   .cp-theme-cards-grid {
     grid-template-columns: 1fr;
   }
+  .cp-identity-column {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
   .cp-theme-intro-bar {
     flex-direction: column;
     align-items: flex-start;
