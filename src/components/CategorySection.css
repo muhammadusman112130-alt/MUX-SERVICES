@@ -978,3 +978,300 @@
     justify-content: center;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CATEGORY SECTION — STRICT TWO-COLOR LIGHT MODE (#FFFFFF & #354F52)
+   Zero Cyan / Zero Green / Zero Color Residue Across Card, Tabs & Slider
+══════════════════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .category-section,
+.theme-warm-stone .category-section {
+  background: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .category-section::before,
+.theme-warm-stone .category-section::before {
+  display: none !important;
+}
+
+[data-theme="warm-stone"] .category-pill-badge,
+.theme-warm-stone .category-pill-badge {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  color: #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .pill-dot,
+.theme-warm-stone .pill-dot {
+  background: #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .category-section .section-title,
+.theme-warm-stone .category-section .section-title {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .category-section .section-subtitle,
+.theme-warm-stone .category-section .section-subtitle {
+  color: #354F52 !important;
+}
+
+/* Quick Nav Filter Tabs (640+ HVAC Technicians, etc.) */
+[data-theme="warm-stone"] .quick-nav-btn,
+.theme-warm-stone .quick-nav-btn {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  color: #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .quick-nav-btn:hover,
+.theme-warm-stone .quick-nav-btn:hover,
+[data-theme="warm-stone"] .quick-nav-btn.active,
+.theme-warm-stone .quick-nav-btn.active {
+  background: #354F52 !important;
+  border-color: #354F52 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(53, 79, 82, 0.25) !important;
+}
+
+/* Hide Cyan Backlight Aura & Floor Beam Animations */
+[data-theme="warm-stone"] .card-backlight-aura,
+.theme-warm-stone .card-backlight-aura,
+[data-theme="warm-stone"] .card-floor-light-animation,
+.theme-warm-stone .card-floor-light-animation,
+[data-theme="warm-stone"] .card-ambient-glow,
+.theme-warm-stone .card-ambient-glow,
+[data-theme="warm-stone"] .slider-slide:hover .card-backlight-aura,
+.theme-warm-stone .slider-slide:hover .card-backlight-aura,
+[data-theme="warm-stone"] .slider-slide:hover .card-floor-light-animation,
+.theme-warm-stone .slider-slide:hover .card-floor-light-animation {
+  display: none !important;
+}
+
+/* Slider Service Card Container */
+[data-theme="warm-stone"] .top-service-card,
+.theme-warm-stone .top-service-card {
+  background: #FFFFFF !important;
+  border: 2px solid #354F52 !important;
+  box-shadow: 0 10px 30px rgba(53, 79, 82, 0.12) !important;
+  animation: none !important;
+}
+
+[data-theme="warm-stone"] .top-service-card:hover,
+.theme-warm-stone .top-service-card:hover {
+  transform: translateY(-6px) !important;
+  border-color: #354F52 !important;
+  box-shadow: 0 18px 45px rgba(53, 79, 82, 0.22) !important;
+  animation: none !important;
+}
+
+/* Card Internal Layout Sub-containers: Transparent & No Box Borders */
+[data-theme="warm-stone"] .card-split-layout,
+.theme-warm-stone .card-split-layout,
+[data-theme="warm-stone"] .card-info-col,
+.theme-warm-stone .card-info-col,
+[data-theme="warm-stone"] .card-main-body,
+.theme-warm-stone .card-main-body,
+[data-theme="warm-stone"] .card-text-block,
+.theme-warm-stone .card-text-block,
+[data-theme="warm-stone"] .card-title-row,
+.theme-warm-stone .card-title-row,
+[data-theme="warm-stone"] .card-bottom-row,
+.theme-warm-stone .card-bottom-row,
+[data-theme="warm-stone"] .card-side-visual,
+.theme-warm-stone .card-side-visual,
+[data-theme="warm-stone"] .card-stats-info,
+.theme-warm-stone .card-stats-info,
+[data-theme="warm-stone"] .card-skills-wrap,
+.theme-warm-stone .card-skills-wrap,
+[data-theme="warm-stone"] .skills-tags-row,
+.theme-warm-stone .skills-tags-row {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Card Top Badges */
+[data-theme="warm-stone"] .card-badge-tag,
+.theme-warm-stone .card-badge-tag {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+[data-theme="warm-stone"] .badge-pulse-indicator,
+.theme-warm-stone .badge-pulse-indicator {
+  background: #FFFFFF !important;
+  box-shadow: 0 0 6px #FFFFFF !important;
+}
+
+/* Typography Inside Service Card */
+[data-theme="warm-stone"] .card-service-title,
+.theme-warm-stone .card-service-title {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .card-price-chip,
+.theme-warm-stone .card-price-chip {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .card-headline,
+.theme-warm-stone .card-headline {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .card-tagline,
+.theme-warm-stone .card-tagline {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .card-icon-wrapper,
+.theme-warm-stone .card-icon-wrapper {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  box-shadow: 0 4px 12px rgba(53, 79, 82, 0.1) !important;
+}
+
+[data-theme="warm-stone"] .card-svg-icon,
+.theme-warm-stone .card-svg-icon {
+  color: #354F52 !important;
+}
+
+/* Features List */
+[data-theme="warm-stone"] .card-features-list,
+.theme-warm-stone .card-features-list {
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(53, 79, 82, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .feature-item,
+.theme-warm-stone .feature-item {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .feature-item::before,
+.theme-warm-stone .feature-item::before {
+  color: #354F52 !important;
+}
+
+/* Skills Chips */
+[data-theme="warm-stone"] .skills-heading,
+.theme-warm-stone .skills-heading {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .skill-chip,
+.theme-warm-stone .skill-chip {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .skill-chip:hover,
+.theme-warm-stone .skill-chip:hover {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+}
+
+/* Side Visual */
+[data-theme="warm-stone"] .card-side-img-wrapper,
+.theme-warm-stone .card-side-img-wrapper {
+  border: 2px solid #354F52 !important;
+  background: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .card-side-img-overlay,
+.theme-warm-stone .card-side-img-overlay {
+  display: none !important;
+}
+
+[data-theme="warm-stone"] .card-side-img-badge,
+.theme-warm-stone .card-side-img-badge {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(53, 79, 82, 0.3) !important;
+}
+
+/* Card Bottom Stats & Counter */
+[data-theme="warm-stone"] .card-bottom-row,
+.theme-warm-stone .card-bottom-row {
+  border-top: 1px solid rgba(53, 79, 82, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .rating-pill,
+.theme-warm-stone .rating-pill,
+[data-theme="warm-stone"] .rating-pill strong,
+.theme-warm-stone .rating-pill strong,
+[data-theme="warm-stone"] .review-count,
+.theme-warm-stone .review-count,
+[data-theme="warm-stone"] .pros-count-text,
+.theme-warm-stone .pros-count-text,
+[data-theme="warm-stone"] .pros-count-text strong,
+.theme-warm-stone .pros-count-text strong {
+  color: #354F52 !important;
+}
+
+/* Explore Button */
+[data-theme="warm-stone"] .card-explore-btn,
+.theme-warm-stone .card-explore-btn {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .card-explore-btn:hover,
+.theme-warm-stone .card-explore-btn:hover {
+  background: #283C3E !important;
+  color: #FFFFFF !important;
+}
+
+/* Slider Controls & Navigation */
+[data-theme="warm-stone"] .slider-control-btn,
+.theme-warm-stone .slider-control-btn {
+  background: #FFFFFF !important;
+  border: 2px solid #354F52 !important;
+  color: #354F52 !important;
+  box-shadow: 0 4px 12px rgba(53, 79, 82, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .slider-control-btn:hover,
+.theme-warm-stone .slider-control-btn:hover {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+}
+
+/* Slider Counter & Dots */
+[data-theme="warm-stone"] .slider-counter,
+.theme-warm-stone .slider-counter,
+[data-theme="warm-stone"] .counter-current,
+.theme-warm-stone .counter-current,
+[data-theme="warm-stone"] .counter-divider,
+.theme-warm-stone .counter-divider,
+[data-theme="warm-stone"] .counter-total,
+.theme-warm-stone .counter-total {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .slider-dot-btn,
+.theme-warm-stone .slider-dot-btn {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+}
+
+[data-theme="warm-stone"] .slider-dot-btn.active,
+.theme-warm-stone .slider-dot-btn.active {
+  border-color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .dot-progress-bar,
+.theme-warm-stone .dot-progress-bar {
+  background: #354F52 !important;
+}

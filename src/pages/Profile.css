@@ -1065,7 +1065,7 @@
 }
 
 .cp-tsc-preview.warm-stone-preview {
-  background: #DAD7CD;
+  background: #FFFFFF;
   border-bottom: 1px solid rgba(53, 79, 82, 0.25);
 }
 
@@ -1107,8 +1107,8 @@
 }
 
 .warm-stone-preview .cp-tsc-sample-card {
-  background: #ECEAE2;
-  border: 1px solid rgba(53, 79, 82, 0.3);
+  background: #FFFFFF;
+  border: 1.5px solid #354F52;
 }
 
 .cp-tsc-sample-line {
@@ -1245,21 +1245,21 @@
 }
 
 /* ══════════════════════════════════════════════════
-   PROFILE SPECIFIC WARM STONE OVERRIDES (#DAD7CD & #354F52)
+   PROFILE SPECIFIC LIGHT MODE OVERRIDES (#FFFFFF & #354F52)
 ══════════════════════════════════════════════════ */
 [data-theme="warm-stone"] .customer-profile-page {
-  background: #DAD7CD !important;
+  background: #FFFFFF !important;
   color: #354F52 !important;
 }
 
 [data-theme="warm-stone"] .cp-hero-card {
-  background: #ECEAE2 !important;
-  border-color: rgba(53, 79, 82, 0.3) !important;
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
   box-shadow: 0 16px 45px rgba(53, 79, 82, 0.18) !important;
 }
 
 [data-theme="warm-stone"] .cp-hero-bg-glow {
-  background: radial-gradient(circle, rgba(53, 79, 82, 0.15) 0%, transparent 70%) !important;
+  background: radial-gradient(circle, rgba(53, 79, 82, 0.1) 0%, transparent 70%) !important;
 }
 
 [data-theme="warm-stone"] .cp-user-fullname {
@@ -1271,8 +1271,8 @@
 }
 
 [data-theme="warm-stone"] .cp-stat-card {
-  background: #ECEAE2 !important;
-  border-color: rgba(53, 79, 82, 0.25) !important;
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
 }
 
 [data-theme="warm-stone"] .cpsc-body strong {
@@ -1284,13 +1284,13 @@
 }
 
 [data-theme="warm-stone"] .cp-nav-tabs {
-  background: #ECEAE2 !important;
-  border-color: rgba(53, 79, 82, 0.25) !important;
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
 }
 
 [data-theme="warm-stone"] .cp-tab-card {
-  background: #ECEAE2 !important;
-  border-color: rgba(53, 79, 82, 0.25) !important;
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
 }
 
 [data-theme="warm-stone"] .cptc-title {
@@ -1302,8 +1302,8 @@
 }
 
 [data-theme="warm-stone"] .cp-theme-intro-bar {
-  background: #F7F6F2 !important;
-  border-color: rgba(53, 79, 82, 0.2) !important;
+  background: #FFFFFF !important;
+  border-color: rgba(53, 79, 82, 0.25) !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-intro-text h4 {
@@ -1317,7 +1317,7 @@
 [data-theme="warm-stone"] .cp-theme-current-badge {
   color: #354F52 !important;
   background: rgba(53, 79, 82, 0.12) !important;
-  border-color: rgba(53, 79, 82, 0.3) !important;
+  border-color: #354F52 !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-switch-label {
@@ -1325,8 +1325,8 @@
 }
 
 [data-theme="warm-stone"] .cp-theme-selection-card {
-  background: #ECEAE2 !important;
-  border-color: rgba(53, 79, 82, 0.25) !important;
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-selection-card:hover,
@@ -1345,7 +1345,7 @@
 [data-theme="warm-stone"] .cp-tsc-active-pill,
 .theme-warm-stone .cp-tsc-active-pill {
   background: #354F52 !important;
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
   box-shadow: 0 2px 8px rgba(53, 79, 82, 0.35) !important;
 }
 
@@ -1358,8 +1358,8 @@
 }
 
 [data-theme="warm-stone"] .cp-theme-info-box {
-  background: #F7F6F2 !important;
-  border-color: rgba(53, 79, 82, 0.2) !important;
+  background: #FFFFFF !important;
+  border-color: rgba(53, 79, 82, 0.25) !important;
 }
 
 [data-theme="warm-stone"] .ctib-text h5 {
@@ -1376,9 +1376,9 @@
 }
 
 [data-theme="warm-stone"] .cp-field-display {
-  background: #F7F6F2 !important;
+  background: #FFFFFF !important;
   color: #354F52 !important;
-  border-color: rgba(53, 79, 82, 0.2) !important;
+  border-color: rgba(53, 79, 82, 0.3) !important;
 }
 
 [data-theme="warm-stone"] .cpai-address-title {
@@ -1410,7 +1410,7 @@
 /* DP Box & Avatar Column in Light Mode */
 [data-theme="warm-stone"] .cp-avatar-frame,
 .theme-warm-stone .cp-avatar-frame {
-  background: #ECEAE2 !important;
+  background: #FFFFFF !important;
   border: 2.5px solid #354F52 !important;
   box-shadow: 0 8px 24px rgba(53, 79, 82, 0.2) !important;
 }
@@ -1418,27 +1418,27 @@
 [data-theme="warm-stone"] .cp-avatar-initials,
 .theme-warm-stone .cp-avatar-initials {
   background: #354F52 !important;
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
 }
 
 [data-theme="warm-stone"] .cp-avatar-initials span,
 .theme-warm-stone .cp-avatar-initials span {
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
   text-shadow: none !important;
 }
 
 [data-theme="warm-stone"] .cp-avatar-upload-trigger,
 .theme-warm-stone .cp-avatar-upload-trigger {
   background: #354F52 !important;
-  border: 1.5px solid #DAD7CD !important;
-  color: #DAD7CD !important;
+  border: 1.5px solid #FFFFFF !important;
+  color: #FFFFFF !important;
   box-shadow: 0 2px 8px rgba(53, 79, 82, 0.3) !important;
 }
 
 [data-theme="warm-stone"] .cp-avatar-live-indicator,
 .theme-warm-stone .cp-avatar-live-indicator {
   background: #354F52 !important;
-  border: 2.5px solid #ECEAE2 !important;
+  border: 2.5px solid #FFFFFF !important;
 }
 
 /* Badges & Identity Tags in Profile */
@@ -1476,7 +1476,7 @@
 [data-theme="warm-stone"] .cpai-tag.primary,
 .theme-warm-stone .cpai-tag.primary {
   background: #354F52 !important;
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
 }
 
 [data-theme="warm-stone"] .cpai-badge-default,
@@ -1496,7 +1496,7 @@
 [data-theme="warm-stone"] .cp-btn-save,
 .theme-warm-stone .cp-btn-save {
   background: #354F52 !important;
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
   border: none !important;
   box-shadow: 0 4px 15px rgba(53, 79, 82, 0.35) !important;
 }
@@ -1535,7 +1535,7 @@
 
 [data-theme="warm-stone"] .cp-toggle-switch .switch-slider,
 .theme-warm-stone .cp-toggle-switch .switch-slider {
-  background: #DAD7CD !important;
+  background: #FFFFFF !important;
 }
 
 [data-theme="warm-stone"] .cp-inline-vtag,
@@ -1548,6 +1548,6 @@
 [data-theme="warm-stone"] .cp-toast-notification,
 .theme-warm-stone .cp-toast-notification {
   background: #354F52 !important;
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
   box-shadow: 0 10px 30px rgba(53, 79, 82, 0.35) !important;
 }

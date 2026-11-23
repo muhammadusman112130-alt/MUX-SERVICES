@@ -840,13 +840,13 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
                   </div>
                 </div>
 
-                {/* 2. Warm Stone Light Theme (Dark Slate Gray #354F52 & Warm Stone #DAD7CD) */}
+                {/* 2. Light Mode (Pure White #FFFFFF & Dark Slate Gray #354F52) */}
                 <div 
                   className={`cp-theme-selection-card animated-shadow-aura ${currentTheme === 'warm-stone' ? 'selected' : ''}`}
                   onClick={() => {
                     if (currentTheme !== 'warm-stone' && typeof onThemeChange === 'function') {
                       onThemeChange('warm-stone')
-                      triggerToast('Warm Stone Light Mode activated across the entire website!')
+                      triggerToast('Light Mode activated across the entire website!')
                     }
                   }}
                   role="button"
@@ -863,15 +863,14 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
                   </div>
                   <div className="cp-tsc-details">
                     <div className="cp-tsc-title-row">
-                      <h4>Warm Stone Light Mode</h4>
+                      <h4>Light Mode</h4>
                       {currentTheme === 'warm-stone' && <span className="cp-tsc-active-pill">Active</span>}
                     </div>
-                    <p>Clean warm stone (#DAD7CD) background with dark slate gray (#354F52) accents and smooth aura animations.</p>
+                    <p>Pure White (#FFFFFF) and Dark Slate Gray (#354F52) minimalist two-color palette.</p>
                     <div className="cp-tsc-swatches">
-                      <span className="cp-swatch" style={{ background: '#DAD7CD' }} title="Warm Stone #DAD7CD"></span>
+                      <span className="cp-swatch" style={{ background: '#FFFFFF', border: '1px solid #354F52' }} title="Pure White #FFFFFF"></span>
                       <span className="cp-swatch" style={{ background: '#354F52' }} title="Dark Slate Gray #354F52"></span>
                       <span className="cp-swatch" style={{ background: '#283C3E' }} title="Deep Slate #283C3E"></span>
-                      <span className="cp-swatch" style={{ background: '#EAE7DF' }} title="Surface Tint #EAE7DF"></span>
                     </div>
                   </div>
                 </div>

@@ -567,12 +567,12 @@
 }
 
 /* ══════════════════════════════════════════════════
-   NAVBAR WARM STONE LIGHT MODE (#DAD7CD & #354F52)
-   100% Theme Isolation: Zero Cyan / Zero Mint in Light Mode
+   NAVBAR LIGHT MODE (#FFFFFF & #354F52)
+   100% Theme Isolation: Zero Cyan / Zero Mint / Pure Two-Color Palette
 ══════════════════════════════════════════════════ */
 [data-theme="warm-stone"] .navbar,
 .theme-warm-stone .navbar {
-  background: #DAD7CD !important;
+  background: #FFFFFF !important;
   border-bottom: 1.5px solid rgba(53, 79, 82, 0.25) !important;
   box-shadow: 0 4px 20px rgba(53, 79, 82, 0.12) !important;
 }
@@ -604,8 +604,8 @@
 .theme-warm-stone .brand-logo-text-cyan,
 [data-theme="warm-stone"] .logo-text-services,
 .theme-warm-stone .logo-text-services {
-  color: #283C3E !important;
-  -webkit-text-fill-color: #283C3E !important;
+  color: #354F52 !important;
+  -webkit-text-fill-color: #354F52 !important;
   text-shadow: none !important;
 }
 
@@ -665,8 +665,8 @@
 /* DP Box / User Profile Pill */
 [data-theme="warm-stone"] .navbar-user-pill,
 .theme-warm-stone .navbar-user-pill {
-  background: #ECEAE2 !important;
-  border: 1.5px solid rgba(53, 79, 82, 0.35) !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
   color: #354F52 !important;
   box-shadow: 0 3px 12px rgba(53, 79, 82, 0.15) !important;
 }
@@ -675,9 +675,17 @@
 .theme-warm-stone .navbar-user-pill:hover,
 [data-theme="warm-stone"] .navbar-user-pill.active,
 .theme-warm-stone .navbar-user-pill.active {
-  background: #DAD7CD !important;
+  background: #354F52 !important;
   border-color: #354F52 !important;
+  color: #FFFFFF !important;
   box-shadow: 0 4px 18px rgba(53, 79, 82, 0.28) !important;
+}
+
+[data-theme="warm-stone"] .navbar-user-pill:hover .nup-user-name,
+.theme-warm-stone .navbar-user-pill:hover .nup-user-name,
+[data-theme="warm-stone"] .navbar-user-pill.active .nup-user-name,
+.theme-warm-stone .navbar-user-pill.active .nup-user-name {
+  color: #FFFFFF !important;
 }
 
 [data-theme="warm-stone"] .nup-avatar-circle,
@@ -689,14 +697,14 @@
 
 [data-theme="warm-stone"] .nup-avatar-text,
 .theme-warm-stone .nup-avatar-text {
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
   font-weight: 900 !important;
 }
 
 [data-theme="warm-stone"] .nup-live-dot,
 .theme-warm-stone .nup-live-dot {
   background: #354F52 !important;
-  border: 1.5px solid #DAD7CD !important;
+  border: 1.5px solid #FFFFFF !important;
   box-shadow: 0 0 6px rgba(53, 79, 82, 0.4) !important;
 }
 
@@ -709,7 +717,7 @@
 /* Buttons in Navbar */
 [data-theme="warm-stone"] .btn-login,
 .theme-warm-stone .btn-login {
-  background: rgba(53, 79, 82, 0.08) !important;
+  background: #FFFFFF !important;
   color: #354F52 !important;
   border: 1.5px solid #354F52 !important;
   box-shadow: none !important;
@@ -718,14 +726,14 @@
 [data-theme="warm-stone"] .btn-login:hover,
 .theme-warm-stone .btn-login:hover {
   background: #354F52 !important;
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
   box-shadow: 0 4px 15px rgba(53, 79, 82, 0.25) !important;
 }
 
 [data-theme="warm-stone"] .btn-signup,
 .theme-warm-stone .btn-signup {
   background: #354F52 !important;
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
   box-shadow: 0 4px 15px rgba(53, 79, 82, 0.35) !important;
 }
 
@@ -738,33 +746,33 @@
 
 [data-theme="warm-stone"] .btn-signup::after,
 .theme-warm-stone .btn-signup::after {
-  background: linear-gradient(90deg, transparent, rgba(218, 215, 205, 0.45), transparent) !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent) !important;
 }
 
 [data-theme="warm-stone"] .btn-logout,
 .theme-warm-stone .btn-logout {
-  background: rgba(53, 79, 82, 0.1) !important;
+  background: #FFFFFF !important;
   color: #354F52 !important;
-  border: 1px solid rgba(53, 79, 82, 0.35) !important;
+  border: 1.5px solid #354F52 !important;
   box-shadow: none !important;
 }
 
 [data-theme="warm-stone"] .btn-logout:hover,
 .theme-warm-stone .btn-logout:hover {
   background: #354F52 !important;
-  color: #DAD7CD !important;
+  color: #FFFFFF !important;
 }
 
 [data-theme="warm-stone"] .navbar-menu-toggle,
 .theme-warm-stone .navbar-menu-toggle {
-  background: #ECEAE2 !important;
-  border-color: rgba(53, 79, 82, 0.3) !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
   color: #354F52 !important;
 }
 
 [data-theme="warm-stone"] .navbar--account .navbar-profile,
 .theme-warm-stone .navbar--account .navbar-profile {
   color: #354F52 !important;
-  background: #ECEAE2 !important;
-  border-color: rgba(53, 79, 82, 0.25) !important;
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
 }

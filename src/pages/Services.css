@@ -5077,3 +5077,264 @@
     width: 100%;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SERVICES PAGE — STRICT TWO-COLOR LIGHT MODE (#FFFFFF & #354F52)
+   Zero Cyan / Zero Green / Zero Color Residue / Pristine Restored Card Layout
+══════════════════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .services-page,
+.theme-warm-stone .services-page,
+[data-theme="warm-stone"] .services-page.has-detail-view,
+.theme-warm-stone .services-page.has-detail-view,
+[data-theme="warm-stone"] .booking-view,
+.theme-warm-stone .booking-view {
+  background: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .svc-tech,
+.theme-warm-stone .svc-tech,
+[data-theme="warm-stone"] .svc-health,
+.theme-warm-stone .svc-health {
+  background: transparent !important;
+}
+
+/* Sub-containers reset inside all services cards: no white box splitting */
+[data-theme="warm-stone"] .svc-home-body,
+.theme-warm-stone .svc-home-body,
+[data-theme="warm-stone"] .svc-tech-body,
+.theme-warm-stone .svc-tech-body,
+[data-theme="warm-stone"] .svc-three-body,
+.theme-warm-stone .svc-three-body,
+[data-theme="warm-stone"] .svc-home-meta,
+.theme-warm-stone .svc-home-meta,
+[data-theme="warm-stone"] .svc-tech-meta,
+.theme-warm-stone .svc-tech-meta,
+[data-theme="warm-stone"] .svc-three-meta,
+.theme-warm-stone .svc-three-meta,
+[data-theme="warm-stone"] .svc-tech-icon-wrap,
+.theme-warm-stone .svc-tech-icon-wrap {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Service Grid Cards (Home Services) */
+[data-theme="warm-stone"] .svc-home-card,
+.theme-warm-stone .svc-home-card,
+[data-theme="warm-stone"] .svc-tech-card,
+.theme-warm-stone .svc-tech-card,
+[data-theme="warm-stone"] .svc-three-card,
+.theme-warm-stone .svc-three-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.1) !important;
+}
+
+[data-theme="warm-stone"] .svc-home-card:hover,
+.theme-warm-stone .svc-home-card:hover,
+[data-theme="warm-stone"] .svc-tech-card:hover,
+.theme-warm-stone .svc-tech-card:hover,
+[data-theme="warm-stone"] .svc-three-card:hover,
+.theme-warm-stone .svc-three-card:hover {
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
+  box-shadow: 0 14px 35px rgba(53, 79, 82, 0.22) !important;
+}
+
+/* Health Cards */
+[data-theme="warm-stone"] .svc-health-card,
+.theme-warm-stone .svc-health-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.1) !important;
+}
+
+[data-theme="warm-stone"] .svc-health-card::before,
+.theme-warm-stone .svc-health-card::before {
+  background: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .svc-health-card:hover,
+.theme-warm-stone .svc-health-card:hover {
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
+  box-shadow: 0 14px 35px rgba(53, 79, 82, 0.22) !important;
+}
+
+/* Card Badges */
+[data-theme="warm-stone"] .svc-home-badge,
+.theme-warm-stone .svc-home-badge,
+[data-theme="warm-stone"] .svc-three-badge,
+.theme-warm-stone .svc-three-badge,
+[data-theme="warm-stone"] .svc-health-badge,
+.theme-warm-stone .svc-health-badge {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  color: #354F52 !important;
+  box-shadow: none !important;
+}
+
+/* Card Typography */
+[data-theme="warm-stone"] .svc-home-name,
+.theme-warm-stone .svc-home-name,
+[data-theme="warm-stone"] .svc-tech-name,
+.theme-warm-stone .svc-tech-name,
+[data-theme="warm-stone"] .svc-three-name,
+.theme-warm-stone .svc-three-name,
+[data-theme="warm-stone"] .svc-health-name,
+.theme-warm-stone .svc-health-name {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .svc-home-desc,
+.theme-warm-stone .svc-home-desc,
+[data-theme="warm-stone"] .svc-tech-desc,
+.theme-warm-stone .svc-tech-desc,
+[data-theme="warm-stone"] .svc-three-desc,
+.theme-warm-stone .svc-three-desc,
+[data-theme="warm-stone"] .svc-health-desc,
+.theme-warm-stone .svc-health-desc,
+[data-theme="warm-stone"] .svc-home-meta,
+.theme-warm-stone .svc-home-meta,
+[data-theme="warm-stone"] .svc-tech-meta,
+.theme-warm-stone .svc-tech-meta,
+[data-theme="warm-stone"] .svc-three-meta,
+.theme-warm-stone .svc-three-meta {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .svc-home-meta strong,
+.theme-warm-stone .svc-home-meta strong,
+[data-theme="warm-stone"] .svc-tech-meta strong,
+.theme-warm-stone .svc-tech-meta strong,
+[data-theme="warm-stone"] .svc-three-meta strong,
+.theme-warm-stone .svc-three-meta strong {
+  color: #354F52 !important;
+  text-shadow: none !important;
+}
+
+/* Card Buttons (Book Now, Details) */
+[data-theme="warm-stone"] .svc-home-btn,
+.theme-warm-stone .svc-home-btn,
+[data-theme="warm-stone"] .svc-tech-btn,
+.theme-warm-stone .svc-tech-btn,
+[data-theme="warm-stone"] .svc-three-btn,
+.theme-warm-stone .svc-three-btn,
+[data-theme="warm-stone"] .svc-health-btn,
+.theme-warm-stone .svc-health-btn {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .svc-home-btn:hover,
+.theme-warm-stone .svc-home-btn:hover,
+[data-theme="warm-stone"] .svc-tech-btn:hover,
+.theme-warm-stone .svc-tech-btn:hover,
+[data-theme="warm-stone"] .svc-three-btn:hover,
+.theme-warm-stone .svc-three-btn:hover,
+[data-theme="warm-stone"] .svc-health-btn:hover,
+.theme-warm-stone .svc-health-btn:hover {
+  background: #283C3E !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.45) !important;
+}
+
+/* Category Detail View & Booking Headers */
+[data-theme="warm-stone"] .booking-header,
+.theme-warm-stone .booking-header {
+  background: #FFFFFF !important;
+  border-bottom: 2.5px solid #354F52 !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .booking-header::before,
+.theme-warm-stone .booking-header::before,
+[data-theme="warm-stone"] .booking-header::after,
+.theme-warm-stone .booking-header::after {
+  background: #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .booking-header-ambient-overlay,
+.theme-warm-stone .booking-header-ambient-overlay {
+  display: none !important;
+}
+
+[data-theme="warm-stone"] .provider-name,
+.theme-warm-stone .provider-name {
+  color: #354F52 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .provider-rating,
+.theme-warm-stone .provider-rating,
+[data-theme="warm-stone"] .provider-rating .star,
+.theme-warm-stone .provider-rating .star,
+[data-theme="warm-stone"] .provider-rating .reviews,
+.theme-warm-stone .provider-rating .reviews,
+[data-theme="warm-stone"] .provider-about,
+.theme-warm-stone .provider-about {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .profile-direct-chat-btn,
+.theme-warm-stone .profile-direct-chat-btn {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .profile-direct-chat-btn:hover,
+.theme-warm-stone .profile-direct-chat-btn:hover {
+  background: #283C3E !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .view-profile-btn,
+.theme-warm-stone .view-profile-btn,
+[data-theme="warm-stone"] .share-profile-btn,
+.theme-warm-stone .share-profile-btn {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .view-profile-btn:hover,
+.theme-warm-stone .view-profile-btn:hover,
+[data-theme="warm-stone"] .share-profile-btn:hover,
+.theme-warm-stone .share-profile-btn:hover {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+}
+
+/* Category Filter and Banners */
+[data-theme="warm-stone"] .svc-banner-tech,
+.theme-warm-stone .svc-banner-tech,
+[data-theme="warm-stone"] .svc-banner-health,
+.theme-warm-stone .svc-banner-health {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .svc-banner-title,
+.theme-warm-stone .svc-banner-title,
+[data-theme="warm-stone"] .svc-banner-sub,
+.theme-warm-stone .svc-banner-sub {
+  color: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .svc-view-all-btn,
+.theme-warm-stone .svc-view-all-btn {
+  background: #FFFFFF !important;
+  border: 2px solid #354F52 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .svc-view-all-btn:hover,
+.theme-warm-stone .svc-view-all-btn:hover {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+}

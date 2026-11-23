@@ -98,7 +98,16 @@ function HeroSection({ setCurrentPage }) {
           text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8) !important;
         }
 
-        /* ── WARM STONE LIGHT MODE HERO SECTION SPECIFICS ── */
+        /* ── WARM STONE LIGHT MODE HERO SECTION SPECIFICS (ONLY #FFFFFF & #354F52) ── */
+        [data-theme="warm-stone"] .hero-slider::after,
+        .theme-warm-stone .hero-slider::after {
+          display: none !important;
+        }
+        [data-theme="warm-stone"] .hero-slider .slide img,
+        .theme-warm-stone .hero-slider .slide img {
+          opacity: 1 !important;
+          filter: none !important;
+        }
         [data-theme="warm-stone"] .hero-section .hero-content h1.hero-title span.hero-title-mint-shine,
         .theme-warm-stone .hero-section .hero-content h1.hero-title span.hero-title-mint-shine {
           background: none !important;
@@ -106,7 +115,7 @@ function HeroSection({ setCurrentPage }) {
           background-clip: unset !important;
           -webkit-text-fill-color: #354F52 !important;
           color: #354F52 !important;
-          text-shadow: 0 2px 8px rgba(255, 255, 255, 0.95), 0 0 18px rgba(218, 215, 205, 0.95) !important;
+          text-shadow: 0 0 12px #FFFFFF, 0 0 24px #FFFFFF, 0 2px 6px #FFFFFF !important;
           animation: none !important;
           filter: none !important;
           letter-spacing: 2px !important;
@@ -118,22 +127,79 @@ function HeroSection({ setCurrentPage }) {
         [data-theme="warm-stone"] .hero-section .hero-content p.hero-subtitle span,
         .theme-warm-stone .hero-section .hero-content p.hero-subtitle,
         .theme-warm-stone .hero-section .hero-content p.hero-subtitle span {
-          color: #283C3E !important;
-          -webkit-text-fill-color: #283C3E !important;
-          text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9) !important;
+          color: #354F52 !important;
+          -webkit-text-fill-color: #354F52 !important;
+          text-shadow: 0 0 10px #FFFFFF, 0 0 20px #FFFFFF !important;
+          font-weight: 800 !important;
+        }
+        [data-theme="warm-stone"] .hero-section .search-container .search-input,
+        .theme-warm-stone .hero-section .search-container .search-input {
+          background: #FFFFFF !important;
+          border: 2.5px solid #354F52 !important;
+          color: #354F52 !important;
           font-weight: 700 !important;
+          box-shadow: 0 4px 15px rgba(53, 79, 82, 0.15) !important;
+        }
+        [data-theme="warm-stone"] .hero-section .search-container .search-input::placeholder,
+        .theme-warm-stone .hero-section .search-container .search-input::placeholder {
+          color: rgba(53, 79, 82, 0.7) !important;
+        }
+        [data-theme="warm-stone"] .hero-section .search-container .search-button,
+        .theme-warm-stone .hero-section .search-container .search-button {
+          background: #354F52 !important;
+          color: #FFFFFF !important;
+          border: none !important;
+          font-weight: 800 !important;
+          box-shadow: 0 4px 18px rgba(53, 79, 82, 0.3) !important;
+        }
+        [data-theme="warm-stone"] .hero-section .search-container .search-button:hover,
+        .theme-warm-stone .hero-section .search-container .search-button:hover {
+          background: #283C3E !important;
+          color: #FFFFFF !important;
+        }
+        [data-theme="warm-stone"] .hero-section .hero-stats .stat-item,
+        .theme-warm-stone .hero-section .hero-stats .stat-item {
+          background: rgba(255, 255, 255, 0.95) !important;
+          border: 2px solid #354F52 !important;
+          border-radius: 16px !important;
+          padding: 0.85rem 1.8rem !important;
+          box-shadow: 0 6px 20px rgba(53, 79, 82, 0.18) !important;
         }
         [data-theme="warm-stone"] .hero-section .hero-content .stat-number,
         .theme-warm-stone .hero-section .hero-content .stat-number {
           color: #354F52 !important;
           -webkit-text-fill-color: #354F52 !important;
-          text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9) !important;
+          text-shadow: none !important;
+          font-weight: 900 !important;
         }
         [data-theme="warm-stone"] .hero-section .hero-content .stat-label,
         .theme-warm-stone .hero-section .hero-content .stat-label {
-          color: #283C3E !important;
-          -webkit-text-fill-color: #283C3E !important;
-          text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9) !important;
+          color: #354F52 !important;
+          -webkit-text-fill-color: #354F52 !important;
+          text-shadow: none !important;
+          font-weight: 700 !important;
+        }
+        [data-theme="warm-stone"] .hero-section .slider-arrow,
+        .theme-warm-stone .hero-section .slider-arrow {
+          background: #FFFFFF !important;
+          border: 2.5px solid #354F52 !important;
+          color: #354F52 !important;
+          box-shadow: 0 4px 15px rgba(53, 79, 82, 0.25) !important;
+        }
+        [data-theme="warm-stone"] .hero-section .slider-arrow:hover,
+        .theme-warm-stone .hero-section .slider-arrow:hover {
+          background: #354F52 !important;
+          color: #FFFFFF !important;
+        }
+        [data-theme="warm-stone"] .hero-section .slider-dots .dot,
+        .theme-warm-stone .hero-section .slider-dots .dot {
+          background: #FFFFFF !important;
+          border: 2px solid #354F52 !important;
+        }
+        [data-theme="warm-stone"] .hero-section .slider-dots .dot.active,
+        .theme-warm-stone .hero-section .slider-dots .dot.active {
+          background: #354F52 !important;
+          border-color: #354F52 !important;
         }
       `}</style>
       <div className="hero-slider">
