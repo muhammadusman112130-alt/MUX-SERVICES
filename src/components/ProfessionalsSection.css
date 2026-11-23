@@ -444,10 +444,149 @@
   }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   PROFESSIONALS SECTION LIGHT MODE OVERRIDES (#FFFFFF & #354F52)
+══════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .professionals-section,
+.theme-warm-stone .professionals-section {
+  background: #FFFFFF !important;
+}
 
-@media (max-width: 480px) {
-  .professionals-section {
-    --pro-card-w: 260px;
-    --pro-gap: 14px;
-  }
+[data-theme="warm-stone"] .professionals-section .section-title,
+.theme-warm-stone .professionals-section .section-title {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .professionals-section .section-subtitle,
+.theme-warm-stone .professionals-section .section-subtitle {
+  color: #354F52 !important;
+  opacity: 0.85 !important;
+}
+
+[data-theme="warm-stone"] .professional-card,
+.theme-warm-stone .professional-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  box-shadow: 0 4px 18px rgba(53, 79, 82, 0.1) !important;
+}
+
+[data-theme="warm-stone"] .professional-card.card-active,
+.theme-warm-stone .professional-card.card-active {
+  border: 2.5px solid #354F52 !important;
+  box-shadow: 0 16px 40px rgba(53, 79, 82, 0.22) !important;
+}
+
+[data-theme="warm-stone"] .avatar,
+.theme-warm-stone .avatar {
+  border: 3px solid #354F52 !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .verified-badge,
+.theme-warm-stone .verified-badge {
+  background: #FFFFFF !important;
+  color: #354F52 !important;
+  border: 2px solid #354F52 !important;
+  box-shadow: 0 2px 8px rgba(53, 79, 82, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .professional-name,
+.theme-warm-stone .professional-name {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .professional-service-box,
+.theme-warm-stone .professional-service-box {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .pro-service-badge,
+.theme-warm-stone .pro-service-badge {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .pro-live-status,
+.theme-warm-stone .pro-live-status {
+  background: rgba(53, 79, 82, 0.1) !important;
+  border: 1px solid #354F52 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .pro-pulse-dot,
+.theme-warm-stone .pro-pulse-dot {
+  background: #354F52 !important;
+  box-shadow: 0 0 6px #354F52 !important;
+}
+
+[data-theme="warm-stone"] .pro-service-detail,
+.theme-warm-stone .pro-service-detail {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .pro-skill-tag,
+.theme-warm-stone .pro-skill-tag {
+  background: #FFFFFF !important;
+  border: 1px solid #354F52 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .pro-skill-tag:hover,
+.theme-warm-stone .pro-skill-tag:hover {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .pro-stat-chip,
+.theme-warm-stone .pro-stat-chip {
+  background: #FFFFFF !important;
+  border: 1px solid #354F52 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .pro-rate-tag,
+.theme-warm-stone .pro-rate-tag {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .rating-number,
+.theme-warm-stone .rating-number {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .reviews,
+.theme-warm-stone .reviews {
+  color: #354F52 !important;
+  opacity: 0.8 !important;
+}
+
+[data-theme="warm-stone"] .hire-button,
+.theme-warm-stone .hire-button {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 18px rgba(53, 79, 82, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .hire-button:hover,
+.theme-warm-stone .hire-button:hover {
+  background: #283C3E !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 24px rgba(53, 79, 82, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .pro-dot-btn,
+.theme-warm-stone .pro-dot-btn {
+  background: rgba(53, 79, 82, 0.25) !important;
+  border: 1px solid #354F52 !important;
+}
+
+[data-theme="warm-stone"] .pro-dot-btn.active,
+.theme-warm-stone .pro-dot-btn.active {
+  background: #354F52 !important;
+  border-color: #354F52 !important;
+  box-shadow: none !important;
 }

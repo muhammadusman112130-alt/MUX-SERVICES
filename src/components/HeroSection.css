@@ -403,6 +403,11 @@
 /* ══════════════════════════════════════════════════
    HERO SECTION LIGHT MODE OVERRIDES (#FFFFFF & #354F52)
 ══════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .hero-section,
+.theme-warm-stone .hero-section {
+  background: #FFFFFF !important;
+}
+
 [data-theme="warm-stone"] .hero-section::before,
 .theme-warm-stone .hero-section::before,
 [data-theme="warm-stone"] .hero-section::after,
@@ -448,38 +453,59 @@
 
 [data-theme="warm-stone"] .hero-section .search-input,
 .theme-warm-stone .hero-section .search-input {
-  background: #FFFFFF !important;
-  border: 2.5px solid #354F52 !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 2px solid rgba(53, 79, 82, 0.4) !important;
   color: #354F52 !important;
   font-weight: 700 !important;
+  box-shadow: 0 8px 30px rgba(53, 79, 82, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .hero-section .search-input:focus,
+.theme-warm-stone .hero-section .search-input:focus {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: #354F52 !important;
+  box-shadow: 0 8px 32px rgba(53, 79, 82, 0.22) !important;
+}
+
+[data-theme="warm-stone"] .hero-section .search-input::placeholder,
+.theme-warm-stone .hero-section .search-input::placeholder {
+  color: rgba(53, 79, 82, 0.75) !important;
 }
 
 [data-theme="warm-stone"] .hero-section .search-button,
 .theme-warm-stone .hero-section .search-button {
-  background: #354F52 !important;
+  background: rgba(53, 79, 82, 0.88) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
   color: #FFFFFF !important;
-  border: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   font-weight: 800 !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.3) !important;
 }
 
 [data-theme="warm-stone"] .hero-section .search-button:hover,
 .theme-warm-stone .hero-section .search-button:hover {
   background: #283C3E !important;
   color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(53, 79, 82, 0.4) !important;
 }
 
 [data-theme="warm-stone"] .hero-section .hero-stats .stat-item,
 .theme-warm-stone .hero-section .hero-stats .stat-item {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 2px solid #354F52 !important;
-  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.18) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
 [data-theme="warm-stone"] .hero-section .stat-number,
 .theme-warm-stone .hero-section .stat-number {
   color: #354F52 !important;
   -webkit-text-fill-color: #354F52 !important;
-  text-shadow: none !important;
+  text-shadow: 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 1px 4px #FFFFFF !important;
   font-weight: 900 !important;
 }
 
@@ -487,27 +513,31 @@
 .theme-warm-stone .hero-section .stat-label {
   color: #354F52 !important;
   -webkit-text-fill-color: #354F52 !important;
-  text-shadow: none !important;
-  font-weight: 700 !important;
+  text-shadow: 0 0 8px #FFFFFF, 0 0 16px #FFFFFF, 0 1px 3px #FFFFFF !important;
+  font-weight: 800 !important;
 }
 
 [data-theme="warm-stone"] .hero-section .slider-arrow,
 .theme-warm-stone .hero-section .slider-arrow {
-  background: #FFFFFF !important;
-  border: 2.5px solid #354F52 !important;
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1.5px solid rgba(53, 79, 82, 0.35) !important;
   color: #354F52 !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.15) !important;
 }
 
 [data-theme="warm-stone"] .hero-section .slider-arrow:hover,
 .theme-warm-stone .hero-section .slider-arrow:hover {
   background: #354F52 !important;
   color: #FFFFFF !important;
+  border-color: #354F52 !important;
 }
 
 [data-theme="warm-stone"] .hero-section .slider-dots .dot,
 .theme-warm-stone .hero-section .slider-dots .dot {
-  background: #FFFFFF !important;
-  border: 2px solid #354F52 !important;
+  background: rgba(255, 255, 255, 0.55) !important;
+  border: 1.5px solid #354F52 !important;
 }
 
 [data-theme="warm-stone"] .hero-section .slider-dots .dot.active,

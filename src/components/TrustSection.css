@@ -141,3 +141,56 @@
     gap: 1.25rem;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   TRUST SECTION LIGHT MODE OVERRIDES (#FFFFFF & #354F52)
+══════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .trust-section,
+.theme-warm-stone .trust-section {
+  background: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .trust-section .section-title,
+.theme-warm-stone .trust-section .section-title {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .trust-section .section-subtitle,
+.theme-warm-stone .trust-section .section-subtitle {
+  color: #354F52 !important;
+  opacity: 0.85 !important;
+}
+
+[data-theme="warm-stone"] .trust-card,
+.theme-warm-stone .trust-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  box-shadow: 0 4px 18px rgba(53, 79, 82, 0.08) !important;
+}
+
+[data-theme="warm-stone"] .trust-card::after,
+.theme-warm-stone .trust-card::after {
+  display: none !important;
+}
+
+[data-theme="warm-stone"] .trust-card::before,
+.theme-warm-stone .trust-card::before {
+  background: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .trust-card:hover,
+.theme-warm-stone .trust-card:hover {
+  border-color: #354F52 !important;
+  box-shadow: 0 10px 30px rgba(53, 79, 82, 0.18) !important;
+}
+
+[data-theme="warm-stone"] .trust-title,
+.theme-warm-stone .trust-title {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .trust-description,
+.theme-warm-stone .trust-description {
+  color: #354F52 !important;
+  opacity: 0.85 !important;
+}

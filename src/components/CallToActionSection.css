@@ -493,3 +493,161 @@
     align-items: flex-start;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   WORKFLOW / CTA SECTION LIGHT MODE OVERRIDES (#FFFFFF & #354F52)
+══════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .workflow-section,
+.theme-warm-stone .workflow-section {
+  background: #FFFFFF !important;
+  color: #354F52 !important;
+  border-top: 2px solid #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .workflow-section::before,
+.theme-warm-stone .workflow-section::before {
+  background: linear-gradient(90deg, transparent, #354F52, transparent) !important;
+  box-shadow: 0 0 12px rgba(53, 79, 82, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .wf-orb,
+.theme-warm-stone .wf-orb {
+  display: none !important;
+}
+
+[data-theme="warm-stone"] .wf-pill-badge,
+.theme-warm-stone .wf-pill-badge {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  color: #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .wf-pulse-dot,
+.theme-warm-stone .wf-pulse-dot {
+  background: #354F52 !important;
+  box-shadow: 0 0 6px #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-title,
+.theme-warm-stone .wf-title {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-subtitle,
+.theme-warm-stone .wf-subtitle {
+  color: #354F52 !important;
+  opacity: 0.85 !important;
+}
+
+[data-theme="warm-stone"] .wf-timeline-track,
+.theme-warm-stone .wf-timeline-track {
+  background: rgba(53, 79, 82, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .wf-timeline-glow,
+.theme-warm-stone .wf-timeline-glow {
+  background: #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .wf-step-card,
+.theme-warm-stone .wf-step-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  box-shadow: 0 4px 18px rgba(53, 79, 82, 0.08) !important;
+}
+
+[data-theme="warm-stone"] .wf-step-card:hover,
+.theme-warm-stone .wf-step-card:hover {
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
+  box-shadow: 0 10px 30px rgba(53, 79, 82, 0.18) !important;
+}
+
+[data-theme="warm-stone"] .wf-step-badge,
+.theme-warm-stone .wf-step-badge {
+  background: #FFFFFF !important;
+  border: 2px solid #354F52 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .wf-step-num,
+.theme-warm-stone .wf-step-num {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-icon-box,
+.theme-warm-stone .wf-icon-box {
+  background: rgba(53, 79, 82, 0.08) !important;
+  border: 1px solid #354F52 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-step-card:hover .wf-icon-box,
+.theme-warm-stone .wf-step-card:hover .wf-icon-box {
+  background: rgba(53, 79, 82, 0.16) !important;
+  border-color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-micro-tag,
+.theme-warm-stone .wf-micro-tag {
+  background: rgba(53, 79, 82, 0.08) !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-step-title,
+.theme-warm-stone .wf-step-title {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-step-desc,
+.theme-warm-stone .wf-step-desc {
+  color: #354F52 !important;
+  opacity: 0.85 !important;
+}
+
+[data-theme="warm-stone"] .wf-card-glow-bar,
+.theme-warm-stone .wf-card-glow-bar {
+  background: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-primary-btn,
+.theme-warm-stone .wf-primary-btn {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .wf-primary-btn:hover,
+.theme-warm-stone .wf-primary-btn:hover {
+  background: #283C3E !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 26px rgba(53, 79, 82, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .wf-secondary-btn,
+.theme-warm-stone .wf-secondary-btn {
+  background: #FFFFFF !important;
+  border: 1.5px solid #354F52 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-secondary-btn:hover,
+.theme-warm-stone .wf-secondary-btn:hover {
+  background: #354F52 !important;
+  color: #FFFFFF !important;
+  border-color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .wf-trust-item,
+.theme-warm-stone .wf-trust-item {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .trust-check,
+.theme-warm-stone .trust-check {
+  color: #354F52 !important;
+}
