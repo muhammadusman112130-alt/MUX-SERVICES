@@ -2457,7 +2457,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                 <div className="ldc-myself-banner">
                   <div className="ldc-myself-left">
                     <div className="ldc-icon-circle">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                         <circle cx="12" cy="10" r="3"></circle>
                       </svg>
@@ -2485,7 +2485,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                 <div className="ldc-other-picker-box">
                   <div className="ldc-picker-headline">
                     <div className="ldc-pin-pulse">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
                         <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                       </svg>
@@ -2685,7 +2685,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   <>
                     {!isAllAreas && !hasExact && (
                       <div className="location-fallback-notice animated-shadow-aura">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                           <circle cx="12" cy="12" r="10"></circle>
                           <line x1="12" y1="8" x2="12" y2="12"></line>
                           <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -2740,7 +2740,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                                 {/* Multan Locality & Arrival ETA Tags */}
                                 <div className="provider-locality-dispatch-row">
                                   <span className="pldr-location-badge">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                       <circle cx="12" cy="10" r="3"></circle>
                                     </svg>

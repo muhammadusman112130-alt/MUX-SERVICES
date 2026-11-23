@@ -308,7 +308,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
         <div className="cp-stats-grid">
           <div className="cp-stat-card animated-shadow-aura">
             <div className="cpsc-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
               </svg>
@@ -321,7 +321,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
 
           <div className="cp-stat-card animated-shadow-aura">
             <div className="cpsc-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
@@ -334,7 +334,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
 
           <div className="cp-stat-card animated-shadow-aura">
             <div className="cpsc-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
@@ -355,6 +355,10 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
             className={`cp-tab-btn ${activeTab === 'personal' ? 'active' : ''}`}
             onClick={() => setActiveTab('personal')}
           >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="cptb-icon">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
             <span>Personal Details</span>
           </button>
           <button 
@@ -362,6 +366,10 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
             className={`cp-tab-btn ${activeTab === 'address' ? 'active' : ''}`}
             onClick={() => setActiveTab('address')}
           >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="cptb-icon">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
             <span>Multan Addresses</span>
           </button>
           <button 
@@ -369,6 +377,10 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
             className={`cp-tab-btn ${activeTab === 'security' ? 'active' : ''}`}
             onClick={() => setActiveTab('security')}
           >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="cptb-icon">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
             <span>Security &amp; Alerts</span>
           </button>
           <button 
@@ -376,6 +388,10 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
             className={`cp-tab-btn ${activeTab === 'general' ? 'active' : ''}`}
             onClick={() => setActiveTab('general')}
           >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="cptb-icon">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
             <span>General Settings</span>
           </button>
         </div>
@@ -775,7 +791,6 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
                       if (typeof onThemeChange === 'function') {
                         onThemeChange(next)
                       }
-                      triggerToast(next === 'warm-stone' ? 'Warm Stone Light Mode activated for entire website!' : 'Default Dark MUX Theme activated for entire website!')
                     }}
                   >
                     <span className="switch-thumb">
@@ -810,7 +825,6 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
                   onClick={() => {
                     if (currentTheme !== 'dark' && typeof onThemeChange === 'function') {
                       onThemeChange('dark')
-                      triggerToast('Default Dark MUX Theme activated!')
                     }
                   }}
                   role="button"
@@ -846,7 +860,6 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
                   onClick={() => {
                     if (currentTheme !== 'warm-stone' && typeof onThemeChange === 'function') {
                       onThemeChange('warm-stone')
-                      triggerToast('Light Mode activated across the entire website!')
                     }
                   }}
                   role="button"

@@ -1261,21 +1261,40 @@
   color: #0A0A0A !important;
 }
 
+/* Quick Metrics Bar in Light Mode (Pure Ivory Card with Jet Black Text) */
+[data-theme="warm-stone"] .pro-hero-metrics,
+.theme-warm-stone .pro-hero-metrics {
+  background: rgba(255, 255, 240, 0.95) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid #0A0A0A !important;
+  border-radius: 50px !important;
+  padding: 0.75rem 2rem !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.15) !important;
+}
+
 [data-theme="warm-stone"] .pro-metric-num,
 .theme-warm-stone .pro-metric-num,
+[data-theme="warm-stone"] .pro-metric-val,
+.theme-warm-stone .pro-metric-val {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  text-shadow: none !important;
+}
+
 [data-theme="warm-stone"] .pro-metric-lbl,
 .theme-warm-stone .pro-metric-lbl,
-[data-theme="warm-stone"] .pro-metric-val,
-.theme-warm-stone .pro-metric-val,
 [data-theme="warm-stone"] .pro-metric-label,
 .theme-warm-stone .pro-metric-label {
   color: #0A0A0A !important;
+  font-weight: 700 !important;
   text-shadow: none !important;
 }
 
 [data-theme="warm-stone"] .pro-metric-div,
 .theme-warm-stone .pro-metric-div {
-  background: rgba(10, 10, 10, 0.2) !important;
+  background: rgba(10, 10, 10, 0.35) !important;
 }
 
 /* Category Filter Bar */

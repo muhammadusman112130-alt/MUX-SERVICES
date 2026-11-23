@@ -1021,8 +1021,6 @@ body.theme-warm-stone,
 .theme-warm-stone .health-card,
 [data-theme="warm-stone"] .booking-card,
 .theme-warm-stone .booking-card,
-[data-theme="warm-stone"] .cp-nav-tabs,
-.theme-warm-stone .cp-nav-tabs,
 [data-theme="warm-stone"] .cp-theme-selection-card,
 .theme-warm-stone .cp-theme-selection-card,
 [data-theme="warm-stone"] .login-card,
@@ -2148,4 +2146,170 @@ body.theme-warm-stone,
   opacity: 1 !important;
   filter: none !important;
   transform: none !important;
+}
+
+/* Customer Profile Navigation Tabs / Slider Bar in Light Mode */
+[data-theme="warm-stone"] .cp-nav-tabs,
+.theme-warm-stone .cp-nav-tabs {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 4px 18px rgba(10, 10, 10, 0.1) !important;
+}
+
+[data-theme="warm-stone"] .cp-tab-btn,
+.theme-warm-stone .cp-tab-btn {
+  color: #0A0A0A !important;
+  background: transparent !important;
+  border: 1.5px solid transparent !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="warm-stone"] .cp-tab-btn span,
+.theme-warm-stone .cp-tab-btn span {
+  color: #0A0A0A !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="warm-stone"] .cp-tab-btn .cptb-icon,
+.theme-warm-stone .cp-tab-btn .cptb-icon,
+[data-theme="warm-stone"] .cp-tab-btn svg,
+.theme-warm-stone .cp-tab-btn svg {
+  stroke: #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .cp-tab-btn:hover,
+.theme-warm-stone .cp-tab-btn:hover {
+  background: rgba(10, 10, 10, 0.08) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .cp-tab-btn:hover .cptb-icon,
+.theme-warm-stone .cp-tab-btn:hover .cptb-icon,
+[data-theme="warm-stone"] .cp-tab-btn:hover svg,
+.theme-warm-stone .cp-tab-btn:hover svg {
+  stroke: #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .cp-tab-btn.active,
+.theme-warm-stone .cp-tab-btn.active {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 4px 15px rgba(10, 10, 10, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .cp-tab-btn.active span,
+.theme-warm-stone .cp-tab-btn.active span {
+  color: #FFFFF0 !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .cp-tab-btn.active .cptb-icon,
+.theme-warm-stone .cp-tab-btn.active .cptb-icon,
+[data-theme="warm-stone"] .cp-tab-btn.active svg,
+.theme-warm-stone .cp-tab-btn.active svg {
+  stroke: #FFFFF0 !important;
+  color: #FFFFF0 !important;
+}
+
+/* Profile Stat Cards & Icon Outlines */
+[data-theme="warm-stone"] .cp-stat-card,
+.theme-warm-stone .cp-stat-card {
+  background: #FFFFF0 !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+}
+
+[data-theme="warm-stone"] .cpsc-icon-wrap,
+.theme-warm-stone .cpsc-icon-wrap {
+  background: rgba(10, 10, 10, 0.08) !important;
+  border: 1px solid rgba(10, 10, 10, 0.25) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .cpsc-icon-wrap svg,
+.theme-warm-stone .cpsc-icon-wrap svg {
+  stroke: #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .cpsc-value,
+.theme-warm-stone .cpsc-value {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .cpsc-label,
+.theme-warm-stone .cpsc-label {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+/* Quick Metrics Bar in Light Mode (Ivory Backdrop with Jet Black Text) */
+[data-theme="warm-stone"] .pro-hero-metrics,
+.theme-warm-stone .pro-hero-metrics {
+  background: rgba(255, 255, 240, 0.95) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid #0A0A0A !important;
+  border-radius: 50px !important;
+  padding: 0.75rem 2rem !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .pro-metric-num,
+.theme-warm-stone .pro-metric-num,
+[data-theme="warm-stone"] .pro-metric-val,
+.theme-warm-stone .pro-metric-val {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .pro-metric-lbl,
+.theme-warm-stone .pro-metric-lbl,
+[data-theme="warm-stone"] .pro-metric-label,
+.theme-warm-stone .pro-metric-label {
+  color: #0A0A0A !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .pro-metric-div,
+.theme-warm-stone .pro-metric-div {
+  background: rgba(10, 10, 10, 0.35) !important;
+}
+
+/* Navbar Profile Pill Active State in Light Mode */
+[data-theme="warm-stone"] .navbar-user-pill:hover,
+.theme-warm-stone .navbar-user-pill:hover,
+[data-theme="warm-stone"] .navbar-user-pill.active,
+.theme-warm-stone .navbar-user-pill.active {
+  background: #FFFFF0 !important;
+  border: 2px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+  box-shadow: 0 4px 14px rgba(10, 10, 10, 0.18) !important;
+}
+
+[data-theme="warm-stone"] .navbar-user-pill:hover .nup-user-name,
+.theme-warm-stone .navbar-user-pill:hover .nup-user-name,
+[data-theme="warm-stone"] .navbar-user-pill.active .nup-user-name,
+.theme-warm-stone .navbar-user-pill.active .nup-user-name {
+  color: #0A0A0A !important;
+}
+
+/* Profile DP Box Initial 'A' in Light Mode */
+[data-theme="warm-stone"] .cp-avatar-initials,
+.theme-warm-stone .cp-avatar-initials {
+  background: transparent !important;
+  color: #0A0A0A !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .cp-avatar-initials span,
+.theme-warm-stone .cp-avatar-initials span {
+  color: #0A0A0A !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
 }

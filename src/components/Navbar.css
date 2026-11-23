@@ -675,17 +675,17 @@
 .theme-warm-stone .navbar-user-pill:hover,
 [data-theme="warm-stone"] .navbar-user-pill.active,
 .theme-warm-stone .navbar-user-pill.active {
-  background: #0A0A0A !important;
-  border-color: #0A0A0A !important;
-  color: #FFFFF0 !important;
-  box-shadow: 0 4px 18px rgba(10, 10, 10, 0.28) !important;
+  background: #FFFFF0 !important;
+  border: 2px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+  box-shadow: 0 4px 14px rgba(10, 10, 10, 0.18) !important;
 }
 
 [data-theme="warm-stone"] .navbar-user-pill:hover .nup-user-name,
 .theme-warm-stone .navbar-user-pill:hover .nup-user-name,
 [data-theme="warm-stone"] .navbar-user-pill.active .nup-user-name,
 .theme-warm-stone .navbar-user-pill.active .nup-user-name {
-  color: #FFFFF0 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .nup-avatar-circle,
