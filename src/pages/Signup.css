@@ -211,21 +211,22 @@
   text-shadow: 0 0 14px rgba(23, 247, 247, 1) !important;
 }
 
-/* ── WARM STONE LIGHT MODE (IVORY & JET BLACK + FROSTED TRANSPARENCY) ── */
+/* ── WARM STONE LIGHT MODE (100% PURE IVORY #FFFFF0 & JET BLACK #0A0A0A — ZERO CARDS) ── */
 [data-theme="warm-stone"] .signup-page,
 .theme-warm-stone .signup-page {
   background: #FFFFF0 !important;
 }
 
+/* Form sits DIRECTLY over background image — NO CARD, NO BORDER, NO SHADOW, NO BACKDROP */
 [data-theme="warm-stone"] .signup-direct-form,
 .theme-warm-stone .signup-direct-form {
-  background: rgba(255, 255, 240, 0.45) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
-  border-radius: 24px !important;
-  padding: 2.2rem !important;
-  box-shadow: 0 16px 45px rgba(10, 10, 10, 0.12) !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 1.5rem 0 !important;
 }
 
 [data-theme="warm-stone"] .signup-page .auth-brand-title,
@@ -234,7 +235,8 @@
 .theme-warm-stone .signup-page .auth-title {
   color: #0A0A0A !important;
   -webkit-text-fill-color: #0A0A0A !important;
-  text-shadow: 0 0 14px #FFFFF0, 0 0 24px #FFFFF0 !important;
+  text-shadow: 0 0 14px #FFFFF0, 0 0 24px #FFFFF0, 0 2px 4px rgba(255, 255, 240, 0.9) !important;
+  font-weight: 900 !important;
 }
 
 [data-theme="warm-stone"] .signup-page .auth-brand-tagline,
@@ -247,7 +249,22 @@
 .theme-warm-stone .signup-page .auth-switch {
   color: #0A0A0A !important;
   -webkit-text-fill-color: #0A0A0A !important;
-  text-shadow: none !important;
+  text-shadow: 0 0 10px #FFFFF0, 0 0 16px #FFFFF0 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="warm-stone"] .signup-page .switch-link,
+.theme-warm-stone .signup-page .switch-link {
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  font-weight: 900 !important;
+  text-decoration: underline !important;
+  text-shadow: 0 0 10px #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .signup-page .switch-link:hover,
+.theme-warm-stone .signup-page .switch-link:hover {
+  color: #222222 !important;
 }
 
 [data-theme="warm-stone"] .signup-page .input-icon,
@@ -256,11 +273,90 @@
 .theme-warm-stone .signup-page .input-icon svg {
   color: #0A0A0A !important;
   stroke: #0A0A0A !important;
+  fill: none !important;
 }
 
+[data-theme="warm-stone"] .signup-page .toggle-password,
+.theme-warm-stone .signup-page .toggle-password,
+[data-theme="warm-stone"] .signup-page .toggle-password svg,
+.theme-warm-stone .signup-page .toggle-password svg {
+  color: #0A0A0A !important;
+  stroke: #0A0A0A !important;
+  fill: none !important;
+}
+
+[data-theme="warm-stone"] .signup-page .input-wrapper .form-input,
+.theme-warm-stone .signup-page .input-wrapper .form-input {
+  background: rgba(255, 255, 240, 0.9) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 2px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  box-shadow: 0 3px 10px rgba(10, 10, 10, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .signup-page .input-wrapper .form-input::placeholder,
+.theme-warm-stone .signup-page .input-wrapper .form-input::placeholder {
+  color: rgba(10, 10, 10, 0.55) !important;
+  -webkit-text-fill-color: rgba(10, 10, 10, 0.55) !important;
+}
+
+[data-theme="warm-stone"] .signup-page .input-wrapper .form-input:focus,
+.theme-warm-stone .signup-page .input-wrapper .form-input:focus {
+  background: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.25), 0 4px 15px rgba(10, 10, 10, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .signup-page .auth-button,
+.theme-warm-stone .signup-page .auth-button,
 [data-theme="warm-stone"] .btn-signup-submit,
 .theme-warm-stone .btn-signup-submit {
   background: #0A0A0A !important;
   color: #FFFFF0 !important;
-  border: none !important;
+  -webkit-text-fill-color: #FFFFF0 !important;
+  border: 2px solid #0A0A0A !important;
+  border-radius: 50px !important;
+  box-shadow: 0 6px 20px rgba(10, 10, 10, 0.35) !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .signup-page .auth-button:hover,
+.theme-warm-stone .signup-page .auth-button:hover,
+[data-theme="warm-stone"] .btn-signup-submit:hover,
+.theme-warm-stone .btn-signup-submit:hover {
+  background: #222222 !important;
+  color: #FFFFF0 !important;
+  -webkit-text-fill-color: #FFFFF0 !important;
+  border-color: #222222 !important;
+  box-shadow: 0 8px 25px rgba(10, 10, 10, 0.45) !important;
+}
+
+[data-theme="warm-stone"] .signup-page .auth-success-box,
+.theme-warm-stone .signup-page .auth-success-box {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+  border: 2px solid #0A0A0A !important;
+  box-shadow: 0 4px 15px rgba(10, 10, 10, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .signup-page .auth-success-box svg,
+.theme-warm-stone .signup-page .auth-success-box svg {
+  color: #0A0A0A !important;
+  stroke: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .signup-page .auth-error-box,
+.theme-warm-stone .signup-page .auth-error-box {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: 2px solid #0A0A0A !important;
+  box-shadow: 0 4px 15px rgba(10, 10, 10, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .signup-page .auth-error-box svg,
+.theme-warm-stone .signup-page .auth-error-box svg {
+  color: #FFFFF0 !important;
+  stroke: #FFFFF0 !important;
 }
