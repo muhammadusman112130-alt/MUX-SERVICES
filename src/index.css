@@ -1809,8 +1809,6 @@ body.theme-warm-stone,
 .theme-warm-stone .booking-header-bg-img,
 [data-theme="warm-stone"] .header-background-image,
 .theme-warm-stone .header-background-image,
-[data-theme="warm-stone"] .services-hero-img,
-.theme-warm-stone .services-hero-img,
 [data-theme="warm-stone"] .pro-hero-bg,
 .theme-warm-stone .pro-hero-bg,
 [data-theme="warm-stone"] .auth-fullscreen-bg,
@@ -1818,6 +1816,18 @@ body.theme-warm-stone,
   opacity: 0.95 !important;
   filter: blur(2.5px) brightness(1.02) contrast(1.04) !important;
   transform: scale(1.04) !important;
+}
+
+/* Services Hero Banner Image — 100% UNBLURRED & SHARP as specifically requested */
+[data-theme="warm-stone"] .services-hero-bg,
+.theme-warm-stone .services-hero-bg,
+[data-theme="warm-stone"] .services-hero img,
+.theme-warm-stone .services-hero img,
+[data-theme="warm-stone"] .services-hero-img,
+.theme-warm-stone .services-hero-img {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Translucent Soft Ivory Ambient Overlays Behind Text */
@@ -1832,7 +1842,7 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] .auth-bg-overlay,
 .theme-warm-stone .auth-bg-overlay {
   display: block !important;
-  background: rgba(255, 255, 240, 0.25) !important;
+  background: rgba(255, 255, 240, 0.28) !important;
   pointer-events: none !important;
 }
 
