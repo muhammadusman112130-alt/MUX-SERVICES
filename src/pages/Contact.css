@@ -1115,3 +1115,26 @@
   border: 1.5px solid #0A0A0A !important;
   color: #0A0A0A !important;
 }
+
+/* Explore More Services Action Button & CTA Wrap */
+[data-theme="warm-stone"] .faq-cta-text,
+.theme-warm-stone .faq-cta-text {
+  color: #0A0A0A !important;
+  opacity: 0.88 !important;
+}
+
+[data-theme="warm-stone"] .faq-action-btn,
+.theme-warm-stone .faq-action-btn {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: none !important;
+  box-shadow: 0 4px 18px rgba(10, 10, 10, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .faq-action-btn:hover,
+.theme-warm-stone .faq-action-btn:hover {
+  background: #222222 !important;
+  color: #FFFFF0 !important;
+  box-shadow: 0 8px 25px rgba(10, 10, 10, 0.5) !important;
+  transform: translateY(-2px) !important;
+}

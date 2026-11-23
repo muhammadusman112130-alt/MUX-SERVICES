@@ -5371,7 +5371,9 @@
 [data-theme="warm-stone"] .services-hero img,
 .theme-warm-stone .services-hero img,
 [data-theme="warm-stone"] .services-hero-img,
-.theme-warm-stone .services-hero-img {
+.theme-warm-stone .services-hero-img,
+[data-theme="warm-stone"] .header-background-image,
+.theme-warm-stone .header-background-image {
   filter: none !important;
   opacity: 1 !important;
   transform: none !important;
@@ -5385,15 +5387,19 @@
   display: none !important;
 }
 
-/* Services Hero Soft Translucent Overlay (Clear Image Visibility + High Contrast Text) */
+/* Services Hero Crystal-Clear Overlay (ZERO MILKY HAZE, ZERO BLUR) */
 [data-theme="warm-stone"] .services-hero-overlay,
-.theme-warm-stone .services-hero-overlay {
+.theme-warm-stone .services-hero-overlay,
+[data-theme="warm-stone"] .header-overlay-ambient,
+.theme-warm-stone .header-overlay-ambient {
   display: block !important;
-  background: rgba(255, 255, 240, 0.28) !important;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.06) 0%, rgba(10, 10, 10, 0.18) 100%) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   pointer-events: none !important;
 }
 
-/* Services Hero Typography — Pure Jet Black, Zero Cyan Shine Animation */
+/* Services Hero Typography — Pure Jet Black with Crisp Contrast Halo */
 [data-theme="warm-stone"] .services-hero .hero-title,
 .theme-warm-stone .services-hero .hero-title,
 [data-theme="warm-stone"] .services-hero .hero-title span,
@@ -5409,7 +5415,7 @@
   background-clip: unset !important;
   -webkit-text-fill-color: #0A0A0A !important;
   color: #0A0A0A !important;
-  text-shadow: none !important;
+  text-shadow: 0 0 18px rgba(255, 255, 240, 0.95), 0 0 32px rgba(255, 255, 240, 0.9), 0 2px 8px rgba(255, 255, 240, 0.85) !important;
   animation: none !important;
   filter: none !important;
   font-weight: 900 !important;
@@ -5420,8 +5426,8 @@
 [data-theme="warm-stone"] .hero-subtitle,
 .theme-warm-stone .hero-subtitle {
   color: #0A0A0A !important;
-  text-shadow: none !important;
-  font-weight: 600 !important;
+  text-shadow: 0 0 14px rgba(255, 255, 240, 0.95), 0 0 26px rgba(255, 255, 240, 0.9) !important;
+  font-weight: 700 !important;
 }
 
 /* Services Hero Search & Location Bar */
@@ -5517,18 +5523,21 @@
 }
 
 [data-theme="warm-stone"] .booking-header-bg-img,
-.theme-warm-stone .booking-header-bg-img,
-[data-theme="warm-stone"] .header-background-image,
-.theme-warm-stone .header-background-image {
+.theme-warm-stone .booking-header-bg-img {
   opacity: 0.95 !important;
   filter: blur(2.5px) brightness(1.02) contrast(1.04) !important;
   transform: scale(1.04) !important;
 }
 
+[data-theme="warm-stone"] .header-background-image,
+.theme-warm-stone .header-background-image {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 [data-theme="warm-stone"] .booking-header-ambient-overlay,
-.theme-warm-stone .booking-header-ambient-overlay,
-[data-theme="warm-stone"] .header-overlay-ambient,
-.theme-warm-stone .header-overlay-ambient {
+.theme-warm-stone .booking-header-ambient-overlay {
   display: block !important;
   background: rgba(255, 255, 240, 0.28) !important;
   pointer-events: none !important;
