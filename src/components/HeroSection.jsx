@@ -58,7 +58,7 @@ function HeroSection({ setCurrentPage }) {
   return (
     <section className="hero-section" id="home">
       <style>{`
-        .hero-section .hero-content h1.hero-title span.hero-title-mint-shine {
+        :root:not([data-theme="warm-stone"]) .hero-section .hero-content h1.hero-title span.hero-title-mint-shine {
           background: linear-gradient(
             90deg,
             #8FD3E8 0%,
@@ -80,22 +80,60 @@ function HeroSection({ setCurrentPage }) {
           text-shadow: none !important;
           filter: none !important;
         }
-        .hero-section .hero-content p.hero-subtitle,
-        .hero-section .hero-content p.hero-subtitle span {
+        :root:not([data-theme="warm-stone"]) .hero-section .hero-content p.hero-subtitle,
+        :root:not([data-theme="warm-stone"]) .hero-section .hero-content p.hero-subtitle span {
           color: #ffffff !important;
           text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8) !important;
           -webkit-text-fill-color: #ffffff !important;
           font-weight: 500 !important;
         }
-        .hero-section .hero-content .stat-number {
+        :root:not([data-theme="warm-stone"]) .hero-section .hero-content .stat-number {
           color: #ffffff !important;
           -webkit-text-fill-color: #ffffff !important;
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.3) !important;
         }
-        .hero-section .hero-content .stat-label {
+        :root:not([data-theme="warm-stone"]) .hero-section .hero-content .stat-label {
           color: #ffffff !important;
           -webkit-text-fill-color: #ffffff !important;
           text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8) !important;
+        }
+
+        /* ── WARM STONE LIGHT MODE HERO SECTION SPECIFICS ── */
+        [data-theme="warm-stone"] .hero-section .hero-content h1.hero-title span.hero-title-mint-shine,
+        .theme-warm-stone .hero-section .hero-content h1.hero-title span.hero-title-mint-shine {
+          background: none !important;
+          -webkit-background-clip: unset !important;
+          background-clip: unset !important;
+          -webkit-text-fill-color: #354F52 !important;
+          color: #354F52 !important;
+          text-shadow: 0 2px 8px rgba(255, 255, 255, 0.95), 0 0 18px rgba(218, 215, 205, 0.95) !important;
+          animation: none !important;
+          filter: none !important;
+          letter-spacing: 2px !important;
+          font-weight: 900 !important;
+          text-transform: uppercase !important;
+          display: inline-block !important;
+        }
+        [data-theme="warm-stone"] .hero-section .hero-content p.hero-subtitle,
+        [data-theme="warm-stone"] .hero-section .hero-content p.hero-subtitle span,
+        .theme-warm-stone .hero-section .hero-content p.hero-subtitle,
+        .theme-warm-stone .hero-section .hero-content p.hero-subtitle span {
+          color: #283C3E !important;
+          -webkit-text-fill-color: #283C3E !important;
+          text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9) !important;
+          font-weight: 700 !important;
+        }
+        [data-theme="warm-stone"] .hero-section .hero-content .stat-number,
+        .theme-warm-stone .hero-section .hero-content .stat-number {
+          color: #354F52 !important;
+          -webkit-text-fill-color: #354F52 !important;
+          text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9) !important;
+        }
+        [data-theme="warm-stone"] .hero-section .hero-content .stat-label,
+        .theme-warm-stone .hero-section .hero-content .stat-label {
+          color: #283C3E !important;
+          -webkit-text-fill-color: #283C3E !important;
+          text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9) !important;
         }
       `}</style>
       <div className="hero-slider">
@@ -142,7 +180,7 @@ function HeroSection({ setCurrentPage }) {
           </span>
         </h1>
         <p className="hero-subtitle">
-          <span style={{ color: '#ffffff', display: 'inline-block' }}>
+          <span className="hero-subtitle-inner">
             Book certified electricians, plumbers, carpenters, AC technicians &amp; deep cleaning pros across Multan
           </span>
         </p>

@@ -800,24 +800,41 @@ body.theme-warm-stone,
 
 [data-theme="warm-stone"] .hero-slider::after,
 .theme-warm-stone .hero-slider::after {
-  background: linear-gradient(180deg, rgba(218, 215, 205, 0.75) 0%, rgba(218, 215, 205, 0.92) 100%) !important;
+  background: linear-gradient(180deg, rgba(218, 215, 205, 0.18) 0%, rgba(218, 215, 205, 0.3) 100%) !important;
+}
+
+[data-theme="warm-stone"] .hero-slider .slide img,
+.theme-warm-stone .hero-slider .slide img,
+[data-theme="warm-stone"] .slide img,
+.theme-warm-stone .slide img {
+  opacity: 1 !important;
+  filter: brightness(1.02) contrast(1.06) saturate(1.1) !important;
 }
 
 [data-theme="warm-stone"] .hero-section .hero-content > h1.hero-title,
 .theme-warm-stone .hero-section .hero-content > h1.hero-title,
 [data-theme="warm-stone"] .hero-section .hero-content > h1.hero-title span,
-.theme-warm-stone .hero-section .hero-content > h1.hero-title span {
-  color: #354F52 !important;
+.theme-warm-stone .hero-section .hero-content > h1.hero-title span,
+[data-theme="warm-stone"] .hero-section .hero-title-mint-shine,
+.theme-warm-stone .hero-section .hero-title-mint-shine {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
   -webkit-text-fill-color: #354F52 !important;
-  text-shadow: none !important;
+  color: #354F52 !important;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.95), 0 0 18px rgba(218, 215, 205, 0.95) !important;
+  animation: none !important;
+  filter: none !important;
 }
 
 [data-theme="warm-stone"] .hero-section .hero-content > p.hero-subtitle,
 .theme-warm-stone .hero-section .hero-content > p.hero-subtitle,
 [data-theme="warm-stone"] .hero-section .hero-content > p.hero-subtitle span,
 .theme-warm-stone .hero-section .hero-content > p.hero-subtitle span {
-  color: #354F52 !important;
-  text-shadow: none !important;
+  color: #283C3E !important;
+  -webkit-text-fill-color: #283C3E !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9) !important;
 }
 
 [data-theme="warm-stone"] .hero-section .hero-content .stat-number,
@@ -1390,7 +1407,18 @@ body.theme-warm-stone,
 
 [data-theme="warm-stone"] .pro-join-bg-layer,
 .theme-warm-stone .pro-join-bg-layer {
-  opacity: 0.22 !important;
+  opacity: 1 !important;
+  filter: brightness(0.98) contrast(1.06) saturate(1.1) !important;
+}
+
+[data-theme="warm-stone"] .pro-join-overlay,
+.theme-warm-stone .pro-join-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(218, 215, 205, 0.65) 0%,
+    rgba(218, 215, 205, 0.35) 50%,
+    rgba(218, 215, 205, 0.75) 100%
+  ) !important;
 }
 
 /* ── 11. TRUST SECTION IN LIGHT MODE ── */
@@ -1587,4 +1615,111 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] [fill="#065f46"]:not([fill="none"]),
 .theme-warm-stone [fill="#065f46"]:not([fill="none"]) {
   fill: #354F52 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   16. 100% CLEAR IMAGES ACROSS THE ENTIRE WEBSITE IN LIGHT MODE
+   Ensure all category banners, card images, hero sliders, and photos are crystal clear
+══════════════════════════════════════════════════════════════════════════ */
+/* All images: Full opacity, crisp contrast, vibrant saturation */
+[data-theme="warm-stone"] img,
+.theme-warm-stone img {
+  opacity: 1 !important;
+}
+
+/* Category Slider Images (Homepage Cards) */
+[data-theme="warm-stone"] .card-side-img-overlay,
+.theme-warm-stone .card-side-img-overlay {
+  display: none !important;
+}
+
+[data-theme="warm-stone"] .card-side-img,
+.theme-warm-stone .card-side-img {
+  opacity: 1 !important;
+  filter: brightness(1.02) contrast(1.05) saturate(1.08) !important;
+}
+
+[data-theme="warm-stone"] .card-side-img-wrapper,
+.theme-warm-stone .card-side-img-wrapper {
+  border-color: rgba(53, 79, 82, 0.25) !important;
+  background: #ECEAE2 !important;
+}
+
+[data-theme="warm-stone"] .card-side-img-badge,
+.theme-warm-stone .card-side-img-badge {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  border-color: rgba(53, 79, 82, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(53, 79, 82, 0.25) !important;
+}
+
+/* Services Category Detail Hero Banners (Gardener, Welder, Appliance Repair, Glass, Laundry, etc.) */
+[data-theme="warm-stone"] .header-overlay-ambient,
+.theme-warm-stone .header-overlay-ambient,
+[data-theme="warm-stone"] .services-hero-overlay,
+.theme-warm-stone .services-hero-overlay {
+  background: linear-gradient(180deg, rgba(53, 79, 82, 0.15) 0%, rgba(53, 79, 82, 0.3) 100%) !important;
+}
+
+[data-theme="warm-stone"] .header-background-image,
+.theme-warm-stone .header-background-image,
+[data-theme="warm-stone"] .services-hero-img,
+.theme-warm-stone .services-hero-img {
+  opacity: 1 !important;
+  filter: brightness(1.02) contrast(1.06) saturate(1.1) !important;
+}
+
+/* Service Grid Cards Images (Home, Tech, Three, More) */
+[data-theme="warm-stone"] .svc-home-img,
+.theme-warm-stone .svc-home-img,
+[data-theme="warm-stone"] .svc-tech-img,
+.theme-warm-stone .svc-tech-img,
+[data-theme="warm-stone"] .svc-three-img,
+.theme-warm-stone .svc-three-img {
+  background: #ECEAE2 !important;
+}
+
+[data-theme="warm-stone"] .svc-home-img img,
+.theme-warm-stone .svc-home-img img,
+[data-theme="warm-stone"] .svc-tech-img img,
+.theme-warm-stone .svc-tech-img img,
+[data-theme="warm-stone"] .svc-three-img img,
+.theme-warm-stone .svc-three-img img {
+  opacity: 1 !important;
+  filter: brightness(1.02) contrast(1.05) saturate(1.08) !important;
+}
+
+/* About Page Images */
+[data-theme="warm-stone"] .about-feature-img,
+.theme-warm-stone .about-feature-img {
+  opacity: 1 !important;
+  filter: brightness(1.02) contrast(1.05) saturate(1.08) !important;
+}
+
+[data-theme="warm-stone"] .about-img-overlay,
+.theme-warm-stone .about-img-overlay {
+  background: linear-gradient(180deg, transparent 40%, rgba(53, 79, 82, 0.7) 100%) !important;
+}
+
+[data-theme="warm-stone"] .about-img-badge,
+.theme-warm-stone .about-img-badge {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  border-color: rgba(53, 79, 82, 0.3) !important;
+}
+
+/* Technician Profile and Avatar Photos */
+[data-theme="warm-stone"] .avatar-photo-img,
+.theme-warm-stone .avatar-photo-img,
+[data-theme="warm-stone"] .provider-card-photo,
+.theme-warm-stone .provider-card-photo {
+  opacity: 1 !important;
+  filter: brightness(1.02) contrast(1.05) !important;
+}
+
+/* Completed Work Cards Images */
+[data-theme="warm-stone"] .work-card-img,
+.theme-warm-stone .work-card-img {
+  opacity: 1 !important;
+  filter: brightness(1.02) contrast(1.05) !important;
 }

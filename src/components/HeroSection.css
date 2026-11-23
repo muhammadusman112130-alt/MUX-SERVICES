@@ -192,6 +192,28 @@
   filter: none !important;
 }
 
+/* Light Mode Overrides for Hero Title & Content */
+[data-theme="warm-stone"] .hero-title-mint-shine,
+.theme-warm-stone .hero-title-mint-shine {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: #354F52 !important;
+  color: #354F52 !important;
+  animation: none !important;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.95), 0 0 18px rgba(218, 215, 205, 0.95) !important;
+}
+
+[data-theme="warm-stone"] .hero-content > p.hero-subtitle,
+.theme-warm-stone .hero-content > p.hero-subtitle,
+[data-theme="warm-stone"] .hero-subtitle-inner,
+.theme-warm-stone .hero-subtitle-inner {
+  color: #283C3E !important;
+  -webkit-text-fill-color: #283C3E !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9) !important;
+}
+
 @keyframes mintColorFlow {
   0% {
     background-position: 0% center;
