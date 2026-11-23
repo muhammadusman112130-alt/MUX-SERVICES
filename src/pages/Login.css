@@ -399,3 +399,95 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── WARM STONE LIGHT MODE (IVORY & JET BLACK + FROSTED TRANSPARENCY) ── */
+[data-theme="warm-stone"] .auth-page,
+.theme-warm-stone .auth-page {
+  background: #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .auth-fullscreen-bg,
+.theme-warm-stone .auth-fullscreen-bg {
+  opacity: 0.95 !important;
+  filter: blur(2.5px) brightness(1.02) contrast(1.04) !important;
+  transform: scale(1.04) !important;
+}
+
+[data-theme="warm-stone"] .auth-bg-overlay,
+.theme-warm-stone .auth-bg-overlay {
+  display: block !important;
+  background: rgba(255, 255, 240, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .auth-direct-form,
+.theme-warm-stone .auth-direct-form {
+  background: rgba(255, 255, 240, 0.45) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
+  border-radius: 24px !important;
+  padding: 2.2rem !important;
+  box-shadow: 0 16px 45px rgba(10, 10, 10, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .auth-brand-title,
+.theme-warm-stone .auth-brand-title,
+[data-theme="warm-stone"] .auth-title,
+.theme-warm-stone .auth-title {
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  text-shadow: 0 0 14px #FFFFF0, 0 0 24px #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .auth-brand-tagline,
+.theme-warm-stone .auth-brand-tagline,
+[data-theme="warm-stone"] .auth-subtitle,
+.theme-warm-stone .auth-subtitle,
+[data-theme="warm-stone"] .form-group label,
+.theme-warm-stone .form-group label,
+[data-theme="warm-stone"] .auth-switch,
+.theme-warm-stone .auth-switch,
+[data-theme="warm-stone"] .remember-me,
+.theme-warm-stone .remember-me,
+[data-theme="warm-stone"] .back-button,
+.theme-warm-stone .back-button {
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .auth-page .input-icon,
+.theme-warm-stone .auth-page .input-icon,
+[data-theme="warm-stone"] .auth-page .input-icon svg,
+.theme-warm-stone .auth-page .input-icon svg {
+  color: #0A0A0A !important;
+  stroke: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .form-input,
+.theme-warm-stone .form-input,
+[data-theme="warm-stone"] .auth-page .input-wrapper .form-input,
+.theme-warm-stone .auth-page .input-wrapper .form-input {
+  background: rgba(255, 255, 240, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.3) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .form-input:focus,
+.theme-warm-stone .form-input:focus,
+[data-theme="warm-stone"] .auth-page .input-wrapper .form-input:focus,
+.theme-warm-stone .auth-page .input-wrapper .form-input:focus {
+  background: rgba(255, 255, 240, 0.9) !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 0 14px rgba(10, 10, 10, 0.22) !important;
+}
+
+[data-theme="warm-stone"] .auth-primary-btn,
+.theme-warm-stone .auth-primary-btn,
+[data-theme="warm-stone"] .btn-login-submit,
+.theme-warm-stone .btn-login-submit {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: none !important;
+}

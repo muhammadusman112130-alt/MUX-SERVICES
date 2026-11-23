@@ -1053,17 +1053,20 @@
 /* Slider Service Card Container */
 [data-theme="warm-stone"] .top-service-card,
 .theme-warm-stone .top-service-card {
-  background: #FFFFF0 !important;
-  border: 2px solid #0A0A0A !important;
-  box-shadow: 0 10px 30px rgba(10, 10, 10, 0.12) !important;
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
   animation: none !important;
 }
 
 [data-theme="warm-stone"] .top-service-card:hover,
 .theme-warm-stone .top-service-card:hover {
   transform: translateY(-6px) !important;
+  background: rgba(255, 255, 240, 0.6) !important;
   border-color: #0A0A0A !important;
-  box-shadow: 0 18px 45px rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 18px 45px rgba(10, 10, 10, 0.18) !important;
   animation: none !important;
 }
 

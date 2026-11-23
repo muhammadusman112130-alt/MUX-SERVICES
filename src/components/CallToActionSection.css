@@ -554,16 +554,18 @@
 
 [data-theme="warm-stone"] .wf-step-card,
 .theme-warm-stone .wf-step-card {
-  background: #FFFFF0 !important;
-  border: 1.5px solid #0A0A0A !important;
-  box-shadow: 0 4px 18px rgba(10, 10, 10, 0.08) !important;
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
 }
 
 [data-theme="warm-stone"] .wf-step-card:hover,
 .theme-warm-stone .wf-step-card:hover {
-  background: #FFFFF0 !important;
+  background: rgba(255, 255, 240, 0.6) !important;
   border-color: #0A0A0A !important;
-  box-shadow: 0 10px 30px rgba(10, 10, 10, 0.18) !important;
+  box-shadow: 0 14px 38px rgba(10, 10, 10, 0.18) !important;
 }
 
 [data-theme="warm-stone"] .wf-step-badge,

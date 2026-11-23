@@ -63,7 +63,9 @@ function PriceOfferSection({ setCurrentPage }) {
         }
         [data-theme="warm-stone"] .pro-join-section .pro-join-overlay,
         .theme-warm-stone .pro-join-section .pro-join-overlay {
-          display: none !important;
+          display: block !important;
+          background: rgba(255, 255, 240, 0.22) !important;
+          pointer-events: none !important;
         }
         [data-theme="warm-stone"] .pro-join-section .pro-join-orb,
         .theme-warm-stone .pro-join-section .pro-join-orb {
@@ -72,7 +74,8 @@ function PriceOfferSection({ setCurrentPage }) {
         [data-theme="warm-stone"] .pro-join-section .pro-join-bg-layer,
         .theme-warm-stone .pro-join-section .pro-join-bg-layer {
           opacity: 1 !important;
-          filter: brightness(1.02) contrast(1.06) saturate(1.1) !important;
+          filter: blur(2.5px) brightness(1.02) contrast(1.04) !important;
+          transform: scale(1.04) !important;
         }
         [data-theme="warm-stone"] .pro-join-section .pro-pill-badge,
         .theme-warm-stone .pro-join-section .pro-pill-badge {
@@ -104,7 +107,7 @@ function PriceOfferSection({ setCurrentPage }) {
         }
         [data-theme="warm-stone"] .pro-join-section .pro-benefit-item,
         .theme-warm-stone .pro-join-section .pro-benefit-item {
-          background: rgba(255, 255, 240, 0.45) !important;
+          background: rgba(255, 255, 240, 0.22) !important;
           backdrop-filter: blur(14px) !important;
           -webkit-backdrop-filter: blur(14px) !important;
           border: 1.5px solid rgba(10, 10, 10, 0.35) !important;
@@ -112,7 +115,7 @@ function PriceOfferSection({ setCurrentPage }) {
         }
         [data-theme="warm-stone"] .pro-join-section .pro-benefit-item:hover,
         .theme-warm-stone .pro-join-section .pro-benefit-item:hover {
-          background: rgba(255, 255, 240, 0.72) !important;
+          background: rgba(255, 255, 240, 0.45) !important;
           border-color: #0A0A0A !important;
           box-shadow: 0 12px 36px rgba(10, 10, 10, 0.2) !important;
         }
@@ -177,7 +180,7 @@ function PriceOfferSection({ setCurrentPage }) {
         }
         [data-theme="warm-stone"] .pro-join-section .pro-stats-card,
         .theme-warm-stone .pro-join-section .pro-stats-card {
-          background: rgba(255, 255, 240, 0.45) !important;
+          background: rgba(255, 255, 240, 0.22) !important;
           backdrop-filter: blur(16px) !important;
           -webkit-backdrop-filter: blur(16px) !important;
           border: 2px solid rgba(10, 10, 10, 0.35) !important;
@@ -207,14 +210,14 @@ function PriceOfferSection({ setCurrentPage }) {
         }
         [data-theme="warm-stone"] .pro-join-section .metric-box,
         .theme-warm-stone .pro-join-section .metric-box {
-          background: rgba(255, 255, 240, 0.55) !important;
+          background: rgba(255, 255, 240, 0.22) !important;
           backdrop-filter: blur(10px) !important;
           -webkit-backdrop-filter: blur(10px) !important;
           border: 1.5px solid rgba(10, 10, 10, 0.3) !important;
         }
         [data-theme="warm-stone"] .pro-join-section .metric-box:hover,
         .theme-warm-stone .pro-join-section .metric-box:hover {
-          background: rgba(255, 255, 240, 0.85) !important;
+          background: rgba(255, 255, 240, 0.48) !important;
           border-color: #0A0A0A !important;
         }
         [data-theme="warm-stone"] .pro-join-section .metric-box.highlight,

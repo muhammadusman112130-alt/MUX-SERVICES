@@ -5338,3 +5338,75 @@
   background: #0A0A0A !important;
   color: #FFFFF0 !important;
 }
+
+/* ── WARM STONE LIGHT MODE (IVORY & JET BLACK + FROSTED TRANSPARENCY) ── */
+[data-theme="warm-stone"] .booking-header-bg-img,
+.theme-warm-stone .booking-header-bg-img,
+[data-theme="warm-stone"] .header-background-image,
+.theme-warm-stone .header-background-image,
+[data-theme="warm-stone"] .services-hero-img,
+.theme-warm-stone .services-hero-img {
+  opacity: 0.95 !important;
+  filter: blur(2.5px) brightness(1.02) contrast(1.04) !important;
+  transform: scale(1.04) !important;
+}
+
+[data-theme="warm-stone"] .booking-header-ambient-overlay,
+.theme-warm-stone .booking-header-ambient-overlay,
+[data-theme="warm-stone"] .header-overlay-ambient,
+.theme-warm-stone .header-overlay-ambient {
+  display: block !important;
+  background: rgba(255, 255, 240, 0.25) !important;
+  pointer-events: none !important;
+}
+
+[data-theme="warm-stone"] .svc-home-card,
+.theme-warm-stone .svc-home-card,
+[data-theme="warm-stone"] .svc-tech-card,
+.theme-warm-stone .svc-tech-card,
+[data-theme="warm-stone"] .svc-health-card,
+.theme-warm-stone .svc-health-card,
+[data-theme="warm-stone"] .svc-three-card,
+.theme-warm-stone .svc-three-card,
+[data-theme="warm-stone"] .service-card,
+.theme-warm-stone .service-card,
+[data-theme="warm-stone"] .technician-card,
+.theme-warm-stone .technician-card,
+[data-theme="warm-stone"] .booking-form-card,
+.theme-warm-stone .booking-form-card,
+[data-theme="warm-stone"] .service-detail-card,
+.theme-warm-stone .service-detail-card,
+[data-theme="warm-stone"] .price-summary-card,
+.theme-warm-stone .price-summary-card,
+[data-theme="warm-stone"] .guarantee-card,
+.theme-warm-stone .guarantee-card,
+[data-theme="warm-stone"] .package-card,
+.theme-warm-stone .package-card,
+[data-theme="warm-stone"] .category-card,
+.theme-warm-stone .category-card {
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .svc-home-card:hover,
+.theme-warm-stone .svc-home-card:hover,
+[data-theme="warm-stone"] .svc-tech-card:hover,
+.theme-warm-stone .svc-tech-card:hover,
+[data-theme="warm-stone"] .svc-health-card:hover,
+.theme-warm-stone .svc-health-card:hover,
+[data-theme="warm-stone"] .svc-three-card:hover,
+.theme-warm-stone .svc-three-card:hover,
+[data-theme="warm-stone"] .service-card:hover,
+.theme-warm-stone .service-card:hover,
+[data-theme="warm-stone"] .technician-card:hover,
+.theme-warm-stone .technician-card:hover,
+[data-theme="warm-stone"] .category-card:hover,
+.theme-warm-stone .category-card:hover {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 14px 38px rgba(10, 10, 10, 0.18) !important;
+}

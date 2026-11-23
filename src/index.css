@@ -800,15 +800,19 @@ body.theme-warm-stone,
 
 [data-theme="warm-stone"] .hero-slider::after,
 .theme-warm-stone .hero-slider::after {
-  display: none !important;
+  display: block !important;
+  background: rgba(255, 255, 240, 0.25) !important;
+  backdrop-filter: blur(1px) !important;
+  -webkit-backdrop-filter: blur(1px) !important;
 }
 
 [data-theme="warm-stone"] .hero-slider .slide img,
 .theme-warm-stone .hero-slider .slide img,
 [data-theme="warm-stone"] .slide img,
 .theme-warm-stone .slide img {
-  opacity: 1 !important;
-  filter: none !important;
+  opacity: 0.95 !important;
+  filter: blur(2.5px) !important;
+  transform: scale(1.04) !important;
 }
 
 [data-theme="warm-stone"] .hero-section .hero-content > h1.hero-title,
@@ -1010,11 +1014,25 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] .pv-card,
 .theme-warm-stone .pv-card,
 [data-theme="warm-stone"] .contact-card,
-.theme-warm-stone .contact-card {
-  background: #FFFFF0 !important;
+.theme-warm-stone .contact-card,
+[data-theme="warm-stone"] .about-image-card,
+.theme-warm-stone .about-image-card,
+[data-theme="warm-stone"] .about-mission-card,
+.theme-warm-stone .about-mission-card,
+[data-theme="warm-stone"] .contact-form-section,
+.theme-warm-stone .contact-form-section,
+[data-theme="warm-stone"] .contact-quick-strip,
+.theme-warm-stone .contact-quick-strip,
+[data-theme="warm-stone"] .messages-sidebar,
+.theme-warm-stone .messages-sidebar,
+[data-theme="warm-stone"] .messages-chat-window,
+.theme-warm-stone .messages-chat-window {
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
   color: #0A0A0A !important;
-  border: 1.5px solid #0A0A0A !important;
-  box-shadow: 0 6px 20px rgba(10, 10, 10, 0.1) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
 }
 
 /* Internal Layout Sub-containers: Reset so they NEVER box up */
@@ -1118,11 +1136,13 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] .cp-stat-card:hover,
 .theme-warm-stone .cp-stat-card:hover,
 [data-theme="warm-stone"] .cp-tab-card:hover,
-.theme-warm-stone .cp-tab-card:hover {
+.theme-warm-stone .cp-tab-card:hover,
+[data-theme="warm-stone"] .contact-form-section:hover,
+.theme-warm-stone .contact-form-section:hover {
   transform: translateY(-4px) !important;
-  background: #FFFFF0 !important;
+  background: rgba(255, 255, 240, 0.6) !important;
   border-color: #0A0A0A !important;
-  box-shadow: 0 14px 35px rgba(10, 10, 10, 0.22), 0 2px 10px rgba(10, 10, 10, 0.08) !important;
+  box-shadow: 0 14px 38px rgba(10, 10, 10, 0.18), 0 2px 10px rgba(10, 10, 10, 0.08) !important;
   animation: none !important;
 }
 
@@ -1140,17 +1160,19 @@ body.theme-warm-stone,
 .theme-warm-stone .professional-service-box,
 [data-theme="warm-stone"] .pro-benefit-item,
 .theme-warm-stone .pro-benefit-item {
-  background: #FFFFF0 !important;
-  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  background: rgba(255, 255, 240, 0.22) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
   color: #0A0A0A !important;
-  box-shadow: 0 4px 14px rgba(10, 10, 10, 0.08) !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
 }
 
 [data-theme="warm-stone"] .pro-benefit-item:hover,
 .theme-warm-stone .pro-benefit-item:hover {
-  background: #FFFFF0 !important;
+  background: rgba(255, 255, 240, 0.45) !important;
   border-color: #0A0A0A !important;
-  box-shadow: 0 10px 28px rgba(10, 10, 10, 0.2) !important;
+  box-shadow: 0 12px 36px rgba(10, 10, 10, 0.18) !important;
 }
 
 [data-theme="warm-stone"] .benefit-title,
@@ -1462,17 +1484,15 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] .pro-join-bg-layer,
 .theme-warm-stone .pro-join-bg-layer {
   opacity: 1 !important;
-  filter: brightness(0.98) contrast(1.06) saturate(1.1) !important;
+  filter: blur(2.5px) brightness(1.02) contrast(1.04) !important;
+  transform: scale(1.04) !important;
 }
 
 [data-theme="warm-stone"] .pro-join-overlay,
 .theme-warm-stone .pro-join-overlay {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 240, 0.65) 0%,
-    rgba(255, 255, 240, 0.35) 50%,
-    rgba(255, 255, 240, 0.75) 100%
-  ) !important;
+  display: block !important;
+  background: rgba(255, 255, 240, 0.22) !important;
+  pointer-events: none !important;
 }
 
 /* ── 11. TRUST SECTION IN LIGHT MODE ── */
@@ -1776,4 +1796,265 @@ body.theme-warm-stone,
 .theme-warm-stone .work-card-img {
   opacity: 1 !important;
   filter: brightness(1.02) contrast(1.05) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   17. COMPREHENSIVE LIGHT MODE: SUBTLE BANNER BLURS & FROSTED TRANSPARENT CARDS
+   Across Services, Professionals, About, Contact, Messages, Login & Signup
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 17.1 BACKGROUND & BANNER IMAGES (SUBTLE BLUR FOR CRISP TEXT CONTRAST) ── */
+[data-theme="warm-stone"] .booking-header-bg-img,
+.theme-warm-stone .booking-header-bg-img,
+[data-theme="warm-stone"] .header-background-image,
+.theme-warm-stone .header-background-image,
+[data-theme="warm-stone"] .services-hero-img,
+.theme-warm-stone .services-hero-img,
+[data-theme="warm-stone"] .pro-hero-bg,
+.theme-warm-stone .pro-hero-bg,
+[data-theme="warm-stone"] .about-feature-img,
+.theme-warm-stone .about-feature-img,
+[data-theme="warm-stone"] .auth-fullscreen-bg,
+.theme-warm-stone .auth-fullscreen-bg {
+  opacity: 0.95 !important;
+  filter: blur(2.5px) brightness(1.02) contrast(1.04) !important;
+  transform: scale(1.04) !important;
+}
+
+/* Translucent Soft Ivory Ambient Overlays Behind Text */
+[data-theme="warm-stone"] .booking-header-ambient-overlay,
+.theme-warm-stone .booking-header-ambient-overlay,
+[data-theme="warm-stone"] .header-overlay-ambient,
+.theme-warm-stone .header-overlay-ambient,
+[data-theme="warm-stone"] .services-hero-overlay,
+.theme-warm-stone .services-hero-overlay,
+[data-theme="warm-stone"] .pro-hero-overlay,
+.theme-warm-stone .pro-hero-overlay,
+[data-theme="warm-stone"] .auth-bg-overlay,
+.theme-warm-stone .auth-bg-overlay {
+  display: block !important;
+  background: rgba(255, 255, 240, 0.25) !important;
+  pointer-events: none !important;
+}
+
+/* ── 17.2 AUTH PAGES (LOGIN, SIGNUP, PROVIDER LOGIN) ── */
+[data-theme="warm-stone"] .auth-direct-form,
+.theme-warm-stone .auth-direct-form,
+[data-theme="warm-stone"] .signup-direct-form,
+.theme-warm-stone .signup-direct-form,
+[data-theme="warm-stone"] .login-box,
+.theme-warm-stone .login-box,
+[data-theme="warm-stone"] .provider-login-box,
+.theme-warm-stone .provider-login-box {
+  background: rgba(255, 255, 240, 0.45) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
+  border-radius: 24px !important;
+  padding: 2.2rem !important;
+  box-shadow: 0 16px 45px rgba(10, 10, 10, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .auth-brand-title,
+.theme-warm-stone .auth-brand-title,
+[data-theme="warm-stone"] .auth-title,
+.theme-warm-stone .auth-title,
+[data-theme="warm-stone"] .login-title,
+.theme-warm-stone .login-title {
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  text-shadow: 0 0 14px #FFFFF0, 0 0 24px #FFFFF0 !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .auth-brand-tagline,
+.theme-warm-stone .auth-brand-tagline,
+[data-theme="warm-stone"] .auth-subtitle,
+.theme-warm-stone .auth-subtitle,
+[data-theme="warm-stone"] .auth-page label,
+.theme-warm-stone .auth-page label,
+[data-theme="warm-stone"] .signup-page label,
+.theme-warm-stone .signup-page label,
+[data-theme="warm-stone"] .auth-switch,
+.theme-warm-stone .auth-switch,
+[data-theme="warm-stone"] .remember-me,
+.theme-warm-stone .remember-me,
+[data-theme="warm-stone"] .back-button,
+.theme-warm-stone .back-button {
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  text-shadow: none !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="warm-stone"] .auth-page .input-icon,
+.theme-warm-stone .auth-page .input-icon,
+[data-theme="warm-stone"] .auth-page .input-icon svg,
+.theme-warm-stone .auth-page .input-icon svg,
+[data-theme="warm-stone"] .signup-page .input-icon svg,
+.theme-warm-stone .signup-page .input-icon svg {
+  color: #0A0A0A !important;
+  stroke: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .auth-page .form-input,
+.theme-warm-stone .auth-page .form-input,
+[data-theme="warm-stone"] .signup-page .form-input,
+.theme-warm-stone .signup-page .form-input {
+  background: rgba(255, 255, 240, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.3) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .auth-page .form-input:focus,
+.theme-warm-stone .auth-page .form-input:focus,
+[data-theme="warm-stone"] .signup-page .form-input:focus,
+.theme-warm-stone .signup-page .form-input:focus {
+  background: rgba(255, 255, 240, 0.9) !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 0 14px rgba(10, 10, 10, 0.22) !important;
+}
+
+/* ── 17.3 MESSAGES PAGE FROSTED PANELS ── */
+[data-theme="warm-stone"] .messages-sidebar,
+.theme-warm-stone .messages-sidebar {
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 12px 35px rgba(10, 10, 10, 0.08) !important;
+}
+
+[data-theme="warm-stone"] .messages-sidebar-header,
+.theme-warm-stone .messages-sidebar-header {
+  background: rgba(255, 255, 240, 0.5) !important;
+  border-bottom: 1.5px solid rgba(10, 10, 10, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .sidebar-search-input,
+.theme-warm-stone .sidebar-search-input {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.3) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .messages-tabs,
+.theme-warm-stone .messages-tabs {
+  background: rgba(255, 255, 240, 0.5) !important;
+  border: 1px solid rgba(10, 10, 10, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .msg-tab-btn,
+.theme-warm-stone .msg-tab-btn {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .msg-tab-btn.active,
+.theme-warm-stone .msg-tab-btn.active {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .conversation-item,
+.theme-warm-stone .conversation-item {
+  background: rgba(255, 255, 240, 0.25) !important;
+  border: 1px solid rgba(10, 10, 10, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .conversation-item:hover,
+.theme-warm-stone .conversation-item:hover {
+  background: rgba(255, 255, 240, 0.55) !important;
+  border-color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .conversation-item.active,
+.theme-warm-stone .conversation-item.active {
+  background: rgba(255, 255, 240, 0.72) !important;
+  border-color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .messages-chat-window,
+.theme-warm-stone .messages-chat-window,
+[data-theme="warm-stone"] .chat-main,
+.theme-warm-stone .chat-main {
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+}
+
+[data-theme="warm-stone"] .chat-header,
+.theme-warm-stone .chat-header,
+[data-theme="warm-stone"] .chat-input-bar,
+.theme-warm-stone .chat-input-bar {
+  background: rgba(255, 255, 240, 0.5) !important;
+  border-color: rgba(10, 10, 10, 0.15) !important;
+}
+
+/* ── 17.4 ABOUT & CONTACT CARDS ── */
+[data-theme="warm-stone"] .about-image-card,
+.theme-warm-stone .about-image-card,
+[data-theme="warm-stone"] .craft-card,
+.theme-warm-stone .craft-card,
+[data-theme="warm-stone"] .contact-quick-strip,
+.theme-warm-stone .contact-quick-strip,
+[data-theme="warm-stone"] .contact-form-section,
+.theme-warm-stone .contact-form-section,
+[data-theme="warm-stone"] .emergency-card,
+.theme-warm-stone .emergency-card,
+[data-theme="warm-stone"] .faq-section,
+.theme-warm-stone .faq-section {
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 10px 32px rgba(10, 10, 10, 0.08) !important;
+}
+
+[data-theme="warm-stone"] .about-badge,
+.theme-warm-stone .about-badge,
+[data-theme="warm-stone"] .contact-badge,
+.theme-warm-stone .contact-badge,
+[data-theme="warm-stone"] .pro-hero-badge,
+.theme-warm-stone .pro-hero-badge {
+  background: rgba(255, 255, 240, 0.6) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.35) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .about-badge-dot,
+.theme-warm-stone .about-badge-dot,
+[data-theme="warm-stone"] .contact-badge-dot,
+.theme-warm-stone .contact-badge-dot {
+  background: #0A0A0A !important;
+  box-shadow: 0 0 6px #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .about-title-mint-shine,
+.theme-warm-stone .about-title-mint-shine,
+[data-theme="warm-stone"] .contact-title-shine,
+.theme-warm-stone .contact-title-shine {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  color: #0A0A0A !important;
+  text-shadow: 0 0 14px #FFFFF0, 0 0 24px #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .hero-primary-btn,
+.theme-warm-stone .hero-primary-btn {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .hero-secondary-btn,
+.theme-warm-stone .hero-secondary-btn {
+  background: rgba(255, 255, 240, 0.5) !important;
+  border: 1.5px solid #0A0A0A !important;
+  color: #0A0A0A !important;
 }

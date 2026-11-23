@@ -1146,3 +1146,41 @@
     flex-direction: column;
   }
 }
+
+/* ── WARM STONE LIGHT MODE (IVORY & JET BLACK + FROSTED TRANSPARENCY) ── */
+[data-theme="warm-stone"] .pro-hero-bg,
+.theme-warm-stone .pro-hero-bg {
+  opacity: 0.95 !important;
+  filter: blur(2.5px) brightness(1.02) contrast(1.04) !important;
+  transform: scale(1.04) !important;
+}
+
+[data-theme="warm-stone"] .pro-hero-overlay,
+.theme-warm-stone .pro-hero-overlay {
+  display: block !important;
+  background: rgba(255, 255, 240, 0.25) !important;
+  pointer-events: none !important;
+}
+
+[data-theme="warm-stone"] .professional-card,
+.theme-warm-stone .professional-card,
+[data-theme="warm-stone"] .pro-trust-card,
+.theme-warm-stone .pro-trust-card,
+[data-theme="warm-stone"] .pro-search-bar-wrap,
+.theme-warm-stone .pro-search-bar-wrap,
+[data-theme="warm-stone"] .pro-modal-box,
+.theme-warm-stone .pro-modal-box {
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .professional-card:hover,
+.theme-warm-stone .professional-card:hover {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 14px 38px rgba(10, 10, 10, 0.18) !important;
+}

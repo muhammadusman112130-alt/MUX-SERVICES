@@ -773,3 +773,26 @@
     width: 100%;
   }
 }
+
+/* ── WARM STONE LIGHT MODE (IVORY & JET BLACK + FROSTED TRANSPARENCY) ── */
+[data-theme="warm-stone"] .provider-login,
+.theme-warm-stone .provider-login {
+  background: #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .main-card,
+.theme-warm-stone .main-card,
+[data-theme="warm-stone"] .login-card,
+.theme-warm-stone .login-card,
+[data-theme="warm-stone"] .stat-box,
+.theme-warm-stone .stat-box,
+[data-theme="warm-stone"] .feature-box,
+.theme-warm-stone .feature-box,
+[data-theme="warm-stone"] .helpline-box,
+.theme-warm-stone .helpline-box {
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  color: #0A0A0A !important;
+}

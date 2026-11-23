@@ -465,15 +465,20 @@
 
 [data-theme="warm-stone"] .professional-card,
 .theme-warm-stone .professional-card {
-  background: #FFFFF0 !important;
-  border: 1.5px solid #0A0A0A !important;
-  box-shadow: 0 4px 18px rgba(10, 10, 10, 0.1) !important;
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
 }
 
+[data-theme="warm-stone"] .professional-card:hover,
+.theme-warm-stone .professional-card:hover,
 [data-theme="warm-stone"] .professional-card.card-active,
 .theme-warm-stone .professional-card.card-active {
-  border: 2.5px solid #0A0A0A !important;
-  box-shadow: 0 16px 40px rgba(10, 10, 10, 0.22) !important;
+  background: rgba(255, 255, 240, 0.6) !important;
+  border: 2px solid #0A0A0A !important;
+  box-shadow: 0 16px 40px rgba(10, 10, 10, 0.18) !important;
 }
 
 [data-theme="warm-stone"] .avatar,
@@ -498,8 +503,9 @@
 
 [data-theme="warm-stone"] .professional-service-box,
 .theme-warm-stone .professional-service-box {
-  background: #FFFFF0 !important;
-  border: 1.5px solid #0A0A0A !important;
+  background: rgba(255, 255, 240, 0.35) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.2) !important;
   box-shadow: none !important;
 }
 

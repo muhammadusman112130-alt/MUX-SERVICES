@@ -210,3 +210,57 @@
   color: #ffffff !important;
   text-shadow: 0 0 14px rgba(23, 247, 247, 1) !important;
 }
+
+/* ── WARM STONE LIGHT MODE (IVORY & JET BLACK + FROSTED TRANSPARENCY) ── */
+[data-theme="warm-stone"] .signup-page,
+.theme-warm-stone .signup-page {
+  background: #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .signup-direct-form,
+.theme-warm-stone .signup-direct-form {
+  background: rgba(255, 255, 240, 0.45) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
+  border-radius: 24px !important;
+  padding: 2.2rem !important;
+  box-shadow: 0 16px 45px rgba(10, 10, 10, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .signup-page .auth-brand-title,
+.theme-warm-stone .signup-page .auth-brand-title,
+[data-theme="warm-stone"] .signup-page .auth-title,
+.theme-warm-stone .signup-page .auth-title {
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  text-shadow: 0 0 14px #FFFFF0, 0 0 24px #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .signup-page .auth-brand-tagline,
+.theme-warm-stone .signup-page .auth-brand-tagline,
+[data-theme="warm-stone"] .signup-page .auth-subtitle,
+.theme-warm-stone .signup-page .auth-subtitle,
+[data-theme="warm-stone"] .signup-page .form-group label,
+.theme-warm-stone .signup-page .form-group label,
+[data-theme="warm-stone"] .signup-page .auth-switch,
+.theme-warm-stone .signup-page .auth-switch {
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .signup-page .input-icon,
+.theme-warm-stone .signup-page .input-icon,
+[data-theme="warm-stone"] .signup-page .input-icon svg,
+.theme-warm-stone .signup-page .input-icon svg {
+  color: #0A0A0A !important;
+  stroke: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .btn-signup-submit,
+.theme-warm-stone .btn-signup-submit {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: none !important;
+}

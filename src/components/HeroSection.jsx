@@ -105,12 +105,16 @@ function HeroSection({ setCurrentPage }) {
         }
         [data-theme="warm-stone"] .hero-slider::after,
         .theme-warm-stone .hero-slider::after {
-          display: none !important;
+          display: block !important;
+          background: rgba(255, 255, 240, 0.25) !important;
+          backdrop-filter: blur(1px) !important;
+          -webkit-backdrop-filter: blur(1px) !important;
         }
         [data-theme="warm-stone"] .hero-slider .slide img,
         .theme-warm-stone .hero-slider .slide img {
-          opacity: 1 !important;
-          filter: none !important;
+          opacity: 0.95 !important;
+          filter: blur(2.5px) !important;
+          transform: scale(1.04) !important;
         }
         [data-theme="warm-stone"] .hero-section .hero-content h1.hero-title span.hero-title-mint-shine,
         .theme-warm-stone .hero-section .hero-content h1.hero-title span.hero-title-mint-shine {
