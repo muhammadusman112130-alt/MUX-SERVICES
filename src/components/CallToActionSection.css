@@ -585,10 +585,25 @@
   color: #354F52 !important;
 }
 
+[data-theme="warm-stone"] .wf-icon-box svg,
+.theme-warm-stone .wf-icon-box svg,
+[data-theme="warm-stone"] .wf-icon-box svg *,
+.theme-warm-stone .wf-icon-box svg * {
+  stroke: #354F52 !important;
+}
+
 [data-theme="warm-stone"] .wf-step-card:hover .wf-icon-box,
 .theme-warm-stone .wf-step-card:hover .wf-icon-box {
-  background: rgba(53, 79, 82, 0.16) !important;
+  background: #354F52 !important;
   border-color: #354F52 !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="warm-stone"] .wf-step-card:hover .wf-icon-box svg,
+.theme-warm-stone .wf-step-card:hover .wf-icon-box svg,
+[data-theme="warm-stone"] .wf-step-card:hover .wf-icon-box svg *,
+.theme-warm-stone .wf-step-card:hover .wf-icon-box svg * {
+  stroke: #FFFFFF !important;
 }
 
 [data-theme="warm-stone"] .wf-micro-tag,

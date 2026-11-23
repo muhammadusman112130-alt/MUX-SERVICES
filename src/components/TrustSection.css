@@ -194,3 +194,15 @@
   color: #354F52 !important;
   opacity: 0.85 !important;
 }
+
+[data-theme="warm-stone"] .trust-icon,
+.theme-warm-stone .trust-icon {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .trust-icon svg,
+.theme-warm-stone .trust-icon svg,
+[data-theme="warm-stone"] .trust-icon svg *,
+.theme-warm-stone .trust-icon svg * {
+  stroke: #354F52 !important;
+}

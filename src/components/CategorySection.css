@@ -1275,3 +1275,20 @@
 .theme-warm-stone .dot-progress-bar {
   background: #354F52 !important;
 }
+
+/* Service Card Main Trade Icon Wrapper (#FFFFFF & #354F52) */
+[data-theme="warm-stone"] .card-icon-wrapper,
+.theme-warm-stone .card-icon-wrapper {
+  background: #FFFFFF !important;
+  border: 2px solid #354F52 !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.12) !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .card-icon-wrapper svg,
+.theme-warm-stone .card-icon-wrapper svg,
+[data-theme="warm-stone"] .card-icon-wrapper svg *,
+.theme-warm-stone .card-icon-wrapper svg * {
+  stroke: #354F52 !important;
+  color: #354F52 !important;
+}

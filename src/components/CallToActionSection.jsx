@@ -56,7 +56,7 @@ function CallToActionSection({ setCurrentPage }) {
       description: 'Browse our verified service categories — Electrician, Plumber, AC Repair, Painter, Carpenter, Cleaner, ya koi bhi category select karein.',
       tag: '30+ Categories Available',
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
@@ -68,7 +68,7 @@ function CallToActionSection({ setCurrentPage }) {
       description: 'Technicians ki verified profiles, real customer reviews, price estimates, aur experience compare karke apna pasandeeda expert chunain.',
       tag: '100% Background Checked',
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
           <path d="m9 12 2 2 4-4"></path>
         </svg>
@@ -80,7 +80,7 @@ function CallToActionSection({ setCurrentPage }) {
       description: 'Aapka chunida technician aapke scheduled time aur Multan address par mukammal tools ke sath pohnch kar high-quality kaam sar-anjaam deta hai.',
       tag: 'On-Time Doorstep Arrival',
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
@@ -92,7 +92,7 @@ function CallToActionSection({ setCurrentPage }) {
       description: 'Kaam mukammal hone aur tasalli ke baad agreed transparent price ada karein. Zero hidden charges aur direct customer ratings.',
       tag: 'Zero Hidden Charges',
       icon: (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#17f7f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
           <line x1="1" y1="10" x2="23" y2="10"></line>
           <circle cx="6" cy="16" r="1.5"></circle>

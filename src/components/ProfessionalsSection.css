@@ -547,6 +547,22 @@
   color: #354F52 !important;
 }
 
+[data-theme="warm-stone"] .pro-stat-chip svg,
+.theme-warm-stone .pro-stat-chip svg {
+  stroke: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .stars-svg,
+.theme-warm-stone .stars-svg {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .stars-svg svg,
+.theme-warm-stone .stars-svg svg {
+  fill: #354F52 !important;
+  stroke: #354F52 !important;
+}
+
 [data-theme="warm-stone"] .pro-rate-tag,
 .theme-warm-stone .pro-rate-tag {
   color: #354F52 !important;

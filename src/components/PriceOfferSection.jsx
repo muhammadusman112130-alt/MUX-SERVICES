@@ -94,7 +94,11 @@ function PriceOfferSection({ setCurrentPage }) {
             {/* 4 Benefit Cards: Accordion-style unfold flow */}
             <div className="pro-benefits-grid">
               <div className="pro-benefit-item anim-card-unfold anim-delay-4">
-                <div className="benefit-icon-box">⚡</div>
+                <div className="benefit-icon-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                </div>
                 <div className="benefit-text-wrap">
                   <h3 className="benefit-title">Instant Job Leads</h3>
                   <p className="benefit-desc">Receive real-time customer requests across Multan straight to your device.</p>
@@ -102,7 +106,12 @@ function PriceOfferSection({ setCurrentPage }) {
               </div>
 
               <div className="pro-benefit-item anim-card-unfold anim-delay-5">
-                <div className="benefit-icon-box">💰</div>
+                <div className="benefit-icon-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23" />
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </div>
                 <div className="benefit-text-wrap">
                   <h3 className="benefit-title">Transparent Earnings</h3>
                   <p className="benefit-desc">Set competitive rates, bid fairly, and retain 100% of your agreed price.</p>
@@ -110,7 +119,12 @@ function PriceOfferSection({ setCurrentPage }) {
               </div>
 
               <div className="pro-benefit-item anim-card-unfold anim-delay-6">
-                <div className="benefit-icon-box">🛡️</div>
+                <div className="benefit-icon-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <polyline points="9 12 11 14 15 10" />
+                  </svg>
+                </div>
                 <div className="benefit-text-wrap">
                   <h3 className="benefit-title">Verified Pro Badge</h3>
                   <p className="benefit-desc">Build trust with police-verified badges and authenticated customer reviews.</p>
@@ -118,7 +132,12 @@ function PriceOfferSection({ setCurrentPage }) {
               </div>
 
               <div className="pro-benefit-item anim-card-unfold anim-delay-7">
-                <div className="benefit-icon-box">📱</div>
+                <div className="benefit-icon-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                    <line x1="12" y1="18" x2="12.01" y2="18" />
+                  </svg>
+                </div>
                 <div className="benefit-text-wrap">
                   <h3 className="benefit-title">Smart Digital Hub</h3>
                   <p className="benefit-desc">Manage schedules, active bookings, and customer chats all in one portal.</p>

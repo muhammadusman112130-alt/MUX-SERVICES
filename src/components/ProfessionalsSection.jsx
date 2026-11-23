@@ -197,14 +197,14 @@ function ProfessionalsSection({ setCurrentPage }) {
 
                       <div className="pro-service-stats">
                         <span className="pro-stat-chip">
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8FD3E8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px', verticalAlign: '-1px' }}>
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px', verticalAlign: '-1px' }}>
                             <circle cx="12" cy="8" r="7"/>
                             <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
                           </svg>
                           {pro.experience}
                         </span>
                         <span className="pro-stat-chip">
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8FD3E8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px', verticalAlign: '-1px' }}>
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px', verticalAlign: '-1px' }}>
                             <polyline points="20 6 9 17 4 12"/>
                           </svg>
                           {pro.completedJobs}
@@ -215,7 +215,7 @@ function ProfessionalsSection({ setCurrentPage }) {
                     <div className="professional-rating">
                       <span className="stars-svg" aria-hidden="true">
                         {[...Array(5)].map((_, i) => (
-                          <svg key={i} width="15" height="15" viewBox="0 0 24 24" fill="#8FD3E8" stroke="#8FD3E8">
+                          <svg key={i} width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor">
                             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                           </svg>
                         ))}
