@@ -869,10 +869,14 @@
 [data-theme="warm-stone"] .about-feature-img,
 .theme-warm-stone .about-feature-img,
 [data-theme="warm-stone"] .craft-feature-img,
-.theme-warm-stone .craft-feature-img {
-  opacity: 0.95 !important;
-  filter: blur(2.5px) brightness(1.02) contrast(1.04) !important;
-  transform: scale(1.04) !important;
+.theme-warm-stone .craft-feature-img,
+[data-theme="warm-stone"] .about-image-card img,
+.theme-warm-stone .about-image-card img,
+[data-theme="warm-stone"] .about-page img,
+.theme-warm-stone .about-page img {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
 }
 
 [data-theme="warm-stone"] .about-img-overlay,

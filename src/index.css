@@ -1813,8 +1813,6 @@ body.theme-warm-stone,
 .theme-warm-stone .services-hero-img,
 [data-theme="warm-stone"] .pro-hero-bg,
 .theme-warm-stone .pro-hero-bg,
-[data-theme="warm-stone"] .about-feature-img,
-.theme-warm-stone .about-feature-img,
 [data-theme="warm-stone"] .auth-fullscreen-bg,
 .theme-warm-stone .auth-fullscreen-bg {
   opacity: 0.95 !important;
@@ -2057,4 +2055,19 @@ body.theme-warm-stone,
   background: rgba(255, 255, 240, 0.5) !important;
   border: 1.5px solid #0A0A0A !important;
   color: #0A0A0A !important;
+}
+
+
+/* About Page Content Images Must Be 100% Crisp & Clear (No Blur) */
+[data-theme="warm-stone"] .about-feature-img,
+.theme-warm-stone .about-feature-img,
+[data-theme="warm-stone"] .craft-feature-img,
+.theme-warm-stone .craft-feature-img,
+[data-theme="warm-stone"] .about-image-card img,
+.theme-warm-stone .about-image-card img,
+[data-theme="warm-stone"] .about-page img,
+.theme-warm-stone .about-page img {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
 }

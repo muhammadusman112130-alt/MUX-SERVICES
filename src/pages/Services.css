@@ -5339,7 +5339,36 @@
   color: #FFFFF0 !important;
 }
 
-/* ── WARM STONE LIGHT MODE (IVORY & JET BLACK + FROSTED TRANSPARENCY) ── */
+/* ══════════════════════════════════════════════════════════════════════════
+   WARM STONE LIGHT MODE — 100% PURE IVORY (#FFFFF0) & JET BLACK (#0A0A0A)
+   Zero teal, zero cyan, zero mint, zero green. Exact home page match.
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .services-page,
+.theme-warm-stone .services-page,
+[data-theme="warm-stone"] .services-page.has-detail-view,
+.theme-warm-stone .services-page.has-detail-view,
+[data-theme="warm-stone"] .booking-view,
+.theme-warm-stone .booking-view {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .booking-header,
+.theme-warm-stone .booking-header {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+  border-bottom: 2.5px solid #0A0A0A !important;
+  box-shadow: 0 8px 25px rgba(10, 10, 10, 0.08) !important;
+}
+
+[data-theme="warm-stone"] .booking-header::before,
+.theme-warm-stone .booking-header::before,
+[data-theme="warm-stone"] .booking-header::after,
+.theme-warm-stone .booking-header::after {
+  background: #0A0A0A !important;
+  box-shadow: none !important;
+}
+
 [data-theme="warm-stone"] .booking-header-bg-img,
 .theme-warm-stone .booking-header-bg-img,
 [data-theme="warm-stone"] .header-background-image,
@@ -5360,6 +5389,68 @@
   pointer-events: none !important;
 }
 
+[data-theme="warm-stone"] .provider-name,
+.theme-warm-stone .provider-name {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .provider-trade,
+.theme-warm-stone .provider-trade,
+[data-theme="warm-stone"] .provider-location,
+.theme-warm-stone .provider-location {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .provider-stat-value,
+.theme-warm-stone .provider-stat-value,
+[data-theme="warm-stone"] .provider-stat-label,
+.theme-warm-stone .provider-stat-label {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .service-detail-back-btn,
+.theme-warm-stone .service-detail-back-btn,
+[data-theme="warm-stone"] .btn-back,
+.theme-warm-stone .btn-back {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border: 1.5px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+/* Category Tabs */
+[data-theme="warm-stone"] .category-tab-btn,
+.theme-warm-stone .category-tab-btn,
+[data-theme="warm-stone"] .svc-category-tab,
+.theme-warm-stone .svc-category-tab,
+[data-theme="warm-stone"] .filter-btn,
+.theme-warm-stone .filter-btn {
+  background: rgba(255, 255, 240, 0.5) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .category-tab-btn:hover,
+.theme-warm-stone .category-tab-btn:hover,
+[data-theme="warm-stone"] .svc-category-tab:hover,
+.theme-warm-stone .svc-category-tab:hover,
+[data-theme="warm-stone"] .filter-btn:hover,
+.theme-warm-stone .filter-btn:hover {
+  background: rgba(255, 255, 240, 0.8) !important;
+  border-color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .category-tab-btn.active,
+.theme-warm-stone .category-tab-btn.active,
+[data-theme="warm-stone"] .svc-category-tab.active,
+.theme-warm-stone .svc-category-tab.active,
+[data-theme="warm-stone"] .filter-btn.active,
+.theme-warm-stone .filter-btn.active {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
+}
+
+/* All Cards in Services */
 [data-theme="warm-stone"] .svc-home-card,
 .theme-warm-stone .svc-home-card,
 [data-theme="warm-stone"] .svc-tech-card,
@@ -5383,7 +5474,15 @@
 [data-theme="warm-stone"] .package-card,
 .theme-warm-stone .package-card,
 [data-theme="warm-stone"] .category-card,
-.theme-warm-stone .category-card {
+.theme-warm-stone .category-card,
+[data-theme="warm-stone"] .service-provider-card,
+.theme-warm-stone .service-provider-card,
+[data-theme="warm-stone"] .booking-form-container,
+.theme-warm-stone .booking-form-container,
+[data-theme="warm-stone"] .provider-detail-sidebar,
+.theme-warm-stone .provider-detail-sidebar,
+[data-theme="warm-stone"] .service-overview-card,
+.theme-warm-stone .service-overview-card {
   background: rgba(255, 255, 240, 0.38) !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
@@ -5405,8 +5504,141 @@
 [data-theme="warm-stone"] .technician-card:hover,
 .theme-warm-stone .technician-card:hover,
 [data-theme="warm-stone"] .category-card:hover,
-.theme-warm-stone .category-card:hover {
+.theme-warm-stone .category-card:hover,
+[data-theme="warm-stone"] .package-card:hover,
+.theme-warm-stone .package-card:hover {
   background: rgba(255, 255, 240, 0.6) !important;
   border-color: #0A0A0A !important;
   box-shadow: 0 14px 38px rgba(10, 10, 10, 0.18) !important;
+}
+
+/* Badges, Chips, Labels */
+[data-theme="warm-stone"] .svc-home-badge,
+.theme-warm-stone .svc-home-badge,
+[data-theme="warm-stone"] .svc-tech-badge,
+.theme-warm-stone .svc-tech-badge,
+[data-theme="warm-stone"] .svc-health-badge,
+.theme-warm-stone .svc-health-badge,
+[data-theme="warm-stone"] .svc-badge,
+.theme-warm-stone .svc-badge,
+[data-theme="warm-stone"] .service-badge,
+.theme-warm-stone .service-badge,
+[data-theme="warm-stone"] .provider-badge,
+.theme-warm-stone .provider-badge,
+[data-theme="warm-stone"] .badge-chip,
+.theme-warm-stone .badge-chip {
+  background: rgba(10, 10, 10, 0.08) !important;
+  color: #0A0A0A !important;
+  border: 1px solid rgba(10, 10, 10, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .svc-price,
+.theme-warm-stone .svc-price,
+[data-theme="warm-stone"] .service-price,
+.theme-warm-stone .service-price,
+[data-theme="warm-stone"] .price-value,
+.theme-warm-stone .price-value,
+[data-theme="warm-stone"] .booking-price-val,
+.theme-warm-stone .booking-price-val {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .verified-nadra-text,
+.theme-warm-stone .verified-nadra-text {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .escrow-notice-text,
+.theme-warm-stone .escrow-notice-text {
+  color: rgba(10, 10, 10, 0.75) !important;
+}
+
+/* Buttons in Services */
+[data-theme="warm-stone"] .btn-book,
+.theme-warm-stone .btn-book,
+[data-theme="warm-stone"] .svc-home-btn,
+.theme-warm-stone .svc-home-btn,
+[data-theme="warm-stone"] .svc-tech-btn,
+.theme-warm-stone .svc-tech-btn,
+[data-theme="warm-stone"] .svc-health-btn,
+.theme-warm-stone .svc-health-btn,
+[data-theme="warm-stone"] .svc-three-btn,
+.theme-warm-stone .svc-three-btn,
+[data-theme="warm-stone"] .book-now-btn,
+.theme-warm-stone .book-now-btn,
+[data-theme="warm-stone"] .select-btn,
+.theme-warm-stone .select-btn,
+[data-theme="warm-stone"] .confirm-booking-btn,
+.theme-warm-stone .confirm-booking-btn {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(10, 10, 10, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .btn-book:hover,
+.theme-warm-stone .btn-book:hover,
+[data-theme="warm-stone"] .svc-home-btn:hover,
+.theme-warm-stone .svc-home-btn:hover,
+[data-theme="warm-stone"] .svc-tech-btn:hover,
+.theme-warm-stone .svc-tech-btn:hover,
+[data-theme="warm-stone"] .svc-health-btn:hover,
+.theme-warm-stone .svc-health-btn:hover,
+[data-theme="warm-stone"] .svc-three-btn:hover,
+.theme-warm-stone .svc-three-btn:hover,
+[data-theme="warm-stone"] .book-now-btn:hover,
+.theme-warm-stone .book-now-btn:hover,
+[data-theme="warm-stone"] .confirm-booking-btn:hover,
+.theme-warm-stone .confirm-booking-btn:hover {
+  background: #222222 !important;
+  color: #FFFFF0 !important;
+}
+
+/* Booking Drawer / Modal & Inputs */
+[data-theme="warm-stone"] .booking-modal-overlay,
+.theme-warm-stone .booking-modal-overlay {
+  background: rgba(10, 10, 10, 0.4) !important;
+}
+
+[data-theme="warm-stone"] .booking-form input,
+.theme-warm-stone .booking-form input,
+[data-theme="warm-stone"] .booking-form select,
+.theme-warm-stone .booking-form select,
+[data-theme="warm-stone"] .booking-form textarea,
+.theme-warm-stone .booking-form textarea {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.3) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .booking-form input:focus,
+.theme-warm-stone .booking-form input:focus,
+[data-theme="warm-stone"] .booking-form select:focus,
+.theme-warm-stone .booking-form select:focus,
+[data-theme="warm-stone"] .booking-form textarea:focus,
+.theme-warm-stone .booking-form textarea:focus {
+  background: rgba(255, 255, 240, 0.95) !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 0 12px rgba(10, 10, 10, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .payment-method-card,
+.theme-warm-stone .payment-method-card {
+  background: rgba(255, 255, 240, 0.5) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .payment-method-card.selected,
+.theme-warm-stone .payment-method-card.selected {
+  background: rgba(255, 255, 240, 0.85) !important;
+  border: 2px solid #0A0A0A !important;
+}
+
+/* Avatar SVG Orbits */
+[data-theme="warm-stone"] .booking-profile-avatar-wrapper circle,
+.theme-warm-stone .booking-profile-avatar-wrapper circle {
+  stroke: #0A0A0A !important;
 }

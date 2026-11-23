@@ -13,6 +13,7 @@ import laundryImg from '../Public/laundary.webp'
 
 function CategorySection({ setCurrentPage }) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const [touchStart, setTouchStart] = useState(null)
   const [touchEnd, setTouchEnd] = useState(null)
   const sliderRef = useRef(null)
@@ -263,14 +264,15 @@ function CategorySection({ setCurrentPage }) {
 
   const totalSlides = categories.length
 
-  // Ultra-smooth continuous auto-slide
+  // Ultra-smooth continuous auto-slide (pauses on hover)
   useEffect(() => {
+    if (isPaused) return
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % totalSlides)
     }, 3500)
 
     return () => clearInterval(interval)
-  }, [totalSlides])
+  }, [totalSlides, isPaused])
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % totalSlides)
@@ -472,6 +474,8 @@ function CategorySection({ setCurrentPage }) {
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
           {/* Navigation Arrows */}
           <button 
@@ -510,7 +514,11 @@ function CategorySection({ setCurrentPage }) {
                   <div 
                     key={cat.id} 
                     className={`slider-slide ${isActive ? 'slide-active' : ''}`}
-                    onMouseEnter={() => setCurrentIndex(index)}
+                    onMouseEnter={() => {
+                      setIsPaused(true)
+                      setCurrentIndex(index)
+                    }}
+                    onMouseLeave={() => setIsPaused(false)}
                   >
                     {/* Dedicated Animated Background Aura & Floor Lighting behind Service Card */}
                     <div className="card-backlight-aura" aria-hidden="true"></div>

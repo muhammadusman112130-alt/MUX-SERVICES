@@ -1765,7 +1765,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                 <h2 className="payment-title">Complete Payment</h2>
                 <p className="payment-subtitle">
                   Amount to pay: <strong>{negotiatedPrice || selectedProvider.price}</strong>
-                  <span style={{ display: 'block', fontSize: '0.84rem', color: '#64748b', marginTop: '4px' }}>
+                  <span className="escrow-notice-text" style={{ display: 'block', fontSize: '0.84rem', marginTop: '4px' }}>
                     Notice: 100% Escrow Protection Active — Funds held securely in Pakistan Banking Escrow until satisfactory job completion.
                   </span>
                 </p>
@@ -1958,8 +1958,8 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   <span>View Chat History</span>
                 </button>
                 <h2 className="booking-form-title">Complete Your Booking</h2>
-                <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '1.2rem' }}>
-                  Booking with <strong>{selectedProvider.name}</strong> • Agreed Price: <strong style={{ color: '#8FD3E8' }}>{negotiatedPrice || selectedProvider.price}</strong>
+                <p style={{ fontSize: '0.9rem', marginBottom: '1.2rem' }}>
+                  Booking with <strong>{selectedProvider.name}</strong> • Agreed Price: <strong className="booking-price-val">{negotiatedPrice || selectedProvider.price}</strong>
                 </p>
 
                 <div className="booking-form">
@@ -2195,7 +2195,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   </div>
                   <div className="info-item">
                     <span className="info-label">Identity Verified:</span>
-                    <span className="info-value" style={{ color: '#8FD3E8', fontWeight: 700 }}>✓ Verified NADRA CNIC</span>
+                    <span className="info-value verified-nadra-text">✓ Verified NADRA CNIC</span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">Jobs Completed:</span>

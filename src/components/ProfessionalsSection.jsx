@@ -7,6 +7,7 @@ import cleanerImg from '../Public/cleaner.webp'
 
 function ProfessionalsSection({ setCurrentPage }) {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef(null)
   const touchEndX = useRef(null)
 
@@ -75,14 +76,15 @@ function ProfessionalsSection({ setCurrentPage }) {
 
   const totalCards = professionals.length
 
-  // Continuous non-stop auto-progression every 3.5s
+  // Continuous non-stop auto-progression every 3.5s (pauses on hover)
   useEffect(() => {
+    if (isPaused) return
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % totalCards)
     }, 3500)
 
     return () => clearInterval(interval)
-  }, [totalCards])
+  }, [totalCards, isPaused])
 
   // Touch swipe support for mobile
   const handleTouchStart = (e) => {
@@ -131,6 +133,8 @@ function ProfessionalsSection({ setCurrentPage }) {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
           <div 
             className="professionals-carousel-track"
@@ -144,7 +148,11 @@ function ProfessionalsSection({ setCurrentPage }) {
                 <div 
                   key={pro.id} 
                   className={`professional-card ${isActive ? 'card-active' : 'card-inactive'}`}
-                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseEnter={() => {
+                    setIsPaused(true)
+                    setActiveIndex(index)
+                  }}
+                  onMouseLeave={() => setIsPaused(false)}
                   onClick={() => setActiveIndex(index)}
                   role="button"
                   tabIndex={0}
