@@ -92,6 +92,28 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [isProviderLoggedIn, setIsProviderLoggedIn] = useState(() => initialPage === 'provider-dashboard')
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem('mux_theme') || 'dark'
+    } catch {
+      return 'dark'
+    }
+  })
+
+  // Synchronize theme to documentElement & body for global CSS targeting
+  useEffect(() => {
+    try {
+      localStorage.setItem('mux_theme', theme)
+    } catch {}
+    document.documentElement.setAttribute('data-theme', theme)
+    if (theme === 'warm-stone') {
+      document.documentElement.classList.add('theme-warm-stone')
+      document.body.classList.add('theme-warm-stone')
+    } else {
+      document.documentElement.classList.remove('theme-warm-stone')
+      document.body.classList.remove('theme-warm-stone')
+    }
+  }, [theme])
 
   // Clean stale legacy storage on startup
   useEffect(() => {
@@ -323,6 +345,8 @@ function App() {
             setCurrentPage={handlePageChange} 
             user={currentUser} 
             onUserUpdate={(updatedUser) => setCurrentUser(updatedUser)}
+            currentTheme={theme}
+            onThemeChange={setTheme}
           />
         )
       case 'booked':
@@ -361,7 +385,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className={`app theme-${theme}`} data-theme={theme}>
       {!authPage && (
         <Navbar 
           currentPage={currentPage}

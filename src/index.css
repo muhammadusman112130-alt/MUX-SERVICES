@@ -693,3 +693,433 @@ button:not(:disabled),
 .cta-section {
   animation: webSectionFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   GLOBAL THEME: WARM STONE LIGHT MODE (#DAD7CD & #354F52)
+   - Primary Typography & Accents: Dark Slate Gray #354F52
+   - Backgrounds & Base Surfaces: Warm Stone #DAD7CD
+   - Cards & Elevated Surfaces:   #ECEAE2 / #F7F6F2
+   - Intact Animations & Hover Shines Adapted to #354F52 Palette
+══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. ROOT VARIABLES OVERRIDE ── */
+[data-theme="warm-stone"],
+.theme-warm-stone {
+  --primary:       #354F52;
+  --primary-light: #52796F;
+  --accent:        #354F52;
+  --accent-glow:   rgba(53, 79, 82, 0.35);
+  --frost-white:   #354F52;
+  --white:         #DAD7CD;
+  --surface:       #ECEAE2;
+  --border:        rgba(53, 79, 82, 0.22);
+  --text:          #354F52;
+  --muted:         rgba(53, 79, 82, 0.78);
+  --shadow-sm:     0 2px 8px rgba(53, 79, 82, 0.12);
+  --shadow-md:     0 6px 24px rgba(53, 79, 82, 0.18);
+  --shadow-lg:     0 16px 48px rgba(53, 79, 82, 0.25);
+}
+
+/* ── 2. GLOBAL BASE & PAGE CONTAINERS ── */
+body.theme-warm-stone,
+[data-theme="warm-stone"] {
+  background: #DAD7CD !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .app,
+[data-theme="warm-stone"] #root {
+  background: #DAD7CD !important;
+  color: #354F52 !important;
+}
+
+/* Page Section Backgrounds */
+[data-theme="warm-stone"] .hero-section,
+[data-theme="warm-stone"] .category-section,
+[data-theme="warm-stone"] .mux-dual-ticker-section,
+[data-theme="warm-stone"] .price-offer-section,
+[data-theme="warm-stone"] .pro-join-section,
+[data-theme="warm-stone"] .professionals-section,
+[data-theme="warm-stone"] .trust-section,
+[data-theme="warm-stone"] .cta-section,
+[data-theme="warm-stone"] .customer-profile-page,
+[data-theme="warm-stone"] .services-page,
+[data-theme="warm-stone"] .services-page.has-detail-view,
+[data-theme="warm-stone"] .booking-view,
+[data-theme="warm-stone"] .booking-header,
+[data-theme="warm-stone"] .professionals-page,
+[data-theme="warm-stone"] .about-page,
+[data-theme="warm-stone"] .contact-page,
+[data-theme="warm-stone"] .my-bookings-page,
+[data-theme="warm-stone"] .messages-page,
+[data-theme="warm-stone"] .provider-dashboard-page,
+[data-theme="warm-stone"] .provider-login-page,
+[data-theme="warm-stone"] .provider-verification-page {
+  background: #DAD7CD !important;
+  color: #354F52 !important;
+}
+
+/* ── 3. TYPOGRAPHY & HEADINGS ── */
+[data-theme="warm-stone"] h1,
+[data-theme="warm-stone"] h2,
+[data-theme="warm-stone"] h3,
+[data-theme="warm-stone"] h4,
+[data-theme="warm-stone"] h5,
+[data-theme="warm-stone"] h6,
+[data-theme="warm-stone"] .section-title,
+[data-theme="warm-stone"] .cp-user-fullname,
+[data-theme="warm-stone"] .cptc-title,
+[data-theme="warm-stone"] .cpsc-value,
+[data-theme="warm-stone"] .card-title,
+[data-theme="warm-stone"] .pro-name,
+[data-theme="warm-stone"] .price-title,
+[data-theme="warm-stone"] .trust-card h3 {
+  color: #354F52 !important;
+  -webkit-text-fill-color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] p,
+[data-theme="warm-stone"] .section-subtitle,
+[data-theme="warm-stone"] .cptc-sub,
+[data-theme="warm-stone"] .cpsc-label,
+[data-theme="warm-stone"] .cp-user-subline,
+[data-theme="warm-stone"] .trust-card p,
+[data-theme="warm-stone"] .price-desc,
+[data-theme="warm-stone"] .card-desc {
+  color: rgba(53, 79, 82, 0.85) !important;
+}
+
+/* ── 4. NAVBAR (WARM STONE WITH DARK SLATE ACCENTS) ── */
+[data-theme="warm-stone"] .navbar {
+  background: #DAD7CD !important;
+  border-bottom: 1.5px solid rgba(53, 79, 82, 0.22) !important;
+  box-shadow: 0 4px 20px rgba(53, 79, 82, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .nav-link,
+[data-theme="warm-stone"] .navbar-link,
+[data-theme="warm-stone"] .nav-item a,
+[data-theme="warm-stone"] .nav-menu button {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .nav-link:hover,
+[data-theme="warm-stone"] .nav-link.active {
+  color: #283C3E !important;
+  border-color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .mobile-nav,
+[data-theme="warm-stone"] .mobile-drawer,
+[data-theme="warm-stone"] .nav-dropdown {
+  background: #ECEAE2 !important;
+  border: 1px solid rgba(53, 79, 82, 0.25) !important;
+  box-shadow: 0 10px 30px rgba(53, 79, 82, 0.2) !important;
+}
+
+/* ── 5. UNIVERSAL CARDS & SURFACES ── */
+[data-theme="warm-stone"] .top-service-card,
+[data-theme="warm-stone"] .professional-card,
+[data-theme="warm-stone"] .price-card,
+[data-theme="warm-stone"] .trust-card,
+[data-theme="warm-stone"] .completed-work-card,
+[data-theme="warm-stone"] .customer-review-card,
+[data-theme="warm-stone"] .service-offer-card,
+[data-theme="warm-stone"] .service-provider-card,
+[data-theme="warm-stone"] .card,
+[data-theme="warm-stone"] .cp-hero-card,
+[data-theme="warm-stone"] .cp-stat-card,
+[data-theme="warm-stone"] .cp-tab-card,
+[data-theme="warm-stone"] .cp-address-item,
+[data-theme="warm-stone"] .cp-toggle-item,
+[data-theme="warm-stone"] .svc-home-card,
+[data-theme="warm-stone"] .service-card,
+[data-theme="warm-stone"] .package-card,
+[data-theme="warm-stone"] .technician-card,
+[data-theme="warm-stone"] .booking-form-card,
+[data-theme="warm-stone"] .category-card,
+[data-theme="warm-stone"] .cp-nav-tabs {
+  background: #ECEAE2 !important;
+  color: #354F52 !important;
+  border: 1.5px solid rgba(53, 79, 82, 0.22) !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.12) !important;
+}
+
+/* Card Hover in Warm Stone Mode */
+[data-theme="warm-stone"] .top-service-card:hover,
+[data-theme="warm-stone"] .professional-card:hover,
+[data-theme="warm-stone"] .price-card:hover,
+[data-theme="warm-stone"] .trust-card:hover,
+[data-theme="warm-stone"] .completed-work-card:hover,
+[data-theme="warm-stone"] .customer-review-card:hover,
+[data-theme="warm-stone"] .service-offer-card:hover,
+[data-theme="warm-stone"] .service-provider-card:hover,
+[data-theme="warm-stone"] .card:hover,
+[data-theme="warm-stone"] .svc-home-card:hover {
+  transform: translateY(-3px) !important;
+  border-color: #354F52 !important;
+  box-shadow: 
+    0 12px 30px rgba(53, 79, 82, 0.2), 
+    0 0 18px rgba(82, 121, 111, 0.25) !important;
+}
+
+/* ── 6. BUTTONS IN WARM STONE LIGHT MODE ── */
+[data-theme="warm-stone"] .btn-primary,
+[data-theme="warm-stone"] .card-explore-btn,
+[data-theme="warm-stone"] .hire-button,
+[data-theme="warm-stone"] .price-button,
+[data-theme="warm-stone"] .search-button,
+[data-theme="warm-stone"] .cta-button,
+[data-theme="warm-stone"] .cta-primary,
+[data-theme="warm-stone"] .view-profile-btn,
+[data-theme="warm-stone"] .chat-action-btn,
+[data-theme="warm-stone"] .pcr-action-btn,
+[data-theme="warm-stone"] .book-now-btn,
+[data-theme="warm-stone"] .btn-signup,
+[data-theme="warm-stone"] .cp-btn-edit-mode,
+[data-theme="warm-stone"] .cp-submit-btn,
+[data-theme="warm-stone"] .cp-btn-save,
+[data-theme="warm-stone"] .cp-mini-edit-btn {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  font-weight: 700 !important;
+  border: none !important;
+  border-radius: 50px !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.35) !important;
+  transition: all 0.25s ease !important;
+}
+
+/* Primary Button Hover */
+[data-theme="warm-stone"] .btn-primary:hover,
+[data-theme="warm-stone"] .card-explore-btn:hover,
+[data-theme="warm-stone"] .hire-button:hover,
+[data-theme="warm-stone"] .price-button:hover,
+[data-theme="warm-stone"] .search-button:hover,
+[data-theme="warm-stone"] .cta-button:hover,
+[data-theme="warm-stone"] .cta-primary:hover,
+[data-theme="warm-stone"] .view-profile-btn:hover,
+[data-theme="warm-stone"] .chat-action-btn:hover,
+[data-theme="warm-stone"] .pcr-action-btn:hover,
+[data-theme="warm-stone"] .book-now-btn:hover,
+[data-theme="warm-stone"] .btn-signup:hover,
+[data-theme="warm-stone"] .cp-btn-edit-mode:hover,
+[data-theme="warm-stone"] .cp-submit-btn:hover,
+[data-theme="warm-stone"] .cp-btn-save:hover,
+[data-theme="warm-stone"] .cp-mini-edit-btn:hover {
+  background: #283C3E !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(53, 79, 82, 0.5) !important;
+}
+
+/* Button Shine Effect for Light Mode */
+[data-theme="warm-stone"] .btn-primary::after {
+  background: linear-gradient(90deg, transparent, rgba(218, 215, 205, 0.45), transparent) !important;
+}
+
+/* Secondary / Outline Buttons */
+[data-theme="warm-stone"] .cta-secondary,
+[data-theme="warm-stone"] .btn-login,
+[data-theme="warm-stone"] .cp-btn-cancel,
+[data-theme="warm-stone"] .cp-cancel-btn {
+  background: rgba(53, 79, 82, 0.1) !important;
+  color: #354F52 !important;
+  border: 1.5px solid #354F52 !important;
+  border-radius: 50px !important;
+  font-weight: 700 !important;
+  transition: all 0.25s ease !important;
+}
+
+[data-theme="warm-stone"] .cta-secondary:hover,
+[data-theme="warm-stone"] .btn-login:hover,
+[data-theme="warm-stone"] .cp-btn-cancel:hover,
+[data-theme="warm-stone"] .cp-cancel-btn:hover {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  border-color: #354F52 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.35) !important;
+}
+
+/* ── 7. INPUTS, SELECTS & FORM FIELDS ── */
+[data-theme="warm-stone"] input,
+[data-theme="warm-stone"] select,
+[data-theme="warm-stone"] textarea,
+[data-theme="warm-stone"] .cp-form-input,
+[data-theme="warm-stone"] .cp-form-select,
+[data-theme="warm-stone"] .cp-form-textarea,
+[data-theme="warm-stone"] .cp-field-display,
+[data-theme="warm-stone"] .search-input {
+  background: #F7F6F2 !important;
+  color: #354F52 !important;
+  border: 1.5px solid rgba(53, 79, 82, 0.28) !important;
+}
+
+[data-theme="warm-stone"] input:focus,
+[data-theme="warm-stone"] select:focus,
+[data-theme="warm-stone"] textarea:focus,
+[data-theme="warm-stone"] .cp-form-input:focus,
+[data-theme="warm-stone"] .cp-form-select:focus,
+[data-theme="warm-stone"] .cp-form-textarea:focus,
+[data-theme="warm-stone"] .search-input:focus {
+  border-color: #354F52 !important;
+  box-shadow: 0 0 12px rgba(53, 79, 82, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .cp-form-label {
+  color: #354F52 !important;
+  font-weight: 700 !important;
+}
+
+/* ── 8. BADGES, PILLS & LABELS ── */
+[data-theme="warm-stone"] .category-pill-badge,
+[data-theme="warm-stone"] .cp-member-tag,
+[data-theme="warm-stone"] .cp-trust-pill,
+[data-theme="warm-stone"] .cpi-verified-badge,
+[data-theme="warm-stone"] .cpi-area-badge,
+[data-theme="warm-stone"] .cpai-tag,
+[data-theme="warm-stone"] .cpai-city-tag,
+[data-theme="warm-stone"] .badge,
+[data-theme="warm-stone"] .filter-btn,
+[data-theme="warm-stone"] .filter-pill {
+  background: rgba(53, 79, 82, 0.12) !important;
+  border: 1px solid rgba(53, 79, 82, 0.25) !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .filter-btn.active,
+[data-theme="warm-stone"] .filter-pill.active {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+}
+
+/* ── 9. PROFILE PAGE TABS ── */
+[data-theme="warm-stone"] .cp-tab-btn {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .cp-tab-btn.active {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .cpsc-icon-wrap {
+  background: rgba(53, 79, 82, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .cpsc-icon-wrap svg {
+  stroke: #354F52 !important;
+}
+
+/* ── 10. TICKER STRIPS IN WARM STONE MODE ── */
+[data-theme="warm-stone"] .mux-dual-ticker-section {
+  background: #ECEAE2 !important;
+  box-shadow: 0 8px 30px rgba(53, 79, 82, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .ticker-patti-row {
+  background: #ECEAE2 !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .ticker-item {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .mux-dual-ticker-section::before,
+[data-theme="warm-stone"] .mux-dual-ticker-section::after {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(53, 79, 82, 0.25) 15%, 
+    #354F52 35%, 
+    #52796F 50%, 
+    #354F52 65%, 
+    rgba(53, 79, 82, 0.25) 85%, 
+    transparent 100%
+  ) !important;
+  box-shadow: 0 0 14px #354F52, 0 0 28px rgba(53, 79, 82, 0.45) !important;
+}
+
+/* ── 11. FOOTER (WARM STONE WITH DARK SLATE GRAY) ── */
+[data-theme="warm-stone"] .footer {
+  background: #E4E1D7 !important;
+  border-top: 3px solid #354F52 !important;
+  box-shadow: 0 -8px 32px rgba(53, 79, 82, 0.12) !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .footer-logo-mux {
+  color: #354F52 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .footer-logo-services {
+  color: #52796F !important;
+  text-shadow: none !important;
+}
+
+[data-theme="warm-stone"] .footer-description,
+[data-theme="warm-stone"] .footer-links a,
+[data-theme="warm-stone"] .footer-section h4 {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .footer-links a:hover {
+  color: #283C3E !important;
+}
+
+[data-theme="warm-stone"] .footer-bottom {
+  border-top-color: rgba(53, 79, 82, 0.2) !important;
+  color: rgba(53, 79, 82, 0.8) !important;
+}
+
+/* ── 12. PRESERVED DYNAMIC ANIMATIONS IN WARM STONE MODE ── */
+/* "animation asy hi dalna inn maa jaha jaha ha sme" */
+@keyframes warmStoneCardAuraPulseGlow {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(53, 79, 82, 0.18), 0 0 18px rgba(53, 79, 82, 0.12) !important;
+    border-color: rgba(53, 79, 82, 0.28) !important;
+  }
+  50% {
+    box-shadow: 0 14px 44px rgba(53, 79, 82, 0.28), 0 0 32px rgba(82, 121, 111, 0.35) !important;
+    border-color: #354F52 !important;
+  }
+}
+
+[data-theme="warm-stone"] .animated-shadow-aura {
+  animation: warmStoneCardAuraPulseGlow 3.6s infinite ease-in-out !important;
+}
+
+@keyframes warmStoneIcePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(53, 79, 82, 0.45); }
+  70%  { box-shadow: 0 0 0 12px rgba(53, 79, 82, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(53, 79, 82, 0); }
+}
+
+[data-theme="warm-stone"] .icePulse {
+  animation: warmStoneIcePulse 2s infinite !important;
+}
+
+/* ── 13. HERO SECTION ADJUSTMENTS IN WARM STONE MODE ── */
+[data-theme="warm-stone"] .hero-section .hero-search-box {
+  background: #ECEAE2 !important;
+  border: 1.5px solid rgba(53, 79, 82, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(53, 79, 82, 0.18) !important;
+}
+
+[data-theme="warm-stone"] .hero-section .hero-stat-card {
+  background: rgba(236, 234, 226, 0.85) !important;
+  border: 1px solid rgba(53, 79, 82, 0.25) !important;
+  box-shadow: 0 6px 18px rgba(53, 79, 82, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .hero-section .hero-stat-card .stat-number {
+  color: #354F52 !important;
+  -webkit-text-fill-color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .hero-section .hero-stat-card .stat-label {
+  color: rgba(53, 79, 82, 0.85) !important;
+  -webkit-text-fill-color: rgba(53, 79, 82, 0.85) !important;
+}

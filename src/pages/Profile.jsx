@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './Profile.css'
 import { authAPI } from '../services/api'
 
-function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
+function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 'dark', onThemeChange }) {
   const [activeTab, setActiveTab] = useState('personal')
   const [isEditMode, setIsEditMode] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
@@ -371,6 +371,13 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
           >
             <span>Security &amp; Alerts</span>
           </button>
+          <button 
+            type="button" 
+            className={`cp-tab-btn ${activeTab === 'general' ? 'active' : ''}`}
+            onClick={() => setActiveTab('general')}
+          >
+            <span>General Settings</span>
+          </button>
         </div>
 
         {/* ══════════════════════════════════════════════════
@@ -726,6 +733,164 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate }) {
                   <p>Your account is protected by encrypted OTP verification for bookings across Multan.</p>
                 </div>
                 <span className="cssc-tag">Encrypted</span>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════════
+            TAB 4: GENERAL SETTINGS & THEME MODE
+        ══════════════════════════════════════════════════ */}
+        {activeTab === 'general' && (
+          <div className="cp-tab-card animated-shadow-aura anim-slide-up">
+            <div className="cptc-header">
+              <div>
+                <h3 className="cptc-title">General Settings &amp; Theme Mode</h3>
+                <p className="cptc-sub">Customize the website appearance, colors, and display theme across the entire Service HUB platform.</p>
+              </div>
+              <span className="cp-theme-current-badge">
+                Active: {currentTheme === 'warm-stone' ? 'Warm Stone Light' : 'Default Dark MUX'}
+              </span>
+            </div>
+
+            <div className="cp-general-settings-wrap">
+              <div className="cp-theme-intro-bar">
+                <div className="cp-theme-intro-text">
+                  <h4>Website Display Mode</h4>
+                  <p>Choose your preferred interface theme. Mode change takes effect immediately on every page, booking section, and menu.</p>
+                </div>
+
+                {/* Quick Toggle Switch */}
+                <div className="cp-theme-quick-switch-wrap">
+                  <span className="cp-theme-switch-label">
+                    {currentTheme === 'warm-stone' ? 'Light Mode' : 'Dark Mode'}
+                  </span>
+                  <button
+                    type="button"
+                    aria-label="Toggle website theme mode"
+                    className={`cp-theme-pill-switch ${currentTheme === 'warm-stone' ? 'light-active' : 'dark-active'}`}
+                    onClick={() => {
+                      const next = currentTheme === 'warm-stone' ? 'dark' : 'warm-stone'
+                      if (typeof onThemeChange === 'function') {
+                        onThemeChange(next)
+                      }
+                      triggerToast(next === 'warm-stone' ? 'Warm Stone Light Mode activated for entire website!' : 'Default Dark MUX Theme activated for entire website!')
+                    }}
+                  >
+                    <span className="switch-thumb">
+                      {currentTheme === 'warm-stone' ? (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="5"></circle>
+                          <line x1="12" y1="1" x2="12" y2="3"></line>
+                          <line x1="12" y1="21" x2="12" y2="23"></line>
+                          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                          <line x1="1" y1="12" x2="3" y2="12"></line>
+                          <line x1="21" y1="12" x2="23" y2="12"></line>
+                          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                      ) : (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                      )}
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Theme Selection Grid Cards */}
+              <div className="cp-theme-cards-grid">
+                
+                {/* 1. Default Dark MUX Theme */}
+                <div 
+                  className={`cp-theme-selection-card animated-shadow-aura ${currentTheme === 'dark' ? 'selected' : ''}`}
+                  onClick={() => {
+                    if (currentTheme !== 'dark' && typeof onThemeChange === 'function') {
+                      onThemeChange('dark')
+                      triggerToast('Default Dark MUX Theme activated!')
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <div className="cp-tsc-preview dark-theme-preview">
+                    <div className="cp-tsc-sample-header"></div>
+                    <div className="cp-tsc-sample-body">
+                      <div className="cp-tsc-sample-card">
+                        <div className="cp-tsc-sample-line accent"></div>
+                        <div className="cp-tsc-sample-line"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="cp-tsc-details">
+                    <div className="cp-tsc-title-row">
+                      <h4>Dark MUX Theme</h4>
+                      {currentTheme === 'dark' && <span className="cp-tsc-active-pill">Active</span>}
+                    </div>
+                    <p>Executive deep teal (#0E2E33) with mint ice (#8FD3E8) glowing neon aura accents.</p>
+                    <div className="cp-tsc-swatches">
+                      <span className="cp-swatch" style={{ background: '#0E2E33' }} title="Navy #0E2E33"></span>
+                      <span className="cp-swatch" style={{ background: '#13383e' }} title="Surface #13383e"></span>
+                      <span className="cp-swatch" style={{ background: '#8FD3E8' }} title="Mint Ice #8FD3E8"></span>
+                      <span className="cp-swatch" style={{ background: '#EEF4F4' }} title="Frost White #EEF4F4"></span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Warm Stone Light Theme (Dark Slate Gray #354F52 & Warm Stone #DAD7CD) */}
+                <div 
+                  className={`cp-theme-selection-card animated-shadow-aura ${currentTheme === 'warm-stone' ? 'selected' : ''}`}
+                  onClick={() => {
+                    if (currentTheme !== 'warm-stone' && typeof onThemeChange === 'function') {
+                      onThemeChange('warm-stone')
+                      triggerToast('Warm Stone Light Mode activated across the entire website!')
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <div className="cp-tsc-preview warm-stone-preview">
+                    <div className="cp-tsc-sample-header"></div>
+                    <div className="cp-tsc-sample-body">
+                      <div className="cp-tsc-sample-card">
+                        <div className="cp-tsc-sample-line accent"></div>
+                        <div className="cp-tsc-sample-line"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="cp-tsc-details">
+                    <div className="cp-tsc-title-row">
+                      <h4>Warm Stone Light Mode</h4>
+                      {currentTheme === 'warm-stone' && <span className="cp-tsc-active-pill">Active</span>}
+                    </div>
+                    <p>Clean warm stone (#DAD7CD) background with dark slate gray (#354F52) accents and smooth aura animations.</p>
+                    <div className="cp-tsc-swatches">
+                      <span className="cp-swatch" style={{ background: '#DAD7CD' }} title="Warm Stone #DAD7CD"></span>
+                      <span className="cp-swatch" style={{ background: '#354F52' }} title="Dark Slate Gray #354F52"></span>
+                      <span className="cp-swatch" style={{ background: '#52796F' }} title="Slate Green #52796F"></span>
+                      <span className="cp-swatch" style={{ background: '#EAE7DF' }} title="Surface Tint #EAE7DF"></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Information / Feature Box */}
+              <div className="cp-theme-info-box animated-shadow-aura">
+                <div className="ctib-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </div>
+                <div className="ctib-text">
+                  <h5>Global Persistence &amp; Smooth Animation</h5>
+                  <p>Your theme preference is automatically remembered on this device. All card hover transforms, glowing aura animations, and button shines adapt dynamically without visual flicker.</p>
+                </div>
               </div>
 
             </div>
