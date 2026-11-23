@@ -21,6 +21,10 @@ import categoryCarpenterBanner from '../assets/category-carpenter-banner.webp'
 import categoryCleaningBanner from '../assets/category-cleaning-banner.webp'
 import categoryPainterBanner from '../assets/category-painter-banner.webp'
 import categoryApplianceBanner from '../assets/category-appliance-banner.webp'
+import categoryGardenerBanner from '../assets/category-gardener-banner.webp'
+import categoryGlassBanner from '../assets/category-glass-banner.webp'
+import categoryWelderBanner from '../assets/category-welder-banner.webp'
+import categoryLaundryBanner from '../assets/category-laundry-banner.webp'
 import providerProfileBanner from '../assets/provider-profile-banner.webp'
 const electricianPng = electricianImage
 const electricianJpg = electricianImage
@@ -1164,10 +1168,10 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       'Painter': categoryPainterBanner,
       'Home Cleaning': categoryCleaningBanner,
       'Appliance Repair': categoryApplianceBanner,
-      'Glass & Aluminum': categoryCarpenterBanner,
-      'Gardener': categoryCleaningBanner,
-      'Welder': categoryElectricianBanner,
-      'Laundry & Ironing': categoryCleaningBanner,
+      'Glass & Aluminum': categoryGlassBanner,
+      'Gardener': categoryGardenerBanner,
+      'Welder': categoryWelderBanner,
+      'Laundry & Ironing': categoryLaundryBanner,
     }
     if (imageMap[normalized]) return imageMap[normalized]
     const foundKey = Object.keys(imageMap).find(k => k.toLowerCase() === String(normalized).toLowerCase())
@@ -1180,7 +1184,11 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
     if (lower.includes('carpent') || lower.includes('wood')) return categoryCarpenterBanner
     if (lower.includes('paint') || lower.includes('rang')) return categoryPainterBanner
     if (lower.includes('clean') || lower.includes('safai')) return categoryCleaningBanner
-    if (lower.includes('appliance') || lower.includes('fridge') || lower.includes('oven')) return categoryApplianceBanner
+    if (lower.includes('appliance') || lower.includes('fridge') || lower.includes('oven') || lower.includes('wash machine')) return categoryApplianceBanner
+    if (lower.includes('glass') || lower.includes('alumin')) return categoryGlassBanner
+    if (lower.includes('garden') || lower.includes('lawn') || lower.includes('mali')) return categoryGardenerBanner
+    if (lower.includes('weld') || lower.includes('gate') || lower.includes('iron') || lower.includes('loha')) return categoryWelderBanner
+    if (lower.includes('laund') || lower.includes('dry clean') || lower.includes('press') || lower.includes('istri')) return categoryLaundryBanner
 
     return categoryAcBanner
   }
