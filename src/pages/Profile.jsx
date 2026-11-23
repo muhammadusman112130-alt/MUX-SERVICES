@@ -840,7 +840,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
                   </div>
                 </div>
 
-                {/* 2. Light Mode (Pure White #FFFFFF & Dark Slate Gray #354F52) */}
+                {/* 2. Light Mode (Pure White #FFFFF0 & Dark Slate Gray #0A0A0A) */}
                 <div 
                   className={`cp-theme-selection-card animated-shadow-aura ${currentTheme === 'warm-stone' ? 'selected' : ''}`}
                   onClick={() => {
@@ -866,11 +866,11 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
                       <h4>Light Mode</h4>
                       {currentTheme === 'warm-stone' && <span className="cp-tsc-active-pill">Active</span>}
                     </div>
-                    <p>Pure White (#FFFFFF) and Dark Slate Gray (#354F52) minimalist two-color palette.</p>
+                    <p>Pure White (#FFFFF0) and Dark Slate Gray (#0A0A0A) minimalist two-color palette.</p>
                     <div className="cp-tsc-swatches">
-                      <span className="cp-swatch" style={{ background: '#FFFFFF', border: '1px solid #354F52' }} title="Pure White #FFFFFF"></span>
-                      <span className="cp-swatch" style={{ background: '#354F52' }} title="Dark Slate Gray #354F52"></span>
-                      <span className="cp-swatch" style={{ background: '#283C3E' }} title="Deep Slate #283C3E"></span>
+                      <span className="cp-swatch" style={{ background: '#FFFFF0', border: '1.5px solid #0A0A0A' }} title="Ivory #FFFFF0"></span>
+                      <span className="cp-swatch" style={{ background: '#0A0A0A' }} title="Dark Slate Gray #0A0A0A"></span>
+                      <span className="cp-swatch" style={{ background: '#222222' }} title="Deep Slate #222222"></span>
                     </div>
                   </div>
                 </div>

@@ -990,7 +990,7 @@
 }
 
 .cp-theme-pill-switch.light-active {
-  background: #354F52;
+  background: #0A0A0A;
   border-color: #DAD7CD;
   box-shadow: 0 0 12px rgba(218, 215, 205, 0.4);
 }
@@ -1014,7 +1014,7 @@
 .cp-theme-pill-switch.light-active .switch-thumb {
   transform: translateX(30px);
   background: #DAD7CD;
-  color: #354F52;
+  color: #0A0A0A;
 }
 
 /* Theme Cards Grid */
@@ -1066,7 +1066,7 @@
 
 .cp-tsc-preview.warm-stone-preview {
   background: #FFFFFF;
-  border-bottom: 1px solid rgba(53, 79, 82, 0.25);
+  border-bottom: 1px solid rgba(10, 10, 10, 0.25);
 }
 
 .cp-tsc-sample-header {
@@ -1080,7 +1080,7 @@
 }
 
 .warm-stone-preview .cp-tsc-sample-header {
-  background: #354F52;
+  background: #0A0A0A;
 }
 
 .cp-tsc-sample-body {
@@ -1108,7 +1108,7 @@
 
 .warm-stone-preview .cp-tsc-sample-card {
   background: #FFFFFF;
-  border: 1.5px solid #354F52;
+  border: 1.5px solid #0A0A0A;
 }
 
 .cp-tsc-sample-line {
@@ -1127,11 +1127,11 @@
 }
 
 .warm-stone-preview .cp-tsc-sample-line {
-  background: rgba(53, 79, 82, 0.35);
+  background: rgba(10, 10, 10, 0.35);
 }
 
 .warm-stone-preview .cp-tsc-sample-line.accent {
-  background: #354F52;
+  background: #0A0A0A;
   width: 35%;
 }
 
@@ -1245,245 +1245,245 @@
 }
 
 /* ══════════════════════════════════════════════════
-   PROFILE SPECIFIC LIGHT MODE OVERRIDES (#FFFFFF & #354F52)
+   PROFILE SPECIFIC LIGHT MODE OVERRIDES (#FFFFFF & #0A0A0A)
 ══════════════════════════════════════════════════ */
 [data-theme="warm-stone"] .customer-profile-page {
-  background: #FFFFFF !important;
-  color: #354F52 !important;
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-hero-card {
-  background: #FFFFFF !important;
-  border-color: #354F52 !important;
-  box-shadow: 0 16px 45px rgba(53, 79, 82, 0.18) !important;
+  background: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 16px 45px rgba(10, 10, 10, 0.18) !important;
 }
 
 [data-theme="warm-stone"] .cp-hero-bg-glow {
-  background: radial-gradient(circle, rgba(53, 79, 82, 0.1) 0%, transparent 70%) !important;
+  background: radial-gradient(circle, rgba(10, 10, 10, 0.1) 0%, transparent 70%) !important;
 }
 
 [data-theme="warm-stone"] .cp-user-fullname {
-  color: #354F52 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-user-subline {
-  color: rgba(53, 79, 82, 0.82) !important;
+  color: rgba(10, 10, 10, 0.82) !important;
 }
 
 [data-theme="warm-stone"] .cp-stat-card {
-  background: #FFFFFF !important;
-  border-color: #354F52 !important;
+  background: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cpsc-body strong {
-  color: #354F52 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cpsc-label {
-  color: rgba(53, 79, 82, 0.8) !important;
+  color: rgba(10, 10, 10, 0.8) !important;
 }
 
 [data-theme="warm-stone"] .cp-nav-tabs {
-  background: #FFFFFF !important;
-  border-color: #354F52 !important;
+  background: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-tab-card {
-  background: #FFFFFF !important;
-  border-color: #354F52 !important;
+  background: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cptc-title {
-  color: #354F52 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cptc-sub {
-  color: rgba(53, 79, 82, 0.8) !important;
+  color: rgba(10, 10, 10, 0.8) !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-intro-bar {
-  background: #FFFFFF !important;
-  border-color: rgba(53, 79, 82, 0.25) !important;
+  background: #FFFFF0 !important;
+  border-color: rgba(10, 10, 10, 0.25) !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-intro-text h4 {
-  color: #354F52 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-intro-text p {
-  color: rgba(53, 79, 82, 0.8) !important;
+  color: rgba(10, 10, 10, 0.8) !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-current-badge {
-  color: #354F52 !important;
-  background: rgba(53, 79, 82, 0.12) !important;
-  border-color: #354F52 !important;
+  color: #0A0A0A !important;
+  background: rgba(10, 10, 10, 0.12) !important;
+  border-color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-switch-label {
-  color: #354F52 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-selection-card {
-  background: #FFFFFF !important;
-  border-color: #354F52 !important;
+  background: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-selection-card:hover,
 .theme-warm-stone .cp-theme-selection-card:hover {
   transform: translateY(-4px) !important;
-  border-color: #354F52 !important;
-  box-shadow: 0 14px 35px rgba(53, 79, 82, 0.25) !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 14px 35px rgba(10, 10, 10, 0.25) !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-selection-card.selected,
 .theme-warm-stone .cp-theme-selection-card.selected {
-  border-color: #354F52 !important;
-  box-shadow: 0 14px 36px rgba(53, 79, 82, 0.25) !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 14px 36px rgba(10, 10, 10, 0.25) !important;
 }
 
 [data-theme="warm-stone"] .cp-tsc-active-pill,
 .theme-warm-stone .cp-tsc-active-pill {
-  background: #354F52 !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 2px 8px rgba(53, 79, 82, 0.35) !important;
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  box-shadow: 0 2px 8px rgba(10, 10, 10, 0.35) !important;
 }
 
 [data-theme="warm-stone"] .cp-tsc-title-row h4 {
-  color: #354F52 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-tsc-details p {
-  color: rgba(53, 79, 82, 0.8) !important;
+  color: rgba(10, 10, 10, 0.8) !important;
 }
 
 [data-theme="warm-stone"] .cp-theme-info-box {
-  background: #FFFFFF !important;
-  border-color: rgba(53, 79, 82, 0.25) !important;
+  background: #FFFFF0 !important;
+  border-color: rgba(10, 10, 10, 0.25) !important;
 }
 
 [data-theme="warm-stone"] .ctib-text h5 {
-  color: #354F52 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .ctib-text p {
-  color: rgba(53, 79, 82, 0.8) !important;
+  color: rgba(10, 10, 10, 0.8) !important;
 }
 
 [data-theme="warm-stone"] .ctib-icon {
-  background: rgba(53, 79, 82, 0.12) !important;
-  color: #354F52 !important;
+  background: rgba(10, 10, 10, 0.12) !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-field-display {
-  background: #FFFFFF !important;
-  color: #354F52 !important;
-  border-color: rgba(53, 79, 82, 0.3) !important;
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+  border-color: rgba(10, 10, 10, 0.3) !important;
 }
 
 [data-theme="warm-stone"] .cpai-address-title {
-  color: #354F52 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cpai-meta,
 [data-theme="warm-stone"] .cpai-landmark {
-  color: rgba(53, 79, 82, 0.8) !important;
+  color: rgba(10, 10, 10, 0.8) !important;
 }
 
 [data-theme="warm-stone"] .cpti-text h4 {
-  color: #354F52 !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cpti-text p {
-  color: rgba(53, 79, 82, 0.8) !important;
+  color: rgba(10, 10, 10, 0.8) !important;
 }
 
 [data-theme="warm-stone"] .cp-security-shield-card {
-  background: rgba(53, 79, 82, 0.08) !important;
-  border-color: rgba(53, 79, 82, 0.28) !important;
+  background: rgba(10, 10, 10, 0.08) !important;
+  border-color: rgba(10, 10, 10, 0.28) !important;
 }
 
 [data-theme="warm-stone"] .cssc-text p {
-  color: rgba(53, 79, 82, 0.8) !important;
+  color: rgba(10, 10, 10, 0.8) !important;
 }
 
 /* DP Box & Avatar Column in Light Mode */
 [data-theme="warm-stone"] .cp-avatar-frame,
 .theme-warm-stone .cp-avatar-frame {
-  background: #FFFFFF !important;
-  border: 2.5px solid #354F52 !important;
-  box-shadow: 0 8px 24px rgba(53, 79, 82, 0.2) !important;
+  background: #FFFFF0 !important;
+  border: 2.5px solid #0A0A0A !important;
+  box-shadow: 0 8px 24px rgba(10, 10, 10, 0.2) !important;
 }
 
 [data-theme="warm-stone"] .cp-avatar-initials,
 .theme-warm-stone .cp-avatar-initials {
-  background: #354F52 !important;
-  color: #FFFFFF !important;
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
 }
 
 [data-theme="warm-stone"] .cp-avatar-initials span,
 .theme-warm-stone .cp-avatar-initials span {
-  color: #FFFFFF !important;
+  color: #FFFFF0 !important;
   text-shadow: none !important;
 }
 
 [data-theme="warm-stone"] .cp-avatar-upload-trigger,
 .theme-warm-stone .cp-avatar-upload-trigger {
-  background: #354F52 !important;
-  border: 1.5px solid #FFFFFF !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 2px 8px rgba(53, 79, 82, 0.3) !important;
+  background: #0A0A0A !important;
+  border: 1.5px solid #FFFFF0 !important;
+  color: #FFFFF0 !important;
+  box-shadow: 0 2px 8px rgba(10, 10, 10, 0.3) !important;
 }
 
 [data-theme="warm-stone"] .cp-avatar-live-indicator,
 .theme-warm-stone .cp-avatar-live-indicator {
-  background: #354F52 !important;
-  border: 2.5px solid #FFFFFF !important;
+  background: #0A0A0A !important;
+  border: 2.5px solid #FFFFF0 !important;
 }
 
 /* Badges & Identity Tags in Profile */
 [data-theme="warm-stone"] .cpi-verified-badge,
 .theme-warm-stone .cpi-verified-badge {
-  background: rgba(53, 79, 82, 0.12) !important;
-  color: #354F52 !important;
-  border: 1px solid rgba(53, 79, 82, 0.3) !important;
+  background: rgba(10, 10, 10, 0.12) !important;
+  color: #0A0A0A !important;
+  border: 1px solid rgba(10, 10, 10, 0.3) !important;
 }
 
 [data-theme="warm-stone"] .cpi-area-badge,
 .theme-warm-stone .cpi-area-badge {
-  background: rgba(53, 79, 82, 0.08) !important;
-  color: #354F52 !important;
-  border: 1px solid rgba(53, 79, 82, 0.25) !important;
+  background: rgba(10, 10, 10, 0.08) !important;
+  color: #0A0A0A !important;
+  border: 1px solid rgba(10, 10, 10, 0.25) !important;
 }
 
 [data-theme="warm-stone"] .cp-member-tag,
 .theme-warm-stone .cp-member-tag,
 [data-theme="warm-stone"] .cp-trust-pill,
 .theme-warm-stone .cp-trust-pill {
-  background: rgba(53, 79, 82, 0.08) !important;
-  color: #354F52 !important;
-  border: 1px solid rgba(53, 79, 82, 0.2) !important;
+  background: rgba(10, 10, 10, 0.08) !important;
+  color: #0A0A0A !important;
+  border: 1px solid rgba(10, 10, 10, 0.2) !important;
 }
 
 [data-theme="warm-stone"] .cpai-tag,
 .theme-warm-stone .cpai-tag,
 [data-theme="warm-stone"] .cpai-city-tag,
 .theme-warm-stone .cpai-city-tag {
-  background: rgba(53, 79, 82, 0.1) !important;
-  color: #354F52 !important;
+  background: rgba(10, 10, 10, 0.1) !important;
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cpai-tag.primary,
 .theme-warm-stone .cpai-tag.primary {
-  background: #354F52 !important;
-  color: #FFFFFF !important;
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
 }
 
 [data-theme="warm-stone"] .cpai-badge-default,
 .theme-warm-stone .cpai-badge-default {
-  background: rgba(53, 79, 82, 0.12) !important;
-  color: #354F52 !important;
-  border: 1px solid rgba(53, 79, 82, 0.3) !important;
+  background: rgba(10, 10, 10, 0.12) !important;
+  color: #0A0A0A !important;
+  border: 1px solid rgba(10, 10, 10, 0.3) !important;
 }
 
 /* Profile Action Buttons */
@@ -1495,10 +1495,10 @@
 .theme-warm-stone .cp-submit-btn,
 [data-theme="warm-stone"] .cp-btn-save,
 .theme-warm-stone .cp-btn-save {
-  background: #354F52 !important;
-  color: #FFFFFF !important;
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
   border: none !important;
-  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.35) !important;
+  box-shadow: 0 4px 15px rgba(10, 10, 10, 0.35) !important;
 }
 
 [data-theme="warm-stone"] .cp-btn-edit-mode:hover,
@@ -1509,45 +1509,45 @@
 .theme-warm-stone .cp-submit-btn:hover,
 [data-theme="warm-stone"] .cp-btn-save:hover,
 .theme-warm-stone .cp-btn-save:hover {
-  background: #283C3E !important;
-  color: #FFFFFF !important;
+  background: #222222 !important;
+  color: #FFFFF0 !important;
 }
 
 [data-theme="warm-stone"] .cp-btn-cancel,
 .theme-warm-stone .cp-btn-cancel,
 [data-theme="warm-stone"] .cp-cancel-btn,
 .theme-warm-stone .cp-cancel-btn {
-  background: rgba(53, 79, 82, 0.1) !important;
-  color: #354F52 !important;
-  border: 1.5px solid #354F52 !important;
+  background: rgba(10, 10, 10, 0.1) !important;
+  color: #0A0A0A !important;
+  border: 1.5px solid #0A0A0A !important;
 }
 
 /* Toggle Switches */
 [data-theme="warm-stone"] .cp-toggle-switch.on,
 .theme-warm-stone .cp-toggle-switch.on {
-  background: #354F52 !important;
+  background: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .cp-toggle-switch.off,
 .theme-warm-stone .cp-toggle-switch.off {
-  background: rgba(53, 79, 82, 0.25) !important;
+  background: rgba(10, 10, 10, 0.25) !important;
 }
 
 [data-theme="warm-stone"] .cp-toggle-switch .switch-slider,
 .theme-warm-stone .cp-toggle-switch .switch-slider {
-  background: #FFFFFF !important;
+  background: #FFFFF0 !important;
 }
 
 [data-theme="warm-stone"] .cp-inline-vtag,
 .theme-warm-stone .cp-inline-vtag {
-  background: rgba(53, 79, 82, 0.12) !important;
-  color: #354F52 !important;
+  background: rgba(10, 10, 10, 0.12) !important;
+  color: #0A0A0A !important;
 }
 
 /* Toast Alert in Light Mode */
 [data-theme="warm-stone"] .cp-toast-notification,
 .theme-warm-stone .cp-toast-notification {
-  background: #354F52 !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 10px 30px rgba(53, 79, 82, 0.35) !important;
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  box-shadow: 0 10px 30px rgba(10, 10, 10, 0.35) !important;
 }

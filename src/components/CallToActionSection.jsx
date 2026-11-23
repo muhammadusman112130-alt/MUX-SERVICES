@@ -102,8 +102,8 @@ function CallToActionSection({ setCurrentPage }) {
   ]
 
   return (
-    <section 
-      ref={sectionRef} 
+    <section
+      ref={sectionRef}
       className={`workflow-section ${isInView ? 'is-in-view' : 'is-out-view'}`}
       aria-label="How MUX SERVICES Works - Booking Workflow"
     >
@@ -124,7 +124,7 @@ function CallToActionSection({ setCurrentPage }) {
           </h2>
 
           <p className="wf-subtitle wf-flow wf-flow-sub">
-            Multan me certified aur verified home technicians book karna nihayat asan, tez, aur mukammal transparent hai. 
+            Multan me certified aur verified home technicians book karna nihayat asan, tez, aur mukammal transparent hai.
             Bas in 4 steps ko follow karein aur tension-free service hasil karein:
           </p>
         </div>
@@ -138,8 +138,8 @@ function CallToActionSection({ setCurrentPage }) {
 
           <div className="wf-steps-grid">
             {steps.map((step, index) => (
-              <div 
-                key={step.stepNum} 
+              <div
+                key={step.stepNum}
                 className={`wf-step-card wf-card-${index + 1}`}
               >
                 <div className="wf-card-top">
@@ -166,8 +166,8 @@ function CallToActionSection({ setCurrentPage }) {
         {/* Action Buttons & Trust Highlights */}
         <div className="wf-footer-actions wf-flow wf-flow-actions">
           <div className="wf-buttons-row">
-            <button 
-              type="button" 
+            <button
+              type="button"
               className="wf-primary-btn"
               onClick={handleBookNowClick}
             >
@@ -175,8 +175,8 @@ function CallToActionSection({ setCurrentPage }) {
               <span className="btn-arrow">→</span>
             </button>
 
-            <button 
-              type="button" 
+            <button
+              type="button"
               className="wf-secondary-btn"
               onClick={handleViewProsClick}
             >

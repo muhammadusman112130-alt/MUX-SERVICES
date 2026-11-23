@@ -56,6 +56,212 @@ function PriceOfferSection({ setCurrentPage }) {
       className={`pro-join-section ${isInView ? 'is-in-view' : 'is-out-view'}`} 
       aria-label="Join as a Service Provider"
     >
+      <style>{`
+        [data-theme="warm-stone"] .pro-join-section,
+        .theme-warm-stone .pro-join-section {
+          background: #FFFFF0 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-join-overlay,
+        .theme-warm-stone .pro-join-section .pro-join-overlay {
+          display: none !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-join-orb,
+        .theme-warm-stone .pro-join-section .pro-join-orb {
+          display: none !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-join-bg-layer,
+        .theme-warm-stone .pro-join-section .pro-join-bg-layer {
+          opacity: 1 !important;
+          filter: brightness(1.02) contrast(1.06) saturate(1.1) !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-pill-badge,
+        .theme-warm-stone .pro-join-section .pro-pill-badge {
+          background: rgba(255, 255, 240, 0.6) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1.5px solid rgba(10, 10, 10, 0.35) !important;
+          color: #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-pill-pulse,
+        .theme-warm-stone .pro-join-section .pro-pill-pulse {
+          background: #0A0A0A !important;
+          box-shadow: 0 0 8px #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-join-title,
+        .theme-warm-stone .pro-join-section .pro-join-title,
+        [data-theme="warm-stone"] .pro-join-section .highlight-cyan,
+        .theme-warm-stone .pro-join-section .highlight-cyan {
+          color: #0A0A0A !important;
+          text-shadow: 0 0 16px #FFFFF0, 0 0 28px #FFFFF0, 0 2px 4px #FFFFF0 !important;
+          font-weight: 900 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-join-description,
+        .theme-warm-stone .pro-join-section .pro-join-description {
+          color: #0A0A0A !important;
+          opacity: 1 !important;
+          font-weight: 700 !important;
+          text-shadow: 0 0 12px #FFFFF0, 0 0 22px #FFFFF0, 0 1px 4px #FFFFF0 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-benefit-item,
+        .theme-warm-stone .pro-join-section .pro-benefit-item {
+          background: rgba(255, 255, 240, 0.45) !important;
+          backdrop-filter: blur(14px) !important;
+          -webkit-backdrop-filter: blur(14px) !important;
+          border: 1.5px solid rgba(10, 10, 10, 0.35) !important;
+          box-shadow: 0 8px 30px rgba(10, 10, 10, 0.1) !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-benefit-item:hover,
+        .theme-warm-stone .pro-join-section .pro-benefit-item:hover {
+          background: rgba(255, 255, 240, 0.72) !important;
+          border-color: #0A0A0A !important;
+          box-shadow: 0 12px 36px rgba(10, 10, 10, 0.2) !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .benefit-icon-box,
+        .theme-warm-stone .pro-join-section .benefit-icon-box {
+          background: rgba(255, 255, 240, 0.65) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+          border: 1.5px solid rgba(10, 10, 10, 0.35) !important;
+          color: #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .benefit-icon-box svg,
+        .theme-warm-stone .pro-join-section .benefit-icon-box svg {
+          stroke: #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-benefit-item:hover .benefit-icon-box,
+        .theme-warm-stone .pro-join-section .pro-benefit-item:hover .benefit-icon-box {
+          background: #0A0A0A !important;
+          border-color: #0A0A0A !important;
+          color: #FFFFF0 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-benefit-item:hover .benefit-icon-box svg,
+        .theme-warm-stone .pro-join-section .pro-benefit-item:hover .benefit-icon-box svg {
+          stroke: #FFFFF0 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .benefit-title,
+        .theme-warm-stone .pro-join-section .benefit-title {
+          color: #0A0A0A !important;
+          font-weight: 800 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .benefit-desc,
+        .theme-warm-stone .pro-join-section .benefit-desc {
+          color: #0A0A0A !important;
+          opacity: 0.9 !important;
+          font-weight: 600 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-primary-btn,
+        .theme-warm-stone .pro-join-section .pro-primary-btn {
+          background: #0A0A0A !important;
+          color: #FFFFF0 !important;
+          border: none !important;
+          box-shadow: 0 6px 20px rgba(10, 10, 10, 0.25) !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-primary-btn:hover,
+        .theme-warm-stone .pro-join-section .pro-primary-btn:hover {
+          background: #222222 !important;
+          color: #FFFFF0 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-secondary-btn,
+        .theme-warm-stone .pro-join-section .pro-secondary-btn {
+          background: rgba(255, 255, 240, 0.5) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+          border: 1.5px solid rgba(10, 10, 10, 0.35) !important;
+          color: #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-secondary-btn:hover,
+        .theme-warm-stone .pro-join-section .pro-secondary-btn:hover {
+          background: #0A0A0A !important;
+          color: #FFFFF0 !important;
+          border-color: #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-stats-card,
+        .theme-warm-stone .pro-join-section .pro-stats-card {
+          background: rgba(255, 255, 240, 0.45) !important;
+          backdrop-filter: blur(16px) !important;
+          -webkit-backdrop-filter: blur(16px) !important;
+          border: 2px solid rgba(10, 10, 10, 0.35) !important;
+          box-shadow: 0 14px 45px rgba(10, 10, 10, 0.14) !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-stats-card::before,
+        .theme-warm-stone .pro-join-section .pro-stats-card::before {
+          background: #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .badge-tag,
+        .theme-warm-stone .pro-join-section .badge-tag {
+          color: #0A0A0A !important;
+          font-weight: 800 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .live-pulse-chip,
+        .theme-warm-stone .pro-join-section .live-pulse-chip {
+          background: rgba(255, 255, 240, 0.7) !important;
+          backdrop-filter: blur(8px) !important;
+          border: 1px solid rgba(10, 10, 10, 0.35) !important;
+          color: #0A0A0A !important;
+          font-weight: 800 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .live-dot,
+        .theme-warm-stone .pro-join-section .live-dot {
+          background: #0A0A0A !important;
+          box-shadow: 0 0 6px #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .metric-box,
+        .theme-warm-stone .pro-join-section .metric-box {
+          background: rgba(255, 255, 240, 0.55) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+          border: 1.5px solid rgba(10, 10, 10, 0.3) !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .metric-box:hover,
+        .theme-warm-stone .pro-join-section .metric-box:hover {
+          background: rgba(255, 255, 240, 0.85) !important;
+          border-color: #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .metric-box.highlight,
+        .theme-warm-stone .pro-join-section .metric-box.highlight {
+          background: rgba(10, 10, 10, 0.08) !important;
+          border: 1.5px solid #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .metric-num,
+        .theme-warm-stone .pro-join-section .metric-num {
+          color: #0A0A0A !important;
+          font-weight: 900 !important;
+          text-shadow: none !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .metric-label,
+        .theme-warm-stone .pro-join-section .metric-label {
+          color: #0A0A0A !important;
+          opacity: 0.9 !important;
+          font-weight: 600 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-card-quote,
+        .theme-warm-stone .pro-join-section .pro-card-quote {
+          border-top: 1px solid rgba(10, 10, 10, 0.2) !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .pro-card-quote p,
+        .theme-warm-stone .pro-join-section .pro-card-quote p {
+          color: #0A0A0A !important;
+          opacity: 0.95 !important;
+          font-weight: 500 !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .author-avatar,
+        .theme-warm-stone .pro-join-section .author-avatar {
+          background: rgba(255, 255, 240, 0.7) !important;
+          backdrop-filter: blur(8px) !important;
+          border: 1px solid rgba(10, 10, 10, 0.35) !important;
+          color: #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .author-details strong,
+        .theme-warm-stone .pro-join-section .author-details strong {
+          color: #0A0A0A !important;
+        }
+        [data-theme="warm-stone"] .pro-join-section .author-details span,
+        .theme-warm-stone .pro-join-section .author-details span {
+          color: #0A0A0A !important;
+          opacity: 0.85 !important;
+          font-weight: 600 !important;
+        }
+      `}</style>
       {/* Laser Light Beams: Expand from center on scroll open */}
       <div className="pro-laser-beam beam-top" aria-hidden="true"></div>
       <div className="pro-laser-beam beam-bottom" aria-hidden="true"></div>

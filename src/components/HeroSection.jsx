@@ -82,26 +82,26 @@ function HeroSection({ setCurrentPage }) {
         }
         :root:not([data-theme="warm-stone"]) .hero-section .hero-content p.hero-subtitle,
         :root:not([data-theme="warm-stone"]) .hero-section .hero-content p.hero-subtitle span {
-          color: #ffffff !important;
+          color: #FFFFF0 !important;
           text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8) !important;
-          -webkit-text-fill-color: #ffffff !important;
+          -webkit-text-fill-color: #FFFFF0 !important;
           font-weight: 500 !important;
         }
         :root:not([data-theme="warm-stone"]) .hero-section .hero-content .stat-number {
-          color: #ffffff !important;
-          -webkit-text-fill-color: #ffffff !important;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.3) !important;
+          color: #FFFFF0 !important;
+          -webkit-text-fill-color: #FFFFF0 !important;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 240, 0.3) !important;
         }
         :root:not([data-theme="warm-stone"]) .hero-section .hero-content .stat-label {
-          color: #ffffff !important;
-          -webkit-text-fill-color: #ffffff !important;
+          color: #FFFFF0 !important;
+          -webkit-text-fill-color: #FFFFF0 !important;
           text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8) !important;
         }
 
-        /* ── WARM STONE LIGHT MODE HERO SECTION SPECIFICS (ONLY #FFFFFF & #354F52 WITH GLASSMORPHISM) ── */
+        /* ── WARM STONE LIGHT MODE HERO SECTION SPECIFICS (ONLY #FFFFF0 & #0A0A0A WITH GLASSMORPHISM) ── */
         [data-theme="warm-stone"] .hero-section,
         .theme-warm-stone .hero-section {
-          background: #FFFFFF !important;
+          background: #FFFFF0 !important;
         }
         [data-theme="warm-stone"] .hero-slider::after,
         .theme-warm-stone .hero-slider::after {
@@ -117,9 +117,9 @@ function HeroSection({ setCurrentPage }) {
           background: none !important;
           -webkit-background-clip: unset !important;
           background-clip: unset !important;
-          -webkit-text-fill-color: #354F52 !important;
-          color: #354F52 !important;
-          text-shadow: 0 0 12px #FFFFFF, 0 0 24px #FFFFFF, 0 2px 6px #FFFFFF !important;
+          -webkit-text-fill-color: #0A0A0A !important;
+          color: #0A0A0A !important;
+          text-shadow: 0 0 12px #FFFFF0, 0 0 24px #FFFFF0, 0 2px 6px #FFFFF0 !important;
           animation: none !important;
           filter: none !important;
           letter-spacing: 2px !important;
@@ -131,47 +131,47 @@ function HeroSection({ setCurrentPage }) {
         [data-theme="warm-stone"] .hero-section .hero-content p.hero-subtitle span,
         .theme-warm-stone .hero-section .hero-content p.hero-subtitle,
         .theme-warm-stone .hero-section .hero-content p.hero-subtitle span {
-          color: #354F52 !important;
-          -webkit-text-fill-color: #354F52 !important;
-          text-shadow: 0 0 10px #FFFFFF, 0 0 20px #FFFFFF !important;
+          color: #0A0A0A !important;
+          -webkit-text-fill-color: #0A0A0A !important;
+          text-shadow: 0 0 10px #FFFFF0, 0 0 20px #FFFFF0 !important;
           font-weight: 800 !important;
         }
         [data-theme="warm-stone"] .hero-section .search-container .search-input,
         .theme-warm-stone .hero-section .search-container .search-input {
-          background: rgba(255, 255, 255, 0.5) !important;
+          background: rgba(255, 255, 240, 0.5) !important;
           backdrop-filter: blur(14px) !important;
           -webkit-backdrop-filter: blur(14px) !important;
-          border: 2px solid rgba(53, 79, 82, 0.4) !important;
-          color: #354F52 !important;
+          border: 2px solid rgba(10, 10, 10, 0.4) !important;
+          color: #0A0A0A !important;
           font-weight: 700 !important;
-          box-shadow: 0 8px 30px rgba(53, 79, 82, 0.12) !important;
+          box-shadow: 0 8px 30px rgba(10, 10, 10, 0.12) !important;
         }
         [data-theme="warm-stone"] .hero-section .search-container .search-input:focus,
         .theme-warm-stone .hero-section .search-container .search-input:focus {
-          background: rgba(255, 255, 255, 0.75) !important;
-          border-color: #354F52 !important;
-          box-shadow: 0 8px 32px rgba(53, 79, 82, 0.22) !important;
+          background: rgba(255, 255, 240, 0.75) !important;
+          border-color: #0A0A0A !important;
+          box-shadow: 0 8px 32px rgba(10, 10, 10, 0.22) !important;
         }
         [data-theme="warm-stone"] .hero-section .search-container .search-input::placeholder,
         .theme-warm-stone .hero-section .search-container .search-input::placeholder {
-          color: rgba(53, 79, 82, 0.75) !important;
+          color: rgba(10, 10, 10, 0.75) !important;
         }
         [data-theme="warm-stone"] .hero-section .search-container .search-button,
         .theme-warm-stone .hero-section .search-container .search-button {
-          background: rgba(53, 79, 82, 0.88) !important;
+          background: rgba(10, 10, 10, 0.88) !important;
           backdrop-filter: blur(10px) !important;
           -webkit-backdrop-filter: blur(10px) !important;
-          color: #FFFFFF !important;
-          border: 1px solid rgba(255, 255, 255, 0.4) !important;
+          color: #FFFFF0 !important;
+          border: 1px solid rgba(255, 255, 240, 0.4) !important;
           font-weight: 800 !important;
-          box-shadow: 0 6px 20px rgba(53, 79, 82, 0.3) !important;
+          box-shadow: 0 6px 20px rgba(10, 10, 10, 0.3) !important;
         }
         [data-theme="warm-stone"] .hero-section .search-container .search-button:hover,
         .theme-warm-stone .hero-section .search-container .search-button:hover {
-          background: #283C3E !important;
-          color: #FFFFFF !important;
+          background: #222222 !important;
+          color: #FFFFF0 !important;
           transform: translateY(-2px) !important;
-          box-shadow: 0 8px 25px rgba(53, 79, 82, 0.4) !important;
+          box-shadow: 0 8px 25px rgba(10, 10, 10, 0.4) !important;
         }
         [data-theme="warm-stone"] .hero-section .hero-stats .stat-item,
         .theme-warm-stone .hero-section .hero-stats .stat-item {
@@ -182,42 +182,42 @@ function HeroSection({ setCurrentPage }) {
         }
         [data-theme="warm-stone"] .hero-section .hero-content .stat-number,
         .theme-warm-stone .hero-section .hero-content .stat-number {
-          color: #354F52 !important;
-          -webkit-text-fill-color: #354F52 !important;
-          text-shadow: 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 1px 4px #FFFFFF !important;
+          color: #0A0A0A !important;
+          -webkit-text-fill-color: #0A0A0A !important;
+          text-shadow: 0 0 10px #FFFFF0, 0 0 20px #FFFFF0, 0 1px 4px #FFFFF0 !important;
           font-weight: 900 !important;
         }
         [data-theme="warm-stone"] .hero-section .hero-content .stat-label,
         .theme-warm-stone .hero-section .hero-content .stat-label {
-          color: #354F52 !important;
-          -webkit-text-fill-color: #354F52 !important;
-          text-shadow: 0 0 8px #FFFFFF, 0 0 16px #FFFFFF, 0 1px 3px #FFFFFF !important;
+          color: #0A0A0A !important;
+          -webkit-text-fill-color: #0A0A0A !important;
+          text-shadow: 0 0 8px #FFFFF0, 0 0 16px #FFFFF0, 0 1px 3px #FFFFF0 !important;
           font-weight: 800 !important;
         }
         [data-theme="warm-stone"] .hero-section .slider-arrow,
         .theme-warm-stone .hero-section .slider-arrow {
-          background: rgba(255, 255, 255, 0.45) !important;
+          background: rgba(255, 255, 240, 0.45) !important;
           backdrop-filter: blur(12px) !important;
           -webkit-backdrop-filter: blur(12px) !important;
-          border: 1.5px solid rgba(53, 79, 82, 0.35) !important;
-          color: #354F52 !important;
-          box-shadow: 0 4px 15px rgba(53, 79, 82, 0.15) !important;
+          border: 1.5px solid rgba(10, 10, 10, 0.35) !important;
+          color: #0A0A0A !important;
+          box-shadow: 0 4px 15px rgba(10, 10, 10, 0.15) !important;
         }
         [data-theme="warm-stone"] .hero-section .slider-arrow:hover,
         .theme-warm-stone .hero-section .slider-arrow:hover {
-          background: #354F52 !important;
-          color: #FFFFFF !important;
-          border-color: #354F52 !important;
+          background: #0A0A0A !important;
+          color: #FFFFF0 !important;
+          border-color: #0A0A0A !important;
         }
         [data-theme="warm-stone"] .hero-section .slider-dots .dot,
         .theme-warm-stone .hero-section .slider-dots .dot {
-          background: rgba(255, 255, 255, 0.55) !important;
-          border: 1.5px solid #354F52 !important;
+          background: rgba(255, 255, 240, 0.55) !important;
+          border: 1.5px solid #0A0A0A !important;
         }
         [data-theme="warm-stone"] .hero-section .slider-dots .dot.active,
         .theme-warm-stone .hero-section .slider-dots .dot.active {
-          background: #354F52 !important;
-          border-color: #354F52 !important;
+          background: #0A0A0A !important;
+          border-color: #0A0A0A !important;
         }
       `}</style>
       <div className="hero-slider">
