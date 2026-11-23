@@ -1038,14 +1038,26 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] .contact-form-section,
 .theme-warm-stone .contact-form-section,
 [data-theme="warm-stone"] .contact-quick-strip,
-.theme-warm-stone .contact-quick-strip,
-[data-theme="warm-stone"] .messages-sidebar,
-.theme-warm-stone .messages-sidebar,
-[data-theme="warm-stone"] .messages-chat-window,
-.theme-warm-stone .messages-chat-window {
+.theme-warm-stone .contact-quick-strip {
   background: rgba(255, 255, 240, 0.38) !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
+  color: #0A0A0A !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
+}
+
+[data-theme="warm-stone"] .messages-sidebar,
+.theme-warm-stone .messages-sidebar,
+[data-theme="warm-stone"] .messages-main,
+.theme-warm-stone .messages-main,
+[data-theme="warm-stone"] .conversation-thread-view,
+.theme-warm-stone .conversation-thread-view,
+[data-theme="warm-stone"] .thread-messages-list,
+.theme-warm-stone .thread-messages-list,
+[data-theme="warm-stone"] .messages-chat-window,
+.theme-warm-stone .messages-chat-window {
+  background: #FFFFF0 !important;
   color: #0A0A0A !important;
   border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
   box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
@@ -2030,21 +2042,31 @@ body.theme-warm-stone,
   border-color: #0A0A0A !important;
 }
 
+[data-theme="warm-stone"] .messages-main,
+.theme-warm-stone .messages-main,
+[data-theme="warm-stone"] .conversation-thread-view,
+.theme-warm-stone .conversation-thread-view,
+[data-theme="warm-stone"] .thread-messages-list,
+.theme-warm-stone .thread-messages-list,
 [data-theme="warm-stone"] .messages-chat-window,
 .theme-warm-stone .messages-chat-window,
 [data-theme="warm-stone"] .chat-main,
 .theme-warm-stone .chat-main {
-  background: rgba(255, 255, 240, 0.38) !important;
+  background: #FFFFF0 !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
   border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
 }
 
+[data-theme="warm-stone"] .thread-header,
+.theme-warm-stone .thread-header,
 [data-theme="warm-stone"] .chat-header,
 .theme-warm-stone .chat-header,
+[data-theme="warm-stone"] .thread-input-bar,
+.theme-warm-stone .thread-input-bar,
 [data-theme="warm-stone"] .chat-input-bar,
 .theme-warm-stone .chat-input-bar {
-  background: rgba(255, 255, 240, 0.5) !important;
+  background: #FFFFF0 !important;
   border-color: rgba(10, 10, 10, 0.15) !important;
 }
 

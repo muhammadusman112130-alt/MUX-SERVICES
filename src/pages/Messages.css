@@ -1492,7 +1492,7 @@
 /* ── SIDEBAR ── */
 [data-theme="warm-stone"] .messages-sidebar,
 .theme-warm-stone .messages-sidebar {
-  background: rgba(255, 255, 240, 0.45) !important;
+  background: #FFFFF0 !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
   border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
@@ -1502,7 +1502,7 @@
 
 [data-theme="warm-stone"] .messages-sidebar-header,
 .theme-warm-stone .messages-sidebar-header {
-  background: rgba(255, 255, 240, 0.6) !important;
+  background: #FFFFF0 !important;
   border-bottom: 1.5px solid rgba(10, 10, 10, 0.15) !important;
 }
 
@@ -1688,12 +1688,16 @@
   color: #FFFFF0 !important;
 }
 
-/* ── CHAT WINDOW & THREAD VIEW ── */
+/* ── CHAT WINDOW & THREAD VIEW (PURE 100% IVORY #FFFFF0) ── */
+[data-theme="warm-stone"] .messages-main,
+.theme-warm-stone .messages-main,
+[data-theme="warm-stone"] .conversation-thread-view,
+.theme-warm-stone .conversation-thread-view,
 [data-theme="warm-stone"] .messages-chat-window,
 .theme-warm-stone .messages-chat-window,
 [data-theme="warm-stone"] .chat-main,
 .theme-warm-stone .chat-main {
-  background: rgba(255, 255, 240, 0.45) !important;
+  background: #FFFFF0 !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
   border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
@@ -1705,7 +1709,7 @@
 .theme-warm-stone .thread-header,
 [data-theme="warm-stone"] .chat-header,
 .theme-warm-stone .chat-header {
-  background: rgba(255, 255, 240, 0.6) !important;
+  background: #FFFFF0 !important;
   border-bottom: 1.5px solid rgba(10, 10, 10, 0.15) !important;
 }
 
@@ -1798,7 +1802,7 @@
 /* ── CHAT MESSAGES & BUBBLES ── */
 [data-theme="warm-stone"] .thread-messages-list,
 .theme-warm-stone .thread-messages-list {
-  background: transparent !important;
+  background: #FFFFF0 !important;
 }
 
 /* User Message Bubble */
@@ -2031,7 +2035,7 @@
 /* ── QUICK REPLIES STRIP ── */
 [data-theme="warm-stone"] .quick-replies-strip,
 .theme-warm-stone .quick-replies-strip {
-  background: rgba(255, 255, 240, 0.6) !important;
+  background: #FFFFF0 !important;
   border-top: 1px solid rgba(10, 10, 10, 0.15) !important;
 }
 
@@ -2058,8 +2062,8 @@
 /* ── CHAT INPUT BAR (CHAT BOX & BUTTONS) ── */
 [data-theme="warm-stone"] .thread-input-bar,
 .theme-warm-stone .thread-input-bar {
-  background: rgba(255, 255, 240, 0.85) !important;
-  border-top: 1.5px solid rgba(10, 10, 10, 0.2) !important;
+  background: #FFFFF0 !important;
+  border-top: 1.5px solid rgba(10, 10, 10, 0.18) !important;
 }
 
 [data-theme="warm-stone"] .msg-attachment-btn,
@@ -2152,7 +2156,7 @@
 .theme-warm-stone .messages-empty-state,
 [data-theme="warm-stone"] .empty-state-card,
 .theme-warm-stone .empty-state-card {
-  background: rgba(255, 255, 240, 0.45) !important;
+  background: #FFFFF0 !important;
   border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
   color: #0A0A0A !important;
 }
