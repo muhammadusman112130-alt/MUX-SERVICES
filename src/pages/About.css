@@ -1043,20 +1043,23 @@
   color: rgba(10, 10, 10, 0.8) !important;
 }
 
-/* Core Values Cards */
+/* Core Values Cards in Light Mode (Pure Jet Black Top Line Animation) */
 [data-theme="warm-stone"] .value-card,
 .theme-warm-stone .value-card {
-  background: rgba(255, 255, 240, 0.38) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
   box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
   color: #0A0A0A !important;
 }
 
+[data-theme="warm-stone"] .value-card::before,
+.theme-warm-stone .value-card::before {
+  background: #0A0A0A !important;
+}
+
 [data-theme="warm-stone"] .value-card:hover,
 .theme-warm-stone .value-card:hover {
-  background: rgba(255, 255, 240, 0.6) !important;
+  background: #FFFFF0 !important;
   border-color: #0A0A0A !important;
   box-shadow: 0 14px 38px rgba(10, 10, 10, 0.18) !important;
 }
@@ -1078,26 +1081,31 @@
 }
 
 /* Pricing Narrative Block & Guarantees */
-[data-theme="warm-stone"] .pricing-narrative-block,
-.theme-warm-stone .pricing-narrative-block {
-  background: rgba(255, 255, 240, 0.45) !important;
-  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+[data-theme="warm-stone"] .pricing-narrative-section,
+.theme-warm-stone .pricing-narrative-section {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
   box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
 }
 
 [data-theme="warm-stone"] .pricing-guarantee-card,
 .theme-warm-stone .pricing-guarantee-card {
-  background: rgba(255, 255, 240, 0.38) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
   color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .pricing-guarantee-card:hover,
 .theme-warm-stone .pricing-guarantee-card:hover {
-  background: rgba(255, 255, 240, 0.6) !important;
+  background: #FFFFF0 !important;
   border-color: #0A0A0A !important;
+  box-shadow: 0 10px 25px rgba(10, 10, 10, 0.15) !important;
+}
+[data-theme="warm-stone"] .pricing-narrative-block,
+.theme-warm-stone .pricing-narrative-block {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
 }
 
 [data-theme="warm-stone"] .feat-check,

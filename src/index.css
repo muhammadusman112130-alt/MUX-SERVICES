@@ -2245,16 +2245,16 @@ body.theme-warm-stone,
   color: rgba(10, 10, 10, 0.8) !important;
 }
 
-/* Quick Metrics Bar in Light Mode (Ivory Backdrop with Jet Black Text) */
+/* Quick Metrics Bar in Light Mode (No Card Box, Glowing Halo Match) */
 [data-theme="warm-stone"] .pro-hero-metrics,
 .theme-warm-stone .pro-hero-metrics {
-  background: rgba(255, 255, 240, 0.95) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border: 1.5px solid #0A0A0A !important;
-  border-radius: 50px !important;
-  padding: 0.75rem 2rem !important;
-  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.15) !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
 }
 
 [data-theme="warm-stone"] .pro-metric-num,
@@ -2264,7 +2264,8 @@ body.theme-warm-stone,
   color: #0A0A0A !important;
   font-weight: 900 !important;
   -webkit-text-fill-color: #0A0A0A !important;
-  text-shadow: none !important;
+  text-shadow: 0 0 16px rgba(255, 255, 240, 0.98), 0 0 32px rgba(255, 255, 240, 0.95), 0 0 48px rgba(255, 255, 240, 0.9) !important;
+  animation: whiteHaloPulse 3s ease-in-out infinite alternate !important;
 }
 
 [data-theme="warm-stone"] .pro-metric-lbl,
@@ -2272,13 +2273,15 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] .pro-metric-label,
 .theme-warm-stone .pro-metric-label {
   color: #0A0A0A !important;
-  font-weight: 700 !important;
-  text-shadow: none !important;
+  font-weight: 800 !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  text-shadow: 0 0 12px rgba(255, 255, 240, 0.98), 0 0 24px rgba(255, 255, 240, 0.95), 0 0 36px rgba(255, 255, 240, 0.9) !important;
+  animation: whiteHaloPulse 3s ease-in-out infinite alternate !important;
 }
 
 [data-theme="warm-stone"] .pro-metric-div,
 .theme-warm-stone .pro-metric-div {
-  background: rgba(10, 10, 10, 0.35) !important;
+  background: #0A0A0A !important;
 }
 
 /* Navbar Profile Pill Active State in Light Mode */
@@ -2312,4 +2315,36 @@ body.theme-warm-stone,
   color: #0A0A0A !important;
   text-shadow: none !important;
   font-weight: 900 !important;
+}
+
+/* Core Values Top Animated Line Reinforcement (Pure Jet Black) */
+[data-theme="warm-stone"] .value-card::before,
+.theme-warm-stone .value-card::before {
+  background: #0A0A0A !important;
+}
+
+/* Services & Category Hero Subtitle White Halo Pulse */
+[data-theme="warm-stone"] .header-subtitle,
+.theme-warm-stone .header-subtitle,
+[data-theme="warm-stone"] .service-detail-view .header-subtitle,
+.theme-warm-stone .service-detail-view .header-subtitle {
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 14px rgba(255, 255, 240, 0.98), 0 0 28px rgba(255, 255, 240, 0.95), 0 0 42px rgba(255, 255, 240, 0.9) !important;
+  animation: whiteHaloPulse 3s ease-in-out infinite alternate !important;
+}
+
+/* Category Pagination Dots in Light Mode */
+[data-theme="warm-stone"] .requests-pagination-dots .page-dot,
+.theme-warm-stone .requests-pagination-dots .page-dot {
+  background: rgba(10, 10, 10, 0.25) !important;
+  border: 1px solid rgba(10, 10, 10, 0.4) !important;
+}
+
+[data-theme="warm-stone"] .requests-pagination-dots .page-dot.active,
+.theme-warm-stone .requests-pagination-dots .page-dot.active {
+  background: #0A0A0A !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 2px 8px rgba(10, 10, 10, 0.3) !important;
 }
