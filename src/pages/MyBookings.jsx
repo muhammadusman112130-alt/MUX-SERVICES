@@ -421,17 +421,18 @@ function MyBookings({ setCurrentPage }) {
                         </filter>
                       </defs>
 
-                      {/* Full-width 1200x420 Dark Tech Canvas */}
-                      <rect width="1200" height="420" fill="url(#mapBgFull)" />
+                      {/* Full-width 1200x420 Tech Canvas */}
+                      <rect className="map-base-canvas" width="1200" height="420" fill="url(#mapBgFull)" />
 
                       {/* City Canal / Water Accent */}
                       <path 
+                        className="map-river-path"
                         d="M 0 350 C 300 330, 600 390, 1200 340 L 1200 420 L 0 420 Z" 
                         fill="url(#riverStream)" 
                       />
 
                       {/* Background City Street Grid (Multan Coordinate Network spanning 0 to 1200) */}
-                      <g opacity="0.14" stroke="#8FD3E8" strokeWidth="1">
+                      <g className="map-grid-network" opacity="0.14" stroke="#8FD3E8" strokeWidth="1">
                         <line x1="0" y1="50" x2="1200" y2="50" />
                         <line x1="0" y1="110" x2="1200" y2="110" />
                         <line x1="0" y1="170" x2="1200" y2="170" />
@@ -453,19 +454,19 @@ function MyBookings({ setCurrentPage }) {
 
                       {/* Major Multan Highways & Thoroughfares (Spanning edge to edge) */}
                       {/* Northern Bypass */}
-                      <path d="M 0 65 Q 400 80, 800 60 T 1200 70" fill="none" stroke="#12353c" strokeWidth="16" strokeLinecap="round" />
-                      <path d="M 0 65 Q 400 80, 800 60 T 1200 70" fill="none" stroke="rgba(143, 211, 232, 0.3)" strokeWidth="2.5" strokeDasharray="8 6" />
+                      <path className="map-major-road" d="M 0 65 Q 400 80, 800 60 T 1200 70" fill="none" stroke="#12353c" strokeWidth="16" strokeLinecap="round" />
+                      <path className="map-road-dash" d="M 0 65 Q 400 80, 800 60 T 1200 70" fill="none" stroke="rgba(143, 211, 232, 0.3)" strokeWidth="2.5" strokeDasharray="8 6" />
 
                       {/* Bosan Road into City Center */}
-                      <path d="M 180 0 Q 320 180 520 230 T 900 290" fill="none" stroke="#12353c" strokeWidth="18" strokeLinecap="round" />
-                      <path d="M 180 0 Q 320 180 520 230 T 900 290" fill="none" stroke="rgba(143, 211, 232, 0.3)" strokeWidth="3" strokeDasharray="8 6" />
+                      <path className="map-major-road" d="M 180 0 Q 320 180 520 230 T 900 290" fill="none" stroke="#12353c" strokeWidth="18" strokeLinecap="round" />
+                      <path className="map-road-dash" d="M 180 0 Q 320 180 520 230 T 900 290" fill="none" stroke="rgba(143, 211, 232, 0.3)" strokeWidth="3" strokeDasharray="8 6" />
 
                       {/* Khanewal Road to Cantt Mall Road */}
-                      <path d="M 0 280 Q 350 240 700 200 T 1200 180" fill="none" stroke="#12353c" strokeWidth="16" strokeLinecap="round" />
-                      <path d="M 0 280 Q 350 240 700 200 T 1200 180" fill="none" stroke="rgba(143, 211, 232, 0.25)" strokeWidth="2.5" strokeDasharray="7 5" />
+                      <path className="map-major-road" d="M 0 280 Q 350 240 700 200 T 1200 180" fill="none" stroke="#12353c" strokeWidth="16" strokeLinecap="round" />
+                      <path className="map-road-dash" d="M 0 280 Q 350 240 700 200 T 1200 180" fill="none" stroke="rgba(143, 211, 232, 0.25)" strokeWidth="2.5" strokeDasharray="7 5" />
 
                       {/* Multan City Sector & Landmark Labels */}
-                      <g fill="rgba(238, 244, 244, 0.5)" fontSize="11" fontWeight="800" fontFamily="sans-serif">
+                      <g className="map-landmarks-labels" fill="rgba(238, 244, 244, 0.5)" fontSize="11" fontWeight="800" fontFamily="sans-serif">
                         <text x="70" y="45">NORTHERN BYPASS</text>
                         <text x="190" y="100">GULGASHT COLONY</text>
                         <text x="390" y="85">BOSAN ROAD</text>
@@ -478,9 +479,10 @@ function MyBookings({ setCurrentPage }) {
                         <text x="1080" y="160">SHERSHAH ROAD</text>
                       </g>
 
-                      {/* ═══ REAL-TIME DISPATCH TRAJECTORY PATH (Glowing Neon) ═══ */}
+                      {/* ═══ REAL-TIME DISPATCH TRAJECTORY PATH ═══ */}
                       {/* Base Glow Line */}
                       <path 
+                        className="map-route-base"
                         d="M 320 215 C 450 230, 580 160, 720 180 S 860 215, 960 205" 
                         fill="none" 
                         stroke="rgba(23, 247, 247, 0.25)" 
@@ -500,26 +502,26 @@ function MyBookings({ setCurrentPage }) {
                       />
 
                       {/* ═══ DESTINATION: CUSTOMER DOORSTEP PIN (at x=960, y=205) ═══ */}
-                      <g transform="translate(960, 205)">
+                      <g className="map-pin-group map-dest-group" transform="translate(960, 205)">
                         {/* Radar wave ripples */}
-                        <circle r="40" fill="none" stroke="#17f7f7" strokeWidth="1" className="radar-wave-cust-1" />
-                        <circle r="25" fill="none" stroke="#17f7f7" strokeWidth="1.5" className="radar-wave-cust-2" />
-                        <circle r="12" fill="#17f7f7" filter="url(#neonPulseGlow)" />
-                        <circle r="5" fill="#0E2E33" />
+                        <circle r="40" fill="none" stroke="#17f7f7" strokeWidth="1" className="radar-wave-cust-1 map-radar-circle" />
+                        <circle r="25" fill="none" stroke="#17f7f7" strokeWidth="1.5" className="radar-wave-cust-2 map-radar-circle" />
+                        <circle r="12" fill="#17f7f7" filter="url(#neonPulseGlow)" className="map-pin-core" />
+                        <circle r="5" fill="#0E2E33" className="map-pin-inner" />
                         
                         {/* Destination HUD Marker Box */}
                         <g className="hud-pin-float">
-                          <rect x="-95" y="-58" width="190" height="38" rx="10" fill="#0E2E33" stroke="#17f7f7" strokeWidth="1.8" filter="url(#neonPulseGlow)" />
-                          <text x="0" y="-39" fill="#17f7f7" fontSize="11" fontWeight="900" textAnchor="middle">📍 YOUR DOORSTEP</text>
-                          <text x="0" y="-24" fill="#EEF4F4" fontSize="9.5" fontWeight="700" textAnchor="middle">{liveBooking.location || 'Cantt, Multan'}</text>
+                          <rect className="map-hud-box" x="-95" y="-58" width="190" height="38" rx="10" fill="#0E2E33" stroke="#17f7f7" strokeWidth="1.8" filter="url(#neonPulseGlow)" />
+                          <text className="map-hud-title" x="0" y="-39" fill="#17f7f7" fontSize="11" fontWeight="900" textAnchor="middle">📍 YOUR DOORSTEP</text>
+                          <text className="map-hud-sub" x="0" y="-24" fill="#EEF4F4" fontSize="9.5" fontWeight="700" textAnchor="middle">{liveBooking.location || 'Cantt, Multan'}</text>
                         </g>
                       </g>
 
                       {/* ═══ ORIGIN: TECHNICIAN REAL-TIME POSITION PIN (at x=320, y=215) ═══ */}
-                      <g transform="translate(320, 215)">
+                      <g className="map-pin-group map-origin-group" transform="translate(320, 215)">
                         {/* Moving Radar Waves */}
-                        <circle r="30" fill="none" stroke="#10b981" strokeWidth="1.5" className="radar-wave-tech" />
-                        <circle r="16" fill="#10b981" filter="url(#neonPulseGlow)" />
+                        <circle r="30" fill="none" stroke="#10b981" strokeWidth="1.5" className="radar-wave-tech map-radar-circle" />
+                        <circle r="16" fill="#10b981" filter="url(#neonPulseGlow)" className="map-pin-core" />
                         
                         {/* Floating Motorcycle Icon with vibration */}
                         <g className="tech-bike-vibration">
@@ -528,11 +530,11 @@ function MyBookings({ setCurrentPage }) {
 
                         {/* Specialist Live HUD Pin */}
                         <g className="hud-pin-float">
-                          <rect x="-110" y="-58" width="220" height="38" rx="10" fill="#0E2E33" stroke="#10b981" strokeWidth="1.8" filter="url(#neonPulseGlow)" />
-                          <text x="0" y="-39" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
+                          <rect className="map-hud-box" x="-110" y="-58" width="220" height="38" rx="10" fill="#0E2E33" stroke="#10b981" strokeWidth="1.8" filter="url(#neonPulseGlow)" />
+                          <text className="map-hud-title" x="0" y="-39" fill="#10b981" fontSize="11" fontWeight="900" textAnchor="middle">
                             🟢 {liveBooking.provider} (En Route)
                           </text>
-                          <text x="0" y="-24" fill="#EEF4F4" fontSize="9.5" fontWeight="700" textAnchor="middle">
+                          <text className="map-hud-sub" x="0" y="-24" fill="#EEF4F4" fontSize="9.5" fontWeight="700" textAnchor="middle">
                             {liveBooking.speed} • {liveBooking.distance} remaining
                           </text>
                         </g>

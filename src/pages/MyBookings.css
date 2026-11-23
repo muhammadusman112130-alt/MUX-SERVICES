@@ -2245,6 +2245,8 @@
 .theme-warm-stone .lst-live-dot,
 [data-theme="warm-stone"] .lmc-traffic-dot,
 .theme-warm-stone .lmc-traffic-dot,
+[data-theme="warm-stone"] .lmc-radar-sweep-icon,
+.theme-warm-stone .lmc-radar-sweep-icon,
 [data-theme="warm-stone"] .uoc-live-dot,
 .theme-warm-stone .uoc-live-dot,
 [data-theme="warm-stone"] .uoc-actions-lamp,
@@ -2253,7 +2255,7 @@
   box-shadow: 0 0 6px rgba(10, 10, 10, 0.5) !important;
 }
 
-/* ── RADAR BEACON & COUNTDOWN ── */
+/* ── RADAR BEACON & COUNTDOWN TIMER POD ── */
 [data-theme="warm-stone"] .lst-radar-beacon,
 .theme-warm-stone .lst-radar-beacon {
   background: rgba(10, 10, 10, 0.08) !important;
@@ -2271,25 +2273,56 @@
 }
 
 [data-theme="warm-stone"] .lst-headline,
-.theme-warm-stone .lst-headline,
-[data-theme="warm-stone"] .cd-hero-digits,
-.theme-warm-stone .cd-hero-digits {
+.theme-warm-stone .lst-headline {
   color: #0A0A0A !important;
   font-weight: 900 !important;
 }
 
 [data-theme="warm-stone"] .lst-subtext,
-.theme-warm-stone .lst-subtext,
+.theme-warm-stone .lst-subtext {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+/* ⏱️ REAL-TIME COUNTDOWN TIMER POD (IVORY & JET BLACK) */
+[data-theme="warm-stone"] .lst-right-timer,
+.theme-warm-stone .lst-right-timer {
+  background: rgba(255, 255, 240, 0.85) !important;
+  border: 2px solid #0A0A0A !important;
+  border-radius: 18px !important;
+  box-shadow: 0 4px 20px rgba(10, 10, 10, 0.12) !important;
+}
+
 [data-theme="warm-stone"] .cd-hero-label,
 .theme-warm-stone .cd-hero-label,
 [data-theme="warm-stone"] .cd-hero-unit,
 .theme-warm-stone .cd-hero-unit,
 [data-theme="warm-stone"] .cd-hero-guarantee,
 .theme-warm-stone .cd-hero-guarantee {
-  color: rgba(10, 10, 10, 0.8) !important;
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
 }
 
-/* ── MULTAN GPS MAP HUD ── */
+[data-theme="warm-stone"] .cd-hero-digits,
+.theme-warm-stone .cd-hero-digits {
+  color: #0A0A0A !important;
+  text-shadow: none !important;
+  animation: none !important;
+  font-weight: 900 !important;
+}
+
+/* ── MULTAN GPS MAP RADAR (PURE IVORY #FFFFF0 & JET BLACK #0A0A0A) ── */
+[data-theme="warm-stone"] .live-multan-map-card,
+.theme-warm-stone .live-multan-map-card {
+  background: rgba(255, 255, 240, 0.45) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+}
+
+[data-theme="warm-stone"] .lmc-header-bar,
+.theme-warm-stone .lmc-header-bar {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border-bottom: 1.5px solid rgba(10, 10, 10, 0.15) !important;
+}
+
 [data-theme="warm-stone"] .lmc-left-title,
 .theme-warm-stone .lmc-left-title {
   color: #0A0A0A !important;
@@ -2302,32 +2335,125 @@
   border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
 }
 
-[data-theme="warm-stone"] .multan-vector-map path,
-.theme-warm-stone .multan-vector-map path,
+[data-theme="warm-stone"] .multan-vector-map,
+.theme-warm-stone .multan-vector-map {
+  background: #FFFFF0 !important;
+}
+
+/* Canvas background rect */
+[data-theme="warm-stone"] .multan-vector-map rect.map-base-canvas,
+.theme-warm-stone .multan-vector-map rect.map-base-canvas,
+[data-theme="warm-stone"] .multan-vector-map > rect:first-of-type,
+.theme-warm-stone .multan-vector-map > rect:first-of-type {
+  fill: #FFFFF0 !important;
+}
+
+/* River / Canal accent */
+[data-theme="warm-stone"] .multan-vector-map .map-river-path,
+.theme-warm-stone .multan-vector-map .map-river-path {
+  fill: rgba(10, 10, 10, 0.05) !important;
+}
+
+/* City Coordinate Grid Lines */
+[data-theme="warm-stone"] .multan-vector-map .map-grid-network line,
+.theme-warm-stone .multan-vector-map .map-grid-network line,
 [data-theme="warm-stone"] .multan-vector-map line,
 .theme-warm-stone .multan-vector-map line {
+  stroke: rgba(10, 10, 10, 0.12) !important;
+}
+
+/* City Roads & Highways */
+[data-theme="warm-stone"] .multan-vector-map .map-major-road,
+.theme-warm-stone .multan-vector-map .map-major-road {
+  stroke: rgba(10, 10, 10, 0.15) !important;
+}
+
+[data-theme="warm-stone"] .multan-vector-map .map-road-dash,
+.theme-warm-stone .multan-vector-map .map-road-dash {
+  stroke: rgba(10, 10, 10, 0.35) !important;
+}
+
+/* General fallback for any other road paths */
+[data-theme="warm-stone"] .multan-vector-map path,
+.theme-warm-stone .multan-vector-map path {
+  stroke: rgba(10, 10, 10, 0.18);
+}
+
+/* Landmark Text Labels */
+[data-theme="warm-stone"] .multan-vector-map text,
+.theme-warm-stone .multan-vector-map text,
+[data-theme="warm-stone"] .multan-vector-map .map-landmarks-labels text,
+.theme-warm-stone .multan-vector-map .map-landmarks-labels text {
+  fill: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+/* Trajectory Dispatch Line */
+[data-theme="warm-stone"] .multan-vector-map .map-route-base,
+.theme-warm-stone .multan-vector-map .map-route-base {
   stroke: rgba(10, 10, 10, 0.18) !important;
 }
 
-[data-theme="warm-stone"] .multan-vector-map text,
-.theme-warm-stone .multan-vector-map text {
-  fill: #0A0A0A !important;
-  font-weight: 700 !important;
+[data-theme="warm-stone"] .multan-vector-map .animated-gps-route-flow,
+.theme-warm-stone .multan-vector-map .animated-gps-route-flow {
+  stroke: #0A0A0A !important;
+  filter: none !important;
 }
 
-[data-theme="warm-stone"] .animated-gps-route-flow,
-.theme-warm-stone .animated-gps-route-flow {
+/* Pin Circles & Waves */
+[data-theme="warm-stone"] .multan-vector-map circle.map-radar-circle,
+.theme-warm-stone .multan-vector-map circle.map-radar-circle,
+[data-theme="warm-stone"] .multan-vector-map .radar-wave-cust-1,
+.theme-warm-stone .multan-vector-map .radar-wave-cust-1,
+[data-theme="warm-stone"] .multan-vector-map .radar-wave-cust-2,
+.theme-warm-stone .multan-vector-map .radar-wave-cust-2,
+[data-theme="warm-stone"] .multan-vector-map .radar-wave-tech,
+.theme-warm-stone .multan-vector-map .radar-wave-tech {
   stroke: #0A0A0A !important;
+  fill: none !important;
+}
+
+[data-theme="warm-stone"] .multan-vector-map circle.map-pin-core,
+.theme-warm-stone .multan-vector-map circle.map-pin-core {
+  fill: #0A0A0A !important;
+  stroke: #0A0A0A !important;
+  filter: none !important;
+}
+
+[data-theme="warm-stone"] .multan-vector-map circle.map-pin-inner,
+.theme-warm-stone .multan-vector-map circle.map-pin-inner {
+  fill: #FFFFF0 !important;
+  stroke: none !important;
+}
+
+/* HUD Pin Marker Boxes */
+[data-theme="warm-stone"] .multan-vector-map .hud-pin-float rect,
+.theme-warm-stone .multan-vector-map .hud-pin-float rect,
+[data-theme="warm-stone"] .multan-vector-map .map-hud-box,
+.theme-warm-stone .multan-vector-map .map-hud-box {
+  fill: rgba(255, 255, 240, 0.98) !important;
+  stroke: #0A0A0A !important;
+  stroke-width: 1.8 !important;
+  filter: drop-shadow(0 4px 12px rgba(10, 10, 10, 0.18)) !important;
+}
+
+[data-theme="warm-stone"] .multan-vector-map .hud-pin-float text,
+.theme-warm-stone .multan-vector-map .hud-pin-float text,
+[data-theme="warm-stone"] .multan-vector-map .map-hud-title,
+.theme-warm-stone .multan-vector-map .map-hud-title,
+[data-theme="warm-stone"] .multan-vector-map .map-hud-sub,
+.theme-warm-stone .multan-vector-map .map-hud-sub {
+  fill: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .map-radar-sweep-line,
 .theme-warm-stone .map-radar-sweep-line {
-  background: linear-gradient(90deg, transparent, rgba(10, 10, 10, 0.15), transparent) !important;
+  background: linear-gradient(90deg, transparent, rgba(10, 10, 10, 0.12), transparent) !important;
 }
 
 [data-theme="warm-stone"] .map-floating-telemetry,
 .theme-warm-stone .map-floating-telemetry {
-  background: rgba(255, 255, 240, 0.85) !important;
+  background: rgba(255, 255, 240, 0.9) !important;
   border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
   color: #0A0A0A !important;
   backdrop-filter: blur(10px) !important;

@@ -194,10 +194,6 @@ function About({ setCurrentPage }) {
         className={`core-values-section ${valuesInView ? 'values-in-view' : 'values-out-view'}`}
       >
         <div className="values-header">
-          <div className="foundation-badge">
-            <span className="foundation-dot"></span>
-            <span>OUR FOUNDATION</span>
-          </div>
           <h2 className="values-title">Core Values That Guide Every Doorstep Visit</h2>
           <p className="values-subtitle">
             The principles upholding customer peace of mind and technician dignity across Multan.
@@ -207,7 +203,6 @@ function About({ setCurrentPage }) {
         <div className="values-grid">
           {coreValues.map((value, index) => (
             <div key={index} className={`value-card anim-card-${index + 1}`}>
-              <div className="value-icon-box">{value.icon}</div>
               <h3 className="value-title">{value.title}</h3>
               <p className="value-description">{value.description}</p>
             </div>
