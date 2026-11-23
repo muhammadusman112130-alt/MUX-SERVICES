@@ -2014,3 +2014,670 @@
     text-align: center;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   WARM STONE LIGHT MODE — 100% PURE IVORY (#FFFFF0) & JET BLACK (#0A0A0A)
+   Zero teal, zero cyan, zero mint, zero green. Exact home page match.
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .booked-page,
+.theme-warm-stone .booked-page {
+  background: #FFFFF0 !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .booked-container,
+.theme-warm-stone .booked-container {
+  background: transparent !important;
+}
+
+/* ── HEADER ── */
+[data-theme="warm-stone"] .bh-title,
+.theme-warm-stone .bh-title {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .bh-subtitle,
+.theme-warm-stone .bh-subtitle {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+[data-theme="warm-stone"] .bh-badge,
+.theme-warm-stone .bh-badge {
+  background: rgba(10, 10, 10, 0.08) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
+  color: #0A0A0A !important;
+}
+
+/* ── NAVIGATION TABS ── */
+[data-theme="warm-stone"] .booked-tabs-bar,
+.theme-warm-stone .booked-tabs-bar {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 4px 20px rgba(10, 10, 10, 0.06) !important;
+}
+
+[data-theme="warm-stone"] .bt-tab-btn,
+.theme-warm-stone .bt-tab-btn {
+  color: #0A0A0A !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="warm-stone"] .bt-tab-btn:hover,
+.theme-warm-stone .bt-tab-btn:hover {
+  background: rgba(10, 10, 10, 0.06) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .bt-tab-btn.active,
+.theme-warm-stone .bt-tab-btn.active {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .tab-live-dot,
+.theme-warm-stone .tab-live-dot {
+  background: #0A0A0A !important;
+  box-shadow: 0 0 8px rgba(10, 10, 10, 0.5) !important;
+}
+
+/* ── BUTTONS (PRIMARY & SECONDARY) ── */
+[data-theme="warm-stone"] .bh-new-book-btn,
+.theme-warm-stone .bh-new-book-btn,
+[data-theme="warm-stone"] .uoc-btn-complete,
+.theme-warm-stone .uoc-btn-complete,
+[data-theme="warm-stone"] .cjc-book-again-btn,
+.theme-warm-stone .cjc-book-again-btn,
+[data-theme="warm-stone"] .lodge-new-complaint-btn,
+.theme-warm-stone .lodge-new-complaint-btn,
+[data-theme="warm-stone"] .nlsc-hire-btn,
+.theme-warm-stone .nlsc-hire-btn,
+[data-theme="warm-stone"] .bmb-submit-review-btn,
+.theme-warm-stone .bmb-submit-review-btn,
+[data-theme="warm-stone"] .call-now-btn,
+.theme-warm-stone .call-now-btn,
+[data-theme="warm-stone"] .bmb-cancel-action-btn,
+.theme-warm-stone .bmb-cancel-action-btn,
+[data-theme="warm-stone"] .bmb-submit-complaint-btn,
+.theme-warm-stone .bmb-submit-complaint-btn {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(10, 10, 10, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .bh-new-book-btn:hover,
+.theme-warm-stone .bh-new-book-btn:hover,
+[data-theme="warm-stone"] .uoc-btn-complete:hover,
+.theme-warm-stone .uoc-btn-complete:hover,
+[data-theme="warm-stone"] .cjc-book-again-btn:hover,
+.theme-warm-stone .cjc-book-again-btn:hover,
+[data-theme="warm-stone"] .lodge-new-complaint-btn:hover,
+.theme-warm-stone .lodge-new-complaint-btn:hover,
+[data-theme="warm-stone"] .nlsc-hire-btn:hover,
+.theme-warm-stone .nlsc-hire-btn:hover,
+[data-theme="warm-stone"] .bmb-submit-review-btn:hover,
+.theme-warm-stone .bmb-submit-review-btn:hover,
+[data-theme="warm-stone"] .call-now-btn:hover,
+.theme-warm-stone .call-now-btn:hover,
+[data-theme="warm-stone"] .bmb-cancel-action-btn:hover,
+.theme-warm-stone .bmb-cancel-action-btn:hover,
+[data-theme="warm-stone"] .bmb-submit-complaint-btn:hover,
+.theme-warm-stone .bmb-submit-complaint-btn:hover {
+  background: #222222 !important;
+  color: #FFFFF0 !important;
+  box-shadow: 0 8px 25px rgba(10, 10, 10, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+[data-theme="warm-stone"] .bh-complaint-quick-btn,
+.theme-warm-stone .bh-complaint-quick-btn,
+[data-theme="warm-stone"] .uoc-btn-cancel,
+.theme-warm-stone .uoc-btn-cancel,
+[data-theme="warm-stone"] .uoc-btn-complaint,
+.theme-warm-stone .uoc-btn-complaint,
+[data-theme="warm-stone"] .cjc-chat-again-btn,
+.theme-warm-stone .cjc-chat-again-btn,
+[data-theme="warm-stone"] .nlsc-view-past-btn,
+.theme-warm-stone .nlsc-view-past-btn,
+[data-theme="warm-stone"] .uoc-btn-call,
+.theme-warm-stone .uoc-btn-call,
+[data-theme="warm-stone"] .uoc-btn-chat,
+.theme-warm-stone .uoc-btn-chat,
+[data-theme="warm-stone"] .bmb-keep-btn,
+.theme-warm-stone .bmb-keep-btn {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border: 1.5px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .bh-complaint-quick-btn:hover,
+.theme-warm-stone .bh-complaint-quick-btn:hover,
+[data-theme="warm-stone"] .uoc-btn-cancel:hover,
+.theme-warm-stone .uoc-btn-cancel:hover,
+[data-theme="warm-stone"] .uoc-btn-complaint:hover,
+.theme-warm-stone .uoc-btn-complaint:hover,
+[data-theme="warm-stone"] .cjc-chat-again-btn:hover,
+.theme-warm-stone .cjc-chat-again-btn:hover,
+[data-theme="warm-stone"] .nlsc-view-past-btn:hover,
+.theme-warm-stone .nlsc-view-past-btn:hover,
+[data-theme="warm-stone"] .uoc-btn-call:hover,
+.theme-warm-stone .uoc-btn-call:hover,
+[data-theme="warm-stone"] .uoc-btn-chat:hover,
+.theme-warm-stone .uoc-btn-chat:hover,
+[data-theme="warm-stone"] .bmb-keep-btn:hover,
+.theme-warm-stone .bmb-keep-btn:hover {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+}
+
+/* ── MODULAR CARDS ── */
+[data-theme="warm-stone"] .live-mod-card,
+.theme-warm-stone .live-mod-card,
+[data-theme="warm-stone"] .completed-job-card,
+.theme-warm-stone .completed-job-card,
+[data-theme="warm-stone"] .complaint-card,
+.theme-warm-stone .complaint-card,
+[data-theme="warm-stone"] .no-live-service-card,
+.theme-warm-stone .no-live-service-card,
+[data-theme="warm-stone"] .empty-subtab-card,
+.theme-warm-stone .empty-subtab-card {
+  background: rgba(255, 255, 240, 0.38) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  box-shadow: 0 8px 30px rgba(10, 10, 10, 0.08) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .live-mod-card:hover,
+.theme-warm-stone .live-mod-card:hover,
+[data-theme="warm-stone"] .completed-job-card:hover,
+.theme-warm-stone .completed-job-card:hover,
+[data-theme="warm-stone"] .complaint-card:hover,
+.theme-warm-stone .complaint-card:hover {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border-color: #0A0A0A !important;
+  box-shadow: 0 14px 38px rgba(10, 10, 10, 0.18) !important;
+}
+
+/* ── PILLS & BADGES ── */
+[data-theme="warm-stone"] .lst-pill-live,
+.theme-warm-stone .lst-pill-live,
+[data-theme="warm-stone"] .lst-pill-ref,
+.theme-warm-stone .lst-pill-ref,
+[data-theme="warm-stone"] .lst-pill-vehicle,
+.theme-warm-stone .lst-pill-vehicle,
+[data-theme="warm-stone"] .lmc-traffic-pill,
+.theme-warm-stone .lmc-traffic-pill,
+[data-theme="warm-stone"] .uoc-section-tag,
+.theme-warm-stone .uoc-section-tag,
+[data-theme="warm-stone"] .uoc-vetted-pill,
+.theme-warm-stone .uoc-vetted-pill,
+[data-theme="warm-stone"] .uoc-stage-indicator,
+.theme-warm-stone .uoc-stage-indicator,
+[data-theme="warm-stone"] .completed-counter-badge,
+.theme-warm-stone .completed-counter-badge,
+[data-theme="warm-stone"] .cjc-status-pill,
+.theme-warm-stone .cjc-status-pill,
+[data-theme="warm-stone"] .crb-tag-pill,
+.theme-warm-stone .crb-tag-pill,
+[data-theme="warm-stone"] .cmp-ticket-badge,
+.theme-warm-stone .cmp-ticket-badge,
+[data-theme="warm-stone"] .cmp-status-badge,
+.theme-warm-stone .cmp-status-badge,
+[data-theme="warm-stone"] .rtp-tag-pill,
+.theme-warm-stone .rtp-tag-pill {
+  background: rgba(10, 10, 10, 0.08) !important;
+  border: 1px solid rgba(10, 10, 10, 0.25) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .rtp-tag-pill.active,
+.theme-warm-stone .rtp-tag-pill.active {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .lst-live-dot,
+.theme-warm-stone .lst-live-dot,
+[data-theme="warm-stone"] .lmc-traffic-dot,
+.theme-warm-stone .lmc-traffic-dot,
+[data-theme="warm-stone"] .uoc-live-dot,
+.theme-warm-stone .uoc-live-dot,
+[data-theme="warm-stone"] .uoc-actions-lamp,
+.theme-warm-stone .uoc-actions-lamp {
+  background: #0A0A0A !important;
+  box-shadow: 0 0 6px rgba(10, 10, 10, 0.5) !important;
+}
+
+/* ── RADAR BEACON & COUNTDOWN ── */
+[data-theme="warm-stone"] .lst-radar-beacon,
+.theme-warm-stone .lst-radar-beacon {
+  background: rgba(10, 10, 10, 0.08) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .lst-beacon-core,
+.theme-warm-stone .lst-beacon-core {
+  background: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .lst-beacon-wave,
+.theme-warm-stone .lst-beacon-wave {
+  border-color: rgba(10, 10, 10, 0.4) !important;
+}
+
+[data-theme="warm-stone"] .lst-headline,
+.theme-warm-stone .lst-headline,
+[data-theme="warm-stone"] .cd-hero-digits,
+.theme-warm-stone .cd-hero-digits {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .lst-subtext,
+.theme-warm-stone .lst-subtext,
+[data-theme="warm-stone"] .cd-hero-label,
+.theme-warm-stone .cd-hero-label,
+[data-theme="warm-stone"] .cd-hero-unit,
+.theme-warm-stone .cd-hero-unit,
+[data-theme="warm-stone"] .cd-hero-guarantee,
+.theme-warm-stone .cd-hero-guarantee {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+/* ── MULTAN GPS MAP HUD ── */
+[data-theme="warm-stone"] .lmc-left-title,
+.theme-warm-stone .lmc-left-title {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .multan-gps-map-container,
+.theme-warm-stone .multan-gps-map-container {
+  background: #FFFFF0 !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
+}
+
+[data-theme="warm-stone"] .multan-vector-map path,
+.theme-warm-stone .multan-vector-map path,
+[data-theme="warm-stone"] .multan-vector-map line,
+.theme-warm-stone .multan-vector-map line {
+  stroke: rgba(10, 10, 10, 0.18) !important;
+}
+
+[data-theme="warm-stone"] .multan-vector-map text,
+.theme-warm-stone .multan-vector-map text {
+  fill: #0A0A0A !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="warm-stone"] .animated-gps-route-flow,
+.theme-warm-stone .animated-gps-route-flow {
+  stroke: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .map-radar-sweep-line,
+.theme-warm-stone .map-radar-sweep-line {
+  background: linear-gradient(90deg, transparent, rgba(10, 10, 10, 0.15), transparent) !important;
+}
+
+[data-theme="warm-stone"] .map-floating-telemetry,
+.theme-warm-stone .map-floating-telemetry {
+  background: rgba(255, 255, 240, 0.85) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.25) !important;
+  color: #0A0A0A !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+[data-theme="warm-stone"] .mft-lbl,
+.theme-warm-stone .mft-lbl {
+  color: rgba(10, 10, 10, 0.65) !important;
+}
+
+[data-theme="warm-stone"] .mft-val,
+.theme-warm-stone .mft-val {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+/* ── SPECIALIST OPS & STEPPER ── */
+[data-theme="warm-stone"] .uoc-avatar,
+.theme-warm-stone .uoc-avatar {
+  background: #FFFFF0 !important;
+  border: 2px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .uoc-avatar-text,
+.theme-warm-stone .uoc-avatar-text {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .uoc-name,
+.theme-warm-stone .uoc-name {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .uoc-service,
+.theme-warm-stone .uoc-service {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+[data-theme="warm-stone"] .uoc-rate-line,
+.theme-warm-stone .uoc-rate-line,
+[data-theme="warm-stone"] .uoc-rate-line strong,
+.theme-warm-stone .uoc-rate-line strong {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .uoc-divider,
+.theme-warm-stone .uoc-divider {
+  background: rgba(10, 10, 10, 0.18) !important;
+}
+
+[data-theme="warm-stone"] .uoc-stepper-title,
+.theme-warm-stone .uoc-stepper-title {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .stepper-track-line,
+.theme-warm-stone .stepper-track-line {
+  background: rgba(10, 10, 10, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .stepper-track-fill,
+.theme-warm-stone .stepper-track-fill {
+  background: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .cs-marker,
+.theme-warm-stone .cs-marker {
+  background: #FFFFF0 !important;
+  border: 2px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .cs-node.completed .cs-marker,
+.theme-warm-stone .cs-node.completed .cs-marker,
+[data-theme="warm-stone"] .cs-node.active .cs-marker,
+.theme-warm-stone .cs-node.active .cs-marker {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .cs-title,
+.theme-warm-stone .cs-title {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .cs-sub,
+.theme-warm-stone .cs-sub {
+  color: rgba(10, 10, 10, 0.75) !important;
+}
+
+[data-theme="warm-stone"] .cs-sub.highlight,
+.theme-warm-stone .cs-sub.highlight {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .uoc-escrow-strip,
+.theme-warm-stone .uoc-escrow-strip,
+[data-theme="warm-stone"] .cjc-review-box,
+.theme-warm-stone .cjc-review-box,
+[data-theme="warm-stone"] .cmp-details-quote,
+.theme-warm-stone .cmp-details-quote,
+[data-theme="warm-stone"] .cmp-support-resolution-box,
+.theme-warm-stone .cmp-support-resolution-box {
+  background: rgba(255, 255, 240, 0.5) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.2) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .ues-title,
+.theme-warm-stone .ues-title,
+[data-theme="warm-stone"] .cdq-title,
+.theme-warm-stone .cdq-title,
+[data-theme="warm-stone"] .srb-title,
+.theme-warm-stone .srb-title,
+[data-theme="warm-stone"] .uoc-actions-heading,
+.theme-warm-stone .uoc-actions-heading {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .ues-sub,
+.theme-warm-stone .ues-sub,
+[data-theme="warm-stone"] .uoc-actions-caption,
+.theme-warm-stone .uoc-actions-caption,
+[data-theme="warm-stone"] .srb-hotline,
+.theme-warm-stone .srb-hotline {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+/* ── COMPLETED JOBS TAB ── */
+[data-theme="warm-stone"] .section-title-strip h2,
+.theme-warm-stone .section-title-strip h2 {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .section-title-strip p,
+.theme-warm-stone .section-title-strip p {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+[data-theme="warm-stone"] .cjc-title,
+.theme-warm-stone .cjc-title {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .cjc-ref,
+.theme-warm-stone .cjc-ref,
+[data-theme="warm-stone"] .cbd-row,
+.theme-warm-stone .cbd-row {
+  color: rgba(10, 10, 10, 0.75) !important;
+}
+
+[data-theme="warm-stone"] .cbd-row strong,
+.theme-warm-stone .cbd-row strong,
+[data-theme="warm-stone"] .cjc-price,
+.theme-warm-stone .cjc-price {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .crb-stars,
+.theme-warm-stone .crb-stars {
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .crb-label,
+.theme-warm-stone .crb-label {
+  color: rgba(10, 10, 10, 0.7) !important;
+}
+
+[data-theme="warm-stone"] .crb-comment,
+.theme-warm-stone .crb-comment {
+  color: #0A0A0A !important;
+  font-style: italic;
+}
+
+/* ── COMPLAINTS TAB ── */
+[data-theme="warm-stone"] .cmp-category-title,
+.theme-warm-stone .cmp-category-title {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .cmp-meta-label,
+.theme-warm-stone .cmp-meta-label {
+  color: rgba(10, 10, 10, 0.65) !important;
+}
+
+[data-theme="warm-stone"] .cmp-meta-val,
+.theme-warm-stone .cmp-meta-val {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .no-live-service-card h3,
+.theme-warm-stone .no-live-service-card h3,
+[data-theme="warm-stone"] .empty-subtab-card h3,
+.theme-warm-stone .empty-subtab-card h3 {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .no-live-service-card p,
+.theme-warm-stone .no-live-service-card p,
+[data-theme="warm-stone"] .empty-subtab-card p,
+.theme-warm-stone .empty-subtab-card p {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+/* ── MODALS (CANCEL, REVIEW, COMPLAINT, CALL) ── */
+[data-theme="warm-stone"] .booked-modal-backdrop,
+.theme-warm-stone .booked-modal-backdrop {
+  background: rgba(10, 10, 10, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+[data-theme="warm-stone"] .booked-modal-box,
+.theme-warm-stone .booked-modal-box {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 24px 60px rgba(10, 10, 10, 0.35) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .bmb-top,
+.theme-warm-stone .bmb-top {
+  background: rgba(10, 10, 10, 0.05) !important;
+  border-bottom: 1.5px solid rgba(10, 10, 10, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .bmb-top h3,
+.theme-warm-stone .bmb-top h3 {
+  color: #0A0A0A !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="warm-stone"] .bmb-x-btn,
+.theme-warm-stone .bmb-x-btn {
+  background: rgba(10, 10, 10, 0.08) !important;
+  border: 1px solid rgba(10, 10, 10, 0.25) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .bmb-x-btn:hover,
+.theme-warm-stone .bmb-x-btn:hover {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+}
+
+[data-theme="warm-stone"] .cancel-warning-banner,
+.theme-warm-stone .cancel-warning-banner,
+[data-theme="warm-stone"] .complaint-warning-banner,
+.theme-warm-stone .complaint-warning-banner,
+[data-theme="warm-stone"] .review-spec-card,
+.theme-warm-stone .review-spec-card,
+[data-theme="warm-stone"] .complaint-hotline-strip,
+.theme-warm-stone .complaint-hotline-strip,
+[data-theme="warm-stone"] .call-number-box,
+.theme-warm-stone .call-number-box {
+  background: rgba(255, 255, 240, 0.6) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.22) !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .cancel-warning-banner strong,
+.theme-warm-stone .cancel-warning-banner strong,
+[data-theme="warm-stone"] .complaint-warning-banner strong,
+.theme-warm-stone .complaint-warning-banner strong,
+[data-theme="warm-stone"] .rsc-name,
+.theme-warm-stone .rsc-name,
+[data-theme="warm-stone"] .cnb-val,
+.theme-warm-stone .cnb-val {
+  color: #0A0A0A !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="warm-stone"] .cancel-warning-banner p,
+.theme-warm-stone .cancel-warning-banner p,
+[data-theme="warm-stone"] .complaint-warning-banner p,
+.theme-warm-stone .complaint-warning-banner p,
+[data-theme="warm-stone"] .rsc-service,
+.theme-warm-stone .rsc-service,
+[data-theme="warm-stone"] .call-sub,
+.theme-warm-stone .call-sub,
+[data-theme="warm-stone"] .cnb-label,
+.theme-warm-stone .cnb-label {
+  color: rgba(10, 10, 10, 0.8) !important;
+}
+
+[data-theme="warm-stone"] .rsc-avatar,
+.theme-warm-stone .rsc-avatar {
+  background: #FFFFF0 !important;
+  border: 1.5px solid #0A0A0A !important;
+  color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .cfg-label,
+.theme-warm-stone .cfg-label,
+[data-theme="warm-stone"] .rcg-label,
+.theme-warm-stone .rcg-label,
+[data-theme="warm-stone"] .rrs-label,
+.theme-warm-stone .rrs-label,
+[data-theme="warm-stone"] .rtp-label,
+.theme-warm-stone .rtp-label,
+[data-theme="warm-stone"] .rrs-score-text,
+.theme-warm-stone .rrs-score-text,
+[data-theme="warm-stone"] .lodge-field-label,
+.theme-warm-stone .lodge-field-label {
+  color: #0A0A0A !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="warm-stone"] .cfg-select,
+.theme-warm-stone .cfg-select,
+[data-theme="warm-stone"] .cfg-textarea,
+.theme-warm-stone .cfg-textarea,
+[data-theme="warm-stone"] .rcg-textarea,
+.theme-warm-stone .rcg-textarea,
+[data-theme="warm-stone"] .lodge-input,
+.theme-warm-stone .lodge-input,
+[data-theme="warm-stone"] .lodge-select,
+.theme-warm-stone .lodge-select,
+[data-theme="warm-stone"] .lodge-textarea,
+.theme-warm-stone .lodge-textarea {
+  background: rgba(255, 255, 240, 0.95) !important;
+  border: 1.5px solid rgba(10, 10, 10, 0.3) !important;
+  color: #0A0A0A !important;
+  outline: none !important;
+}
+
+[data-theme="warm-stone"] .cfg-select:focus,
+.theme-warm-stone .cfg-select:focus,
+[data-theme="warm-stone"] .cfg-textarea:focus,
+.theme-warm-stone .cfg-textarea:focus,
+[data-theme="warm-stone"] .rcg-textarea:focus,
+.theme-warm-stone .rcg-textarea:focus,
+[data-theme="warm-stone"] .lodge-input:focus,
+.theme-warm-stone .lodge-input:focus,
+[data-theme="warm-stone"] .lodge-select:focus,
+.theme-warm-stone .lodge-select:focus,
+[data-theme="warm-stone"] .lodge-textarea:focus,
+.theme-warm-stone .lodge-textarea:focus {
+  border-color: #0A0A0A !important;
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.12) !important;
+}
+

@@ -785,6 +785,12 @@ body.theme-warm-stone,
 .theme-warm-stone .contact-page,
 [data-theme="warm-stone"] .my-bookings-page,
 .theme-warm-stone .my-bookings-page,
+[data-theme="warm-stone"] .booked-page,
+.theme-warm-stone .booked-page,
+[data-theme="warm-stone"] .booked-container,
+.theme-warm-stone .booked-container,
+[data-theme="warm-stone"] .booked-header,
+.theme-warm-stone .booked-header,
 [data-theme="warm-stone"] .messages-page,
 .theme-warm-stone .messages-page,
 [data-theme="warm-stone"] .auth-page,
@@ -1817,8 +1823,6 @@ body.theme-warm-stone,
 /* ── 17.1 BACKGROUND & BANNER IMAGES (SUBTLE BLUR FOR CRISP TEXT CONTRAST) ── */
 [data-theme="warm-stone"] .booking-header-bg-img,
 .theme-warm-stone .booking-header-bg-img,
-[data-theme="warm-stone"] .pro-hero-bg,
-.theme-warm-stone .pro-hero-bg,
 [data-theme="warm-stone"] .auth-fullscreen-bg,
 .theme-warm-stone .auth-fullscreen-bg {
   opacity: 0.95 !important;
@@ -1826,7 +1830,7 @@ body.theme-warm-stone,
   transform: scale(1.04) !important;
 }
 
-/* Services Hero & Category Banner Images — 100% UNBLURRED & SHARP as specifically requested */
+/* Services Hero, Category Banner, & Professionals Hero — 100% UNBLURRED & SHARP as specifically requested */
 [data-theme="warm-stone"] .services-hero-bg,
 .theme-warm-stone .services-hero-bg,
 [data-theme="warm-stone"] .services-hero img,
@@ -1834,17 +1838,21 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] .services-hero-img,
 .theme-warm-stone .services-hero-img,
 [data-theme="warm-stone"] .header-background-image,
-.theme-warm-stone .header-background-image {
+.theme-warm-stone .header-background-image,
+[data-theme="warm-stone"] .pro-hero-bg,
+.theme-warm-stone .pro-hero-bg {
   filter: none !important;
   opacity: 1 !important;
   transform: none !important;
 }
 
-/* Services Hero & Category Header Clear Overlays (NO MILKY HAZE, NO BLUR) */
+/* Hero Clear Overlays (NO MILKY HAZE, NO BLUR) */
 [data-theme="warm-stone"] .services-hero-overlay,
 .theme-warm-stone .services-hero-overlay,
 [data-theme="warm-stone"] .header-overlay-ambient,
-.theme-warm-stone .header-overlay-ambient {
+.theme-warm-stone .header-overlay-ambient,
+[data-theme="warm-stone"] .pro-hero-overlay,
+.theme-warm-stone .pro-hero-overlay {
   display: block !important;
   background: linear-gradient(180deg, rgba(10, 10, 10, 0.06) 0%, rgba(10, 10, 10, 0.18) 100%) !important;
   backdrop-filter: none !important;
@@ -1855,8 +1863,6 @@ body.theme-warm-stone,
 /* Translucent Soft Ivory Ambient Overlays Behind Text */
 [data-theme="warm-stone"] .booking-header-ambient-overlay,
 .theme-warm-stone .booking-header-ambient-overlay,
-[data-theme="warm-stone"] .pro-hero-overlay,
-.theme-warm-stone .pro-hero-overlay,
 [data-theme="warm-stone"] .auth-bg-overlay,
 .theme-warm-stone .auth-bg-overlay {
   display: block !important;
