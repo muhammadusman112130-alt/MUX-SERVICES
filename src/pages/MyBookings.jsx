@@ -782,7 +782,7 @@ function MyBookings({ setCurrentPage }) {
                     <div className="cjc-body-details">
                       <div className="cbd-row">
                         <span>Technician:</span>
-                        <strong>{b.provider} <span style={{ color: '#10b981' }}>✓</span></strong>
+                        <strong>{b.provider} <span className="cjc-check-icon">✓</span></strong>
                       </div>
                       <div className="cbd-row">
                         <span>Paid Amount:</span>

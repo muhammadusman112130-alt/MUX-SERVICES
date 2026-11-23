@@ -724,7 +724,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
               {/* Security Shield Card */}
               <div className="cp-security-shield-card animated-shadow-aura">
                 <div className="cssc-icon-wrap">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                   </svg>
                 </div>
@@ -870,7 +870,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
                     <div className="cp-tsc-swatches">
                       <span className="cp-swatch" style={{ background: '#DAD7CD' }} title="Warm Stone #DAD7CD"></span>
                       <span className="cp-swatch" style={{ background: '#354F52' }} title="Dark Slate Gray #354F52"></span>
-                      <span className="cp-swatch" style={{ background: '#52796F' }} title="Slate Green #52796F"></span>
+                      <span className="cp-swatch" style={{ background: '#283C3E' }} title="Deep Slate #283C3E"></span>
                       <span className="cp-swatch" style={{ background: '#EAE7DF' }} title="Surface Tint #EAE7DF"></span>
                     </div>
                   </div>

@@ -710,15 +710,15 @@ button:not(:disabled),
 [data-theme="warm-stone"],
 .theme-warm-stone {
   --primary:       #354F52;
-  --primary-light: #52796F;
+  --primary-light: #283C3E;
   --accent:        #354F52;
   --accent-glow:   rgba(53, 79, 82, 0.35);
   --frost-white:   #354F52;
   --white:         #DAD7CD;
-  --surface:       #ECEAE2;
-  --border:        rgba(53, 79, 82, 0.25);
+  --surface:       #FFFFFF;
+  --border:        rgba(53, 79, 82, 0.22);
   --text:          #354F52;
-  --muted:         #52796F;
+  --muted:         rgba(53, 79, 82, 0.78);
   --shadow-sm:     0 2px 8px rgba(53, 79, 82, 0.12);
   --shadow-md:     0 6px 24px rgba(53, 79, 82, 0.18);
   --shadow-lg:     0 16px 48px rgba(53, 79, 82, 0.25);
@@ -828,8 +828,8 @@ body.theme-warm-stone,
 
 [data-theme="warm-stone"] .hero-section .hero-content .stat-label,
 .theme-warm-stone .hero-section .hero-content .stat-label {
-  color: #52796F !important;
-  -webkit-text-fill-color: #52796F !important;
+  color: #354F52 !important;
+  -webkit-text-fill-color: #354F52 !important;
 }
 
 [data-theme="warm-stone"] .hero-section .hero-search-box,
@@ -868,6 +868,8 @@ body.theme-warm-stone,
 .theme-warm-stone .card-backlight-aura,
 [data-theme="warm-stone"] .card-floor-light-animation,
 .theme-warm-stone .card-floor-light-animation,
+[data-theme="warm-stone"] .card-ambient-glow,
+.theme-warm-stone .card-ambient-glow,
 [data-theme="warm-stone"] .slider-slide:hover .card-backlight-aura,
 .theme-warm-stone .slider-slide:hover .card-backlight-aura,
 [data-theme="warm-stone"] .slider-slide:hover .card-floor-light-animation,
@@ -910,7 +912,7 @@ body.theme-warm-stone,
   border-color: #354F52 !important;
 }
 
-/* ── 5. ALL CARDS & SURFACES (#ECEAE2 CLEAN WARM STONE) ── */
+/* ── 5. ALL CARDS & SURFACES (#FFFFFF CLEAN CRISP SURFACES) ── */
 [data-theme="warm-stone"] .top-service-card,
 .theme-warm-stone .top-service-card,
 [data-theme="warm-stone"] .professional-card,
@@ -941,6 +943,12 @@ body.theme-warm-stone,
 .theme-warm-stone .cp-toggle-item,
 [data-theme="warm-stone"] .svc-home-card,
 .theme-warm-stone .svc-home-card,
+[data-theme="warm-stone"] .svc-tech-card,
+.theme-warm-stone .svc-tech-card,
+[data-theme="warm-stone"] .svc-health-card,
+.theme-warm-stone .svc-health-card,
+[data-theme="warm-stone"] .svc-three-card,
+.theme-warm-stone .svc-three-card,
 [data-theme="warm-stone"] .service-card,
 .theme-warm-stone .service-card,
 [data-theme="warm-stone"] .package-card,
@@ -957,14 +965,37 @@ body.theme-warm-stone,
 .theme-warm-stone .guarantee-card,
 [data-theme="warm-stone"] .category-card,
 .theme-warm-stone .category-card,
+[data-theme="warm-stone"] .pro-trust-card,
+.theme-warm-stone .pro-trust-card,
+[data-theme="warm-stone"] .pro-stats-card,
+.theme-warm-stone .pro-stats-card,
+[data-theme="warm-stone"] .provider-request-card,
+.theme-warm-stone .provider-request-card,
+[data-theme="warm-stone"] .tech-card,
+.theme-warm-stone .tech-card,
+[data-theme="warm-stone"] .health-card,
+.theme-warm-stone .health-card,
+[data-theme="warm-stone"] .booking-card,
+.theme-warm-stone .booking-card,
 [data-theme="warm-stone"] .cp-nav-tabs,
-.theme-warm-stone .cp-nav-tabs {
-  background: #ECEAE2 !important;
+.theme-warm-stone .cp-nav-tabs,
+[data-theme="warm-stone"] .cp-theme-selection-card,
+.theme-warm-stone .cp-theme-selection-card,
+[data-theme="warm-stone"] .login-card,
+.theme-warm-stone .login-card,
+[data-theme="warm-stone"] .pv-card,
+.theme-warm-stone .pv-card,
+[data-theme="warm-stone"] .contact-card,
+.theme-warm-stone .contact-card,
+[data-theme="warm-stone"] [class*="-card"],
+.theme-warm-stone [class*="-card"] {
+  background: #FFFFFF !important;
   color: #354F52 !important;
-  border: 1.5px solid rgba(53, 79, 82, 0.25) !important;
-  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.12) !important;
+  border: 1.5px solid rgba(53, 79, 82, 0.22) !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.1) !important;
 }
 
+/* Card Hover Across Entire Site in Light Mode: Pure White background, Dark Slate border & shadow, ZERO GREEN */
 [data-theme="warm-stone"] .top-service-card:hover,
 .theme-warm-stone .top-service-card:hover,
 [data-theme="warm-stone"] .professional-card:hover,
@@ -984,10 +1015,150 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] .card:hover,
 .theme-warm-stone .card:hover,
 [data-theme="warm-stone"] .svc-home-card:hover,
-.theme-warm-stone .svc-home-card:hover {
-  transform: translateY(-3px) !important;
+.theme-warm-stone .svc-home-card:hover,
+[data-theme="warm-stone"] .svc-tech-card:hover,
+.theme-warm-stone .svc-tech-card:hover,
+[data-theme="warm-stone"] .svc-health-card:hover,
+.theme-warm-stone .svc-health-card:hover,
+[data-theme="warm-stone"] .svc-three-card:hover,
+.theme-warm-stone .svc-three-card:hover,
+[data-theme="warm-stone"] .service-card:hover,
+.theme-warm-stone .service-card:hover,
+[data-theme="warm-stone"] .package-card:hover,
+.theme-warm-stone .package-card:hover,
+[data-theme="warm-stone"] .technician-card:hover,
+.theme-warm-stone .technician-card:hover,
+[data-theme="warm-stone"] .booking-form-card:hover,
+.theme-warm-stone .booking-form-card:hover,
+[data-theme="warm-stone"] .pro-trust-card:hover,
+.theme-warm-stone .pro-trust-card:hover,
+[data-theme="warm-stone"] .provider-request-card:hover,
+.theme-warm-stone .provider-request-card:hover,
+[data-theme="warm-stone"] .tech-card:hover,
+.theme-warm-stone .tech-card:hover,
+[data-theme="warm-stone"] .health-card:hover,
+.theme-warm-stone .health-card:hover,
+[data-theme="warm-stone"] .booking-card:hover,
+.theme-warm-stone .booking-card:hover,
+[data-theme="warm-stone"] .category-card:hover,
+.theme-warm-stone .category-card:hover,
+[data-theme="warm-stone"] .cp-stat-card:hover,
+.theme-warm-stone .cp-stat-card:hover,
+[data-theme="warm-stone"] .cp-tab-card:hover,
+.theme-warm-stone .cp-tab-card:hover,
+[data-theme="warm-stone"] [class*="-card"]:hover,
+.theme-warm-stone [class*="-card"]:hover {
+  transform: translateY(-4px) !important;
+  background: #FFFFFF !important;
   border-color: #354F52 !important;
-  box-shadow: 0 12px 30px rgba(53, 79, 82, 0.2), 0 0 18px rgba(82, 121, 111, 0.25) !important;
+  box-shadow: 0 14px 35px rgba(53, 79, 82, 0.22), 0 2px 10px rgba(53, 79, 82, 0.08) !important;
+  animation: none !important;
+}
+
+[data-theme="warm-stone"] .svc-health-card::before,
+.theme-warm-stone .svc-health-card::before,
+[data-theme="warm-stone"] .trust-card::before,
+.theme-warm-stone .trust-card::before,
+[data-theme="warm-stone"] .provider-request-card::before,
+.theme-warm-stone .provider-request-card::before {
+  background: #354F52 !important;
+}
+
+/* Card Inner Elements & Sub-containers in Light Mode */
+[data-theme="warm-stone"] .professional-service-box,
+.theme-warm-stone .professional-service-box,
+[data-theme="warm-stone"] .pro-benefit-item,
+.theme-warm-stone .pro-benefit-item {
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(53, 79, 82, 0.22) !important;
+  color: #354F52 !important;
+  box-shadow: 0 4px 14px rgba(53, 79, 82, 0.08) !important;
+}
+
+[data-theme="warm-stone"] .pro-benefit-item:hover,
+.theme-warm-stone .pro-benefit-item:hover {
+  background: #FFFFFF !important;
+  border-color: #354F52 !important;
+  box-shadow: 0 10px 28px rgba(53, 79, 82, 0.2) !important;
+}
+
+[data-theme="warm-stone"] .benefit-title,
+.theme-warm-stone .benefit-title,
+[data-theme="warm-stone"] .benefit-desc,
+.theme-warm-stone .benefit-desc,
+[data-theme="warm-stone"] .pro-service-detail,
+.theme-warm-stone .pro-service-detail,
+[data-theme="warm-stone"] .professional-name,
+.theme-warm-stone .professional-name {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .benefit-icon-box,
+.theme-warm-stone .benefit-icon-box {
+  background: rgba(53, 79, 82, 0.1) !important;
+  border-color: rgba(53, 79, 82, 0.3) !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .pro-stat-chip,
+.theme-warm-stone .pro-stat-chip {
+  background: #ECEAE2 !important;
+  border: 1px solid rgba(53, 79, 82, 0.25) !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .pro-rate-tag,
+.theme-warm-stone .pro-rate-tag {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .avatar,
+.theme-warm-stone .avatar {
+  border-color: #354F52 !important;
+  background: #ECEAE2 !important;
+}
+
+[data-theme="warm-stone"] .verified-badge,
+.theme-warm-stone .verified-badge,
+[data-theme="warm-stone"] .pro-service-badge,
+.theme-warm-stone .pro-service-badge {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  border-color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .pro-live-status,
+.theme-warm-stone .pro-live-status,
+[data-theme="warm-stone"] .pro-pill-badge,
+.theme-warm-stone .pro-pill-badge,
+[data-theme="warm-stone"] .live-pulse-chip,
+.theme-warm-stone .live-pulse-chip {
+  background: rgba(53, 79, 82, 0.1) !important;
+  color: #354F52 !important;
+  border-color: rgba(53, 79, 82, 0.3) !important;
+}
+
+[data-theme="warm-stone"] .pro-pulse-dot,
+.theme-warm-stone .pro-pulse-dot,
+[data-theme="warm-stone"] .pro-pill-pulse,
+.theme-warm-stone .pro-pill-pulse {
+  background: #354F52 !important;
+  box-shadow: 0 0 6px rgba(53, 79, 82, 0.4) !important;
+  animation: none !important;
+}
+
+[data-theme="warm-stone"] .pro-primary-btn,
+.theme-warm-stone .pro-primary-btn {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+  box-shadow: 0 6px 20px rgba(53, 79, 82, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .pro-secondary-btn,
+.theme-warm-stone .pro-secondary-btn {
+  background: rgba(53, 79, 82, 0.1) !important;
+  color: #354F52 !important;
+  border-color: #354F52 !important;
 }
 
 /* ── 6. ALL BUTTONS IN LIGHT MODE (#354F52 WITH #DAD7CD TEXT) ── */
@@ -1206,14 +1377,14 @@ body.theme-warm-stone,
 .theme-warm-stone .mux-dual-ticker-section::before,
 [data-theme="warm-stone"] .mux-dual-ticker-section::after,
 .theme-warm-stone .mux-dual-ticker-section::after {
-  background: linear-gradient(90deg, transparent 0%, rgba(53, 79, 82, 0.25) 15%, #354F52 35%, #52796F 50%, #354F52 65%, rgba(53, 79, 82, 0.25) 85%, transparent 100%) !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(53, 79, 82, 0.25) 15%, #354F52 35%, #283C3E 50%, #354F52 65%, rgba(53, 79, 82, 0.25) 85%, transparent 100%) !important;
   box-shadow: 0 0 14px #354F52, 0 0 28px rgba(53, 79, 82, 0.45) !important;
 }
 
 /* ── 10. PRO JOIN & PRICE SECTION IN LIGHT MODE ── */
 [data-theme="warm-stone"] .pro-laser-beam,
 .theme-warm-stone .pro-laser-beam {
-  background: linear-gradient(90deg, transparent, #354F52, #52796F, transparent) !important;
+  background: linear-gradient(90deg, transparent, #354F52, #283C3E, transparent) !important;
   box-shadow: 0 0 12px rgba(53, 79, 82, 0.4) !important;
 }
 
@@ -1245,7 +1416,7 @@ body.theme-warm-stone,
 
 [data-theme="warm-stone"] .footer-logo-services,
 .theme-warm-stone .footer-logo-services {
-  color: #52796F !important;
+  color: #354F52 !important;
   text-shadow: none !important;
 }
 
@@ -1288,7 +1459,7 @@ body.theme-warm-stone,
     border-color: rgba(53, 79, 82, 0.28) !important;
   }
   50% {
-    box-shadow: 0 14px 44px rgba(53, 79, 82, 0.28), 0 0 32px rgba(82, 121, 111, 0.35) !important;
+    box-shadow: 0 14px 44px rgba(53, 79, 82, 0.28), 0 0 24px rgba(53, 79, 82, 0.2) !important;
     border-color: #354F52 !important;
   }
 }
@@ -1312,4 +1483,108 @@ body.theme-warm-stone,
 [data-theme="warm-stone"] .btn-primary::after,
 .theme-warm-stone .btn-primary::after {
   background: linear-gradient(90deg, transparent, rgba(218, 215, 205, 0.45), transparent) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   15. 100% COMPREHENSIVE UNIVERSAL GREEN PURGE IN LIGHT MODE
+   Zero green color allowed anywhere on the website in Light Mode (#DAD7CD & #354F52)
+══════════════════════════════════════════════════════════════════════════ */
+[data-theme="warm-stone"] .svc-banner-health,
+.theme-warm-stone .svc-banner-health {
+  background: #354F52 !important;
+  border-left: 5px solid #283C3E !important;
+  color: #DAD7CD !important;
+}
+
+[data-theme="warm-stone"] .svc-health-badge,
+.theme-warm-stone .svc-health-badge,
+[data-theme="warm-stone"] .svc-guarantee-badge,
+.theme-warm-stone .svc-guarantee-badge,
+[data-theme="warm-stone"] .cpi-verified-badge,
+.theme-warm-stone .cpi-verified-badge,
+[data-theme="warm-stone"] .verified-tag,
+.theme-warm-stone .verified-tag,
+[data-theme="warm-stone"] .cp-tsc-active-pill,
+.theme-warm-stone .cp-tsc-active-pill,
+[data-theme="warm-stone"] [class*="verified"],
+.theme-warm-stone [class*="verified"],
+[data-theme="warm-stone"] [class*="badge-success"],
+.theme-warm-stone [class*="badge-success"],
+[data-theme="warm-stone"] [class*="pill-success"],
+.theme-warm-stone [class*="pill-success"] {
+  background: rgba(53, 79, 82, 0.12) !important;
+  border: 1px solid rgba(53, 79, 82, 0.3) !important;
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .svc-health-name,
+.theme-warm-stone .svc-health-name,
+[data-theme="warm-stone"] .svc-health-rating,
+.theme-warm-stone .svc-health-rating,
+[data-theme="warm-stone"] .green-text,
+.theme-warm-stone .green-text,
+[data-theme="warm-stone"] [class*="text-emerald"],
+.theme-warm-stone [class*="text-emerald"],
+[data-theme="warm-stone"] [class*="text-green"],
+.theme-warm-stone [class*="text-green"] {
+  color: #354F52 !important;
+}
+
+[data-theme="warm-stone"] .svc-health-btn,
+.theme-warm-stone .svc-health-btn {
+  background: #354F52 !important;
+  color: #DAD7CD !important;
+}
+
+[data-theme="warm-stone"] .svc-health-btn:hover,
+.theme-warm-stone .svc-health-btn:hover {
+  background: #283C3E !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 15px rgba(53, 79, 82, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .live-dot-pulse,
+.theme-warm-stone .live-dot-pulse,
+[data-theme="warm-stone"] .tech-status-dot,
+.theme-warm-stone .tech-status-dot,
+[data-theme="warm-stone"] .live-dot,
+.theme-warm-stone .live-dot,
+[data-theme="warm-stone"] .status-dot,
+.theme-warm-stone .status-dot,
+[data-theme="warm-stone"] .live-ring,
+.theme-warm-stone .live-ring {
+  background: #354F52 !important;
+  box-shadow: 0 0 6px rgba(53, 79, 82, 0.4) !important;
+  animation: none !important;
+}
+
+/* Green SVGs and SVG stroke/fill purge */
+[data-theme="warm-stone"] [stroke="#10b981"],
+.theme-warm-stone [stroke="#10b981"],
+[data-theme="warm-stone"] [stroke="#059669"],
+.theme-warm-stone [stroke="#059669"],
+[data-theme="warm-stone"] [stroke="#22c55e"],
+.theme-warm-stone [stroke="#22c55e"],
+[data-theme="warm-stone"] [stroke="#16a34a"],
+.theme-warm-stone [stroke="#16a34a"],
+[data-theme="warm-stone"] [stroke="#064e3b"],
+.theme-warm-stone [stroke="#064e3b"],
+[data-theme="warm-stone"] [stroke="#065f46"],
+.theme-warm-stone [stroke="#065f46"] {
+  stroke: #354F52 !important;
+}
+
+[data-theme="warm-stone"] [fill="#10b981"]:not([fill="none"]),
+.theme-warm-stone [fill="#10b981"]:not([fill="none"]),
+[data-theme="warm-stone"] [fill="#059669"]:not([fill="none"]),
+.theme-warm-stone [fill="#059669"]:not([fill="none"]),
+[data-theme="warm-stone"] [fill="#22c55e"]:not([fill="none"]),
+.theme-warm-stone [fill="#22c55e"]:not([fill="none"]),
+[data-theme="warm-stone"] [fill="#16a34a"]:not([fill="none"]),
+.theme-warm-stone [fill="#16a34a"]:not([fill="none"]),
+[data-theme="warm-stone"] [fill="#064e3b"]:not([fill="none"]),
+.theme-warm-stone [fill="#064e3b"]:not([fill="none"]),
+[data-theme="warm-stone"] [fill="#065f46"]:not([fill="none"]),
+.theme-warm-stone [fill="#065f46"]:not([fill="none"]) {
+  fill: #354F52 !important;
 }
