@@ -5,6 +5,43 @@
    ========================================================================== */
 
 /* Keyframe Animations */
+@keyframes proTitleShineFlow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes ambientAuraBreath {
+  0%, 100% {
+    opacity: 0.85;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.06);
+  }
+}
+
+@keyframes proCardFloat0 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes proCardFloat1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+@keyframes proCardFloat2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes proCardFloat3 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 @keyframes ivoryPulse {
   0% {
     box-shadow: 0 0 10px rgba(255, 255, 240, 0.2);
@@ -379,22 +416,40 @@
   padding: 0 1.5rem;
 }
 
-.slide-content-glass {
-  max-width: 720px;
-  background: rgba(10, 10, 10, 0.68);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(255, 255, 240, 0.35);
-  border-radius: 16px;
-  padding: 2.2rem 2.5rem;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+/* Direct Hero Text Presentation (NO Enclosing Card Box) */
+.slide-hero-direct-content {
+  position: relative;
+  max-width: 860px;
+  padding: 1rem 0;
+  z-index: 5;
+}
+
+/* Ambient Animated Backlight behind Hero Text for Crystal Visibility */
+.slide-hero-direct-content::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -25px;
+  transform: translateY(-50%);
+  width: calc(100% + 50px);
+  height: 320px;
+  background: radial-gradient(
+    ellipse at 30% 50%,
+    rgba(10, 10, 10, 0.82) 0%,
+    rgba(10, 10, 10, 0.52) 55%,
+    rgba(10, 10, 10, 0) 100%
+  );
+  filter: blur(26px);
+  z-index: -1;
+  pointer-events: none;
+  animation: ambientAuraBreath 5s ease-in-out infinite;
 }
 
 .slide-badge-wrapper {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.15rem;
   flex-wrap: wrap;
 }
 
@@ -428,22 +483,44 @@
   color: #FFFFF0;
 }
 
-.slide-title {
-  font-size: 2.15rem;
-  font-weight: 800;
-  line-height: 1.25;
-  color: #FFFFF0;
-  margin: 0 0 0.85rem 0;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-  letter-spacing: -0.01em;
+/* Hero Title with Flowing Gradient Animation (like Customer Dashboard H1) */
+.provider-slide-hero-title {
+  font-size: clamp(2.1rem, 3.8vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.16;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  position: relative;
 }
 
-.slide-description {
-  font-size: 0.98rem;
+.provider-slide-title-animated {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    #FFFFF0 0%,
+    #e8e8dc 25%,
+    #ffffff 50%,
+    #e8e8dc 75%,
+    #FFFFF0 100%
+  ) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: proTitleShineFlow 4s linear infinite !important;
+  filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.95)) drop-shadow(0 4px 28px rgba(0, 0, 0, 0.85));
+}
+
+.provider-slide-hero-desc {
+  font-size: clamp(1.02rem, 1.35vw, 1.18rem);
   line-height: 1.6;
   color: #FFFFF0;
-  margin: 0 0 1.75rem 0;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  margin: 0 0 1.85rem 0;
+  max-width: 720px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.85);
+  font-weight: 500;
 }
 
 .slide-cta-row {
@@ -754,41 +831,92 @@
   text-decoration: underline;
 }
 
-/* 4 Core Pillars Grid: Jet Black & Ivory */
+/* ==========================================================================
+   4 CORE PILLARS CONNECTED WITH JET BLACK LINE (NO ICONS)
+   ========================================================================== */
+.about-pillars-connected-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Continuous Jet Black Line passing behind all 4 pillar cards */
+.pillars-jet-pipeline-line {
+  position: absolute;
+  top: 48px;
+  left: 4%;
+  right: 4%;
+  height: 4px;
+  background: #0A0A0A;
+  border-top: 1.5px solid #FFFFF0;
+  border-bottom: 1.5px solid #FFFFF0;
+  box-shadow: 0 0 14px rgba(255, 255, 240, 0.4);
+  z-index: 1;
+}
+
 .about-pillars-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.75rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 .pillar-glow-card {
   background: #0A0A0A;
   border: 1.5px solid #FFFFF0;
   border-radius: 18px;
-  padding: 2rem 1.75rem;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 2.2rem 1.6rem 1.8rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7);
 }
 
+/* Pillar Connector Joint Node to the Jet Black Line */
+.pillar-joint-node {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0A0A0A;
+  border: 2px solid #FFFFF0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  box-shadow: 0 0 10px rgba(255, 255, 240, 0.5);
+}
+
+.pillar-node-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FFFFF0;
+}
+
+/* Floating Animations on Pillar Cards */
+.pillar-card-0 { animation: proCardFloat0 5.5s ease-in-out infinite; }
+.pillar-card-1 { animation: proCardFloat1 6.2s ease-in-out infinite 0.4s; }
+.pillar-card-2 { animation: proCardFloat2 5.8s ease-in-out infinite 0.8s; }
+.pillar-card-3 { animation: proCardFloat3 6.5s ease-in-out infinite 1.2s; }
+
 .pillar-glow-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 35px rgba(255, 255, 240, 0.25);
-  background: #111111;
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 18px 42px rgba(255, 255, 240, 0.35);
+  background: #141414;
+  border-color: #FFFFF0;
 }
 
 .pillar-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.15rem;
-}
-
-.pillar-icon {
-  font-size: 2rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .pillar-tag {
@@ -801,8 +929,18 @@
   letter-spacing: 0.05em;
 }
 
+.pillar-seq-num {
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: #FFFFF0;
+  border: 1px solid rgba(255, 255, 240, 0.4);
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  background: #0A0A0A;
+}
+
 .pillar-title {
-  font-size: 1.25rem;
+  font-size: 1.22rem;
   font-weight: 800;
   color: #FFFFF0;
   margin: 0 0 0.85rem 0;
@@ -841,14 +979,14 @@
 }
 
 /* ==========================================================================
-   4 CONNECTED WORKFLOW CARDS (CONNECTED TOGETHER)
+   4 CONNECTED WORKFLOW CARDS (OPEN SECTION - NO BIG CARD BOX - ANIMATED)
    ========================================================================== */
 .how-it-works-section {
-  background: #0A0A0A;
-  border: 2px solid #FFFFF0;
-  border-radius: 20px;
-  padding: 2.5rem;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
   position: relative;
 }
 
@@ -911,15 +1049,17 @@
   width: 100%;
 }
 
-/* Horizontal Connecting Axis Line across all 4 cards */
+/* Continuous Jet Black Line passing behind all 4 workflow cards */
 .how-pipeline-line {
   position: absolute;
-  top: 38px;
+  top: 48px;
   left: 5%;
   right: 5%;
-  height: 3px;
-  background: #FFFFF0;
-  box-shadow: 0 0 10px rgba(255, 255, 240, 0.5);
+  height: 4px;
+  background: #0A0A0A;
+  border-top: 1.5px solid #FFFFF0;
+  border-bottom: 1.5px solid #FFFFF0;
+  box-shadow: 0 0 14px rgba(255, 255, 240, 0.4);
   z-index: 1;
 }
 
@@ -934,18 +1074,26 @@
 .how-step-connected-card {
   background: #0A0A0A;
   border: 1.5px solid #FFFFF0;
-  border-radius: 14px;
-  padding: 1.6rem 1.3rem;
+  border-radius: 16px;
+  padding: 1.8rem 1.3rem;
   position: relative;
-  transition: all 0.25s ease;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7);
 }
 
+/* Staggered Floating Animations on Workflow Cards */
+.step-card-anim-0 { animation: proCardFloat0 6s ease-in-out infinite; }
+.step-card-anim-1 { animation: proCardFloat1 6.5s ease-in-out infinite 0.5s; }
+.step-card-anim-2 { animation: proCardFloat2 5.8s ease-in-out infinite 1s; }
+.step-card-anim-3 { animation: proCardFloat3 6.3s ease-in-out infinite 1.5s; }
+
 .how-step-connected-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px) scale(1.02) !important;
   background: #141414;
-  box-shadow: 0 8px 24px rgba(255, 255, 240, 0.2);
+  box-shadow: 0 18px 42px rgba(255, 255, 240, 0.3);
+  border-color: #FFFFF0;
 }
 
 /* Joint Node connecting card to the axis line */
@@ -1120,6 +1268,60 @@
   color: #0A0A0A;
 }
 
+[data-theme="warm-stone"] .provider-slide-title-animated,
+.theme-warm-stone .provider-slide-title-animated {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  color: #0A0A0A !important;
+  text-shadow: 0 0 16px #FFFFF0, 0 0 32px #FFFFF0, 0 2px 8px #FFFFF0 !important;
+  filter: none !important;
+}
+
+[data-theme="warm-stone"] .provider-slide-hero-desc,
+.theme-warm-stone .provider-slide-hero-desc {
+  color: #0A0A0A !important;
+  text-shadow: 0 0 14px #FFFFF0, 0 0 24px #FFFFF0 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="warm-stone"] .slide-hero-direct-content::before,
+.theme-warm-stone .slide-hero-direct-content::before {
+  background: radial-gradient(
+    ellipse at 30% 50%,
+    rgba(255, 255, 240, 0.92) 0%,
+    rgba(255, 255, 240, 0.6) 55%,
+    rgba(255, 255, 240, 0) 100%
+  ) !important;
+}
+
+[data-theme="warm-stone"] .pillars-jet-pipeline-line,
+.theme-warm-stone .pillars-jet-pipeline-line {
+  background: #0A0A0A !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: 0 0 8px rgba(10, 10, 10, 0.35) !important;
+}
+
+[data-theme="warm-stone"] .pillar-seq-num,
+.theme-warm-stone .pillar-seq-num {
+  background: #0A0A0A !important;
+  color: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .pillar-joint-node,
+.theme-warm-stone .pillar-joint-node {
+  background: #FFFFF0 !important;
+  border-color: #0A0A0A !important;
+}
+
+[data-theme="warm-stone"] .pillar-node-dot,
+.theme-warm-stone .pillar-node-dot {
+  background: #0A0A0A !important;
+}
+
 [data-theme="warm-stone"] .pillar-glow-card,
 .theme-warm-stone .pillar-glow-card {
   background: #FFFFF0;
@@ -1167,9 +1369,9 @@
 
 [data-theme="warm-stone"] .how-it-works-section,
 .theme-warm-stone .how-it-works-section {
-  background: #FFFFF0;
-  border-color: #0A0A0A;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 [data-theme="warm-stone"] .how-title,
@@ -1203,7 +1405,10 @@
 
 [data-theme="warm-stone"] .how-pipeline-line,
 .theme-warm-stone .how-pipeline-line {
-  background: #0A0A0A;
+  background: #0A0A0A !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: 0 0 8px rgba(10, 10, 10, 0.35) !important;
 }
 
 [data-theme="warm-stone"] .how-step-connected-card,
@@ -1260,6 +1465,15 @@
    RESPONSIVENESS
    ========================================================================== */
 @media (max-width: 1024px) {
+  .about-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pillars-jet-pipeline-line {
+    display: none;
+  }
+  .pillar-joint-node {
+    display: none;
+  }
   .how-steps-connected-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1283,19 +1497,19 @@
   }
 
   .provider-hero-carousel-section.full-width-banner {
-    height: 480px;
+    height: 520px;
   }
 
-  .slide-content-glass {
-    padding: 1.5rem;
+  .slide-hero-direct-content {
+    padding: 1rem 0;
   }
 
-  .slide-title {
-    font-size: 1.6rem;
+  .provider-slide-hero-title {
+    font-size: 1.8rem;
   }
 
-  .slide-description {
-    font-size: 0.9rem;
+  .provider-slide-hero-desc {
+    font-size: 0.92rem;
   }
 
   .carousel-control-arrow {
@@ -1308,6 +1522,10 @@
 
   .about-main-heading {
     font-size: 1.8rem;
+  }
+
+  .about-pillars-grid {
+    grid-template-columns: 1fr;
   }
 
   .how-steps-connected-grid {

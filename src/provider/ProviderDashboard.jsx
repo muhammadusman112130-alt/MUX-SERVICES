@@ -57,25 +57,21 @@ const STRIP_2_ITEMS = [
 
 const MUX_PILLARS = [
   {
-    icon: '⚡',
     tag: 'FINANCIAL INTEGRITY',
     title: 'Guaranteed Direct Payment',
     description: 'Every job on MUX SERVICES ensures transparent, guaranteed compensation. No middleman deductions, no delayed wages — payments clear directly to your bank account or instant cash upon verified completion.'
   },
   {
-    icon: '📍',
     tag: 'HYPERLOCAL RADIUS',
     title: 'Smart Multan GPS Matching',
     description: 'Our automated dispatch algorithm stations you exclusively in your preferred Multan zones — Cantt, Bosan Road, Gulgasht, Officers Colony, Wapda Town, or Shah Rukn-e-Alam — minimizing transit and maximizing your billable hours.'
   },
   {
-    icon: '🎖️',
     tag: 'GOVERNMENT BACKED',
     title: 'Police & NADRA Verified Credibility',
     description: 'MUX SERVICES certifies your ustad credentials through official Government CNIC verification and Multan Police Khidmat Markaz clearance, positioning you as an elite master professional who commands premium service rates.'
   },
   {
-    icon: '🤝',
     tag: 'FAIR GROWTH',
     title: 'Direct Negotiation & Zero Traps',
     description: 'We believe skilled labor deserves respect and fair wages. You communicate directly with clients via secure in-app chat, inspect the site, and propose custom quotes tailored to actual technical requirements.'
@@ -240,15 +236,17 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
               {/* Subtle scrim overlay so background photo remains crisp, bright and clear */}
               <div className="slide-gradient-overlay"></div>
               <div className="slide-content-container">
-                <div className="slide-content-glass">
+                <div className="slide-hero-direct-content">
                   <div className="slide-badge-wrapper">
                     <span className="slide-tag-pill">{slide.tag}</span>
                     <span className="slide-guarantee-pill">
                       <span className="pulse-spark">✦</span> {slide.highlight}
                     </span>
                   </div>
-                  <h2 className="slide-title">{slide.title}</h2>
-                  <p className="slide-description">{slide.description}</p>
+                  <h1 className="provider-slide-hero-title">
+                    <span className="provider-slide-title-animated">{slide.title}</span>
+                  </h1>
+                  <p className="provider-slide-hero-desc">{slide.description}</p>
                   
                   <div className="slide-cta-row">
                     <button 
@@ -396,25 +394,31 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
             </p>
           </div>
 
-          {/* 4 Core Pillars of MUX SERVICES */}
-          <div className="about-pillars-grid">
-            {MUX_PILLARS.map((pillar, idx) => (
-              <div key={idx} className="pillar-glow-card">
-                <div className="pillar-header-row">
-                  <span className="pillar-icon">{pillar.icon}</span>
-                  <span className="pillar-tag">{pillar.tag}</span>
+          {/* 4 Core Pillars of MUX SERVICES Connected with Jet Black Line (No Icons) */}
+          <div className="about-pillars-connected-wrapper">
+            <div className="pillars-jet-pipeline-line" aria-hidden="true"></div>
+            <div className="about-pillars-grid">
+              {MUX_PILLARS.map((pillar, idx) => (
+                <div key={idx} className={`pillar-glow-card pillar-card-${idx}`}>
+                  <div className="pillar-joint-node" aria-hidden="true">
+                    <span className="pillar-node-dot"></span>
+                  </div>
+                  <div className="pillar-header-row">
+                    <span className="pillar-tag">{pillar.tag}</span>
+                    <span className="pillar-seq-num">0{idx + 1}</span>
+                  </div>
+                  <h3 className="pillar-title">{pillar.title}</h3>
+                  <p className="pillar-desc">{pillar.description}</p>
+                  <div className="pillar-footer-accent">
+                    <span className="accent-bar"></span>
+                    <span className="accent-text">MUX SERVICES Guaranteed</span>
+                  </div>
                 </div>
-                <h3 className="pillar-title">{pillar.title}</h3>
-                <p className="pillar-desc">{pillar.description}</p>
-                <div className="pillar-footer-accent">
-                  <span className="accent-bar"></span>
-                  <span className="accent-text">MUX SERVICES Guaranteed</span>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          {/* How MUX SERVICES Works for Providers (4 CONNECTED CARDS) */}
+          {/* How MUX SERVICES Works for Providers (Open Section, 4 Cards Connected with Black Line & Animated) */}
           <div className="how-it-works-section">
             <div className="how-header-row">
               <div>
@@ -435,12 +439,12 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
               </button>
             </div>
 
-            {/* Connected Journey Pipeline Linking All 4 Cards */}
+            {/* Connected Journey Pipeline with Black Line Linking All 4 Cards */}
             <div className="how-connected-flow-wrapper">
               <div className="how-pipeline-line" aria-hidden="true"></div>
               <div className="how-steps-connected-grid">
                 {HOW_IT_WORKS_STEPS.map((step, idx) => (
-                  <div key={idx} className="how-step-connected-card">
+                  <div key={idx} className={`how-step-connected-card step-card-anim-${idx}`}>
                     <div className="step-joint-node">
                       <span className="node-core"></span>
                     </div>
