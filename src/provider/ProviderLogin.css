@@ -1,8 +1,8 @@
 /* ==========================================================================
-   MUX SERVICES — PROVIDER LOGIN (DIRECT FORM ON BACKGROUND IMAGE — ZERO CARDS)
-   - Background: Custom high-res cinematic workshop image
-   - Form: Direct form overlay, no boxed card container
-   - Brand: Strictly "MUX SERVICES" (No "Services Hub" or "Hub")
+   MUX SERVICES — PROVIDER LOGIN (DIRECT FORM OVER CLEAR BACKGROUND IMAGE)
+   - Background: Vivid, clearly visible cinematic background image
+   - Form: Floating direct form with glowing animated aura behind it
+   - Brand: Strictly "MUX SERVICES"
    ========================================================================== */
 
 .provider-login-page {
@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 85px 1.25rem 3rem 1.25rem;
+  padding: 65px 1.25rem 3rem 1.25rem;
   box-sizing: border-box;
   overflow-x: hidden;
   background-color: #0E2E33;
@@ -20,7 +20,7 @@
   font-family: inherit;
 }
 
-/* Fullscreen Background Image */
+/* Fullscreen Background Image — Clearly and vividly visible */
 .pl-fullscreen-bg {
   position: fixed;
   inset: 0;
@@ -30,17 +30,20 @@
   object-position: center;
   z-index: 0;
   pointer-events: none;
+  filter: brightness(0.92) contrast(1.08) saturate(1.05);
+  transform: scale(1.02);
+  transition: transform 0.5s ease;
 }
 
-/* Dark Gradient Overlay for optimal contrast while keeping image fully visible */
+/* Subtle Gradient Overlay: keeps image clearly visible while preserving text contrast */
 .pl-bg-overlay {
   position: fixed;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(14, 46, 51, 0.45) 0%,
-    rgba(14, 46, 51, 0.78) 50%,
-    rgba(14, 46, 51, 0.92) 100%
+  background: radial-gradient(
+    circle at center,
+    rgba(14, 46, 51, 0.18) 0%,
+    rgba(14, 46, 51, 0.38) 65%,
+    rgba(14, 46, 51, 0.65) 100%
   );
   z-index: 1;
   pointer-events: none;
@@ -51,119 +54,156 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 580px;
+  max-width: 540px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   margin: 0 auto;
 }
 
-/* Top Control Bar */
-.pl-top-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  padding-bottom: 0.5rem;
-}
-
-.pl-back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background: rgba(14, 46, 51, 0.7);
-  border: 1.5px solid rgba(143, 211, 232, 0.35);
-  color: #8FD3E8;
-  padding: 0.5rem 0.95rem;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.pl-back-btn:hover {
-  background: rgba(23, 247, 247, 0.18);
-  border-color: #17f7f7;
-  color: #17f7f7;
-  transform: translateX(-2px);
-}
-
-.pl-dispatch-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(14, 46, 51, 0.75);
-  border: 1px solid rgba(143, 211, 232, 0.25);
-  padding: 0.45rem 0.85rem;
-  border-radius: 20px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.pl-pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 10px #10b981;
-  animation: plDotBlink 1.6s infinite;
-}
-
-@keyframes plDotBlink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(1.3); }
-}
-
-.pl-dispatch-status {
-  font-size: 0.8rem;
-  color: #8FD3E8;
-}
-
-.pl-dispatch-status strong {
-  color: #10b981;
-}
-
-.pl-top-reg-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(23, 247, 247, 0.15);
-  border: 1.5px solid #17f7f7;
-  color: #17f7f7;
-  padding: 0.5rem 0.95rem;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.pl-top-reg-btn:hover {
-  background: #17f7f7;
-  color: #0E2E33;
-}
-
-.pl-arr {
-  font-size: 1rem;
-}
-
 /* ==========================================================================
-   DIRECT FORM WRAPPER — ABSOLUTELY NO CARD BOX
+   DIRECT FORM WRAPPER WITH GLOWING ANIMATION BEHIND IT
    ========================================================================== */
 
 .pl-form-wrapper {
+  position: relative;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  padding: 0;
+  padding: 2.25rem 2rem;
   width: 100%;
   box-sizing: border-box;
+}
+
+/* ── ANIMATED LIGHT AURA BEHIND THE FORM ── */
+.pl-form-glow-animation {
+  position: absolute;
+  inset: -12px -15px;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+/* Animated radial glow orbs pulsing with light */
+.pl-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.pl-glow-orb-1 {
+  top: 5%;
+  left: 10%;
+  width: 80%;
+  height: 65%;
+  background: radial-gradient(
+    circle,
+    rgba(23, 247, 247, 0.38) 0%,
+    rgba(143, 211, 232, 0.22) 45%,
+    transparent 72%
+  );
+  filter: blur(48px);
+  animation: plFormAuraBreath 4.5s ease-in-out infinite alternate;
+}
+
+.pl-glow-orb-2 {
+  bottom: 8%;
+  right: 8%;
+  width: 75%;
+  height: 60%;
+  background: radial-gradient(
+    circle,
+    rgba(143, 211, 232, 0.32) 0%,
+    rgba(23, 247, 247, 0.18) 48%,
+    transparent 75%
+  );
+  filter: blur(52px);
+  animation: plFormAuraShift 6.5s ease-in-out infinite alternate;
+}
+
+/* Glowing breathing translucent neon glass frame */
+.pl-glow-ring {
+  position: absolute;
+  inset: 8px;
+  border-radius: 28px;
+  border: 1.5px solid rgba(23, 247, 247, 0.38);
+  background: rgba(14, 46, 51, 0.35);
+  box-shadow: 0 0 30px rgba(23, 247, 247, 0.28), inset 0 0 25px rgba(23, 247, 247, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: plRingBreath 3.5s ease-in-out infinite alternate;
+}
+
+/* Subtle moving light sweep shimmer */
+.pl-glow-shimmer {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(23, 247, 247, 0.18) 50%,
+    transparent 100%
+  );
+  transform: skewX(-22deg);
+  animation: plShimmerSweep 6s ease-in-out infinite;
+}
+
+@keyframes plFormAuraBreath {
+  0% {
+    transform: scale(0.92) translateY(0);
+    opacity: 0.45;
+    filter: blur(42px);
+  }
+  50% {
+    transform: scale(1.12) translateY(-12px);
+    opacity: 0.85;
+    filter: blur(58px);
+  }
+  100% {
+    transform: scale(0.92) translateY(0);
+    opacity: 0.45;
+    filter: blur(42px);
+  }
+}
+
+@keyframes plFormAuraShift {
+  0% {
+    transform: scale(0.95) translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.16) translateY(14px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.95) translateY(0);
+    opacity: 0.4;
+  }
+}
+
+@keyframes plRingBreath {
+  0% {
+    border-color: rgba(23, 247, 247, 0.28);
+    box-shadow: 0 0 22px rgba(23, 247, 247, 0.2), inset 0 0 16px rgba(23, 247, 247, 0.08);
+  }
+  100% {
+    border-color: rgba(23, 247, 247, 0.65);
+    box-shadow: 0 0 45px rgba(23, 247, 247, 0.45), inset 0 0 32px rgba(23, 247, 247, 0.22);
+  }
+}
+
+@keyframes plShimmerSweep {
+  0% { left: -140%; }
+  35%, 100% { left: 220%; }
+}
+
+/* Foreground Form Content */
+.pl-form-content {
+  position: relative;
+  z-index: 1;
 }
 
 /* Brand Header */
@@ -176,16 +216,17 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  background: rgba(23, 247, 247, 0.12);
-  border: 1px solid rgba(23, 247, 247, 0.35);
+  background: rgba(23, 247, 247, 0.14);
+  border: 1px solid rgba(23, 247, 247, 0.4);
   color: #17f7f7;
-  padding: 0.35rem 0.85rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 20px;
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
+  box-shadow: 0 0 14px rgba(23, 247, 247, 0.2);
 }
 
 .pl-bb-icon {
@@ -193,18 +234,18 @@
 }
 
 .pl-brand-title {
-  font-size: clamp(2.2rem, 4vw, 2.85rem);
+  font-size: clamp(2.3rem, 4.5vw, 3rem);
   font-weight: 900;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.8px;
   color: #8FD3E8 !important;
   margin: 0 0 0.35rem 0;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9), 0 0 26px rgba(143, 211, 232, 0.75) !important;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.95), 0 0 30px rgba(143, 211, 232, 0.85) !important;
 }
 
 .pl-brand-tagline {
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-size: clamp(0.96rem, 1.6vw, 1.12rem);
   color: #EEF4F4;
-  margin: 0 0 0.4rem 0;
+  margin: 0 0 0.35rem 0;
   font-weight: 700;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 }
@@ -223,13 +264,14 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: rgba(14, 46, 51, 0.72);
-  border: 1px solid rgba(143, 211, 232, 0.28);
+  background: rgba(14, 46, 51, 0.65);
+  border: 1px solid rgba(143, 211, 232, 0.32);
   border-radius: 16px;
   padding: 0.85rem 1rem;
   margin-bottom: 1.5rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
 }
 
 .pl-qmetric {
@@ -256,7 +298,7 @@
 .pl-qm-divider {
   width: 1px;
   height: 28px;
-  background: rgba(143, 211, 232, 0.25);
+  background: rgba(143, 211, 232, 0.3);
 }
 
 /* Error Banner */
@@ -264,7 +306,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.28);
   border: 1.5px solid #ef4444;
   color: #fca5a5;
   padding: 0.85rem 1.15rem;
@@ -285,10 +327,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
-  background: rgba(14, 46, 51, 0.75);
+  background: rgba(14, 46, 51, 0.7);
   padding: 0.35rem;
   border-radius: 14px;
-  border: 1px solid rgba(143, 211, 232, 0.28);
+  border: 1px solid rgba(143, 211, 232, 0.3);
   margin-bottom: 1.5rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -320,7 +362,7 @@
   border-color: #17f7f7;
   color: #17f7f7;
   font-weight: 700;
-  box-shadow: 0 0 16px rgba(23, 247, 247, 0.3);
+  box-shadow: 0 0 18px rgba(23, 247, 247, 0.35);
 }
 
 .pl-tab-pill {
@@ -358,7 +400,7 @@
   font-size: 0.88rem;
   font-weight: 700;
   color: #EEF4F4;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .pl-field-urdu {
@@ -397,8 +439,8 @@
 
 .pl-text-input {
   width: 100%;
-  background: rgba(14, 46, 51, 0.85);
-  border: 1.5px solid rgba(143, 211, 232, 0.32);
+  background: rgba(14, 46, 51, 0.82);
+  border: 1.5px solid rgba(143, 211, 232, 0.35);
   color: #EEF4F4;
   padding: 0.9rem 1rem;
   border-radius: 12px;
@@ -420,13 +462,13 @@
 }
 
 .pl-text-input::placeholder {
-  color: rgba(143, 211, 232, 0.5);
+  color: rgba(143, 211, 232, 0.52);
 }
 
 .pl-text-input:focus {
   border-color: #17f7f7;
   background: rgba(14, 46, 51, 0.96);
-  box-shadow: 0 0 0 3px rgba(23, 247, 247, 0.25), 0 0 16px rgba(23, 247, 247, 0.2);
+  box-shadow: 0 0 0 3px rgba(23, 247, 247, 0.25), 0 0 18px rgba(23, 247, 247, 0.25);
 }
 
 .pl-eye-toggle {
@@ -449,9 +491,9 @@
 
 .pl-hint {
   font-size: 0.78rem;
-  color: rgba(238, 244, 244, 0.7);
+  color: rgba(238, 244, 244, 0.72);
   line-height: 1.4;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
 }
 
 /* OTP Controls */
@@ -468,7 +510,7 @@
 }
 
 .pl-otp-action-btn {
-  background: linear-gradient(135deg, rgba(23, 247, 247, 0.22) 0%, rgba(143, 211, 232, 0.18) 100%);
+  background: linear-gradient(135deg, rgba(23, 247, 247, 0.24) 0%, rgba(143, 211, 232, 0.18) 100%);
   border: 1.5px solid #17f7f7;
   color: #17f7f7;
   font-weight: 700;
@@ -551,12 +593,12 @@
   justify-content: center;
   gap: 0.6rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 22px rgba(23, 247, 247, 0.4);
+  box-shadow: 0 4px 22px rgba(23, 247, 247, 0.45);
 }
 
 .pl-action-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 28px rgba(23, 247, 247, 0.6);
+  box-shadow: 0 6px 30px rgba(23, 247, 247, 0.65);
   background: #17f7f7;
 }
 
@@ -590,12 +632,12 @@
 
 .pl-reg-question {
   font-size: 0.88rem;
-  color: rgba(238, 244, 244, 0.82);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  color: rgba(238, 244, 244, 0.85);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
 }
 
 .pl-reg-cta-btn {
-  background: rgba(14, 46, 51, 0.75);
+  background: rgba(14, 46, 51, 0.72);
   border: 1.5px solid #17f7f7;
   color: #17f7f7;
   font-weight: 700;
@@ -633,7 +675,7 @@
   font-size: 0.76rem;
   color: #8FD3E8;
   font-weight: 600;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
 }
 
 /* ==========================================================================
@@ -642,18 +684,11 @@
 
 @media (max-width: 640px) {
   .provider-login-page {
-    padding: 75px 1rem 2rem 1rem;
+    padding: 60px 1rem 2rem 1rem;
   }
 
-  .pl-top-nav {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .pl-back-btn,
-  .pl-top-reg-btn,
-  .pl-dispatch-pill {
-    justify-content: center;
+  .pl-form-wrapper {
+    padding: 1.5rem 1rem;
   }
 
   .pl-quick-metrics {
@@ -690,11 +725,11 @@
 
 [data-theme="warm-stone"] .pl-bg-overlay,
 .theme-warm-stone .pl-bg-overlay {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 240, 0.65) 0%,
-    rgba(255, 255, 240, 0.88) 60%,
-    rgba(255, 255, 240, 0.96) 100%
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 240, 0.35) 0%,
+    rgba(255, 255, 240, 0.6) 65%,
+    rgba(255, 255, 240, 0.82) 100%
   ) !important;
 }
 
@@ -703,6 +738,44 @@
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+/* In Light Mode: Glowing white/ivory animated light halo behind the form */
+[data-theme="warm-stone"] .pl-glow-orb-1,
+.theme-warm-stone .pl-glow-orb-1 {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 240, 0.95) 0%,
+    rgba(255, 255, 240, 0.65) 45%,
+    transparent 75%
+  ) !important;
+}
+
+[data-theme="warm-stone"] .pl-glow-orb-2,
+.theme-warm-stone .pl-glow-orb-2 {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 240, 0.85) 0%,
+    rgba(255, 255, 240, 0.5) 50%,
+    transparent 75%
+  ) !important;
+}
+
+[data-theme="warm-stone"] .pl-glow-ring,
+.theme-warm-stone .pl-glow-ring {
+  background: rgba(255, 255, 240, 0.45) !important;
+  border-color: rgba(10, 10, 10, 0.32) !important;
+  box-shadow: 0 0 35px rgba(255, 255, 240, 0.95), 0 0 15px rgba(10, 10, 10, 0.12) !important;
+}
+
+[data-theme="warm-stone"] .pl-glow-shimmer,
+.theme-warm-stone .pl-glow-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 240, 0.7) 50%,
+    transparent 100%
+  ) !important;
 }
 
 [data-theme="warm-stone"] .pl-brand-title,
@@ -733,51 +806,18 @@
 .theme-warm-stone .pl-reg-question,
 [data-theme="warm-stone"] .pl-tf-item,
 .theme-warm-stone .pl-tf-item {
-  color: rgba(10, 10, 10, 0.78) !important;
+  color: rgba(10, 10, 10, 0.8) !important;
   text-shadow: none !important;
 }
 
 [data-theme="warm-stone"] .pl-brand-badge,
 .theme-warm-stone .pl-brand-badge,
-[data-theme="warm-stone"] .pl-dispatch-pill,
-.theme-warm-stone .pl-dispatch-pill,
 [data-theme="warm-stone"] .pl-quick-metrics,
 .theme-warm-stone .pl-quick-metrics,
 [data-theme="warm-stone"] .pl-method-tabs,
 .theme-warm-stone .pl-method-tabs {
   background: rgba(255, 255, 240, 0.85) !important;
   border-color: rgba(10, 10, 10, 0.25) !important;
-}
-
-[data-theme="warm-stone"] .pl-dispatch-status,
-.theme-warm-stone .pl-dispatch-status {
-  color: #0A0A0A !important;
-}
-
-[data-theme="warm-stone"] .pl-back-btn,
-.theme-warm-stone .pl-back-btn {
-  background: rgba(255, 255, 240, 0.8) !important;
-  border-color: rgba(10, 10, 10, 0.3) !important;
-  color: #0A0A0A !important;
-}
-
-[data-theme="warm-stone"] .pl-back-btn:hover,
-.theme-warm-stone .pl-back-btn:hover {
-  background: #0A0A0A !important;
-  color: #FFFFF0 !important;
-}
-
-[data-theme="warm-stone"] .pl-top-reg-btn,
-.theme-warm-stone .pl-top-reg-btn {
-  background: transparent !important;
-  border-color: #0A0A0A !important;
-  color: #0A0A0A !important;
-}
-
-[data-theme="warm-stone"] .pl-top-reg-btn:hover,
-.theme-warm-stone .pl-top-reg-btn:hover {
-  background: #0A0A0A !important;
-  color: #FFFFF0 !important;
 }
 
 [data-theme="warm-stone"] .pl-method-tab,

@@ -111,39 +111,27 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
 
       {/* Direct Form on Background — Single Unified View (NO CARDS) */}
       <div className="pl-direct-container">
-        {/* Top Control Bar */}
-        <div className="pl-top-nav">
-          <button type="button" className="pl-back-btn" onClick={handleBackHome}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-            <span>Back to Home</span>
-          </button>
-
-          <div className="pl-dispatch-pill">
-            <span className="pl-pulse-dot"></span>
-            <span className="pl-dispatch-status">Multan Dispatch: <strong>88 Pros Online</strong> • 18 Live Leads</span>
-          </div>
-
-          <button type="button" className="pl-top-reg-btn" onClick={handleSignup}>
-            <span>Join as Pro</span>
-            <span className="pl-arr">→</span>
-          </button>
-        </div>
-
-        {/* Central Direct Login Form (Pure Form over Background Image) */}
+        {/* Central Direct Login Form with Glowing Animated Backdrop */}
         <div className="pl-form-wrapper">
-          {/* Brand Header — Strictly MUX SERVICES */}
-          <div className="pl-brand-header">
-            <div className="pl-brand-badge">
-              <span className="pl-bb-icon">⚡</span>
-              <span>MUX SERVICES • ملتان پارٹنر پورٹل</span>
-            </div>
-            <h1 className="pl-brand-title">MUX SERVICES</h1>
-            <p className="pl-brand-tagline">Multan's Premier Technician &amp; Partner Portal</p>
-            <p className="pl-brand-urdu">اپنے روزگار، تصدیق شدہ لیڈز اور والٹ میں لاگ ان کریں</p>
+          {/* Animated Light Aura behind the form */}
+          <div className="pl-form-glow-animation" aria-hidden="true">
+            <div className="pl-glow-orb pl-glow-orb-1"></div>
+            <div className="pl-glow-orb pl-glow-orb-2"></div>
+            <div className="pl-glow-ring"></div>
+            <div className="pl-glow-shimmer"></div>
           </div>
+
+          <div className="pl-form-content">
+            {/* Brand Header — Strictly MUX SERVICES */}
+            <div className="pl-brand-header">
+              <div className="pl-brand-badge">
+                <span className="pl-bb-icon">⚡</span>
+                <span>MUX SERVICES • ملتان پارٹنر پورٹل</span>
+              </div>
+              <h1 className="pl-brand-title">MUX SERVICES</h1>
+              <p className="pl-brand-tagline">Multan's Premier Technician &amp; Partner Portal</p>
+              <p className="pl-brand-urdu">اپنے روزگار، تصدیق شدہ لیڈز اور والٹ میں لاگ ان کریں</p>
+            </div>
 
           {/* Quick Metrics Bar — Floating Transparent Strip */}
           <div className="pl-quick-metrics">
@@ -398,6 +386,7 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
             <div className="pl-tf-item">✓ JazzCash Business</div>
             <div className="pl-tf-item">✓ NADRA Biometric Verified</div>
             <div className="pl-tf-item">✓ Escrow Protection</div>
+          </div>
           </div>
         </div>
       </div>
