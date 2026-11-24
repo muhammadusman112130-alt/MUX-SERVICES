@@ -230,7 +230,7 @@ function ProviderVerification({ setCurrentPage }) {
                 <label htmlFor="profession">
                   Select Profession <span className="form-req-star">*</span>
                 </label>
-                <div className="input-wrapper">
+                <div className="input-wrapper select-input-wrapper">
                   <select
                     id="profession"
                     name="profession"
@@ -250,6 +250,11 @@ function ProviderVerification({ setCurrentPage }) {
                     <option value="Welding & Fabrication">Welding &amp; Fabrication</option>
                     <option value="Gardening & Lawn">Gardening &amp; Lawn</option>
                   </select>
+                  <span className="select-arrow-chevron" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </span>
                 </div>
               </div>
 
@@ -259,7 +264,7 @@ function ProviderVerification({ setCurrentPage }) {
                   <label htmlFor="zone">
                     Multan Locality <span className="form-req-star">*</span>
                   </label>
-                  <div className="input-wrapper">
+                  <div className="input-wrapper select-input-wrapper">
                     <select
                       id="zone"
                       name="zone"
@@ -274,12 +279,17 @@ function ProviderVerification({ setCurrentPage }) {
                       <option value="MDA Chowk & Lodhi Colony">MDA Chowk</option>
                       <option value="Model Town & Shershah Road">Model Town</option>
                     </select>
+                    <span className="select-arrow-chevron" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </span>
                   </div>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="experience">Experience (Optional)</label>
-                  <div className="input-wrapper">
+                  <div className="input-wrapper select-input-wrapper">
                     <select
                       id="experience"
                       name="experience"
@@ -292,6 +302,11 @@ function ProviderVerification({ setCurrentPage }) {
                       <option value="4-7 Years">4 - 7 Years</option>
                       <option value="8+ Years Master">8+ Years Master</option>
                     </select>
+                    <span className="select-arrow-chevron" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -301,7 +316,7 @@ function ProviderVerification({ setCurrentPage }) {
                 <label htmlFor="pathway">
                   Skill Qualification <span className="form-req-star">*</span>
                 </label>
-                <div className="input-wrapper">
+                <div className="input-wrapper select-input-wrapper">
                   <select
                     id="pathway"
                     name="pathway"
@@ -313,6 +328,11 @@ function ProviderVerification({ setCurrentPage }) {
                     <option value="ustad">Master Ustad Apprenticeship</option>
                     <option value="diploma">Technical Diploma</option>
                   </select>
+                  <span className="select-arrow-chevron" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </span>
                 </div>
               </div>
 

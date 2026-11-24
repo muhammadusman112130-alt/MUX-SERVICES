@@ -272,8 +272,15 @@ function App() {
   }
 
   const handleProviderLogin = () => {
-    setIsProviderLoggedIn(true)
+    // Automatically log out any active customer dashboard session
+    try {
+      authAPI.logout()
+    } catch (e) {
+      console.warn('Customer logout cleanup:', e)
+    }
+    setCurrentUser(null)
     setIsLoggedIn(false)
+    setIsProviderLoggedIn(true)
     setAuthPage(null)
     handlePageChange('provider-dashboard', '', true)
   }

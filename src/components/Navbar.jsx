@@ -133,24 +133,28 @@ function Navbar({
               <span className="nav-btn-text">Professionals</span>
             </a>
           </li>
-          <li>
-            <a 
-              href="/messages" 
-              className={currentPage === 'messages' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}
-            >
-              <span className="nav-btn-text">Messages</span>
-            </a>
-          </li>
-          <li>
-            <a 
-              href="/booked" 
-              className={(currentPage === 'booked' || currentPage === 'bookings') ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); setCurrentPage('booked'); }}
-            >
-              <span className="nav-btn-text">Booked</span>
-            </a>
-          </li>
+          {isLoggedIn && (
+            <>
+              <li>
+                <a 
+                  href="/messages" 
+                  className={currentPage === 'messages' ? 'active' : ''}
+                  onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}
+                >
+                  <span className="nav-btn-text">Messages</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/booked" 
+                  className={(currentPage === 'booked' || currentPage === 'bookings') ? 'active' : ''}
+                  onClick={(e) => { e.preventDefault(); setCurrentPage('booked'); }}
+                >
+                  <span className="nav-btn-text">Booked</span>
+                </a>
+              </li>
+            </>
+          )}
           <li>
             <a 
               href="/about" 

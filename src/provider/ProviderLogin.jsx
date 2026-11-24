@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { providerAPI } from '../services/api'
+import { providerAPI, authAPI } from '../services/api'
 import loginScr from '../Public/login scr.webp'
 import './ProviderLogin.css'
 
@@ -74,6 +74,13 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
         cnic,
         password
       })
+
+      // Automatically log out active customer dashboard session
+      try {
+        authAPI.logout()
+      } catch (e) {
+        console.warn('Customer session logout:', e)
+      }
 
       if (typeof onProviderLogin === 'function') {
         onProviderLogin()

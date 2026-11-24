@@ -189,15 +189,34 @@
 }
 
 /* Select Dropdown Styling directly over background */
-.form-select {
+.select-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.provider-verification-page .input-wrapper .form-select {
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238FD3E8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1.1em;
-  padding-right: 2.5rem !important;
+  padding-right: 2.85rem !important;
   cursor: pointer;
+}
+
+.select-arrow-chevron {
+  position: absolute;
+  right: 1.15rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8FD3E8;
+  z-index: 2;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.select-arrow-chevron svg {
+  display: block;
 }
 
 .form-select option {
@@ -540,7 +559,12 @@
 
 [data-theme="warm-stone"] .form-select,
 .theme-warm-stone .form-select {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-image: none !important;
+}
+
+[data-theme="warm-stone"] .select-arrow-chevron,
+.theme-warm-stone .select-arrow-chevron {
+  color: #0A0A0A !important;
 }
 
 [data-theme="warm-stone"] .form-select option,
