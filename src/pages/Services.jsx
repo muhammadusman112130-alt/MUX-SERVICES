@@ -2305,8 +2305,8 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
         {/* ── PROVIDER CUSTOMER REQUESTS & DISPATCH CONSOLE (STRICT JET BLACK & IVORY) ── */}
         <div className="provider-services-requests-hub">
           <div className="requests-hub-container">
-            {/* Header Radar Bar */}
-            <div className="requests-hub-header-bar">
+            {/* Header Radar Section: Clean Text, No Card Container */}
+            <div className="requests-hub-header-bar requests-hub-header-plain">
               <div className="rh-left">
                 <div className="rh-badge-row">
                   <span className="rh-pulse-dot" aria-hidden="true"></span>
@@ -2320,42 +2320,20 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
               </div>
 
               <div className="rh-right-controls">
-                {/* Trade Selector Switcher */}
-                <div className="rh-trade-selector-box">
-                  <span className="rh-trade-tag-label">REGISTERED TRADE</span>
-                  <select 
-                    className="rh-trade-select-dropdown"
-                    value={activeProviderTrade}
-                    onChange={(e) => {
-                      const nextTrade = e.target.value
-                      setActiveProviderTrade(nextTrade)
-                      try { localStorage.setItem('mux_provider_trade', nextTrade) } catch {}
-                      setProviderCategoryFilter('all')
-                    }}
-                    title="Change Active Trade"
-                  >
-                    <option value="Electrical & Solar">Electrical &amp; Solar</option>
-                    <option value="AC & HVAC Cooling">AC &amp; HVAC Cooling</option>
-                    <option value="Plumbing & Sanitary">Plumbing &amp; Sanitary</option>
-                    <option value="Carpentry & Woodwork">Carpentry &amp; Woodwork</option>
-                    <option value="Appliance Repair">Appliance Repair</option>
-                    <option value="Painting & Polishing">Painting &amp; Polishing</option>
-                    <option value="Deep Home Cleaning">Deep Home Cleaning</option>
-                    <option value="Welding & Fabrication">Welding &amp; Fabrication</option>
-                    <option value="Gardening & Lawn">Gardening &amp; Lawn</option>
-                    <option value="Glass & Aluminum">Glass &amp; Aluminum</option>
-                    <option value="Laundry & Ironing">Laundry &amp; Ironing</option>
-                  </select>
+                {/* Registered Trade Display: Static Saved Value, No Dropdown, No Card */}
+                <div className="rh-plain-stat-item">
+                  <span className="rh-stat-lbl">REGISTERED TRADE</span>
+                  <span className="rh-stat-val rh-trade-name-val">{activeProviderTrade}</span>
                 </div>
 
                 <div className="rh-metrics-summary">
-                  <div className="rh-metric-card">
-                    <span className="metric-val">{tradeAllRequests.filter(r => r.status === 'pending').length}</span>
-                    <span className="metric-lbl">Active Inquiries</span>
+                  <div className="rh-plain-stat-item">
+                    <span className="rh-stat-val">{tradeAllRequests.filter(r => r.status === 'pending').length}</span>
+                    <span className="rh-stat-lbl">Active Inquiries</span>
                   </div>
-                  <div className="rh-metric-card">
-                    <span className="metric-val">100%</span>
-                    <span className="metric-lbl">Direct Payout</span>
+                  <div className="rh-plain-stat-item">
+                    <span className="rh-stat-val">100%</span>
+                    <span className="rh-stat-lbl">Direct Payout</span>
                   </div>
                 </div>
               </div>
