@@ -8,8 +8,8 @@ const HERO_SLIDES = [
     tag: '⚡ Precision Diagnostic Station',
     title: 'Multan High-Precision Electrical & Solar Grid Operations',
     description: 'Real-time telemetry, digital multimeter diagnostics, and smart distribution panel calibrations across Bosan Road, Gulgasht, and Cantt.',
-    highlight: '100% Escrow Protected via SBP Raast',
-    badgeClass: 'badge-cyan'
+    highlight: 'Direct SBP Raast Clearance',
+    badgeClass: 'badge-ivory'
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const HERO_SLIDES = [
     title: 'Advanced Commercial Cooling & Refrigerant Diagnostics',
     description: 'Precision digital manifold pressure telemetry, high-vacuum evacuation, and inverter compressor troubleshooting across Multan.',
     highlight: 'Direct Customer OTP Sign-Off',
-    badgeClass: 'badge-mint'
+    badgeClass: 'badge-ivory'
   },
   {
     id: 3,
@@ -27,19 +27,19 @@ const HERO_SLIDES = [
     title: 'Architectural Joinery, Laser Fitment & Hardware Engineering',
     description: 'Sub-millimeter laser guide leveling, heavy-duty cordless installation, and structural woodworking across Multan commercial zones.',
     highlight: 'Police Verified Master Pro Status',
-    badgeClass: 'badge-gold'
+    badgeClass: 'badge-ivory'
   }
 ]
 
 // Strip 1: Core Platform Guarantees & Features for Providers (Left-to-Right)
 const STRIP_1_ITEMS = [
-  { icon: '🛡️', title: '100% SBP Raast Escrow Protection', desc: 'Client funds locked before work begins.' },
-  { icon: '⚡', title: 'Zero Payment Delay', desc: 'Instant OTP release directly to your account.' },
+  { icon: '⚡', title: 'Direct Instant SBP Raast Payouts', desc: 'Instant transfer upon client sign-off.' },
+  { icon: '✓', title: 'Zero Payment Delay', desc: 'Direct verification directly to your account.' },
   { icon: '📍', title: 'Hyperlocal Multan Dispatch', desc: 'Matches within Cantt, Bosan Road & Gulgasht.' },
   { icon: '🔍', title: 'Police & NADRA Verified', desc: 'Certified Ustad status boosts client trust.' },
   { icon: '💰', title: 'Custom Price Offer System', desc: 'Negotiate fair technical rates directly.' },
   { icon: '📱', title: 'Direct In-App Customer Chat', desc: 'Fast communication with clear scope of work.' },
-  { icon: '🏆', title: 'Level-1 Verified Pro Badging', desc: 'Stand out as Multan’s top certified technician.' },
+  { icon: '🏆', title: 'Level-1 Verified Pro Badging', desc: "Stand out as Multan's top certified technician." },
   { icon: '📞', title: '24/7 Dispatch Control Room', desc: 'Direct technical & safety assistance helpline.' }
 ]
 
@@ -57,10 +57,10 @@ const STRIP_2_ITEMS = [
 
 const MUX_PILLARS = [
   {
-    icon: '🛡️',
-    tag: 'FINANCIAL SECURITY',
-    title: 'Guaranteed Escrow Protection',
-    description: 'Every customer booking on MUX SERVICES is pre-funded into an SBP Raast escrow lock. No more chasing clients for pending dues or handling bad debts — funds clear instantly upon completion with a verified 4-digit client OTP.'
+    icon: '⚡',
+    tag: 'FINANCIAL INTEGRITY',
+    title: 'Guaranteed Direct Payment',
+    description: 'Every job on MUX SERVICES ensures transparent, guaranteed compensation. No middleman deductions, no delayed wages — payments clear directly to your bank account or instant cash upon verified completion.'
   },
   {
     icon: '📍',
@@ -92,8 +92,8 @@ const HOW_IT_WORKS_STEPS = [
   {
     step: '02',
     badge: 'AGREEMENT',
-    title: 'Lock Escrow or Send Proposal',
-    desc: 'Accept the customer request with 1-click or send a tailored custom quote. The customer accepts and pre-funds the job in SBP Raast escrow.'
+    title: 'Confirm Schedule & Send Proposal',
+    desc: 'Accept the customer request with 1-click or send a tailored custom quote. The customer confirms timing and job location.'
   },
   {
     step: '03',
@@ -103,9 +103,9 @@ const HOW_IT_WORKS_STEPS = [
   },
   {
     step: '04',
-    badge: 'INSTANT PAYOUT',
-    title: 'Client OTP Sign-Off',
-    desc: 'Ask the client for their 4-digit completion code. Enter it to instantly release 100% of the funds to your withdrawable Raast balance.'
+    badge: 'INSTANT TRANSFER',
+    title: 'Direct Client Verification & Sign-Off',
+    desc: 'Customer verifies the completed work with their 4-digit completion code. 100% payment is transferred directly via Raast or cash on site.'
   }
 ]
 
@@ -194,7 +194,7 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
                   onChange={() => {
                     const next = !isOnline
                     setIsOnline(next)
-                    showToast(next ? '🟢 Dispatch radar active: Receiving Multan leads' : '⚪ Dispatch paused: Offline mode')
+                    showToast(next ? 'Dispatch radar active: Receiving Multan leads' : 'Dispatch paused: Offline mode')
                   }} 
                 />
                 <span className="radar-slider"></span>
@@ -223,7 +223,7 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
       </header>
 
       {/* ========================================================= */}
-      {/* FULL-WIDTH HERO SLIDER CAROUSEL (NOT BOXED IN A CARD)     */}
+      {/* FULL-WIDTH HERO SLIDER CAROUSEL (IMAGES CLEARLY VISIBLE)  */}
       {/* ========================================================= */}
       <section 
         className="provider-hero-carousel-section full-width-banner"
@@ -237,11 +237,12 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
               className={`carousel-slide ${idx === activeSlide ? 'slide-active' : ''}`}
               style={{ backgroundImage: `url(${slide.image})` }}
             >
+              {/* Subtle scrim overlay so background photo remains crisp, bright and clear */}
               <div className="slide-gradient-overlay"></div>
               <div className="slide-content-container">
                 <div className="slide-content-glass">
                   <div className="slide-badge-wrapper">
-                    <span className={`slide-tag-pill ${slide.badgeClass}`}>{slide.tag}</span>
+                    <span className="slide-tag-pill">{slide.tag}</span>
                     <span className="slide-guarantee-pill">
                       <span className="pulse-spark">✦</span> {slide.highlight}
                     </span>
@@ -259,7 +260,7 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
                         }
                       }}
                     >
-                      <span className="radar-echo-icon">◎</span> View Customer Requests in Services
+                      <span>View Customer Requests in Services</span>
                     </button>
                     <button 
                       type="button" 
@@ -278,7 +279,7 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
           ))}
         </div>
 
-        {/* Carousel Navigation Arrows */}
+        {/* Carousel Navigation Arrows in Jet Black & Ivory */}
         <button 
           type="button" 
           className="carousel-control-arrow arrow-prev" 
@@ -296,7 +297,7 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
           &#8250;
         </button>
 
-        {/* Carousel Dots Indicator */}
+        {/* Carousel Dots Indicator in Jet Black & Ivory */}
         <div className="carousel-pagination-dots">
           {HERO_SLIDES.map((slide, idx) => (
             <button
@@ -311,7 +312,7 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
           ))}
         </div>
 
-        {/* Slide Counter HUD */}
+        {/* Slide Counter HUD in Jet Black & Ivory */}
         <div className="carousel-hud-counter">
           <span className="active-idx">0{activeSlide + 1}</span>
           <span className="separator">/</span>
@@ -320,7 +321,7 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
       </section>
 
       {/* ========================================================= */}
-      {/* 2 ANIMATED TICKER STRIPS ("WO PATTI BI CHALA DU 2")       */}
+      {/* 2 ANIMATED TICKER STRIPS (JET BLACK & IVORY PATTI)        */}
       {/* ========================================================= */}
       <section className="mux-dual-ticker-section provider-ticker-theme" aria-label="MUX SERVICES Provider Guarantees and Trades">
         {/* Patti 1: Left-to-Right Animation */}
@@ -377,7 +378,7 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
       </section>
 
       {/* ========================================================= */}
-      {/* ABOUT MUX SERVICES ECOSYSTEM & PROVIDER EMPOWERMENT       */}
+      {/* ABOUT MUX SERVICES ECOSYSTEM & 4 CONNECTED WORKFLOW CARDS */}
       {/* ========================================================= */}
       <main className="provider-about-mux-main" id="about-mux-provider-section">
         <div className="provider-about-container">
@@ -413,11 +414,11 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
             ))}
           </div>
 
-          {/* How MUX SERVICES Works for Providers */}
+          {/* How MUX SERVICES Works for Providers (4 CONNECTED CARDS) */}
           <div className="how-it-works-section">
             <div className="how-header-row">
               <div>
-                <span className="how-badge">SEAMLESS WORKFLOW</span>
+                <span className="how-badge">CONNECTED WORKFLOW</span>
                 <h3 className="how-title">How MUX SERVICES Works For Professionals</h3>
                 <p className="how-sub">Transparent, fast, and 100% dispute-free doorstep servicing process.</p>
               </div>
@@ -434,42 +435,27 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
               </button>
             </div>
 
-            <div className="how-steps-grid">
-              {HOW_IT_WORKS_STEPS.map((step, idx) => (
-                <div key={idx} className="how-step-card">
-                  <div className="step-number-pill">{step.step}</div>
-                  <span className="step-badge">{step.badge}</span>
-                  <h4 className="step-title">{step.title}</h4>
-                  <p className="step-desc">{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom Call to Action for Customer Requests */}
-          <div className="provider-services-cta-banner">
-            <div className="cta-left">
-              <span className="cta-sparkle">⚡</span>
-              <div>
-                <h3 className="cta-title">Ready to Review Incoming Customer Requests?</h3>
-                <p className="cta-sub">
-                  Customer service requests, emergency SOS calls, and quote bids are live in the <strong>Services</strong> tab.
-                </p>
+            {/* Connected Journey Pipeline Linking All 4 Cards */}
+            <div className="how-connected-flow-wrapper">
+              <div className="how-pipeline-line" aria-hidden="true"></div>
+              <div className="how-steps-connected-grid">
+                {HOW_IT_WORKS_STEPS.map((step, idx) => (
+                  <div key={idx} className="how-step-connected-card">
+                    <div className="step-joint-node">
+                      <span className="node-core"></span>
+                    </div>
+                    <div className="step-card-header-row">
+                      <div className="step-number-pill">{step.step}</div>
+                      {idx < HOW_IT_WORKS_STEPS.length - 1 && (
+                        <span className="step-flow-arrow" aria-hidden="true">→</span>
+                      )}
+                    </div>
+                    <span className="step-badge">{step.badge}</span>
+                    <h4 className="step-title">{step.title}</h4>
+                    <p className="step-desc">{step.desc}</p>
+                  </div>
+                ))}
               </div>
-            </div>
-            <div className="cta-actions">
-              <button 
-                type="button" 
-                className="cta-primary-btn"
-                onClick={() => {
-                  if (typeof setCurrentPage === 'function') {
-                    setCurrentPage('services')
-                  }
-                }}
-              >
-                Open Services Tab & View Requests →
-              </button>
-              <span className="cta-helpline">Emergency Control Room: 0800-MUX-PRO</span>
             </div>
           </div>
         </div>
