@@ -317,10 +317,16 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
             {loading ? 'Authenticating Pro Account...' : 'Sign In to Provider Portal'}
           </button>
 
-          <div className="auth-switch">
-            <span>New technician or workshop owner?</span>
-            <button type="button" className="switch-link" onClick={handleSignup}>
-              Register as Verified Pro
+          <div className="provider-reg-highlight-wrap">
+            <span className="prh-question">New technician or workshop owner?</span>
+            <button
+              type="button"
+              className="provider-reg-lighting-btn"
+              onClick={handleSignup}
+            >
+              <span className="prh-glow-aura" aria-hidden="true"></span>
+              <span className="prh-btn-text">Register as Verified Pro</span>
+              <span className="prh-arrow">→</span>
             </button>
           </div>
         </form>
