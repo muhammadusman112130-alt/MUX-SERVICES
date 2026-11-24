@@ -129,16 +129,50 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
   // ══════════════════════════════════════════════════════════════════
   // PROVIDER MODE: CUSTOMER SERVICE REQUESTS & DISPATCH STATE
   // ══════════════════════════════════════════════════════════════════
+  const [activeProviderTrade, setActiveProviderTrade] = useState(() => {
+    try {
+      const explicit = localStorage.getItem('mux_provider_trade') || localStorage.getItem('provider_trade')
+      if (explicit) return explicit
+
+      const storedUser = localStorage.getItem('mux_provider_user')
+      if (storedUser) {
+        const u = JSON.parse(storedUser)
+        if (u.trade) return u.trade
+        if (u.profession) return u.profession
+        if (Array.isArray(u.services) && u.services.length > 0) return u.services[0]
+      }
+    } catch {}
+    return 'Electrical & Solar'
+  })
+
+  const normalizeTradeToCategory = (trade) => {
+    if (!trade) return 'Electrician'
+    const t = trade.toLowerCase()
+    if (t.includes('electr') || t.includes('solar') || t.includes('bijli')) return 'Electrician'
+    if (t.includes('ac') || t.includes('hvac') || t.includes('cool')) return 'AC & HVAC'
+    if (t.includes('plumb') || t.includes('sanit') || t.includes('pipe')) return 'Plumber'
+    if (t.includes('carpent') || t.includes('wood') || t.includes('furniture')) return 'Carpenter'
+    if (t.includes('appliance') || t.includes('fridge') || t.includes('machine')) return 'Appliance Repair'
+    if (t.includes('paint') || t.includes('polish') || t.includes('waterproof')) return 'Painter'
+    if (t.includes('clean') || t.includes('wash') || t.includes('safai')) return 'Home Cleaning'
+    if (t.includes('weld') || t.includes('metal') || t.includes('loha')) return 'Welder'
+    if (t.includes('garden') || t.includes('lawn') || t.includes('mali')) return 'Gardener'
+    if (t.includes('glass') || t.includes('alum')) return 'Glass & Aluminum'
+    if (t.includes('laund') || t.includes('iron') || t.includes('dry')) return 'Laundry & Ironing'
+    return 'Electrician'
+  }
+
   const [providerRequests, setProviderRequests] = useState([
+    // ── Electrician / Electrical & Solar ──
     {
-      id: 'REQ-8021',
+      id: 'REQ-EL-101',
       title: '3-Phase DB Panel Short Circuit & Load Balancing',
       customer: 'Malik Farhan',
       phone: '0301-7654321',
       location: 'Officers Colony, Bosan Road, Multan',
       localityId: 'bosan',
       category: 'Electrician',
-      distance: '1.8 km away',
+      distance: '1.8 km',
       budget: 'PKR 6,500',
       type: 'emergency',
       badge: 'URGENT DISPATCH',
@@ -147,83 +181,375 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       status: 'pending'
     },
     {
-      id: 'REQ-8022',
-      title: 'Commercial Dual AC Deep Chemical Overhaul & Gas Top-Up',
-      customer: 'Dr. Asim Clinic',
-      phone: '0300-8765432',
-      location: 'Main Boulevard, Multan Cantt',
-      localityId: 'cantt',
-      category: 'AC & HVAC',
-      distance: '3.2 km away',
-      budget: 'PKR 9,200',
-      type: 'high-value',
-      badge: 'HIGH VALUE',
-      time: '12 mins ago',
-      details: 'Two 2-Ton inverter split units in patient waiting area blowing lukewarm air. Suction pressure is low, coil chemical wash & R410A gas top-up required.',
-      status: 'pending'
-    },
-    {
-      id: 'REQ-8023',
+      id: 'REQ-EL-102',
       title: '10kW Hybrid Solar Inverter Bus Voltage Calibration',
       customer: 'Engr. Bilal',
       phone: '0302-9876543',
       location: 'Wapda Town Phase 1, Multan',
       localityId: 'wapdatown',
       category: 'Electrician',
-      distance: '4.5 km away',
+      distance: '4.5 km',
       budget: 'PKR 7,500',
       type: 'high-value',
-      badge: 'ESCROW LOCKED',
-      time: '28 mins ago',
+      badge: 'HIGH VALUE',
+      time: '18 mins ago',
       details: 'Inverter trips to grid bypass when battery drops to 48V. Requires digital solar analyzer and firmware load calibration.',
       status: 'pending'
     },
     {
-      id: 'REQ-8024',
-      title: 'Full Bathroom Concealed PPRC Pipe Leak Testing',
-      customer: 'Haji Riaz',
-      phone: '0303-1234567',
-      location: 'Sadar Bazar, Multan Cantt',
-      localityId: 'cantt',
-      category: 'Plumber',
-      distance: '2.6 km away',
-      budget: 'PKR 5,000',
-      type: 'nearby',
-      badge: 'SCHEDULED',
-      time: '35 mins ago',
-      details: 'Seepage appearing on ground floor ceiling. Concealed PPRC pipe pressure testing and joint replacement required.',
-      status: 'pending'
-    },
-    {
-      id: 'REQ-8025',
-      title: 'Solid Wood Door Smart Lock & Concealed Hinges Fitment',
-      customer: 'Tariq Mahmood',
-      phone: '0304-2345678',
-      location: 'Sector B, Gulgasht Colony, Multan',
-      localityId: 'gulgasht',
-      category: 'Carpenter',
-      distance: '2.1 km away',
-      budget: 'PKR 4,800',
-      type: 'nearby',
-      badge: 'VERIFIED CLIENT',
-      time: '42 mins ago',
-      details: 'Installation of electronic smart lock and four concealed hydraulic hinges on entrance mahogany door.',
-      status: 'pending'
-    },
-    {
-      id: 'REQ-8026',
+      id: 'REQ-EL-103',
       title: 'Automatic Water Pump Starter Panel & Float Sensor Wiring',
       customer: 'Mrs. Parveen',
       phone: '0305-3456789',
       location: 'Shah Rukn-e-Alam Colony, Multan',
       localityId: 'mda',
       category: 'Electrician',
-      distance: '5.0 km away',
+      distance: '3.2 km',
       budget: 'PKR 3,800',
       type: 'nearby',
-      badge: 'TODAY EVENING',
-      time: '55 mins ago',
+      badge: 'SCHEDULED',
+      time: '35 mins ago',
       details: 'Underground to overhead tank automation circuit breaker wire disconnected. Motor magnetic contactor inspection.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-EL-104',
+      title: 'Whole House Short-Circuit Diagnosis & Earthing Test',
+      customer: 'Dr. Tariq Mahmood',
+      phone: '0300-4567890',
+      location: 'Sector A, Gulgasht Colony, Multan',
+      localityId: 'gulgasht',
+      category: 'Electrician',
+      distance: '2.1 km',
+      budget: 'PKR 5,500',
+      type: 'emergency',
+      badge: 'URGENT DISPATCH',
+      time: '50 mins ago',
+      details: 'Frequent earth leakage tripping during rains. Digital megger test required for neutral-earth resistance check.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-EL-105',
+      title: 'Commercial Showroom LED Concealed Profile Light Setup',
+      customer: 'Usman Textiles',
+      phone: '0303-6543210',
+      location: 'Main Mall Road, Multan Cantt',
+      localityId: 'cantt',
+      category: 'Electrician',
+      distance: '2.8 km',
+      budget: 'PKR 8,500',
+      type: 'high-value',
+      badge: 'HIGH VALUE',
+      time: '1 hr ago',
+      details: '40 meters of COB warm strip lights with dual 24V power supplies and dimming remote controller synchronization.',
+      status: 'pending'
+    },
+
+    // ── AC & HVAC Cooling ──
+    {
+      id: 'REQ-AC-201',
+      title: 'Commercial Dual 2-Ton Inverter Chemical Jet Overhaul',
+      customer: 'Dr. Asim Clinic',
+      phone: '0300-8765432',
+      location: 'Main Boulevard, Multan Cantt',
+      localityId: 'cantt',
+      category: 'AC & HVAC',
+      distance: '3.2 km',
+      budget: 'PKR 9,200',
+      type: 'high-value',
+      badge: 'HIGH VALUE',
+      time: '12 mins ago',
+      details: 'Two 2-Ton inverter split units blowing lukewarm air. Suction pressure is low, coil chemical wash & R410A gas top-up required.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-AC-202',
+      title: 'Inverter Split AC PCB Card Repair & Error Code E6 Diagnostic',
+      customer: 'Muhammad Rizwan',
+      phone: '0304-1122334',
+      location: 'Gol Bagh, Gulgasht Colony, Multan',
+      localityId: 'gulgasht',
+      category: 'AC & HVAC',
+      distance: '2.0 km',
+      budget: 'PKR 6,800',
+      type: 'emergency',
+      badge: 'URGENT DISPATCH',
+      time: '25 mins ago',
+      details: 'Outdoor unit fan motor not starting. Microcontroller communication error code blinking on display.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-AC-203',
+      title: 'New 1.5-Ton Inverter Complete Bracket Installation & Vacuum',
+      customer: 'Sheikh Farooq',
+      phone: '0302-3344556',
+      location: 'Officers Colony, Bosan Road, Multan',
+      localityId: 'bosan',
+      category: 'AC & HVAC',
+      distance: '1.9 km',
+      budget: 'PKR 5,500',
+      type: 'nearby',
+      badge: 'SCHEDULED',
+      time: '40 mins ago',
+      details: 'Core drilling through 9-inch brick wall, 12ft copper piping installation and digital manifold vacuum before refrigerant release.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-AC-204',
+      title: 'Indoor Unit Water Dripping & Drain Pipe De-clogging',
+      customer: 'Mrs. Tahir',
+      phone: '0306-7788990',
+      location: 'Wapda Town Phase 2, Multan',
+      localityId: 'wapdatown',
+      category: 'AC & HVAC',
+      distance: '4.8 km',
+      budget: 'PKR 3,500',
+      type: 'nearby',
+      badge: 'SCHEDULED',
+      time: '1 hr ago',
+      details: 'Water overflowing from indoor unit back tray into bedroom carpet. High-pressure pump flushing needed.',
+      status: 'pending'
+    },
+
+    // ── Plumber / Plumbing & Sanitary ──
+    {
+      id: 'REQ-PL-301',
+      title: 'Full Bathroom Concealed PPRC Pipe Leak Testing',
+      customer: 'Haji Riaz',
+      phone: '0303-1234567',
+      location: 'Sadar Bazar, Multan Cantt',
+      localityId: 'cantt',
+      category: 'Plumber',
+      distance: '2.6 km',
+      budget: 'PKR 5,000',
+      type: 'emergency',
+      badge: 'URGENT DISPATCH',
+      time: '22 mins ago',
+      details: 'Seepage appearing on ground floor ceiling. Concealed PPRC pipe pressure testing and joint replacement required.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-PL-302',
+      title: 'Underground Water Tank 1HP Jet Pump Seal & Impeller Replacement',
+      customer: 'Sheikh Nadeem',
+      phone: '0301-4455667',
+      location: 'Officers Colony, Bosan Road, Multan',
+      localityId: 'bosan',
+      category: 'Plumber',
+      distance: '1.7 km',
+      budget: 'PKR 4,200',
+      type: 'nearby',
+      badge: 'SCHEDULED',
+      time: '45 mins ago',
+      details: 'Pump running but failing to pull water to overhead reservoir. Air suction leak and mechanical seal damage.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-PL-303',
+      title: 'Complete Sanitary Fitting: Vanity Basin, Mixer & Wall Hung Commode',
+      customer: 'Engr. Zubair',
+      phone: '0307-8899001',
+      location: 'Wapda Town Phase 1, Multan',
+      localityId: 'wapdatown',
+      category: 'Plumber',
+      distance: '4.3 km',
+      budget: 'PKR 7,500',
+      type: 'high-value',
+      badge: 'HIGH VALUE',
+      time: '1 hr ago',
+      details: 'Master bedroom new washroom fittings installation with concealed cistern and hot/cold PPRC alignment.',
+      status: 'pending'
+    },
+
+    // ── Carpenter / Carpentry & Woodwork ──
+    {
+      id: 'REQ-CP-401',
+      title: 'Solid Ash Wood Main Door Smart Lock & Concealed Hinges Fitment',
+      customer: 'Tariq Mahmood',
+      phone: '0304-2345678',
+      location: 'Sector B, Gulgasht Colony, Multan',
+      localityId: 'gulgasht',
+      category: 'Carpenter',
+      distance: '2.1 km',
+      budget: 'PKR 4,800',
+      type: 'nearby',
+      badge: 'SCHEDULED',
+      time: '30 mins ago',
+      details: 'Installation of electronic smart lock and four concealed hydraulic hinges on entrance mahogany door.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-CP-402',
+      title: 'Modular Kitchen Cabinet Hydraulic Soft-Close Upgrades',
+      customer: 'Mrs. Imran',
+      phone: '0300-3322110',
+      location: 'Bosan Road, Multan',
+      localityId: 'bosan',
+      category: 'Carpenter',
+      distance: '2.5 km',
+      budget: 'PKR 8,500',
+      type: 'high-value',
+      badge: 'HIGH VALUE',
+      time: '55 mins ago',
+      details: '14 cabinet doors requiring replacement of rusted hinges with premium German soft-close hydraulic dampers.',
+      status: 'pending'
+    },
+
+    // ── Appliance Repair ──
+    {
+      id: 'REQ-AP-501',
+      title: 'Inverter Refrigerator Cooling Coil Sensor & Gas Charging',
+      customer: 'Dr. Noman',
+      phone: '0302-6677881',
+      location: 'Officers Colony, Multan',
+      localityId: 'bosan',
+      category: 'Appliance Repair',
+      distance: '2.2 km',
+      budget: 'PKR 6,200',
+      type: 'emergency',
+      badge: 'URGENT DISPATCH',
+      time: '20 mins ago',
+      details: 'Freezer section working but lower refrigerator compartment warm. Thermostat defrost sensor check and R600a gas charging.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-AP-502',
+      title: 'Front Load Automatic Washing Machine Bearing & Drum Overhaul',
+      customer: 'Mrs. Tahir',
+      phone: '0309-1122445',
+      location: 'Model Town, Multan',
+      localityId: 'modeltown',
+      category: 'Appliance Repair',
+      distance: '3.6 km',
+      budget: 'PKR 5,500',
+      type: 'high-value',
+      badge: 'HIGH VALUE',
+      time: '45 mins ago',
+      details: 'Loud grinding metal noise during 1200 RPM spin cycle. Spider arm and double bearing seal replacement.',
+      status: 'pending'
+    },
+
+    // ── Painter ──
+    {
+      id: 'REQ-PA-601',
+      title: 'Exterior Weather-Shield & Wall Dampness Chemical Proofing',
+      customer: 'Malik Rauf',
+      phone: '0301-9988776',
+      location: 'Wapda Town Phase 1, Multan',
+      localityId: 'wapdatown',
+      category: 'Painter',
+      distance: '4.1 km',
+      budget: 'PKR 18,500',
+      type: 'high-value',
+      badge: 'HIGH VALUE',
+      time: '35 mins ago',
+      details: 'Double story front elevation weather-shield coating with dampness sealant primer to prevent water seepage.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-PA-602',
+      title: 'Interior Velvet Silk Paint & Crack Filling (Drawing Room)',
+      customer: 'Col. Shah',
+      phone: '0300-5544778',
+      location: 'Multan Cantt',
+      localityId: 'cantt',
+      category: 'Painter',
+      distance: '2.7 km',
+      budget: 'PKR 14,000',
+      type: 'high-value',
+      badge: 'HIGH VALUE',
+      time: '1 hr ago',
+      details: 'Wall putty leveling, 3 coats of premium silk emulsion, and ceiling matte finish in 24x16 drawing room.',
+      status: 'pending'
+    },
+
+    // ── Home Cleaning ──
+    {
+      id: 'REQ-CL-701',
+      title: 'Complete 1-Kanal House Post-Renovation Deep Scrub & Sanitization',
+      customer: 'Rana Naveed',
+      phone: '0307-3344112',
+      location: 'Bosan Road, Multan',
+      localityId: 'bosan',
+      category: 'Home Cleaning',
+      distance: '2.6 km',
+      budget: 'PKR 16,000',
+      type: 'high-value',
+      badge: 'HIGH VALUE',
+      time: '15 mins ago',
+      details: 'Floor buffing for tile paint stains, glass window wiping, 5 washrooms acid-free deep stain removal.',
+      status: 'pending'
+    },
+
+    // ── Welder ──
+    {
+      id: 'REQ-WD-801',
+      title: 'Main Entrance Heavy Steel Sliding Gate Track Re-Welding',
+      customer: 'M. Akram',
+      phone: '0303-9988112',
+      location: 'New Multan Colony, Multan',
+      localityId: 'newmultan',
+      category: 'Welder',
+      distance: '3.8 km',
+      budget: 'PKR 7,500',
+      type: 'emergency',
+      badge: 'URGENT DISPATCH',
+      time: '28 mins ago',
+      details: '14ft main sliding gate derailed due to collapsed guide angle. Portable welding generator required on site.',
+      status: 'pending'
+    },
+
+    // ── Gardener ──
+    {
+      id: 'REQ-GD-901',
+      title: 'Lawn Turf Leveling, Bermuda Grass Maintenance & Plant Trimming',
+      customer: 'Dr. Afzal',
+      phone: '0302-1144778',
+      location: 'Officers Colony, Multan',
+      localityId: 'bosan',
+      category: 'Gardener',
+      distance: '2.0 km',
+      budget: 'PKR 4,500',
+      type: 'nearby',
+      badge: 'SCHEDULED',
+      time: '45 mins ago',
+      details: 'Lawn mower edging, seasonal weed eradication, root aerating, and organic fertilizer application.',
+      status: 'pending'
+    },
+
+    // ── Glass & Aluminum ──
+    {
+      id: 'REQ-GL-1001',
+      title: 'Double Glazed Soundproof Aluminum Window Track Repair',
+      customer: 'Modern Eye Clinic',
+      phone: '0305-2233665',
+      location: 'Gulgasht Colony, Multan',
+      localityId: 'gulgasht',
+      category: 'Glass & Aluminum',
+      distance: '2.2 km',
+      budget: 'PKR 5,800',
+      type: 'nearby',
+      badge: 'SCHEDULED',
+      time: '30 mins ago',
+      details: 'Two commercial consultation room sliding windows jammed. Heavy duty roller replacement and weather-strip seal.',
+      status: 'pending'
+    },
+
+    // ── Laundry & Ironing ──
+    {
+      id: 'REQ-LD-1101',
+      title: 'Executive Suits Steam Press & Delicate Fabric Care Dispatch',
+      customer: 'Advocate Bilal',
+      phone: '0301-3322889',
+      location: 'Multan Cantt',
+      localityId: 'cantt',
+      category: 'Laundry & Ironing',
+      distance: '2.4 km',
+      budget: 'PKR 4,500',
+      type: 'nearby',
+      badge: 'SCHEDULED',
+      time: '40 mins ago',
+      details: '12 two-piece suits and formal shirts steam pressing and anti-crease hanger delivery.',
       status: 'pending'
     }
   ])
@@ -242,12 +568,12 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
 
   const handleProviderAcceptRequest = (reqId, title, budget) => {
     setProviderRequests(prev => prev.map(r => r.id === reqId ? { ...r, status: 'accepted' } : r))
-    showProviderToast(`✓ Mission Accepted: "${title}" (${budget} locked in Escrow)`)
+    showProviderToast(`✓ Job Confirmed: "${title}" (${budget} Direct Raast Payout)`)
   }
 
   const handleProviderDeclineRequest = (reqId) => {
     setProviderRequests(prev => prev.filter(r => r.id !== reqId))
-    showProviderToast('Customer request declined. Radar scanning for alternative requests.')
+    showProviderToast('Customer request declined. Scanning for alternative inquiries.')
   }
 
   const handleOpenQuoteModal = (req) => {
@@ -258,13 +584,13 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
   const handleSendCustomQuote = (e) => {
     e.preventDefault()
     if (!customQuoteInput || Number(customQuoteInput) <= 0) {
-      showProviderToast('⚠️ Please enter a valid quote amount in PKR')
+      showProviderToast('Please enter a valid quote amount in PKR')
       return
     }
     const reqId = quoteModalData.id
     const amount = Number(customQuoteInput).toLocaleString()
     setProviderRequests(prev => prev.map(r => r.id === reqId ? { ...r, status: 'quoted', quotedAmount: `PKR ${amount}` } : r))
-    showProviderToast(`✓ Custom Proposal of PKR ${amount} sent to ${quoteModalData.customer}!`)
+    showProviderToast(`Custom proposal of PKR ${amount} sent to ${quoteModalData.customer}`)
     setQuoteModalData(null)
     setCustomQuoteInput('')
   }
@@ -1853,31 +2179,30 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
   }, [isViewingProfile, selectedProvider])
 
   // ────────────────────────────────────────────────────────────────
-  // PROVIDER MODE: Customer Requests Hub (No customer screens, hero preserved)
+  // PROVIDER MODE: Customer Requests Hub (Strict Trade Matching, Jet Black & Ivory Only, No AI Icons)
   // ────────────────────────────────────────────────────────────────
   if (isProviderLoggedIn) {
-    const filteredProviderRequests = providerRequests.filter((req) => {
+    const currentCategory = normalizeTradeToCategory(activeProviderTrade)
+    const tradeAllRequests = providerRequests.filter(r => r.category.toLowerCase() === currentCategory.toLowerCase())
+
+    const filteredProviderRequests = tradeAllRequests.filter((req) => {
       // Search query filter (from hero search input)
       if (heroSearchQuery && heroSearchQuery.trim()) {
         const q = heroSearchQuery.toLowerCase().trim()
         const matchesTitle = req.title.toLowerCase().includes(q)
-        const matchesCat = req.category.toLowerCase().includes(q)
         const matchesLoc = req.location.toLowerCase().includes(q)
         const matchesCust = req.customer.toLowerCase().includes(q)
-        if (!matchesTitle && !matchesCat && !matchesLoc && !matchesCust) {
+        const matchesDetails = req.details.toLowerCase().includes(q)
+        if (!matchesTitle && !matchesLoc && !matchesCust && !matchesDetails) {
           return false
         }
       }
 
-      // Category filter
+      // Sub-filter: all, emergency, high-value, nearby
       if (providerCategoryFilter !== 'all') {
-        if (providerCategoryFilter === 'emergency') {
-          if (req.type !== 'emergency') return false
-        } else if (providerCategoryFilter === 'high-value') {
-          if (req.type !== 'high-value') return false
-        } else {
-          if (req.category.toLowerCase() !== providerCategoryFilter.toLowerCase()) return false
-        }
+        if (providerCategoryFilter === 'emergency' && req.type !== 'emergency') return false
+        if (providerCategoryFilter === 'high-value' && req.type !== 'high-value') return false
+        if (providerCategoryFilter === 'nearby' && req.type !== 'nearby') return false
       }
 
       // Locality filter
@@ -1893,17 +2218,17 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
         {/* Floating Toast Notification */}
         {providerToastMessage && (
           <div className="provider-floating-toast">
-            <span className="toast-icon">⚡</span>
+            <span className="toast-symbol">✓</span>
             <span className="toast-text">{providerToastMessage}</span>
           </div>
         )}
 
-        {/* Custom Quote Modal */}
+        {/* Custom Quote Modal: Strictly Jet Black & Ivory */}
         {quoteModalData && (
           <div className="provider-quote-modal-overlay">
             <div className="provider-quote-modal-card">
               <div className="quote-modal-header">
-                <h3>Send Custom Proposal</h3>
+                <h3>Submit Custom Proposal</h3>
                 <button type="button" className="close-quote-modal-btn" onClick={() => setQuoteModalData(null)}>✕</button>
               </div>
               <p className="quote-modal-sub">
@@ -1926,17 +2251,17 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   />
                 </div>
                 <div className="quote-field-group">
-                  <label>Guaranteed Arrival Time (Minutes)</label>
+                  <label>Guaranteed Doorstep Arrival (Minutes)</label>
                   <select className="quote-select-input" defaultValue="20 mins">
-                    <option value="15 mins">15 Mins (Urgent Local)</option>
-                    <option value="20 mins">20 Mins (Rapid Dispatch)</option>
-                    <option value="30 mins">30 Mins (Standard)</option>
+                    <option value="15 mins">15 Mins (Rapid Dispatch)</option>
+                    <option value="20 mins">20 Mins (Standard Dispatch)</option>
+                    <option value="30 mins">30 Mins</option>
                     <option value="45 mins">45 Mins</option>
                   </select>
                 </div>
                 <div className="quote-actions-row">
                   <button type="button" className="quote-cancel-btn" onClick={() => setQuoteModalData(null)}>Cancel</button>
-                  <button type="submit" className="quote-submit-btn">Send Proposal & Lock Escrow</button>
+                  <button type="submit" className="quote-submit-btn">Send Proposal Directly</button>
                 </div>
               </form>
             </div>
@@ -1955,15 +2280,10 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
             <div className="hero-search-row">
               <input 
                 type="text" 
-                placeholder="Search home service (e.g. Electrician, Plumber, AC Repair)..." 
+                placeholder={`Search ${currentCategory} requests across Multan...`}
                 className="hero-search-input" 
                 value={heroSearchQuery}
                 onChange={(e) => setHeroSearchQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    // search filter updates automatically
-                  }
-                }}
               />
               <input 
                 type="text" 
@@ -1982,36 +2302,66 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
           </div>
         </div>
 
-        {/* ── PROVIDER CUSTOMER REQUESTS & DISPATCH RADAR ── */}
+        {/* ── PROVIDER CUSTOMER REQUESTS & DISPATCH CONSOLE (STRICT JET BLACK & IVORY) ── */}
         <div className="provider-services-requests-hub">
           <div className="requests-hub-container">
             {/* Header Radar Bar */}
             <div className="requests-hub-header-bar">
               <div className="rh-left">
                 <div className="rh-badge-row">
-                  <span className="rh-pulse-dot"></span>
-                  <span className="rh-live-text">LIVE CUSTOMER DISPATCH RADAR</span>
-                  <span className="rh-scope-badge">Multan Sector</span>
+                  <span className="rh-pulse-dot" aria-hidden="true"></span>
+                  <span className="rh-live-text">DIRECT CUSTOMER DISPATCH CONSOLE</span>
+                  <span className="rh-scope-badge">MULTAN SECTOR</span>
                 </div>
-                <h2 className="rh-main-title">Incoming Customer Service Inquiries</h2>
+                <h2 className="rh-main-title">Incoming Customer Requests: {currentCategory}</h2>
                 <p className="rh-sub-text">
-                  Direct verified service requests and quote calls submitted by customers across Multan (100% SBP Raast Escrow Secured).
+                  Direct verified service requests and quote calls dispatched exclusively for your registered trade in Multan.
                 </p>
               </div>
 
-              <div className="rh-metrics-summary">
-                <div className="rh-metric-card">
-                  <span className="metric-val">{providerRequests.filter(r => r.status === 'pending').length}</span>
-                  <span className="metric-lbl">Pending Leads</span>
+              <div className="rh-right-controls">
+                {/* Trade Selector Switcher */}
+                <div className="rh-trade-selector-box">
+                  <span className="rh-trade-tag-label">REGISTERED TRADE</span>
+                  <select 
+                    className="rh-trade-select-dropdown"
+                    value={activeProviderTrade}
+                    onChange={(e) => {
+                      const nextTrade = e.target.value
+                      setActiveProviderTrade(nextTrade)
+                      try { localStorage.setItem('mux_provider_trade', nextTrade) } catch {}
+                      setProviderCategoryFilter('all')
+                    }}
+                    title="Change Active Trade"
+                  >
+                    <option value="Electrical & Solar">Electrical &amp; Solar</option>
+                    <option value="AC & HVAC Cooling">AC &amp; HVAC Cooling</option>
+                    <option value="Plumbing & Sanitary">Plumbing &amp; Sanitary</option>
+                    <option value="Carpentry & Woodwork">Carpentry &amp; Woodwork</option>
+                    <option value="Appliance Repair">Appliance Repair</option>
+                    <option value="Painting & Polishing">Painting &amp; Polishing</option>
+                    <option value="Deep Home Cleaning">Deep Home Cleaning</option>
+                    <option value="Welding & Fabrication">Welding &amp; Fabrication</option>
+                    <option value="Gardening & Lawn">Gardening &amp; Lawn</option>
+                    <option value="Glass & Aluminum">Glass &amp; Aluminum</option>
+                    <option value="Laundry & Ironing">Laundry &amp; Ironing</option>
+                  </select>
                 </div>
-                <div className="rh-metric-card">
-                  <span className="metric-val">100%</span>
-                  <span className="metric-lbl">Escrow Backed</span>
+
+                <div className="rh-metrics-summary">
+                  <div className="rh-metric-card">
+                    <span className="metric-val">{tradeAllRequests.filter(r => r.status === 'pending').length}</span>
+                    <span className="metric-lbl">Active Inquiries</span>
+                  </div>
+                  <div className="rh-metric-card">
+                    <span className="metric-val">100%</span>
+                    <span className="metric-lbl">Direct Payout</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Filter Pills and Locality Selector */}
+            {/* Filter Pills and Locality Selector (Strictly Trade-Specific) */}
             <div className="requests-filter-toolbar">
               <div className="rh-category-pills">
                 <button 
@@ -2019,55 +2369,34 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   className={`rh-pill ${providerCategoryFilter === 'all' ? 'active' : ''}`}
                   onClick={() => setProviderCategoryFilter('all')}
                 >
-                  All Requests ({providerRequests.length})
+                  All {currentCategory} Leads ({tradeAllRequests.length})
                 </button>
                 <button 
                   type="button" 
-                  className={`rh-pill ${providerCategoryFilter === 'Electrician' ? 'active' : ''}`}
-                  onClick={() => setProviderCategoryFilter('Electrician')}
-                >
-                  ⚡ Electrician & Solar
-                </button>
-                <button 
-                  type="button" 
-                  className={`rh-pill ${providerCategoryFilter === 'AC & HVAC' ? 'active' : ''}`}
-                  onClick={() => setProviderCategoryFilter('AC & HVAC')}
-                >
-                  ❄️ AC & HVAC
-                </button>
-                <button 
-                  type="button" 
-                  className={`rh-pill ${providerCategoryFilter === 'Plumber' ? 'active' : ''}`}
-                  onClick={() => setProviderCategoryFilter('Plumber')}
-                >
-                  🔧 Plumbing
-                </button>
-                <button 
-                  type="button" 
-                  className={`rh-pill ${providerCategoryFilter === 'Carpenter' ? 'active' : ''}`}
-                  onClick={() => setProviderCategoryFilter('Carpenter')}
-                >
-                  🪚 Carpentry
-                </button>
-                <button 
-                  type="button" 
-                  className={`rh-pill emergency-pill ${providerCategoryFilter === 'emergency' ? 'active' : ''}`}
+                  className={`rh-pill ${providerCategoryFilter === 'emergency' ? 'active' : ''}`}
                   onClick={() => setProviderCategoryFilter('emergency')}
                 >
-                  🚨 Emergency SOS
+                  Urgent Dispatch ({tradeAllRequests.filter(r => r.type === 'emergency').length})
                 </button>
                 <button 
                   type="button" 
                   className={`rh-pill ${providerCategoryFilter === 'high-value' ? 'active' : ''}`}
                   onClick={() => setProviderCategoryFilter('high-value')}
                 >
-                  💎 High Value
+                  High Value ({tradeAllRequests.filter(r => r.type === 'high-value').length})
+                </button>
+                <button 
+                  type="button" 
+                  className={`rh-pill ${providerCategoryFilter === 'nearby' ? 'active' : ''}`}
+                  onClick={() => setProviderCategoryFilter('nearby')}
+                >
+                  Nearby Inquiries ({tradeAllRequests.filter(r => r.type === 'nearby').length})
                 </button>
               </div>
 
               {/* Locality Quick Selector */}
               <div className="rh-locality-select-wrap">
-                <label className="rh-loc-label">Area Filter:</label>
+                <label className="rh-loc-label">Area:</label>
                 <select 
                   className="rh-locality-dropdown"
                   value={providerLocalityFilter}
@@ -2079,6 +2408,8 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   <option value="gulgasht">Gulgasht Colony</option>
                   <option value="wapdatown">Wapda Town</option>
                   <option value="mda">Shah Rukn-e-Alam / MDA</option>
+                  <option value="modeltown">Model Town</option>
+                  <option value="newmultan">New Multan</option>
                 </select>
               </div>
             </div>
@@ -2087,9 +2418,9 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
             <div className="requests-cards-feed">
               {filteredProviderRequests.length === 0 ? (
                 <div className="no-requests-placeholder">
-                  <span className="no-req-icon">📡</span>
-                  <h4>No Matching Customer Inquiries</h4>
-                  <p>Radar is actively scanning Multan for incoming service bookings matching this filter.</p>
+                  <div className="no-req-symbol" aria-hidden="true">[ RADAR SCAN ]</div>
+                  <h4>No Active Customer Inquiries Found</h4>
+                  <p>Radar is actively scanning Multan for incoming customer requests matching this criteria.</p>
                   <button 
                     type="button" 
                     className="reset-filters-btn"
@@ -2099,7 +2430,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                       setHeroSearchQuery('')
                     }}
                   >
-                    Reset All Filters
+                    Reset Area Filters
                   </button>
                 </div>
               ) : (
@@ -2109,7 +2440,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                       <div className="req-badge-group">
                         <span className={`req-priority-tag ${req.type}`}>{req.badge}</span>
                         <span className="req-time-stamp">Requested {req.time}</span>
-                        <span className="req-escrow-badge">● SBP Raast Escrow Ready</span>
+                        <span className="req-direct-badge">Verified Direct Client</span>
                       </div>
                       <div className="req-budget-tag">
                         <span className="budget-caption">Client Budget</span>
@@ -2123,35 +2454,23 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
 
                       <div className="req-customer-info-strip">
                         <div className="cust-meta-item">
-                          <span className="cust-icon">👤</span>
-                          <div>
-                            <span className="cust-lbl">Customer</span>
-                            <strong className="cust-name">{req.customer}</strong>
-                          </div>
+                          <span className="cust-lbl">Customer Name</span>
+                          <strong className="cust-val">{req.customer}</strong>
                         </div>
 
                         <div className="cust-meta-item">
-                          <span className="cust-icon">📍</span>
-                          <div>
-                            <span className="cust-lbl">Delivery Location</span>
-                            <span className="cust-location">{req.location}</span>
-                          </div>
+                          <span className="cust-lbl">Delivery Location</span>
+                          <strong className="cust-val">{req.location}</strong>
                         </div>
 
                         <div className="cust-meta-item">
-                          <span className="cust-icon">📏</span>
-                          <div>
-                            <span className="cust-lbl">Distance</span>
-                            <span className="cust-dist">{req.distance}</span>
-                          </div>
+                          <span className="cust-lbl">Transit Distance</span>
+                          <strong className="cust-val">{req.distance}</strong>
                         </div>
 
                         <div className="cust-meta-item">
-                          <span className="cust-icon">🏷️</span>
-                          <div>
-                            <span className="cust-lbl">Category</span>
-                            <span className="cust-cat">{req.category}</span>
-                          </div>
+                          <span className="cust-lbl">Trade Category</span>
+                          <strong className="cust-val">{req.category}</strong>
                         </div>
                       </div>
                     </div>
@@ -2159,11 +2478,11 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                     <div className="req-card-actions-row">
                       {req.status === 'accepted' ? (
                         <div className="req-accepted-status-badge">
-                          ✓ Mission Accepted • Escrow Locked ({req.budget})
+                          Job Confirmed • Direct Payout ({req.budget})
                         </div>
                       ) : req.status === 'quoted' ? (
                         <div className="req-quoted-status-badge">
-                          ✓ Custom Quote Sent ({req.quotedAmount}) • Awaiting Client Confirmation
+                          Custom Proposal Sent ({req.quotedAmount}) • Awaiting Client Response
                         </div>
                       ) : (
                         <>
@@ -2172,7 +2491,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                             className="req-accept-action-btn"
                             onClick={() => handleProviderAcceptRequest(req.id, req.title, req.budget)}
                           >
-                            Accept Request & Lock Escrow
+                            Accept Job &amp; Confirm Dispatch
                           </button>
 
                           <button 
@@ -2186,9 +2505,9 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                           <button 
                             type="button" 
                             className="req-chat-action-btn"
-                            onClick={() => showProviderToast(`💬 Direct encrypted chat opened with ${req.customer}...`)}
+                            onClick={() => showProviderToast(`Direct chat opened with ${req.customer}...`)}
                           >
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                             </svg>
                             Direct Chat

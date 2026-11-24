@@ -92,6 +92,11 @@ function ProviderVerification({ setCurrentPage }) {
     }
 
     setLoading(true)
+    try {
+      localStorage.setItem('mux_provider_trade', formData.profession)
+      localStorage.setItem('mux_provider_name', formData.fullName)
+      localStorage.setItem('mux_provider_zone', formData.zone)
+    } catch {}
     setTimeout(() => {
       setLoading(false)
       setSubmitted(true)

@@ -75,6 +75,13 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
         password
       })
 
+      // Ensure provider trade is initialized
+      try {
+        if (!localStorage.getItem('mux_provider_trade')) {
+          localStorage.setItem('mux_provider_trade', 'Electrical & Solar')
+        }
+      } catch {}
+
       // Automatically log out active customer dashboard session
       try {
         authAPI.logout()
