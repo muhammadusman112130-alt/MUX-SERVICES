@@ -136,16 +136,27 @@ function Navbar({
             </a>
           </li>
           {isProviderLoggedIn ? (
-            /* Provider Navigation: Replace Professionals with Messages, NO Booked */
-            <li>
-              <a 
-                href="/messages" 
-                className={currentPage === 'messages' ? 'active' : ''}
-                onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}
-              >
-                <span className="nav-btn-text">Messages</span>
-              </a>
-            </li>
+            /* Provider Navigation: Messages & Booked */
+            <>
+              <li>
+                <a 
+                  href="/messages" 
+                  className={currentPage === 'messages' ? 'active' : ''}
+                  onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}
+                >
+                  <span className="nav-btn-text">Messages</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/booked" 
+                  className={(currentPage === 'booked' || currentPage === 'bookings') ? 'active' : ''}
+                  onClick={(e) => { e.preventDefault(); setCurrentPage('booked'); }}
+                >
+                  <span className="nav-btn-text">Booked</span>
+                </a>
+              </li>
+            </>
           ) : (
             <>
               <li>

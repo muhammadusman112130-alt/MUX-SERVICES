@@ -397,9 +397,32 @@ function ProviderMessages({ setCurrentPage }) {
     triggerToast(`Proposal of ${formattedPrice} sent to ${activeConversation.name}!`)
   }
 
-  // Handle Accept or Confirm Booking
+  // Handle Accept or Confirm Booking -> Directly navigates to Booked screen
   const handleAcceptBooking = () => {
     if (!activeConversation) return
+
+    const bookedMission = {
+      id: `MUX-${Date.now().toString().slice(-6)}`,
+      refNumber: `MUX-${Date.now().toString().slice(-6)}`,
+      customer: activeConversation.name,
+      phone: activeConversation.phone || '0301-7654321',
+      location: activeConversation.location || 'House 42, Officers Colony, Bosan Road, Multan',
+      service: activeConversation.service,
+      price: activeConversation.price,
+      status: 'active',
+      date: 'Today',
+      time: 'Just now',
+      bikePlate: 'MN-24-7890 (Honda CD-70)',
+      currentLocality: 'Crossing Bosan Road towards Officers Colony',
+      speed: '34 km/h',
+      distance: '1.8 km remaining',
+      initialSeconds: 885
+    }
+
+    try {
+      localStorage.setItem('provider_live_booking', JSON.stringify(bookedMission))
+    } catch {}
+
     setConversations(prev => prev.map(c => {
       if (c.id === activeConversation.id && c.offer) {
         return {
@@ -413,7 +436,11 @@ function ProviderMessages({ setCurrentPage }) {
       }
       return c
     }))
-    triggerToast(`Booking confirmed for ${activeConversation.name}! Payout secured.`)
+
+    // Direct transition to Booked screen as requested by user
+    if (typeof setCurrentPage === 'function') {
+      setCurrentPage('booked')
+    }
   }
 
   // Handle Decline
@@ -710,6 +737,15 @@ function ProviderMessages({ setCurrentPage }) {
                     {activeConversation.offer.status === 'accepted' && (
                       <div className="ic-offer-status-ribbon accepted">
                         <span>✓ Job Confirmed ({activeConversation.offer.amount}) • Doorstep Dispatch Active!</span>
+                        {setCurrentPage && (
+                          <button
+                            type="button"
+                            className="ic-view-booking-btn"
+                            onClick={() => setCurrentPage('booked')}
+                          >
+                            🚀 View Live Doorstep GPS Tracking in Booked →
+                          </button>
+                        )}
                       </div>
                     )}
 

@@ -567,8 +567,31 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
   }
 
   const handleProviderAcceptRequest = (reqId, title, budget) => {
+    const targetReq = providerRequests.find(r => r.id === reqId)
+    const bookedMission = {
+      id: targetReq ? targetReq.id : `MUX-${Date.now().toString().slice(-6)}`,
+      refNumber: targetReq ? targetReq.id : `MUX-${Date.now().toString().slice(-6)}`,
+      customer: targetReq ? targetReq.customer : 'Malik Farhan',
+      phone: targetReq ? targetReq.phone : '0301-7654321',
+      location: targetReq ? targetReq.location : 'Officers Colony, Bosan Road, Multan',
+      service: title,
+      price: budget,
+      status: 'active',
+      date: 'Today',
+      time: 'Just now',
+      bikePlate: 'MN-24-7890 (Honda CD-70)',
+      currentLocality: 'Crossing Bosan Road towards Officers Colony',
+      speed: '34 km/h',
+      distance: targetReq ? targetReq.distance : '1.8 km',
+      initialSeconds: 885
+    }
+    try {
+      localStorage.setItem('provider_live_booking', JSON.stringify(bookedMission))
+    } catch {}
     setProviderRequests(prev => prev.map(r => r.id === reqId ? { ...r, status: 'accepted' } : r))
-    showProviderToast(`✓ Job Confirmed: "${title}" (${budget} Direct Raast Payout)`)
+    if (typeof setCurrentPage === 'function') {
+      setCurrentPage('booked')
+    }
   }
 
   const handleProviderDeclineRequest = (reqId) => {
