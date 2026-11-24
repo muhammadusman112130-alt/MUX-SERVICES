@@ -217,116 +217,7 @@
   padding: 8px;
 }
 
-/* ── 2 PATHWAY SELECTION: USTAD VS DIPLOMA ONLY ── */
-.section-step-label {
-  display: block;
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #8FD3E8 !important;
-  margin-bottom: 0.65rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95) !important;
-}
-
-.pathway-toggle-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-}
-
-.pathway-card-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: rgba(14, 46, 51, 0.75);
-  border: 1.5px solid rgba(143, 211, 232, 0.35);
-  padding: 0.85rem 1rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  text-align: left;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-.pathway-card-btn .pw-icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
-}
-
-.pathway-card-btn .pw-text-block {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.pathway-card-btn .pw-text-block strong {
-  font-size: 0.88rem;
-  color: #EEF4F4;
-  line-height: 1.25;
-}
-
-.pathway-card-btn .pw-text-block span {
-  font-size: 0.75rem;
-  color: #8FD3E8;
-  direction: rtl;
-  text-align: left;
-}
-
-.pathway-card-btn:hover:not(.active) {
-  background: rgba(19, 56, 62, 0.85);
-  border-color: #8FD3E8;
-  transform: translateY(-1px);
-}
-
-.pathway-card-btn.active {
-  background: rgba(19, 56, 62, 0.95) !important;
-  border-color: #17f7f7 !important;
-  box-shadow: 0 0 18px rgba(23, 247, 247, 0.4), inset 0 0 10px rgba(23, 247, 247, 0.2);
-}
-
-.pathway-card-btn.active .pw-text-block strong {
-  color: #17f7f7;
-}
-
-/* Dynamic Pathway Box (Dynamic fields for Ustad / Diploma) */
-.dynamic-pathway-box {
-  background: rgba(14, 46, 51, 0.65);
-  border: 1.5px solid rgba(143, 211, 232, 0.3);
-  border-radius: 14px;
-  padding: 1.25rem 1.15rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
-  margin-top: 0.5rem;
-  backdrop-filter: blur(6px);
-}
-
-.pathway-header-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(143, 211, 232, 0.25);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.25rem;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.phs-tag {
-  font-size: 0.84rem;
-  font-weight: 800;
-  color: #17f7f7;
-  letter-spacing: 0.02em;
-}
-
-.phs-urdu {
-  font-size: 0.78rem;
-  color: #8FD3E8;
-  direction: rtl;
-}
-
-/* File Upload Controls */
+/* ── FILE UPLOAD CONTROLS (DIRECT FORM BARS - NO CARDS) ── */
 .file-upload-box {
   position: relative;
   width: 100%;
@@ -348,23 +239,24 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  background: rgba(14, 46, 51, 0.75);
-  border: 1.5px dashed #8FD3E8;
+  background: rgba(14, 46, 51, 0.78);
+  border: 1.5px solid #8FD3E8;
   border-radius: 12px;
   padding: 0.85rem 1.15rem;
   cursor: pointer;
   transition: all 0.25s ease;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .file-upload-trigger:hover {
-  background: rgba(19, 56, 62, 0.9);
-  border-color: #17f7f7;
+  background: rgba(19, 56, 62, 0.95);
+  border-color: #bbf0fd;
 }
 
 .fut-icon {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   flex-shrink: 0;
 }
 
@@ -398,8 +290,7 @@
 }
 
 .police-upload-box .file-upload-trigger {
-  border-color: #17f7f7;
-  background: rgba(14, 46, 51, 0.82);
+  border-color: #8FD3E8;
 }
 
 /* Oath Row */
@@ -654,83 +545,12 @@
   text-decoration: underline !important;
 }
 
-/* ── WARM STONE LIGHT MODE: 2-WAY PATHWAY & POLICE VERIFICATION ── */
-[data-theme="warm-stone"] .section-step-label,
-.theme-warm-stone .section-step-label {
-  color: #0A0A0A !important;
-  -webkit-text-fill-color: #0A0A0A !important;
-  text-shadow: 0 0 10px #FFFFF0, 0 0 16px #FFFFF0 !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="warm-stone"] .pathway-card-btn,
-.theme-warm-stone .pathway-card-btn {
-  background: rgba(255, 255, 240, 0.88) !important;
-  border: 1.5px solid rgba(10, 10, 10, 0.35) !important;
-  box-shadow: 0 2px 10px rgba(10, 10, 10, 0.08) !important;
-}
-
-[data-theme="warm-stone"] .pathway-card-btn .pw-text-block strong,
-.theme-warm-stone .pathway-card-btn .pw-text-block strong {
-  color: #0A0A0A !important;
-}
-
-[data-theme="warm-stone"] .pathway-card-btn .pw-text-block span,
-.theme-warm-stone .pathway-card-btn .pw-text-block span {
-  color: #444444 !important;
-}
-
-[data-theme="warm-stone"] .pathway-card-btn:hover:not(.active),
-.theme-warm-stone .pathway-card-btn:hover:not(.active) {
-  background: #FFFFF0 !important;
-  border-color: #0A0A0A !important;
-}
-
-[data-theme="warm-stone"] .pathway-card-btn.active,
-.theme-warm-stone .pathway-card-btn.active {
-  background: #0A0A0A !important;
-  border-color: #0A0A0A !important;
-  box-shadow: 0 4px 18px rgba(10, 10, 10, 0.3) !important;
-}
-
-[data-theme="warm-stone"] .pathway-card-btn.active .pw-text-block strong,
-.theme-warm-stone .pathway-card-btn.active .pw-text-block strong {
-  color: #FFFFF0 !important;
-}
-
-[data-theme="warm-stone"] .pathway-card-btn.active .pw-text-block span,
-.theme-warm-stone .pathway-card-btn.active .pw-text-block span {
-  color: #d6d6c8 !important;
-}
-
-[data-theme="warm-stone"] .dynamic-pathway-box,
-.theme-warm-stone .dynamic-pathway-box {
-  background: rgba(255, 255, 240, 0.9) !important;
-  border: 1.5px solid rgba(10, 10, 10, 0.4) !important;
-  box-shadow: 0 4px 18px rgba(10, 10, 10, 0.1) !important;
-}
-
-[data-theme="warm-stone"] .pathway-header-strip,
-.theme-warm-stone .pathway-header-strip {
-  border-bottom: 1px solid rgba(10, 10, 10, 0.18) !important;
-}
-
-[data-theme="warm-stone"] .phs-tag,
-.theme-warm-stone .phs-tag {
-  color: #0A0A0A !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="warm-stone"] .phs-urdu,
-.theme-warm-stone .phs-urdu {
-  color: #444444 !important;
-  font-weight: 600 !important;
-}
-
+/* ── WARM STONE LIGHT MODE: FILE UPLOADS (NO CARDS) ── */
 [data-theme="warm-stone"] .file-upload-trigger,
 .theme-warm-stone .file-upload-trigger {
   background: rgba(255, 255, 240, 0.9) !important;
-  border: 1.5px dashed #0A0A0A !important;
+  border: 1.5px solid #0A0A0A !important;
+  box-shadow: 0 2px 10px rgba(10, 10, 10, 0.08) !important;
 }
 
 [data-theme="warm-stone"] .file-upload-trigger:hover,

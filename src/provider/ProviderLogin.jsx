@@ -162,7 +162,7 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
           {loginMethod === 'mobile' && (
             <>
               <div className="form-group">
-                <label htmlFor="pl-mobile">Registered Mobile Number (موبائل نمبر)</label>
+                <label htmlFor="pl-mobile">Registered Mobile Number</label>
                 <div className="input-wrapper">
                   <span className="input-icon">🇵🇰 +92</span>
                   <input
@@ -181,7 +181,7 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
 
               <div className="form-group">
                 <div className="label-split-row">
-                  <label htmlFor="pl-otp">6-Digit OTP Code (او ٹی پی)</label>
+                  <label htmlFor="pl-otp">6-Digit OTP Code</label>
                   {otpSent && <span className="otp-dispatched-text">✓ Code Dispatched</span>}
                 </div>
                 <div className="otp-action-row">
@@ -219,7 +219,7 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
           {loginMethod === 'cnic' && (
             <>
               <div className="form-group">
-                <label htmlFor="pl-cnic">CNIC Number (13 Digits / شناختی کارڈ)</label>
+                <label htmlFor="pl-cnic">CNIC Number (13 Digits)</label>
                 <div className="input-wrapper">
                   <span className="input-icon">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -253,7 +253,7 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
 
               <div className="form-group">
                 <div className="label-split-row">
-                  <label htmlFor="pl-password">Password (پاس ورڈ)</label>
+                  <label htmlFor="pl-password">Password</label>
                   <a
                     href="#forgot"
                     className="forgot-password"

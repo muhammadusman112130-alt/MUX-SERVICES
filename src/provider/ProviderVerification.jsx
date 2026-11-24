@@ -10,7 +10,7 @@ function ProviderVerification({ setCurrentPage }) {
     cnic: '',
     profession: '',
     zone: 'Multan Cantt & Sadar',
-    experience: 'None / Fresh',
+    experience: 'Fresh',
     // Ustad Pathway Fields
     ustadName: '',
     ustadCnic: '',
@@ -63,7 +63,7 @@ function ProviderVerification({ setCurrentPage }) {
     }
 
     if (!formData.profession) {
-      setError('Please select your trade / profession from the category list.')
+      setError('Please select your trade from the category list.')
       return
     }
 
@@ -76,7 +76,7 @@ function ProviderVerification({ setCurrentPage }) {
     // Validation for Ustad Pathway
     if (pathway === 'ustad') {
       if (!formData.ustadName.trim() || !formData.shopLocation.trim() || !formData.shopAddress.trim()) {
-        setError("Please enter Ustad's Name, Shop Location, and Shop Address.")
+        setError('Please enter Ustad Name, Shop Location, and Workshop Address.')
         return
       }
     }
@@ -84,7 +84,7 @@ function ProviderVerification({ setCurrentPage }) {
     // Validation for Diploma Pathway
     if (pathway === 'diploma') {
       if (!formData.instituteName.trim()) {
-        setError('Please enter your technical Institute or Board name.')
+        setError('Please enter technical Institute Name.')
         return
       }
     }
@@ -123,7 +123,7 @@ function ProviderVerification({ setCurrentPage }) {
             <div className="pv-success-icon-wrap">✓</div>
             <h2 className="auth-title">Application Submitted!</h2>
             <p className="auth-subtitle">
-              آپ کی رجسٹریشن درخواست موصول ہو چکی ہے۔
+              Your registration application has been received successfully.
             </p>
             <div className="pv-success-info">
               <p>
@@ -147,7 +147,7 @@ function ProviderVerification({ setCurrentPage }) {
           <>
             <h2 className="auth-title">Register as Verified Pro</h2>
             <p className="auth-subtitle">
-              اپنے ہنر کو رجسٹر کریں اور روزانہ کی بنیاد پر باوقار روزگار حاصل کریں
+              Register your trade to receive daily verified bookings across Multan
             </p>
 
             {error && (
@@ -164,7 +164,7 @@ function ProviderVerification({ setCurrentPage }) {
             <form className="auth-form" onSubmit={handleSubmit} autoComplete="off">
               {/* Full Name */}
               <div className="form-group">
-                <label htmlFor="fullName">Full Name (شناختی کارڈ کے مطابق پورا نام) *</label>
+                <label htmlFor="fullName">Full Name *</label>
                 <div className="input-wrapper">
                   <span className="input-icon">👤</span>
                   <input
@@ -182,7 +182,7 @@ function ProviderVerification({ setCurrentPage }) {
 
               {/* Mobile Number */}
               <div className="form-group">
-                <label htmlFor="mobile">Mobile Number (WhatsApp Enabled / موبائل نمبر) *</label>
+                <label htmlFor="mobile">Mobile Number *</label>
                 <div className="input-wrapper">
                   <span className="input-icon">🇵🇰 +92</span>
                   <input
@@ -200,7 +200,7 @@ function ProviderVerification({ setCurrentPage }) {
 
               {/* CNIC */}
               <div className="form-group">
-                <label htmlFor="cnic">CNIC Number (13 Digits / شناختی کارڈ نمبر) *</label>
+                <label htmlFor="cnic">CNIC Number (13 Digits) *</label>
                 <div className="input-wrapper">
                   <span className="input-icon">🪪</span>
                   <input
@@ -227,7 +227,7 @@ function ProviderVerification({ setCurrentPage }) {
 
               {/* Profession Category Dropdown List (No Boxes as per user requirement) */}
               <div className="form-group">
-                <label htmlFor="profession">Select Profession / Category (پیشہ منتخب کریں) *</label>
+                <label htmlFor="profession">Select Profession *</label>
                 <div className="input-wrapper">
                   <span className="input-icon">🛠️</span>
                   <select
@@ -238,16 +238,16 @@ function ProviderVerification({ setCurrentPage }) {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">-- Choose Your Trade / Profession --</option>
-                    <option value="Electrical & Solar">⚡ Electrical &amp; Solar (بجلی و سولر وائرنگ)</option>
-                    <option value="Plumbing & Sanitary">🔧 Plumbing &amp; Sanitary (پلمبنگ و سینیٹری)</option>
-                    <option value="AC & HVAC Cooling">❄️ AC &amp; HVAC Cooling (اے سی و کولنگ سروس)</option>
-                    <option value="Carpentry & Woodwork">🪚 Carpentry &amp; Woodwork (بڑھئی و لکڑی کا کام)</option>
-                    <option value="Appliance Repair">🧺 Appliance Repair (گھریلو آلات ریپئر)</option>
-                    <option value="Painting & Polishing">🎨 Painting &amp; Polishing (پینٹر و پالش سروس)</option>
-                    <option value="Deep Home Cleaning">✨ Deep Home Cleaning (ڈیپ ہوم کلیننگ)</option>
-                    <option value="Welding & Fabrication">🔥 Welding &amp; Fabrication (ویلڈنگ و فیبریکیشن)</option>
-                    <option value="Gardening & Lawn">🌱 Gardening &amp; Lawn (باغبانی و لان کیئر)</option>
+                    <option value="">-- Select Trade --</option>
+                    <option value="Electrical & Solar">⚡ Electrical &amp; Solar</option>
+                    <option value="Plumbing & Sanitary">🔧 Plumbing &amp; Sanitary</option>
+                    <option value="AC & HVAC Cooling">❄️ AC &amp; HVAC Cooling</option>
+                    <option value="Carpentry & Woodwork">🪚 Carpentry &amp; Woodwork</option>
+                    <option value="Appliance Repair">🧺 Appliance Repair</option>
+                    <option value="Painting & Polishing">🎨 Painting &amp; Polishing</option>
+                    <option value="Deep Home Cleaning">✨ Deep Home Cleaning</option>
+                    <option value="Welding & Fabrication">🔥 Welding &amp; Fabrication</option>
+                    <option value="Gardening & Lawn">🌱 Gardening &amp; Lawn</option>
                   </select>
                 </div>
               </div>
@@ -255,7 +255,7 @@ function ProviderVerification({ setCurrentPage }) {
               {/* Multan Locality & Optional Experience Level */}
               <div className="form-row-dual">
                 <div className="form-group">
-                  <label htmlFor="zone">Multan Locality (علاقہ) *</label>
+                  <label htmlFor="zone">Multan Locality *</label>
                   <div className="input-wrapper">
                     <span className="input-icon">📍</span>
                     <select
@@ -276,7 +276,7 @@ function ProviderVerification({ setCurrentPage }) {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="experience">Experience (تجربہ - Optional)</label>
+                  <label htmlFor="experience">Experience (Optional)</label>
                   <div className="input-wrapper">
                     <select
                       id="experience"
@@ -285,57 +285,39 @@ function ProviderVerification({ setCurrentPage }) {
                       value={formData.experience}
                       onChange={handleChange}
                     >
-                      <option value="None / Fresh">None / Fresh (نئے کاریگر)</option>
+                      <option value="Fresh">Fresh</option>
                       <option value="1-3 Years">1 - 3 Years</option>
                       <option value="4-7 Years">4 - 7 Years</option>
-                      <option value="8+ Years Master">8+ Years (ماسٹر کاریگر)</option>
+                      <option value="8+ Years Master">8+ Years Master</option>
                     </select>
                   </div>
                 </div>
               </div>
 
-              {/* 2 Pathway Selection (Ustad vs Diploma ONLY as requested) */}
+              {/* Skill Qualification Pathway as Dropdown List Bar (NO CARDS) */}
               <div className="form-group">
-                <label className="section-step-label">
-                  Skill Qualification Pathway (ہنر کی تصدیق کا طریقہ - صرف 2 آپشنز) *
-                </label>
-                <div className="pathway-toggle-grid">
-                  <button
-                    type="button"
-                    className={`pathway-card-btn ${pathway === 'ustad' ? 'active' : ''}`}
-                    onClick={() => setPathway('ustad')}
+                <label htmlFor="pathway">Skill Qualification *</label>
+                <div className="input-wrapper">
+                  <span className="input-icon">🎓</span>
+                  <select
+                    id="pathway"
+                    name="pathway"
+                    className="form-input form-select"
+                    value={pathway}
+                    onChange={(e) => setPathway(e.target.value)}
+                    required
                   >
-                    <span className="pw-icon">👨‍🏫</span>
-                    <div className="pw-text-block">
-                      <strong>Master Ustad Apprenticeship</strong>
-                      <span>استاد شاگردی کا عملی تجربہ</span>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    className={`pathway-card-btn ${pathway === 'diploma' ? 'active' : ''}`}
-                    onClick={() => setPathway('diploma')}
-                  >
-                    <span className="pw-icon">📜</span>
-                    <div className="pw-text-block">
-                      <strong>Technical Diploma / TEVTA</strong>
-                      <span>ٹیکنیکل ڈپلومہ یا سرٹیفیکیٹ</span>
-                    </div>
-                  </button>
+                    <option value="ustad">Master Ustad Apprenticeship</option>
+                    <option value="diploma">Technical Diploma</option>
+                  </select>
                 </div>
               </div>
 
-              {/* Dynamic Form: If Ustad is Selected */}
+              {/* Dynamic Form: If Ustad is Selected (Direct Input Bars - NO CARDS) */}
               {pathway === 'ustad' && (
-                <div className="dynamic-pathway-box anim-fade-in">
-                  <div className="pathway-header-strip">
-                    <span className="phs-tag">👨‍🏫 Master Ustad Verification Details</span>
-                    <span className="phs-urdu">استاد اور ورکشاپ کی تفصیلات درج کریں</span>
-                  </div>
-
+                <>
                   <div className="form-group">
-                    <label htmlFor="ustadName">Master Ustad's Full Name (استاد کا نام) *</label>
+                    <label htmlFor="ustadName">Master Ustad Name *</label>
                     <div className="input-wrapper">
                       <span className="input-icon">👨‍🔧</span>
                       <input
@@ -353,7 +335,7 @@ function ProviderVerification({ setCurrentPage }) {
 
                   <div className="form-row-dual">
                     <div className="form-group">
-                      <label htmlFor="ustadCnic">Ustad's CNIC (شناختی کارڈ نمبر)</label>
+                      <label htmlFor="ustadCnic">Ustad CNIC</label>
                       <div className="input-wrapper">
                         <span className="input-icon">🪪</span>
                         <input
@@ -378,7 +360,7 @@ function ProviderVerification({ setCurrentPage }) {
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="shopLocation">Shop / Market Location (علاقہ / مارکیٹ) *</label>
+                      <label htmlFor="shopLocation">Shop Location *</label>
                       <div className="input-wrapper">
                         <span className="input-icon">📍</span>
                         <input
@@ -396,14 +378,14 @@ function ProviderVerification({ setCurrentPage }) {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="shopAddress">Complete Workshop Address (ورکشاپ کا مکمل پتہ) *</label>
+                    <label htmlFor="shopAddress">Workshop Address *</label>
                     <div className="input-wrapper">
                       <span className="input-icon">🏢</span>
                       <input
                         type="text"
                         id="shopAddress"
                         name="shopAddress"
-                        placeholder="Shop #, Street, Near Landmark, Multan"
+                        placeholder="Shop #, Street, Landmark, Multan"
                         className="form-input"
                         value={formData.shopAddress}
                         onChange={handleChange}
@@ -413,7 +395,7 @@ function ProviderVerification({ setCurrentPage }) {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="ustadContact">Ustad's Phone (رابطہ فون نمبر - Optional)</label>
+                    <label htmlFor="ustadContact">Ustad Phone (Optional)</label>
                     <div className="input-wrapper">
                       <span className="input-icon">📞</span>
                       <input
@@ -427,26 +409,21 @@ function ProviderVerification({ setCurrentPage }) {
                       />
                     </div>
                   </div>
-                </div>
+                </>
               )}
 
-              {/* Dynamic Form: If Diploma is Selected */}
+              {/* Dynamic Form: If Diploma is Selected (Direct Input Bars - NO CARDS) */}
               {pathway === 'diploma' && (
-                <div className="dynamic-pathway-box anim-fade-in">
-                  <div className="pathway-header-strip">
-                    <span className="phs-tag">📜 Technical Institute &amp; Certificate</span>
-                    <span className="phs-urdu">ڈپلومہ ادارے اور سرٹیفیکیٹ کی تفصیل</span>
-                  </div>
-
+                <>
                   <div className="form-group">
-                    <label htmlFor="instituteName">Institute / Board Name (ادارے کا نام) *</label>
+                    <label htmlFor="instituteName">Institute Name *</label>
                     <div className="input-wrapper">
                       <span className="input-icon">🏫</span>
                       <input
                         type="text"
                         id="instituteName"
                         name="instituteName"
-                        placeholder="e.g. TEVTA / Government College of Technology Multan"
+                        placeholder="e.g. Government College of Technology Multan"
                         className="form-input"
                         value={formData.instituteName}
                         onChange={handleChange}
@@ -456,7 +433,7 @@ function ProviderVerification({ setCurrentPage }) {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="diplomaFile">Upload Diploma / Certificate (سرٹیفیکیٹ اپلوڈ کریں)</label>
+                    <label htmlFor="diplomaFile">Upload Diploma</label>
                     <div className="file-upload-box">
                       <input
                         type="file"
@@ -468,21 +445,19 @@ function ProviderVerification({ setCurrentPage }) {
                       <label htmlFor="diplomaFile" className="file-upload-trigger">
                         <span className="fut-icon">📎</span>
                         <div className="fut-text">
-                          <strong>{formData.diplomaFileName || 'Choose Diploma Certificate File / Photo'}</strong>
-                          <span>Supports JPG, PNG or PDF</span>
+                          <strong>{formData.diplomaFileName || 'Choose Diploma File'}</strong>
+                          <span>JPG, PNG, PDF</span>
                         </div>
                         <span className="fut-btn">Browse</span>
                       </label>
                     </div>
                   </div>
-                </div>
+                </>
               )}
 
-              {/* Police Character Clearance Certificate Upload Field */}
+              {/* Police Clearance Certificate Upload Field */}
               <div className="form-group">
-                <label className="section-step-label">
-                  Police Verification Clearance (پنجاب پولیس خدمت مرکز کلیرنس سرٹیفیکیٹ) *
-                </label>
+                <label htmlFor="policeCertificate">Police Clearance Certificate *</label>
                 <div className="file-upload-box police-upload-box">
                   <input
                     type="file"
@@ -495,9 +470,9 @@ function ProviderVerification({ setCurrentPage }) {
                     <span className="fut-icon">🛡️</span>
                     <div className="fut-text">
                       <strong>
-                        {formData.policeCertificateFileName || 'Upload Police Khidmat Markaz Clearance Slip / Certificate'}
+                        {formData.policeCertificateFileName || 'Upload Police Clearance Certificate'}
                       </strong>
-                      <span>پنجاب پولیس خدمت مرکز سلپ یا کریکٹر سرٹیفیکیٹ کی تصویر اپلوڈ کریں</span>
+                      <span>Punjab Police Khidmat Markaz Certificate (JPG, PNG, PDF)</span>
                     </div>
                     <span className="fut-btn">Upload</span>
                   </label>
@@ -525,13 +500,13 @@ function ProviderVerification({ setCurrentPage }) {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="accountNumber">Account / Raast ID</label>
+                  <label htmlFor="accountNumber">Account Number</label>
                   <div className="input-wrapper">
                     <input
                       type="text"
                       id="accountNumber"
                       name="accountNumber"
-                      placeholder="e.g. 03001234567 or IBAN"
+                      placeholder="e.g. 03001234567 or Raast ID"
                       className="form-input"
                       value={formData.accountNumber}
                       onChange={handleChange}
@@ -551,7 +526,7 @@ function ProviderVerification({ setCurrentPage }) {
                     required
                   />
                   <span style={{ fontSize: '0.85rem', lineHeight: '1.45' }}>
-                    I solemnly swear that my trade information, Master Ustad / Diploma details, and CNIC are 100% genuine and clear of any criminal record.
+                    I solemnly swear that my trade information, qualification details, and CNIC are 100% genuine and clear of any criminal record.
                   </span>
                 </label>
               </div>
@@ -563,7 +538,7 @@ function ProviderVerification({ setCurrentPage }) {
                 disabled={loading}
                 style={{ opacity: loading ? 0.7 : 1 }}
               >
-                {loading ? 'Submitting Application...' : 'Register as Verified Pro (درخواست جمع کروائیں) →'}
+                {loading ? 'Submitting Application...' : 'Register as Verified Pro →'}
               </button>
 
               {/* Switch to Login */}
