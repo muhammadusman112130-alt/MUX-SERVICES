@@ -23,6 +23,7 @@ const Messages = lazy(() => import('./pages/Messages'))
 const ProviderDashboard = lazy(() => import('./provider/ProviderDashboard'))
 const ProviderLogin = lazy(() => import('./provider/ProviderLogin'))
 const ProviderVerification = lazy(() => import('./provider/ProviderVerification'))
+const ProviderMessages = lazy(() => import('./provider/ProviderMessages'))
 
 const VALID_PAGES = [
   'home',
@@ -373,6 +374,9 @@ function App() {
         return <MyBookings setCurrentPage={handlePageChange} />
       case 'messages':
       case 'Messages':
+        if (isProviderLoggedIn) {
+          return <ProviderMessages setCurrentPage={handlePageChange} />
+        }
         return (
           <Messages 
             setCurrentPage={handlePageChange} 

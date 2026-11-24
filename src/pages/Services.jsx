@@ -175,7 +175,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '1.8 km',
       budget: 'PKR 6,500',
       type: 'emergency',
-      badge: 'URGENT DISPATCH',
+      badge: 'URGENT REQUEST',
       time: '4 mins ago',
       details: 'Main circuit breaker tripping repeatedly under AC load. Burning odor observed near distribution panel. Urgent diagnostic and fuse replacement needed.',
       status: 'pending'
@@ -191,7 +191,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '4.5 km',
       budget: 'PKR 7,500',
       type: 'high-value',
-      badge: 'HIGH VALUE',
+      badge: 'VERIFIED INQUIRY',
       time: '18 mins ago',
       details: 'Inverter trips to grid bypass when battery drops to 48V. Requires digital solar analyzer and firmware load calibration.',
       status: 'pending'
@@ -223,7 +223,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '2.1 km',
       budget: 'PKR 5,500',
       type: 'emergency',
-      badge: 'URGENT DISPATCH',
+      badge: 'URGENT REQUEST',
       time: '50 mins ago',
       details: 'Frequent earth leakage tripping during rains. Digital megger test required for neutral-earth resistance check.',
       status: 'pending'
@@ -239,7 +239,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '2.8 km',
       budget: 'PKR 8,500',
       type: 'high-value',
-      badge: 'HIGH VALUE',
+      badge: 'VERIFIED INQUIRY',
       time: '1 hr ago',
       details: '40 meters of COB warm strip lights with dual 24V power supplies and dimming remote controller synchronization.',
       status: 'pending'
@@ -257,7 +257,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '3.2 km',
       budget: 'PKR 9,200',
       type: 'high-value',
-      badge: 'HIGH VALUE',
+      badge: 'VERIFIED INQUIRY',
       time: '12 mins ago',
       details: 'Two 2-Ton inverter split units blowing lukewarm air. Suction pressure is low, coil chemical wash & R410A gas top-up required.',
       status: 'pending'
@@ -273,7 +273,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '2.0 km',
       budget: 'PKR 6,800',
       type: 'emergency',
-      badge: 'URGENT DISPATCH',
+      badge: 'URGENT REQUEST',
       time: '25 mins ago',
       details: 'Outdoor unit fan motor not starting. Microcontroller communication error code blinking on display.',
       status: 'pending'
@@ -323,7 +323,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '2.6 km',
       budget: 'PKR 5,000',
       type: 'emergency',
-      badge: 'URGENT DISPATCH',
+      badge: 'URGENT REQUEST',
       time: '22 mins ago',
       details: 'Seepage appearing on ground floor ceiling. Concealed PPRC pipe pressure testing and joint replacement required.',
       status: 'pending'
@@ -355,7 +355,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '4.3 km',
       budget: 'PKR 7,500',
       type: 'high-value',
-      badge: 'HIGH VALUE',
+      badge: 'VERIFIED INQUIRY',
       time: '1 hr ago',
       details: 'Master bedroom new washroom fittings installation with concealed cistern and hot/cold PPRC alignment.',
       status: 'pending'
@@ -389,7 +389,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '2.5 km',
       budget: 'PKR 8,500',
       type: 'high-value',
-      badge: 'HIGH VALUE',
+      badge: 'VERIFIED INQUIRY',
       time: '55 mins ago',
       details: '14 cabinet doors requiring replacement of rusted hinges with premium German soft-close hydraulic dampers.',
       status: 'pending'
@@ -407,7 +407,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '2.2 km',
       budget: 'PKR 6,200',
       type: 'emergency',
-      badge: 'URGENT DISPATCH',
+      badge: 'URGENT REQUEST',
       time: '20 mins ago',
       details: 'Freezer section working but lower refrigerator compartment warm. Thermostat defrost sensor check and R600a gas charging.',
       status: 'pending'
@@ -423,7 +423,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '3.6 km',
       budget: 'PKR 5,500',
       type: 'high-value',
-      badge: 'HIGH VALUE',
+      badge: 'VERIFIED INQUIRY',
       time: '45 mins ago',
       details: 'Loud grinding metal noise during 1200 RPM spin cycle. Spider arm and double bearing seal replacement.',
       status: 'pending'
@@ -441,7 +441,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '4.1 km',
       budget: 'PKR 18,500',
       type: 'high-value',
-      badge: 'HIGH VALUE',
+      badge: 'VERIFIED INQUIRY',
       time: '35 mins ago',
       details: 'Double story front elevation weather-shield coating with dampness sealant primer to prevent water seepage.',
       status: 'pending'
@@ -457,7 +457,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '2.7 km',
       budget: 'PKR 14,000',
       type: 'high-value',
-      badge: 'HIGH VALUE',
+      badge: 'VERIFIED INQUIRY',
       time: '1 hr ago',
       details: 'Wall putty leveling, 3 coats of premium silk emulsion, and ceiling matte finish in 24x16 drawing room.',
       status: 'pending'
@@ -475,7 +475,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '2.6 km',
       budget: 'PKR 16,000',
       type: 'high-value',
-      badge: 'HIGH VALUE',
+      badge: 'VERIFIED INQUIRY',
       time: '15 mins ago',
       details: 'Floor buffing for tile paint stains, glass window wiping, 5 washrooms acid-free deep stain removal.',
       status: 'pending'
@@ -493,7 +493,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
       distance: '3.8 km',
       budget: 'PKR 7,500',
       type: 'emergency',
-      badge: 'URGENT DISPATCH',
+      badge: 'URGENT REQUEST',
       time: '28 mins ago',
       details: '14ft main sliding gate derailed due to collapsed guide angle. Portable welding generator required on site.',
       status: 'pending'
@@ -2310,12 +2310,12 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
               <div className="rh-left">
                 <div className="rh-badge-row">
                   <span className="rh-pulse-dot" aria-hidden="true"></span>
-                  <span className="rh-live-text">DIRECT CUSTOMER DISPATCH CONSOLE</span>
+                  <span className="rh-live-text">DIRECT CUSTOMER REQUESTS CONSOLE</span>
                   <span className="rh-scope-badge">MULTAN SECTOR</span>
                 </div>
                 <h2 className="rh-main-title">Incoming Customer Requests: {currentCategory}</h2>
                 <p className="rh-sub-text">
-                  Direct verified service requests and quote calls dispatched exclusively for your registered trade in Multan.
+                  Direct verified service requests and quote calls received exclusively for your registered trade in Multan.
                 </p>
               </div>
 
@@ -2348,20 +2348,6 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                   onClick={() => setProviderCategoryFilter('all')}
                 >
                   All {currentCategory} Leads ({tradeAllRequests.length})
-                </button>
-                <button 
-                  type="button" 
-                  className={`rh-pill ${providerCategoryFilter === 'emergency' ? 'active' : ''}`}
-                  onClick={() => setProviderCategoryFilter('emergency')}
-                >
-                  Urgent Dispatch ({tradeAllRequests.filter(r => r.type === 'emergency').length})
-                </button>
-                <button 
-                  type="button" 
-                  className={`rh-pill ${providerCategoryFilter === 'high-value' ? 'active' : ''}`}
-                  onClick={() => setProviderCategoryFilter('high-value')}
-                >
-                  High Value ({tradeAllRequests.filter(r => r.type === 'high-value').length})
                 </button>
                 <button 
                   type="button" 
@@ -2469,7 +2455,7 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                             className="req-accept-action-btn"
                             onClick={() => handleProviderAcceptRequest(req.id, req.title, req.budget)}
                           >
-                            Accept Job &amp; Confirm Dispatch
+                            Accept Job &amp; Confirm Booking
                           </button>
 
                           <button 
@@ -2483,7 +2469,23 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
                           <button 
                             type="button" 
                             className="req-chat-action-btn"
-                            onClick={() => showProviderToast(`Direct chat opened with ${req.customer}...`)}
+                            onClick={() => {
+                              try {
+                                localStorage.setItem('provider_active_chat_customer', JSON.stringify({
+                                  id: req.id,
+                                  customer: req.customer,
+                                  phone: req.phone,
+                                  title: req.title,
+                                  location: req.location,
+                                  category: req.category,
+                                  budget: req.budget,
+                                  details: req.details
+                                }))
+                              } catch {}
+                              if (typeof setCurrentPage === 'function') {
+                                setCurrentPage('messages')
+                              }
+                            }}
                           >
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>

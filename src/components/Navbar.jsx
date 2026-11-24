@@ -135,35 +135,50 @@ function Navbar({
               <span className="nav-btn-text">Services</span>
             </a>
           </li>
-          <li>
-            <a 
-              href="/professionals" 
-              className={currentPage === 'professionals' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); setCurrentPage('professionals'); }}
-            >
-              <span className="nav-btn-text">Professionals</span>
-            </a>
-          </li>
-          {isLoggedIn && (
+          {isProviderLoggedIn ? (
+            /* Provider Navigation: Replace Professionals with Messages, NO Booked */
+            <li>
+              <a 
+                href="/messages" 
+                className={currentPage === 'messages' ? 'active' : ''}
+                onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}
+              >
+                <span className="nav-btn-text">Messages</span>
+              </a>
+            </li>
+          ) : (
             <>
               <li>
                 <a 
-                  href="/messages" 
-                  className={currentPage === 'messages' ? 'active' : ''}
-                  onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}
+                  href="/professionals" 
+                  className={currentPage === 'professionals' ? 'active' : ''}
+                  onClick={(e) => { e.preventDefault(); setCurrentPage('professionals'); }}
                 >
-                  <span className="nav-btn-text">Messages</span>
+                  <span className="nav-btn-text">Professionals</span>
                 </a>
               </li>
-              <li>
-                <a 
-                  href="/booked" 
-                  className={(currentPage === 'booked' || currentPage === 'bookings') ? 'active' : ''}
-                  onClick={(e) => { e.preventDefault(); setCurrentPage('booked'); }}
-                >
-                  <span className="nav-btn-text">Booked</span>
-                </a>
-              </li>
+              {isLoggedIn && (
+                <>
+                  <li>
+                    <a 
+                      href="/messages" 
+                      className={currentPage === 'messages' ? 'active' : ''}
+                      onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}
+                    >
+                      <span className="nav-btn-text">Messages</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="/booked" 
+                      className={(currentPage === 'booked' || currentPage === 'bookings') ? 'active' : ''}
+                      onClick={(e) => { e.preventDefault(); setCurrentPage('booked'); }}
+                    >
+                      <span className="nav-btn-text">Booked</span>
+                    </a>
+                  </li>
+                </>
+              )}
             </>
           )}
           <li>
