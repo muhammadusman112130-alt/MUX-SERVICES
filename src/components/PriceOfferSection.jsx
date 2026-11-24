@@ -38,7 +38,7 @@ function PriceOfferSection({ setCurrentPage }) {
 
   const handleJoinClick = () => {
     if (typeof setCurrentPage === 'function') {
-      setCurrentPage('provider-login')
+      setCurrentPage('provider-verification')
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }

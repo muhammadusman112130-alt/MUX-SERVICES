@@ -1,631 +1,782 @@
 import { useState } from 'react'
 import './ProviderVerification.css'
 
-/* ─────────────────────────────────────────────
-   DYNAMIC VERIFICATION SECTIONS PER PROFESSION
-───────────────────────────────────────────── */
-
-function RiderVerification() {
-  return (
-    <div className="pv-card">
-      <div className="pv-section-header">
-        <span className="pv-step-num">3</span>
-        <h2 className="pv-section-title">Rider &amp; Delivery Verification</h2>
-        <span className="pv-auto-badge">Driving License &amp; Vehicle Reg</span>
-      </div>
-      <p className="pv-card-subtitle">Category specific compliance framework</p>
-
-      <div className="pv-verification-banner">
-        <span className="pv-ver-icon">🏍️</span>
-        <div>
-          <p className="pv-ver-title">Rider &amp; Courier Verification Protocol</p>
-          <p className="pv-ver-desc">
-            All delivery riders must hold a valid Driving License, CNIC, and Vehicle Registration (Book/Smart Card). Safe riding and police verification are confirmed before dispatch access.
-          </p>
-        </div>
-      </div>
-
-      <div className="pv-form-row">
-        <div className="pv-form-group">
-          <label className="pv-label">Driving License Number *</label>
-          <input className="pv-input" type="text" placeholder="e.g. DL-MULT-123456" />
-        </div>
-        <div className="pv-form-group">
-          <label className="pv-label">Live Identity Confirmed</label>
-          <input className="pv-input" type="text" placeholder="Auto-confirmed" disabled />
-        </div>
-        <div className="pv-form-group">
-          <label className="pv-label">Vehicle Type *</label>
-          <select className="pv-input pv-select">
-            <option>Motorbike (70cc / 100cc / 125cc / 150cc)</option>
-            <option>Cargo Rickshaw / Qingqi</option>
-            <option>Delivery Van / Mini Truck</option>
-            <option>Electric Bike (EV)</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="pv-form-row">
-        <div className="pv-form-group">
-          <label className="pv-label">Vehicle Registration Number *</label>
-          <input className="pv-input" type="text" placeholder="e.g. MN-24-7890" />
-        </div>
-        <div className="pv-form-group">
-          <label className="pv-label">Engine / Chassis Number *</label>
-          <input className="pv-input" type="text" placeholder="e.g. JAP-5678912" />
-        </div>
-      </div>
-
-      <div className="pv-form-row">
-        <div className="pv-form-group pv-full-width">
-          <label className="pv-label">Preferred Operating Zones / City *</label>
-          <input className="pv-input" type="text" placeholder="e.g. Cantt, Bosan Road, Gulgasht, Shah Rukn-e-Alam — Multan" />
-        </div>
-      </div>
-
-      <div className="pv-upload-row">
-        <div className="pv-upload-box">
-          <label className="pv-label">Driving License<br /><span className="pv-upload-sub">Front &amp; Back PDF or JPG (Max 5MB)</span></label>
-          <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
-        </div>
-        <div className="pv-upload-box">
-          <label className="pv-label">Vehicle Registration Book / Smart Card<br /><span className="pv-upload-sub">Clear photo of registration documents</span></label>
-          <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
-        </div>
-      </div>
-
-      <div className="pv-oath-checkbox">
-        <input type="checkbox" id="rider-oath" />
-        <label htmlFor="rider-oath">
-          <strong>Rider Safety &amp; Legal Declaration:</strong> I hereby solemnly certify that my vehicle is in roadworthy condition and I possess a valid driving license with clean traffic and legal record.
-        </label>
-      </div>
-    </div>
-  )
-}
-
-function HomeServicesVerification() {
-  const [pathway, setPathway] = useState('diploma')
-
-  return (
-    <div className="pv-card">
-      <div className="pv-section-header">
-        <span className="pv-step-num">3</span>
-        <h2 className="pv-section-title">Skilled Trades &amp; Vocational Verification</h2>
-        <span className="pv-auto-badge">TEVTA / Apprenticeship</span>
-      </div>
-      <p className="pv-card-subtitle">TEVTA Diploma or Master Ustad Reference Pathway</p>
-
-      {/* Pathway selector */}
-      <div className="pv-pathway-label">Verification Pathway (تصدیق کا طریقہ منتخب کریں)</div>
-      <div className="pv-pathway-row">
-        <div
-          className={`pv-pathway-card ${pathway === 'diploma' ? 'selected' : ''}`}
-          onClick={() => setPathway('diploma')}
-        >
-          <div className="pv-pathway-radio">
-            <span className={`pv-radio-dot ${pathway === 'diploma' ? 'active' : ''}`}></span>
-            <strong>Pathway A: Technical Diploma</strong>
-          </div>
-          <p className="pv-pathway-desc">Certified via NAVTTC / TEVTA<br />Official state vocational diploma</p>
-        </div>
-        <div
-          className={`pv-pathway-card ${pathway === 'ustad' ? 'selected' : ''}`}
-          onClick={() => setPathway('ustad')}
-        >
-          <div className="pv-pathway-radio">
-            <span className={`pv-radio-dot ${pathway === 'ustad' ? 'active' : ''}`}></span>
-            <strong>Pathway B: Ustad &amp; Field Reference</strong>
-          </div>
-          <p className="pv-pathway-desc">نہ کوئی ڈپلومہ درکار، ماسٹر کی تصدیق شدہ<br />No diploma required, verified by master</p>
-        </div>
-      </div>
-
-      <div className="pv-form-row">
-        <div className="pv-form-group">
-          <label className="pv-label">Trade Specialization *</label>
-          <select className="pv-input pv-select">
-            <option>Electrician (Three-Phase &amp; Solar Invert ▼</option>
-            <option>Plumber (Residential &amp; Commercial)</option>
-            <option>HVAC Technician</option>
-            <option>Carpenter / Wood Works</option>
-            <option>Welder / Fabricator</option>
-            <option>Painter (Interior &amp; Exterior)</option>
-          </select>
-        </div>
-        <div className="pv-form-group">
-          <label className="pv-label">TEVTA / NAVTTC Certificate Registration No.</label>
-          <input className="pv-input" type="text" placeholder="e.g. TEVTA-LHR-2021-9812" />
-        </div>
-      </div>
-
-      {/* Upload */}
-      <div className="pv-upload-solo">
-        <div className="pv-upload-icon-box">📄</div>
-        <div>
-          <p className="pv-label">Upload TEVTA / Technical Institute Diploma</p>
-          <p className="pv-upload-sub">Scanned copy of course diploma or marks sheet</p>
-          <label className="pv-upload-btn" style={{marginTop:'0.5rem'}}>
-            Choose File
-            <input type="file" hidden />
-          </label>
-        </div>
-      </div>
-
-      {/* Safety checklist */}
-      <div className="pv-safety-box">
-        <p className="pv-safety-title">Safety Equipment &amp; Kit Inventory</p>
-        <div className="pv-safety-grid">
-          <label className="pv-check-item">
-            <input type="checkbox" defaultChecked /> Owns professional insulated tools &amp; digital multimeter
-          </label>
-          <label className="pv-check-item">
-            <input type="checkbox" defaultChecked /> Owns safety harness, helmet &amp; rubberized safety shoes
-          </label>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function ITVerification() {
-  return (
-    <div className="pv-card">
-      <div className="pv-section-header">
-        <span className="pv-step-num">3</span>
-        <h2 className="pv-section-title">IT, Digital &amp; Software Verification</h2>
-        <span className="pv-auto-badge">HEC / Tech Portfolios</span>
-      </div>
-      <p className="pv-card-subtitle">Higher Education &amp; Shipped Product Portfolios</p>
-
-      {/* Portfolio banner */}
-      <div className="pv-verification-banner it-banner">
-        <span className="pv-ver-icon">💻</span>
-        <div>
-          <p className="pv-ver-title">Digital Portfolio &amp; Higher Education Verification</p>
-          <p className="pv-ver-desc">
-            High-level IT contracts require verifiable proof of past shipped software, design repositories, or HEC
-            recognised computer science/media degrees.
-          </p>
-        </div>
-      </div>
-
-      <div className="pv-form-row">
-        <div className="pv-form-group">
-          <label className="pv-label">University Degree (HEC Recognized?) *</label>
-          <input className="pv-input" type="text" placeholder="e.g. BS Computer Science (FAST NUCES)" />
-        </div>
-        <div className="pv-form-group">
-          <label className="pv-label">Portfolio / Github / Dribbble / Behance URL *</label>
-          <input className="pv-input" type="text" placeholder="https://github.com/yourhandle or behance..." />
-        </div>
-      </div>
-
-      <div className="pv-form-row">
-        <div className="pv-form-group pv-full-width">
-          <label className="pv-label">Primary Skills &amp; Tech Stack Tags</label>
-          <input className="pv-input" type="text" placeholder="React.js, Node.js, Python, Figma, TailwindCSS, AWS" />
-        </div>
-      </div>
-
-      {/* Upload row — 2 uploads */}
-      <div className="pv-upload-row">
-        <div className="pv-upload-box">
-          <label className="pv-label">Degree / Transcript / Certificate<br /><span className="pv-upload-sub">HEC recognized or IBCC attested (PDF/JPG)</span></label>
-          <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
-        </div>
-        <div className="pv-upload-box">
-          <label className="pv-label">Portfolio Screenshot / Project Proof<br /><span className="pv-upload-sub">Up to 3 screenshots of shipped work (PNG/PDF)</span></label>
-          <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
-        </div>
-      </div>
-
-      <div className="pv-oath-checkbox">
-        <input type="checkbox" id="it-oath" />
-        <label htmlFor="it-oath">
-          <strong>Digital Integrity Declaration:</strong> I confirm that all portfolio links, project descriptions, and educational credentials
-          submitted are authentic and belong to me. I authorize Service HUB to verify these against public repositories and HEC records.
-        </label>
-      </div>
-    </div>
-  )
-}
-
-function AutoVerification() {
-  return (
-    <div className="pv-card">
-      <div className="pv-section-header">
-        <span className="pv-step-num">3</span>
-        <h2 className="pv-section-title">Auto &amp; Heavy Appliance Verification</h2>
-        <span className="pv-auto-badge">NAVTTC / Workshop Reg.</span>
-      </div>
-      <p className="pv-card-subtitle">Mechanical trade licence &amp; workshop registration</p>
-
-      <div className="pv-verification-banner">
-        <span className="pv-ver-icon">🚗</span>
-        <div>
-          <p className="pv-ver-title">Auto Mechanic &amp; Appliance Technician Protocol</p>
-          <p className="pv-ver-desc">
-            All auto mechanics and appliance technicians must provide a workshop registration certificate or
-            NAVTTC/TEVTA trade qualification with at least 2 years of documented hands-on experience.
-          </p>
-        </div>
-      </div>
-
-      <div className="pv-form-row">
-        <div className="pv-form-group">
-          <label className="pv-label">Auto Trade Specialization *</label>
-          <select className="pv-input pv-select">
-            <option>Auto Mechanic (Engine &amp; Transmission)</option>
-            <option>Auto Electrician</option>
-            <option>AC &amp; Cooling Systems</option>
-            <option>Heavy Appliance Repair (AC, Fridge, Washing)</option>
-            <option>Tyre &amp; Alignment Specialist</option>
-          </select>
-        </div>
-        <div className="pv-form-group">
-          <label className="pv-label">Workshop / Garage Registration No.</label>
-          <input className="pv-input" type="text" placeholder="e.g. WRK-LHR-2020-4521" />
-        </div>
-      </div>
-
-      <div className="pv-form-row">
-        <div className="pv-form-group">
-          <label className="pv-label">Years of Experience *</label>
-          <select className="pv-input pv-select">
-            <option>2 – 5 Years</option>
-            <option>5 – 10 Years</option>
-            <option>10+ Years</option>
-          </select>
-        </div>
-        <div className="pv-form-group">
-          <label className="pv-label">Workshop / Business Address</label>
-          <input className="pv-input" type="text" placeholder="Shop #5, Auto Market, Shahdara Lahore" />
-        </div>
-      </div>
-
-      <div className="pv-upload-row">
-        <div className="pv-upload-box">
-          <label className="pv-label">NAVTTC / TEVTA Auto Trade Certificate<br /><span className="pv-upload-sub">Scanned copy (PDF or JPG)</span></label>
-          <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
-        </div>
-        <div className="pv-upload-box">
-          <label className="pv-label">Workshop Registration / NTN Certificate<br /><span className="pv-upload-sub">Issued by local body or FBR</span></label>
-          <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ─────────────────────────────────────────────
-   MAIN COMPONENT
-───────────────────────────────────────────── */
-
 function ProviderVerification({ setCurrentPage }) {
   const [selectedProfession, setSelectedProfession] = useState('electrical')
+  const [pathway, setPathway] = useState('diploma')
   const [agreedToOath, setAgreedToOath] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [formData, setFormData] = useState({
+    fullName: '',
+    mobile: '',
+    email: '',
+    cnic: '',
+    zone: 'Multan Cantt & Sadar',
+    experience: '4-7 Years',
+    diplomaInstitute: '',
+    diplomaNumber: '',
+    ustadName: '',
+    workshopAddress: '',
+    ustadContact: '',
+    payoutChannel: 'State Bank Raast ID',
+    accountNumber: ''
+  })
 
   const professions = [
-    { id: 'electrical', icon: '⚡', title: 'Electrical & Wiring', desc: 'Electricians, Panels, UPS, Solar Inverters' },
-    { id: 'plumbing', icon: '🔧', title: 'Plumbing & Sanitary', desc: 'Leak Detection, Pipe Fitting, Geyser Fixes' },
-    { id: 'hvac', icon: '❄️', title: 'AC & HVAC Cooling', desc: 'AC Installation, Gas Refill, Jet Servicing' },
-    { id: 'carpentry', icon: '🪚', title: 'Carpentry & Woodwork', desc: 'Wardrobes, Kitchen Cabinets, Door Locks' },
-    { id: 'appliances', icon: '🔌', title: 'Appliance Repair', desc: 'Refrigerators, Washing Machines, Microwaves' },
-    { id: 'cleaning', icon: '🧹', title: 'Deep Home Cleaning', desc: 'House Sanitization, Water Tank, Sofa Wash' },
-    { id: 'painting', icon: '🎨', title: 'Painting & Polishing', desc: 'Interior & Exterior Painting, Waterproofing' },
+    {
+      id: 'electrical',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+      ),
+      title: 'Electrical & Solar',
+      urdu: 'بجلی و سولر وائرنگ',
+      desc: 'Short circuits, distribution boards, UPS, solar inverters & wiring.'
+    },
+    {
+      id: 'plumbing',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+        </svg>
+      ),
+      title: 'Plumbing & Sanitary',
+      urdu: 'پلمبنگ و سینیٹری',
+      desc: 'Acoustic leak detection, PPRC fitting, geyser & water motor fixes.'
+    },
+    {
+      id: 'hvac',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07" />
+        </svg>
+      ),
+      title: 'AC & HVAC Cooling',
+      urdu: 'اے سی و کولنگ سروس',
+      desc: 'Inverter installation, jet deep wash, gas recharge & PCB repair.'
+    },
+    {
+      id: 'carpentry',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m14 12 6-6M2 20l7-7M9 13l2 2M16 6l2 2M6 22l-4-4 13-13 4 4L6 22z" />
+        </svg>
+      ),
+      title: 'Carpentry & Woodwork',
+      urdu: 'بڑھئی و لکڑی کا کام',
+      desc: 'Wardrobes, kitchen cabinets, hydraulic hinges & door locks.'
+    },
+    {
+      id: 'appliances',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="4" y="2" width="16" height="20" rx="2" />
+          <line x1="4" y1="10" x2="20" y2="10" />
+        </svg>
+      ),
+      title: 'Appliance Repair',
+      urdu: 'گھریلو آلات ریپئر',
+      desc: 'Automatic washing machines, refrigerators, deep freezers & ovens.'
+    },
+    {
+      id: 'painting',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m19 11-8-8-8.5 8.5a2.12 2.12 0 0 0 3 3L12 8l3 3" />
+          <path d="m5 2 5 5" />
+          <path d="M2 22h20" />
+        </svg>
+      ),
+      title: 'Painting & Polishing',
+      urdu: 'پینٹر و پالش سروس',
+      desc: 'Interior plastic emulsion, weather sheet, rockwall & deco polish.'
+    },
+    {
+      id: 'cleaning',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+        </svg>
+      ),
+      title: 'Deep Home Cleaning',
+      urdu: 'ڈیپ ہوم کلیننگ',
+      desc: 'Floor scrubbing, chemical tank wash, sofa & carpet extraction.'
+    },
+    {
+      id: 'welder',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+        </svg>
+      ),
+      title: 'Welding & Fabrication',
+      urdu: 'ویلڈنگ و میٹل فیبریکیشن',
+      desc: 'Main safety gates, window grills, shed framing & iron repair.'
+    },
+    {
+      id: 'gardener',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22v-9" />
+          <path d="M12 13a5 5 0 0 0 5-5c0-3-5-6-5-6s-5 3-5 6a5 5 0 0 0 5 5z" />
+          <path d="M8 17a4 4 0 0 1-4-4c0-2.5 4-5 4-5" />
+          <path d="M16 17a4 4 0 0 0 4-4c0-2.5-4-5-4-5" />
+        </svg>
+      ),
+      title: 'Gardening & Lawn',
+      urdu: 'باغبانی و لان کیئر',
+      desc: 'Lawn manicuring, hedge shaping, seasonal flowers & pest spray.'
+    }
   ]
 
-  /* Render the vocational trade verification */
-  const renderProfessionForm = () => {
-    return <HomeServicesVerification />
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!agreedToOath) {
+      alert('Please agree to the Safety & Character Declaration oath before submitting.')
+      return
+    }
+    setSubmitted(true)
+    window.scrollTo({ top: 120, behavior: 'smooth' })
   }
 
   return (
-    <div className="pv-wrapper">
-      <nav className="provider-navbar">
-        <div className="navbar-container">
-          <div className="navbar-left" onClick={() => setCurrentPage && setCurrentPage('home')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <img src="/brand-logo-cyan-v3.png" alt="MUX SERVICES" className="navbar-logo" style={{ height: '42px', width: 'auto', objectFit: 'contain' }} />
-            <span style={{ fontWeight: 900, fontSize: '1.25rem', letterSpacing: '1px', color: '#17f7f7' }}>MUX SERVICES</span>
-          </div>
-          <div className="navbar-center">
-            <button type="button" onClick={() => setCurrentPage && setCurrentPage('home')} className="nav-link">Home</button>
-            <button type="button" onClick={() => setCurrentPage && setCurrentPage('Messages')} className="nav-link">Messages</button>
-            <button type="button" onClick={() => setCurrentPage && setCurrentPage('about')} className="nav-link">About</button>
-            <button type="button" onClick={() => setCurrentPage && setCurrentPage('contact')} className="nav-link">Contact</button>
-          </div>
-        </div>
-      </nav>
-
-      {/* ── TOP BREADCRUMB ── */}
-      <div className="pv-breadcrumb">
-        <span>🏠 Home</span>
-        <span className="pv-sep">›</span>
-        <span>Partner Network</span>
-        <span className="pv-sep">›</span>
-        <span className="pv-active">Provider Verification &amp; Registration</span>
-      </div>
-
-      {/* ── HERO BANNER ── */}
-      <div className="pv-hero">
-        <div className="pv-hero-badge">✅ VERIFIED PRO ONBOARDING GATEWAY</div>
-        <h1 className="pv-hero-title">
-          Join MUX SERVICES as an Elite<br />Verified Pro
-        </h1>
-        <p className="pv-hero-subtitle">مکس سروسز پر مصدق پارٹنر بنیں</p>
-        <p className="pv-hero-desc">
-          Select your home service trade below. Our verification engine automatically
-          authenticates credential standards — including TEVTA diplomas, electrical/HVAC licenses,
-          and Master Ustad apprenticeship references.
-        </p>
-
-        <div className="pv-stats-row">
-          <div className="pv-stat">
-            <span className="pv-stat-icon">✓</span>
-            <div>
-              <p className="pv-stat-val">100% Verified</p>
-              <p className="pv-stat-sub">NADRA &amp; Legal Backed</p>
-            </div>
-          </div>
-          <div className="pv-stat">
-            <span className="pv-stat-icon">⏱</span>
-            <div>
-              <p className="pv-stat-val">24-48 hrs</p>
-              <p className="pv-stat-sub">Fast Review Cycle</p>
-            </div>
-          </div>
-          <div className="pv-stat">
-            <span className="pv-stat-icon">💰</span>
-            <div>
-              <p className="pv-stat-val">PKR 500k</p>
-              <p className="pv-stat-sub">Accelerated Earner</p>
-            </div>
-          </div>
-          <div className="pv-stat">
-            <span className="pv-stat-icon">🎯</span>
-            <div>
-              <p className="pv-stat-val">0% Commission</p>
-              <p className="pv-stat-sub">On First 5 Orders</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── MAIN GRID ── */}
-      <div className="pv-main-grid">
-
-        {/* ═══════ LEFT COLUMN ═══════ */}
-        <div className="pv-left">
-
-          {/* ── STEP 1: Profession ── */}
-          <div className="pv-section-header">
-            <span className="pv-step-num">1</span>
-            <h2 className="pv-section-title">Select Your Professional Industry / پیشہ منتخب کریں</h2>
-            <span className="pv-auto-badge">✓ Credential fields adjust automatically</span>
-          </div>
-
-          <div className="pv-profession-grid">
-            {professions.map(p => (
-              <div
-                key={p.id}
-                className={`pv-profession-card ${selectedProfession === p.id ? 'selected' : ''}`}
-                onClick={() => setSelectedProfession(p.id)}
-              >
-                <div className="pv-prof-icon">{p.icon}</div>
-                <p className="pv-prof-title">{p.title}</p>
-                <p className="pv-prof-desc">{p.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* ── STEP 2: Identity (common for all) ── */}
-          <div className="pv-card">
-            <div className="pv-section-header">
-              <span className="pv-step-num">2</span>
-              <h2 className="pv-section-title">Identity &amp; Biometric Details</h2>
-              <span className="pv-auto-badge">🆔 256-Bit Encrypted</span>
-            </div>
-            <p className="pv-card-subtitle">Standard NADRA-aligned identity parameters</p>
-
-            <div className="pv-form-row">
-              <div className="pv-form-group">
-                <label className="pv-label">Full Name (as on CNIC) *</label>
-                <input className="pv-input" type="text" placeholder="Dr. Muhammad Hamid Khan" />
-              </div>
-              <div className="pv-form-group">
-                <label className="pv-label">Mobile Number (WhatsApp Enabled) *</label>
-                <input className="pv-input" type="text" placeholder="+92 3001234567" />
-              </div>
-            </div>
-
-            <div className="pv-form-row">
-              <div className="pv-form-group">
-                <label className="pv-label">Professional Email Address *</label>
-                <input className="pv-input" type="email" placeholder="m.haris@healthpro.pk" />
-              </div>
-              <div className="pv-form-group">
-                <label className="pv-label">Base City of Operation *</label>
-                <select className="pv-input pv-select">
-                  <option>Lahore (All Sectors &amp; Cantt)</option>
-                  <option>Karachi</option>
-                  <option>Islamabad / Rawalpindi</option>
-                  <option>Multan</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="pv-form-row">
-              <div className="pv-form-group pv-full-width">
-                <label className="pv-label">13-Digit National Identity Core (CNIC) / قومی شناختی کارڈ نمبر *</label>
-                <input className="pv-input" type="text" placeholder="35201-1234567-1" />
-                <p className="pv-hint">✓ NADRA VeriSys Verified</p>
-                <p className="pv-note">Identity checks run automatically in the background via NADRA Verisys gateway.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* ── STEP 3: Dynamic per profession ── */}
-          {renderProfessionForm()}
-
-          {/* ── STEP 4: Police Clearance (common) ── */}
-          <div className="pv-card">
-            <div className="pv-section-header">
-              <span className="pv-step-num">4</span>
-              <h2 className="pv-section-title">Police Clearance &amp; Legal Oath</h2>
-              <p className="pv-section-urdu">قانونی حلف اور پولیس کی منظوری</p>
-            </div>
-
-            <div className="pv-upload-row">
-              <div className="pv-upload-box">
-                <label className="pv-label">Punjab Police Khidmat Markaz<br />Token / Character Card<br /><span className="pv-upload-sub">Attach Scan / Verification Slip</span></label>
-                <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
-              </div>
-              <div className="pv-upload-box">
-                <label className="pv-label">Upload Certificate / Slip</label>
-                <label className="pv-upload-btn">Choose File<input type="file" hidden /></label>
-              </div>
-            </div>
-
-            <div className="pv-oath-block">
-              <input
-                type="checkbox"
-                id="criminal-oath"
-                checked={agreedToOath}
-                onChange={() => setAgreedToOath(!agreedToOath)}
-              />
-              <label htmlFor="criminal-oath">
-                <strong>Solemn Oath &amp; Consent for Criminal Background Verification / حلف نامہ</strong><br />
-                I solemnly swear under the laws of the Islamic Republic of Pakistan that I do not possess any
-                criminal convictions or active First Information Reports (FIRs) against any person. I authorize
-                Service Hub to contact third-party licensed/registered authorities with criminal justice departments.
-              </label>
-            </div>
-          </div>
-
-          {/* ── STEP 5: Payout ── */}
-          <div className="pv-card">
-            <div className="pv-section-header">
-              <span className="pv-step-num">5</span>
-              <h2 className="pv-section-title">Direct Payout Account (Raast / JazzCash)</h2>
-              <p className="pv-section-urdu">Immediate payments for all customer bookings</p>
-            </div>
-
-            <div className="pv-form-row">
-              <div className="pv-form-group">
-                <label className="pv-label">Payment Channel</label>
-                <select className="pv-input pv-select">
-                  <option>State Bank Raast IID (Phone/BAF ▼)</option>
-                  <option>JazzCash</option>
-                  <option>EasyPaisa</option>
-                </select>
-              </div>
-              <div className="pv-form-group">
-                <label className="pv-label">Raast ID / Account Number / IBAN</label>
-                <input className="pv-input" type="text" placeholder="PK00MZ900000000000000 or 0300-" />
-              </div>
-            </div>
-          </div>
-
-          {/* ── SUBMIT ── */}
-          <button
-            className="pv-submit-btn"
-            onClick={() => setCurrentPage && setCurrentPage('provider-login')}
+    <div className="pv-page-container">
+      {/* ── TOP BREADCRUMB & SWITCH ACTION ── */}
+      <div className="pv-top-nav-bar">
+        <div className="pv-breadcrumb-wrap">
+          <button 
+            type="button" 
+            className="pv-crumb-link" 
+            onClick={() => setCurrentPage && setCurrentPage('home')}
           >
-            ✅ Submit for Verified Partner Badge (24-48h Approval)
+            Home
           </button>
-          <p className="pv-submit-note">
-            Upon approval, your verified partner badge and dispatch access will become immediately active online.
-          </p>
+          <span className="pv-crumb-sep">›</span>
+          <span className="pv-crumb-current">Partner Network</span>
+          <span className="pv-crumb-sep">›</span>
+          <span className="pv-crumb-badge">Verified Pro Registration</span>
         </div>
 
-        {/* ═══════ RIGHT COLUMN ═══════ */}
-        <div className="pv-right">
+        <button 
+          type="button" 
+          className="pv-switch-login-btn"
+          onClick={() => setCurrentPage && setCurrentPage('provider-login')}
+        >
+          <span>Already a Registered Partner?</span>
+          <strong>Login to Provider Portal →</strong>
+        </button>
+      </div>
 
-          <div className="pv-sla-card">
-            <div className="pv-sla-header">
-              <span className="pv-sla-dot"></span>
-              <span className="pv-sla-title">VERIFICATION SLA</span>
+      {/* ── CINEMATIC HERO SECTION ── */}
+      <section className="pv-hero-banner animated-shadow-aura">
+        <div className="pv-hero-content">
+          <div className="pv-hero-chip">
+            <span className="pv-chip-dot"></span>
+            <span>MULTAN VERIFIED PRO ONBOARDING GATEWAY</span>
+          </div>
+
+          <h1 className="pv-hero-title">
+            Register as a Certified <span className="highlight-cyan">MUX Professional</span>
+          </h1>
+
+          <p className="pv-hero-urdu">
+            مکس سروسز پر مصدقہ کاریگر بنیں اور ملتان بھر سے براہِ راست روزانہ کام حاصل کریں
+          </p>
+
+          <p className="pv-hero-description">
+            Join Multan's fastest-growing technical artisan network. Connect directly with verified homeowners 
+            across Multan Cantt, Bosan Road, Gulgasht Colony, Shah Rukn-e-Alam, and surrounding sectors. 
+            Enjoy transparent upfront PKR pricing, 100% daily customer leads, and zero middleman cuts.
+          </p>
+
+          <div className="pv-hero-stats-strip">
+            <div className="pv-hstat-card">
+              <span className="pv-hstat-icon">🛡️</span>
+              <div className="pv-hstat-text">
+                <strong>100% Verified</strong>
+                <span>NADRA CNIC &amp; Criminal Clearance</span>
+              </div>
             </div>
-            <h3 className="pv-sla-time">24 – 48 Hours</h3>
-            <p className="pv-sla-desc">Average turnaround time for credential inspection and first dispatch access.</p>
-            <div className="pv-sla-rows">
-              <div className="pv-sla-row">
-                <span>Background Checks to NADRA/PMDC</span>
-                <span className="pv-sla-hrs">24 Hours</span>
+
+            <div className="pv-hstat-card">
+              <span className="pv-hstat-icon">💰</span>
+              <div className="pv-hstat-text">
+                <strong>PKR 75K – 120K+</strong>
+                <span>Average Monthly Pro Income</span>
               </div>
-              <div className="pv-sla-row">
-                <span>Payout / Reference Verification</span>
-                <span className="pv-sla-hrs">24 Hours</span>
+            </div>
+
+            <div className="pv-hstat-card">
+              <span className="pv-hstat-icon">🎉</span>
+              <div className="pv-hstat-text">
+                <strong>0% Commission</strong>
+                <span>Free on First 5 Orders Monthly</span>
               </div>
-              <div className="pv-sla-row">
-                <span>Account Live &amp; Lead submission</span>
-                <span className="pv-sla-hrs">Rev 2</span>
+            </div>
+
+            <div className="pv-hstat-card">
+              <span className="pv-hstat-icon">⏱️</span>
+              <div className="pv-hstat-text">
+                <strong>&lt; 30 Mins Dispatch</strong>
+                <span>Smart Locality Radius Routing</span>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="pv-hero-img">
-            <div className="pv-img-placeholder">
-              <span>⚡</span>
-              <p>Verified Pro</p>
-            </div>
-          </div>
-
-          <div className="pv-rating-card">
-            <div className="pv-stars">⭐⭐⭐⭐⭐</div>
-            <p className="pv-rating-val">4.92 / 5.0</p>
-            <p className="pv-rating-count">Join Over 5,000+ Verified Pros</p>
-            <p className="pv-rating-desc">
-              "Service Hub transformed my business as a certified electrician. Consistent customer bookings across Multan, upfront PKR payments, and respectful clients made all the difference."
+      {/* ── SUCCESS NOTICE BANNER (IF SUBMITTED) ── */}
+      {submitted ? (
+        <div className="pv-success-banner animated-shadow-aura">
+          <div className="pv-sb-icon">✅</div>
+          <div className="pv-sb-content">
+            <h2>Application Submitted Successfully! (درخواست موصول ہوگئی)</h2>
+            <p>
+              Your verification packet has been logged into our Multan Compliance Center (Registration Token: <strong>MUX-PRO-{Math.floor(100000 + Math.random() * 900000)}</strong>). 
+              Our team will review your CNIC and credentials within <strong>24 – 48 hours</strong>.
             </p>
-            <p className="pv-reviewer">— Akram Malik, Master Electrician</p>
-          </div>
-
-          <div className="pv-why-card">
-            <h4 className="pv-why-title">Why Professionals Choose Service HUB</h4>
-            <div className="pv-why-item">
-              <span className="pv-why-icon">✅</span>
-              <div>
-                <p className="pv-why-head">PKR 500,000 Income Guarantee</p>
-                <p className="pv-why-sub">Guaranteed earnings for your first 3 months on the platform</p>
-              </div>
-            </div>
-            <div className="pv-why-item">
-              <span className="pv-why-icon">🔒</span>
-              <div>
-                <p className="pv-why-head">Escrow-Backed Work</p>
-                <p className="pv-why-sub">We hold 100% earnings for your life inside of your membership</p>
-              </div>
-            </div>
-            <div className="pv-why-item">
-              <span className="pv-why-icon">📱</span>
-              <div>
-                <p className="pv-why-head">24/7 Technician Account</p>
-                <p className="pv-why-sub">24/7 coverage for all coverage for all for your business inside</p>
-              </div>
+            <div className="pv-sb-actions">
+              <button 
+                type="button" 
+                className="pv-btn-primary" 
+                onClick={() => setCurrentPage && setCurrentPage('provider-login')}
+              >
+                Proceed to Provider Login Portal →
+              </button>
+              <button 
+                type="button" 
+                className="pv-btn-secondary" 
+                onClick={() => setCurrentPage && setCurrentPage('home')}
+              >
+                Return to Homepage
+              </button>
             </div>
           </div>
+        </div>
+      ) : (
+        /* ── MAIN WORKSPACE GRID ── */
+        <div className="pv-main-grid">
+          {/* ═══════ LEFT COLUMN: ONBOARDING FORM ═══════ */}
+          <form className="pv-form-column" onSubmit={handleSubmit}>
+            
+            {/* STEP 1: CHOOSE PROFESSION */}
+            <div className="pv-form-card animated-shadow-aura">
+              <div className="pv-card-step-header">
+                <span className="pv-step-badge">STEP 1</span>
+                <div>
+                  <h2 className="pv-step-title">Select Your Skilled Trade / پیشہ منتخب کریں</h2>
+                  <p className="pv-step-subtitle">Choose your primary field of expertise in Multan</p>
+                </div>
+              </div>
 
-          <div className="pv-helpline-card">
-            <p className="pv-helpline-label">✅ Partner Verification Helpline</p>
-            <p className="pv-helpline-num">042-111-HUB-PRO</p>
-            <p className="pv-helpline-time">Mon – Sat 08 AM – 8:00 PM</p>
-          </div>
+              <div className="pv-professions-grid">
+                {professions.map((p) => {
+                  const isSelected = selectedProfession === p.id
+                  return (
+                    <div
+                      key={p.id}
+                      className={`pv-profession-box ${isSelected ? 'active' : ''}`}
+                      onClick={() => setSelectedProfession(p.id)}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      <div className="pv-pbox-icon">{p.icon}</div>
+                      <h3 className="pv-pbox-title">{p.title}</h3>
+                      <p className="pv-pbox-urdu">{p.urdu}</p>
+                      <p className="pv-pbox-desc">{p.desc}</p>
+                      {isSelected && <span className="pv-pbox-check">✓ Active Choice</span>}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
 
-          <div className="pv-app-card">
-            <span className="pv-app-icon">📱</span>
-            <div>
-              <p className="pv-app-title">Service HUB Pro App</p>
-              <p className="pv-app-desc">
-                Access real-time job dispatches, navigate via Bykea, Al-maps, and manage daily client
-                info in one place.
+            {/* STEP 2: PERSONAL IDENTITY & CONTACT */}
+            <div className="pv-form-card animated-shadow-aura">
+              <div className="pv-card-step-header">
+                <span className="pv-step-badge">STEP 2</span>
+                <div>
+                  <h2 className="pv-step-title">Technician Identity &amp; Contact Details</h2>
+                  <p className="pv-step-subtitle">Standard National Identity parameters for verified doorstep dispatch</p>
+                </div>
+              </div>
+
+              <div className="pv-fields-grid">
+                <div className="pv-input-group">
+                  <label htmlFor="fullName">Full Name (as per CNIC / شناختی کارڈ کے مطابق نام) *</label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    placeholder="e.g. Muhammad Rafiq"
+                    className="pv-input-field"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="pv-input-group">
+                  <label htmlFor="mobile">Mobile Number (WhatsApp Enabled) *</label>
+                  <input
+                    type="tel"
+                    id="mobile"
+                    name="mobile"
+                    placeholder="0300-1234567"
+                    className="pv-input-field"
+                    value={formData.mobile}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="pv-input-group">
+                  <label htmlFor="cnic">13-Digit CNIC Number (قومی شناختی کارڈ نمبر) *</label>
+                  <input
+                    type="text"
+                    id="cnic"
+                    name="cnic"
+                    placeholder="36302-XXXXXXX-X"
+                    className="pv-input-field"
+                    value={formData.cnic}
+                    onChange={handleChange}
+                    required
+                  />
+                  <span className="pv-field-hint">✓ Encrypted &amp; authenticated via NADRA standards</span>
+                </div>
+
+                <div className="pv-input-group">
+                  <label htmlFor="email">Email Address (Optional)</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="rafiq.electrician@gmail.com"
+                    className="pv-input-field"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="pv-input-group">
+                  <label htmlFor="zone">Operating Locality in Multan *</label>
+                  <select
+                    id="zone"
+                    name="zone"
+                    className="pv-input-field pv-select-field"
+                    value={formData.zone}
+                    onChange={handleChange}
+                  >
+                    <option>Multan Cantt &amp; Sadar</option>
+                    <option>Bosan Road &amp; BZU Sector</option>
+                    <option>Gulgasht Colony &amp; Gol Bagh</option>
+                    <option>Shah Rukn-e-Alam &amp; New Multan</option>
+                    <option>Model Town &amp; Northern Bypass</option>
+                    <option>Suraj Miani &amp; Walled City</option>
+                    <option>Chowk Kumharanwala &amp; Vehari Road</option>
+                    <option>All Multan Municipal Sectors (30 Mins Radius)</option>
+                  </select>
+                </div>
+
+                <div className="pv-input-group">
+                  <label htmlFor="experience">Years of Practical Trade Experience *</label>
+                  <select
+                    id="experience"
+                    name="experience"
+                    className="pv-input-field pv-select-field"
+                    value={formData.experience}
+                    onChange={handleChange}
+                  >
+                    <option>1 – 3 Years (Junior Technician)</option>
+                    <option>4 – 7 Years (Skilled Craftsman)</option>
+                    <option>8+ Years (Master Ustad / Specialist)</option>
+                    <option>15+ Years (Industry Veteran)</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Upload CNIC Front & Back */}
+              <div className="pv-upload-row">
+                <div className="pv-upload-card">
+                  <div className="pv-uc-head">
+                    <span className="pv-uc-icon">🪪</span>
+                    <strong>CNIC Front Photo</strong>
+                  </div>
+                  <p>Clear colored photo of your National ID Card front side</p>
+                  <label className="pv-btn-file">
+                    <span>Choose File</span>
+                    <input type="file" accept="image/*" hidden />
+                  </label>
+                </div>
+
+                <div className="pv-upload-card">
+                  <div className="pv-uc-head">
+                    <span className="pv-uc-icon">🪪</span>
+                    <strong>CNIC Back Photo</strong>
+                  </div>
+                  <p>Clear colored photo showing current address &amp; signature</p>
+                  <label className="pv-btn-file">
+                    <span>Choose File</span>
+                    <input type="file" accept="image/*" hidden />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* STEP 3: VOCATIONAL CREDENTIALS OR USTAD REFERENCE */}
+            <div className="pv-form-card animated-shadow-aura">
+              <div className="pv-card-step-header">
+                <span className="pv-step-badge">STEP 3</span>
+                <div>
+                  <h2 className="pv-step-title">Trade Certification &amp; Apprenticeship Pathway</h2>
+                  <p className="pv-step-subtitle">Select how your craftsmanship qualifications are proven</p>
+                </div>
+              </div>
+
+              {/* Pathway Toggle */}
+              <div className="pv-pathway-tabs">
+                <button
+                  type="button"
+                  className={`pv-ptab ${pathway === 'diploma' ? 'active' : ''}`}
+                  onClick={() => setPathway('diploma')}
+                >
+                  <span className="pv-ptab-icon">📜</span>
+                  <div className="pv-ptab-text">
+                    <strong>TEVTA / NAVTTC Technical Diploma</strong>
+                    <span>Certified diploma or trade test certificate</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  className={`pv-ptab ${pathway === 'ustad' ? 'active' : ''}`}
+                  onClick={() => setPathway('ustad')}
+                >
+                  <span className="pv-ptab-icon">🤝</span>
+                  <div className="pv-ptab-text">
+                    <strong>Master Ustad Apprenticeship Reference</strong>
+                    <span>Verified workshop apprenticeship &amp; market repute</span>
+                  </div>
+                </button>
+              </div>
+
+              {pathway === 'diploma' ? (
+                <div className="pv-fields-grid">
+                  <div className="pv-input-group">
+                    <label htmlFor="diplomaInstitute">Diploma Awarding Body / Technical Institute *</label>
+                    <input
+                      type="text"
+                      id="diplomaInstitute"
+                      name="diplomaInstitute"
+                      placeholder="e.g. Government College of Technology (GCT) Multan / TEVTA"
+                      className="pv-input-field"
+                      value={formData.diplomaInstitute}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="pv-input-group">
+                    <label htmlFor="diplomaNumber">Roll / Certificate Number *</label>
+                    <input
+                      type="text"
+                      id="diplomaNumber"
+                      name="diplomaNumber"
+                      placeholder="e.g. DAE-ELEC-2021-8945"
+                      className="pv-input-field"
+                      value={formData.diplomaNumber}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="pv-fields-grid">
+                  <div className="pv-input-group">
+                    <label htmlFor="ustadName">Master Ustad / Workshop Mentor Name *</label>
+                    <input
+                      type="text"
+                      id="ustadName"
+                      name="ustadName"
+                      placeholder="e.g. Ustad Bashir Ahmad (Master Plumber)"
+                      className="pv-input-field"
+                      value={formData.ustadName}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="pv-input-group">
+                    <label htmlFor="workshopAddress">Workshop Address / Multan Market *</label>
+                    <input
+                      type="text"
+                      id="workshopAddress"
+                      name="workshopAddress"
+                      placeholder="e.g. Shop #12, Loha Market, Haram Gate, Multan"
+                      className="pv-input-field"
+                      value={formData.workshopAddress}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="pv-input-group pv-full-width">
+                    <label htmlFor="ustadContact">Ustad Contact Mobile (For verification call) *</label>
+                    <input
+                      type="tel"
+                      id="ustadContact"
+                      name="ustadContact"
+                      placeholder="0301-7654321"
+                      className="pv-input-field"
+                      value={formData.ustadContact}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Tools Checklist */}
+              <div className="pv-tools-box">
+                <span className="pv-tools-badge">✓ PROFESSIONAL TOOLKIT PREREQUISITE</span>
+                <p className="pv-tools-desc">
+                  Every MUX verified technician must carry their own specialized digital meters, testing equipment, 
+                  and safety gear upon arrival at the customer's doorstep.
+                </p>
+                <div className="pv-tools-pills">
+                  <span>⚡ Digital Multimeter / Circuit Testers</span>
+                  <span>🔧 Acoustic Leak &amp; Pressure Gauges</span>
+                  <span>❄️ Manifold Vacuum Pump Kit</span>
+                  <span>🛡️ Insulated Safety Gloves &amp; Shoes</span>
+                </div>
+              </div>
+            </div>
+
+            {/* STEP 4: POLICE CHARACTER CLEARANCE & INTEGRITY OATH */}
+            <div className="pv-form-card animated-shadow-aura">
+              <div className="pv-card-step-header">
+                <span className="pv-step-badge">STEP 4</span>
+                <div>
+                  <h2 className="pv-step-title">Police Character Clearance &amp; Legal Oath</h2>
+                  <p className="pv-step-subtitle">قومی حلف نامہ اور پولیس کریکٹر ویری فکیشن</p>
+                </div>
+              </div>
+
+              <div className="pv-police-strip">
+                <div className="pv-ps-icon">👮‍♂️</div>
+                <div className="pv-ps-text">
+                  <strong>Punjab Police Khidmat Markaz Character Authentication</strong>
+                  <p>
+                    Technicians must possess clean legal standing with no active FIRs or criminal convictions. 
+                    Token slip or character clearance slip from Multan Khidmat Markaz (Kutchery / Cantt / MDA Chowk) is verified.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pv-upload-card pv-single-upload">
+                <div className="pv-uc-head">
+                  <span className="pv-uc-icon">📄</span>
+                  <strong>Police Khidmat Markaz Clearance Slip / Certificate</strong>
+                </div>
+                <p>Upload token slip, character certificate or police verification slip (JPG or PDF)</p>
+                <label className="pv-btn-file">
+                  <span>Choose Document</span>
+                  <input type="file" accept="image/*,.pdf" hidden />
+                </label>
+              </div>
+
+              <div className="pv-oath-declaration-box">
+                <label className="pv-checkbox-wrap">
+                  <input
+                    type="checkbox"
+                    checked={agreedToOath}
+                    onChange={(e) => setAgreedToOath(e.target.checked)}
+                    required
+                  />
+                  <span className="pv-custom-checkbox"></span>
+                  <span className="pv-oath-text">
+                    <strong>Solemn Oath &amp; Professional Integrity Undertaking (حلف نامہ):</strong><br />
+                    I solemnly swear under the laws of the Islamic Republic of Pakistan that I possess no criminal record 
+                    or active FIRs. I commit to honoring customer privacy, strictly charging agreed upfront PKR prices, 
+                    using genuine manufacturer parts, and executing every service with highest trade excellence.
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            {/* STEP 5: DIRECT PAYOUTS */}
+            <div className="pv-form-card animated-shadow-aura">
+              <div className="pv-card-step-header">
+                <span className="pv-step-badge">STEP 5</span>
+                <div>
+                  <h2 className="pv-step-title">Direct Payout Account (Raast / JazzCash / Bank)</h2>
+                  <p className="pv-step-subtitle">Receive 100% of customer earnings instantly with zero bank deduction</p>
+                </div>
+              </div>
+
+              <div className="pv-fields-grid">
+                <div className="pv-input-group">
+                  <label htmlFor="payoutChannel">Payout Channel *</label>
+                  <select
+                    id="payoutChannel"
+                    name="payoutChannel"
+                    className="pv-input-field pv-select-field"
+                    value={formData.payoutChannel}
+                    onChange={handleChange}
+                  >
+                    <option>State Bank Raast ID (Instant 0 Fee)</option>
+                    <option>JazzCash Merchant / Mobile Account</option>
+                    <option>EasyPaisa Business Wallet</option>
+                    <option>Bank Alfalah / HBL / Meezan Bank Transfer</option>
+                  </select>
+                </div>
+
+                <div className="pv-input-group">
+                  <label htmlFor="accountNumber">Raast ID / Account Number / IBAN *</label>
+                  <input
+                    type="text"
+                    id="accountNumber"
+                    name="accountNumber"
+                    placeholder="e.g. 03001234567 or PK36ALFH0000..."
+                    className="pv-input-field"
+                    value={formData.accountNumber}
+                    onChange={handleChange}
+                    required
+                  />
+                  <span className="pv-field-hint">✓ Escrow funds disburse directly to this account immediately upon job sign-off</span>
+                </div>
+              </div>
+            </div>
+
+            {/* SUBMIT BUTTON ROW */}
+            <div className="pv-submit-row">
+              <button type="submit" className="pv-btn-submit-app animated-shadow-aura">
+                <span>Submit Application for Verified Partner Badge (24-48h Review)</span>
+                <span className="pv-btn-arrow">→</span>
+              </button>
+              <p className="pv-submit-disclaimer">
+                Upon submission, our Multan onboarding desk will review your credentials within 24 to 48 hours. 
+                Once activated, you will receive real-time job dispatch notifications directly to your phone.
               </p>
             </div>
-          </div>
+          </form>
 
+          {/* ═══════ RIGHT COLUMN: TRUST & SLA SIDEBAR ═══════ */}
+          <aside className="pv-sidebar-column">
+            
+            {/* SLA CARD */}
+            <div className="pv-side-card animated-shadow-aura">
+              <div className="pv-sc-header">
+                <span className="pv-live-indicator"></span>
+                <h3>VERIFICATION SLA</h3>
+              </div>
+              <div className="pv-sla-time-box">
+                <strong className="pv-sla-num">24 – 48</strong>
+                <span className="pv-sla-unit">Hours Turnaround</span>
+              </div>
+              <p className="pv-sla-info">
+                Average approval turnaround time for credential inspection and dispatch clearance across Multan.
+              </p>
+              
+              <div className="pv-sla-steps-list">
+                <div className="pv-sla-item done">
+                  <span className="pv-sstep-check">✓</span>
+                  <div>
+                    <strong>Identity &amp; CNIC Audit</strong>
+                    <span>Automated NADRA parameter check</span>
+                  </div>
+                </div>
+
+                <div className="pv-sla-item in-progress">
+                  <span className="pv-sstep-check">⏱</span>
+                  <div>
+                    <strong>Trade Credential Evaluation</strong>
+                    <span>TEVTA / Master Ustad verification</span>
+                  </div>
+                </div>
+
+                <div className="pv-sla-item pending">
+                  <span className="pv-sstep-check">🚀</span>
+                  <div>
+                    <strong>Live Dispatch Activation</strong>
+                    <span>Account goes live on customer maps</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* WHY CHOOSE MUX SERVICES */}
+            <div className="pv-side-card animated-shadow-aura">
+              <h3 className="pv-side-title">Why Top Multan Pros Choose MUX</h3>
+              
+              <div className="pv-why-points">
+                <div className="pv-why-point">
+                  <span className="pv-wp-icon">💰</span>
+                  <div>
+                    <strong>Upfront Escrow Protection</strong>
+                    <p>Clients pay upfront in escrow; zero risk of delayed or unpaid labor charges.</p>
+                  </div>
+                </div>
+
+                <div className="pv-why-point">
+                  <span className="pv-wp-icon">📍</span>
+                  <div>
+                    <strong>30-Min Locality Radius</strong>
+                    <p>Dispatch routes jobs in your neighborhood so you spend less time driving and more time earning.</p>
+                  </div>
+                </div>
+
+                <div className="pv-why-point">
+                  <span className="pv-wp-icon">⭐</span>
+                  <div>
+                    <strong>Verified Pro Badge Prestige</strong>
+                    <p>Stand out from informal day-laborers with authenticated ratings and police clearance.</p>
+                  </div>
+                </div>
+
+                <div className="pv-why-point">
+                  <span className="pv-wp-icon">📱</span>
+                  <div>
+                    <strong>Direct Customer Chat</strong>
+                    <p>Coordinate directions and job requirements through in-app live messaging.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* TESTIMONIAL CARD */}
+            <div className="pv-side-card pv-testimonial-card animated-shadow-aura">
+              <div className="pv-tstars">⭐⭐⭐⭐⭐ 5.0</div>
+              <p className="pv-tquote">
+                &ldquo;Before MUX SERVICES, I had to wait in market addas hoping for electrical jobs. 
+                Now I receive 4 to 6 verified doorstep service calls every day in Cantt and Bosan Road. 
+                My monthly earnings exceed PKR 90,000!&rdquo;
+              </p>
+              <div className="pv-tauthor">
+                <span className="pv-ta-avatar">🔧</span>
+                <div>
+                  <strong>Muhammad Rafiq</strong>
+                  <span>Master Electrician • Multan Cantt</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 24/7 HELPLINE CARD */}
+            <div className="pv-side-card pv-helpline-side-card animated-shadow-aura">
+              <span className="pv-hl-badge">24/7 PRO ONBOARDING DESK</span>
+              <h4 className="pv-hl-num">061-652-MUX1</h4>
+              <p className="pv-hl-sub">Multan Khidmat Desk: MDA Chowk &amp; Cantt</p>
+              <a href="tel:03006896891" className="pv-hl-call-btn">
+                <span>📞 Call Onboarding Support</span>
+              </a>
+            </div>
+
+          </aside>
         </div>
-      </div>
+      )}
     </div>
   )
 }
