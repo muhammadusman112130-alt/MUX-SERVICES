@@ -534,17 +534,15 @@ function ProviderVerification({ setCurrentPage }) {
                 {loading ? 'Submitting Application...' : 'Register as Verified Pro →'}
               </button>
 
-              {/* Switch to Login with Prominent Lighting Button */}
-              <div className="provider-reg-highlight-wrap">
-                <span className="prh-question">Already registered as a partner?</span>
+              {/* Switch to Login Text */}
+              <div className="auth-switch">
+                <span>Already registered as a partner?</span>
                 <button
                   type="button"
-                  className="provider-reg-lighting-btn"
+                  className="switch-link"
                   onClick={() => setCurrentPage && setCurrentPage('provider-login')}
                 >
-                  <span className="prh-glow-aura" aria-hidden="true"></span>
-                  <span className="prh-btn-text">Sign In to Provider Portal</span>
-                  <span className="prh-arrow">→</span>
+                  Sign In to Provider Portal
                 </button>
               </div>
             </form>

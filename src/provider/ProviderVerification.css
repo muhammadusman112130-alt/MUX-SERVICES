@@ -390,132 +390,40 @@
   box-shadow: 0 10px 32px rgba(143, 211, 232, 0.75), 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* ── HIGHLIGHTED SWITCH BUTTON WITH LIGHTING ANIMATION ── */
-.provider-verification-page .provider-reg-highlight-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  margin-top: 1.25rem;
-  text-align: center;
-}
-
-.provider-verification-page .prh-question {
-  font-size: 0.92rem;
-  color: #8FD3E8 !important;
-  font-weight: 700;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95) !important;
-}
-
-.provider-verification-page .provider-reg-lighting-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  background: linear-gradient(135deg, rgba(23, 247, 247, 0.22) 0%, rgba(143, 211, 232, 0.28) 100%) !important;
-  border: 2px solid #17f7f7 !important;
-  color: #17f7f7 !important;
-  font-size: 1.02rem;
-  font-weight: 900;
-  padding: 0.85rem 1.6rem;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  text-shadow: 0 0 12px rgba(23, 247, 247, 0.8), 0 2px 4px rgba(0, 0, 0, 0.95);
-  animation: registerPulseLighting 2.6s ease-in-out infinite alternate;
-  width: 100%;
-  max-width: 380px;
-  box-sizing: border-box;
-}
-
-.provider-verification-page .prh-glow-aura {
-  position: absolute;
-  inset: -6px;
-  border-radius: 50px;
-  background: radial-gradient(circle, rgba(23, 247, 247, 0.55) 0%, rgba(143, 211, 232, 0.25) 50%, transparent 75%);
-  filter: blur(12px);
-  z-index: -1;
-  pointer-events: none;
-  animation: lightAuraBreath 2.6s ease-in-out infinite alternate;
-}
-
-.provider-verification-page .prh-arrow {
-  font-size: 1.2rem;
-  transition: transform 0.25s ease;
-}
-
-.provider-verification-page .provider-reg-lighting-btn:hover {
-  background: #17f7f7 !important;
-  color: #0E2E33 !important;
-  border-color: #EEF4F4 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(23, 247, 247, 0.9), 0 0 60px rgba(143, 211, 232, 0.6);
-  text-shadow: none;
-}
-
-.provider-verification-page .provider-reg-lighting-btn:hover .prh-arrow {
-  transform: translateX(4px);
-}
-
-@keyframes registerPulseLighting {
-  0% {
-    box-shadow: 0 0 15px rgba(23, 247, 247, 0.4), inset 0 0 10px rgba(23, 247, 247, 0.2);
-    border-color: #17f7f7;
-  }
-  50% {
-    box-shadow: 0 0 35px rgba(23, 247, 247, 0.85), 0 0 50px rgba(143, 211, 232, 0.45), inset 0 0 18px rgba(23, 247, 247, 0.35);
-    border-color: #EEF4F4;
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(23, 247, 247, 0.4), inset 0 0 10px rgba(23, 247, 247, 0.2);
-    border-color: #17f7f7;
-  }
-}
-
-@keyframes lightAuraBreath {
-  0% {
-    opacity: 0.4;
-    transform: scale(0.96);
-  }
-  100% {
-    opacity: 0.9;
-    transform: scale(1.06);
-  }
-}
-
-/* Switch link */
+/* Switch link - Crystal Clear, Bold & Fully Visible Text */
 .provider-verification-page .auth-switch {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  font-size: 0.92rem;
-  color: #8FD3E8 !important;
-  margin-top: 0.85rem;
-  font-weight: 600;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95) !important;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  font-size: 0.98rem;
+  color: #EEF4F4 !important;
+  margin-top: 1.35rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 16px rgba(0, 0, 0, 0.85) !important;
+  text-align: center;
 }
 
 .provider-verification-page .switch-link {
   background: none;
   border: none;
-  color: #8FD3E8 !important;
-  font-weight: 800;
-  font-size: 0.92rem;
+  color: #17f7f7 !important;
+  font-weight: 900;
+  font-size: 1.04rem;
   cursor: pointer;
   padding: 0;
-  transition: all 0.2s;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95) !important;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-shadow: 0 0 12px rgba(23, 247, 247, 0.85), 0 2px 8px rgba(0, 0, 0, 0.95) !important;
+  transition: all 0.25s ease;
+  display: inline-block;
 }
 
 .provider-verification-page .switch-link:hover {
-  color: #bbf0fd !important;
-  text-shadow: 0 0 10px rgba(143, 211, 232, 0.9) !important;
-  text-decoration: underline;
+  color: #ffffff !important;
+  text-shadow: 0 0 18px rgba(23, 247, 247, 1), 0 0 28px rgba(143, 211, 232, 0.9) !important;
+  transform: translateY(-1px);
 }
 
 /* Success Confirmation Screen directly over background */
@@ -682,42 +590,30 @@
   background: #262626 !important;
 }
 
+[data-theme="warm-stone"] .provider-verification-page .auth-switch,
+.theme-warm-stone .provider-verification-page .auth-switch {
+  color: #0A0A0A !important;
+  -webkit-text-fill-color: #0A0A0A !important;
+  font-size: 0.98rem;
+  font-weight: 800 !important;
+  text-shadow: 0 0 10px #FFFFF0, 0 0 18px #FFFFF0, 0 1px 3px rgba(255, 255, 240, 0.95) !important;
+}
+
 [data-theme="warm-stone"] .provider-verification-page .switch-link,
 .theme-warm-stone .provider-verification-page .switch-link {
   color: #0A0A0A !important;
   -webkit-text-fill-color: #0A0A0A !important;
-  font-weight: 900 !important;
+  font-weight: 950 !important;
+  font-size: 1.04rem;
   text-decoration: underline !important;
+  text-underline-offset: 4px;
+  text-shadow: 0 0 12px #FFFFF0, 0 0 22px #FFFFF0, 0 0 30px #FFFFF0 !important;
 }
 
-[data-theme="warm-stone"] .provider-verification-page .prh-question,
-.theme-warm-stone .provider-verification-page .prh-question {
-  color: #0A0A0A !important;
-  -webkit-text-fill-color: #0A0A0A !important;
-  text-shadow: 0 0 10px #FFFFF0, 0 0 16px #FFFFF0 !important;
-  font-weight: 700 !important;
-}
-
-[data-theme="warm-stone"] .provider-verification-page .provider-reg-lighting-btn,
-.theme-warm-stone .provider-verification-page .provider-reg-lighting-btn {
-  background: #0A0A0A !important;
-  color: #FFFFF0 !important;
-  -webkit-text-fill-color: #FFFFF0 !important;
-  border-color: #0A0A0A !important;
-  box-shadow: 0 0 25px rgba(255, 255, 240, 0.95), 0 4px 18px rgba(10, 10, 10, 0.35) !important;
-  text-shadow: none !important;
-}
-
-[data-theme="warm-stone"] .provider-verification-page .provider-reg-lighting-btn:hover,
-.theme-warm-stone .provider-verification-page .provider-reg-lighting-btn:hover {
-  background: #262626 !important;
-  color: #FFFFF0 !important;
-  box-shadow: 0 0 35px rgba(255, 255, 240, 1), 0 6px 25px rgba(10, 10, 10, 0.5) !important;
-}
-
-[data-theme="warm-stone"] .provider-verification-page .prh-glow-aura,
-.theme-warm-stone .provider-verification-page .prh-glow-aura {
-  background: radial-gradient(circle, rgba(255, 255, 240, 0.9) 0%, rgba(255, 255, 240, 0.5) 50%, transparent 80%) !important;
+[data-theme="warm-stone"] .provider-verification-page .switch-link:hover,
+.theme-warm-stone .provider-verification-page .switch-link:hover {
+  color: #000000 !important;
+  text-shadow: 0 0 16px #FFFFF0, 0 0 28px #FFFFF0 !important;
 }
 
 /* ── WARM STONE LIGHT MODE: FILE UPLOADS (NO CARDS) ── */
