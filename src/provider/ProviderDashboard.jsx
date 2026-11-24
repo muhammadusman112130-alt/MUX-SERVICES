@@ -439,12 +439,12 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
               </button>
             </div>
 
-            {/* Connected Journey Pipeline with Black Line Linking All 4 Cards */}
+            {/* Connected Journey Pipeline with Black Line Linking All 4 Cards (Clean & Static) */}
             <div className="how-connected-flow-wrapper">
               <div className="how-pipeline-line" aria-hidden="true"></div>
               <div className="how-steps-connected-grid">
                 {HOW_IT_WORKS_STEPS.map((step, idx) => (
-                  <div key={idx} className={`how-step-connected-card step-card-anim-${idx}`}>
+                  <div key={idx} className="how-step-connected-card">
                     <div className="step-joint-node">
                       <span className="node-core"></span>
                     </div>

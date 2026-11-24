@@ -14,17 +14,6 @@
   }
 }
 
-@keyframes ambientAuraBreath {
-  0%, 100% {
-    opacity: 0.85;
-    transform: translateY(-50%) scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(-50%) scale(1.06);
-  }
-}
-
 @keyframes proCardFloat0 {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-7px); }
@@ -422,27 +411,6 @@
   max-width: 860px;
   padding: 1rem 0;
   z-index: 5;
-}
-
-/* Ambient Animated Backlight behind Hero Text for Crystal Visibility */
-.slide-hero-direct-content::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -25px;
-  transform: translateY(-50%);
-  width: calc(100% + 50px);
-  height: 320px;
-  background: radial-gradient(
-    ellipse at 30% 50%,
-    rgba(10, 10, 10, 0.82) 0%,
-    rgba(10, 10, 10, 0.52) 55%,
-    rgba(10, 10, 10, 0) 100%
-  );
-  filter: blur(26px);
-  z-index: -1;
-  pointer-events: none;
-  animation: ambientAuraBreath 5s ease-in-out infinite;
 }
 
 .slide-badge-wrapper {
@@ -1077,22 +1045,16 @@
   border-radius: 16px;
   padding: 1.8rem 1.3rem;
   position: relative;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s ease;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-/* Staggered Floating Animations on Workflow Cards */
-.step-card-anim-0 { animation: proCardFloat0 6s ease-in-out infinite; }
-.step-card-anim-1 { animation: proCardFloat1 6.5s ease-in-out infinite 0.5s; }
-.step-card-anim-2 { animation: proCardFloat2 5.8s ease-in-out infinite 1s; }
-.step-card-anim-3 { animation: proCardFloat3 6.3s ease-in-out infinite 1.5s; }
-
 .how-step-connected-card:hover {
-  transform: translateY(-8px) scale(1.02) !important;
+  transform: translateY(-4px);
   background: #141414;
-  box-shadow: 0 18px 42px rgba(255, 255, 240, 0.3);
+  box-shadow: 0 12px 30px rgba(255, 255, 240, 0.2);
   border-color: #FFFFF0;
 }
 
@@ -1284,16 +1246,6 @@
   color: #0A0A0A !important;
   text-shadow: 0 0 14px #FFFFF0, 0 0 24px #FFFFF0 !important;
   font-weight: 700 !important;
-}
-
-[data-theme="warm-stone"] .slide-hero-direct-content::before,
-.theme-warm-stone .slide-hero-direct-content::before {
-  background: radial-gradient(
-    ellipse at 30% 50%,
-    rgba(255, 255, 240, 0.92) 0%,
-    rgba(255, 255, 240, 0.6) 55%,
-    rgba(255, 255, 240, 0) 100%
-  ) !important;
 }
 
 [data-theme="warm-stone"] .pillars-jet-pipeline-line,
