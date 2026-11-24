@@ -763,7 +763,7 @@ function Profile({ onLogout, setCurrentPage, user, onUserUpdate, currentTheme = 
             <div className="cptc-header">
               <div>
                 <h3 className="cptc-title">General Settings &amp; Theme Mode</h3>
-                <p className="cptc-sub">Customize the website appearance, colors, and display theme across the entire Service HUB platform.</p>
+                <p className="cptc-sub">Customize the website appearance, colors, and display theme across the entire MUX SERVICES platform.</p>
               </div>
               <span className="cp-theme-current-badge">
                 Active: {currentTheme === 'warm-stone' ? 'Warm Stone Light' : 'Default Dark MUX'}
