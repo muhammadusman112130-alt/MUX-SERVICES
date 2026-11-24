@@ -67,11 +67,15 @@ function Navbar({
       <div className={`navbar-container${isMenuOpen ? ' is-menu-open' : ''}`}>
         <div className="navbar-logo">
           <a
-            href="/"
+            href={isProviderLoggedIn ? "/provider-dashboard" : "/"}
             className="logo-link"
             onClick={(e) => {
               e.preventDefault()
-              setCurrentPage('home')
+              if (isProviderLoggedIn) {
+                setCurrentPage('provider-dashboard')
+              } else {
+                setCurrentPage('home')
+              }
             }}
             aria-label="MUX SERVICES Home"
           >
@@ -108,9 +112,16 @@ function Navbar({
         <ul className="navbar-menu" id="main-navigation">
           <li>
             <a 
-              href="/" 
-              className={currentPage === 'home' ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}
+              href={isProviderLoggedIn ? "/provider-dashboard" : "/"} 
+              className={(isProviderLoggedIn ? (currentPage === 'provider-dashboard' || currentPage === 'home') : currentPage === 'home') ? 'active' : ''}
+              onClick={(e) => { 
+                e.preventDefault(); 
+                if (isProviderLoggedIn) {
+                  setCurrentPage('provider-dashboard');
+                } else {
+                  setCurrentPage('home');
+                }
+              }}
             >
               <span className="nav-btn-text">Home</span>
             </a>

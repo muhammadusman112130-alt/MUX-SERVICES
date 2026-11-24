@@ -1,6 +1,6 @@
 /* ==========================================================================
    MUX SERVICES - PROVIDER HOME / DASHBOARD STYLES
-   With Glowing Animations, Hero Carousel & Dual-Theme (Dark & Warm Stone)
+   With Glowing Animations, Full-Width Hero Slider & Dual-Theme (Dark & Warm Stone)
    ========================================================================== */
 
 /* Keyframe Animations */
@@ -315,26 +315,19 @@
   box-shadow: 0 0 14px rgba(239, 68, 68, 0.4);
 }
 
-/* Main Content Layout */
-.provider-main-content {
-  max-width: 1280px;
-  margin: 1.5rem auto 0 auto;
-  padding: 0 1.5rem;
-}
-
 /* ==========================================================================
-   HERO CAROUSEL SECTION (NO HUMANS - TECHNICAL PRECISION BENCHES)
+   FULL-WIDTH HERO SLIDER (SEAMLESS - NO CARD CONTAINER)
    ========================================================================== */
-.provider-hero-carousel-section {
+.provider-hero-carousel-section.full-width-banner {
   position: relative;
   width: 100%;
-  height: 420px;
-  border-radius: 18px;
+  height: 440px;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(20, 241, 149, 0.2);
-  border: 1px solid rgba(20, 241, 149, 0.3);
+  border: none;
+  border-bottom: 1px solid rgba(20, 241, 149, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   margin-bottom: 2rem;
-  animation: pulseCyanGlow 4s infinite ease-in-out;
 }
 
 .carousel-viewport {
@@ -369,18 +362,24 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(11, 34, 39, 0.94) 0%,
-    rgba(11, 34, 39, 0.8) 55%,
+    rgba(11, 34, 39, 0.95) 0%,
+    rgba(11, 34, 39, 0.82) 50%,
     rgba(11, 34, 39, 0.35) 100%
   );
   z-index: 1;
 }
 
-.slide-content-glass {
+.slide-content-container {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.slide-content-glass {
   max-width: 720px;
-  padding: 2.5rem 3rem;
 }
 
 .slide-badge-wrapper {
@@ -535,18 +534,19 @@
 }
 
 .arrow-prev {
-  left: 1.25rem;
+  left: 1.5rem;
 }
 
 .arrow-next {
-  right: 1.25rem;
+  right: 1.5rem;
 }
 
 /* Carousel Dots */
 .carousel-pagination-dots {
   position: absolute;
   bottom: 1.25rem;
-  left: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
   display: flex;
   align-items: center;
@@ -599,6 +599,13 @@
 .carousel-hud-counter .separator {
   margin: 0 0.35rem;
   color: rgba(255, 255, 255, 0.4);
+}
+
+/* Main Content Layout */
+.provider-main-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 /* ==========================================================================
@@ -713,6 +720,84 @@
   gap: 1.75rem;
 }
 
+/* Services Dispatch Shortcut Banner */
+.services-request-dispatch-banner {
+  background: linear-gradient(135deg, rgba(20, 241, 149, 0.15) 0%, rgba(14, 46, 51, 0.9) 100%);
+  border: 1px solid #14F195;
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 20px rgba(20, 241, 149, 0.2);
+  flex-wrap: wrap;
+}
+
+.srd-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.srd-radar-icon {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(20, 241, 149, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.srd-pulse-ring {
+  position: absolute;
+  inset: -4px;
+  border: 2px solid #14F195;
+  border-radius: 50%;
+  animation: radarScanPing 2s infinite ease-in-out;
+}
+
+.srd-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.srd-desc {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.84rem;
+  color: rgba(230, 244, 241, 0.85);
+}
+
+.srd-desc strong {
+  color: #14F195;
+}
+
+.srd-navigate-btn {
+  background: #14F195;
+  color: #0B2227;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 14px rgba(20, 241, 149, 0.4);
+}
+
+.srd-navigate-btn:hover {
+  background: #25F8A2;
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(20, 241, 149, 0.6);
+}
+
 /* ==========================================================================
    ACTIVE IN-FLIGHT MISSION CARD
    ========================================================================== */
@@ -723,7 +808,7 @@
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
   transition: all 0.25s ease;
 }
 
@@ -1040,10 +1125,8 @@
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* ==========================================================================
-   INCOMING LEADS RADAR
-   ========================================================================== */
-.incoming-leads-radar-section {
+/* Technical Dispatch Standards Card */
+.provider-diagnostic-hub-card {
   background: rgba(14, 46, 51, 0.75);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(20, 241, 149, 0.22);
@@ -1051,254 +1134,57 @@
   padding: 1.5rem;
 }
 
-.leads-radar-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+.diagnostic-hub-header {
   margin-bottom: 1.25rem;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
-.leads-section-title {
+.hub-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #14F195;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.diagnostic-hub-header h4 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-.radar-ping-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #14F195;
-  box-shadow: 0 0 10px #14F195;
-  animation: radarScanPing 2s infinite ease-in-out;
-}
-
-.leads-section-sub {
-  margin: 0.25rem 0 0 0;
-  font-size: 0.84rem;
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.leads-filter-pills {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  flex-wrap: wrap;
-}
-
-.filter-pill {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.filter-pill:hover,
-.filter-pill.active {
-  background: rgba(20, 241, 149, 0.2);
-  border-color: #14F195;
-  color: #14F195;
-}
-
-.leads-cards-container {
-  display: flex;
-  flex-direction: column;
+.diagnostic-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
 
-.lead-dispatch-card {
+.diag-item {
   background: rgba(11, 34, 39, 0.65);
   border: 1px solid rgba(20, 241, 149, 0.18);
-  border-radius: 12px;
-  padding: 1.25rem;
-  transition: all 0.25s ease;
+  border-radius: 10px;
+  padding: 1rem;
 }
 
-.lead-dispatch-card:hover {
-  border-color: rgba(20, 241, 149, 0.45);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 16px rgba(20, 241, 149, 0.12);
-  transform: translateY(-2px);
-}
-
-.lead-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.65rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.lead-tag-row {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  flex-wrap: wrap;
-}
-
-.lead-status-pill {
-  font-size: 0.7rem;
-  font-weight: 800;
-  padding: 0.18rem 0.55rem;
-  border-radius: 4px;
-  letter-spacing: 0.04em;
-}
-
-.lead-status-pill.emergency {
-  background: rgba(239, 68, 68, 0.2);
-  border: 1px solid rgba(239, 68, 68, 0.5);
-  color: #F87171;
-}
-
-.lead-status-pill.high-value {
-  background: rgba(251, 191, 36, 0.2);
-  border: 1px solid rgba(251, 191, 36, 0.5);
-  color: #FBBF24;
-}
-
-.lead-status-pill.nearby {
-  background: rgba(20, 241, 149, 0.18);
-  border: 1px solid rgba(20, 241, 149, 0.4);
-  color: #14F195;
-}
-
-.lead-time-elapsed {
-  font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.lead-escrow-secured {
-  font-size: 0.74rem;
-  color: #14F195;
-  font-weight: 600;
-}
-
-.lead-budget-display {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #14F195;
-  background: rgba(20, 241, 149, 0.1);
-  padding: 0.2rem 0.65rem;
-  border-radius: 6px;
-  border: 1px solid rgba(20, 241, 149, 0.25);
-}
-
-.lead-card-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin: 0 0 0.4rem 0;
-}
-
-.lead-card-details {
-  font-size: 0.84rem;
-  color: rgba(230, 244, 241, 0.8);
-  line-height: 1.45;
-  margin: 0 0 0.85rem 0;
-}
-
-.lead-card-location-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.lead-location-pin {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.lead-distance-badge {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 600;
-}
-
-.lead-card-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
-}
-
-.lead-accept-btn {
-  background: #14F195;
-  color: #0B2227;
-  border: none;
-  font-weight: 700;
-  font-size: 0.84rem;
-  padding: 0.55rem 1.15rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.lead-accept-btn:hover {
-  background: #25F8A2;
-  box-shadow: 0 0 16px rgba(20, 241, 149, 0.5);
-}
-
-.lead-quote-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #FFFFFF;
-  font-size: 0.84rem;
-  font-weight: 600;
-  padding: 0.55rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.lead-quote-btn:hover {
-  border-color: #14F195;
-  color: #14F195;
-}
-
-.lead-decline-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 0.84rem;
-  padding: 0.55rem 0.85rem;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-left: auto;
-  transition: all 0.2s ease;
-}
-
-.lead-decline-btn:hover {
-  border-color: #EF4444;
-  color: #F87171;
-}
-
-.leads-empty-state {
-  text-align: center;
-  padding: 3rem 1.5rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.empty-radar-icon {
-  font-size: 2.5rem;
+.diag-icon {
+  font-size: 1.5rem;
   display: block;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.diag-item h5 {
+  margin: 0 0 0.3rem 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.diag-item p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(230, 244, 241, 0.75);
+  line-height: 1.4;
 }
 
 /* ==========================================================================
@@ -1648,13 +1534,36 @@
 
 [data-theme="warm-stone"] .stat-glow-card,
 [data-theme="warm-stone"] .mission-commander-card,
-[data-theme="warm-stone"] .incoming-leads-radar-section,
+[data-theme="warm-stone"] .provider-diagnostic-hub-card,
 [data-theme="warm-stone"] .provider-wallet-card,
 [data-theme="warm-stone"] .provider-schedule-card,
 [data-theme="warm-stone"] .provider-credentials-card {
   background: #FFFFFF;
   border-color: rgba(0, 122, 96, 0.25);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="warm-stone"] .services-request-dispatch-banner {
+  background: linear-gradient(135deg, rgba(0, 122, 96, 0.1) 0%, #FFFFFF 100%);
+  border-color: #007A60;
+  box-shadow: 0 4px 18px rgba(0, 122, 96, 0.15);
+}
+
+[data-theme="warm-stone"] .srd-title {
+  color: #0A0A0A;
+}
+
+[data-theme="warm-stone"] .srd-desc {
+  color: #374151;
+}
+
+[data-theme="warm-stone"] .srd-desc strong {
+  color: #007A60;
+}
+
+[data-theme="warm-stone"] .srd-navigate-btn {
+  background: #007A60;
+  color: #FFFFFF;
 }
 
 [data-theme="warm-stone"] .stat-title {
@@ -1754,76 +1663,22 @@
   color: #FFFFFF;
 }
 
-[data-theme="warm-stone"] .leads-section-title {
-  color: #0A0A0A;
-}
-
-[data-theme="warm-stone"] .leads-section-sub {
-  color: #4B5563;
-}
-
-[data-theme="warm-stone"] .filter-pill {
-  background: #F3F4F6;
-  border-color: #E5E7EB;
-  color: #374151;
-}
-
-[data-theme="warm-stone"] .filter-pill.active {
-  background: #007A60;
-  border-color: #007A60;
-  color: #FFFFFF;
-}
-
-[data-theme="warm-stone"] .lead-dispatch-card {
-  background: #FDFDFD;
-  border-color: #E5E7EB;
-}
-
-[data-theme="warm-stone"] .lead-card-title {
-  color: #0A0A0A;
-}
-
-[data-theme="warm-stone"] .lead-card-details {
-  color: #374151;
-}
-
-[data-theme="warm-stone"] .lead-card-location-row {
-  color: #4B5563;
-}
-
-[data-theme="warm-stone"] .lead-distance-badge {
-  background: #E5E7EB;
-  color: #111827;
-}
-
-[data-theme="warm-stone"] .lead-accept-btn {
-  background: #007A60;
-  color: #FFFFFF;
-}
-
-[data-theme="warm-stone"] .lead-quote-btn {
-  background: #F3F4F6;
-  border-color: #D1D5DB;
-  color: #111827;
-}
-
-[data-theme="warm-stone"] .lead-decline-btn {
-  border-color: #D1D5DB;
-  color: #6B7280;
-}
-
 [data-theme="warm-stone"] .wallet-header-title h4,
 [data-theme="warm-stone"] .schedule-card-header h4,
-[data-theme="warm-stone"] .credentials-badge-row h5 {
+[data-theme="warm-stone"] .credentials-badge-row h5,
+[data-theme="warm-stone"] .diagnostic-hub-header h4,
+[data-theme="warm-stone"] .diag-item h5 {
   color: #0A0A0A;
 }
 
-[data-theme="warm-stone"] .balance-block {
+[data-theme="warm-stone"] .balance-block,
+[data-theme="warm-stone"] .diag-item {
   background: #F9FAFB;
   border-color: #E5E7EB;
 }
 
-[data-theme="warm-stone"] .balance-caption {
+[data-theme="warm-stone"] .balance-caption,
+[data-theme="warm-stone"] .diag-item p {
   color: #4B5563;
 }
 
@@ -1890,12 +1745,12 @@
     justify-content: space-between;
   }
 
-  .provider-hero-carousel-section {
+  .provider-hero-carousel-section.full-width-banner {
     height: 480px;
   }
 
   .slide-content-glass {
-    padding: 1.5rem;
+    padding: 1.5rem 0;
   }
 
   .slide-title {
@@ -1910,8 +1765,8 @@
     display: none;
   }
 
-  .carousel-pagination-dots {
-    left: 1.5rem;
+  .carousel-hud-counter {
+    right: 1.5rem;
   }
 
   .mission-milestones-tracker {

@@ -194,7 +194,13 @@ function App() {
   }, [])
 
   const handlePageChange = (page, query = '', pushToHistory = true) => {
-    const normalized = page === 'bookings' ? 'booked' : (page === 'Booked' ? 'booked' : (page === 'Messages' ? 'messages' : page))
+    let normalized = page === 'bookings' ? 'booked' : (page === 'Booked' ? 'booked' : (page === 'Messages' ? 'messages' : page))
+    
+    // When provider is logged in, navigating to 'home' should keep them on provider-dashboard
+    if (isProviderLoggedIn && (normalized === 'home' || normalized === '')) {
+      normalized = 'provider-dashboard'
+    }
+
     const isSamePage = normalized === currentPage && query === initialSearchQuery && authPage === null
 
     setInitialSearchQuery(query || '')
@@ -318,6 +324,9 @@ function App() {
 
     switch(currentPage) {
       case 'home':
+        if (isProviderLoggedIn) {
+          return <ProviderDashboard setCurrentPage={handlePageChange} onLogout={handleLogout} />
+        }
         return (
           <>
             <HeroSection setCurrentPage={handlePageChange} />
@@ -335,6 +344,7 @@ function App() {
             initialSearchQuery={initialSearchQuery} 
             setCurrentPage={handlePageChange} 
             isLoggedIn={isLoggedIn}
+            isProviderLoggedIn={isProviderLoggedIn}
             onLoginClick={() => handleLoginClick(true)}
             currentUser={currentUser}
           />
@@ -377,6 +387,9 @@ function App() {
       case 'provider-verification':
         return <ProviderVerification setCurrentPage={handlePageChange} />
       default:
+        if (isProviderLoggedIn) {
+          return <ProviderDashboard setCurrentPage={handlePageChange} onLogout={handleLogout} />
+        }
         return (
           <>
             <HeroSection setCurrentPage={handlePageChange} />

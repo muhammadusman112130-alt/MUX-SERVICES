@@ -31,53 +31,6 @@ const HERO_SLIDES = [
   }
 ]
 
-const INITIAL_LEADS = [
-  {
-    id: 'LD-1049',
-    title: '3-Phase Inverter Fault & Solar Grid Sync Calibration',
-    location: 'Sector B, Gulgasht Colony, Multan',
-    distance: '2.1 km away',
-    budget: 'PKR 6,500',
-    type: 'emergency',
-    badge: 'URGENT DISPATCH',
-    time: '4 mins ago',
-    details: '10kW hybrid solar inverter throwing Error 09 (Bus Soft-Start Failed). Needs capacitor testing and grid phase voltage balancing.'
-  },
-  {
-    id: 'LD-1050',
-    title: 'Dual Commercial AC Deep Chemical Overhaul & Gas Top-Up',
-    location: 'Main Boulevard, Multan Cantt',
-    distance: '3.4 km away',
-    budget: 'PKR 9,200',
-    type: 'high-value',
-    badge: 'HIGH VALUE',
-    time: '12 mins ago',
-    details: '2-Ton inverter split units in corporate clinic. Suction pressure dropping, coil chemical flush and R410A gas balance required.'
-  },
-  {
-    id: 'LD-1051',
-    title: 'Smart Distribution Board DB Rewiring & Earthing Test',
-    location: 'Wapda Town Phase 1, Bosan Road, Multan',
-    distance: '4.8 km away',
-    budget: 'PKR 5,000',
-    type: 'nearby',
-    badge: 'ESCROW LOCKED',
-    time: '28 mins ago',
-    details: 'Circuit breaker tripping under AC load. Earth leakage breaker replacement and phase load re-distribution required.'
-  },
-  {
-    id: 'LD-1052',
-    title: 'Commercial Submersible Water Pump Motor & Float Switch',
-    location: 'Near Chowk Kumharanwala, Multan',
-    distance: '5.2 km away',
-    budget: 'PKR 4,200',
-    type: 'nearby',
-    badge: 'SCHEDULED',
-    time: '45 mins ago',
-    details: 'Overhead tank automation wiring and motor starter capacitor replacement.'
-  }
-]
-
 function ProviderDashboard({ setCurrentPage, onLogout }) {
   // Slider State
   const [activeSlide, setActiveSlide] = useState(0)
@@ -85,8 +38,6 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
   
   // Provider Operations State
   const [isOnline, setIsOnline] = useState(true)
-  const [radarFilter, setRadarFilter] = useState('all')
-  const [leads, setLeads] = useState(INITIAL_LEADS)
   const [toastMessage, setToastMessage] = useState('')
   
   // Active Mission Steps
@@ -132,16 +83,6 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
     }
   }
 
-  const handleAcceptLead = (leadId, title, budget) => {
-    setLeads((prev) => prev.filter((item) => item.id !== leadId))
-    showToast(`✓ Mission Accepted: ${title} (${budget} locked in Escrow)`)
-  }
-
-  const handleDeclineLead = (leadId) => {
-    setLeads((prev) => prev.filter((item) => item.id !== leadId))
-    showToast(`Lead declined. Radar scanning for alternative requests.`)
-  }
-
   const handleOtpVerify = (e) => {
     e.preventDefault()
     if (otpInput.trim().length === 4) {
@@ -172,14 +113,6 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
     setWithdrawableBalance(0)
     showToast(`💸 State Bank Raast transfer initiated: PKR ${amount.toLocaleString()} dispatched to your account!`)
   }
-
-  const filteredLeads = leads.filter((lead) => {
-    if (radarFilter === 'all') return true
-    if (radarFilter === 'emergency') return lead.type === 'emergency'
-    if (radarFilter === 'high-value') return lead.type === 'high-value'
-    if (radarFilter === 'nearby') return lead.type === 'nearby'
-    return true
-  })
 
   return (
     <div className="provider-home-wrapper">
@@ -262,24 +195,23 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
         </div>
       </header>
 
-      {/* Main Container */}
-      <main className="provider-main-content">
-        {/* ========================================================= */}
-        {/* HERO SECTION WITH DYNAMIC NON-HUMAN IMAGE SLIDER CAROUSEL */}
-        {/* ========================================================= */}
-        <section 
-          className="provider-hero-carousel-section"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div className="carousel-viewport">
-            {HERO_SLIDES.map((slide, idx) => (
-              <div 
-                key={slide.id}
-                className={`carousel-slide ${idx === activeSlide ? 'slide-active' : ''}`}
-                style={{ backgroundImage: `url(${slide.image})` }}
-              >
-                <div className="slide-gradient-overlay"></div>
+      {/* ========================================================= */}
+      {/* FULL-WIDTH HERO SLIDER CAROUSEL (NOT BOXED IN A CARD)     */}
+      {/* ========================================================= */}
+      <section 
+        className="provider-hero-carousel-section full-width-banner"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        <div className="carousel-viewport">
+          {HERO_SLIDES.map((slide, idx) => (
+            <div 
+              key={slide.id}
+              className={`carousel-slide ${idx === activeSlide ? 'slide-active' : ''}`}
+              style={{ backgroundImage: `url(${slide.image})` }}
+            >
+              <div className="slide-gradient-overlay"></div>
+              <div className="slide-content-container">
                 <div className="slide-content-glass">
                   <div className="slide-badge-wrapper">
                     <span className={`slide-tag-pill ${slide.badgeClass}`}>{slide.tag}</span>
@@ -295,11 +227,12 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
                       type="button" 
                       className="slide-primary-btn"
                       onClick={() => {
-                        const el = document.getElementById('provider-leads-radar')
-                        if (el) el.scrollIntoView({ behavior: 'smooth' })
+                        if (typeof setCurrentPage === 'function') {
+                          setCurrentPage('services')
+                        }
                       }}
                     >
-                      <span className="radar-echo-icon">◎</span> View Available Leads
+                      <span className="radar-echo-icon">◎</span> View Customer Requests in Services
                     </button>
                     <button 
                       type="button" 
@@ -314,50 +247,53 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
 
-          {/* Carousel Navigation Arrows */}
-          <button 
-            type="button" 
-            className="carousel-control-arrow arrow-prev" 
-            onClick={prevSlide}
-            aria-label="Previous Slide"
-          >
-            &#8249;
-          </button>
-          <button 
-            type="button" 
-            className="carousel-control-arrow arrow-next" 
-            onClick={nextSlide}
-            aria-label="Next Slide"
-          >
-            &#8250;
-          </button>
+        {/* Carousel Navigation Arrows */}
+        <button 
+          type="button" 
+          className="carousel-control-arrow arrow-prev" 
+          onClick={prevSlide}
+          aria-label="Previous Slide"
+        >
+          &#8249;
+        </button>
+        <button 
+          type="button" 
+          className="carousel-control-arrow arrow-next" 
+          onClick={nextSlide}
+          aria-label="Next Slide"
+        >
+          &#8250;
+        </button>
 
-          {/* Carousel Dots Indicator */}
-          <div className="carousel-pagination-dots">
-            {HERO_SLIDES.map((slide, idx) => (
-              <button
-                key={slide.id}
-                type="button"
-                className={`pagination-dot ${idx === activeSlide ? 'dot-active' : ''}`}
-                onClick={() => setActiveSlide(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
-              >
-                <span className="dot-inner"></span>
-              </button>
-            ))}
-          </div>
+        {/* Carousel Dots Indicator */}
+        <div className="carousel-pagination-dots">
+          {HERO_SLIDES.map((slide, idx) => (
+            <button
+              key={slide.id}
+              type="button"
+              className={`pagination-dot ${idx === activeSlide ? 'dot-active' : ''}`}
+              onClick={() => setActiveSlide(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+            >
+              <span className="dot-inner"></span>
+            </button>
+          ))}
+        </div>
 
-          {/* Slide Counter HUD */}
-          <div className="carousel-hud-counter">
-            <span className="active-idx">0{activeSlide + 1}</span>
-            <span className="separator">/</span>
-            <span className="total-idx">0{HERO_SLIDES.length}</span>
-          </div>
-        </section>
+        {/* Slide Counter HUD */}
+        <div className="carousel-hud-counter">
+          <span className="active-idx">0{activeSlide + 1}</span>
+          <span className="separator">/</span>
+          <span className="total-idx">0{HERO_SLIDES.length}</span>
+        </div>
+      </section>
 
+      {/* Main Container */}
+      <main className="provider-main-content">
         {/* ========================================================= */}
         {/* REAL-TIME OPERATIONS STATS STRIP WITH GLOWING ACCENTS     */}
         {/* ========================================================= */}
@@ -386,12 +322,12 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
 
           <div className="stat-glow-card">
             <div className="stat-card-header">
-              <span className="stat-title">Available Leads Nearby</span>
-              <span className="stat-trend-tag neutral">8 km radius</span>
+              <span className="stat-title">Customer Requests Portal</span>
+              <span className="stat-trend-tag neutral">Services Tab</span>
             </div>
-            <div className="stat-main-figure">{leads.length} Leads</div>
+            <div className="stat-main-figure">14 Inquiries</div>
             <div className="stat-meta-note">
-              <span className="pin-bullet">📍</span> Multan Zones
+              <span className="pin-bullet">📍</span> Managed in Services screen
             </div>
           </div>
 
@@ -408,11 +344,39 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
         </section>
 
         {/* ========================================================= */}
-        {/* DUAL COLUMN WORKSPACE: IN-FLIGHT MISSION & RADAR LEADS    */}
+        {/* DUAL COLUMN WORKSPACE: IN-FLIGHT MISSION & OPERATIONS HUB */}
         {/* ========================================================= */}
         <div className="provider-workspace-grid">
-          {/* LEFT COLUMN: ACTIVE IN-FLIGHT MISSION TRACKER */}
+          {/* LEFT COLUMN: ACTIVE IN-FLIGHT MISSION TRACKER & SERVICES DISPATCH SHORTCUT */}
           <div className="workspace-column-left">
+            {/* SERVICES INCOMING REQUESTS NOTIFICATION CARD */}
+            <div className="services-request-dispatch-banner">
+              <div className="srd-left">
+                <div className="srd-radar-icon">
+                  <span className="srd-pulse-ring"></span>
+                  <span className="srd-dot">📡</span>
+                </div>
+                <div>
+                  <h4 className="srd-title">Customer Requests Are Live in "Services"</h4>
+                  <p className="srd-desc">
+                    All incoming customer service requests, emergency calls, and verified quote inquiries are organized inside the <strong>Services</strong> tab.
+                  </p>
+                </div>
+              </div>
+              <button 
+                type="button" 
+                className="srd-navigate-btn"
+                onClick={() => {
+                  if (typeof setCurrentPage === 'function') {
+                    setCurrentPage('services')
+                  }
+                }}
+              >
+                Go to Customer Requests →
+              </button>
+            </div>
+
+            {/* LIVE IN-FLIGHT MISSION COMMANDER */}
             <div className="mission-commander-card" id="provider-active-mission">
               <div className="mission-commander-header">
                 <div className="mission-badge-group">
@@ -561,108 +525,28 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
               </div>
             </div>
 
-            {/* INCOMING LEADS RADAR */}
-            <div className="incoming-leads-radar-section" id="provider-leads-radar">
-              <div className="leads-radar-header">
-                <div>
-                  <h3 className="leads-section-title">
-                    <span className="radar-ping-dot"></span> Incoming Dispatch Radar
-                  </h3>
-                  <p className="leads-section-sub">Verified customer service requests in Multan within your 8 km radius</p>
-                </div>
-
-                {/* Filter Pills */}
-                <div className="leads-filter-pills">
-                  <button 
-                    type="button" 
-                    className={`filter-pill ${radarFilter === 'all' ? 'active' : ''}`}
-                    onClick={() => setRadarFilter('all')}
-                  >
-                    All ({leads.length})
-                  </button>
-                  <button 
-                    type="button" 
-                    className={`filter-pill ${radarFilter === 'emergency' ? 'active' : ''}`}
-                    onClick={() => setRadarFilter('emergency')}
-                  >
-                    Emergency
-                  </button>
-                  <button 
-                    type="button" 
-                    className={`filter-pill ${radarFilter === 'high-value' ? 'active' : ''}`}
-                    onClick={() => setRadarFilter('high-value')}
-                  >
-                    High Value
-                  </button>
-                  <button 
-                    type="button" 
-                    className={`filter-pill ${radarFilter === 'nearby' ? 'active' : ''}`}
-                    onClick={() => setRadarFilter('nearby')}
-                  >
-                    Nearby
-                  </button>
-                </div>
+            {/* HIGH-TECH DIAGNOSTIC PROTOCOLS CARD */}
+            <div className="provider-diagnostic-hub-card">
+              <div className="diagnostic-hub-header">
+                <span className="hub-tag">MUX SERVICES PROTOCOL</span>
+                <h4>Technical Dispatch Standards</h4>
               </div>
-
-              {/* Leads Card List */}
-              <div className="leads-cards-container">
-                {filteredLeads.length === 0 ? (
-                  <div className="leads-empty-state">
-                    <span className="empty-radar-icon">📡</span>
-                    <p>No active requests in this filter right now. Radar is actively scanning Multan.</p>
-                  </div>
-                ) : (
-                  filteredLeads.map((lead) => (
-                    <div key={lead.id} className="lead-dispatch-card">
-                      <div className="lead-card-top">
-                        <div className="lead-tag-row">
-                          <span className={`lead-status-pill ${lead.type}`}>{lead.badge}</span>
-                          <span className="lead-time-elapsed">Requested {lead.time}</span>
-                          <span className="lead-escrow-secured">● SBP Escrow Ready</span>
-                        </div>
-                        <div className="lead-budget-display">{lead.budget}</div>
-                      </div>
-
-                      <h4 className="lead-card-title">{lead.title}</h4>
-                      <p className="lead-card-details">{lead.details}</p>
-
-                      <div className="lead-card-location-row">
-                        <span className="lead-location-pin">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                          </svg>
-                          {lead.location}
-                        </span>
-                        <span className="lead-distance-badge">{lead.distance}</span>
-                      </div>
-
-                      <div className="lead-card-actions">
-                        <button 
-                          type="button" 
-                          className="lead-accept-btn"
-                          onClick={() => handleAcceptLead(lead.id, lead.title, lead.budget)}
-                        >
-                          Accept & Lock Escrow
-                        </button>
-                        <button 
-                          type="button" 
-                          className="lead-quote-btn"
-                          onClick={() => showToast(`Offer proposal modal opened for: ${lead.title}`)}
-                        >
-                          Custom Quote
-                        </button>
-                        <button 
-                          type="button" 
-                          className="lead-decline-btn"
-                          onClick={() => handleDeclineLead(lead.id)}
-                        >
-                          Decline
-                        </button>
-                      </div>
-                    </div>
-                  ))
-                )}
+              <div className="diagnostic-items-grid">
+                <div className="diag-item">
+                  <span className="diag-icon">⚡</span>
+                  <h5>Phase & Voltage Test</h5>
+                  <p>Check balanced line voltage (220V - 240V) before closing DB panel.</p>
+                </div>
+                <div className="diag-item">
+                  <span className="diag-icon">🛡️</span>
+                  <h5>Earthing Leakage Protection</h5>
+                  <p>Measure earth resistance (&lt; 5 Ohms) with digital megger tester.</p>
+                </div>
+                <div className="diag-item">
+                  <span className="diag-icon">📸</span>
+                  <h5>Telemetry Proof Capture</h5>
+                  <p>Upload clean photo of multimeter and circuit breaker wiring.</p>
+                </div>
               </div>
             </div>
           </div>

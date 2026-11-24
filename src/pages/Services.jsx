@@ -120,11 +120,154 @@ const MULTAN_LOCALITIES = [
   { id: 'wapdatown', name: 'Wapda Town', tag: 'Suburban' }
 ]
 
-function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false, onLoginClick, currentUser = null }) {
+function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false, isProviderLoggedIn = false, onLoginClick, currentUser = null }) {
   const userDefaultLocality = currentUser?.area || currentUser?.city || 'Multan Cantt'
   const [bookingFor, setBookingFor] = useState('myself') // 'myself' | 'someone_else'
   const [selectedLocality, setSelectedLocality] = useState(userDefaultLocality)
   const [recipientAddress, setRecipientAddress] = useState('')
+
+  // ══════════════════════════════════════════════════════════════════
+  // PROVIDER MODE: CUSTOMER SERVICE REQUESTS & DISPATCH STATE
+  // ══════════════════════════════════════════════════════════════════
+  const [providerRequests, setProviderRequests] = useState([
+    {
+      id: 'REQ-8021',
+      title: '3-Phase DB Panel Short Circuit & Load Balancing',
+      customer: 'Malik Farhan',
+      phone: '0301-7654321',
+      location: 'Officers Colony, Bosan Road, Multan',
+      localityId: 'bosan',
+      category: 'Electrician',
+      distance: '1.8 km away',
+      budget: 'PKR 6,500',
+      type: 'emergency',
+      badge: 'URGENT DISPATCH',
+      time: '4 mins ago',
+      details: 'Main circuit breaker tripping repeatedly under AC load. Burning odor observed near distribution panel. Urgent diagnostic and fuse replacement needed.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-8022',
+      title: 'Commercial Dual AC Deep Chemical Overhaul & Gas Top-Up',
+      customer: 'Dr. Asim Clinic',
+      phone: '0300-8765432',
+      location: 'Main Boulevard, Multan Cantt',
+      localityId: 'cantt',
+      category: 'AC & HVAC',
+      distance: '3.2 km away',
+      budget: 'PKR 9,200',
+      type: 'high-value',
+      badge: 'HIGH VALUE',
+      time: '12 mins ago',
+      details: 'Two 2-Ton inverter split units in patient waiting area blowing lukewarm air. Suction pressure is low, coil chemical wash & R410A gas top-up required.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-8023',
+      title: '10kW Hybrid Solar Inverter Bus Voltage Calibration',
+      customer: 'Engr. Bilal',
+      phone: '0302-9876543',
+      location: 'Wapda Town Phase 1, Multan',
+      localityId: 'wapdatown',
+      category: 'Electrician',
+      distance: '4.5 km away',
+      budget: 'PKR 7,500',
+      type: 'high-value',
+      badge: 'ESCROW LOCKED',
+      time: '28 mins ago',
+      details: 'Inverter trips to grid bypass when battery drops to 48V. Requires digital solar analyzer and firmware load calibration.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-8024',
+      title: 'Full Bathroom Concealed PPRC Pipe Leak Testing',
+      customer: 'Haji Riaz',
+      phone: '0303-1234567',
+      location: 'Sadar Bazar, Multan Cantt',
+      localityId: 'cantt',
+      category: 'Plumber',
+      distance: '2.6 km away',
+      budget: 'PKR 5,000',
+      type: 'nearby',
+      badge: 'SCHEDULED',
+      time: '35 mins ago',
+      details: 'Seepage appearing on ground floor ceiling. Concealed PPRC pipe pressure testing and joint replacement required.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-8025',
+      title: 'Solid Wood Door Smart Lock & Concealed Hinges Fitment',
+      customer: 'Tariq Mahmood',
+      phone: '0304-2345678',
+      location: 'Sector B, Gulgasht Colony, Multan',
+      localityId: 'gulgasht',
+      category: 'Carpenter',
+      distance: '2.1 km away',
+      budget: 'PKR 4,800',
+      type: 'nearby',
+      badge: 'VERIFIED CLIENT',
+      time: '42 mins ago',
+      details: 'Installation of electronic smart lock and four concealed hydraulic hinges on entrance mahogany door.',
+      status: 'pending'
+    },
+    {
+      id: 'REQ-8026',
+      title: 'Automatic Water Pump Starter Panel & Float Sensor Wiring',
+      customer: 'Mrs. Parveen',
+      phone: '0305-3456789',
+      location: 'Shah Rukn-e-Alam Colony, Multan',
+      localityId: 'mda',
+      category: 'Electrician',
+      distance: '5.0 km away',
+      budget: 'PKR 3,800',
+      type: 'nearby',
+      badge: 'TODAY EVENING',
+      time: '55 mins ago',
+      details: 'Underground to overhead tank automation circuit breaker wire disconnected. Motor magnetic contactor inspection.',
+      status: 'pending'
+    }
+  ])
+  const [providerCategoryFilter, setProviderCategoryFilter] = useState('all')
+  const [providerLocalityFilter, setProviderLocalityFilter] = useState('all')
+  const [providerToastMessage, setProviderToastMessage] = useState('')
+  const [quoteModalData, setQuoteModalData] = useState(null)
+  const [customQuoteInput, setCustomQuoteInput] = useState('')
+
+  const showProviderToast = (msg) => {
+    setProviderToastMessage(msg)
+    setTimeout(() => {
+      setProviderToastMessage('')
+    }, 3500)
+  }
+
+  const handleProviderAcceptRequest = (reqId, title, budget) => {
+    setProviderRequests(prev => prev.map(r => r.id === reqId ? { ...r, status: 'accepted' } : r))
+    showProviderToast(`✓ Mission Accepted: "${title}" (${budget} locked in Escrow)`)
+  }
+
+  const handleProviderDeclineRequest = (reqId) => {
+    setProviderRequests(prev => prev.filter(r => r.id !== reqId))
+    showProviderToast('Customer request declined. Radar scanning for alternative requests.')
+  }
+
+  const handleOpenQuoteModal = (req) => {
+    setQuoteModalData(req)
+    setCustomQuoteInput(req.budget.replace(/[^\d]/g, ''))
+  }
+
+  const handleSendCustomQuote = (e) => {
+    e.preventDefault()
+    if (!customQuoteInput || Number(customQuoteInput) <= 0) {
+      showProviderToast('⚠️ Please enter a valid quote amount in PKR')
+      return
+    }
+    const reqId = quoteModalData.id
+    const amount = Number(customQuoteInput).toLocaleString()
+    setProviderRequests(prev => prev.map(r => r.id === reqId ? { ...r, status: 'quoted', quotedAmount: `PKR ${amount}` } : r))
+    showProviderToast(`✓ Custom Proposal of PKR ${amount} sent to ${quoteModalData.customer}!`)
+    setQuoteModalData(null)
+    setCustomQuoteInput('')
+  }
 
   useEffect(() => {
     if (currentUser?.area || currentUser?.city) {
@@ -1708,6 +1851,369 @@ function Services({ initialSearchQuery = '', setCurrentPage, isLoggedIn = false,
 
     return () => clearInterval(timer)
   }, [isViewingProfile, selectedProvider])
+
+  // ────────────────────────────────────────────────────────────────
+  // PROVIDER MODE: Customer Requests Hub (No customer screens, hero preserved)
+  // ────────────────────────────────────────────────────────────────
+  if (isProviderLoggedIn) {
+    const filteredProviderRequests = providerRequests.filter((req) => {
+      // Search query filter (from hero search input)
+      if (heroSearchQuery && heroSearchQuery.trim()) {
+        const q = heroSearchQuery.toLowerCase().trim()
+        const matchesTitle = req.title.toLowerCase().includes(q)
+        const matchesCat = req.category.toLowerCase().includes(q)
+        const matchesLoc = req.location.toLowerCase().includes(q)
+        const matchesCust = req.customer.toLowerCase().includes(q)
+        if (!matchesTitle && !matchesCat && !matchesLoc && !matchesCust) {
+          return false
+        }
+      }
+
+      // Category filter
+      if (providerCategoryFilter !== 'all') {
+        if (providerCategoryFilter === 'emergency') {
+          if (req.type !== 'emergency') return false
+        } else if (providerCategoryFilter === 'high-value') {
+          if (req.type !== 'high-value') return false
+        } else {
+          if (req.category.toLowerCase() !== providerCategoryFilter.toLowerCase()) return false
+        }
+      }
+
+      // Locality filter
+      if (providerLocalityFilter !== 'all') {
+        if (req.localityId !== providerLocalityFilter) return false
+      }
+
+      return true
+    })
+
+    return (
+      <div className="services-page provider-services-mode">
+        {/* Floating Toast Notification */}
+        {providerToastMessage && (
+          <div className="provider-floating-toast">
+            <span className="toast-icon">⚡</span>
+            <span className="toast-text">{providerToastMessage}</span>
+          </div>
+        )}
+
+        {/* Custom Quote Modal */}
+        {quoteModalData && (
+          <div className="provider-quote-modal-overlay">
+            <div className="provider-quote-modal-card">
+              <div className="quote-modal-header">
+                <h3>Send Custom Proposal</h3>
+                <button type="button" className="close-quote-modal-btn" onClick={() => setQuoteModalData(null)}>✕</button>
+              </div>
+              <p className="quote-modal-sub">
+                Submitting competitive proposal to <strong>{quoteModalData.customer}</strong> for <em>"{quoteModalData.title}"</em>
+              </p>
+              <form onSubmit={handleSendCustomQuote} className="quote-modal-form">
+                <div className="quote-field-group">
+                  <label>Client Stated Budget</label>
+                  <input type="text" value={quoteModalData.budget} readOnly className="quote-readonly-input" />
+                </div>
+                <div className="quote-field-group">
+                  <label>Your Proposed Offer (PKR) *</label>
+                  <input 
+                    type="number" 
+                    placeholder="e.g. 6000" 
+                    value={customQuoteInput}
+                    onChange={(e) => setCustomQuoteInput(e.target.value)}
+                    required
+                    className="quote-amount-input"
+                  />
+                </div>
+                <div className="quote-field-group">
+                  <label>Guaranteed Arrival Time (Minutes)</label>
+                  <select className="quote-select-input" defaultValue="20 mins">
+                    <option value="15 mins">15 Mins (Urgent Local)</option>
+                    <option value="20 mins">20 Mins (Rapid Dispatch)</option>
+                    <option value="30 mins">30 Mins (Standard)</option>
+                    <option value="45 mins">45 Mins</option>
+                  </select>
+                </div>
+                <div className="quote-actions-row">
+                  <button type="button" className="quote-cancel-btn" onClick={() => setQuoteModalData(null)}>Cancel</button>
+                  <button type="submit" className="quote-submit-btn">Send Proposal & Lock Escrow</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* ── HERO SECTION (EXACT SAME AS CUSTOMER - UNCHANGED) ── */}
+        <div className="services-hero">
+          <img src={servicesHeroBanner} alt="Home Services Header" className="services-hero-bg" />
+          <div className="services-hero-overlay" aria-hidden="true"></div>
+          <div className="services-hero-content">
+            <h1 className="hero-title">
+              <span className="hero-title-mint-shine">Find Expert Home Services</span>
+            </h1>
+            <p className="hero-subtitle">Multan's premier verified platform for home repairs, maintenance, plumbing, electrical &amp; HVAC solutions.</p>
+            <div className="hero-search-row">
+              <input 
+                type="text" 
+                placeholder="Search home service (e.g. Electrician, Plumber, AC Repair)..." 
+                className="hero-search-input" 
+                value={heroSearchQuery}
+                onChange={(e) => setHeroSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    // search filter updates automatically
+                  }
+                }}
+              />
+              <input 
+                type="text" 
+                placeholder="Location" 
+                defaultValue="Multan, Pakistan" 
+                readOnly 
+                className="hero-location-input" 
+              />
+              <button 
+                className="hero-search-btn"
+                type="button"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ── PROVIDER CUSTOMER REQUESTS & DISPATCH RADAR ── */}
+        <div className="provider-services-requests-hub">
+          <div className="requests-hub-container">
+            {/* Header Radar Bar */}
+            <div className="requests-hub-header-bar">
+              <div className="rh-left">
+                <div className="rh-badge-row">
+                  <span className="rh-pulse-dot"></span>
+                  <span className="rh-live-text">LIVE CUSTOMER DISPATCH RADAR</span>
+                  <span className="rh-scope-badge">Multan Sector</span>
+                </div>
+                <h2 className="rh-main-title">Incoming Customer Service Inquiries</h2>
+                <p className="rh-sub-text">
+                  Direct verified service requests and quote calls submitted by customers across Multan (100% SBP Raast Escrow Secured).
+                </p>
+              </div>
+
+              <div className="rh-metrics-summary">
+                <div className="rh-metric-card">
+                  <span className="metric-val">{providerRequests.filter(r => r.status === 'pending').length}</span>
+                  <span className="metric-lbl">Pending Leads</span>
+                </div>
+                <div className="rh-metric-card">
+                  <span className="metric-val">100%</span>
+                  <span className="metric-lbl">Escrow Backed</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Filter Pills and Locality Selector */}
+            <div className="requests-filter-toolbar">
+              <div className="rh-category-pills">
+                <button 
+                  type="button" 
+                  className={`rh-pill ${providerCategoryFilter === 'all' ? 'active' : ''}`}
+                  onClick={() => setProviderCategoryFilter('all')}
+                >
+                  All Requests ({providerRequests.length})
+                </button>
+                <button 
+                  type="button" 
+                  className={`rh-pill ${providerCategoryFilter === 'Electrician' ? 'active' : ''}`}
+                  onClick={() => setProviderCategoryFilter('Electrician')}
+                >
+                  ⚡ Electrician & Solar
+                </button>
+                <button 
+                  type="button" 
+                  className={`rh-pill ${providerCategoryFilter === 'AC & HVAC' ? 'active' : ''}`}
+                  onClick={() => setProviderCategoryFilter('AC & HVAC')}
+                >
+                  ❄️ AC & HVAC
+                </button>
+                <button 
+                  type="button" 
+                  className={`rh-pill ${providerCategoryFilter === 'Plumber' ? 'active' : ''}`}
+                  onClick={() => setProviderCategoryFilter('Plumber')}
+                >
+                  🔧 Plumbing
+                </button>
+                <button 
+                  type="button" 
+                  className={`rh-pill ${providerCategoryFilter === 'Carpenter' ? 'active' : ''}`}
+                  onClick={() => setProviderCategoryFilter('Carpenter')}
+                >
+                  🪚 Carpentry
+                </button>
+                <button 
+                  type="button" 
+                  className={`rh-pill emergency-pill ${providerCategoryFilter === 'emergency' ? 'active' : ''}`}
+                  onClick={() => setProviderCategoryFilter('emergency')}
+                >
+                  🚨 Emergency SOS
+                </button>
+                <button 
+                  type="button" 
+                  className={`rh-pill ${providerCategoryFilter === 'high-value' ? 'active' : ''}`}
+                  onClick={() => setProviderCategoryFilter('high-value')}
+                >
+                  💎 High Value
+                </button>
+              </div>
+
+              {/* Locality Quick Selector */}
+              <div className="rh-locality-select-wrap">
+                <label className="rh-loc-label">Area Filter:</label>
+                <select 
+                  className="rh-locality-dropdown"
+                  value={providerLocalityFilter}
+                  onChange={(e) => setProviderLocalityFilter(e.target.value)}
+                >
+                  <option value="all">All Multan Zones</option>
+                  <option value="cantt">Multan Cantt</option>
+                  <option value="bosan">Bosan Road / Officers Colony</option>
+                  <option value="gulgasht">Gulgasht Colony</option>
+                  <option value="wapdatown">Wapda Town</option>
+                  <option value="mda">Shah Rukn-e-Alam / MDA</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Requests Cards Feed */}
+            <div className="requests-cards-feed">
+              {filteredProviderRequests.length === 0 ? (
+                <div className="no-requests-placeholder">
+                  <span className="no-req-icon">📡</span>
+                  <h4>No Matching Customer Inquiries</h4>
+                  <p>Radar is actively scanning Multan for incoming service bookings matching this filter.</p>
+                  <button 
+                    type="button" 
+                    className="reset-filters-btn"
+                    onClick={() => {
+                      setProviderCategoryFilter('all')
+                      setProviderLocalityFilter('all')
+                      setHeroSearchQuery('')
+                    }}
+                  >
+                    Reset All Filters
+                  </button>
+                </div>
+              ) : (
+                filteredProviderRequests.map((req) => (
+                  <div key={req.id} className={`provider-request-item-card ${req.status}`}>
+                    <div className="req-card-top-row">
+                      <div className="req-badge-group">
+                        <span className={`req-priority-tag ${req.type}`}>{req.badge}</span>
+                        <span className="req-time-stamp">Requested {req.time}</span>
+                        <span className="req-escrow-badge">● SBP Raast Escrow Ready</span>
+                      </div>
+                      <div className="req-budget-tag">
+                        <span className="budget-caption">Client Budget</span>
+                        <strong className="budget-val">{req.budget}</strong>
+                      </div>
+                    </div>
+
+                    <div className="req-card-main-content">
+                      <h3 className="req-problem-title">{req.title}</h3>
+                      <p className="req-problem-details">{req.details}</p>
+
+                      <div className="req-customer-info-strip">
+                        <div className="cust-meta-item">
+                          <span className="cust-icon">👤</span>
+                          <div>
+                            <span className="cust-lbl">Customer</span>
+                            <strong className="cust-name">{req.customer}</strong>
+                          </div>
+                        </div>
+
+                        <div className="cust-meta-item">
+                          <span className="cust-icon">📍</span>
+                          <div>
+                            <span className="cust-lbl">Delivery Location</span>
+                            <span className="cust-location">{req.location}</span>
+                          </div>
+                        </div>
+
+                        <div className="cust-meta-item">
+                          <span className="cust-icon">📏</span>
+                          <div>
+                            <span className="cust-lbl">Distance</span>
+                            <span className="cust-dist">{req.distance}</span>
+                          </div>
+                        </div>
+
+                        <div className="cust-meta-item">
+                          <span className="cust-icon">🏷️</span>
+                          <div>
+                            <span className="cust-lbl">Category</span>
+                            <span className="cust-cat">{req.category}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="req-card-actions-row">
+                      {req.status === 'accepted' ? (
+                        <div className="req-accepted-status-badge">
+                          ✓ Mission Accepted • Escrow Locked ({req.budget})
+                        </div>
+                      ) : req.status === 'quoted' ? (
+                        <div className="req-quoted-status-badge">
+                          ✓ Custom Quote Sent ({req.quotedAmount}) • Awaiting Client Confirmation
+                        </div>
+                      ) : (
+                        <>
+                          <button 
+                            type="button" 
+                            className="req-accept-action-btn"
+                            onClick={() => handleProviderAcceptRequest(req.id, req.title, req.budget)}
+                          >
+                            Accept Request & Lock Escrow
+                          </button>
+
+                          <button 
+                            type="button" 
+                            className="req-quote-action-btn"
+                            onClick={() => handleOpenQuoteModal(req)}
+                          >
+                            Send Custom Proposal
+                          </button>
+
+                          <button 
+                            type="button" 
+                            className="req-chat-action-btn"
+                            onClick={() => showProviderToast(`💬 Direct encrypted chat opened with ${req.customer}...`)}
+                          >
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Direct Chat
+                          </button>
+
+                          <button 
+                            type="button" 
+                            className="req-decline-action-btn"
+                            onClick={() => handleProviderDeclineRequest(req.id)}
+                            title="Decline this request"
+                          >
+                            Decline
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={`services-page ${selectedService ? 'has-detail-view' : ''}`}>
