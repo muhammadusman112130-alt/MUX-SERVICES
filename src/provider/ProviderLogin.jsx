@@ -162,15 +162,16 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
           {loginMethod === 'mobile' && (
             <>
               <div className="form-group">
-                <label htmlFor="pl-mobile">Registered Mobile Number</label>
+                <label htmlFor="pl-mobile">
+                  Registered Mobile Number <span className="form-req-star">*</span>
+                </label>
                 <div className="input-wrapper">
-                  <span className="input-icon">🇵🇰 +92</span>
                   <input
                     type="tel"
                     id="pl-mobile"
                     name="mux_provider_mobile"
                     placeholder="0300-1234567"
-                    className="form-input has-prefix"
+                    className="form-input"
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value)}
                     autoComplete="tel"
@@ -181,17 +182,13 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
 
               <div className="form-group">
                 <div className="label-split-row">
-                  <label htmlFor="pl-otp">6-Digit OTP Code</label>
+                  <label htmlFor="pl-otp">
+                    6-Digit OTP Code <span className="form-req-star">*</span>
+                  </label>
                   {otpSent && <span className="otp-dispatched-text">✓ Code Dispatched</span>}
                 </div>
                 <div className="otp-action-row">
                   <div className="input-wrapper" style={{ flex: 1 }}>
-                    <span className="input-icon">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                      </svg>
-                    </span>
                     <input
                       type="text"
                       id="pl-otp"
@@ -219,16 +216,10 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
           {loginMethod === 'cnic' && (
             <>
               <div className="form-group">
-                <label htmlFor="pl-cnic">CNIC Number (13 Digits)</label>
+                <label htmlFor="pl-cnic">
+                  CNIC Number (13 Digits) <span className="form-req-star">*</span>
+                </label>
                 <div className="input-wrapper">
-                  <span className="input-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="4" width="18" height="16" rx="2"></rect>
-                      <circle cx="9" cy="10" r="2"></circle>
-                      <line x1="15" y1="8" x2="17" y2="8"></line>
-                      <line x1="15" y1="12" x2="17" y2="12"></line>
-                    </svg>
-                  </span>
                   <input
                     type="text"
                     id="pl-cnic"
@@ -253,7 +244,9 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
 
               <div className="form-group">
                 <div className="label-split-row">
-                  <label htmlFor="pl-password">Password</label>
+                  <label htmlFor="pl-password">
+                    Password <span className="form-req-star">*</span>
+                  </label>
                   <a
                     href="#forgot"
                     className="forgot-password"
@@ -267,12 +260,6 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
                   </a>
                 </div>
                 <div className="input-wrapper">
-                  <span className="input-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
-                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                  </span>
                   <input
                     type={showPassword ? 'text' : 'password'}
                     id="pl-password"

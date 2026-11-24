@@ -173,6 +173,41 @@
   font-weight: 700;
   color: #8FD3E8 !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95) !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Glowing Animated Required Star Asterisk */
+.form-req-star {
+  display: inline-block;
+  color: #ff4757;
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-left: 0.35rem;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(255, 71, 87, 0.95), 0 0 18px rgba(255, 71, 87, 0.7);
+  animation: reqStarPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes reqStarPulse {
+  0% {
+    transform: scale(0.92);
+    color: #ff4757;
+    text-shadow: 0 0 6px rgba(255, 71, 87, 0.6);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.3) rotate(15deg);
+    color: #ff6b81;
+    text-shadow: 0 0 14px rgba(255, 107, 129, 1), 0 0 22px rgba(255, 71, 87, 0.85);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.92);
+    color: #ff4757;
+    text-shadow: 0 0 6px rgba(255, 71, 87, 0.6);
+    opacity: 0.85;
+  }
 }
 
 .provider-login-page .input-wrapper {
@@ -182,30 +217,10 @@
   width: 100%;
 }
 
-.provider-login-page .input-icon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #8FD3E8 !important;
-  z-index: 2;
-  pointer-events: none;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.provider-login-page .input-icon svg {
-  display: block;
-  stroke: #8FD3E8 !important;
-}
-
 .provider-login-page .input-wrapper .form-input {
   width: 100% !important;
   box-sizing: border-box !important;
-  padding: 0.85rem 1.2rem 0.85rem 3.1rem !important;
+  padding: 0.85rem 1.25rem !important;
   border: 1.5px solid #8FD3E8 !important;
   border-radius: 12px !important;
   font-size: 0.98rem !important;
@@ -663,4 +678,11 @@
 [data-theme="warm-stone"] .prh-glow-aura,
 .theme-warm-stone .prh-glow-aura {
   background: radial-gradient(circle, rgba(255, 255, 240, 0.9) 0%, rgba(255, 255, 240, 0.5) 50%, transparent 80%) !important;
+}
+
+[data-theme="warm-stone"] .form-req-star,
+.theme-warm-stone .form-req-star {
+  color: #e81123 !important;
+  -webkit-text-fill-color: #e81123 !important;
+  text-shadow: 0 0 8px rgba(232, 17, 35, 0.5) !important;
 }

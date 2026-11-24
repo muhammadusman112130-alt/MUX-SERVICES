@@ -24,9 +24,6 @@ function ProviderVerification({ setCurrentPage }) {
     // Police Verification Upload
     policeCertificateFile: null,
     policeCertificateFileName: '',
-    // Payout details
-    payoutChannel: 'State Bank Raast ID',
-    accountNumber: '',
     agreedToOath: false
   })
 
@@ -164,9 +161,10 @@ function ProviderVerification({ setCurrentPage }) {
             <form className="auth-form" onSubmit={handleSubmit} autoComplete="off">
               {/* Full Name */}
               <div className="form-group">
-                <label htmlFor="fullName">Full Name *</label>
+                <label htmlFor="fullName">
+                  Full Name <span className="form-req-star">*</span>
+                </label>
                 <div className="input-wrapper">
-                  <span className="input-icon">👤</span>
                   <input
                     type="text"
                     id="fullName"
@@ -182,15 +180,16 @@ function ProviderVerification({ setCurrentPage }) {
 
               {/* Mobile Number */}
               <div className="form-group">
-                <label htmlFor="mobile">Mobile Number *</label>
+                <label htmlFor="mobile">
+                  Mobile Number <span className="form-req-star">*</span>
+                </label>
                 <div className="input-wrapper">
-                  <span className="input-icon">🇵🇰 +92</span>
                   <input
                     type="tel"
                     id="mobile"
                     name="mobile"
                     placeholder="0300-1234567"
-                    className="form-input has-prefix"
+                    className="form-input"
                     value={formData.mobile}
                     onChange={handleChange}
                     required
@@ -200,9 +199,10 @@ function ProviderVerification({ setCurrentPage }) {
 
               {/* CNIC */}
               <div className="form-group">
-                <label htmlFor="cnic">CNIC Number (13 Digits) *</label>
+                <label htmlFor="cnic">
+                  CNIC Number (13 Digits) <span className="form-req-star">*</span>
+                </label>
                 <div className="input-wrapper">
-                  <span className="input-icon">🪪</span>
                   <input
                     type="text"
                     id="cnic"
@@ -225,11 +225,12 @@ function ProviderVerification({ setCurrentPage }) {
                 </div>
               </div>
 
-              {/* Profession Category Dropdown List (No Boxes as per user requirement) */}
+              {/* Profession Category Dropdown List */}
               <div className="form-group">
-                <label htmlFor="profession">Select Profession *</label>
+                <label htmlFor="profession">
+                  Select Profession <span className="form-req-star">*</span>
+                </label>
                 <div className="input-wrapper">
-                  <span className="input-icon">🛠️</span>
                   <select
                     id="profession"
                     name="profession"
@@ -239,15 +240,15 @@ function ProviderVerification({ setCurrentPage }) {
                     required
                   >
                     <option value="">-- Select Trade --</option>
-                    <option value="Electrical & Solar">⚡ Electrical &amp; Solar</option>
-                    <option value="Plumbing & Sanitary">🔧 Plumbing &amp; Sanitary</option>
-                    <option value="AC & HVAC Cooling">❄️ AC &amp; HVAC Cooling</option>
-                    <option value="Carpentry & Woodwork">🪚 Carpentry &amp; Woodwork</option>
-                    <option value="Appliance Repair">🧺 Appliance Repair</option>
-                    <option value="Painting & Polishing">🎨 Painting &amp; Polishing</option>
-                    <option value="Deep Home Cleaning">✨ Deep Home Cleaning</option>
-                    <option value="Welding & Fabrication">🔥 Welding &amp; Fabrication</option>
-                    <option value="Gardening & Lawn">🌱 Gardening &amp; Lawn</option>
+                    <option value="Electrical & Solar">Electrical &amp; Solar</option>
+                    <option value="Plumbing & Sanitary">Plumbing &amp; Sanitary</option>
+                    <option value="AC & HVAC Cooling">AC &amp; HVAC Cooling</option>
+                    <option value="Carpentry & Woodwork">Carpentry &amp; Woodwork</option>
+                    <option value="Appliance Repair">Appliance Repair</option>
+                    <option value="Painting & Polishing">Painting &amp; Polishing</option>
+                    <option value="Deep Home Cleaning">Deep Home Cleaning</option>
+                    <option value="Welding & Fabrication">Welding &amp; Fabrication</option>
+                    <option value="Gardening & Lawn">Gardening &amp; Lawn</option>
                   </select>
                 </div>
               </div>
@@ -255,9 +256,10 @@ function ProviderVerification({ setCurrentPage }) {
               {/* Multan Locality & Optional Experience Level */}
               <div className="form-row-dual">
                 <div className="form-group">
-                  <label htmlFor="zone">Multan Locality *</label>
+                  <label htmlFor="zone">
+                    Multan Locality <span className="form-req-star">*</span>
+                  </label>
                   <div className="input-wrapper">
-                    <span className="input-icon">📍</span>
                     <select
                       id="zone"
                       name="zone"
@@ -294,11 +296,12 @@ function ProviderVerification({ setCurrentPage }) {
                 </div>
               </div>
 
-              {/* Skill Qualification Pathway as Dropdown List Bar (NO CARDS) */}
+              {/* Skill Qualification Pathway as Dropdown List Bar */}
               <div className="form-group">
-                <label htmlFor="pathway">Skill Qualification *</label>
+                <label htmlFor="pathway">
+                  Skill Qualification <span className="form-req-star">*</span>
+                </label>
                 <div className="input-wrapper">
-                  <span className="input-icon">🎓</span>
                   <select
                     id="pathway"
                     name="pathway"
@@ -313,13 +316,14 @@ function ProviderVerification({ setCurrentPage }) {
                 </div>
               </div>
 
-              {/* Dynamic Form: If Ustad is Selected (Direct Input Bars - NO CARDS) */}
+              {/* Dynamic Form: If Ustad is Selected */}
               {pathway === 'ustad' && (
                 <>
                   <div className="form-group">
-                    <label htmlFor="ustadName">Master Ustad Name *</label>
+                    <label htmlFor="ustadName">
+                      Master Ustad Name <span className="form-req-star">*</span>
+                    </label>
                     <div className="input-wrapper">
-                      <span className="input-icon">👨‍🔧</span>
                       <input
                         type="text"
                         id="ustadName"
@@ -337,7 +341,6 @@ function ProviderVerification({ setCurrentPage }) {
                     <div className="form-group">
                       <label htmlFor="ustadCnic">Ustad CNIC</label>
                       <div className="input-wrapper">
-                        <span className="input-icon">🪪</span>
                         <input
                           type="text"
                           id="ustadCnic"
@@ -360,9 +363,10 @@ function ProviderVerification({ setCurrentPage }) {
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="shopLocation">Shop Location *</label>
+                      <label htmlFor="shopLocation">
+                        Shop Location <span className="form-req-star">*</span>
+                      </label>
                       <div className="input-wrapper">
-                        <span className="input-icon">📍</span>
                         <input
                           type="text"
                           id="shopLocation"
@@ -378,9 +382,10 @@ function ProviderVerification({ setCurrentPage }) {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="shopAddress">Workshop Address *</label>
+                    <label htmlFor="shopAddress">
+                      Workshop Address <span className="form-req-star">*</span>
+                    </label>
                     <div className="input-wrapper">
-                      <span className="input-icon">🏢</span>
                       <input
                         type="text"
                         id="shopAddress"
@@ -397,7 +402,6 @@ function ProviderVerification({ setCurrentPage }) {
                   <div className="form-group">
                     <label htmlFor="ustadContact">Ustad Phone (Optional)</label>
                     <div className="input-wrapper">
-                      <span className="input-icon">📞</span>
                       <input
                         type="tel"
                         id="ustadContact"
@@ -412,13 +416,14 @@ function ProviderVerification({ setCurrentPage }) {
                 </>
               )}
 
-              {/* Dynamic Form: If Diploma is Selected (Direct Input Bars - NO CARDS) */}
+              {/* Dynamic Form: If Diploma is Selected */}
               {pathway === 'diploma' && (
                 <>
                   <div className="form-group">
-                    <label htmlFor="instituteName">Institute Name *</label>
+                    <label htmlFor="instituteName">
+                      Institute Name <span className="form-req-star">*</span>
+                    </label>
                     <div className="input-wrapper">
-                      <span className="input-icon">🏫</span>
                       <input
                         type="text"
                         id="instituteName"
@@ -443,12 +448,13 @@ function ProviderVerification({ setCurrentPage }) {
                         className="file-hidden-input"
                       />
                       <label htmlFor="diplomaFile" className="file-upload-trigger">
-                        <span className="fut-icon">📎</span>
                         <div className="fut-text">
-                          <strong>{formData.diplomaFileName || 'Choose Diploma File'}</strong>
-                          <span>JPG, PNG, PDF</span>
+                          <strong>{formData.diplomaFileName || 'Choose Diploma Certificate File'}</strong>
+                          <span>Supports JPG, PNG or PDF</span>
                         </div>
-                        <span className="fut-btn">Browse</span>
+                        <span className="fut-btn">
+                          <span className="fut-btn-sparkle">✦</span> Browse File
+                        </span>
                       </label>
                     </div>
                   </div>
@@ -457,7 +463,9 @@ function ProviderVerification({ setCurrentPage }) {
 
               {/* Police Clearance Certificate Upload Field */}
               <div className="form-group">
-                <label htmlFor="policeCertificate">Police Clearance Certificate *</label>
+                <label htmlFor="policeCertificate">
+                  Police Clearance Certificate <span className="form-req-star">*</span>
+                </label>
                 <div className="file-upload-box police-upload-box">
                   <input
                     type="file"
@@ -467,51 +475,16 @@ function ProviderVerification({ setCurrentPage }) {
                     className="file-hidden-input"
                   />
                   <label htmlFor="policeCertificate" className="file-upload-trigger">
-                    <span className="fut-icon">🛡️</span>
                     <div className="fut-text">
                       <strong>
                         {formData.policeCertificateFileName || 'Upload Police Clearance Certificate'}
                       </strong>
-                      <span>Punjab Police Khidmat Markaz Certificate (JPG, PNG, PDF)</span>
+                      <span>Punjab Police Khidmat Markaz Document (JPG, PNG, PDF)</span>
                     </div>
-                    <span className="fut-btn">Upload</span>
+                    <span className="fut-btn">
+                      <span className="fut-btn-sparkle">✦</span> Upload Slip
+                    </span>
                   </label>
-                </div>
-              </div>
-
-              {/* Payout Channel & Account */}
-              <div className="form-row-dual">
-                <div className="form-group">
-                  <label htmlFor="payoutChannel">Payout Channel</label>
-                  <div className="input-wrapper">
-                    <select
-                      id="payoutChannel"
-                      name="payoutChannel"
-                      className="form-input form-select"
-                      value={formData.payoutChannel}
-                      onChange={handleChange}
-                    >
-                      <option value="State Bank Raast ID">State Bank Raast ID</option>
-                      <option value="JazzCash Business">JazzCash</option>
-                      <option value="EasyPaisa Pro">EasyPaisa</option>
-                      <option value="Bank IBAN">Bank Account (IBAN)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="accountNumber">Account Number</label>
-                  <div className="input-wrapper">
-                    <input
-                      type="text"
-                      id="accountNumber"
-                      name="accountNumber"
-                      placeholder="e.g. 03001234567 or Raast ID"
-                      className="form-input"
-                      value={formData.accountNumber}
-                      onChange={handleChange}
-                    />
-                  </div>
                 </div>
               </div>
 
