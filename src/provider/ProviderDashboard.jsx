@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import './ProviderDashboard.css'
 
 const HERO_SLIDES = [
@@ -31,6 +31,84 @@ const HERO_SLIDES = [
   }
 ]
 
+// Strip 1: Core Platform Guarantees & Features for Providers (Left-to-Right)
+const STRIP_1_ITEMS = [
+  { icon: '🛡️', title: '100% SBP Raast Escrow Protection', desc: 'Client funds locked before work begins.' },
+  { icon: '⚡', title: 'Zero Payment Delay', desc: 'Instant OTP release directly to your account.' },
+  { icon: '📍', title: 'Hyperlocal Multan Dispatch', desc: 'Matches within Cantt, Bosan Road & Gulgasht.' },
+  { icon: '🔍', title: 'Police & NADRA Verified', desc: 'Certified Ustad status boosts client trust.' },
+  { icon: '💰', title: 'Custom Price Offer System', desc: 'Negotiate fair technical rates directly.' },
+  { icon: '📱', title: 'Direct In-App Customer Chat', desc: 'Fast communication with clear scope of work.' },
+  { icon: '🏆', title: 'Level-1 Verified Pro Badging', desc: 'Stand out as Multan’s top certified technician.' },
+  { icon: '📞', title: '24/7 Dispatch Control Room', desc: 'Direct technical & safety assistance helpline.' }
+]
+
+// Strip 2: Specialized Trades & Technical Standards (Right-to-Left)
+const STRIP_2_ITEMS = [
+  { icon: '⚡', title: 'Certified Electricians & Solar', desc: '3-Phase panels, earthing & inverter sync.' },
+  { icon: '❄️', title: 'Inverter AC & HVAC Technicians', desc: 'Digital manifold vacuum & chemical jet wash.' },
+  { icon: '🚰', title: 'Master Plumbers & Sanitary', desc: 'Acoustic leak detection & PPRC piping.' },
+  { icon: '🪵', title: 'Artisan Woodcraft & Joinery', desc: 'Laser leveled modular cabinets & smart locks.' },
+  { icon: '🎨', title: 'Architectural Painting Experts', desc: 'Weather-shield & dampness protection.' },
+  { icon: '✨', title: 'Deep Cleaning & Sanitization', desc: 'Industrial floor buffing & upholstery wash.' },
+  { icon: '🚪', title: 'Glass & Double-Glazed Aluminum', desc: 'Soundproof sliding doors & windows.' },
+  { icon: '🔥', title: 'Precision Structural Welding', desc: 'Heavy steel sheds, iron grills & gates.' }
+]
+
+const MUX_PILLARS = [
+  {
+    icon: '🛡️',
+    tag: 'FINANCIAL SECURITY',
+    title: 'Guaranteed Escrow Protection',
+    description: 'Every customer booking on MUX SERVICES is pre-funded into an SBP Raast escrow lock. No more chasing clients for pending dues or handling bad debts — funds clear instantly upon completion with a verified 4-digit client OTP.'
+  },
+  {
+    icon: '📍',
+    tag: 'HYPERLOCAL RADIUS',
+    title: 'Smart Multan GPS Matching',
+    description: 'Our automated dispatch algorithm stations you exclusively in your preferred Multan zones — Cantt, Bosan Road, Gulgasht, Officers Colony, Wapda Town, or Shah Rukn-e-Alam — minimizing transit and maximizing your billable hours.'
+  },
+  {
+    icon: '🎖️',
+    tag: 'GOVERNMENT BACKED',
+    title: 'Police & NADRA Verified Credibility',
+    description: 'MUX SERVICES certifies your ustad credentials through official Government CNIC verification and Multan Police Khidmat Markaz clearance, positioning you as an elite master professional who commands premium service rates.'
+  },
+  {
+    icon: '🤝',
+    tag: 'FAIR GROWTH',
+    title: 'Direct Negotiation & Zero Traps',
+    description: 'We believe skilled labor deserves respect and fair wages. You communicate directly with clients via secure in-app chat, inspect the site, and propose custom quotes tailored to actual technical requirements.'
+  }
+]
+
+const HOW_IT_WORKS_STEPS = [
+  {
+    step: '01',
+    badge: 'DISCOVERY',
+    title: 'Review Customer Inquiries',
+    desc: 'Browse incoming service requests in the Services screen, filter by trade and locality, and inspect customer budget and problem details.'
+  },
+  {
+    step: '02',
+    badge: 'AGREEMENT',
+    title: 'Lock Escrow or Send Proposal',
+    desc: 'Accept the customer request with 1-click or send a tailored custom quote. The customer accepts and pre-funds the job in SBP Raast escrow.'
+  },
+  {
+    step: '03',
+    badge: 'EXECUTION',
+    title: 'Deliver High-Standard Service',
+    desc: 'Arrive at the customer doorstep, carry out precision technical diagnostic testing, complete the repair, and take telemetry proof.'
+  },
+  {
+    step: '04',
+    badge: 'INSTANT PAYOUT',
+    title: 'Client OTP Sign-Off',
+    desc: 'Ask the client for their 4-digit completion code. Enter it to instantly release 100% of the funds to your withdrawable Raast balance.'
+  }
+]
+
 function ProviderDashboard({ setCurrentPage, onLogout }) {
   // Slider State
   const [activeSlide, setActiveSlide] = useState(0)
@@ -39,17 +117,6 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
   // Provider Operations State
   const [isOnline, setIsOnline] = useState(true)
   const [toastMessage, setToastMessage] = useState('')
-  
-  // Active Mission Steps
-  const [activeMissionStep, setActiveMissionStep] = useState(2) // 1: Confirmed, 2: En Route, 3: At Site, 4: In Progress, 5: OTP Sign-Off
-  const [otpInput, setOtpInput] = useState('')
-  const [isOtpSuccess, setIsOtpSuccess] = useState(false)
-  const [diagnosticUploaded, setDiagnosticUploaded] = useState(false)
-  const fileInputRef = useRef(null)
-
-  // Wallet State
-  const [withdrawableBalance, setWithdrawableBalance] = useState(48500)
-  const [escrowLocked, setEscrowLocked] = useState(14000)
 
   // Slider Autoplay Effect
   useEffect(() => {
@@ -83,37 +150,6 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
     }
   }
 
-  const handleOtpVerify = (e) => {
-    e.preventDefault()
-    if (otpInput.trim().length === 4) {
-      setIsOtpSuccess(true)
-      setActiveMissionStep(5)
-      setWithdrawableBalance((prev) => prev + 5500)
-      setEscrowLocked((prev) => Math.max(0, prev - 5500))
-      showToast('🎉 Customer OTP Verified! PKR 5,500 transferred to Raast balance.')
-      setOtpInput('')
-    } else {
-      showToast('⚠️ Please enter a valid 4-digit client OTP')
-    }
-  }
-
-  const handleDiagnosticUpload = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setDiagnosticUploaded(true)
-      showToast(`📸 Diagnostic telemetry proof uploaded: ${e.target.files[0].name}`)
-    }
-  }
-
-  const handleWithdrawal = () => {
-    if (withdrawableBalance <= 0) {
-      showToast('⚠️ No withdrawable balance available at this time.')
-      return
-    }
-    const amount = withdrawableBalance
-    setWithdrawableBalance(0)
-    showToast(`💸 State Bank Raast transfer initiated: PKR ${amount.toLocaleString()} dispatched to your account!`)
-  }
-
   return (
     <div className="provider-home-wrapper">
       {/* Toast Notification */}
@@ -123,15 +159,6 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
           <span className="toast-text">{toastMessage}</span>
         </div>
       )}
-
-      {/* Hidden File Input for Diagnostic Proof */}
-      <input 
-        type="file" 
-        ref={fileInputRef} 
-        onChange={handleDiagnosticUpload} 
-        style={{ display: 'none' }} 
-        accept="image/*,.pdf"
-      />
 
       {/* Top Operations Header Bar */}
       <header className="provider-ops-header">
@@ -238,11 +265,11 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
                       type="button" 
                       className="slide-secondary-btn"
                       onClick={() => {
-                        const el = document.getElementById('provider-active-mission')
+                        const el = document.getElementById('about-mux-provider-section')
                         if (el) el.scrollIntoView({ behavior: 'smooth' })
                       }}
                     >
-                      <span>Active Mission Radar</span>
+                      <span>About MUX SERVICES Ecosystem ↓</span>
                     </button>
                   </div>
                 </div>
@@ -292,410 +319,157 @@ function ProviderDashboard({ setCurrentPage, onLogout }) {
         </div>
       </section>
 
-      {/* Main Container */}
-      <main className="provider-main-content">
-        {/* ========================================================= */}
-        {/* REAL-TIME OPERATIONS STATS STRIP WITH GLOWING ACCENTS     */}
-        {/* ========================================================= */}
-        <section className="provider-stats-strip">
-          <div className="stat-glow-card">
-            <div className="stat-card-header">
-              <span className="stat-title">Net Verified Earnings</span>
-              <span className="stat-trend-tag positive">+18.4%</span>
-            </div>
-            <div className="stat-main-figure">PKR 148,500</div>
-            <div className="stat-meta-note">
-              <span className="check-bullet">✓</span> State Bank Raast cleared
-            </div>
-          </div>
-
-          <div className="stat-glow-card highlight-card">
-            <div className="stat-card-header">
-              <span className="stat-title">Escrow Protected In-Flight</span>
-              <span className="stat-trend-tag live">LIVE</span>
-            </div>
-            <div className="stat-main-figure">PKR {escrowLocked.toLocaleString()}</div>
-            <div className="stat-meta-note">
-              <span className="radar-pulse-tiny"></span> 1 Mission currently active
-            </div>
-          </div>
-
-          <div className="stat-glow-card">
-            <div className="stat-card-header">
-              <span className="stat-title">Customer Requests Portal</span>
-              <span className="stat-trend-tag neutral">Services Tab</span>
-            </div>
-            <div className="stat-main-figure">14 Inquiries</div>
-            <div className="stat-meta-note">
-              <span className="pin-bullet">📍</span> Managed in Services screen
-            </div>
-          </div>
-
-          <div className="stat-glow-card">
-            <div className="stat-card-header">
-              <span className="stat-title">Master Pro Trust Rating</span>
-              <span className="stat-trend-tag rating">★ 4.98</span>
-            </div>
-            <div className="stat-main-figure">99.4%</div>
-            <div className="stat-meta-note">
-              <span className="shield-bullet">🛡️</span> 62 Completed with Zero Disputes
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================= */}
-        {/* DUAL COLUMN WORKSPACE: IN-FLIGHT MISSION & OPERATIONS HUB */}
-        {/* ========================================================= */}
-        <div className="provider-workspace-grid">
-          {/* LEFT COLUMN: ACTIVE IN-FLIGHT MISSION TRACKER & SERVICES DISPATCH SHORTCUT */}
-          <div className="workspace-column-left">
-            {/* SERVICES INCOMING REQUESTS NOTIFICATION CARD */}
-            <div className="services-request-dispatch-banner">
-              <div className="srd-left">
-                <div className="srd-radar-icon">
-                  <span className="srd-pulse-ring"></span>
-                  <span className="srd-dot">📡</span>
+      {/* ========================================================= */}
+      {/* 2 ANIMATED TICKER STRIPS ("WO PATTI BI CHALA DU 2")       */}
+      {/* ========================================================= */}
+      <section className="mux-dual-ticker-section provider-ticker-theme" aria-label="MUX SERVICES Provider Guarantees and Trades">
+        {/* Patti 1: Left-to-Right Animation */}
+        <div className="mux-ticker-track-wrapper strip-1-theme">
+          <div className="mux-ticker-inner mux-ticker-ltr">
+            {STRIP_1_ITEMS.map((item, idx) => (
+              <div key={`p1-${idx}`} className="mux-ticker-item">
+                <span className="ticker-badge-icon" aria-hidden="true">{item.icon}</span>
+                <div className="ticker-text-wrap">
+                  <span className="ticker-title">{item.title}.</span>
+                  <span className="ticker-dot-sep">•</span>
+                  <span className="ticker-desc">{item.desc}</span>
                 </div>
-                <div>
-                  <h4 className="srd-title">Customer Requests Are Live in "Services"</h4>
-                  <p className="srd-desc">
-                    All incoming customer service requests, emergency calls, and verified quote inquiries are organized inside the <strong>Services</strong> tab.
-                  </p>
+              </div>
+            ))}
+            {STRIP_1_ITEMS.map((item, idx) => (
+              <div key={`p1-dup-${idx}`} className="mux-ticker-item" aria-hidden="true">
+                <span className="ticker-badge-icon">{item.icon}</span>
+                <div className="ticker-text-wrap">
+                  <span className="ticker-title">{item.title}.</span>
+                  <span className="ticker-dot-sep">•</span>
+                  <span className="ticker-desc">{item.desc}</span>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Patti 2: Right-to-Left Animation */}
+        <div className="mux-ticker-track-wrapper strip-2-theme">
+          <div className="mux-ticker-inner mux-ticker-rtl">
+            {STRIP_2_ITEMS.map((item, idx) => (
+              <div key={`p2-${idx}`} className="mux-ticker-item">
+                <span className="ticker-badge-icon" aria-hidden="true">{item.icon}</span>
+                <div className="ticker-text-wrap">
+                  <span className="ticker-title">{item.title}.</span>
+                  <span className="ticker-dot-sep">•</span>
+                  <span className="ticker-desc">{item.desc}</span>
+                </div>
+              </div>
+            ))}
+            {STRIP_2_ITEMS.map((item, idx) => (
+              <div key={`p2-dup-${idx}`} className="mux-ticker-item" aria-hidden="true">
+                <span className="ticker-badge-icon">{item.icon}</span>
+                <div className="ticker-text-wrap">
+                  <span className="ticker-title">{item.title}.</span>
+                  <span className="ticker-dot-sep">•</span>
+                  <span className="ticker-desc">{item.desc}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* ABOUT MUX SERVICES ECOSYSTEM & PROVIDER EMPOWERMENT       */}
+      {/* ========================================================= */}
+      <main className="provider-about-mux-main" id="about-mux-provider-section">
+        <div className="provider-about-container">
+          {/* Header Story Intro */}
+          <div className="about-hero-block">
+            <div className="about-tag-badge">
+              <span className="tag-spark">✦</span>
+              <span>MULTAN'S PREMIER SMART ON-DEMAND PLATFORM</span>
+            </div>
+            <h2 className="about-main-heading">
+              Built Specifically for Multan's Elite Technicians & Master Ustads
+            </h2>
+            <p className="about-lead-para">
+              <strong>MUX SERVICES</strong> is transforming skilled doorstep maintenance across Multan. We provide verified electricians, HVAC mechanics, master plumbers, joinery carpenters, and technicians with guaranteed instant payments, direct client negotiations, and continuous job dispatches across Multan Cantt, Bosan Road, Gulgasht Colony, and Wapda Town.
+            </p>
+          </div>
+
+          {/* 4 Core Pillars of MUX SERVICES */}
+          <div className="about-pillars-grid">
+            {MUX_PILLARS.map((pillar, idx) => (
+              <div key={idx} className="pillar-glow-card">
+                <div className="pillar-header-row">
+                  <span className="pillar-icon">{pillar.icon}</span>
+                  <span className="pillar-tag">{pillar.tag}</span>
+                </div>
+                <h3 className="pillar-title">{pillar.title}</h3>
+                <p className="pillar-desc">{pillar.description}</p>
+                <div className="pillar-footer-accent">
+                  <span className="accent-bar"></span>
+                  <span className="accent-text">MUX SERVICES Guaranteed</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* How MUX SERVICES Works for Providers */}
+          <div className="how-it-works-section">
+            <div className="how-header-row">
+              <div>
+                <span className="how-badge">SEAMLESS WORKFLOW</span>
+                <h3 className="how-title">How MUX SERVICES Works For Professionals</h3>
+                <p className="how-sub">Transparent, fast, and 100% dispute-free doorstep servicing process.</p>
               </div>
               <button 
                 type="button" 
-                className="srd-navigate-btn"
+                className="how-services-link-btn"
                 onClick={() => {
                   if (typeof setCurrentPage === 'function') {
                     setCurrentPage('services')
                   }
                 }}
               >
-                Go to Customer Requests →
+                Go to Services Tab →
               </button>
             </div>
 
-            {/* LIVE IN-FLIGHT MISSION COMMANDER */}
-            <div className="mission-commander-card" id="provider-active-mission">
-              <div className="mission-commander-header">
-                <div className="mission-badge-group">
-                  <span className="mission-pulse-badge">LIVE IN-FLIGHT MISSION</span>
-                  <span className="mission-id-pill">#MUX-9042</span>
+            <div className="how-steps-grid">
+              {HOW_IT_WORKS_STEPS.map((step, idx) => (
+                <div key={idx} className="how-step-card">
+                  <div className="step-number-pill">{step.step}</div>
+                  <span className="step-badge">{step.badge}</span>
+                  <h4 className="step-title">{step.title}</h4>
+                  <p className="step-desc">{step.desc}</p>
                 </div>
-                <div className="mission-escrow-pill">
-                  <span className="shield-lock">🔒</span> Escrow Secured: PKR 5,500
-                </div>
-              </div>
-
-              <div className="mission-body">
-                <div className="mission-priority-row">
-                  <span className="priority-tag-urgent">EMERGENCY DISPATCH</span>
-                  <span className="assigned-time-tag">Assigned 18 mins ago</span>
-                </div>
-
-                <h3 className="mission-heading">
-                  3-Phase DB Panel Short Circuit & Inverter Load Balancing
-                </h3>
-                <p className="mission-client-meta">
-                  <strong>Client:</strong> Malik Farhan • <span>House 42, Officers Colony, Bosan Road, Multan</span>
-                </p>
-
-                {/* Milestone Progress Bar */}
-                <div className="mission-milestones-tracker">
-                  <div className={`milestone-step ${activeMissionStep >= 1 ? 'step-done' : ''}`}>
-                    <div className="milestone-bubble" onClick={() => setActiveMissionStep(1)}>
-                      {activeMissionStep >= 1 ? '✓' : '1'}
-                    </div>
-                    <span className="milestone-label">Confirmed</span>
-                  </div>
-
-                  <div className={`milestone-step-connector ${activeMissionStep >= 2 ? 'connector-done' : ''}`}></div>
-
-                  <div className={`milestone-step ${activeMissionStep === 2 ? 'step-current' : activeMissionStep > 2 ? 'step-done' : ''}`}>
-                    <div className="milestone-bubble" onClick={() => setActiveMissionStep(2)}>
-                      {activeMissionStep > 2 ? '✓' : '2'}
-                    </div>
-                    <span className="milestone-label">En Route</span>
-                  </div>
-
-                  <div className={`milestone-step-connector ${activeMissionStep >= 3 ? 'connector-done' : ''}`}></div>
-
-                  <div className={`milestone-step ${activeMissionStep === 3 ? 'step-current' : activeMissionStep > 3 ? 'step-done' : ''}`}>
-                    <div className="milestone-bubble" onClick={() => setActiveMissionStep(3)}>
-                      {activeMissionStep > 3 ? '✓' : '3'}
-                    </div>
-                    <span className="milestone-label">At Site</span>
-                  </div>
-
-                  <div className={`milestone-step-connector ${activeMissionStep >= 4 ? 'connector-done' : ''}`}></div>
-
-                  <div className={`milestone-step ${activeMissionStep === 4 ? 'step-current' : activeMissionStep > 4 ? 'step-done' : ''}`}>
-                    <div className="milestone-bubble" onClick={() => setActiveMissionStep(4)}>
-                      {activeMissionStep > 4 ? '✓' : '4'}
-                    </div>
-                    <span className="milestone-label">Repairs</span>
-                  </div>
-
-                  <div className={`milestone-step-connector ${activeMissionStep >= 5 ? 'connector-done' : ''}`}></div>
-
-                  <div className={`milestone-step ${activeMissionStep >= 5 ? 'step-done' : ''}`}>
-                    <div className="milestone-bubble" onClick={() => setActiveMissionStep(5)}>
-                      {activeMissionStep >= 5 ? '✓' : '5'}
-                    </div>
-                    <span className="milestone-label">OTP Sign-Off</span>
-                  </div>
-                </div>
-
-                {/* Quick Action Buttons */}
-                <div className="mission-action-bar">
-                  <button 
-                    type="button" 
-                    className="action-pill-btn"
-                    onClick={() => showToast('💬 Opening encrypted direct message with Malik Farhan...')}
-                  >
-                    <span className="btn-icon">💬</span> In-App Chat
-                  </button>
-                  
-                  <button 
-                    type="button" 
-                    className="action-pill-btn"
-                    onClick={() => showToast('📞 Connecting to Client phone: 0301-XXXXXXX...')}
-                  >
-                    <span className="btn-icon">📞</span> Direct Call
-                  </button>
-
-                  <button 
-                    type="button" 
-                    className={`action-pill-btn ${diagnosticUploaded ? 'btn-uploaded' : ''}`}
-                    onClick={() => fileInputRef.current && fileInputRef.current.click()}
-                  >
-                    <span className="btn-icon">📸</span> {diagnosticUploaded ? 'Proof Uploaded ✓' : 'Diagnostic Proof'}
-                  </button>
-
-                  <button 
-                    type="button" 
-                    className="action-pill-btn btn-step-advance"
-                    onClick={() => {
-                      const next = Math.min(5, activeMissionStep + 1)
-                      setActiveMissionStep(next)
-                      showToast(`Milestone updated to Step ${next}`)
-                    }}
-                  >
-                    <span className="btn-icon">⚡</span> Next Stage
-                  </button>
-                </div>
-
-                {/* OTP Sign-Off Box */}
-                <div className="otp-verification-box">
-                  <div className="otp-box-header">
-                    <span className="lock-glyph">🔑</span>
-                    <div>
-                      <h4 className="otp-title">Client OTP Instant Escrow Release</h4>
-                      <p className="otp-sub">Ask the customer for their 4-digit completion code to trigger instant Raast payout</p>
-                    </div>
-                  </div>
-
-                  {isOtpSuccess ? (
-                    <div className="otp-success-alert">
-                      <span className="success-icon">🎉</span>
-                      <div>
-                        <strong>Mission Successfully Completed & Signed Off!</strong>
-                        <p>PKR 5,500 has been transferred into your withdrawable SBP Raast balance.</p>
-                      </div>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleOtpVerify} className="otp-input-form">
-                      <div className="otp-field-wrapper">
-                        <input 
-                          type="text" 
-                          maxLength="4" 
-                          placeholder="e.g. 7419" 
-                          value={otpInput}
-                          onChange={(e) => setOtpInput(e.target.value.replace(/\D/g, ''))}
-                          className="otp-code-input"
-                        />
-                        <button type="submit" className="otp-verify-submit-btn">
-                          Verify & Release PKR 5,500
-                        </button>
-                      </div>
-                    </form>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* HIGH-TECH DIAGNOSTIC PROTOCOLS CARD */}
-            <div className="provider-diagnostic-hub-card">
-              <div className="diagnostic-hub-header">
-                <span className="hub-tag">MUX SERVICES PROTOCOL</span>
-                <h4>Technical Dispatch Standards</h4>
-              </div>
-              <div className="diagnostic-items-grid">
-                <div className="diag-item">
-                  <span className="diag-icon">⚡</span>
-                  <h5>Phase & Voltage Test</h5>
-                  <p>Check balanced line voltage (220V - 240V) before closing DB panel.</p>
-                </div>
-                <div className="diag-item">
-                  <span className="diag-icon">🛡️</span>
-                  <h5>Earthing Leakage Protection</h5>
-                  <p>Measure earth resistance (&lt; 5 Ohms) with digital megger tester.</p>
-                </div>
-                <div className="diag-item">
-                  <span className="diag-icon">📸</span>
-                  <h5>Telemetry Proof Capture</h5>
-                  <p>Upload clean photo of multimeter and circuit breaker wiring.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* RIGHT COLUMN: WALLET, SCHEDULE & DISPATCH HOTLINE */}
-          <div className="workspace-column-right">
-            {/* ESCROW WALLET & RAAST PAYOUT CARD */}
-            <div className="provider-wallet-card">
-              <div className="wallet-card-header">
-                <div className="wallet-header-title">
-                  <span className="wallet-icon">💳</span>
-                  <h4>Raast Instant Payout Wallet</h4>
-                </div>
-                <span className="raast-badge">SBP Raast Enabled</span>
+          {/* Bottom Call to Action for Customer Requests */}
+          <div className="provider-services-cta-banner">
+            <div className="cta-left">
+              <span className="cta-sparkle">⚡</span>
+              <div>
+                <h3 className="cta-title">Ready to Review Incoming Customer Requests?</h3>
+                <p className="cta-sub">
+                  Customer service requests, emergency SOS calls, and quote bids are live in the <strong>Services</strong> tab.
+                </p>
               </div>
-
-              <div className="wallet-balances-grid">
-                <div className="balance-block withdrawable">
-                  <span className="balance-caption">Withdrawable Balance</span>
-                  <span className="balance-amount">PKR {withdrawableBalance.toLocaleString()}</span>
-                  <span className="balance-sub">Zero Clearance Delay</span>
-                </div>
-                <div className="balance-block locked">
-                  <span className="balance-caption">Locked In-Flight Escrow</span>
-                  <span className="balance-amount">PKR {escrowLocked.toLocaleString()}</span>
-                  <span className="balance-sub">1 Mission Active</span>
-                </div>
-              </div>
-
+            </div>
+            <div className="cta-actions">
               <button 
                 type="button" 
-                className="wallet-payout-cta-btn"
-                onClick={handleWithdrawal}
+                className="cta-primary-btn"
+                onClick={() => {
+                  if (typeof setCurrentPage === 'function') {
+                    setCurrentPage('services')
+                  }
+                }}
               >
-                Instant Transfer via Raast (0% Fee)
+                Open Services Tab & View Requests →
               </button>
-
-              <div className="recent-clearance-history">
-                <div className="history-header">
-                  <span>Recent Escrow Clearances</span>
-                  <span className="history-count">Multan Hub</span>
-                </div>
-                <div className="history-item">
-                  <div className="history-left">
-                    <span className="clear-arrow">↗</span>
-                    <div>
-                      <p className="history-client">Tariq Mahmood</p>
-                      <span className="history-loc">Gulgasht Colony</span>
-                    </div>
-                  </div>
-                  <div className="history-right">
-                    <span className="history-amt">PKR 6,500</span>
-                    <span className="history-status cleared">Cleared</span>
-                  </div>
-                </div>
-
-                <div className="history-item">
-                  <div className="history-left">
-                    <span className="clear-arrow">↗</span>
-                    <div>
-                      <p className="history-client">Dr. Asim</p>
-                      <span className="history-loc">Bosan Road</span>
-                    </div>
-                  </div>
-                  <div className="history-right">
-                    <span className="history-amt">PKR 4,000</span>
-                    <span className="history-status cleared">Cleared</span>
-                  </div>
-                </div>
-
-                <div className="history-item">
-                  <div className="history-left">
-                    <span className="clear-arrow">⏳</span>
-                    <div>
-                      <p className="history-client">Haji Riaz</p>
-                      <span className="history-loc">Cantt Sadar</span>
-                    </div>
-                  </div>
-                  <div className="history-right">
-                    <span className="history-amt">PKR 5,500</span>
-                    <span className="history-status locked">In Escrow</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* TODAY'S SCHEDULE CARD */}
-            <div className="provider-schedule-card">
-              <div className="schedule-card-header">
-                <h4>Today's Dispatch Schedule</h4>
-                <span className="schedule-date-pill">Multan Sector</span>
-              </div>
-
-              <div className="schedule-timeline">
-                <div className="timeline-entry entry-active">
-                  <div className="entry-time-col">
-                    <span className="time-text">10:30 AM</span>
-                    <span className="entry-status-badge">Active</span>
-                  </div>
-                  <div className="entry-content">
-                    <h5>Emergency 3-Phase DB Panel Inspection</h5>
-                    <p>Officers Colony, Bosan Road • Malik Farhan</p>
-                  </div>
-                </div>
-
-                <div className="timeline-entry entry-upcoming">
-                  <div className="entry-time-col">
-                    <span className="time-text">02:00 PM</span>
-                    <span className="entry-status-badge">Upcoming</span>
-                  </div>
-                  <div className="entry-content">
-                    <h5>Solar Inverter Diagnostics & Earthing</h5>
-                    <p>Wapda Town Phase 1 • Engr. Bilal</p>
-                  </div>
-                </div>
-
-                <div className="timeline-entry entry-scheduled">
-                  <div className="entry-time-col">
-                    <span className="time-text">04:30 PM</span>
-                    <span className="entry-status-badge">Scheduled</span>
-                  </div>
-                  <div className="entry-content">
-                    <h5>Commercial AC Chemical Wash</h5>
-                    <p>Gulgasht Gol Bagh Market • Clinic 3</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* MUX VERIFICATION CREDENTIALS & HOTLINE CARD */}
-            <div className="provider-credentials-card">
-              <div className="credentials-badge-row">
-                <div className="gov-seal">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h5>Verified Ustad Professional</h5>
-                  <p>CNIC & Multan Police Khidmat Markaz Cleared</p>
-                </div>
-              </div>
-              <div className="hotline-box">
-                <div className="hotline-icon">🚨</div>
-                <div>
-                  <span className="hotline-label">24/7 Dispatch Control Room</span>
-                  <span className="hotline-number">0800-MUX-PRO (689-776)</span>
-                </div>
-              </div>
+              <span className="cta-helpline">Emergency Control Room: 0800-MUX-PRO</span>
             </div>
           </div>
         </div>
