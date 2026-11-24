@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { providerAPI } from '../services/api'
-import providerLoginBg from '../Public/provider-login-bg.webp'
+import loginScr from '../Public/login scr.webp'
 import './ProviderLogin.css'
 
 function ProviderLogin({ setCurrentPage, onProviderLogin }) {
@@ -93,302 +93,237 @@ function ProviderLogin({ setCurrentPage, onProviderLogin }) {
     }
   }
 
-  const handleBackHome = () => {
-    if (typeof setCurrentPage === 'function') {
-      setCurrentPage('home')
-    }
-  }
-
   return (
-    <div className="provider-login-page">
-      {/* Fullscreen Background Image Generated for MUX SERVICES */}
+    <div className="auth-page provider-login-page">
+      {/* Fullscreen Background Image — Same as Customer Login */}
       <img
-        src={providerLoginBg}
-        alt="MUX SERVICES Provider Portal Background"
-        className="pl-fullscreen-bg"
+        src={loginScr}
+        alt="MUX SERVICES Provider Login Background"
+        className="auth-fullscreen-bg"
       />
-      <div className="pl-bg-overlay" aria-hidden="true"></div>
+      <div className="auth-bg-overlay" aria-hidden="true"></div>
 
-      {/* Direct Form on Background — Single Unified View (NO CARDS) */}
-      <div className="pl-direct-container">
-        {/* Central Direct Login Form with Glowing Animated Backdrop */}
-        <div className="pl-form-wrapper">
-          {/* Animated Light Aura behind the form */}
-          <div className="pl-form-glow-animation" aria-hidden="true">
-            <div className="pl-glow-orb pl-glow-orb-1"></div>
-            <div className="pl-glow-orb pl-glow-orb-2"></div>
-            <div className="pl-glow-ring"></div>
-            <div className="pl-glow-shimmer"></div>
+      {/* Centered Direct Form on Clear Background Image (NO CARDS) */}
+      <div className="auth-direct-form provider-direct-form">
+        <div className="auth-header-brand">
+          <h1 className="auth-brand-title">MUX SERVICES</h1>
+          <p className="auth-brand-tagline">Multan's Premier Technician &amp; Partner Portal</p>
+        </div>
+
+        <h2 className="auth-title">Provider Sign In</h2>
+        <p className="auth-subtitle">Enter your verified credentials to access jobs &amp; payouts</p>
+
+        {errorMsg && (
+          <div className="auth-error-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span>{errorMsg}</span>
           </div>
+        )}
 
-          <div className="pl-form-content">
-            {/* Brand Header — Strictly MUX SERVICES */}
-            <div className="pl-brand-header">
-              <div className="pl-brand-badge">
-                <span className="pl-bb-icon">⚡</span>
-                <span>MUX SERVICES • ملتان پارٹنر پورٹل</span>
-              </div>
-              <h1 className="pl-brand-title">MUX SERVICES</h1>
-              <p className="pl-brand-tagline">Multan's Premier Technician &amp; Partner Portal</p>
-              <p className="pl-brand-urdu">اپنے روزگار، تصدیق شدہ لیڈز اور والٹ میں لاگ ان کریں</p>
-            </div>
+        {/* Method Selector Tabs directly over background */}
+        <div className="provider-method-tabs" role="tablist">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={loginMethod === 'mobile'}
+            className={`method-tab-btn ${loginMethod === 'mobile' ? 'active' : ''}`}
+            onClick={() => { setLoginMethod('mobile'); setErrorMsg('') }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+            <span>Mobile &amp; SMS OTP</span>
+          </button>
 
-          {/* Quick Metrics Bar — Floating Transparent Strip */}
-          <div className="pl-quick-metrics">
-            <div className="pl-qmetric">
-              <span className="pl-qm-val">PKR 48,500+</span>
-              <span className="pl-qm-lbl">Avg Weekly Earnings</span>
-            </div>
-            <div className="pl-qm-divider"></div>
-            <div className="pl-qmetric">
-              <span className="pl-qm-val">18 Live</span>
-              <span className="pl-qm-lbl">Multan Active Calls</span>
-            </div>
-            <div className="pl-qm-divider"></div>
-            <div className="pl-qmetric">
-              <span className="pl-qm-val">061-652-MUX1</span>
-              <span className="pl-qm-lbl">24/7 Dispatch Desk</span>
-            </div>
-          </div>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={loginMethod === 'cnic'}
+            className={`method-tab-btn ${loginMethod === 'cnic' ? 'active' : ''}`}
+            onClick={() => { setLoginMethod('cnic'); setErrorMsg('') }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+              <circle cx="9" cy="10" r="2"></circle>
+              <line x1="15" y1="8" x2="17" y2="8"></line>
+              <line x1="15" y1="12" x2="17" y2="12"></line>
+            </svg>
+            <span>CNIC &amp; Password</span>
+          </button>
+        </div>
 
-          {/* Error Banner */}
-          {errorMsg && (
-            <div className="pl-error-banner" role="alert">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-              <span>{errorMsg}</span>
-            </div>
-          )}
-
-          {/* Method Tabs directly over background */}
-          <div className="pl-method-tabs" role="tablist">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={loginMethod === 'mobile'}
-              className={`pl-method-tab ${loginMethod === 'mobile' ? 'active' : ''}`}
-              onClick={() => { setLoginMethod('mobile'); setErrorMsg('') }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                <line x1="12" y1="18" x2="12.01" y2="18"></line>
-              </svg>
-              <span>Mobile &amp; SMS OTP</span>
-              <span className="pl-tab-pill">Fast</span>
-            </button>
-
-            <button
-              type="button"
-              role="tab"
-              aria-selected={loginMethod === 'cnic'}
-              className={`pl-method-tab ${loginMethod === 'cnic' ? 'active' : ''}`}
-              onClick={() => { setLoginMethod('cnic'); setErrorMsg('') }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
-                <circle cx="9" cy="10" r="2"></circle>
-                <line x1="15" y1="8" x2="17" y2="8"></line>
-                <line x1="15" y1="12" x2="17" y2="12"></line>
-              </svg>
-              <span>CNIC &amp; Password</span>
-            </button>
-          </div>
-
-          {/* Login Form */}
-          <form onSubmit={handleLogin} className="pl-login-form">
-            {/* Mobile & OTP Form */}
-            {loginMethod === 'mobile' && (
-              <div className="pl-form-fields">
-                <div className="pl-form-group">
-                  <label htmlFor="pl-mobile-input" className="pl-field-label">
-                    <span>Registered Mobile Number</span>
-                    <span className="pl-field-urdu">رجسٹرڈ موبائل نمبر</span>
-                  </label>
-                  <div className="pl-input-container">
-                    <span className="pl-prefix">🇵🇰 +92</span>
-                    <input
-                      id="pl-mobile-input"
-                      type="tel"
-                      className="pl-text-input pl-has-prefix"
-                      placeholder="0300-1234567"
-                      value={mobile}
-                      onChange={(e) => setMobile(e.target.value)}
-                      autoComplete="tel"
-                    />
-                  </div>
-                  <span className="pl-hint">Dispatched via secure NADRA/MUX SMS gateway.</span>
+        <form className="auth-form" onSubmit={handleLogin} autoComplete="off">
+          {/* Mobile & OTP Form */}
+          {loginMethod === 'mobile' && (
+            <>
+              <div className="form-group">
+                <label htmlFor="pl-mobile">Registered Mobile Number (موبائل نمبر)</label>
+                <div className="input-wrapper">
+                  <span className="input-icon">🇵🇰 +92</span>
+                  <input
+                    type="tel"
+                    id="pl-mobile"
+                    name="mux_provider_mobile"
+                    placeholder="0300-1234567"
+                    className="form-input has-prefix"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                    autoComplete="tel"
+                    required
+                  />
                 </div>
+              </div>
 
-                <div className="pl-form-group">
-                  <label htmlFor="pl-otp-input" className="pl-field-label">
-                    <span>6-Digit Verification Code (او ٹی پی)</span>
-                    {otpSent && <span className="pl-otp-ok">✓ OTP Dispatched</span>}
-                  </label>
-                  <div className="pl-otp-group">
+              <div className="form-group">
+                <div className="label-split-row">
+                  <label htmlFor="pl-otp">6-Digit OTP Code (او ٹی پی)</label>
+                  {otpSent && <span className="otp-dispatched-text">✓ Code Dispatched</span>}
+                </div>
+                <div className="otp-action-row">
+                  <div className="input-wrapper" style={{ flex: 1 }}>
+                    <span className="input-icon">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                      </svg>
+                    </span>
                     <input
-                      id="pl-otp-input"
                       type="text"
+                      id="pl-otp"
                       maxLength={6}
-                      className="pl-text-input pl-otp-field"
                       placeholder="e.g. 786110"
+                      className="form-input otp-input-field"
                       value={otp}
                       onChange={(e) => setOtp(e.target.value.replace(/[^0-9]/g, ''))}
                     />
-                    <button
-                      type="button"
-                      className={`pl-otp-action-btn ${countdown > 0 ? 'disabled' : ''}`}
-                      onClick={handleSendOtp}
-                      disabled={countdown > 0}
-                    >
-                      {countdown > 0 ? `Resend (${countdown}s)` : otpSent ? 'Resend Code' : 'Send Code'}
-                    </button>
                   </div>
-                  <div className="pl-helper-row">
-                    <span className="pl-hint">Instant login code sent to your phone.</span>
-                    <button
-                      type="button"
-                      className="pl-sim-change-link"
-                      onClick={() => alert('To update your registered SIM number, visit MUX Services Khidmat Desk at MDA Chowk or call 061-652-MUX1.')}
-                    >
-                      Changed SIM / Phone?
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    className={`otp-send-button ${countdown > 0 ? 'disabled' : ''}`}
+                    onClick={handleSendOtp}
+                    disabled={countdown > 0}
+                  >
+                    {countdown > 0 ? `${countdown}s` : otpSent ? 'Resend' : 'Send Code'}
+                  </button>
                 </div>
               </div>
-            )}
+            </>
+          )}
 
-            {/* CNIC & Password Form */}
-            {loginMethod === 'cnic' && (
-              <div className="pl-form-fields">
-                <div className="pl-form-group">
-                  <label htmlFor="pl-cnic-input" className="pl-field-label">
-                    <span>CNIC Number (13 Digits)</span>
-                    <span className="pl-field-urdu">شناختی کارڈ نمبر</span>
-                  </label>
-                  <div className="pl-input-container">
-                    <input
-                      id="pl-cnic-input"
-                      type="text"
-                      maxLength={15}
-                      className="pl-text-input"
-                      placeholder="36302-XXXXXXX-X"
-                      value={cnic}
-                      onChange={(e) => {
-                        let val = e.target.value.replace(/[^0-9]/g, '')
-                        if (val.length > 5 && val.length <= 12) {
-                          val = `${val.slice(0, 5)}-${val.slice(5)}`
-                        } else if (val.length > 12) {
-                          val = `${val.slice(0, 5)}-${val.slice(5, 12)}-${val.slice(12, 13)}`
-                        }
-                        setCnic(val)
-                      }}
-                      autoComplete="username"
-                    />
-                  </div>
-                  <span className="pl-hint">Your 13-digit National Identity Card number.</span>
-                </div>
-
-                <div className="pl-form-group">
-                  <div className="pl-fl-split">
-                    <label htmlFor="pl-password-input" className="pl-field-label">
-                      <span>Account Password</span>
-                      <span className="pl-field-urdu">پاس ورڈ</span>
-                    </label>
-                    <button
-                      type="button"
-                      className="pl-forgot-link"
-                      onClick={() => {
-                        setLoginMethod('mobile')
-                        setErrorMsg('Tip: Use Mobile & SMS OTP for instant passwordless sign-in.')
-                      }}
-                    >
-                      Forgot Password?
-                    </button>
-                  </div>
-                  <div className="pl-input-container">
-                    <input
-                      id="pl-password-input"
-                      type={showPassword ? 'text' : 'password'}
-                      className="pl-text-input pl-has-eye"
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      autoComplete="current-password"
-                    />
-                    <button
-                      type="button"
-                      className="pl-eye-toggle"
-                      onClick={() => setShowPassword(!showPassword)}
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
-                    >
-                      {showPassword ? (
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                          <line x1="1" y1="1" x2="23" y2="23"></line>
-                        </svg>
-                      ) : (
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                          <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                      )}
-                    </button>
-                  </div>
+          {/* CNIC & Password Form */}
+          {loginMethod === 'cnic' && (
+            <>
+              <div className="form-group">
+                <label htmlFor="pl-cnic">CNIC Number (13 Digits / شناختی کارڈ)</label>
+                <div className="input-wrapper">
+                  <span className="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                      <circle cx="9" cy="10" r="2"></circle>
+                      <line x1="15" y1="8" x2="17" y2="8"></line>
+                      <line x1="15" y1="12" x2="17" y2="12"></line>
+                    </svg>
+                  </span>
+                  <input
+                    type="text"
+                    id="pl-cnic"
+                    maxLength={15}
+                    placeholder="36302-XXXXXXX-X"
+                    className="form-input"
+                    value={cnic}
+                    onChange={(e) => {
+                      let val = e.target.value.replace(/[^0-9]/g, '')
+                      if (val.length > 5 && val.length <= 12) {
+                        val = `${val.slice(0, 5)}-${val.slice(5)}`
+                      } else if (val.length > 12) {
+                        val = `${val.slice(0, 5)}-${val.slice(5, 12)}-${val.slice(12, 13)}`
+                      }
+                      setCnic(val)
+                    }}
+                    autoComplete="username"
+                    required
+                  />
                 </div>
               </div>
-            )}
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="pl-action-btn"
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <span className="pl-spinner"></span>
-                  <span>Authenticating Pro Account...</span>
-                </>
-              ) : (
-                <>
-                  <span>Login to MUX SERVICES Portal</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </>
-              )}
+              <div className="form-group">
+                <div className="label-split-row">
+                  <label htmlFor="pl-password">Password (پاس ورڈ)</label>
+                  <a
+                    href="#forgot"
+                    className="forgot-password"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setLoginMethod('mobile')
+                      setErrorMsg('Tip: Use Mobile & SMS OTP for instant sign in.')
+                    }}
+                  >
+                    Forgot password?
+                  </a>
+                </div>
+                <div className="input-wrapper">
+                  <span className="input-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                  </span>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    id="pl-password"
+                    placeholder="Enter your password"
+                    className="form-input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="current-password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="toggle-password"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showPassword ? (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+                        <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+                        <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+                        <line x1="2" y1="2" x2="22" y2="22"/>
+                      </svg>
+                    ) : (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+
+          <button
+            type="submit"
+            className="auth-button"
+            disabled={loading}
+            style={{ opacity: loading ? 0.7 : 1 }}
+          >
+            {loading ? 'Authenticating Pro Account...' : 'Sign In to Provider Portal'}
+          </button>
+
+          <div className="auth-switch">
+            <span>New technician or workshop owner?</span>
+            <button type="button" className="switch-link" onClick={handleSignup}>
+              Register as Verified Pro
             </button>
-          </form>
-
-          {/* Bottom Switcher: Register as Verified Pro */}
-          <div className="pl-bottom-register">
-            <span className="pl-reg-question">New technician or workshop owner in Multan?</span>
-            <button
-              type="button"
-              className="pl-reg-cta-btn"
-              onClick={handleSignup}
-            >
-              <span>Join as Verified Pro (رجسٹریشن فارم)</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
           </div>
-
-          {/* Trust Footnote */}
-          <div className="pl-trust-footer">
-            <div className="pl-tf-item">✓ State Bank Raast P2G</div>
-            <div className="pl-tf-item">✓ JazzCash Business</div>
-            <div className="pl-tf-item">✓ NADRA Biometric Verified</div>
-            <div className="pl-tf-item">✓ Escrow Protection</div>
-          </div>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   )
